@@ -120,10 +120,14 @@
   border-width: 0px;
   background-color: var(--secondary-color);
   color: white;
-  font-size: 0.8rem;
+  font-size: 1rem;
   letter-spacing: 2px;
   cursor: pointer;
   transition-duration: 100ms;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .SignIn_Page_Create_Account_Button:hover {
   background-color: var(--secondary-color-point-9);
@@ -435,11 +439,19 @@
   background-color: var(--primary-color-point-9);
 }
 .SignUp_Page_SignIn_Button {
+  width: 47%;
+  border-radius: 20px;
+  height: 2rem;
+  border-width: 0px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #b9adb775;
   transition-duration: 100ms;
+  text-decoration: none;
 }
 .SignUp_Page_SignIn_Button:hover {
   background-color: #c0b8bf75;

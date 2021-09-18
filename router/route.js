@@ -1,0 +1,77 @@
+const express = require("express");
+const router = express.Router();
+const userDetail = require("../models/userDetail_model");
+const bcrypt = require("bcryptjs");
+router.get("/", (req, res) => {
+  res.send("Hello");
+});
+
+router.post("/register", (req, res) => {
+  const { name, email, password, cpassword, birthday, gender } = req.body;
+  if (!name || !email || !password || !cpassword || !birthday || !gender) {
+    return res.status(422).json({ error: "Plz fill the field properly" });
+  }
+  userDetail
+    .findOne({ email: email })
+    .then((userExist) => {
+      if (userExist) {
+        return res.status(422).json({ error: "Email already Exist" });
+      }
+      const creatingUserData = new userDetail({
+        name,
+        email,
+        password,
+        cpassword,
+        birthday,
+        cpassword,
+        gender,
+      });
+      creatingUserData
+        .save()
+        .then(() => {
+          return res
+            .status(201)
+            .json({ message: "User register successfully" });
+        })
+        .catch((err) => {
+          return res.status(500).json({ error: "Failed registerd!!!" });
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.post("/signin", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Please filled the form properly" });
+    }
+    const userLogin = await userDetail.findOne({ email: email });
+    if (!userLogin) {
+      return res.status(400).json({ error: "Error Login! User does't exist" });
+    } else {
+      const isPasswordMatch = await bcrypt.compare(
+        password,
+        userLogin.password
+      );
+      token = await userLogin.generateAuthToken();
+      res.cookie("Authentication", token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly: true,
+      });
+      if (!isPasswordMatch) {
+        res.status(400).json({ error: "Username and password doesn't match" });
+      } else {
+        res.status(200).json({ message: "Login Successfully" });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+router.get("/profile", (req, res) => {});
+
+module.exports = router;

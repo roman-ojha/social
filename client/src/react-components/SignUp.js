@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
+import { NavLink, useHistory } from "react-router-dom";
+let previousSelectGenderElement;
 const SignUp = () => {
   let today = new Date();
   let birthdayYear = [];
-  for (let i = 1900; i <= today.getFullYear(); i++) {
+  for (let i = today.getFullYear() - 100; i <= today.getFullYear(); i++) {
     birthdayYear.push(i);
   }
   let birthdayMonth = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
@@ -12,8 +14,39 @@ const SignUp = () => {
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
     22, 23, 24, 25, 26, 27, 28, 29, 30,
   ];
+  // getting user Input data
+  let name, value;
+  const [userData, setuserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    cpassword: "",
+    birthday: {
+      year: "",
+      month: "",
+      day: "",
+    },
+    gender: "",
+  });
+  const getUserData = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+    if (name === "year" || name === "month" || name === "day") {
+      setuserData({
+        ...userData,
+        birthday: {
+          ...userData.birthday,
+          [name]: value,
+        },
+      });
+    } else {
+      setuserData({
+        ...userData,
+        [name]: value,
+      });
+    }
+  };
   // Login of selecting gender
-  let previousSelectGenderElement;
   const selectGender = (event) => {
     let element = event.target;
     if (
@@ -45,6 +78,38 @@ const SignUp = () => {
       }
     }
     previousSelectGenderElement = element;
+    setuserData({
+      ...userData,
+      gender: element.value,
+    });
+  };
+  const history = useHistory();
+  const registerData = async (e) => {
+    e.preventDefault();
+    const { name, email, password, cpassword, birthday, gender } = userData;
+    try {
+      const res = await fetch("/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          cpassword,
+          birthday,
+          gender,
+        }),
+      });
+      const data = await res.json();
+      if (res.status === 422 || !data) {
+        console.log(data.error);
+      } else {
+        console.log(data.message);
+        history.push("/signin");
+      }
+    } catch (err) {}
   };
   return (
     <>
@@ -62,27 +127,39 @@ const SignUp = () => {
         </div>
         <div className="SignUp_Page_Rignt_Half">
           <div className="SignUp_Page_SignUp_Container">
-            <form className="SignUp_Page_SignUp_Form">
+            <form method="POST" className="SignUp_Page_SignUp_Form">
               <div className="SignUp_Page_Input_Field_Container">
                 <input
                   className="SignUp_Page_Full_Name_Input_Field"
                   type="text"
                   placeholder="Full name"
+                  name="name"
+                  value={userData.name}
+                  onChange={getUserData}
                 />
                 <input
                   className="SignUp_Page_Email_Address_Input_Field"
                   type="email"
                   placeholder="Email Address"
+                  name="email"
+                  value={userData.email}
+                  onChange={getUserData}
                 />
                 <input
                   className="SignUp_Page_Password_Input_Field"
                   type="password"
                   placeholder="Password"
+                  name="password"
+                  value={userData.password}
+                  onChange={getUserData}
                 />
                 <input
                   className="SignUp_Page_Conform_Password_Input_Field"
                   type="password"
                   placeholder="Conform Password"
+                  name="cpassword"
+                  value={userData.cpassword}
+                  onChange={getUserData}
                 />
               </div>
               <div className="SignUp_Page_Birthday_Selection_Container">
@@ -90,27 +167,39 @@ const SignUp = () => {
                 <div className="SignUp_Page_Birthday_Selection_Date_Container">
                   <select
                     className="SignUp_Page_Birthday_Year_Selection"
-                    defaultValue="YY"
+                    name="year"
+                    value={userData.birthday.year}
+                    onChange={getUserData}
                   >
-                    <option>YY</option>
+                    <option hidden>YY</option>
                     {birthdayYear.map((value, index) => {
                       return (
                         <>
-                          <option>{value}</option>
+                          <option key={index.toString()}>{value}</option>
                         </>
                       );
                     })}
                   </select>
-                  <select className="SignUp_Page_Birthday_Month_Selection">
-                    <option>MM</option>
+                  <select
+                    className="SignUp_Page_Birthday_Month_Selection"
+                    name="month"
+                    value={userData.birthday.month}
+                    onChange={getUserData}
+                  >
+                    <option hidden>MM</option>
                     {birthdayMonth.map((value, index) => {
-                      return <option>{value}</option>;
+                      return <option key={index.toString()}>{value}</option>;
                     })}
                   </select>
-                  <select className="SignUp_Page_Birthday_Day_Selection">
-                    <option>DD</option>
+                  <select
+                    className="SignUp_Page_Birthday_Day_Selection"
+                    name="day"
+                    value={userData.birthday.day}
+                    onChange={getUserData}
+                  >
+                    <option hidden>DD</option>
                     {birthdayDays.map((value, index) => {
-                      return <option>{value}</option>;
+                      return <option key={index.toString()}>{value}</option>;
                     })}
                   </select>
                 </div>
@@ -160,23 +249,32 @@ const SignUp = () => {
                       className="SignUp_Page_Others_CheckBox_Title"
                       value="other"
                     >
-                      Others
+                      Other
                     </p>
                     <input
                       className="SignUp_Page_Others_CheckBox"
                       type="checkbox"
                       name="other"
-                      value="off"
+                      value="other"
                     />
                   </div>
                 </div>
               </div>
               <div className="SignUp_Page_Submit_Container">
-                <button className="SignUp_Page_SignUp_Button">Sign Up</button>
-                <button className="SignUp_Page_SignIn_Button">
+                <button
+                  className="SignUp_Page_SignUp_Button"
+                  onClick={registerData}
+                >
+                  Sign Up
+                </button>
+                <NavLink
+                  exact
+                  to="/signin"
+                  className="SignUp_Page_SignIn_Button"
+                >
                   <p className="SignUp_Page_SignIn_Button_Title">Sign In</p>
                   <ForwardOutlinedIcon className="SignUp_Page_SignIn_Button_Icon" />
-                </button>
+                </NavLink>
               </div>
             </form>
           </div>

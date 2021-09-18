@@ -2,6 +2,7 @@ import React from "react";
 import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
+import { Link, NavLink } from "react-router-dom";
 function SignIn() {
   return (
     <>
@@ -24,9 +25,13 @@ function SignIn() {
                 placeholder="Password"
               />
               <button className="SignIn_Page_SignIn_Button">Sign In</button>
-              <button className="SignIn_Page_Create_Account_Button">
+              <NavLink
+                exact
+                to="/register"
+                className="SignIn_Page_Create_Account_Button"
+              >
                 Create New Account
-              </button>
+              </NavLink>
               <p className="SignIn_Page_Forgot_Password_Button">
                 Forgot Password?
               </p>
@@ -42,6 +47,7 @@ function SignIn() {
                 alt="SignIn"
               />
             </div>
+
             <button className="SignIn_page_Google_Button">
               <img
                 className="SignIn_page_Google_Button_Logo"
