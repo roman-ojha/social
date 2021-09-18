@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
-import { Link, NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 function SignIn() {
   const [signInDetail, setSignInDetail] = useState({
     email: "",
@@ -20,6 +20,7 @@ function SignIn() {
   const history = useHistory();
   const signingIn = async (e) => {
     e.preventDefault();
+
     try {
       const res = await fetch("/signin", {
         method: "POST",
@@ -42,6 +43,25 @@ function SignIn() {
     } catch (err) {
       // console.log(err);
     }
+  };
+  const signInWithGoogle = async () => {
+    window.open("http://localhost:8080/auth/google", "_self");
+    // window.open("<URL>", "<MODE>");
+    // here this will open the google authentication frist
+    // try {
+    //   const res = await fetch("/auth/login/success", {
+    //     method: "GET",
+    //     headers: {
+    //       Accept: "application/json",
+    //       "Content-Type": "application/json",
+    //     },
+    //     credentials: "include",
+    //   });
+    //   const data = await res.json();
+    //   console.log(data);
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
   return (
     <>
@@ -95,7 +115,10 @@ function SignIn() {
               />
             </div>
 
-            <button className="SignIn_page_Google_Button">
+            <button
+              onClick={signInWithGoogle}
+              className="SignIn_page_Google_Button"
+            >
               <img
                 className="SignIn_page_Google_Button_Logo"
                 src={Sign_In_Google_Logo}

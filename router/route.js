@@ -2,11 +2,14 @@ const express = require("express");
 const router = express.Router();
 const userDetail = require("../models/userDetail_model");
 const bcrypt = require("bcryptjs");
-router.get("/", (req, res) => {
-  res.send("Hello");
+const authenticate = require("../middleware/authenticate");
+
+router.get("/u", authenticate, (req, res) => {
+  res.send(req.user);
 });
 
 router.post("/register", (req, res) => {
+  console.log("register");
   const { name, email, password, cpassword, birthday, gender } = req.body;
   if (!name || !email || !password || !cpassword || !birthday || !gender) {
     return res.status(422).json({ error: "Plz fill the field properly" });
@@ -74,7 +77,5 @@ router.post("/signin", async (req, res) => {
     console.log(err);
   }
 });
-
-router.get("/profile", (req, res) => {});
 
 module.exports = router;
