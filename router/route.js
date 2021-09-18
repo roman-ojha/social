@@ -11,6 +11,9 @@ router.post("/register", (req, res) => {
   if (!name || !email || !password || !cpassword || !birthday || !gender) {
     return res.status(422).json({ error: "Plz fill the field properly" });
   }
+  if (password !== cpassword) {
+    return res.status(422).json({ error: "Password doesn't match" });
+  }
   userDetail
     .findOne({ email: email })
     .then((userExist) => {
@@ -56,14 +59,14 @@ router.post("/signin", async (req, res) => {
         password,
         userLogin.password
       );
-      token = await userLogin.generateAuthToken();
-      res.cookie("Authentication", token, {
-        expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
-      });
       if (!isPasswordMatch) {
         res.status(400).json({ error: "Username and password doesn't match" });
       } else {
+        token = await userLogin.generateAuthToken();
+        res.cookie("AuthToken", token, {
+          expires: new Date(Date.now() + 25892000000),
+          httpOnly: true,
+        });
         res.status(200).json({ message: "Login Successfully" });
       }
     }
