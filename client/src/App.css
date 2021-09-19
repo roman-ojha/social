@@ -8,11 +8,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Ramaraja&display=swap");
 /* Styling Sign In Page------------------------------------ */
 :root {
-  --Page-Background-Color: #ebe7ea;
+  --Page-Background-Color: #ebe7ea96;
   --primary-color: #8b37ca;
   --primary-color-point-9: #8a37caf1;
+  --primary-color-point-7: #8e3fcad7;
   --secondary-color: #c929a6;
+  --secondary-color-point-4: #e665ca36;
   --secondary-color-point-9: #c929a6e8;
+  --secondary-color-point-2: #b359a021;
+  --input-field-font-family: "Raleway", sans-serif;
+  --primary-font-family: "Raleway", sans-serif;
+  --lower-opacity-font-color: rgb(73, 73, 73);
+  --medium-opacity-font-color: rgb(54, 54, 54);
 }
 
 .SignIn_Page_Container {
@@ -72,7 +79,7 @@
   width: 70%;
   height: 11%;
   border-radius: 7px;
-  font-family: "Raleway", sans-serif;
+  font-family: var(--input-field-font-family);
   font-weight: 600;
   border-color: rgb(180, 180, 180);
   border-style: solid;
@@ -307,14 +314,14 @@
   outline: none;
   box-shadow: 0px 0px 10px rgb(211, 211, 211);
 }
-.SignUp_Page_Full_Name_Input_Field {
+/* .SignUp_Page_Full_Name_Input_Field {
 }
 .SignUp_Page_Email_Address_Input_Field {
 }
 .SignUp_Page_Password_Input_Field {
 }
 .SignUp_Page_Conform_Password_Input_Field {
-}
+} */
 .SignUp_Page_Birthday_Selection_Container {
   /* border: 1px solid red; */
   width: 75%;
@@ -354,12 +361,12 @@
   font-weight: 600;
   font-size: 0.9rem;
 }
-.SignUp_Page_Birthday_Year_Selection {
+/* .SignUp_Page_Birthday_Year_Selection {
 }
 .SignUp_Page_Birthday_Month_Selection {
 }
 .SignUp_Page_Birthday_Day_Selection {
-}
+} */
 .SignUp_Page_Gender_Checkbox_Container {
   display: flex;
   flex-direction: column;
@@ -393,7 +400,7 @@
   height: 40%;
   cursor: pointer;
 }
-.SignUp_Page_Male_CheckBox_Container {
+/* .SignUp_Page_Male_CheckBox_Container {
 }
 .SignUp_Page_Male_CheckBox_Title {
 }
@@ -410,7 +417,7 @@
 .SignUp_Page_Others_CheckBox_Title {
 }
 .SignUp_Page_Others_CheckBox {
-}
+} */
 .SignUp_Page_Submit_Container {
   width: 75%;
   display: flex;
@@ -464,4 +471,574 @@
 }
 .SignUp_Page_SignIn_Button_Icon {
   color: rgb(71, 71, 71);
+}
+
+/* Designing MainPage SideBar---------------------------------------- */
+.MainPage_Container {
+  background-color: var(--Page-Background-Color);
+  width: 100%;
+  height: 100vh;
+}
+.MainPage_SideBar_Container {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  position: fixed;
+  height: 100vh;
+  /* justify-content: space-between; */
+  background-color: white;
+  box-shadow: 5px 0px 15px rgb(211, 211, 211);
+}
+.MainPage_SideBar_Logo_Search_Container {
+  /* border: 1px solid black; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 14%;
+}
+.MainPage_SideBar_Page_Logo {
+  height: 3rem;
+}
+.MainPage_SideBar_Search_Outline {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: 65%;
+  margin-left: 3%;
+  height: 40%;
+  border-color: rgb(122, 122, 122);
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 1rem;
+  padding-left: 10px;
+}
+.MainPage_SideBar_Search_Icon {
+  color: rgb(92, 92, 92);
+  width: 1.4rem;
+}
+.MainPage_SideBar_Search_Input_Field {
+  width: 75%;
+  border-width: 0px;
+  height: 90%;
+  color: rgb(92, 92, 92);
+}
+.MainPage_SideBar_Search_Input_Field:read-write {
+  padding-left: 10px;
+  color: rgb(92, 92, 92);
+  font-family: var(--input-field-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.MainPage_SideBar_Search_Input_Field:focus {
+  outline: none;
+}
+.MainPage_SideBar_Menu_Container {
+  /* border: 1px solid blue; */
+  height: 37%;
+}
+.MainPage_SideBar_Menu_NavLink_Container {
+  height: 90%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.MainPage_SideBar_Menu_NavLink_Container a {
+  display: flex;
+  cursor: pointer;
+  padding: 2% 0% 2% 0%;
+  align-items: center;
+  border-radius: 0px 1rem 1rem 0px;
+  transition-duration: 100ms;
+  text-decoration: none;
+}
+.MainPage_SideBar_Menu_NavLink_Container a:hover {
+  background-color: var(--secondary-color-point-2);
+}
+.MainPage_SideBar_Menu_NavLink_Container a img {
+  margin-left: 5%;
+  height: 1.5rem;
+}
+.MainPage_SideBar_Menu_NavLink_Container a h3 {
+  margin-left: 5%;
+  color: var(--lower-opacity-font-color);
+  font-size: 0.8rem;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.MainPage_SideBar_Menu_SelectBar_Colored {
+  width: 12px;
+  height: 120%;
+  background-color: var(--primary-color-point-7);
+}
+.MainPage_SideBar_Menu_Title {
+  font-family: var(--primary-font-family);
+  color: var(--lower-opacity-font-color);
+  font-size: 0.9rem;
+  margin-left: 5%;
+  /* border: 1px solid black; */
+  height: 8%;
+}
+/* .MainPage_SideBar_Menu_Home_Container {
+}
+.MainPage_SideBar_Menu_Home_Title {
+}
+.MainPage_SideBar_Menu_Home_Logo {
+}
+.MainPage_SideBar_Menu_Home_Title {
+}
+.MainPage_SideBar_Menu_Video_Container {
+}
+.MainPage_SideBar_Menu_Video_Logo {
+}
+.MainPage_SideBar_Menu_Video_Title {
+}
+.MainPage_SideBar_Menu_Message_Container {
+}
+.MainPage_SideBar_Menu_Message_Logo {
+}
+.MainPage_SideBar_Menu_Message_Title {
+}
+.MainPage_SideBar_Menu_Setting_Container {
+}
+.MainPage_SideBar_Menu_Setting_Logo {
+}
+.MainPage_SideBar_Menu_Setting_Title {
+}
+.MainPage_SideBar_Menu_Profile_Container {
+}
+.MainPage_SideBar_Menu_Profile_Logo {
+}
+.MainPage_SideBar_Menu_Profile_Title {
+} */
+.MainPage_SideBar_Friends_Container {
+  /* border: 1px solid purple; */
+  height: 35%;
+  margin: 1% 4% 1% 4%;
+  background-color: var(--secondary-color-point-2);
+  border-radius: 15px;
+}
+.MainPage_SideBar_Friends_Title {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  margin: 2% 0% 1% 5%;
+  color: var(--lower-opacity-font-color);
+  /* border: 1px solid red; */
+  height: 10%;
+}
+.MainPage_SideBar_Friends_Inner_Container {
+  width: 100%;
+  height: 85%;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.MainPage_SideBar_Friend_Outline {
+  display: flex;
+  align-items: center;
+}
+.MainPage_SideBar_Friend_Image {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-left: 7%;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.MainPage_SideBar_Friend_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.7rem;
+  margin-left: 5%;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  width: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+.MainPage_SideBar_Friend_Name:hover {
+  text-decoration: underline;
+}
+.MainPage_SideBar_Friend_Active_Status {
+  margin: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 50%;
+  border-radius: 1rem;
+  background-color: var(--primary-color-point-7);
+}
+.MainPage_SideBar_Friend_Active_Status p {
+  font-family: var(--primary-font-family);
+  font-size: 0.5rem;
+  margin-left: 5%;
+  letter-spacing: 0.5px;
+  color: white;
+}
+.MainPage_SideBar_User_Account_LogOut_Container {
+  height: 14%;
+}
+.MainPage_SideBar_Account_Title {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  margin: 1% 0% 1% 5%;
+  color: var(--lower-opacity-font-color);
+  /* border: 1px solid orangered; */
+  height: 25%;
+}
+.MainPage_SideBar_User_Account_Logout_Outline {
+  display: flex;
+  /* border: 1px solid black; */
+  height: 75%;
+  align-items: center;
+  justify-content: space-between;
+}
+.MainPage_SideBar_User_Account_Img {
+  margin-left: 3%;
+  height: 2.9rem;
+  width: 2.9rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.MainPage_SideBar_User_Account_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  color: rgb(51, 51, 51);
+  cursor: pointer;
+}
+.MainPage_SideBar_User_Account_Name:hover {
+  text-decoration: underline;
+}
+.MainPage_LogOut_Icon {
+  margin-left: 4%;
+  height: 1rem;
+  cursor: pointer;
+}
+.MainPage_SideBar_User_Logout_Button {
+  margin-right: 5%;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  background-color: white;
+  border-width: 0px;
+}
+.MainPage_SideBar_User_Logout_Button:hover {
+  text-decoration: underline;
+}
+
+.MainPage_SideBar_Horizontal_Line {
+  width: 90%;
+  margin-left: 5%;
+  /* height: 0.5px; */
+  background-color: rgb(197, 197, 197);
+}
+
+/* Designing Main Page User Stories ----------------------------- */
+.MainPage_User_Stories_Container {
+  width: 50%;
+  height: 14%;
+  position: fixed;
+  left: 20%;
+  background-color: white;
+  box-shadow: 12px 5px 15px rgb(211, 211, 211);
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Current_User_Story_Container,
+.Friends_Story_Container {
+  /* border: 1px solid blue; */
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.Current_User_Story_Picure_Container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Current_User_Story_Picture {
+  width: 2.7rem;
+  height: 2.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 1.5px;
+  width: 2.7rem;
+  border-radius: 50%;
+  filter: brightness(0.89);
+  cursor: pointer;
+}
+.Current_User_Story_Add_Icon {
+  position: absolute;
+  filter: brightness(0.97);
+  cursor: pointer;
+}
+.Current_User_Story_Name,
+.Friend_Story_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(78, 78, 78);
+  cursor: pointer;
+}
+.Current_User_Story_Name:hover,
+.Friend_Story_Name:hover {
+  text-decoration: underline;
+}
+.Friend_Story_Picture {
+  width: 2.7rem;
+  height: 2.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(230, 94, 207, 0.425);
+  padding: 1.5px;
+  cursor: pointer;
+}
+
+/* Designing Main Page Message and Notification Bar----------------- */
+.MainPage_Message_and_Notification_Bar_Container {
+  width: 30%;
+  /* border: 1px solid red; */
+  height: 14%;
+  position: fixed;
+  left: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.MainPage_Message_and_Notification_Bar_Container div {
+  border-radius: 50%;
+  display: flex;
+  border: 2px solid rgb(145, 145, 145);
+  cursor: pointer;
+  transition-duration: 100ms;
+  box-shadow: 0px 0px 10px rgba(163, 162, 162, 0.486);
+}
+.MainPage_Message_and_Notification_Bar_Container div:hover {
+  background-color: rgba(214, 214, 214, 0.836);
+}
+.MainPage_Message_Bar_Message_Outline {
+  padding: 1.2%;
+}
+.MainPage_Message_Bar_Notification_Outline {
+  padding: 1.2% 1.5% 1.2% 1.5%;
+}
+
+.MainPage_Message_Bar_Message_Outline img {
+  height: 1.9rem;
+}
+.MainPage_Message_Bar_Notification_Outline img {
+  height: 1.9rem;
+}
+.MainPage_Message_Bar_More_Outline {
+  padding: 4% 3% 3% 3%;
+}
+.MainPage_Message_Bar_More_Outline img {
+  height: 1rem;
+}
+
+.MainPage_Message_Bar_Profile {
+  height: 2.6rem;
+  width: 2.6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Designing Main Page rignt side component ---------------------------------*/
+/* Suggestion User Design and Followed By */
+.MainPage_Rignt_Side_Component_Container {
+  width: 28.5%;
+  height: 96%;
+  /* border: 1px solid red; */
+  position: fixed;
+  top: 14%;
+  left: 70.5%;
+}
+
+.MainPage_UserSuggession_Container {
+  background-color: white;
+  border-radius: 10px;
+  height: 40%;
+}
+.MainPage_UserSuggession_Title,
+.MainPage_FollowedBy_Title,
+.MainPage_SponsoredBy_Title {
+  /* border: 1px solid red; */
+  margin: 0% 0% 0% 5%;
+  height: 15%;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--medium-opacity-font-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.MainPage_UserSuggession_Inner_Container,
+.MainPage_FollowedBy_Inner_Container {
+  height: 85%;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.MainPage_Suggested_User_Container,
+.MainPage_Followed_User_Container {
+  /* border: 1px solid black; */
+  display: flex;
+  width: 95%;
+  align-items: center;
+  border-radius: 0.6rem;
+  background-color: var(--secondary-color-point-4);
+  padding: 2px 0px 2px 0px;
+}
+.MainPage_Suggested_User_Image,
+.MainPage_Followed_User_Image {
+  margin-left: 3%;
+  height: 2.5rem;
+  width: 2.5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.MainPage_Suggested_User_Name_Container,
+.MainPage_Followed_User_Name_Container {
+  margin-left: 2%;
+  /* border: 1px solid purple; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+  height: 100%;
+}
+.MainPage_Suggested_User_Name,
+.MainPage_Followed_User_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--medium-opacity-font-color);
+  cursor: pointer;
+  width: fit-content;
+}
+.MainPage_Suggested_User_Follower_Name,
+.MainPage_Followed_User_Follower_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+  width: fit-content;
+}
+.MainPage_Suggested_User_Follow_Button,
+.MainPage_Followed_User_Follow_Button {
+  width: 25%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  margin-left: 2%;
+  background-color: var(--primary-color-point-7);
+  cursor: pointer;
+}
+.MainPage_Suggested_User_Follow_Button_Text,
+.MainPage_Followed_User_Follow_Button_Text {
+  font-family: var(--primary-font-family);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: white;
+}
+.MainPage_FollowedBy_Container {
+  margin-top: 2%;
+  /* border: 1px solid black; */
+  background-color: white;
+  border-radius: 10px;
+  height: 28%;
+}
+.MainPage_Followed_User_Container {
+  background-color: rgba(218, 218, 218, 0.5);
+}
+
+/* Designing Sponsored By  */
+.MainPage_SponsoredBy_Container {
+  margin-top: 2%;
+  /* border: 1px solid black; */
+  background-color: white;
+  border-radius: 10px;
+  height: 18%;
+}
+.MainPage_SponsoredBy_Title {
+  /* border: 1px solid red; */
+  padding-top: 1%;
+  height: 15%;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--medium-opacity-font-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.MainPage_SponsoredBy_Inner_Container {
+  /* border: 1px solid red; */
+  display: flex;
+  height: 80%;
+  align-items: center;
+}
+.MainPage_Sponsored_Image {
+  margin-left: 5%;
+  width: 3rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.MainPage_Sponsored_Name_Container {
+  /* border: 1px solid blue; */
+  width: 75%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-left: 4%;
+}
+.MainPage_Sponsored_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--medium-opacity-font-color);
+  cursor: pointer;
+  width: fit-content;
+}
+.MainPage_Sponsored_Info {
+  font-family: var(--primary-font-family);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+  width: fit-content;
+}
+.MainPage_Sponsored_genre {
+  font-family: var(--primary-font-family);
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+  width: fit-content;
 }

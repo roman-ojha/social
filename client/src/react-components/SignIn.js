@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
@@ -47,21 +47,7 @@ function SignIn() {
   const signInWithGoogle = async () => {
     window.open("http://localhost:8080/auth/google", "_self");
     // window.open("<URL>", "<MODE>");
-    // here this will open the google authentication frist
-    // try {
-    //   const res = await fetch("/auth/login/success", {
-    //     method: "GET",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //     credentials: "include",
-    //   });
-    //   const data = await res.json();
-    //   console.log(data);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    // here this will open the google authentication
   };
   return (
     <>

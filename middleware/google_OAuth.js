@@ -21,19 +21,15 @@ passport.use(
         let token;
         const userExist = await userDetail.findOne({ email: profile.email });
         if (userExist) {
-          // if (userExist.googleID === undefined) {
-          //   // if the user exist but had already login from the
-          //   console.log("Error~!!!!!!!!!!!!!!!!!");
-          //   return done(err, profile);
-          // } else {
-          //   return done(null, userExist);
-          // }
+          // if the user exist but had already signup from the social Accout
+          // i had not complete this feture but, will be complete in future
           return done(null, userExist);
         } else {
           const userData = new userDetail({
             googleID: profile.id,
             name: profile.displayName,
             email: profile.email,
+            picture: profile.picture,
           });
           const createUser = await userData.save();
           return done(null, createUser);

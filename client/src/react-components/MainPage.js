@@ -1,49 +1,44 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import MainPageSideBar from "./MainPageSideBar";
+import MainPageStory from "./MainPageStory";
+import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
+import MainPageRightSideComp from "./MainPageRightSideComp";
 
 const HomePage = () => {
   const history = useHistory();
-  const getUserData = async () => {
-    try {
-      const res = await fetch("/u", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
-      console.log(await res.json());
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-    } catch (err) {
-      console.log(err);
-      history.push("/signin");
-    }
-  };
-  // const getUserData = async () => {
-  //   try {
-  //     const res = await fetch("/auth/login/success", {
-  //       method: "GET",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       credentials: "include",
-  //     });
-  //     console.log(await res.json());
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
   useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await fetch("/u", {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+        const userData = await res.json();
+        console.log(userData);
+        if (!res.status === 200) {
+          const error = new Error(res.error);
+          throw error;
+        }
+      } catch (err) {
+        console.log(err);
+        history.push("/signin");
+      }
+    };
     getUserData();
   }, []);
   return (
     <>
-      <h1>Home page</h1>
+      <div className="MainPage_Container">
+        <MainPageSideBar />
+        <MainPageStory />
+        <MainPageMsgAndNtfBar />
+        <MainPageRightSideComp />
+      </div>
     </>
   );
 };

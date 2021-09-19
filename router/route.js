@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
 
 router.get("/u", authenticate, (req, res) => {
-  res.send(req.user);
+  res.send(req.rootUser);
 });
 
 router.post("/register", (req, res) => {
@@ -76,6 +76,11 @@ router.post("/signin", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/u/logout", authenticate, (req, res) => {
+  res.clearCookie("AuthToken", { path: "/" });
+  res.status(200).send("User Logout");
 });
 
 module.exports = router;

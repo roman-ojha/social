@@ -18,6 +18,9 @@ const userDetailSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  picture: {
+    type: String,
+  },
   password: {
     type: String,
     require: true,

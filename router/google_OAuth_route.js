@@ -27,6 +27,7 @@ router.get(
 router.get("/auth/login/success", async (req, res) => {
   // here if user login form google after that we are finding the email of that on data base and generating token for that user and after that store that token in cookie
   // and after that we are redirecting to the homepage after that there we will check the does token get match or not if it get match then we will send the data from the user into the home page
+  console.log(req.user);
   const userLogin = await UserDetail.findOne({ email: req.user.email });
   try {
     let token;
