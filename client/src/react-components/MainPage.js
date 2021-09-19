@@ -4,8 +4,28 @@ import MainPageSideBar from "./MainPageSideBar";
 import MainPageStory from "./MainPageStory";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import MainPageRightSideComp from "./MainPageRightSideComp";
+import HomePage from "./HomePage";
+import VideoPage from "./VideoPage";
+import MessagePage from "./MessagePage";
+import SettingPage from "./SettingPage";
+import ProfilePage from "./ProfilePage";
+import { Switch, Route } from "react-router-dom";
 
-const HomePage = () => {
+const RoutingMainPage = () => {
+  return (
+    <>
+      <Switch>
+        <Route exact path="/u" component={HomePage} />
+        <Route exact path="/u/video" component={VideoPage} />
+        <Route exact path="/u/message" component={MessagePage} />
+        <Route exact path="/u/setting" component={SettingPage} />
+        <Route exact path="/u/profile" componen={ProfilePage} />
+      </Switch>
+    </>
+  );
+};
+
+const MainPage = () => {
   const history = useHistory();
   useEffect(() => {
     const getUserData = async () => {
@@ -29,13 +49,15 @@ const HomePage = () => {
         history.push("/signin");
       }
     };
-    getUserData();
+    // getUserData();
   }, []);
   return (
     <>
       <div className="MainPage_Container">
         <MainPageSideBar />
         <MainPageStory />
+        {/* <RoutingMainPage /> */}
+        <HomePage />
         <MainPageMsgAndNtfBar />
         <MainPageRightSideComp />
       </div>
@@ -43,4 +65,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MainPage;

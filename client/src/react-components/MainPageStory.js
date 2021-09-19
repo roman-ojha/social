@@ -7,17 +7,17 @@ const AddStory = () => {
     <>
       <div className="Current_User_Story_Container">
         <div className="Current_User_Story_Picure_Container">
+          <AddCircleOutlineRoundedIcon
+            className="Current_User_Story_Add_Icon"
+            style={{ color: "white", height: "1.2rem" }}
+          />
           <img
             src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
             alt=""
             className="Current_User_Story_Picture"
           />
-          <AddCircleOutlineRoundedIcon
-            className="Current_User_Story_Add_Icon"
-            style={{ color: "white", height: "1.2rem" }}
-          />
         </div>
-        <p className="Current_User_Story_Name">You</p>
+        <p className="Current_User_Story_Name">Create</p>
       </div>
     </>
   );

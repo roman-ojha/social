@@ -37,6 +37,9 @@ const ShowFriends = () => {
         <MainPageFriend />
         <MainPageFriend />
         <MainPageFriend />
+        <MainPageFriend />
+        <MainPageFriend />
+        <MainPageFriend />
       </div>
     </>
   );
@@ -86,7 +89,7 @@ const MainPageSideBar = () => {
         <div className="MainPage_SideBar_Menu_Container">
           <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
           <div className="MainPage_SideBar_Menu_NavLink_Container">
-            <NavLink to="" className="MainPage_SideBar_Menu_Home_Container">
+            <NavLink to="/u" className="MainPage_SideBar_Menu_Home_Container">
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <img
                 className="MainPage_SideBar_Menu_Home_Logo"
@@ -95,7 +98,10 @@ const MainPageSideBar = () => {
               />
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
-            <NavLink to="" className="MainPage_SideBar_Menu_Video_Container">
+            <NavLink
+              to="/u/video"
+              className="MainPage_SideBar_Menu_Video_Container"
+            >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <img
                 className="MainPage_SideBar_Menu_Video_Logo"
@@ -104,7 +110,10 @@ const MainPageSideBar = () => {
               />
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
             </NavLink>
-            <NavLink to="" className="MainPage_SideBar_Menu_Message_Container">
+            <NavLink
+              to="/u/message"
+              className="MainPage_SideBar_Menu_Message_Container"
+            >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <img
                 className="MainPage_SideBar_Menu_Message_Logo"
@@ -113,7 +122,10 @@ const MainPageSideBar = () => {
               />
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
             </NavLink>
-            <NavLink to="" className="MainPage_SideBar_Menu_Setting_Container">
+            <NavLink
+              to="/u/setting"
+              className="MainPage_SideBar_Menu_Setting_Container"
+            >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <img
                 className="MainPage_SideBar_Menu_Setting_Logo"
@@ -122,7 +134,10 @@ const MainPageSideBar = () => {
               />
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
-            <NavLink to="" className="MainPage_SideBar_Menu_Profile_Container">
+            <NavLink
+              to="/u/profile"
+              className="MainPage_SideBar_Menu_Profile_Container"
+            >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <img
                 className="MainPage_SideBar_Menu_Profile_Logo"

@@ -21,6 +21,26 @@
   --lower-opacity-font-color: rgb(73, 73, 73);
   --medium-opacity-font-color: rgb(54, 54, 54);
 }
+body {
+  background-color: var(--Page-Background-Color);
+}
+
+/* Designing Scrollbar */
+
+/* this has to be in the exact same order */
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body::-webkit-scrollbar-track {
+  background-color: var(--Page-Background-Color);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #522572;
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #604175;
+}
 
 .SignIn_Page_Container {
   background-color: var(--Page-Background-Color);
@@ -314,14 +334,7 @@
   outline: none;
   box-shadow: 0px 0px 10px rgb(211, 211, 211);
 }
-/* .SignUp_Page_Full_Name_Input_Field {
-}
-.SignUp_Page_Email_Address_Input_Field {
-}
-.SignUp_Page_Password_Input_Field {
-}
-.SignUp_Page_Conform_Password_Input_Field {
-} */
+
 .SignUp_Page_Birthday_Selection_Container {
   /* border: 1px solid red; */
   width: 75%;
@@ -361,12 +374,6 @@
   font-weight: 600;
   font-size: 0.9rem;
 }
-/* .SignUp_Page_Birthday_Year_Selection {
-}
-.SignUp_Page_Birthday_Month_Selection {
-}
-.SignUp_Page_Birthday_Day_Selection {
-} */
 .SignUp_Page_Gender_Checkbox_Container {
   display: flex;
   flex-direction: column;
@@ -400,24 +407,6 @@
   height: 40%;
   cursor: pointer;
 }
-/* .SignUp_Page_Male_CheckBox_Container {
-}
-.SignUp_Page_Male_CheckBox_Title {
-}
-.SignUp_Page_Male_CheckBox {
-}
-.SignUp_Page_Female_CheckBox_Container {
-}
-.SignUp_Page_Female_CheckBox_Title {
-}
-.SignUp_Page_Female_CheckBox {
-}
-.SignUp_Page_Others_CheckBox_Container {
-}
-.SignUp_Page_Others_CheckBox_Title {
-}
-.SignUp_Page_Others_CheckBox {
-} */
 .SignUp_Page_Submit_Container {
   width: 75%;
   display: flex;
@@ -474,11 +463,7 @@
 }
 
 /* Designing MainPage SideBar---------------------------------------- */
-.MainPage_Container {
-  background-color: var(--Page-Background-Color);
-  width: 100%;
-  height: 100vh;
-}
+
 .MainPage_SideBar_Container {
   /* border: 1px solid red; */
   display: flex;
@@ -583,38 +568,6 @@
   /* border: 1px solid black; */
   height: 8%;
 }
-/* .MainPage_SideBar_Menu_Home_Container {
-}
-.MainPage_SideBar_Menu_Home_Title {
-}
-.MainPage_SideBar_Menu_Home_Logo {
-}
-.MainPage_SideBar_Menu_Home_Title {
-}
-.MainPage_SideBar_Menu_Video_Container {
-}
-.MainPage_SideBar_Menu_Video_Logo {
-}
-.MainPage_SideBar_Menu_Video_Title {
-}
-.MainPage_SideBar_Menu_Message_Container {
-}
-.MainPage_SideBar_Menu_Message_Logo {
-}
-.MainPage_SideBar_Menu_Message_Title {
-}
-.MainPage_SideBar_Menu_Setting_Container {
-}
-.MainPage_SideBar_Menu_Setting_Logo {
-}
-.MainPage_SideBar_Menu_Setting_Title {
-}
-.MainPage_SideBar_Menu_Profile_Container {
-}
-.MainPage_SideBar_Menu_Profile_Logo {
-}
-.MainPage_SideBar_Menu_Profile_Title {
-} */
 .MainPage_SideBar_Friends_Container {
   /* border: 1px solid purple; */
   height: 35%;
@@ -636,11 +589,32 @@
   /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: start;
+  overflow: auto;
+  transition-duration: 100ms;
 }
+
+.MainPage_SideBar_Friends_Inner_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MainPage_SideBar_Friends_Inner_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.MainPage_SideBar_Friends_Inner_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MainPage_SideBar_Friends_Inner_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MainPage_SideBar_Friends_Inner_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+
 .MainPage_SideBar_Friend_Outline {
   display: flex;
   align-items: center;
+  margin-top: 1%;
 }
 .MainPage_SideBar_Friend_Image {
   width: 1.4rem;
@@ -752,6 +726,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  z-index: 2;
 }
 
 .Current_User_Story_Container,
@@ -781,13 +756,21 @@
   border-radius: 50%;
   filter: brightness(0.89);
   cursor: pointer;
+  transition-duration: 50ms;
+  z-index: 1;
+}
+.Current_User_Story_Picture:hover {
+  transform: scale(1.05);
 }
 .Current_User_Story_Add_Icon {
   position: absolute;
   filter: brightness(0.97);
   cursor: pointer;
+  z-index: 2;
 }
-.Current_User_Story_Name,
+.Current_User_Story_Add_Icon:hover + .Current_User_Story_Picture {
+  transform: scale(1.05);
+}
 .Friend_Story_Name {
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
@@ -809,6 +792,10 @@
   border-color: rgba(230, 94, 207, 0.425);
   padding: 1.5px;
   cursor: pointer;
+  transition-duration: 80ms;
+}
+.Friend_Story_Picture:hover {
+  transform: scale(1.05);
 }
 
 /* Designing Main Page Message and Notification Bar----------------- */
@@ -818,6 +805,7 @@
   height: 14%;
   position: fixed;
   left: 70%;
+  top: 0px;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -1041,4 +1029,16 @@
   color: var(--lower-opacity-font-color);
   cursor: pointer;
   width: fit-content;
+}
+
+/*Designing Home Page ---------------------------------  */
+.HomePage_Container {
+  width: 50%;
+  /* min-height: 85vh; */
+  min-height: 500vh;
+  border: 1px solid red;
+  position: relative;
+  left: 20%;
+  top: 14vh;
+  z-index: 1;
 }
