@@ -12,10 +12,14 @@
   --primary-color: #8b37ca;
   --primary-color-point-9: #8a37caf1;
   --primary-color-point-7: #8e3fcad7;
+  --primary-color-darker-5: #68377e;
+  --primary-color-lighter-1: #733f8b;
   --secondary-color: #c929a6;
-  --secondary-color-point-4: #e665ca36;
-  --secondary-color-point-9: #c929a6e8;
+  --secondary-color-point-1-transparent-0: #f7e0f2;
   --secondary-color-point-2: #b359a021;
+  --secondary-color-point-4: #e665ca36;
+  --secondary-color-point-7: #d8a3cdd8;
+  --secondary-color-point-9: #d43eb4e8;
   --input-field-font-family: "Raleway", sans-serif;
   --primary-font-family: "Raleway", sans-serif;
   --lower-opacity-font-color: rgb(73, 73, 73);
@@ -32,7 +36,7 @@ body::-webkit-scrollbar {
   width: 10px;
 }
 body::-webkit-scrollbar-track {
-  background-color: var(--Page-Background-Color);
+  background-color: transparent;
 }
 body::-webkit-scrollbar-thumb {
   background-color: #522572;
@@ -792,10 +796,10 @@ body::-webkit-scrollbar-thumb:hover {
   border-color: rgba(230, 94, 207, 0.425);
   padding: 1.5px;
   cursor: pointer;
-  transition-duration: 80ms;
+  transition-duration: 150ms;
 }
 .Friend_Story_Picture:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 /* Designing Main Page Message and Notification Bar----------------- */
@@ -1032,13 +1036,184 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 /*Designing Home Page ---------------------------------  */
+/* Designing User Post filed */
 .HomePage_Container {
   width: 50%;
-  /* min-height: 85vh; */
   min-height: 500vh;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   position: relative;
   left: 20%;
   top: 14vh;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.HomePage_User_Post_Field_Container {
+  width: 80%;
+  min-height: 3rem;
+  /* border: 1px solid red; */
+  margin-top: 1.2rem;
+  background-color: var(--secondary-color-point-7);
+  border-radius: 10px;
+}
+.HomePage_MinView_UserPost_Field_Container {
+  width: 100%;
+  height: 3rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.HomePage_MinField_UserPost_Field_Image {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.HomePage_MinView_UserPost_Input_Field {
+  width: 75%;
+  height: 2rem;
+  border-radius: 0.7rem;
+  border-width: 0px;
+  background-color: var(--secondary-color-point-1-transparent-0);
+}
+.HomePage_MinView_UserPost_Input_Field:read-write {
+  font-family: var(--input-field-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 5%;
+  color: rgb(68, 68, 68);
+}
+.HomePage_MinView_UserPost_Input_Field:focus {
+  outline: none;
+}
+/* HomePage MaxView UserPost Field */
+.HomePage_MaxView_UserPost_Field_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
+}
+.HomePage_MaxView_UserPost_Field_Upper_Part_Container {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.HomePage_MaxField_UserPost_Field_Image_Container {
+  /* border: 1px solid blue; */
+  height: 6rem;
+  margin-left: 1%;
+  margin-bottom: 0.3rem;
+}
+.HomePage_MaxField_UserPost_Field_Image {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  /* border: 1px solid red; */
+}
+
+.HomePage_MaxView_UserPost_Input_Field {
+  width: 70%;
+  height: 5rem;
+  border-radius: 0.5rem;
+  border-width: 0px;
+  background-color: var(--secondary-color-point-1-transparent-0);
+}
+.HomePage_MaxView_UserPost_Input_Field:read-write {
+  font-family: var(--input-field-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2% 3% 2% 3%;
+  color: rgb(68, 68, 68);
+  resize: none;
+}
+.HomePage_MaxView_UserPost_Input_Field:focus {
+  outline: none;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar {
+  width: 7px;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.HomePage_MaxView_UserPost_Input_Field:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+
+.HomePage_MaxView_UserPost_Field_Icons_Container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 6rem;
+  width: 10%;
+  position: relative;
+}
+
+.HomePage_MaxView_UserPost_Field_Icon {
+  color: var(--primary-color-darker-5);
+  cursor: pointer;
+}
+.HomePage_MaxView_UserPost_Field_Icon:hover {
+  color: var(--primary-color-lighter-1);
+}
+.HomePage_MaxView_UserPost_Field_Post_Button {
+  margin-bottom: 0.5rem;
+  width: 76%;
+  height: 1.4rem;
+  margin-right: 0.6%;
+  border-radius: 0.4rem;
+  border-width: 0px;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: var(--primary-color-darker-5);
+  color: white;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+.HomePage_MaxView_UserPost_Field_Post_Button:hover {
+  background-color: var(--primary-color-lighter-1);
+}
+.MaxView_UserPost_Image_Container {
+  width: 75%;
+  /* border: 1px solid red; */
+  max-height: 17rem;
+  margin-bottom: 0.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.MaxView_UserPost_Image {
+  width: 100%;
+  object-fit: cover;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MaxView_UserPost_Image_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
 }

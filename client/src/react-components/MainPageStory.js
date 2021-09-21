@@ -1,6 +1,5 @@
 import React from "react";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const AddStory = () => {
   return (

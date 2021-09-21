@@ -49,15 +49,15 @@ const MainPage = () => {
         history.push("/signin");
       }
     };
-    // getUserData();
+    getUserData();
   }, []);
+
   return (
     <>
       <div className="MainPage_Container">
         <MainPageSideBar />
         <MainPageStory />
-        {/* <RoutingMainPage /> */}
-        <HomePage />
+        <RoutingMainPage />
         <MainPageMsgAndNtfBar />
         <MainPageRightSideComp />
       </div>

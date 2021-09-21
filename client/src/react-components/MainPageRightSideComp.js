@@ -1,5 +1,4 @@
 import React from "react";
-import Profile_Icon from "../Images/mainPage_sideBar_profile.svg";
 
 const SuggestedUser = () => {
   return (

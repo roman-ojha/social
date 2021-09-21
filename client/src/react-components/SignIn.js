@@ -38,7 +38,7 @@ function SignIn() {
         });
       } else {
         console.log(data);
-        history.push("/");
+        history.push("/u");
       }
     } catch (err) {
       // console.log(err);
