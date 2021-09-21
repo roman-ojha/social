@@ -1,5 +1,4 @@
 import React from "react";
-import mainPage_sideBar_profile from "../Images/mainPage_sideBar_profile.svg";
 import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import more_icon from "../Images/more_icon.svg";
 import notification_icon from "../Images/notification_icon.svg";

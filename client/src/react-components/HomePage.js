@@ -94,7 +94,7 @@ const HomePage = () => {
         var isClickInsideElement = document
           .getElementsByClassName("HomePage_User_Post_Field_Container")[0]
           .contains(e.target);
-        if (!isClickInsideElement && count != 0) {
+        if (!isClickInsideElement && count !== 0) {
           setViewValue("min");
           document.removeEventListener("click", minView);
         }
@@ -187,6 +187,7 @@ const HomePage = () => {
           <SelectUserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
+          <HomePageFeed />
           <HomePageFeed />
         </div>
       </div>

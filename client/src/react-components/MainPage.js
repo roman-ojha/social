@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import MainPageSideBar from "./MainPageSideBar";
 import MainPageStory from "./MainPageStory";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
@@ -9,8 +8,8 @@ import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
-import { Switch, Route } from "react-router-dom";
-
+import { Switch, Route, useHistory } from "react-router-dom";
+let history;
 const RoutingMainPage = () => {
   return (
     <>
@@ -26,7 +25,7 @@ const RoutingMainPage = () => {
 };
 
 const MainPage = () => {
-  const history = useHistory();
+  history = useHistory();
   useEffect(() => {
     const getUserData = async () => {
       try {

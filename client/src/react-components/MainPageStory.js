@@ -26,11 +26,13 @@ const FriendStory = () => {
   return (
     <>
       <div className="Friends_Story_Container">
-        <img
-          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-          alt=""
-          className="Friend_Story_Picture"
-        />
+        <div className="Friends_Story_Picutre_Container">
+          <img
+            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+            alt=""
+            className="Friend_Story_Picture"
+          />
+        </div>
         <p className="Friend_Story_Name">Jaklin</p>
       </div>
     </>

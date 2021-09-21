@@ -12,8 +12,9 @@
   --primary-color: #8b37ca;
   --primary-color-point-9: #8a37caf1;
   --primary-color-point-7: #8e3fcad7;
-  --primary-color-darker-5: #68377e;
-  --primary-color-lighter-1: #733f8b;
+  /* --primary-color-darker-5: #68377e; */
+  --primary-color-darker-5: #7931b1;
+  --primary-color-lighter-1: #873cc0;
   --secondary-color: #c929a6;
   --secondary-color-point-1-transparent-0: #f7e0f2;
   --secondary-color-point-2: #b359a021;
@@ -26,6 +27,7 @@
   --medium-opacity-font-color: rgb(54, 54, 54);
   --home-page-content-width: 80%;
   --logo-icon-low-opacity-black-color: #333333;
+  --logo-icon-low-opacity-black-color-point-3: #555555;
 }
 body {
   background-color: var(--Page-Background-Color);
@@ -496,7 +498,7 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: white;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   width: 65%;
   margin-left: 3%;
   height: 40%;
@@ -549,9 +551,15 @@ body::-webkit-scrollbar-thumb:hover {
 .MainPage_SideBar_Menu_NavLink_Container a:hover {
   background-color: var(--secondary-color-point-2);
 }
-.MainPage_SideBar_Menu_NavLink_Container a img {
-  margin-left: 5%;
+/* .MainPage_SideBar_Menu_NavLink_Container a span {
   height: 1.5rem;
+  cursor: pointer;
+} */
+.MainPage_SideBar_Menu_Home_Logo {
+  margin-left: 2%;
+  color: var(--logo-icon-low-opacity-black-color-point-3);
+  height: 1.6rem;
+  width: 1.6rem;
 }
 .MainPage_SideBar_Menu_NavLink_Container a h3 {
   margin-left: 5%;
@@ -564,7 +572,7 @@ body::-webkit-scrollbar-thumb:hover {
 .MainPage_SideBar_Menu_SelectBar_Colored {
   width: 12px;
   height: 120%;
-  background-color: var(--primary-color-point-7);
+  /* background-color: var(--primary-color-point-7); */
 }
 .MainPage_SideBar_Menu_Title {
   font-family: var(--primary-font-family);
@@ -595,7 +603,7 @@ body::-webkit-scrollbar-thumb:hover {
   /* border: 1px solid blue; */
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   overflow: auto;
   transition-duration: 100ms;
 }
@@ -793,8 +801,8 @@ body::-webkit-scrollbar-thumb:hover {
   height: 2.7rem;
   object-fit: cover;
   border-radius: 50%;
-  border-width: 1px;
-  border-style: solid;
+  border-width: 2px;
+  border-style: dotted;
   border-color: rgba(230, 94, 207, 0.425);
   padding: 1.5px;
   cursor: pointer;
@@ -1041,7 +1049,6 @@ body::-webkit-scrollbar-thumb:hover {
 /* Designing User Post filed */
 .HomePage_Container {
   width: 50%;
-  min-height: 500vh;
   /* border: 1px solid red; */
   position: relative;
   left: 20%;
@@ -1050,6 +1057,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 1rem;
 }
 
 .HomePage_User_Post_Field_Container {
@@ -1247,13 +1255,13 @@ body::-webkit-scrollbar-thumb:hover {
   justify-content: space-around;
   align-items: center;
 }
-.HomePage_Feed_Info_User_Image {
-}
+
 .HomePage_Feed_Info_User_Image img {
   width: 2.2rem;
   height: 2.2rem;
   border-radius: 50%;
   cursor: pointer;
+  object-fit: cover;
 }
 .HomePage_Feed_User_Name_And_ID_Info_Container {
   /* border: 1px solid blue; */
@@ -1263,7 +1271,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 100%;
   /* border: 1px solid purple; */
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 .HomePage_Feed_User_ID_Text {
   /* border: 1px solid green; */
@@ -1324,5 +1332,4 @@ body::-webkit-scrollbar-thumb:hover {
 .HomePage_Feed_More_Info_Icon {
   color: var(--logo-icon-low-opacity-black-color);
   cursor: pointer;
-  border: 1px solid black;
 }

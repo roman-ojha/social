@@ -1,14 +1,11 @@
-import React from "react";
-import mainPage_sideBar_profile from "../Images/mainPage_sideBar_profile.svg";
-import mainPage_sideBar_setting from "../Images/mainPage_sideBar_setting.svg";
-import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
-import mainPage_sideBar_video from "../Images/mainPage_sideBar_video.svg";
-import mainPage_sideBar_home from "../Images/mainPage_sideBar_home.svg";
+import React, { useEffect } from "react";
 import mainPage_Logo from "../Images/mainPage_Logo.svg";
 import mainPage_sideBar_search from "../Images/mainPage_sideBar_Search.svg";
 import mainPage_Logout_Icon from "../Images/mainPage_Logout_Icon.svg";
-import { NavLink, useHistory } from "react-router-dom";
-
+import { NavLink, useHistory, useLocation } from "react-router-dom";
+let previouslySelectedElement;
+let selectedLinkIndex;
+let location;
 const MainPageFriend = () => {
   return (
     <>
@@ -47,6 +44,7 @@ const ShowFriends = () => {
 
 const MainPageSideBar = () => {
   const history = useHistory();
+  location = useLocation();
   const userLogOut = async () => {
     try {
       const res = await fetch("/u/logout", {
@@ -64,6 +62,70 @@ const MainPageSideBar = () => {
       }
     } catch (err) {}
   };
+  const colorSelectedMainPage = (e) => {
+    let parentElement;
+    try {
+      if (e.target.tagName === "A") {
+        // this will execute if clicked tagName is "A" which is the parent element
+        parentElement = e.target;
+      } else {
+        parentElement = e.target.parentElement;
+      }
+      parentElement.firstElementChild.style.backgroundColor =
+        "var(--primary-color-point-7)";
+      parentElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+        "var(--primary-color-point-7)";
+      parentElement.firstElementChild.nextElementSibling.style.color =
+        "var(--primary-color-point-7)";
+      if (
+        previouslySelectedElement !== parentElement &&
+        previouslySelectedElement !== undefined
+      ) {
+        previouslySelectedElement.firstElementChild.style.backgroundColor =
+          "transparent";
+        previouslySelectedElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+          "var(--medium-opacity-font-color)";
+        previouslySelectedElement.firstElementChild.nextElementSibling.style.color =
+          "var(--logo-icon-low-opacity-black-color-point-3)";
+      }
+      previouslySelectedElement = parentElement;
+    } catch (err) {}
+  };
+  // coloring the selected url page side bar onload
+  const colorSelectedUrl = () => {
+    switch (location.pathname) {
+      case "/u":
+        selectedLinkIndex = 0;
+        break;
+      case "/u/video":
+        selectedLinkIndex = 1;
+        break;
+      case "/u/message":
+        selectedLinkIndex = 2;
+        break;
+      case "/u/setting":
+        selectedLinkIndex = 3;
+        break;
+      case "/u/profile":
+        selectedLinkIndex = 4;
+        break;
+      default:
+        break;
+    }
+    const selectedLinkElement = document.getElementsByClassName(
+      "MainPage_SideBar_Link"
+    )[selectedLinkIndex];
+    selectedLinkElement.firstElementChild.style.backgroundColor =
+      "var(--primary-color-point-7)";
+    selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+      "var(--primary-color-point-7)";
+    selectedLinkElement.firstElementChild.nextElementSibling.style.color =
+      "var(--primary-color-point-7)";
+    previouslySelectedElement = selectedLinkElement;
+  };
+  useEffect(() => {
+    colorSelectedUrl();
+  }, []);
   return (
     <>
       <div className="MainPage_SideBar_Container">
@@ -89,61 +151,64 @@ const MainPageSideBar = () => {
         <div className="MainPage_SideBar_Menu_Container">
           <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
           <div className="MainPage_SideBar_Menu_NavLink_Container">
-            <NavLink to="/u" className="MainPage_SideBar_Menu_Home_Container">
+            <NavLink
+              to="/u"
+              className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
+              onClick={colorSelectedMainPage}
+            >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <img
-                className="MainPage_SideBar_Menu_Home_Logo"
-                src={mainPage_sideBar_home}
-                alt="home"
-              />
+              <span
+                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                data-icon="ant-design:home-filled"
+              ></span>
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
             <NavLink
               to="/u/video"
-              className="MainPage_SideBar_Menu_Video_Container"
+              className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
+              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <img
-                className="MainPage_SideBar_Menu_Video_Logo"
-                src={mainPage_sideBar_video}
-                alt="video"
-              />
+              <span
+                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                data-icon="clarity:video-gallery-solid"
+              ></span>
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
             </NavLink>
             <NavLink
               to="/u/message"
-              className="MainPage_SideBar_Menu_Message_Container"
+              className="MainPage_SideBar_Menu_Message_Container MainPage_SideBar_Link"
+              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <img
-                className="MainPage_SideBar_Menu_Message_Logo"
-                src={mainPage_sideBar_message}
-                alt="message"
-              />
+              <span
+                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                data-icon="ant-design:message-filled"
+              ></span>
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
             </NavLink>
             <NavLink
               to="/u/setting"
-              className="MainPage_SideBar_Menu_Setting_Container"
+              className="MainPage_SideBar_Menu_Setting_Container MainPage_SideBar_Link"
+              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <img
-                className="MainPage_SideBar_Menu_Setting_Logo"
-                src={mainPage_sideBar_setting}
-                alt="setting"
-              />
+              <span
+                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                data-icon="ant-design:setting-filled"
+              ></span>
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
             <NavLink
               to="/u/profile"
-              className="MainPage_SideBar_Menu_Profile_Container"
+              className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
+              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <img
-                className="MainPage_SideBar_Menu_Profile_Logo"
-                src={mainPage_sideBar_profile}
-                alt="profile"
-              />
+              <span
+                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                data-icon="gg:profile"
+              ></span>
               <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
             </NavLink>
           </div>
