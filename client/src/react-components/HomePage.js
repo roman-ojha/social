@@ -2,6 +2,61 @@ import React, { useState } from "react";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
+import ShareIcon from "@mui/icons-material/Share";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+
+const HomePageFeed = () => {
+  return (
+    <>
+      <div className="HomePage_Feed_Content_Container">
+        <div className="HomePage_Feed_Image_Container">
+          <img
+            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+            // src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg"
+            alt="post"
+          />
+        </div>
+        <div className="HomePage_Feed_Info_Container">
+          <div className="HomePage_Feed_Info_User_Image">
+            <img
+              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+              alt="user"
+            />
+          </div>
+          <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
+            <div className="HomePage_Feed_User_Name_And_Time_InfoContainer">
+              <p className="HomePage_Feed_User_ID_Text">
+                Kath_and_renfdsaasdafafdds
+              </p>
+              <p className="HomePage_Feed_User_Time_Text">3h</p>
+            </div>
+            <p className="HomePage_Feed_User_Name_Text">Katherine</p>
+          </div>
+          <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
+            <FavoriteBorderIcon
+              className="HomePage_Feed_Love_Icon"
+              style={{ width: "1.7rem", height: "1.7rem" }}
+            />
+            <CommentRoundedIcon
+              className="HomePage_Feed__Comment_Icon"
+              style={{ width: "1.7rem", height: "1.7rem" }}
+            />
+            <ShareIcon
+              className="HomePage_Feed_Share_Icon"
+              style={{ width: "1.7rem", height: "1.7rem" }}
+            />
+            <MoreVertIcon
+              className="HomePage_Feed_More_Info_Icon"
+              style={{ width: "1.7rem", height: "1.7rem" }}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 const HomePage = () => {
   const [viewValue, setViewValue] = useState("min");
@@ -130,6 +185,9 @@ const HomePage = () => {
       <div className="HomePage_Container">
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
+        </div>
+        <div className="HomePage_Feed_Main_Container">
+          <HomePageFeed />
         </div>
       </div>
     </>

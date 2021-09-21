@@ -24,6 +24,8 @@
   --primary-font-family: "Raleway", sans-serif;
   --lower-opacity-font-color: rgb(73, 73, 73);
   --medium-opacity-font-color: rgb(54, 54, 54);
+  --home-page-content-width: 80%;
+  --logo-icon-low-opacity-black-color: #333333;
 }
 body {
   background-color: var(--Page-Background-Color);
@@ -1051,7 +1053,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .HomePage_User_Post_Field_Container {
-  width: 80%;
+  width: var(--home-page-content-width);
   min-height: 3rem;
   /* border: 1px solid red; */
   margin-top: 1.2rem;
@@ -1089,7 +1091,7 @@ body::-webkit-scrollbar-thumb:hover {
 .HomePage_MinView_UserPost_Input_Field:focus {
   outline: none;
 }
-/* HomePage MaxView UserPost Field */
+/* HomePage MaxView UserPost Field --------------------------------------------------------*/
 .HomePage_MaxView_UserPost_Field_Container {
   display: flex;
   flex-direction: column;
@@ -1216,4 +1218,111 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb:hover {
   background-color: #6b4a81;
+}
+
+/* Designing HomePage Feed -------------------------------------------------*/
+.HomePage_Feed_Main_Container {
+  width: var(--home-page-content-width);
+  height: auto;
+}
+.HomePage_Feed_Content_Container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--secondary-color-point-2);
+  border-radius: 5px;
+}
+.HomePage_Feed_Image_Container {
+  width: 97%;
+  margin-top: 0.3rem;
+}
+.HomePage_Feed_Image_Container img {
+  width: 100%;
+}
+.HomePage_Feed_Info_Container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.HomePage_Feed_Info_User_Image {
+}
+.HomePage_Feed_Info_User_Image img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.HomePage_Feed_User_Name_And_ID_Info_Container {
+  /* border: 1px solid blue; */
+  width: 45%;
+}
+.HomePage_Feed_User_Name_And_Time_InfoContainer {
+  width: 100%;
+  /* border: 1px solid purple; */
+  display: flex;
+  justify-content: start;
+}
+.HomePage_Feed_User_ID_Text {
+  /* border: 1px solid green; */
+  max-width: 75%;
+  overflow: hidden;
+  font-family: var(--primary-font-family);
+  font-size: 0.89rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.HomePage_Feed_User_ID_Text:hover {
+  text-decoration: underline;
+}
+.HomePage_Feed_User_Time_Text {
+  /* border: 1px solid red; */
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+}
+
+.HomePage_Feed_User_Name_Text {
+  /* border: 1px solid black; */
+  overflow: hidden;
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.HomePage_Feed_User_Name_Text:hover {
+  text-decoration: underline;
+}
+.HomePage_Feed_Love_Comment_Share_Info_Container {
+  /* border: 1px solid purple; */
+  width: 35%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.HomePage_Feed_Love_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+  cursor: pointer;
+}
+.HomePage_Feed_Love_Icon:hover {
+  fill: var(--primary-color);
+}
+.HomePage_Feed__Comment_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+  cursor: pointer;
+}
+.HomePage_Feed_Share_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+  cursor: pointer;
+}
+.HomePage_Feed_More_Info_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+  cursor: pointer;
+  border: 1px solid black;
 }
