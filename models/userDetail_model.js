@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const userDetailSchema = new mongoose.Schema({
   googleID: {
@@ -106,4 +106,4 @@ userDetailSchema.methods.uploadPost = async function (postData) {
 };
 
 const UserDetail = mongoose.model("USERDETAIL", userDetailSchema);
-module.exports = UserDetail;
+export default UserDetail;

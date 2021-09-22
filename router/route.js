@@ -1,8 +1,8 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const userDetail = require("../models/userDetail_model");
-const bcrypt = require("bcryptjs");
-const authenticate = require("../middleware/authenticate");
+import userDetail from "../models/userDetail_model.js";
+import bcrypt from "bcryptjs";
+import authenticate from "../middleware/authenticate.js";
 
 router.get("/u", authenticate, (req, res) => {
   res.send(req.rootUser);
@@ -83,4 +83,4 @@ router.get("/u/logout", authenticate, (req, res) => {
   res.status(200).send("User Logout");
 });
 
-module.exports = router;
+export default router;

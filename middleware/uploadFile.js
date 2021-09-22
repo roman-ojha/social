@@ -1,7 +1,7 @@
-const multer = require("multer");
-const { GridFsStorage } = require("multer-gridfs-storage");
-const crypto = require("crypto");
-const path = require("path");
+import multer from "multer";
+import { GridFsStorage } from "multer-gridfs-storage";
+import crypto from "crypto";
+import path from "path";
 // const imagemin = require("imagemin");
 // const isJpg = require("is-jpg");
 // const sharp = require("sharp");
@@ -45,4 +45,4 @@ const storage = new GridFsStorage({
 });
 
 // const filename = `${Date.now()}-any-name-${file.originalname}`;
-module.exports = multer({ storage });
+export default multer({ storage });

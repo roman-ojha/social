@@ -1,9 +1,10 @@
-const passport = require("passport");
-const userDetail = require("../models/userDetail_model");
+import passport from "passport";
+import userDetail from "../models/userDetail_model.js";
 
-var GoogleStrategy = require("passport-google-oauth2").Strategy;
-GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+import GoogleOauth2 from "passport-google-oauth2";
+const GoogleStrategy = GoogleOauth2.Strategy;
+let GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+let GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 passport.use(
   new GoogleStrategy(
@@ -52,4 +53,4 @@ function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
 }
 
-module.exports = isLoggedIn;
+export default isLoggedIn;

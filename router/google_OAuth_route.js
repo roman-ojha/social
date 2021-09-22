@@ -1,11 +1,11 @@
-const express = require("express");
-const passport = require("passport");
-const session = require("express-session");
+import express from "express";
+import passport from "passport";
+import session from "express-session";
 const router = express.Router();
-require("../middleware/google_OAuth");
-const isLoogedIn = require("../middleware/google_OAuth");
-const authenticate = require("../middleware/authenticate");
-const UserDetail = require("../models/userDetail_model");
+import("../middleware/google_OAuth.js");
+import isLoogedIn from "../middleware/google_OAuth.js";
+import authenticate from "../middleware/authenticate.js";
+import UserDetail from "../models/userDetail_model.js";
 const CLIENT_HOME_PAGE_URL = "http://localhost:3000";
 
 router.use(session({ secret: "cat", resave: true, saveUninitialized: true }));
@@ -46,4 +46,4 @@ router.get("/auth/login/failed", (req, res) => {
   res.status(401).json({ error: "Something went wrong, try again letter..." });
 });
 
-module.exports = router;
+export default router;

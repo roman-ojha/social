@@ -1,22 +1,26 @@
-const express = require("express");
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import router from "../router/route.js";
+import storageRouter from "../router/storageRoute.js";
+import google_OAuth_route from "../router/google_OAuth_route.js";
 const app = express();
-const dotenv = require("dotenv");
-const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 dotenv.config({ path: "../config.env" });
 app.use(express.json());
 const PORT = process.env.PORT;
 
 // Database connection
-require("../db/userDataConnection");
-require("../db/userStorageConnection");
+import("../db/userDataConnection.js");
+import("../db/userStorageConnection.js");
 
 // Connection router
-app.use(require("../router/route"));
-app.use(require("../router/storageRoute"));
+app.use(router);
+app.use(storageRouter);
 
 // using google authentication function
-app.use(require("../router/google_OAuth_route"));
+
+app.use(google_OAuth_route);
 
 // listening to a 'PORT'
 app.listen(PORT, () => {

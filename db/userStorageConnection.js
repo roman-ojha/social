@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 dotenv.config({ path: "../config.env" });
 
 const DB = process.env.USERSTORAGEDATABASE;
 
 const stgConn = mongoose.createConnection(DB);
 
-module.exports = stgConn;
+export default stgConn;

@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const stgConn = require("../db/userStorageConnection");
-const upload = require("../middleware/uploadFile");
-const Grid = require("gridfs-stream");
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const userDetail = require("../models/userDetail_model");
+import stgConn from "../db/userStorageConnection.js";
+import upload from "../middleware/uploadFile.js";
+import Grid from "gridfs-stream";
+import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
+import userDetail from "../models/userDetail_model.js";
 let gfs;
 stgConn.once("open", function () {
   gfs = Grid(stgConn.db, mongoose.mongo);
@@ -41,4 +41,4 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
   res.send("Hello");
 });
 
-module.exports = router;
+export default router;
