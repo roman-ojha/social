@@ -31,6 +31,7 @@
 }
 body {
   background-color: var(--Page-Background-Color);
+  overflow-y: scroll;
 }
 
 /* Designing Scrollbar */
@@ -873,18 +874,39 @@ body::-webkit-scrollbar-thumb:hover {
   top: 14%;
   left: 70.5%;
 }
-
+/* @keyframes Convert_MainPage_UserSuggession_Container_To_MaxView {
+  from {
+    height: 14%;
+  }
+  to {
+    height: 40%;
+  }
+} */
 .MainPage_UserSuggession_Container {
   background-color: white;
   border-radius: 10px;
   height: 40%;
+  transition-duration: 500ms;
+}
+/* @keyframes Convert_MainPage_UserSuggession_Container_To_MinView {
+  from {
+    height: 40%;
+  }
+  to {
+    height: 14%;
+  }
+} */
+.MainPage_UserSuggession_Container_MinView {
+  background-color: white;
+  border-radius: 10px;
+  height: 14%;
+  padding-bottom: 4%;
 }
 .MainPage_UserSuggession_Title,
 .MainPage_FollowedBy_Title,
 .MainPage_SponsoredBy_Title {
   /* border: 1px solid red; */
   margin: 0% 0% 0% 5%;
-  height: 15%;
   font-family: var(--primary-font-family);
   font-weight: 600;
   font-size: 0.9rem;
@@ -892,6 +914,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding-top: 1.5%;
 }
 .MainPage_UserSuggession_Inner_Container,
 .MainPage_FollowedBy_Inner_Container {
@@ -901,6 +924,7 @@ body::-webkit-scrollbar-thumb:hover {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  overflow: hidden;
 }
 .MainPage_Suggested_User_Container,
 .MainPage_Followed_User_Container {
@@ -911,6 +935,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 0.6rem;
   background-color: var(--secondary-color-point-4);
   padding: 2px 0px 2px 0px;
+  margin: 2.5% 0% 2.5% 0%;
 }
 .MainPage_Suggested_User_Image,
 .MainPage_Followed_User_Image {
@@ -975,10 +1000,24 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
   height: 28%;
 }
+/* @keyframes Convert_MainPage_FollowedBy_Container_To_MinView {
+  from {
+    height: 28%;
+  }
+  to {
+    height: 13%;
+  }
+} */
+.MainPage_FollowedBy_Container_MinView {
+  margin-top: 2%;
+  background-color: white;
+  border-radius: 10px;
+  height: 13%;
+  padding-bottom: 5%;
+}
 .MainPage_Followed_User_Container {
   background-color: rgba(218, 218, 218, 0.5);
 }
-
 /* Designing Sponsored By  */
 .MainPage_SponsoredBy_Container {
   margin-top: 2%;
