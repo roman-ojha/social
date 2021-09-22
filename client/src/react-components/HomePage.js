@@ -60,6 +60,7 @@ const HomePageFeed = () => {
 
 const HomePage = () => {
   const [viewValue, setViewValue] = useState("min");
+
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -82,13 +83,8 @@ const HomePage = () => {
         </>
       );
     };
-    const getUserPostFiledImage = (event) => {
-      var image = document.getElementsByClassName("MaxView_UserPost_Image")[0];
-      image.style.visibility = "visible";
-      image.style.position = "static";
-      image.src = URL.createObjectURL(event.target.files[0]);
-    };
     const MaxViewUserPostField = () => {
+      const [userPostData, setUserPostData] = useState("");
       let count = 0;
       const minView = (e) => {
         var isClickInsideElement = document
@@ -101,9 +97,32 @@ const HomePage = () => {
         count++;
       };
       document.addEventListener("click", minView);
+      const getUserPostFiledImage = (event) => {
+        var image = document.getElementsByClassName(
+          "MaxView_UserPost_Image"
+        )[0];
+        image.style.visibility = "visible";
+        image.style.position = "static";
+        image.src = URL.createObjectURL(event.target.files[0]);
+      };
+      // uploading post to database
+      const uploadUserPost = async (e) => {
+        e.preventDefault();
+        var image = document.getElementById("image-input").files[0];
+        let data = new FormData();
+        data.append("image", image);
+        data.append("content", userPostData);
+        // we can be able to pass the other form of data like this
+        const res = await fetch("/u/post", {
+          method: "POST",
+          body: data,
+        });
+        // const resData = await res.json();
+        console.log(await res);
+      };
       return (
         <>
-          <div
+          <form
             className="HomePage_MaxView_UserPost_Field_Container"
             id="HomePage_MaxView_UserPost_Field_Container_ID"
           >
@@ -115,11 +134,17 @@ const HomePage = () => {
                   alt="profile"
                 />
               </div>
+
               <textarea
                 className="HomePage_MaxView_UserPost_Input_Field"
                 placeholder="Post Your Thought...."
                 autoFocus
+                value={userPostData}
+                onChange={(e) => {
+                  setUserPostData(e.target.value);
+                }}
               ></textarea>
+
               <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
                 <label htmlFor="image-input">
                   <PhotoLibraryIcon
@@ -133,6 +158,7 @@ const HomePage = () => {
                   style={{ visibility: "hidden" }}
                   onChange={getUserPostFiledImage}
                   accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+                  name="image"
                 />
                 <label htmlFor="video-input">
                   <VideoLibraryIcon
@@ -159,10 +185,13 @@ const HomePage = () => {
                 style={{ visibility: "hidden", position: "absolute" }}
               />
             </div>
-            <button className="HomePage_MaxView_UserPost_Field_Post_Button">
+            <button
+              className="HomePage_MaxView_UserPost_Field_Post_Button"
+              onClick={uploadUserPost}
+            >
               Post
             </button>
-          </div>
+          </form>
         </>
       );
     };

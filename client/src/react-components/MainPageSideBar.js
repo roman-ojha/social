@@ -93,35 +93,38 @@ const MainPageSideBar = () => {
   };
   // coloring the selected url page side bar onload
   const colorSelectedUrl = () => {
-    switch (location.pathname) {
-      case "/u":
-        selectedLinkIndex = 0;
-        break;
-      case "/u/video":
-        selectedLinkIndex = 1;
-        break;
-      case "/u/message":
-        selectedLinkIndex = 2;
-        break;
-      case "/u/setting":
-        selectedLinkIndex = 3;
-        break;
-      case "/u/profile":
-        selectedLinkIndex = 4;
-        break;
-      default:
-        break;
-    }
-    const selectedLinkElement = document.getElementsByClassName(
-      "MainPage_SideBar_Link"
-    )[selectedLinkIndex];
-    selectedLinkElement.firstElementChild.style.backgroundColor =
-      "var(--primary-color-point-7)";
-    selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-      "var(--primary-color-point-7)";
-    selectedLinkElement.firstElementChild.nextElementSibling.style.color =
-      "var(--primary-color-point-7)";
-    previouslySelectedElement = selectedLinkElement;
+    try {
+      switch (location.pathname) {
+        case "/u":
+          selectedLinkIndex = 0;
+          break;
+        case "/u/video":
+          selectedLinkIndex = 1;
+          break;
+        case "/u/message":
+          selectedLinkIndex = 2;
+          break;
+        case "/u/setting":
+          selectedLinkIndex = 3;
+          break;
+        case "/u/profile":
+          selectedLinkIndex = 4;
+          break;
+        default:
+          break;
+      }
+
+      const selectedLinkElement = document.getElementsByClassName(
+        "MainPage_SideBar_Link"
+      )[selectedLinkIndex];
+      selectedLinkElement.firstElementChild.style.backgroundColor =
+        "var(--primary-color-point-7)";
+      selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+        "var(--primary-color-point-7)";
+      selectedLinkElement.firstElementChild.nextElementSibling.style.color =
+        "var(--primary-color-point-7)";
+      previouslySelectedElement = selectedLinkElement;
+    } catch (err) {}
   };
   useEffect(() => {
     colorSelectedUrl();

@@ -43,10 +43,28 @@ const userDetailSchema = new mongoose.Schema({
       require: true,
     },
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   gender: {
     type: String,
     require: true,
   },
+  posts: [
+    {
+      content: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   tokens: [
     {
       token: {
@@ -71,6 +89,17 @@ userDetailSchema.methods.generateAuthToken = async function () {
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+userDetailSchema.methods.uploadPost = async function (postData) {
+  try {
+    // console.log(postData);
+    this.posts.unshift(postData);
+    await this.save();
+    return this.posts;
   } catch (err) {
     console.log(err);
   }

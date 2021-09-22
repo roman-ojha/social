@@ -1,0 +1,59 @@
+[33mcommit 852832dba4a6ddcf1a2b30aabcbe7b8618d16980[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Tue Sep 21 15:21:07 2021 +0545
+
+    Completing logic for coloring navigation sidebar in mainPage
+
+[33mcommit 041ec342ab6585970e1c1083ffa7641f94205d37[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Tue Sep 21 09:10:37 2021 +0545
+
+    Complet desiging homePage User Feed
+
+[33mcommit c140fc67c3008d432f57e47a04f982dbfa459846[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Tue Sep 21 07:42:00 2021 +0545
+
+    completing UI design of UserPost field
+
+[33mcommit eaa5e08d791cef3d800616b511fb3f5e2dabaeb0[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Mon Sep 20 00:22:37 2021 +0545
+
+    Improving the MainPage functionality like scrollbar, hover effect etc..
+
+[33mcommit 9d7e6f89cfc5f14ff7c9de70b8863a5196b39b69[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Sun Sep 19 21:49:56 2021 +0545
+
+    almost completing Design of mainPage and implement Logout feature
+
+[33mcommit 34c7ed602fd38e305865f47a2e48821ac037a1c3[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Sat Sep 18 21:09:20 2021 +0545
+
+    completing google login feature and authentication
+
+[33mcommit ebd26ea8abe93df57672b433c761b102ce6fcb51[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Sat Sep 18 09:09:54 2021 +0545
+
+    Completing SignIn functionality from email and password
+
+[33mcommit ea663eb62ef6cfe878ab7aec59cc87c807d7a750[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Sat Sep 18 08:20:30 2021 +0545
+
+    implementing backend for login and signup
+
+[33mcommit 0dfc2d9ee191d94e512f386822e50eba473bb7e6[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Fri Sep 17 14:22:42 2021 +0545
+
+    Completing SignUp UI part version 0.0.2
+
+[33mcommit 229b762e6e6ab19263e93b823d389c22242f2583[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Roman Ojha <razzroman98@gmail.com>
+Date:   Fri Sep 17 13:20:13 2021 +0545
+
+    Initialize project using Create React App
