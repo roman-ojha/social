@@ -12,7 +12,6 @@
   --primary-color: #8b37ca;
   --primary-color-point-9: #8a37caf1;
   --primary-color-point-7: #8e3fcad7;
-  /* --primary-color-darker-5: #68377e; */
   --primary-color-darker-5: #7931b1;
   --primary-color-lighter-1: #873cc0;
   --secondary-color: #c929a6;
@@ -899,8 +898,8 @@ body::-webkit-scrollbar-thumb:hover {
 .MainPage_UserSuggession_Container_MinView {
   background-color: white;
   border-radius: 10px;
-  height: 14%;
-  padding-bottom: 4%;
+  height: 11%;
+  padding-bottom: 5.5%;
 }
 .MainPage_UserSuggession_Title,
 .MainPage_FollowedBy_Title,
@@ -1012,8 +1011,8 @@ body::-webkit-scrollbar-thumb:hover {
   margin-top: 2%;
   background-color: white;
   border-radius: 10px;
-  height: 13%;
-  padding-bottom: 5%;
+  height: 10%;
+  padding-bottom: 6%;
 }
 .MainPage_Followed_User_Container {
   background-color: rgba(218, 218, 218, 0.5);
@@ -1371,4 +1370,151 @@ body::-webkit-scrollbar-thumb:hover {
 .HomePage_Feed_More_Info_Icon {
   color: var(--logo-icon-low-opacity-black-color);
   cursor: pointer;
+}
+
+/* 
+@ Designing MainPage MessageBox
+*/
+.MainPage_MessageBox_Container {
+  /* border: 1px solid red; */
+  height: 59%;
+  overflow: hidden;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+}
+.MainPage_Scrollable_MessageBox_Container {
+  height: 94%;
+  overflow-y: auto;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  /* border: 1px solid red; */
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin-top: 1.5rem;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MainPage_Scrollable_MessageBox_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+.MainPage_MessageBox_Title_Container {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-between;
+  height: 7%;
+}
+.MainPage_MessageBox_Title_Container h4 {
+  margin-left: 5%;
+  font-family: var(--primary-font-family);
+  letter-spacing: 1px;
+  font-size: 1rem;
+  color: rgb(66, 66, 66);
+}
+.MainPage_MessageBox_Title_More_Icon {
+  margin-right: 2%;
+  color: var(--logo-icon-low-opacity-black-color);
+}
+.MainPage_MessageBox_Title_Search_Divider {
+  /* margin: 0.4% 0% 0.4% 0%; */
+  margin: 1%;
+}
+.MainPage_MessageBox_Search_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid rgb(65, 65, 65);
+  border-radius: 1rem;
+  margin: 0% 3% 0% 3%;
+  height: 8%;
+}
+.MainPage_MessageBox_Search_Input_Field {
+  border-width: 0px;
+  width: 20%;
+  margin-left: 2%;
+}
+.MainPage_MessageBox_Search_Input_Field::placeholder {
+  color: var(--medium-opacity-font-color);
+}
+.MainPage_MessageBox_Search_Input_Field:read-write {
+  outline: none;
+  color: var(--medium-opacity-font-color);
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.MainPage_MessageBox_Search_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+}
+.MainPage_MessageBox_Message_Container {
+  /* border: 1px solid blue; */
+  height: max-content;
+  max-height: 79.5%;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 1%;
+}
+.MaiPage_MessageBox_UserMessage_Container {
+  /* border: 1px solid black; */
+  display: flex;
+  margin: 0.5% 2% 1% 2%;
+  border-radius: 0.5rem;
+  height: 18.5%;
+  align-items: center;
+  justify-content: start;
+  background-color: #9066b150;
+  cursor: pointer;
+  padding: 0.5% 0%;
+  transition-duration: 100ms;
+}
+.MaiPage_MessageBox_UserMessage_Container:hover {
+  background-color: #a183b950;
+}
+.MainPage_MessageBox_UserMessage_Picutre {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 5%;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container {
+  margin-left: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container h4 {
+  font-family: var(--primary-font-family);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.MainPage_MessageBox_See_More_Message_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MainPage_MessageBox_See_More_Message_Container a {
+  font-size: 0.7rem;
+  text-decoration: none;
+  font-family: var(--primary-font-family);
+}
+.MainPage_MessageBox_See_More_Message_Container a:hover {
+  text-decoration: underline;
 }
