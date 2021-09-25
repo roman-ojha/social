@@ -65,7 +65,7 @@ router.post("/signin", async (req, res) => {
       if (!isPasswordMatch) {
         res.status(400).json({ error: "Username and password doesn't match" });
       } else {
-        token = await userLogin.generateAuthToken();
+        let token = await userLogin.generateAuthToken();
         res.cookie("AuthToken", token, {
           expires: new Date(Date.now() + 25892000000),
           httpOnly: true,
