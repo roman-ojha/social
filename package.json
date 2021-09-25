@@ -11,6 +11,8 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
+    "firebase": "^9.1.0",
+    "firebase-admin": "^9.11.1",
     "gridfs-stream": "^1.1.1",
     "imagemin": "^8.0.1",
     "imagemin-mozjpeg": "^9.0.0",
@@ -22,7 +24,8 @@
     "multer-gridfs-storage": "^5.0.1",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
-    "sharp": "^0.29.1"
+    "sharp": "^0.29.1",
+    "uuid-v4": "^0.1.0"
   },
   "devDependencies": {},
   "scripts": {

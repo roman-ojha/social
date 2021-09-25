@@ -109,6 +109,7 @@ const HomePage = () => {
       const uploadUserPost = async (e) => {
         e.preventDefault();
         var image = document.getElementById("image-input").files[0];
+        // console.log(image);
         let data = new FormData();
         data.append("image", image);
         data.append("content", userPostData);
@@ -118,7 +119,8 @@ const HomePage = () => {
           body: data,
         });
         // const resData = await res.json();
-        console.log(await res);
+        const resData = await res.body;
+        console.log(resData);
       };
       return (
         <>
