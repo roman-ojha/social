@@ -57,7 +57,21 @@ const userDetailSchema = new mongoose.Schema({
         type: String,
       },
       picture: {
-        type: String,
+        fileName: {
+          type: String,
+        },
+        firebaseStoragePath: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+        firebaseStorageDownloadToken: {
+          type: String,
+        },
+        bucket: {
+          type: String,
+        },
       },
       date: {
         type: Date,
