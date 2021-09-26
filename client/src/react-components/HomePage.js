@@ -119,7 +119,7 @@ const HomePage = () => {
           body: data,
         });
         // const resData = await res.json();
-        const resData = await res.body;
+        const resData = await res.json();
         console.log(resData);
       };
       return (

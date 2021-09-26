@@ -57,10 +57,10 @@ const userDetailSchema = new mongoose.Schema({
         type: String,
       },
       picture: {
-        fileName: {
+        name: {
           type: String,
         },
-        firebaseStoragePath: {
+        path: {
           type: String,
         },
         url: {
@@ -72,6 +72,9 @@ const userDetailSchema = new mongoose.Schema({
         bucket: {
           type: String,
         },
+      },
+      like: {
+        type: Number,
       },
       date: {
         type: Date,
