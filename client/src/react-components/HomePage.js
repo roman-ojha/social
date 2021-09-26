@@ -6,14 +6,19 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  userPostResponseData,
+  mainPageMessageViewOnOff,
+} from "../redux-actions/index";
 
-const HomePageFeed = () => {
+const HomePageFeed = (props) => {
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
           <img
-            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80"
+            src={props.userPostData.picture.url}
             // src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg"
             alt="post"
           />
@@ -59,8 +64,11 @@ const HomePageFeed = () => {
 };
 
 const HomePage = () => {
+  const userPostResponseDataState = useSelector(
+    (state) => state.setUserPostResponseData
+  );
+  const userPostDataDispatch = useDispatch();
   const [viewValue, setViewValue] = useState("min");
-
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -98,29 +106,34 @@ const HomePage = () => {
       };
       document.addEventListener("click", minView);
       const getUserPostFiledImage = (event) => {
-        var image = document.getElementsByClassName(
-          "MaxView_UserPost_Image"
-        )[0];
-        image.style.visibility = "visible";
-        image.style.position = "static";
-        image.src = URL.createObjectURL(event.target.files[0]);
+        try {
+          var image = document.getElementsByClassName(
+            "MaxView_UserPost_Image"
+          )[0];
+          image.style.visibility = "visible";
+          image.style.position = "static";
+          image.src = URL.createObjectURL(event.target.files[0]);
+        } catch (err) {}
       };
       // uploading post to database
       const uploadUserPost = async (e) => {
-        e.preventDefault();
-        var image = document.getElementById("image-input").files[0];
-        // console.log(image);
-        let data = new FormData();
-        data.append("image", image);
-        data.append("content", userPostData);
-        // we can be able to pass the other form of data like this
-        const res = await fetch("/u/post", {
-          method: "POST",
-          body: data,
-        });
-        // const resData = await res.json();
-        const resData = await res.json();
-        console.log(resData);
+        try {
+          e.preventDefault();
+          var image = document.getElementById("image-input").files[0];
+          let data = new FormData();
+          data.append("image", image);
+          data.append("content", userPostData);
+          // we can be able to pass the other form of data like this
+          const res = await fetch("/u/post", {
+            method: "POST",
+            body: data,
+          });
+          const resData = await res.json();
+          console.log(resData);
+          // window.open(`${resData.picture.url}`, "_blank");
+          setViewValue("min");
+          userPostDataDispatch(userPostResponseData(resData));
+        } catch (err) {}
       };
       return (
         <>
@@ -211,6 +224,20 @@ const HomePage = () => {
       );
     }
   };
+  const ReturnCurrentUserPost = () => {
+    if (
+      userPostResponseDataState.picture.name === "" &&
+      userPostResponseDataState.content == ""
+    ) {
+      return <></>;
+    } else {
+      return (
+        <>
+          <HomePageFeed userPostData={userPostResponseDataState} />
+        </>
+      );
+    }
+  };
   return (
     <>
       <div className="HomePage_Container">
@@ -218,8 +245,9 @@ const HomePage = () => {
           <SelectUserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
-          <HomePageFeed />
-          <HomePageFeed />
+          <ReturnCurrentUserPost />
+          <HomePageFeed userPostData={userPostResponseDataState} />
+          <HomePageFeed userPostData={userPostResponseDataState} />
         </div>
       </div>
     </>

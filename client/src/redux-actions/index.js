@@ -3,3 +3,10 @@ export const mainPageMessageViewOnOff = () => {
     type: "MainPageMessageViewOnOf",
   };
 };
+
+export const userPostResponseData = (data) => {
+  return {
+    type: "UserPostResponseData",
+    payload: data,
+  };
+};
