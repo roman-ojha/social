@@ -10,7 +10,7 @@ const userDetailSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  socailID: {
+  userID: {
     type: String,
     require: true,
   },

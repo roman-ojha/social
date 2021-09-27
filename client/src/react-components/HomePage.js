@@ -17,57 +17,6 @@ import {
   homePageUserPostFieldDataAction,
 } from "../redux-actions/index";
 
-const HomePageFeed = (props) => {
-  return (
-    <>
-      <div className="HomePage_Feed_Content_Container">
-        <div className="HomePage_Feed_Image_Container">
-          <img
-            src={props.userPostData.picture.url}
-            // src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg"
-            alt="post"
-          />
-        </div>
-        <div className="HomePage_Feed_Info_Container">
-          <div className="HomePage_Feed_Info_User_Image">
-            <img
-              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
-              alt="user"
-            />
-          </div>
-          <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
-            <div className="HomePage_Feed_User_Name_And_Time_InfoContainer">
-              <p className="HomePage_Feed_User_ID_Text">
-                Kath_and_renfdsaasdafafdds
-              </p>
-              <p className="HomePage_Feed_User_Time_Text">3h</p>
-            </div>
-            <p className="HomePage_Feed_User_Name_Text">Katherine</p>
-          </div>
-          <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
-            <FavoriteBorderIcon
-              className="HomePage_Feed_Love_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <CommentRoundedIcon
-              className="HomePage_Feed__Comment_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <ShareIcon
-              className="HomePage_Feed_Share_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <MoreVertIcon
-              className="HomePage_Feed_More_Info_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
 const HomePage = () => {
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
@@ -81,6 +30,66 @@ const HomePage = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
+  const HomePageFeed = (props) => {
+    return (
+      <>
+        <div className="HomePage_Feed_Content_Container">
+          <div className="HomePage_Feed_Image_Container">
+            <img
+              src={props.userPostData.pictureUrl}
+              // src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg"
+              alt="post"
+            />
+          </div>
+          <div className="HomePage_Feed_User_Caption_Container">
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book. It has
+              survived not
+            </p>
+          </div>
+          <div className="HomePage_Feed_Info_Container">
+            <div className="HomePage_Feed_Info_User_Image">
+              <img
+                src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+                alt="user"
+              />
+            </div>
+            <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
+              <div className="HomePage_Feed_User_Name_And_Time_InfoContainer">
+                <p className="HomePage_Feed_User_ID_Text">
+                  Kath_and_renfdsaasdafafdds
+                </p>
+                <p className="HomePage_Feed_User_Time_Text">3h</p>
+              </div>
+              <p className="HomePage_Feed_User_Name_Text">Katherine</p>
+            </div>
+            <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
+              <FavoriteBorderIcon
+                className="HomePage_Feed_Love_Icon"
+                style={{ width: "1.7rem", height: "1.7rem" }}
+              />
+              <CommentRoundedIcon
+                className="HomePage_Feed__Comment_Icon"
+                style={{ width: "1.7rem", height: "1.7rem" }}
+              />
+              <ShareIcon
+                className="HomePage_Feed_Share_Icon"
+                style={{ width: "1.7rem", height: "1.7rem" }}
+              />
+              <MoreVertIcon
+                className="HomePage_Feed_More_Info_Icon"
+                style={{ width: "1.7rem", height: "1.7rem" }}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -145,7 +154,6 @@ const HomePage = () => {
           image.style.visibility = "visible";
           image.style.position = "static";
           image.src = URL.createObjectURL(event.target.files[0]);
-          console.log(event.target.files[0]);
         } catch (err) {}
       };
       // uploading post to database
@@ -163,10 +171,11 @@ const HomePage = () => {
             body: data,
           });
           const resData = await res.json();
-          console.log(resData);
+          if (res.status === 201) {
+            userPostResponseDataDispatch(userPostResponseData(resData));
+          }
           setUserPostResponseLoading(false);
           setViewValue("min");
-          userPostResponseDataDispatch(userPostResponseData(resData));
         } catch (err) {}
       };
       return (
@@ -292,17 +301,18 @@ const HomePage = () => {
     }
   };
   const ReturnCurrentUserPost = () => {
+    console.log(userPostResponseDataState);
     if (
-      userPostResponseDataState.picture.name === "" &&
-      userPostResponseDataState.content == ""
+      userPostResponseDataState.content !== "" ||
+      userPostResponseDataState.pictureUrl !== ""
     ) {
-      return <></>;
-    } else {
       return (
         <>
           <HomePageFeed userPostData={userPostResponseDataState} />
         </>
       );
+    } else {
+      return <></>;
     }
   };
   return (

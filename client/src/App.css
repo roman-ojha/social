@@ -6,6 +6,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Aladin&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ramaraja&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
 /* Styling Sign In Page------------------------------------ */
 :root {
   --Page-Background-Color: #ebe7ea96;
@@ -1317,6 +1318,15 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
+}
+.HomePage_Feed_User_Caption_Container {
+  width: 95%;
+  /* border: 1px solid red; */
+  margin: 10px 0px 10px 0px;
+}
+.HomePage_Feed_User_Caption_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
 }
 .HomePage_Feed_User_Name_And_ID_Info_Container {
   /* border: 1px solid blue; */

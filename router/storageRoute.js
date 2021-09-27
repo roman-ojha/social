@@ -31,52 +31,95 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
       _id: verifyToken._id,
       "tokens.token": token,
     });
-    // console.log(rootUser);
-    if (rootUser) {
-      // uploading image to firebase Storage
-      await compressFile(req.file.path);
-      // deleting uncompressed file after compressed
-      fs.unlink(`../db/Images/${req.file.filename}`, (err) => {});
-      const metadata = {
-        metadata: {
-          firebaseStorageDownloadTokens: uuid(),
-        },
-        cacheControl: "public, max-age=31536000",
-      };
-      const uploadRes = await bucket.upload(
-        `../db/build/${req.file.filename}`,
-        {
-          destination: `images/${rootUser.email}/${req.file.filename}`,
-          gzip: true,
-          metadata: metadata,
-        }
-      );
-      // here we are again deleting the compressed file after upload to firebase
-      fs.unlink(`../db/build/${req.file.filename}`, (err) => {});
-      // console.log(uploadRes);
-      const content = req.body.content;
-      const picName = req.file.filename;
-      const picPath = `images/${rootUser.email}/${req.file.filename}`;
-      const picToken =
-        uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
-      const picBucket = process.env.FIREBASE_STORAGEBUCKET;
-      const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
-        picPath
-      )}?alt=media&token=${picToken}`;
-      const userPostDetail = {
-        content: content,
-        picture: {
-          name: picName,
-          path: picPath,
-          url: picUrl,
-          firebaseStorageDownloadToken: picToken,
-          bucket: picBucket,
-        },
-      };
-      const postRes = await rootUser.uploadPost(userPostDetail);
-      return res.status(201).json(postRes[0]);
+    if (!req.body.content && !req.file) {
+      // if user doesn't fill the any filed
+      return res.status(401).json({ error: "Please fill the post properly" });
+    } else if (req.body.content && !req.file) {
+      // if user only fill content field
+      if (rootUser) {
+        const content = req.body.content;
+        const userPostDetail = {
+          content: content,
+        };
+        const postRes = await rootUser.uploadPost(userPostDetail);
+        console.log(postRes);
+        const resData = {
+          useremail: rootUser.email,
+          username: rootUser.name,
+          userID: rootUser.userID,
+          content: postRes[0].content,
+          pictureUrl: "",
+          like: postRes[0].like,
+          date: postRes[0].date,
+        };
+        return res.status(201).json(resData);
+      } else {
+        return res.status(401).json({ error: "Authetication error" });
+      }
     } else {
-      return res.status(401).json({ error: "Authetication error" });
+      // if user fill both field
+      const token = req.cookies.AuthToken;
+      const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+      const rootUser = await userDetail.findOne({
+        _id: verifyToken._id,
+        "tokens.token": token,
+      });
+      // console.log(rootUser);
+      if (rootUser) {
+        // uploading image to firebase Storage
+        await compressFile(req.file.path);
+        // deleting uncompressed file after compressed
+        fs.unlink(`../db/Images/${req.file.filename}`, (err) => {});
+        const metadata = {
+          metadata: {
+            firebaseStorageDownloadTokens: uuid(),
+          },
+          cacheControl: "public, max-age=31536000",
+        };
+        const uploadRes = await bucket.upload(
+          `../db/build/${req.file.filename}`,
+          {
+            destination: `images/${rootUser.email}/${req.file.filename}`,
+            gzip: true,
+            metadata: metadata,
+          }
+        );
+        // here we are again deleting the compressed file after upload to firebase
+        fs.unlink(`../db/build/${req.file.filename}`, (err) => {});
+        // console.log(uploadRes);
+        const content = req.body.content;
+        const picName = req.file.filename;
+        const picPath = `images/${rootUser.email}/${req.file.filename}`;
+        const picToken =
+          uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
+        const picBucket = process.env.FIREBASE_STORAGEBUCKET;
+        const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
+          picPath
+        )}?alt=media&token=${picToken}`;
+        const userPostDetail = {
+          content: content,
+          picture: {
+            name: picName,
+            path: picPath,
+            url: picUrl,
+            firebaseStorageDownloadToken: picToken,
+            bucket: picBucket,
+          },
+        };
+        const postRes = await rootUser.uploadPost(userPostDetail);
+        const resData = {
+          useremail: rootUser.email,
+          username: rootUser.name,
+          userID: rootUser.userID,
+          content: postRes[0].content,
+          pictureUrl: postRes.picture.url,
+          like: postRes[0].like,
+          date: postRes[0].date,
+        };
+        return res.status(201).json(resData);
+      } else {
+        return res.status(401).json({ error: "Authetication error" });
+      }
     }
   } catch (err) {}
 });
