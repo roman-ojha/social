@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   userPostResponseData,
   mainPageMessageViewOnOff,
+  homePageUserPostFieldDataAction,
 } from "../redux-actions/index";
 
 const HomePageFeed = (props) => {
@@ -70,11 +71,14 @@ const HomePage = () => {
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
   );
-  const userPostDataDispatch = useDispatch();
+  const homePageUserPostFieldData = useSelector((state) => {
+    return state.homePageUserPostFieldDataReducer;
+  });
+  const userPostResponseDataDispatch = useDispatch();
+  const homePageUserPostFieldDataDispatch = useDispatch();
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
-
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -89,6 +93,8 @@ const HomePage = () => {
               className="HomePage_MinView_UserPost_Input_Field"
               type="text"
               placeholder="Post Your Thought...."
+              value={homePageUserPostFieldData.content}
+              onChange={() => {}}
               onClick={() => {
                 setViewValue("max");
               }}
@@ -98,8 +104,9 @@ const HomePage = () => {
       );
     };
     const MaxViewUserPostField = () => {
-      const [userPostData, setUserPostData] = useState("");
-      let emojiSelecting = false;
+      const [userPostData, setUserPostData] = useState(
+        homePageUserPostFieldData.content
+      );
       // here we are peforming event when user click away form the post field and alter the post view
       // let count = 0;
       // const minView = (e) => {
@@ -121,8 +128,12 @@ const HomePage = () => {
             <Picker
               set="facebook"
               onSelect={(emoji) => {
-                setUserPostData(userPostData + emoji.native);
-                emojiSelecting = true;
+                homePageUserPostFieldDataDispatch(
+                  homePageUserPostFieldDataAction({
+                    ...homePageUserPostFieldData,
+                    content: homePageUserPostFieldData.content + emoji.native,
+                  })
+                );
               }}
               title="Pick your emoji..."
               emoji="point_up"
@@ -146,6 +157,7 @@ const HomePage = () => {
           image.style.visibility = "visible";
           image.style.position = "static";
           image.src = URL.createObjectURL(event.target.files[0]);
+          console.log(event.target.files[0]);
         } catch (err) {}
       };
       // uploading post to database
@@ -165,7 +177,7 @@ const HomePage = () => {
           console.log(resData);
           // window.open(`${resData.picture.url}`, "_blank");
           setViewValue("min");
-          userPostDataDispatch(userPostResponseData(resData));
+          userPostResponseDataDispatch(userPostResponseData(resData));
         } catch (err) {}
       };
       return (
@@ -187,9 +199,15 @@ const HomePage = () => {
                 className="HomePage_MaxView_UserPost_Input_Field"
                 placeholder="Post Your Thought...."
                 autoFocus
-                value={userPostData}
+                // type="text"
+                value={
+                  homePageUserPostEmojiView
+                    ? homePageUserPostFieldData.content
+                    : userPostData
+                }
                 onChange={(e) => {
                   setUserPostData(e.target.value);
+                  setHomePageUserPostEmojiView(false);
                 }}
               ></textarea>
 
@@ -223,7 +241,12 @@ const HomePage = () => {
                   className=" HomePage_MaxView_UserPost_Field_Icon "
                   style={{ width: "2rem", height: "2rem" }}
                   onClick={() => {
-                    emojiSelecting = true;
+                    homePageUserPostFieldDataDispatch(
+                      homePageUserPostFieldDataAction({
+                        ...homePageUserPostFieldData,
+                        content: userPostData,
+                      })
+                    );
                     homePageUserPostEmojiView
                       ? setHomePageUserPostEmojiView(false)
                       : setHomePageUserPostEmojiView(true);
@@ -245,6 +268,12 @@ const HomePage = () => {
                 className="HomePage_MaxView_UserPost_Field_Back_Icon"
                 style={{ width: "2rem" }}
                 onClick={() => {
+                  homePageUserPostFieldDataDispatch(
+                    homePageUserPostFieldDataAction({
+                      ...homePageUserPostFieldData,
+                      content: userPostData,
+                    })
+                  );
                   setViewValue("min");
                 }}
               />

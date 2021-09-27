@@ -10,3 +10,10 @@ export const userPostResponseData = (data) => {
     payload: data,
   };
 };
+
+export const homePageUserPostFieldDataAction = (data) => {
+  return {
+    type: "homePageUserPostFieldData",
+    payload: data,
+  };
+};

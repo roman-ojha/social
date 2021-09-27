@@ -1135,6 +1135,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 600;
   padding-left: 5%;
   color: rgb(68, 68, 68);
+  padding-right: 2%;
 }
 .HomePage_MinView_UserPost_Input_Field:focus {
   outline: none;
@@ -1232,6 +1233,9 @@ body::-webkit-scrollbar-thumb:hover {
   margin-left: 3.5%;
   color: var(--primary-color-darker-5);
   cursor: pointer;
+}
+.HomePage_MaxView_UserPost_Field_Back_Icon:hover {
+  color: var(--primary-color-lighter-1);
 }
 .HomePage_MaxView_UserPost_Field_Post_Button {
   width: 76%;
