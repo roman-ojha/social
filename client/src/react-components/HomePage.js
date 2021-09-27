@@ -8,6 +8,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "emoji-mart/css/emoji-mart.css";
+import LoadingSpinner from "./LoadingSpinner";
 import { Picker } from "emoji-mart";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -79,6 +80,7 @@ const HomePage = () => {
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
+  const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -107,20 +109,6 @@ const HomePage = () => {
       const [userPostData, setUserPostData] = useState(
         homePageUserPostFieldData.content
       );
-      // here we are peforming event when user click away form the post field and alter the post view
-      // let count = 0;
-      // const minView = (e) => {
-      //   console.log("fire");
-      //   var isClickInsideElement = document
-      //     .getElementsByClassName("HomePage_User_Post_Field_Container")[0]
-      //     .contains(e.target);
-      //   if (!isClickInsideElement && count !== 0 && emojiSelecting !== true) {
-      //     setViewValue("min");
-      //     document.removeEventListener("click", minView);
-      //   }
-      //   count++;
-      // };
-      // document.addEventListener("click", minView);
       // emoji select for post
       const EmojiMart = () => {
         return (
@@ -164,6 +152,7 @@ const HomePage = () => {
       const uploadUserPost = async (e) => {
         try {
           e.preventDefault();
+          setUserPostResponseLoading(true);
           var image = document.getElementById("image-input").files[0];
           let data = new FormData();
           data.append("image", image);
@@ -175,7 +164,7 @@ const HomePage = () => {
           });
           const resData = await res.json();
           console.log(resData);
-          // window.open(`${resData.picture.url}`, "_blank");
+          setUserPostResponseLoading(false);
           setViewValue("min");
           userPostResponseDataDispatch(userPostResponseData(resData));
         } catch (err) {}
@@ -318,6 +307,7 @@ const HomePage = () => {
   };
   return (
     <>
+      {userPostResponseLoading ? <LoadingSpinner /> : ""}
       <div className="HomePage_Container">
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />

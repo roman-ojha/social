@@ -1595,3 +1595,31 @@ body::-webkit-scrollbar-thumb:hover {
 .emoji-mart-scroll:hover::-webkit-scrollbar-thumb {
   background-color: var(--secondary-color-point-1-transparent-0);
 }
+
+/* Loading spinner design */
+.HomePage_Post_Field_Response_Loading_Spinner_Container {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(20, 12, 20, 0.219);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.HomePage_Post_Field_Response_Loading_Spinner {
+  border: 13px solid #dddddd; /* Light grey */
+  border-top: 13px solid var(--primary-color-darker-5); /* Blue */
+  border-radius: 50%;
+  width: 3.3rem;
+  height: 3.3rem;
+  animation: loadingSpinner 1s linear infinite;
+}
+@keyframes loadingSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
