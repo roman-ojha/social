@@ -4,8 +4,11 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 import { useDispatch, useSelector } from "react-redux";
 import {
   userPostResponseData,
@@ -69,6 +72,9 @@ const HomePage = () => {
   );
   const userPostDataDispatch = useDispatch();
   const [viewValue, setViewValue] = useState("min");
+  const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
+    useState(false);
+
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -93,18 +99,45 @@ const HomePage = () => {
     };
     const MaxViewUserPostField = () => {
       const [userPostData, setUserPostData] = useState("");
-      let count = 0;
-      const minView = (e) => {
-        var isClickInsideElement = document
-          .getElementsByClassName("HomePage_User_Post_Field_Container")[0]
-          .contains(e.target);
-        if (!isClickInsideElement && count !== 0) {
-          setViewValue("min");
-          document.removeEventListener("click", minView);
-        }
-        count++;
+      let emojiSelecting = false;
+      // here we are peforming event when user click away form the post field and alter the post view
+      // let count = 0;
+      // const minView = (e) => {
+      //   console.log("fire");
+      //   var isClickInsideElement = document
+      //     .getElementsByClassName("HomePage_User_Post_Field_Container")[0]
+      //     .contains(e.target);
+      //   if (!isClickInsideElement && count !== 0 && emojiSelecting !== true) {
+      //     setViewValue("min");
+      //     document.removeEventListener("click", minView);
+      //   }
+      //   count++;
+      // };
+      // document.addEventListener("click", minView);
+      // emoji select for post
+      const EmojiMart = () => {
+        return (
+          <div>
+            <Picker
+              set="facebook"
+              onSelect={(emoji) => {
+                setUserPostData(userPostData + emoji.native);
+                emojiSelecting = true;
+              }}
+              title="Pick your emoji..."
+              emoji="point_up"
+              i18n={{
+                categories: { search: "Result", recent: "Recents" },
+                skintones: {
+                  2: "Light Skin Tone",
+                },
+              }}
+              style={{ width: "300px" }}
+              color="white"
+            />
+          </div>
+        );
       };
-      document.addEventListener("click", minView);
       const getUserPostFiledImage = (event) => {
         try {
           var image = document.getElementsByClassName(
@@ -189,7 +222,14 @@ const HomePage = () => {
                 <InsertEmoticonIcon
                   className=" HomePage_MaxView_UserPost_Field_Icon "
                   style={{ width: "2rem", height: "2rem" }}
+                  onClick={() => {
+                    emojiSelecting = true;
+                    homePageUserPostEmojiView
+                      ? setHomePageUserPostEmojiView(false)
+                      : setHomePageUserPostEmojiView(true);
+                  }}
                 />
+                {homePageUserPostEmojiView ? <EmojiMart /> : ""}
               </div>
             </div>
             <div className="MaxView_UserPost_Image_Container">
@@ -200,12 +240,21 @@ const HomePage = () => {
                 style={{ visibility: "hidden", position: "absolute" }}
               />
             </div>
-            <button
-              className="HomePage_MaxView_UserPost_Field_Post_Button"
-              onClick={uploadUserPost}
-            >
-              Post
-            </button>
+            <div className="HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container">
+              <ArrowBackIcon
+                className="HomePage_MaxView_UserPost_Field_Back_Icon"
+                style={{ width: "2rem" }}
+                onClick={() => {
+                  setViewValue("min");
+                }}
+              />
+              <button
+                className="HomePage_MaxView_UserPost_Field_Post_Button"
+                onClick={uploadUserPost}
+              >
+                Post
+              </button>
+            </div>
           </form>
         </>
       );

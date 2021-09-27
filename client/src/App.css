@@ -27,6 +27,8 @@
   --home-page-content-width: 80%;
   --logo-icon-low-opacity-black-color: #333333;
   --logo-icon-low-opacity-black-color-point-3: #555555;
+  /* --emoji-picker-background-color: rgb(85, 38, 85); */
+  --emoji-picker-background-color: #674086;
 }
 body {
   background-color: var(--Page-Background-Color);
@@ -1219,11 +1221,22 @@ body::-webkit-scrollbar-thumb:hover {
 .HomePage_MaxView_UserPost_Field_Icon:hover {
   color: var(--primary-color-lighter-1);
 }
-.HomePage_MaxView_UserPost_Field_Post_Button {
+.HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
   margin-bottom: 0.5rem;
+}
+.HomePage_MaxView_UserPost_Field_Back_Icon {
+  margin-left: 3.5%;
+  color: var(--primary-color-darker-5);
+  cursor: pointer;
+}
+.HomePage_MaxView_UserPost_Field_Post_Button {
   width: 76%;
   height: 1.4rem;
-  margin-right: 0.6%;
+  margin-left: 1%;
   border-radius: 0.4rem;
   border-width: 0px;
   font-family: var(--primary-font-family);
@@ -1517,4 +1530,64 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .MainPage_MessageBox_See_More_Message_Container a:hover {
   text-decoration: underline;
+}
+
+/* Styling Emoji Mart package------------------------------------- */
+.emoji-mart,
+.emoji-mart-light {
+  border-radius: 15px;
+  border-width: 0px;
+  background-color: var(--emoji-picker-background-color);
+  position: absolute;
+  left: 116%;
+  top: -11px;
+}
+.emoji-mart-preview {
+  position: absolute;
+  visibility: hidden;
+}
+.emoji-mart-scroll {
+  height: 200px;
+}
+.emoji-mart-category-label span {
+  font-size: 15px;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  background-color: var(--emoji-picker-background-color);
+  color: white;
+}
+.emoji-mart-anchor-icon svg {
+  color: var(--secondary-color-point-1-transparent-0);
+}
+.emoji-mart-no-results-label {
+  font-size: 18px;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  color: white;
+}
+#emoji-mart-search-1 {
+  background-color: var(--secondary-color-point-1-transparent-0);
+  border-width: 0px;
+}
+#emoji-mart-search-1:read-write {
+  font-size: 15px;
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+}
+.emoji-mart-search-icon {
+  visibility: hidden;
+}
+.emoji-mart-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.emoji-mart-scroll::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin-top: 1.5rem;
+}
+.emoji-mart-scroll::-webkit-scrollbar-thumb {
+  /* background-color: transparent; */
+  border-radius: 10px;
+}
+.emoji-mart-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-color-point-1-transparent-0);
 }
