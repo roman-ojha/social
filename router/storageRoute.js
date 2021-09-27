@@ -31,23 +31,23 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
       _id: verifyToken._id,
       "tokens.token": token,
     });
-    if (!req.body.content && !req.file) {
+    if (!req.body.caption && !req.file) {
       // if user doesn't fill the any filed
       return res.status(401).json({ error: "Please fill the post properly" });
-    } else if (req.body.content && !req.file) {
+    } else if (req.body.caption && !req.file) {
       // if user only fill content field
       if (rootUser) {
-        const content = req.body.content;
+        const caption = req.body.caption;
         const userPostDetail = {
-          content: content,
+          caption: caption,
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
-        console.log(postRes);
         const resData = {
+          id: postRes[0]._id,
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
-          content: postRes[0].content,
+          caption: postRes[0].caption,
           pictureUrl: "",
           like: postRes[0].like,
           date: postRes[0].date,
@@ -87,7 +87,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         // here we are again deleting the compressed file after upload to firebase
         fs.unlink(`../db/build/${req.file.filename}`, (err) => {});
         // console.log(uploadRes);
-        const content = req.body.content;
+        const caption = req.body.caption;
         const picName = req.file.filename;
         const picPath = `images/${rootUser.email}/${req.file.filename}`;
         const picToken =
@@ -97,7 +97,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           picPath
         )}?alt=media&token=${picToken}`;
         const userPostDetail = {
-          content: content,
+          caption: caption,
           picture: {
             name: picName,
             path: picPath,
@@ -108,11 +108,12 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
         const resData = {
+          id: postRes[0]._id,
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
-          content: postRes[0].content,
-          pictureUrl: postRes.picture.url,
+          caption: postRes[0].caption,
+          pictureUrl: postRes[0].picture.url,
           like: postRes[0].like,
           date: postRes[0].date,
         };

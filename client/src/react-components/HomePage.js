@@ -30,25 +30,28 @@ const HomePage = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
+
   const HomePageFeed = (props) => {
+    const userPostdate = new Date(props.userFeedData.date);
+    const userPostUTCTime = userPostdate.toUTCString();
+    const currentDate = new Date();
+    const currentUTCTime = currentDate.toUTCString();
+    const difference = currentDate.getTime() - userPostdate.getTime();
+    console.log(difference / 1000);
+    console.log(currentUTCTime);
+    console.log(userPostUTCTime);
     return (
       <>
         <div className="HomePage_Feed_Content_Container">
           <div className="HomePage_Feed_Image_Container">
-            <img
-              src={props.userPostData.pictureUrl}
-              // src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg"
-              alt="post"
-            />
+            {props.userFeedData.pictureUrl === "" ? (
+              ""
+            ) : (
+              <img src={props.userFeedData.pictureUrl} alt="post" />
+            )}
           </div>
           <div className="HomePage_Feed_User_Caption_Container">
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not
-            </p>
+            <p>{props.userFeedData.caption}</p>
           </div>
           <div className="HomePage_Feed_Info_Container">
             <div className="HomePage_Feed_Info_User_Image">
@@ -64,7 +67,9 @@ const HomePage = () => {
                 </p>
                 <p className="HomePage_Feed_User_Time_Text">3h</p>
               </div>
-              <p className="HomePage_Feed_User_Name_Text">Katherine</p>
+              <p className="HomePage_Feed_User_Name_Text">
+                {props.userFeedData.username}
+              </p>
             </div>
             <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
               <FavoriteBorderIcon
@@ -164,7 +169,7 @@ const HomePage = () => {
           var image = document.getElementById("image-input").files[0];
           let data = new FormData();
           data.append("image", image);
-          data.append("content", userPostData);
+          data.append("caption", userPostData);
           // we can be able to pass the other form of data like this
           const res = await fetch("/u/post", {
             method: "POST",
@@ -300,21 +305,7 @@ const HomePage = () => {
       );
     }
   };
-  const ReturnCurrentUserPost = () => {
-    console.log(userPostResponseDataState);
-    if (
-      userPostResponseDataState.content !== "" ||
-      userPostResponseDataState.pictureUrl !== ""
-    ) {
-      return (
-        <>
-          <HomePageFeed userPostData={userPostResponseDataState} />
-        </>
-      );
-    } else {
-      return <></>;
-    }
-  };
+  // console.log(userPostResponseDataState);
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : ""}
@@ -323,9 +314,9 @@ const HomePage = () => {
           <SelectUserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
-          <ReturnCurrentUserPost />
-          <HomePageFeed userPostData={userPostResponseDataState} />
-          <HomePageFeed userPostData={userPostResponseDataState} />
+          {userPostResponseDataState.map((value) => {
+            return <HomePageFeed key={value.id} userFeedData={value} />;
+          })}
         </div>
       </div>
     </>

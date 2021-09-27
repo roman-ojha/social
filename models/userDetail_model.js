@@ -53,7 +53,7 @@ const userDetailSchema = new mongoose.Schema({
   },
   posts: [
     {
-      content: {
+      caption: {
         type: String,
       },
       picture: {
