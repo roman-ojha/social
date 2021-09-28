@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
+import GetUserIDPage from "./GetUserIDPage";
 let previousSelectGenderElement;
 const SignUp = () => {
+  const [viewGetUserIDPage, setViewGetUserIDPage] = useState(false);
   let today = new Date();
   let birthdayYear = [];
   for (let i = today.getFullYear() - 100; i <= today.getFullYear(); i++) {
@@ -107,12 +109,21 @@ const SignUp = () => {
         console.log(data.error);
       } else {
         console.log(data.message);
-        history.push("/signin");
+        // history.push("/signin");
+        setViewGetUserIDPage(true);
       }
     } catch (err) {}
   };
+
   return (
     <>
+      {viewGetUserIDPage ? (
+        <GetUserIDPage
+          userDetail={{ email: userData.email, password: userData.password }}
+        />
+      ) : (
+        ""
+      )}
       <div className="SignUp_Page_Container">
         <div className="SignUp_Page_Left_Half">
           <div className="SignUp_Page_Title_Container">
@@ -173,11 +184,7 @@ const SignUp = () => {
                   >
                     <option hidden>YY</option>
                     {birthdayYear.map((value, index) => {
-                      return (
-                        <>
-                          <option key={index.toString()}>{value}</option>
-                        </>
-                      );
+                      return <option key={index}>{value}</option>;
                     })}
                   </select>
                   <select
@@ -188,7 +195,7 @@ const SignUp = () => {
                   >
                     <option hidden>MM</option>
                     {birthdayMonth.map((value, index) => {
-                      return <option key={index.toString()}>{value}</option>;
+                      return <option key={index}>{value}</option>;
                     })}
                   </select>
                   <select
@@ -199,7 +206,7 @@ const SignUp = () => {
                   >
                     <option hidden>DD</option>
                     {birthdayDays.map((value, index) => {
-                      return <option key={index.toString()}>{value}</option>;
+                      return <option key={index}>{value}</option>;
                     })}
                   </select>
                 </div>

@@ -125,4 +125,9 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
   } catch (err) {}
 });
 
+router.post("/u/userId", upload.single("profile"), (req, res) => {
+  console.log(req.body);
+  res.send("sending");
+});
+
 export default router;

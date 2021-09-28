@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
 
 const MainPageSearchBar = (props) => {
