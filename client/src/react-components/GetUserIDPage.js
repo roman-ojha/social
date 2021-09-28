@@ -1,31 +1,38 @@
 import React, { useState } from "react";
 import User_profile_Icon from "../Images/User_profile_Icon.svg";
+import LoadingSpinner from "./LoadingSpinner";
 import { useHistory } from "react-router";
 
 const GetUserIDPage = (props) => {
+  const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
   const history = useHistory();
   const [userID, setUserID] = useState("");
   const submitDetail = async (e) => {
-    const profile = document.getElementById("image-input").files[0];
-    const data = new FormData();
-    data.append("email", props.userDetail.email);
-    data.append("password", props.userDetail.password);
-    data.append("userID", userID);
-    data.append("profile", profile);
-    const res = await fetch("/u/userId", {
-      method: "POST",
-      body: data,
-    });
-    const resData = await res.json();
-    if (res.status !== 201) {
-      console.log(resData);
-    } else {
-      console.log(resData);
-      history.push("/signin");
-    }
+    try {
+      setOnLoadingSpinner(true);
+      const profile = document.getElementById("image-input").files[0];
+      const data = new FormData();
+      data.append("email", props.userDetail.email);
+      data.append("password", props.userDetail.password);
+      data.append("userID", userID);
+      data.append("profile", profile);
+      const res = await fetch("/u/userId", {
+        method: "POST",
+        body: data,
+      });
+      const resData = await res.json();
+      if (res.status !== 201) {
+        console.log(resData);
+      } else {
+        console.log(resData);
+        history.push("/signin");
+      }
+      setOnLoadingSpinner(false);
+    } catch (err) {}
   };
   return (
     <>
+      {onLoadingSpinner ? <LoadingSpinner /> : ""}
       <div className="GetUserIDPage_Container">
         <div className="GetUserIDPage_Form_Container">
           <h1 className="GetUserIDPage_Form_Title">Almost There...</h1>

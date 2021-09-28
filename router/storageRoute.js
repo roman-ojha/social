@@ -196,7 +196,6 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           { email: email },
           { $set: { userID: userID, picture: picUrl } }
         );
-        console.log("Rresponse post" + resPost, "response data" + resData);
         res.status(201).json({ message: "Register Successfully" });
       }
     }
