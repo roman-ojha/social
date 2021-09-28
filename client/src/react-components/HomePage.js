@@ -32,14 +32,46 @@ const HomePage = () => {
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
 
   const HomePageFeed = (props) => {
+    let uploadedTime;
     const userPostdate = new Date(props.userFeedData.date);
     const userPostUTCTime = userPostdate.toUTCString();
     const currentDate = new Date();
     const currentUTCTime = currentDate.toUTCString();
-    const difference = currentDate.getTime() - userPostdate.getTime();
-    console.log(difference / 1000);
-    console.log(currentUTCTime);
-    console.log(userPostUTCTime);
+    const difference = (currentDate.getTime() - userPostdate.getTime()) / 1000;
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    if (difference < 60) {
+      uploadedTime = `${parseInt(difference)}s`;
+    } else if (difference >= 60 && difference < 3600) {
+      uploadedTime = `${parseInt(difference / 60)}m`;
+    } else if (difference >= 3600 && difference < 86400) {
+      uploadedTime = `${parseInt(difference / 3600)}hr`;
+    } else if (difference >= 86400 && difference < 604800) {
+      uploadedTime = `${parseInt(difference / 86400)}d`;
+    } else if (difference >= 604800 && difference < 31536000) {
+      let getDate = userPostdate.getDate();
+      let getMonth = userPostdate.getMonth();
+      let getHour = userPostdate.getHours();
+      let getMinute = userPostdate.getMinutes();
+      uploadedTime = `${monthNames[getMonth]} ${getDate} at ${getHour}:${getMinute}`;
+    } else {
+      let getDate = userPostdate.getDate();
+      let getYear = userPostdate.getFullYear();
+      let getMonth = userPostdate.getMonth();
+      uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
+    }
     return (
       <>
         <div className="HomePage_Feed_Content_Container">
@@ -61,15 +93,15 @@ const HomePage = () => {
               />
             </div>
             <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
-              <div className="HomePage_Feed_User_Name_And_Time_InfoContainer">
+              <div className="HomePage_Feed_User_Name_Info_Container">
                 <p className="HomePage_Feed_User_ID_Text">
                   Kath_and_renfdsaasdafafdds
                 </p>
-                <p className="HomePage_Feed_User_Time_Text">3h</p>
+                <p className="HomePage_Feed_User_Name_Text">
+                  {props.userFeedData.username}
+                </p>
               </div>
-              <p className="HomePage_Feed_User_Name_Text">
-                {props.userFeedData.username}
-              </p>
+              <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>
             </div>
             <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
               <FavoriteBorderIcon
@@ -94,7 +126,6 @@ const HomePage = () => {
       </>
     );
   };
-
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -305,7 +336,19 @@ const HomePage = () => {
       );
     }
   };
-  // console.log(userPostResponseDataState);
+  const defaultFeedData = [
+    {
+      id: "",
+      useremail: "",
+      username: "Katherin",
+      userID: "",
+      caption: "",
+      pictureUrl:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      like: "",
+      date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
+    },
+  ];
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : ""}
@@ -317,6 +360,7 @@ const HomePage = () => {
           {userPostResponseDataState.map((value) => {
             return <HomePageFeed key={value.id} userFeedData={value} />;
           })}
+          <HomePageFeed userFeedData={defaultFeedData[0]} />
         </div>
       </div>
     </>

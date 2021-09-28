@@ -1318,29 +1318,35 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   cursor: pointer;
   object-fit: cover;
+  /* border: 1px solid red; */
+  margin-left: 5%;
 }
 .HomePage_Feed_User_Caption_Container {
   width: 95%;
   /* border: 1px solid red; */
   margin: 10px 0px 10px 0px;
+  word-wrap: break-word;
 }
 .HomePage_Feed_User_Caption_Container p {
   font-family: var(--primary-font-family);
   font-size: 0.9rem;
 }
 .HomePage_Feed_User_Name_And_ID_Info_Container {
-  /* border: 1px solid blue; */
   width: 45%;
+  /* border: 1px solid blue; */
+  margin-left: 1%;
+  display: flex;
 }
-.HomePage_Feed_User_Name_And_Time_InfoContainer {
-  width: 100%;
+.HomePage_Feed_User_Name_Info_Container {
+  width: 70%;
   /* border: 1px solid purple; */
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
 }
 .HomePage_Feed_User_ID_Text {
   /* border: 1px solid green; */
-  max-width: 75%;
+  max-width: 95%;
   overflow: hidden;
   font-family: var(--primary-font-family);
   font-size: 0.89rem;
@@ -1354,11 +1360,11 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .HomePage_Feed_User_Time_Text {
   /* border: 1px solid red; */
-  width: 35%;
-  display: flex;
-  justify-content: center;
+  width: 30%;
+  height: 2rem;
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
+  word-wrap: break-word;
 }
 
 .HomePage_Feed_User_Name_Text {
@@ -1373,7 +1379,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .HomePage_Feed_Love_Comment_Share_Info_Container {
   /* border: 1px solid purple; */
-  width: 35%;
+  width: 45%;
   display: flex;
   align-items: center;
   justify-content: space-between;
