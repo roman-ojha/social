@@ -83,4 +83,21 @@ router.get("/u/logout", authenticate, (req, res) => {
   res.status(200).send("User Logout");
 });
 
+router.post("/u/search", async (req, res) => {
+  try {
+    if (req.body.name.length === 0) {
+      return res.status(201).json([]);
+    }
+    const resUser = await userDetail.find(
+      {
+        name: { $regex: "^" + req.body.name, $options: "i" },
+      },
+      { name: 1, picture: 1, userID: 1, email: 1 }
+    );
+    return res.status(201).json(resUser);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 export default router;

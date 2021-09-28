@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import mainPage_Logo from "../Images/mainPage_Logo.svg";
 import mainPage_sideBar_search from "../Images/mainPage_sideBar_Search.svg";
 import mainPage_Logout_Icon from "../Images/mainPage_Logout_Icon.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import MainPageSearchBar from "../react-components/MainPageSearchBar";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
@@ -129,12 +131,32 @@ const MainPageSideBar = () => {
   useEffect(() => {
     colorSelectedUrl();
   }, []);
+  const [onSearchBar, setOnSearchBar] = useState(false);
+  const [searchBarData, setSearchBarData] = useState("");
+  const [userSearchResult, setUserSearchResult] = useState([]);
+  const getUserSearchData = async (e) => {
+    setSearchBarData(e.target.value);
+    // console.log(e.target.value);
+    try {
+      const res = await fetch("/u/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: e.target.value }),
+      });
+      const resUser = await res.json();
+      // console.log(resUser);
+      setUserSearchResult(resUser);
+    } catch (err) {}
+  };
   return (
     <>
       <div className="MainPage_SideBar_Container">
         <div className="MainPage_SideBar_Logo_Search_Container">
           <img
             className="MainPage_SideBar_Page_Logo"
+            id="MainPage_Logo"
             src={mainPage_Logo}
             alt="logo"
           />
@@ -148,9 +170,56 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Search_Input_Field"
               type="text"
               placeholder="Search"
+              onClick={(e) => {
+                document.getElementById("MainPage_Logo").style =
+                  "visibility:hidden;position:absolute";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Outline"
+                ).style.width = "85%";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Back_Icon"
+                ).style = "visibility: visible;position: static;";
+                document.querySelector(".MainPage_SideBar_Search_Icon").style =
+                  "visibility:hidden;position:absolute;";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Input_Field"
+                ).style = "width:80%";
+                setOnSearchBar(true);
+              }}
+              value={searchBarData}
+              onChange={getUserSearchData}
+            />
+
+            <ArrowForwardIcon
+              className="MainPage_SideBar_Search_Back_Icon"
+              style={{ width: "1.5rem", height: "1.5rem" }}
+              onClick={() => {
+                document.getElementById("MainPage_Logo").style =
+                  "visibility:visible;position:static";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Outline"
+                ).style.width = "65%";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Back_Icon"
+                ).style = "visibility: hidden;";
+                document.querySelector(".MainPage_SideBar_Search_Icon").style =
+                  "visibility:visible;position:static;";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Input_Field"
+                ).style = "width:65%";
+                document.querySelector(
+                  ".MainPage_SideBar_Search_Input_Field"
+                ).value = "";
+                setOnSearchBar(false);
+              }}
             />
           </div>
         </div>
+        {onSearchBar ? (
+          <MainPageSearchBar userSearchResult={userSearchResult} />
+        ) : (
+          ""
+        )}
         <div className="MainPage_SideBar_Menu_Container">
           <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
           <div className="MainPage_SideBar_Menu_NavLink_Container">
