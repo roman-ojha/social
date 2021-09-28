@@ -28,6 +28,7 @@ passport.use(
           // i had not complete this feture but, will be complete in future
           return done(null, userExist);
         } else {
+          console.log(profile.picture);
           const userData = new userDetail({
             googleID: profile.id,
             name: profile.displayName,

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import User_profile_Icon from "../Images/User_profile_Icon.svg";
+import { useHistory } from "react-router";
 
 const GetUserIDPage = (props) => {
-  console.log(props.userDetail);
+  const history = useHistory();
   const [userID, setUserID] = useState("");
   const submitDetail = async (e) => {
     const profile = document.getElementById("image-input").files[0];
@@ -15,11 +16,12 @@ const GetUserIDPage = (props) => {
       method: "POST",
       body: data,
     });
+    const resData = await res.json();
     if (res.status !== 201) {
-      console.log(res);
-    } else {
-      const resData = await res.json();
       console.log(resData);
+    } else {
+      console.log(resData);
+      history.push("/signin");
     }
   };
   return (
