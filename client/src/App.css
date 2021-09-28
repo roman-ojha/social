@@ -9,12 +9,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@200;300;400;500;600;700;800&display=swap");
 /* Styling Sign In Page------------------------------------ */
 :root {
-  --Page-Background-Color: #ebe7ea96;
+  --Page-Background-Color: #f3f3f3;
   --primary-color: #8b37ca;
   --primary-color-point-9: #8a37caf1;
   --primary-color-point-7: #8e3fcad7;
   --primary-color-darker-5: #7931b1;
   --primary-color-lighter-1: #873cc0;
+  --primary-color-button-hover-color: #9b62c7;
   --secondary-color: #c929a6;
   --secondary-color-point-1-transparent-0: #f7e0f2;
   --secondary-color-point-2: #b359a021;
@@ -987,6 +988,11 @@ body::-webkit-scrollbar-thumb:hover {
   margin-left: 2%;
   background-color: var(--primary-color-point-7);
   cursor: pointer;
+  transition-duration: 50ms;
+}
+.MainPage_Suggested_User_Follow_Button:hover,
+.MainPage_Followed_User_Follow_Button:hover {
+  background-color: var(--primary-color-button-hover-color);
 }
 .MainPage_Suggested_User_Follow_Button_Text,
 .MainPage_Followed_User_Follow_Button_Text {
@@ -1638,4 +1644,197 @@ body::-webkit-scrollbar-thumb:hover {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/* Designing Profile Page------------------------------------ */
+.ProfilePage_Container {
+  width: 50%;
+  /* border: 1px solid red; */
+  position: relative;
+  left: 20%;
+  top: 14vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.ProfilePage_UserInfo_Container {
+  /* border: 1px solid blue; */
+  width: 100%;
+  display: flex;
+  height: 8rem;
+  align-items: center;
+  padding-top: 1%;
+  background-color: #ccbec93a;
+}
+.ProfilePage_UserInfo_Picture_Container {
+  /* border: 1px solid black; */
+  padding: 0% 2.5% 0% 2.5%;
+}
+.ProfilePage_UserInfo_Picture_Container img {
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.ProfilePage_UserInfo_Detail_Container {
+  /* border: 1px solid purple; */
+  width: 48%;
+  height: 100%;
+}
+.ProfilePage_UserInfo_UserName_Msg_Container {
+  display: flex;
+  /* border: 1px solid chocolate; */
+  height: 35%;
+}
+.ProfilePage_UserInfo_UserName_Container {
+  /* border: 1px solid black; */
+}
+.ProfilePage_UserInfo_UserName_Container h1 {
+  font-family: var(--primary-font-family);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+}
+
+.ProfilePage_UserInfo_UserName_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+}
+.ProfilePage_UserInfo_UserName_Container h1:hover,
+.ProfilePage_UserInfo_UserName_Container p:hover {
+  text-decoration: underline;
+}
+.ProfilePage_UserInfo_Message_Icon_Container {
+  margin-left: 2%;
+  border: 1px solid black;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.ProfilePage_UserInfo_Message_Icon_Container img {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+.ProfilePage_UserInfo_User_follow_Detail_Container {
+  /* border: 1px solid green; */
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.ProfilePage_UserInfo_User_follow_Detail_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--lower-opacity-font-color);
+  cursor: pointer;
+}
+.ProfilePage_UserInfo_User_follow_Detail_Container p:hover {
+  text-decoration: underline;
+}
+
+.ProfilePage_UserInfo_Follow_and_More_Button_Container {
+  /* border: 1px solid palevioletred; */
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.ProfilePage_UserInfo_More_Icon_Container {
+  /* border: 1px solid brown; */
+  margin-top: 2%;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  cursor: pointer;
+}
+.ProfilePage_UserInfo_FollowUser_Button {
+  width: 90%;
+  height: 20%;
+  border-width: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background-color: var(--primary-color-point-7);
+  cursor: pointer;
+  color: white;
+  margin-bottom: 7%;
+  transition-duration: 50ms;
+}
+.ProfilePage_UserInfo_FollowUser_Button:hover {
+  background-color: var(--primary-color-button-hover-color);
+}
+.ProfilePage_UserContent_Route_Container {
+  padding-top: 1%;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.ProfilePage_UserContent_Feed_Icon {
+  color: var(--primary-color-point-7);
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.ProfilePage_UserContent_Feed_Route_Container {
+  border-width: 0px 0px 7px 0px;
+  border-style: solid;
+  border-color: var(--primary-color-point-7);
+  z-index: 2;
+}
+.ProfilePage_UserContent_Picture_Icon {
+  color: var(--logo-icon-low-opacity-black-color-point-3);
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.ProfilePage_UserContent_Picture_Route_Container {
+  border-width: 0px 0px 7px 0px;
+  border-style: solid;
+  border-color: transparent;
+  z-index: 2;
+}
+.ProfilePage_UserContent_Friends_Icon {
+  color: var(--logo-icon-low-opacity-black-color-point-3);
+  width: 1.7rem;
+  height: 1.7rem;
+}
+.ProfilePage_UserContent_Friends_Route_Container {
+  border-width: 0px 0px 7px 0px;
+  border-style: solid;
+  border-color: transparent;
+  z-index: 2;
+}
+.ProfilePage_UserContent_Feed_Route_Container,
+.ProfilePage_UserContent_Picture_Route_Container,
+.ProfilePage_UserContent_Friends_Route_Container {
+  cursor: pointer;
+}
+.ProfilePage_UserContent_Divider_Line {
+  width: 80%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d4c9d28c;
+  position: relative;
+  bottom: 4px;
+}
+.ProfilePage_UserContent_Container {
+  /* border: 1px solid red; */
+  margin-top: -2%;
+  width: 80%;
 }
