@@ -9,6 +9,8 @@ import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { userMainInformationAction } from "../redux-actions/index";
 let history;
 const RoutingMainPage = () => {
   return (
@@ -25,6 +27,10 @@ const RoutingMainPage = () => {
 };
 
 const MainPage = () => {
+  const userMainInformationStore = useSelector(
+    (state) => state.setUserMainInformationReducer
+  );
+  const userMainInformationDispatch = useDispatch();
   history = useHistory();
   useEffect(() => {
     const getUserData = async () => {
@@ -38,11 +44,11 @@ const MainPage = () => {
           credentials: "include",
         });
         const userData = await res.json();
-        console.log(userData);
         if (!res.status === 200) {
           const error = new Error(res.error);
           throw error;
         }
+        userMainInformationDispatch(userMainInformationAction(userData));
       } catch (err) {
         console.log(err);
         history.push("/signin");

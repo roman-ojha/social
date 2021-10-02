@@ -17,3 +17,10 @@ export const homePageUserPostFieldDataAction = (data) => {
     payload: data,
   };
 };
+
+export const userMainInformationAction = (value) => {
+  return {
+    type: "userMainInformation",
+    payload: value,
+  };
+};
