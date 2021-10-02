@@ -7,6 +7,7 @@ import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "./LoadingSpinner";
 import { Picker } from "emoji-mart";
 import { useDispatch, useSelector } from "react-redux";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import {
   userPostResponseData,
   mainPageMessageViewOnOff,
@@ -18,7 +19,7 @@ const HomePage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  console.log(userProfileDetailStore);
+  // console.log(userProfileDetailStore);
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
   );
@@ -37,7 +38,11 @@ const HomePage = () => {
         <>
           <div className="HomePage_MinView_UserPost_Field_Container">
             <img
-              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+              src={
+                userProfileDetailStore.picture === undefined
+                  ? User_Profile_Icon
+                  : userProfileDetailStore.picture
+              }
               className="HomePage_MinField_UserPost_Field_Image"
               alt="profile"
             />
@@ -115,6 +120,7 @@ const HomePage = () => {
           if (res.status === 201) {
             userPostResponseDataDispatch(userPostResponseData(resData));
           }
+          console.log(resData);
           setUserPostResponseLoading(false);
           setViewValue("min");
         } catch (err) {}
@@ -128,7 +134,11 @@ const HomePage = () => {
             <div className="HomePage_MaxView_UserPost_Field_Upper_Part_Container">
               <div className="HomePage_MaxField_UserPost_Field_Image_Container">
                 <img
-                  src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+                  src={
+                    userProfileDetailStore.picture === undefined
+                      ? User_Profile_Icon
+                      : userProfileDetailStore.picture
+                  }
                   className="HomePage_MaxField_UserPost_Field_Image"
                   alt="profile"
                 />
@@ -248,7 +258,7 @@ const HomePage = () => {
       username: "Katherin",
       userID: "",
       caption: "",
-      pictureUrl:
+      postPicture:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
       like: "",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",

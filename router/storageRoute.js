@@ -48,8 +48,9 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
+          profilePicture: rootUser.picture,
           caption: postRes[0].caption,
-          pictureUrl: "",
+          postPicture: "",
           like: postRes[0].like,
           date: postRes[0].date,
         };
@@ -113,8 +114,9 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
+          profilePicture: rootUser.picture,
           caption: postRes[0].caption,
-          pictureUrl: postRes[0].picture.url,
+          postPicture: postRes[0].picture.url,
           like: postRes[0].like,
           date: postRes[0].date,
         };

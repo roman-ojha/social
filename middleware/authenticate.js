@@ -16,6 +16,7 @@ const authenticate = async (req, res, next) => {
         birthday: 1,
         gender: 1,
         picture: 1,
+        userID: 1,
         posts: { caption: 1, date: 1, picture: { url: 1 } },
         tokens: 1,
       }

@@ -701,8 +701,8 @@ body::-webkit-scrollbar-thumb:hover {
 }
 .MainPage_SideBar_User_Account_Img {
   margin-left: 3%;
-  height: 2.9rem;
-  width: 2.9rem;
+  height: 2.75rem;
+  width: 2.75rem;
   object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
@@ -712,6 +712,10 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.9rem;
   color: rgb(51, 51, 51);
   cursor: pointer;
+  width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .MainPage_SideBar_User_Account_Name:hover {
   text-decoration: underline;

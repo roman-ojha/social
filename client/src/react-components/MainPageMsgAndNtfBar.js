@@ -4,8 +4,12 @@ import more_icon from "../Images/more_icon.svg";
 import notification_icon from "../Images/notification_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { mainPageMessageViewOnOff } from "../redux-actions/index";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const MainPageMsgAndNtfBar = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
@@ -30,7 +34,11 @@ const MainPageMsgAndNtfBar = () => {
         </div>
         <img
           className="MainPage_Message_Bar_Profile"
-          src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+          src={
+            userProfileDetailStore.picture === undefined
+              ? User_Profile_Icon
+              : userProfileDetailStore.picture
+          }
           alt="profile"
         />
       </div>

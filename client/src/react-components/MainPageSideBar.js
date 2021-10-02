@@ -5,6 +5,8 @@ import mainPage_Logout_Icon from "../Images/mainPage_Logout_Icon.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "../react-components/MainPageSearchBar";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import { useSelector } from "react-redux";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
@@ -45,6 +47,9 @@ const ShowFriends = () => {
 };
 
 const MainPageSideBar = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const history = useHistory();
   location = useLocation();
   const userLogOut = async () => {
@@ -295,11 +300,19 @@ const MainPageSideBar = () => {
           <h2 className="MainPage_SideBar_Account_Title">Account</h2>
           <div className="MainPage_SideBar_User_Account_Logout_Outline">
             <img
-              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+              src={
+                userProfileDetailStore.picture === undefined
+                  ? User_Profile_Icon
+                  : userProfileDetailStore.picture
+              }
               className="MainPage_SideBar_User_Account_Img"
               alt="profile"
             />
-            <h3 className="MainPage_SideBar_User_Account_Name">Roman</h3>
+            <h3 className="MainPage_SideBar_User_Account_Name">
+              {userProfileDetailStore.userID === undefined
+                ? userProfileDetailStore.name
+                : userProfileDetailStore.userID}
+            </h3>
             <img
               src={mainPage_Logout_Icon}
               className="MainPage_LogOut_Icon"

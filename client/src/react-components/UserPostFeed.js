@@ -3,6 +3,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const UserPostFeed = (props) => {
   let uploadedTime;
@@ -49,10 +50,10 @@ const UserPostFeed = (props) => {
     <>
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
-          {props.userFeedData.pictureUrl === "" ? (
+          {props.userFeedData.postPicture === "" ? (
             ""
           ) : (
-            <img src={props.userFeedData.pictureUrl} alt="post" />
+            <img src={props.userFeedData.postPicture} alt="post" />
           )}
         </div>
         <div className="HomePage_Feed_User_Caption_Container">
@@ -61,14 +62,20 @@ const UserPostFeed = (props) => {
         <div className="HomePage_Feed_Info_Container">
           <div className="HomePage_Feed_Info_User_Image">
             <img
-              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+              src={
+                props.userFeedData.profilePicture === undefined
+                  ? User_Profile_Icon
+                  : props.userFeedData.profilePicture
+              }
               alt="user"
             />
           </div>
           <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
             <div className="HomePage_Feed_User_Name_Info_Container">
               <p className="HomePage_Feed_User_ID_Text">
-                Kath_and_renfdsaasdafafdds
+                {props.userFeedData.userID === undefined
+                  ? props.userFeedData.username
+                  : props.userFeedData.userID}
               </p>
               <p className="HomePage_Feed_User_Name_Text">
                 {props.userFeedData.username}
