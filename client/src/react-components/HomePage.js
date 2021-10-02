@@ -15,10 +15,10 @@ import {
 import UserPostFeed from "./UserPostFeed";
 
 const HomePage = () => {
-  const userMainInformationStore = useSelector(
-    (state) => state.setUserMainInformationReducer
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
   );
-  console.log(userMainInformationStore);
+  console.log(userProfileDetailStore);
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
   );

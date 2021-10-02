@@ -5,10 +5,21 @@ const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.AuthToken;
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-    const rootUser = await userDetail.findOne({
-      _id: verifyToken._id,
-      "tokens.token": token,
-    });
+    const rootUser = await userDetail.findOne(
+      {
+        _id: verifyToken._id,
+        "tokens.token": token,
+      },
+      {
+        name: 1,
+        email: 1,
+        birthday: 1,
+        gender: 1,
+        picture: 1,
+        posts: { caption: 1, date: 1, picture: { url: 1 } },
+        tokens: 1,
+      }
+    );
     if (!rootUser) {
       throw new Error("User not found");
     }

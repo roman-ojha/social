@@ -18,9 +18,9 @@ export const homePageUserPostFieldDataAction = (data) => {
   };
 };
 
-export const userMainInformationAction = (value) => {
+export const userProfileDetailAction = (value) => {
   return {
-    type: "userMainInformation",
+    type: "userProfileDetail",
     payload: value,
   };
 };
