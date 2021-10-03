@@ -277,7 +277,7 @@ const MainPageSideBar = () => {
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
             <NavLink
-              to="/u/profile"
+              to={`/u/profile/${userProfileDetailStore.userID}`}
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
               onClick={colorSelectedMainPage}
             >

@@ -100,4 +100,16 @@ router.post("/u/search", async (req, res) => {
   }
 });
 
+router.get("/u/profile/:userid", async (req, res) => {
+  try {
+    // getting userid form url parameter
+    const userID = req.params.userid;
+    console.log("hello");
+    console.log(req.params.userid);
+    const rootUser = await userDetail.findOne({ userID: userID });
+    console.log(rootUser);
+    res.send();
+  } catch (err) {}
+});
+
 export default router;

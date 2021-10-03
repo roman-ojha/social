@@ -16,6 +16,9 @@ import {
 } from "../redux-actions/index";
 let history;
 const RoutingMainPage = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   return (
     <>
       <Switch>
@@ -23,7 +26,11 @@ const RoutingMainPage = () => {
         <Route exact path="/u/video" component={VideoPage} />
         <Route exact path="/u/message" component={MessagePage} />
         <Route exact path="/u/setting" component={SettingPage} />
-        <Route exact path="/u/profile" component={ProfilePage} />
+        <Route
+          exact
+          path={`/u/profile/${userProfileDetailStore.userID}`}
+          component={ProfilePage}
+        />
       </Switch>
     </>
   );

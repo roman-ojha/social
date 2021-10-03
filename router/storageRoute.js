@@ -166,7 +166,6 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           { email: email },
           { $set: { userID: userID } }
         );
-        console.log(resData);
         return res.status(201).json({ message: "Register Successfully" });
       } else {
         await compressFile(req.file.path);

@@ -5,26 +5,13 @@ import UserPostFeed from "./UserPostFeed";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
-const ProfilePage = () => {
+const SearchedProfilePage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const defaultFeedData = [
-    {
-      id: "",
-      useremail: "",
-      username: "Katherin",
-      userID: "",
-      caption: "",
-      picture:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-      like: "",
-      date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
-    },
-  ];
   return (
     <>
       <div className="ProfilePage_Container">
@@ -89,11 +76,10 @@ const ProfilePage = () => {
           {userProfilePostStore.map((value) => (
             <UserPostFeed userFeedData={value} key={value._id} />
           ))}
-          {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
         </div>
       </div>
     </>
   );
 };
 
-export default ProfilePage;
+export default SearchedProfilePage;

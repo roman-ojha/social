@@ -1,13 +1,34 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
+import { useSelector } from "react-redux";
 
 const MainPageSearchBar = (props) => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   // const [noResultFound, setNoResultFound] = useState(true);
   let noResultFound = true;
   const SearchBarUser = (props) => {
+    // console.log(props.userDetail);
     return (
       <>
-        <div className="MainPage_SearchBar_User_Container">
+        <NavLink
+          className="MainPage_SearchBar_User_Container"
+          to={`/u/profile/${props.userDetail.userID}`}
+          onClick={async () => {
+            if (userProfileDetailStore.userID !== props.userDetail.userID) {
+              // fetching user Detail which current user had search
+              const res = await fetch(`/u/profile/${props.userDetail.userID}`, {
+                method: "GET",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+            }
+          }}
+        >
+          {/* here link goes to there user profile  using userid link*/}
           <img
             src={
               props.userDetail.picture === undefined
@@ -16,8 +37,8 @@ const MainPageSearchBar = (props) => {
             }
             alt="user"
           />
-          <p>{props.userDetail.name}</p>
-        </div>
+          <p>{props.userDetail.userID}</p>
+        </NavLink>
       </>
     );
   };

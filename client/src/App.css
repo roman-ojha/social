@@ -1914,6 +1914,7 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 5px;
   padding: 0.2rem 0rem 0.2rem 0rem;
   cursor: pointer;
+  text-decoration: none;
 }
 .MainPage_SearchBar_User_Container:hover {
   background-color: #b180dae7;
