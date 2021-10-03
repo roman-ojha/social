@@ -24,3 +24,10 @@ export const userProfileDetailAction = (value) => {
     payload: value,
   };
 };
+
+export const userProfilePostAction = (value) => {
+  return {
+    type: "userProfilePost",
+    payload: value,
+  };
+};

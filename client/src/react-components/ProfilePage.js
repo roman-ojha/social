@@ -2,8 +2,17 @@ import React from "react";
 import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "./UserPostFeed";
+import { useSelector } from "react-redux";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const ProfilePage = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+  const userProfilePostStore = useSelector(
+    (state) => state.setUserProfilePostReducer
+  );
+  console.log(userProfilePostStore);
   const defaultFeedData = [
     {
       id: "",
@@ -11,7 +20,7 @@ const ProfilePage = () => {
       username: "Katherin",
       userID: "",
       caption: "",
-      pictureUrl:
+      picture:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
       like: "",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
@@ -23,15 +32,19 @@ const ProfilePage = () => {
         <div className="ProfilePage_UserInfo_Container">
           <div className="ProfilePage_UserInfo_Picture_Container">
             <img
-              src="https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg"
+              src={
+                userProfileDetailStore.picture === undefined
+                  ? User_Profile_Icon
+                  : userProfileDetailStore.picture
+              }
               alt="profile"
             />
           </div>
           <div className="ProfilePage_UserInfo_Detail_Container">
             <div className="ProfilePage_UserInfo_UserName_Msg_Container">
               <div className="ProfilePage_UserInfo_UserName_Container">
-                <h1>Roman@Plus</h1>
-                <p>Roman Ojha</p>
+                <h1>{userProfileDetailStore.userID}</h1>
+                <p>{userProfileDetailStore.name}</p>
               </div>
               <div className="ProfilePage_UserInfo_Message_Icon_Container">
                 <img src={mainPage_sideBar_message} alt="message" />
@@ -74,7 +87,10 @@ const ProfilePage = () => {
         </div>
         <div className="ProfilePage_UserContent_Divider_Line"></div>
         <div className="ProfilePage_UserContent_Container">
-          <UserPostFeed userFeedData={defaultFeedData[0]} />
+          {userProfilePostStore.map((value) => (
+            <UserPostFeed userFeedData={value} key={value._id} />
+          ))}
+          {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
         </div>
       </div>
     </>

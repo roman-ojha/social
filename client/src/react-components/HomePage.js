@@ -16,10 +16,10 @@ import {
 import UserPostFeed from "./UserPostFeed";
 
 const HomePage = () => {
+  // storing user Profile Detail
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  // console.log(userProfileDetailStore);
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
   );

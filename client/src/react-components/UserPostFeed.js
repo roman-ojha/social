@@ -50,10 +50,10 @@ const UserPostFeed = (props) => {
     <>
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
-          {props.userFeedData.postPicture === "" ? (
+          {props.userFeedData.picture === undefined ? (
             ""
           ) : (
-            <img src={props.userFeedData.postPicture} alt="post" />
+            <img src={props.userFeedData.picture.url} alt="post" />
           )}
         </div>
         <div className="HomePage_Feed_User_Caption_Container">

@@ -10,6 +10,7 @@ const authenticate = async (req, res, next) => {
         _id: verifyToken._id,
         "tokens.token": token,
       },
+      // filtering to get only data that is need when page load
       {
         name: 1,
         email: 1,
@@ -17,7 +18,8 @@ const authenticate = async (req, res, next) => {
         gender: 1,
         picture: 1,
         userID: 1,
-        posts: { caption: 1, date: 1, picture: { url: 1 } },
+        posts: { $slice: [0, 5] },
+        // posts: { caption: 1, date: 1, picture: { url: 1 } },
         tokens: 1,
       }
     );

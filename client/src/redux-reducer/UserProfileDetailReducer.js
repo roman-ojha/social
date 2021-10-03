@@ -1,10 +1,12 @@
 const intitialState = {};
+// this store the detail of user
 
 const setUserProfileDetailReducer = (state = intitialState, action) => {
-  if (action.type === "userProfileDetail") {
-    return action.payload;
-  } else {
-    return state;
+  switch (action.type) {
+    case "userProfileDetail":
+      return action.payload;
+    default:
+      return state;
   }
 };
 

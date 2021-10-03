@@ -10,7 +10,10 @@ import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userProfileDetailAction } from "../redux-actions/index";
+import {
+  userProfileDetailAction,
+  userProfilePostAction,
+} from "../redux-actions/index";
 let history;
 const RoutingMainPage = () => {
   return (
@@ -31,6 +34,10 @@ const MainPage = () => {
     (state) => state.setUserProfileDetailReducer
   );
   const userProfileDetailDispatch = useDispatch();
+  const userProfilePostStore = useSelector(
+    (state) => state.setUserProfilePostReducer
+  );
+  const userProfilePostDispatch = useDispatch();
   history = useHistory();
   useEffect(() => {
     const getUserData = async () => {
@@ -49,6 +56,8 @@ const MainPage = () => {
           throw error;
         }
         userProfileDetailDispatch(userProfileDetailAction(userData));
+        userProfileDetailDispatch(userProfilePostAction(userData.posts));
+        console.log(userData);
       } catch (err) {
         console.log(err);
         history.push("/signin");
