@@ -4,6 +4,7 @@ import SignUp from "./react-components/SignUp";
 import MainPage from "./react-components/MainPage";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
+import GetUserIDPage from "./react-components/GetUserIDPage";
 
 const MainRoot = () => {
   const history = useHistory();
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/u" component={MainPage} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={SignUp} />
+        <Route path="/userid" component={GetUserIDPage} />
       </Switch>
     </>
   );

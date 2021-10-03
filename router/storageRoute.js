@@ -130,25 +130,43 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
 
 router.post("/u/userId", upload.single("profile"), async (req, res) => {
   try {
-    const { email, password, userID } = req.body;
-    if (!email && !password) {
-      return res.status(422).json({ error: "Please Register Frist" });
-    } else if (!userID) {
+    const { email, password, userID, auth } = req.body;
+    if (auth === "google") {
+      // if user is login using google authetication and user doesnot have a password
+      if (!email) {
+        return res.status(422).json({ error: "Please Register Frist" });
+      }
+    } else {
+      // if user is register using social account then will have a password
+      if (!email && !password) {
+        return res.status(422).json({ error: "Please Register Frist" });
+      }
+    }
+    if (!userID) {
       return res.status(422).json({ error: "Please Fill Field Properly" });
     } else {
       const rootUser = await userDetail.findOne({ email: email });
       if (!rootUser) {
         return res.status(422).json({ error: "User doesn't exist" });
       }
-      const isPasswordMatch = await bcrypt.compare(password, rootUser.password);
-      if (!isPasswordMatch) {
-        return res
-          .status(400)
-          .json({ error: "email and password doesn't match" });
+      if (auth !== "google") {
+        // if user is login using google authetication and user doesnot have a password
+        const isPasswordMatch = await bcrypt.compare(
+          password,
+          rootUser.password
+        );
+        if (!isPasswordMatch) {
+          return res
+            .status(400)
+            .json({ error: "email and password doesn't match" });
+        }
       }
       if (!req.file) {
-        console.log("Not file");
-        const resData = await userDetail.updateOne({ userID: userID });
+        const resData = await userDetail.updateOne(
+          { email: email },
+          { $set: { userID: userID } }
+        );
+        console.log(resData);
         return res.status(201).json({ message: "Register Successfully" });
       } else {
         await compressFile(req.file.path);

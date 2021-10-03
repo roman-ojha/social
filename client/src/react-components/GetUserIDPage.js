@@ -1,19 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import User_profile_Icon from "../Images/User_profile_Icon.svg";
 import LoadingSpinner from "./LoadingSpinner";
 import { useHistory } from "react-router";
 
+let userDetail;
 const GetUserIDPage = (props) => {
   const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
   const history = useHistory();
   const [userID, setUserID] = useState("");
+  const url = new URL(window.location.href);
+  const uid = url.searchParams.get("uid");
+  useEffect(() => {
+    if (uid !== "undefined") {
+      // and if user had already login then we can push route into homepage
+      history.push("/u");
+    } else {
+      // if user is login for the first time then the userID will be undefined
+      if (props.userDetail === undefined) {
+        // if UserID page will be open using google authnetication
+        // then we have to get user Detail to save userID of the user
+        const getUserDetail = async () => {
+          const res = await fetch("/u", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+          userDetail = await res.json();
+          console.log(userDetail);
+        };
+        getUserDetail();
+      }
+    }
+  }, []);
   const submitDetail = async (e) => {
     try {
       setOnLoadingSpinner(true);
       const profile = document.getElementById("image-input").files[0];
       const data = new FormData();
-      data.append("email", props.userDetail.email);
-      data.append("password", props.userDetail.password);
+      if (props.userDetail === undefined) {
+        // if UserID page will be open using google authnetication
+        // then user doesn't have a password and userDetail is not commit form the props
+        data.append("email", userDetail.email);
+        data.append("auth", "google");
+        // we have to send 'password' as undefinded if user is login with google authntication to check in backend
+      } else {
+        data.append("email", props.userDetail.email);
+        data.append("password", props.userDetail.password);
+        data.append("auth", "social");
+      }
       data.append("userID", userID);
       data.append("profile", profile);
       const res = await fetch("/u/userId", {
@@ -25,7 +60,11 @@ const GetUserIDPage = (props) => {
         console.log(resData);
       } else {
         console.log(resData);
-        history.push("/signin");
+        if (props.userDetail === undefined) {
+          history.push("/");
+        } else {
+          history.push("/signin");
+        }
       }
       setOnLoadingSpinner(false);
     } catch (err) {}
