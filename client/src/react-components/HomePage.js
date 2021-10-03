@@ -258,8 +258,9 @@ const HomePage = () => {
       username: "Katherin",
       userID: "",
       caption: "",
-      postPicture:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      picture: {
+        url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
+      },
       like: "",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
@@ -273,9 +274,17 @@ const HomePage = () => {
         </div>
         <div className="HomePage_Feed_Main_Container">
           {userPostResponseDataState.map((value) => {
-            return <UserPostFeed key={value.id} userFeedData={value} />;
+            return (
+              <UserPostFeed
+                key={value.id}
+                // sending user main information
+                userMainInformation={userProfileDetailStore}
+                // sending user feed information information
+                userFeedData={value}
+              />
+            );
           })}
-          <UserPostFeed userFeedData={defaultFeedData[0]} />
+          {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
         </div>
       </div>
     </>

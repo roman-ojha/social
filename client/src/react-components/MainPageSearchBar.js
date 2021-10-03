@@ -1,14 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { searchedUserProfileAction } from "../redux-actions/index";
 
 const MainPageSearchBar = (props) => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  // const [noResultFound, setNoResultFound] = useState(true);
   let noResultFound = true;
+  // Storing Searched userData into redux
+  const searchUserProfileStore = useSelector(
+    (state) => state.setSearchUserProfileReducer
+  );
+  const userDataDispatch = useDispatch();
+
   const SearchBarUser = (props) => {
     // console.log(props.userDetail);
     return (
@@ -25,6 +31,8 @@ const MainPageSearchBar = (props) => {
                   "Content-Type": "application/json",
                 },
               });
+              const userData = await res.json();
+              userDataDispatch(searchedUserProfileAction(userData));
             }
           }}
         >

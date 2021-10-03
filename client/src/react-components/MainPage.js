@@ -8,6 +8,7 @@ import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
+import SearchedProfilePage from "./SearchedProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,6 +20,10 @@ const RoutingMainPage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const searchUserProfileStore = useSelector(
+    (state) => state.setSearchUserProfileReducer
+  );
+  console.log(searchUserProfileStore);
   return (
     <>
       <Switch>
@@ -30,6 +35,11 @@ const RoutingMainPage = () => {
           exact
           path={`/u/profile/${userProfileDetailStore.userID}`}
           component={ProfilePage}
+        />
+        <Route
+          exact
+          path={`/u/profile/${searchUserProfileStore.userID}`}
+          component={SearchedProfilePage}
         />
       </Switch>
     </>

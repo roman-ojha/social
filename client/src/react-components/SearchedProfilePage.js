@@ -6,12 +6,18 @@ import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const SearchedProfilePage = () => {
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+  const searchUserProfileStore = useSelector(
+    (state) => state.setSearchUserProfileReducer
   );
-  const userProfilePostStore = useSelector(
-    (state) => state.setUserProfilePostReducer
-  );
+  const searchedUserMainInformation = {
+    // store searched user essintal information
+    name: searchUserProfileStore.name,
+    email: searchUserProfileStore.email,
+    picture: searchUserProfileStore.picture,
+    userID: searchUserProfileStore.userID,
+  };
+  const searchedUserFeed = searchUserProfileStore.posts;
+  console.log(searchUserProfileStore);
   return (
     <>
       <div className="ProfilePage_Container">
@@ -19,9 +25,9 @@ const SearchedProfilePage = () => {
           <div className="ProfilePage_UserInfo_Picture_Container">
             <img
               src={
-                userProfileDetailStore.picture === undefined
+                searchUserProfileStore.picture === undefined
                   ? User_Profile_Icon
-                  : userProfileDetailStore.picture
+                  : searchUserProfileStore.picture
               }
               alt="profile"
             />
@@ -29,8 +35,8 @@ const SearchedProfilePage = () => {
           <div className="ProfilePage_UserInfo_Detail_Container">
             <div className="ProfilePage_UserInfo_UserName_Msg_Container">
               <div className="ProfilePage_UserInfo_UserName_Container">
-                <h1>{userProfileDetailStore.userID}</h1>
-                <p>{userProfileDetailStore.name}</p>
+                <h1>{searchUserProfileStore.userID}</h1>
+                <p>{searchUserProfileStore.name}</p>
               </div>
               <div className="ProfilePage_UserInfo_Message_Icon_Container">
                 <img src={mainPage_sideBar_message} alt="message" />
@@ -73,8 +79,12 @@ const SearchedProfilePage = () => {
         </div>
         <div className="ProfilePage_UserContent_Divider_Line"></div>
         <div className="ProfilePage_UserContent_Container">
-          {userProfilePostStore.map((value) => (
-            <UserPostFeed userFeedData={value} key={value._id} />
+          {searchedUserFeed.map((value) => (
+            <UserPostFeed
+              userMainInformation={searchedUserMainInformation}
+              userFeedData={value}
+              key={value._id}
+            />
           ))}
         </div>
       </div>

@@ -12,6 +12,13 @@ const ProfilePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
+  const userProfileMainInformation = {
+    // store searched user essintal information
+    name: userProfileDetailStore.name,
+    email: userProfileDetailStore.email,
+    picture: userProfileDetailStore.picture,
+    userID: userProfileDetailStore.userID,
+  };
   const defaultFeedData = [
     {
       id: "",
@@ -87,7 +94,11 @@ const ProfilePage = () => {
         <div className="ProfilePage_UserContent_Divider_Line"></div>
         <div className="ProfilePage_UserContent_Container">
           {userProfilePostStore.map((value) => (
-            <UserPostFeed userFeedData={value} key={value._id} />
+            <UserPostFeed
+              userMainInformation={userProfileMainInformation}
+              userFeedData={value}
+              key={value._id}
+            />
           ))}
           {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
         </div>

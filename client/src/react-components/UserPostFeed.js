@@ -63,9 +63,9 @@ const UserPostFeed = (props) => {
           <div className="HomePage_Feed_Info_User_Image">
             <img
               src={
-                props.userFeedData.profilePicture === undefined
+                props.userMainInformation.picture === undefined
                   ? User_Profile_Icon
-                  : props.userFeedData.profilePicture
+                  : props.userMainInformation.picture
               }
               alt="user"
             />
@@ -73,12 +73,10 @@ const UserPostFeed = (props) => {
           <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
             <div className="HomePage_Feed_User_Name_Info_Container">
               <p className="HomePage_Feed_User_ID_Text">
-                {props.userFeedData.userID === undefined
-                  ? props.userFeedData.username
-                  : props.userFeedData.userID}
+                {props.userMainInformation.userID}
               </p>
               <p className="HomePage_Feed_User_Name_Text">
-                {props.userFeedData.username}
+                {props.userMainInformation.name}
               </p>
             </div>
             <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>

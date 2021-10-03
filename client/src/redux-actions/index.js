@@ -31,3 +31,10 @@ export const userProfilePostAction = (value) => {
     payload: value,
   };
 };
+
+export const searchedUserProfileAction = (value) => {
+  return {
+    type: "searchedUserProfile",
+    payload: value,
+  };
+};

@@ -107,8 +107,10 @@ router.get("/u/profile/:userid", async (req, res) => {
     console.log("hello");
     console.log(req.params.userid);
     const rootUser = await userDetail.findOne({ userID: userID });
-    console.log(rootUser);
-    res.send();
+    if (!rootUser) {
+      return res.status(401).json({ error: "User doesnot exist" });
+    }
+    return res.status(201).json(rootUser);
   } catch (err) {}
 });
 
