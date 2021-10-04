@@ -51,6 +51,7 @@ const MainPageStory = () => {
     <>
       <div className="MainPage_User_Stories_Container">
         <AddStory />
+        {/* showing friends story */}
         <FriendStory />
         <FriendStory />
         <FriendStory />

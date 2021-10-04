@@ -10,41 +10,6 @@ import { useSelector } from "react-redux";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
-const MainPageFriend = () => {
-  return (
-    <>
-      <div className="MainPage_SideBar_Friend_Outline">
-        <img
-          src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-          alt=""
-          className="MainPage_SideBar_Friend_Image"
-        />
-        <p className="MainPage_SideBar_Friend_Name">Katherine</p>
-        <div className="MainPage_SideBar_Friend_Active_Status">
-          <p>Active</p>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const ShowFriends = () => {
-  return (
-    <>
-      <div className="MainPage_SideBar_Friends_Inner_Container">
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-        <MainPageFriend />
-      </div>
-    </>
-  );
-};
 
 const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
@@ -68,6 +33,46 @@ const MainPageSideBar = () => {
         throw error;
       }
     } catch (err) {}
+  };
+  const MainPageFriend = (props) => {
+    return (
+      <>
+        <div className="MainPage_SideBar_Friend_Outline">
+          <img
+            src={
+              props.friendDetail.picture === undefined
+                ? User_Profile_Icon
+                : props.friendDetail.picture
+            }
+            alt=""
+            className="MainPage_SideBar_Friend_Image"
+          />
+          <p className="MainPage_SideBar_Friend_Name">
+            {props.friendDetail.userID}
+          </p>
+          <div className="MainPage_SideBar_Friend_Active_Status">
+            <p>Active</p>
+          </div>
+        </div>
+      </>
+    );
+  };
+  const ShowFriends = () => {
+    // Displaying current user friends
+    return (
+      <>
+        <div className="MainPage_SideBar_Friends_Inner_Container">
+          {userProfileDetailStore.friends.map((friendDetail) => {
+            return (
+              <MainPageFriend
+                friendDetail={friendDetail}
+                key={friendDetail._id}
+              />
+            );
+          })}
+        </div>
+      </>
+    );
   };
   const colorSelectedMainPage = (e) => {
     let parentElement;

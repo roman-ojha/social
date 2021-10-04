@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainPageSideBar from "./MainPageSideBar";
 import MainPageStory from "./MainPageStory";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
@@ -54,7 +54,8 @@ const MainPage = () => {
     (state) => state.setUserProfilePostReducer
   );
   const userProfilePostDispatch = useDispatch();
-  history = useHistory();
+  const history = useHistory();
+  const [renderMainPage, setRenderMainPage] = useState(false);
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -74,6 +75,7 @@ const MainPage = () => {
         userProfileDetailDispatch(userProfileDetailAction(userData));
         userProfileDetailDispatch(userProfilePostAction(userData.posts));
         console.log(userData);
+        setRenderMainPage(true);
       } catch (err) {
         console.log(err);
         history.push("/signin");
@@ -81,15 +83,21 @@ const MainPage = () => {
     };
     getUserData();
   }, []);
-
-  return (
-    <>
-      <div className="MainPage_Container">
+  const ReturnMainPage = () => {
+    return (
+      <>
         <MainPageSideBar />
         <MainPageStory />
         <RoutingMainPage />
         <MainPageMsgAndNtfBar />
         <MainPageRightSideComp />
+      </>
+    );
+  };
+  return (
+    <>
+      <div className="MainPage_Container">
+        {renderMainPage ? <ReturnMainPage /> : ""}
       </div>
     </>
   );
