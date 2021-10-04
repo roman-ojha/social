@@ -33,6 +33,7 @@ const MainPageSearchBar = (props) => {
               });
               const userData = await res.json();
               userDataDispatch(searchedUserProfileAction(userData));
+              console.log(userData);
             }
           }}
         >

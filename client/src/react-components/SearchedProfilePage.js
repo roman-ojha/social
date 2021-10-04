@@ -9,6 +9,9 @@ const SearchedProfilePage = () => {
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const searchedUserMainInformation = {
     // store searched user essintal information
     name: searchUserProfileStore.name,
@@ -17,7 +20,25 @@ const SearchedProfilePage = () => {
     userID: searchUserProfileStore.userID,
   };
   const searchedUserFeed = searchUserProfileStore.posts;
-  console.log(searchUserProfileStore);
+  const followUser = async () => {
+    // writing logic for followuser
+    try {
+      const followedTo = {
+        email: searchUserProfileStore.email,
+        userID: searchUserProfileStore.userID,
+      };
+      const response = await fetch("/u/follow", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(followedTo),
+        // sending both follwedTo and FollowedBy
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {}
+  };
   return (
     <>
       <div className="ProfilePage_Container">
@@ -52,7 +73,10 @@ const SearchedProfilePage = () => {
             <div className="ProfilePage_UserInfo_More_Icon_Container">
               <MoreVertIcon />
             </div>
-            <button className="ProfilePage_UserInfo_FollowUser_Button">
+            <button
+              className="ProfilePage_UserInfo_FollowUser_Button"
+              onClick={followUser}
+            >
               Follow
             </button>
           </div>

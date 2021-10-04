@@ -52,6 +52,63 @@ const userDetailSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  followersNo: {
+    type: Number,
+  },
+  followers: [
+    {
+      email: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      userID: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
+    },
+  ],
+  followingNo: {
+    type: Number,
+  },
+  following: [
+    {
+      email: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      userID: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
+    },
+  ],
+  postNo: {
+    type: Number,
+  },
+  friends: [
+    {
+      email: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      userID: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
+    },
+  ],
   posts: [
     {
       caption: {
@@ -116,11 +173,46 @@ userDetailSchema.methods.uploadPost = async function (postData) {
   try {
     // console.log(postData);
     this.posts.unshift(postData);
+    console.log(this.posts);
     await this.save();
     return this.posts;
   } catch (err) {
     console.log(err);
   }
+};
+
+userDetailSchema.methods.followUser = async function (followedToUser) {
+  try {
+    // saving following user detail into current user database
+    this.following.unshift(followedToUser);
+    this.followingNo++;
+    // saving following user detail into followed to user database
+    const res = await UserDetail.updateOne(
+      {
+        userID: followedToUser.userID,
+      },
+      {
+        // pushing the new followers into followed to user database
+        $push: {
+          followers: {
+            name: this.name,
+            email: this.email,
+            userID: this.userID,
+            picture: this.picture,
+          },
+        },
+        $inc: {
+          followersNo: 1,
+        },
+      }
+    );
+    if (res) {
+      await this.save();
+      return true;
+    } else {
+      return false;
+    }
+  } catch (err) {}
 };
 
 const UserDetail = mongoose.model("USERDETAIL", userDetailSchema);

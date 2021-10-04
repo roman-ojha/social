@@ -11,26 +11,25 @@ const GetUserIDPage = (props) => {
   const url = new URL(window.location.href);
   const uid = url.searchParams.get("uid");
   useEffect(() => {
-    if (uid !== "undefined") {
-      // and if user had already login then we can push route into homepage
-      history.push("/u");
-    } else {
-      // if user is login for the first time then the userID will be undefined
-      if (props.userDetail === undefined) {
-        // if UserID page will be open using google authnetication
-        // then we have to get user Detail to save userID of the user
-        const getUserDetail = async () => {
-          const res = await fetch("/u", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          userDetail = await res.json();
-          console.log(userDetail);
-        };
-        getUserDetail();
+    // if user is login for the first time then the userID will be undefined
+    if (props.userDetail === undefined) {
+      // if UserID page will be open using google authnetication
+      // then we have to get user Detail to save userID of the user
+      if (uid !== "undefined") {
+        // and if user had already login then we can push route into homepage
+        history.push("/u");
       }
+      const getUserDetail = async () => {
+        const res = await fetch("/u", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        userDetail = await res.json();
+        console.log(userDetail);
+      };
+      getUserDetail();
     }
   }, []);
   const submitDetail = async (e) => {

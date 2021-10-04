@@ -66,9 +66,9 @@ const ProfilePage = () => {
             <div className="ProfilePage_UserInfo_More_Icon_Container">
               <MoreVertIcon />
             </div>
-            <button className="ProfilePage_UserInfo_FollowUser_Button">
+            {/* <button className="ProfilePage_UserInfo_FollowUser_Button">
               Follow
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="ProfilePage_UserContent_Route_Container">

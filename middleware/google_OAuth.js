@@ -34,6 +34,9 @@ passport.use(
             name: profile.displayName,
             email: profile.email,
             picture: profile.picture,
+            followersNo: 0,
+            followingNo: 0,
+            postNo: 0,
           });
           const createUser = await userData.save();
           return done(null, createUser);

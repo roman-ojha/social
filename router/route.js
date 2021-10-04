@@ -31,6 +31,9 @@ router.post("/register", (req, res) => {
         birthday,
         cpassword,
         gender,
+        followersNo: 0,
+        followingNo: 0,
+        postNo: 0,
       });
       creatingUserData
         .save()
@@ -104,14 +107,45 @@ router.get("/u/profile/:userid", async (req, res) => {
   try {
     // getting userid form url parameter
     const userID = req.params.userid;
-    console.log("hello");
-    console.log(req.params.userid);
+    // console.log("hello");
+    console.log(userID);
     const rootUser = await userDetail.findOne({ userID: userID });
     if (!rootUser) {
       return res.status(401).json({ error: "User doesnot exist" });
     }
     return res.status(201).json(rootUser);
   } catch (err) {}
+});
+
+router.post("/u/follow", authenticate, async (req, res) => {
+  try {
+    const rootUser = req.rootUser;
+    const { email, userID } = req.body;
+    // these are the followed to user id and email
+    if (!email && !userID) {
+      return res.status(400).json({ error: "unauthorized user" });
+    }
+    const followedToUser = await userDetail.findOne(
+      {
+        userID: userID,
+      },
+      {
+        email: 1,
+        name: 1,
+        userID: 1,
+        picture: 1,
+      }
+    );
+    if (!followedToUser) {
+      return res.status(400).json({ error: "User doesn't exist" });
+    }
+    const followRes = await rootUser.followUser(followedToUser);
+    if (!followRes) {
+      return res.status(500).json({ error: "Server error" });
+    }
+    return res.status(200).json({ message: "Follow successfully" });
+  } catch (err) {}
+  res.send("hello");
 });
 
 export default router;

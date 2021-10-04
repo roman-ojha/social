@@ -23,7 +23,6 @@ const RoutingMainPage = () => {
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
-  console.log(searchUserProfileStore);
   return (
     <>
       <Switch>
