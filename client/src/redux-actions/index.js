@@ -38,3 +38,10 @@ export const searchedUserProfileAction = (value) => {
     payload: value,
   };
 };
+
+export const followedUserPostDataAction = (value) => {
+  return {
+    type: "followedUserPostData",
+    payload: value,
+  };
+};

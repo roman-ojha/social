@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   userProfileDetailAction,
   userProfilePostAction,
+  followedUserPostDataAction,
 } from "../redux-actions/index";
 let history;
 const RoutingMainPage = () => {
@@ -23,6 +24,7 @@ const RoutingMainPage = () => {
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
+
   return (
     <>
       <Switch>
@@ -46,6 +48,7 @@ const RoutingMainPage = () => {
 };
 
 const MainPage = () => {
+  const userDataDispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -53,10 +56,13 @@ const MainPage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const userProfilePostDispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
+  const followedUserPostDataStore = useSelector(
+    (state) => state.setFollowedUserPostDataReducer
+  );
   useEffect(() => {
+    // fetching all user data and current user following user Post data
     const getUserData = async () => {
       try {
         const res = await fetch("/u", {
@@ -72,8 +78,11 @@ const MainPage = () => {
           const error = new Error(res.error);
           throw error;
         }
-        userProfileDetailDispatch(userProfileDetailAction(userData));
-        userProfileDetailDispatch(userProfilePostAction(userData.posts));
+        userDataDispatch(userProfileDetailAction(userData.userProfileDetail));
+        userDataDispatch(
+          userProfilePostAction(userData.userProfileDetail.posts)
+        );
+        userDataDispatch(followedUserPostDataAction(userData.followedUserPost));
         console.log(userData);
         setRenderMainPage(true);
       } catch (err) {

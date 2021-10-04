@@ -5,6 +5,7 @@ import homePageUserPostFieldDataReducer from "./homePageUserPostFieldData";
 import setUserProfileDetailReducer from "./UserProfileDetailReducer";
 import setUserProfilePostReducer from "./UserProfilePostReducer";
 import setSearchUserProfileReducer from "./SearchedUserProfileReducer";
+import setFollowedUserPostDataReducer from "./FollowedUserPostDataReducer";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -13,6 +14,7 @@ const rootReducers = combineReducers({
   setUserProfileDetailReducer,
   setUserProfilePostReducer,
   setSearchUserProfileReducer,
+  setFollowedUserPostDataReducer,
 });
 
 export default rootReducers;

@@ -273,6 +273,7 @@ const HomePage = () => {
           <SelectUserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
+          {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {
             return (
               <UserPostFeed
@@ -284,6 +285,7 @@ const HomePage = () => {
               />
             );
           })}
+          {/* Displaying current user Followed User post field filed */}
           {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
         </div>
       </div>
