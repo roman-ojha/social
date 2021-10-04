@@ -28,6 +28,9 @@ const HomePage = () => {
   });
   const userPostResponseDataDispatch = useDispatch();
   const homePageUserPostFieldDataDispatch = useDispatch();
+  const followedUserPostDataStore = useSelector(
+    (state) => state.setFollowedUserPostDataReducer
+  );
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
@@ -265,6 +268,38 @@ const HomePage = () => {
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
   ];
+  const DisplayFollowedUserPost = () => {
+    // Displaying Followed User Post
+    console.log(followedUserPostDataStore);
+    let userPostFeedElement = [];
+    if (followedUserPostDataStore.length !== 0) {
+      let getMaxLengthOnce = 0;
+      let lengthOfOneUserPostIndex;
+      let maxLengthOfUserPost = followedUserPostDataStore[0].posts.length;
+      for (let i = 0; i < maxLengthOfUserPost; i++) {
+        for (let j = 0; j < followedUserPostDataStore.length; j++) {
+          lengthOfOneUserPostIndex = followedUserPostDataStore[j].posts.length;
+          if (followedUserPostDataStore[j].posts.length > maxLengthOfUserPost) {
+            console.log("hello");
+            maxLengthOfUserPost = followedUserPostDataStore[j].posts.length;
+          }
+          if (followedUserPostDataStore[j].posts[i] === undefined) {
+            continue;
+          }
+          userPostFeedElement.push(
+            <UserPostFeed
+              key={followedUserPostDataStore[j].posts[i]._id}
+              userMainInformation={followedUserPostDataStore[j]}
+              userFeedData={followedUserPostDataStore[j].posts[i]}
+            />
+          );
+        }
+      }
+      return <>{userPostFeedElement}</>;
+    } else {
+      return <></>;
+    }
+  };
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : ""}
@@ -286,7 +321,7 @@ const HomePage = () => {
             );
           })}
           {/* Displaying current user Followed User post field filed */}
-          {/* <UserPostFeed userFeedData={defaultFeedData[0]} /> */}
+          <DisplayFollowedUserPost />
         </div>
       </div>
     </>

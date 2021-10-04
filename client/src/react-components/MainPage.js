@@ -58,9 +58,7 @@ const MainPage = () => {
   );
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const followedUserPostDataStore = useSelector(
-    (state) => state.setFollowedUserPostDataReducer
-  );
+
   useEffect(() => {
     // fetching all user data and current user following user Post data
     const getUserData = async () => {
