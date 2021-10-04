@@ -93,6 +93,9 @@ const userDetailSchema = new mongoose.Schema({
   postNo: {
     type: Number,
   },
+  friendsNo: {
+    type: Number,
+  },
   friends: [
     {
       email: {
