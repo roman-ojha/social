@@ -26,6 +26,8 @@ const SearchedProfilePage = () => {
       const followedTo = {
         email: searchUserProfileStore.email,
         userID: searchUserProfileStore.userID,
+        picture: searchUserProfileStore.picture,
+        name: searchUserProfileStore.name,
       };
       const response = await fetch("/u/follow", {
         method: "POST",

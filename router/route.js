@@ -125,6 +125,19 @@ router.post("/u/follow", authenticate, async (req, res) => {
     if (!email && !userID) {
       return res.status(400).json({ error: "unauthorized user" });
     }
+    const followUserExist = await userDetail.findOne({
+      // here we are finding only the user which is followed by rootuser to user who is being followed
+      // if it doesn't exist only after that we will going to go forther to save the data if it exist it means he had already follwed the user
+      userID: rootUser.userID,
+      following: {
+        $elemMatch: {
+          userID: userID,
+        },
+      },
+    });
+    if (followUserExist) {
+      return res.status(200).json({ message: "you had already followed" });
+    }
     const followedToUser = await userDetail.findOne(
       {
         userID: userID,
