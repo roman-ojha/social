@@ -1624,6 +1624,55 @@ body::-webkit-scrollbar-thumb:hover {
   margin: 1% 2% 0% 2%;
   border-radius: 10px 10px 0px 0px;
   background-color: #fff5fd;
+  overflow-y: scroll;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin-top: 1.5rem;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MessageBox_InnerMessage_Message_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+.MessageBox_Inner_SingleMessage_Container {
+  width: 67%;
+  /* height: 20%; */
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  margin: 0.5% 0% 0.5% 0%;
+  position: relative;
+  /* left: 31%; */
+}
+.MessageBox_Inner_SingleMessage_Container img {
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.MessageBox_Inner_SingleMessage {
+  /* border: 1px solid blue; */
+  background-color: #9066b150;
+  width: 80%;
+  height: auto;
+  margin-left: 3%;
+  padding: 2%;
+  border-radius: 7px;
+}
+.MessageBox_Inner_SingleMessage p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
 }
 .MessageBox_LowerPart_InputField_Container {
   /* border: 1px solid red; */

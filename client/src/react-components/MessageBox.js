@@ -19,6 +19,9 @@ const MessageBox = () => {
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
   );
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const [showInnerMessage, setShowInnerMessage] = useState(false);
   const UserMessage = () => {
     return (
@@ -104,7 +107,50 @@ const MessageBox = () => {
     );
   };
   const ReturnInnerUserMessageBox = () => {
-    const UserSingleMessageBox = () => {};
+    const UserSingleMessageBox = (props) => {
+      return (
+        <>
+          <div
+            className="MessageBox_Inner_SingleMessage_Container"
+            style={
+              props.MessageInfo.sender === userProfileDetailStore.userID
+                ? {
+                    left: "31%",
+                  }
+                : {}
+            }
+          >
+            {props.MessageInfo.sender === userProfileDetailStore.userID ? (
+              ""
+            ) : (
+              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" />
+            )}
+            <div
+              className="MessageBox_Inner_SingleMessage"
+              style={
+                props.MessageInfo.sender === userProfileDetailStore.userID
+                  ? {
+                      backgroundColor: "var(--primary-color-point-7)",
+                    }
+                  : {}
+              }
+            >
+              <p
+                style={
+                  props.MessageInfo.sender === userProfileDetailStore.userID
+                    ? {
+                        color: "white",
+                      }
+                    : {}
+                }
+              >
+                {props.MessageInfo.content}
+              </p>
+            </div>
+          </div>
+        </>
+      );
+    };
     return (
       <>
         <div className="MessageBox_InnerMessage_Container">
@@ -122,7 +168,11 @@ const MessageBox = () => {
               }}
             />
           </div>
-          <div className="MessageBox_InnerMessage_Message_Container"></div>
+          <div className="MessageBox_InnerMessage_Message_Container">
+            {currentMessageStore.message.map((message) => {
+              return <UserSingleMessageBox MessageInfo={message} />;
+            })}
+          </div>
           <div className="MessageBox_LowerPart_InputField_Container">
             <div className="MessageBox_LowerPart_InputField_Inner_Container">
               <EmojiEmotionsIcon

@@ -3,28 +3,35 @@ const initialMessage = {
   messageBy: "roman@987",
   message: [
     {
+      sender: "mina ojha",
+      content: "ke gerdai ho ta ani keta,khana khako ",
+      date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
+    },
+    {
       sender: "roman@987",
-      content: "ke gerdai ho ta ani keta",
+      content: "ke gerdai ho ta ani keta,khana khako ",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
     {
       sender: "mina ojha",
-      content: "ke gerdai ho ta ani keta",
+      content: "mata basiraho",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
     {
       sender: "roman@987",
-      content: "ke gerdai ho ta ani keta",
+      content:
+        "laaay, patan mani tight vhayexa , abo best of luck yar for you result",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
     {
       sender: "roman@987",
-      content: "ke gerdai ho ta ani keta",
+      content: "Vanja lai aba milecha vane vetna jam la",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
     {
       sender: "mina ojha",
-      content: "ke gerdai ho ta ani keta",
+      content:
+        "mildaina hare namaste garnu oeee.....Ngarnu vhanu vhooo maiali taaaa",
       date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
     },
   ],
