@@ -63,7 +63,6 @@ router.get("/u", authenticate, async (req, res) => {
       }
     }
   }
-  console.log(getUserPost);
   res.status(200).json({
     userProfileDetail: req.rootUser,
     followedUserPost: getUserPost,

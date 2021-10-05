@@ -31,6 +31,9 @@ const HomePage = () => {
   const followedUserPostDataStore = useSelector(
     (state) => state.setFollowedUserPostDataReducer
   );
+  const userProfilePostStore = useSelector(
+    (state) => state.setUserProfilePostReducer
+  );
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
@@ -270,7 +273,6 @@ const HomePage = () => {
   ];
   const DisplayFollowedUserPost = () => {
     // Displaying Followed User Post
-    console.log(followedUserPostDataStore);
     let userPostFeedElement = [];
     if (followedUserPostDataStore.length !== 0) {
       let getMaxLengthOnce = 0;
@@ -280,7 +282,6 @@ const HomePage = () => {
         for (let j = 0; j < followedUserPostDataStore.length; j++) {
           lengthOfOneUserPostIndex = followedUserPostDataStore[j].posts.length;
           if (followedUserPostDataStore[j].posts.length > maxLengthOfUserPost) {
-            console.log("hello");
             maxLengthOfUserPost = followedUserPostDataStore[j].posts.length;
           }
           if (followedUserPostDataStore[j].posts[i] === undefined) {
@@ -319,6 +320,24 @@ const HomePage = () => {
                 userFeedData={value}
               />
             );
+          })}
+          {/* Display only those user profile post which are post 5 min ago */}
+          {userProfilePostStore.map((post) => {
+            // if(post)
+            let currentDate = new Date();
+            let date5MinutesAgo = new Date(currentDate);
+            date5MinutesAgo.setMinutes(date5MinutesAgo.getMinutes() - 5);
+            if (date5MinutesAgo.getTime() < new Date(post.date).getTime()) {
+              return (
+                <UserPostFeed
+                  key={post._id}
+                  userMainInformation={userProfileDetailStore}
+                  userFeedData={post}
+                />
+              );
+            } else {
+              return <></>;
+            }
           })}
           {/* Displaying current user Followed User post field filed */}
           <DisplayFollowedUserPost />

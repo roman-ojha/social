@@ -81,7 +81,7 @@ const MainPage = () => {
           userProfilePostAction(userData.userProfileDetail.posts)
         );
         userDataDispatch(followedUserPostDataAction(userData.followedUserPost));
-        console.log(userData);
+        // console.log(userData);
         setRenderMainPage(true);
       } catch (err) {
         console.log(err);
