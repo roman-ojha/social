@@ -45,3 +45,11 @@ export const followedUserPostDataAction = (value) => {
     payload: value,
   };
 };
+
+// this action will have the messge of rootUser message to other people and which is currently fetch
+export const currentUserMessageAction = (message) => {
+  return {
+    type: "currentUserMessage",
+    payload: message,
+  };
+};

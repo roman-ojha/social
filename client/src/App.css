@@ -1571,6 +1571,98 @@ body::-webkit-scrollbar-thumb:hover {
   text-decoration: underline;
 }
 
+/* Designing Inner Box of the Message Box */
+.MessageBox_InnerMessage_Container {
+  /* border: 1px solid red; */
+  background-color: #9066b150;
+  width: 100%;
+  height: 100%;
+}
+.MessageBox_InnerMessage_Upper_Part_Container {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  border-radius: 10px 10px 10px 10px;
+  margin: 0% 1% 0% 1%;
+  padding: 1% 0% 1% 0%;
+}
+.MessageBox_InnerMessage_Upper_Part_Container img {
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 5%;
+  cursor: pointer;
+}
+.MessageBox_InnerMessage_Upper_Part_Container h3 {
+  font-family: var(--primary-font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 2%;
+  cursor: pointer;
+}
+.MessageBox_InnerMessage_Upper_Part_Container h3:hover {
+  text-decoration: underline;
+}
+.MessageBox_InnerMessage_Upper_Part_Close_Button {
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
+  /* border: 1px solid blue; */
+  border-radius: 50%;
+  /* background-color: var(--primary-color); */
+  color: black;
+  padding: 1%;
+}
+.MessageBox_InnerMessage_Upper_Part_Close_Button:hover {
+  background-color: #e7e7e75d;
+}
+.MessageBox_InnerMessage_Message_Container {
+  /* background-color: var(--secondary-color-point-1-transparent-0); */
+  /* border: 1px solid black; */
+  height: 75%;
+  margin: 1% 2% 0% 2%;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #fff5fd;
+}
+.MessageBox_LowerPart_InputField_Container {
+  /* border: 1px solid red; */
+  height: 10%;
+  margin: 0% 2% 0% 2%;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #fff5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MessageBox_LowerPart_InputField_Inner_Container {
+  /* border: 1px solid blue; */
+  margin: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fffafe;
+  width: 100%;
+  padding: 0% 1% 0% 1%;
+  border-radius: 5px;
+  height: 90%;
+}
+.MessageBox_LowerPart_InputField_Inner_Container input {
+  border-width: 0px;
+  width: 68%;
+  height: 80%;
+  background-color: #fffafe;
+}
+.MessageBox_LowerPart_InputField_Inner_Container input:read-write {
+  outline: none;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+}
+.MessageBox_LowerPart_InputField_Buttons {
+  color: rgb(108, 91, 109);
+  cursor: pointer;
+}
+
 /* Styling Emoji Mart package------------------------------------- */
 .emoji-mart,
 .emoji-mart-light {

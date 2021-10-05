@@ -336,7 +336,7 @@ const HomePage = () => {
                 />
               );
             } else {
-              return <></>;
+              return <div key={post._id}></div>;
             }
           })}
           {/* Displaying current user Followed User post field filed */}
