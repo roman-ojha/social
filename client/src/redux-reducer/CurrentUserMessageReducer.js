@@ -51,17 +51,9 @@ const setCurrentUserMessageReducer = (state = initialMessage, action) => {
       message: action.payload.message.reverse(),
     };
   } else if (action.type === "appendOnCurrentUserMessage") {
-    const { sender, content, date } = action.payload;
     return {
       ...state,
-      message: [
-        {
-          sender,
-          content,
-          date,
-        },
-        ...state.message,
-      ],
+      message: [action.payload, ...state.message],
     };
   } else {
     return state;

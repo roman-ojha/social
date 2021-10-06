@@ -153,8 +153,13 @@ const MessageBox = () => {
       encrypted: true,
     });
     const channel = pusher.subscribe("chat");
-    channel.bind("message", function (data) {
-      dispatch(appendOnCurrentUserMessage(data));
+    channel.bind("message", function (message) {
+      dispatch(
+        appendOnCurrentUserMessage({
+          ...message,
+          _id: `${Math.random()}`,
+        })
+      );
     });
   }, []);
   const ReturnInnerUserMessageBox = (props) => {
