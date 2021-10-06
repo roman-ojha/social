@@ -13,6 +13,7 @@ import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
+  userMessageFieldAction,
 } from "../redux-actions/index";
 const MessageBox = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ const MessageBox = () => {
   );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
+  );
+  const userMessageFieldStore = useSelector(
+    (state) => state.setUserMessageFieldReducer
   );
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state) => state.mainPageInnerMessageBoxOnOff
@@ -187,6 +191,7 @@ const MessageBox = () => {
         </>
       );
     };
+    // Styling Loading Spinner
     const loadingContainerSpinnerStyle = {
       width: "100%",
       height: "100%",
@@ -249,7 +254,14 @@ const MessageBox = () => {
                 className="MessageBox_LowerPart_InputField_Buttons"
                 style={{ width: "1.5rem", height: "1.5rem" }}
               />
-              <input type="text" />
+              <input
+                type="text"
+                value={userMessageFieldStore}
+                autoFocus
+                onChange={(e) => {
+                  dispatch(userMessageFieldAction(e.target.value));
+                }}
+              />
               <PhotoLibraryIcon
                 className="MessageBox_LowerPart_InputField_Buttons"
                 style={{ width: "1.5rem", height: "1.5rem" }}

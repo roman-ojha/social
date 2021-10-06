@@ -449,12 +449,12 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
     );
     if (resSaveReciverMsg && resSaveSenderMsg) {
       // triggering pusher here to create a message
-      // pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
-      //   // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
-      //   sender: rootUser.userID,
-      //   content: req.body.message,
-      //   date: Date(),
-      // });
+      pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
+        // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
+        sender: rootUser.userID,
+        content: req.body.message,
+        date: Date(),
+      });
       return res.status(200).json({ message: "message send" });
     } else {
       return res.status(500).json({ error: "server error" });

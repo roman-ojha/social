@@ -61,3 +61,10 @@ export const currentUserMessageAction = (message) => {
     payload: message,
   };
 };
+
+export const userMessageFieldAction = (message) => {
+  return {
+    type: "userMessageField",
+    payload: message,
+  };
+};
