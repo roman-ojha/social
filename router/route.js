@@ -300,11 +300,6 @@ router.post("/u/message", authenticate, async (req, res) => {
     if (!req.body.messageTo) {
       return res.status(401).json({ error: "receiver Doesn't exist" });
     }
-    if (!req.body.message) {
-      return res
-        .status(401)
-        .json({ error: "Please field the message field, It's empty" });
-    }
     const receiverExist = await userDetail.findOne({
       // searching that user to message if it exist
       userID: receiverUser,
@@ -324,8 +319,7 @@ router.post("/u/message", authenticate, async (req, res) => {
     });
     if (!messageExist) {
       // if initialize message doesn't exist then we have to create a field for both user
-      console.log("doesn't exist");
-      const saveToRootUser = await userDetail.updateOne(
+      await userDetail.updateOne(
         // creating and saving message to rootUser
         {
           userID: rootUser.userID,
@@ -340,7 +334,7 @@ router.post("/u/message", authenticate, async (req, res) => {
           },
         }
       );
-      const saveToReciver = await userDetail.updateOne(
+      await userDetail.updateOne(
         // creating and saving message to rootUser
         {
           userID: receiverUser,
@@ -355,9 +349,9 @@ router.post("/u/message", authenticate, async (req, res) => {
           },
         }
       );
+      return res.status(200).json({ message: "message created" });
     } else {
       // if message already exist then we just have to put
-      console.log("Message exist");
       await userDetail.updateOne(
         // creating and saving message to rootUser
         {
@@ -392,10 +386,11 @@ router.post("/u/message", authenticate, async (req, res) => {
           },
         },
         {
-          arrayFilters: [{ "messageBy.messageBy": rootUser }],
+          arrayFilters: [{ "messageBy.messageBy": receiverUser }],
           // here we are filtering the messageBy
         }
       );
+      return res.status(200).json({ message: "message created" });
     }
     res.send("message send");
   } catch (err) {}
