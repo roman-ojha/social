@@ -10,6 +10,7 @@ import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
+  mainPageMessageInnerViewOnOff,
 } from "../redux-actions/index";
 const MessageBox = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,9 @@ const MessageBox = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const mainPageInnerMessageBoxOnOffState = useSelector(
+    (state) => state.mainPageInnerMessageBoxOnOff
+  );
   const [showInnerMessage, setShowInnerMessage] = useState(false);
   const UserMessage = () => {
     return (
@@ -29,7 +33,7 @@ const MessageBox = () => {
         <div
           className="MaiPage_MessageBox_UserMessage_Container"
           onClick={() => {
-            setShowInnerMessage(true);
+            dispatch(mainPageMessageInnerViewOnOff(true));
           }}
         >
           <img
@@ -164,7 +168,7 @@ const MessageBox = () => {
               className="MessageBox_InnerMessage_Upper_Part_Close_Button"
               style={{ width: "1.2rem", height: "1.2rem" }}
               onClick={() => {
-                setShowInnerMessage(false);
+                dispatch(mainPageMessageInnerViewOnOff(false));
               }}
             />
           </div>
@@ -198,7 +202,7 @@ const MessageBox = () => {
     return (
       <>
         <div className="MainPage_MessageBox_Container">
-          {showInnerMessage ? (
+          {mainPageInnerMessageBoxOnOffState ? (
             <ReturnInnerUserMessageBox />
           ) : (
             <ReturnMessageListBox />

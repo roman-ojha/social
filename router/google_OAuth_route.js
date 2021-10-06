@@ -3,8 +3,6 @@ import passport from "passport";
 import session from "express-session";
 const router = express.Router();
 import("../middleware/google_OAuth.js");
-import isLoogedIn from "../middleware/google_OAuth.js";
-import authenticate from "../middleware/authenticate.js";
 import UserDetail from "../models/userDetail_model.js";
 const CLIENT_HOME_PAGE_URL = process.env.CLIENT_BASE_URL;
 

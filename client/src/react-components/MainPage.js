@@ -24,7 +24,6 @@ const RoutingMainPage = () => {
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
-
   return (
     <>
       <Switch>
@@ -58,7 +57,6 @@ const MainPage = () => {
   );
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-
   useEffect(() => {
     // fetching all user data and current user following user Post data
     const getUserData = async () => {

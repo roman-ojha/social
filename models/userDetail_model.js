@@ -57,6 +57,9 @@ const userDetailSchema = new mongoose.Schema({
       messageTo: {
         type: String,
       },
+      receiverPicture: {
+        type: String,
+      },
       message: [
         {
           sender: {

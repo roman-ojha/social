@@ -326,6 +326,7 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
           $push: {
             messages: {
               messageTo: receiverUser,
+              receiverPicture: receiverExist.picture,
             },
           },
         }
@@ -339,6 +340,7 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
           $push: {
             messages: {
               messageTo: rootUser.userID,
+              receiverPicture: rootUser.picture,
             },
           },
         }
@@ -349,7 +351,7 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
         return res.status(500).json({ error: "server error" });
       }
     } else {
-      return res.status(200).json({ message: "Message already be created" });
+      return res.status(200).json({ message: "Message already been created" });
     }
   } catch (err) {}
 });
