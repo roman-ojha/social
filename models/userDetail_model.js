@@ -57,9 +57,6 @@ const userDetailSchema = new mongoose.Schema({
       messageTo: {
         type: String,
       },
-      messageBy: {
-        type: String,
-      },
       message: [
         {
           sender: {

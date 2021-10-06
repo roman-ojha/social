@@ -344,10 +344,6 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
         }
       );
       if (resSaverReciverMsg && resSaveRootMsg) {
-        // triggering pusher here to create a message
-        // pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
-        //   // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
-        // });
         return res.status(200).json({ message: "message created" });
       } else {
         return res.status(500).json({ error: "server error" });
@@ -417,6 +413,13 @@ router.post("/u/message", authenticate, async (req, res) => {
       }
     );
     if (resSaveReciverMsg && resSaveSenderMsg) {
+      // triggering pusher here to create a message
+      pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
+        // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
+        sender: rootUser.userID,
+        content: req.body.message,
+        date: new Date(),
+      });
       return res.status(200).json({ message: "message send" });
     } else {
       return res.status(500).json({ error: "server error" });
