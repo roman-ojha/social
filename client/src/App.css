@@ -1669,6 +1669,7 @@ body::-webkit-scrollbar-thumb:hover {
   margin-left: 3%;
   padding: 2%;
   border-radius: 7px;
+  overflow: hidden;
 }
 .MessageBox_Inner_SingleMessage p {
   font-family: var(--primary-font-family);

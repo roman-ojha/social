@@ -292,4 +292,113 @@ router.post("/u/follow", authenticate, async (req, res) => {
   res.send("hello");
 });
 
+router.post("/u/message", authenticate, async (req, res) => {
+  try {
+    const rootUser = req.rootUser;
+    const receiverUser = req.body.messageTo;
+    console.log(req.body);
+    if (!req.body.messageTo) {
+      return res.status(401).json({ error: "receiver Doesn't exist" });
+    }
+    if (!req.body.message) {
+      return res
+        .status(401)
+        .json({ error: "Please field the message field, It's empty" });
+    }
+    const receiverExist = await userDetail.findOne({
+      // searching that user to message if it exist
+      userID: receiverUser,
+    });
+    if (!receiverExist) {
+      return res.status(400).json({ error: "User doesn't exist" });
+    }
+    console.log("Hello");
+    const messageExist = await userDetail.findOne({
+      userID: rootUser.userID,
+      messages: {
+        $elemMatch: {
+          messageTo: receiverUser,
+          messageBy: rootUser.userID,
+        },
+      },
+    });
+    if (!messageExist) {
+      // if initialize message doesn't exist then we have to create a field for both user
+      console.log("doesn't exist");
+      const saveToRootUser = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: rootUser.userID,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: receiverUser,
+              messageBy: rootUser.userID,
+              message: [],
+            },
+          },
+        }
+      );
+      const saveToReciver = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: receiverUser,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: rootUser.userID,
+              messageBy: receiverUser,
+              message: [],
+            },
+          },
+        }
+      );
+    } else {
+      // if message already exist then we just have to put
+      console.log("Message exist");
+      await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: rootUser.userID,
+        },
+        {
+          $push: {
+            "messages.$[messageBy].message": {
+              // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
+              sender: rootUser.userID,
+              content: req.body.message,
+            },
+          },
+        },
+        {
+          arrayFilters: [{ "messageBy.messageBy": rootUser.userID }],
+          // here we are filtering the messageBy
+        }
+      );
+      await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: receiverUser,
+        },
+        {
+          $push: {
+            "messages.$[messageBy].message": {
+              // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
+              sender: rootUser.userID,
+              content: req.body.message,
+            },
+          },
+        },
+        {
+          arrayFilters: [{ "messageBy.messageBy": rootUser }],
+          // here we are filtering the messageBy
+        }
+      );
+    }
+    res.send("message send");
+  } catch (err) {}
+});
+
 export default router;

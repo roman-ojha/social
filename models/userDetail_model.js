@@ -52,6 +52,30 @@ const userDetailSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  messages: [
+    {
+      messageTo: {
+        type: String,
+      },
+      messageBy: {
+        type: String,
+      },
+      message: [
+        {
+          sender: {
+            type: String,
+          },
+          content: {
+            type: String,
+          },
+          date: {
+            type: Date,
+            default: Date.now,
+          },
+        },
+      ],
+    },
+  ],
   followersNo: {
     type: Number,
   },
@@ -215,6 +239,13 @@ userDetailSchema.methods.followUser = async function (followedToUser) {
     } else {
       return false;
     }
+  } catch (err) {}
+};
+
+userDetailSchema.methods.saveMessage = async function (message) {
+  try {
+    console.log(message);
+    // searching for a use which is getting the message
   } catch (err) {}
 };
 
