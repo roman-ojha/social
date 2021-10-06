@@ -1,4 +1,6 @@
 import Pusher from "pusher";
+import dotenv from "dotenv";
+dotenv.config({ path: "../config.env" });
 
 const pusher = new Pusher({
   appId: process.env.PUSHER_APPID,

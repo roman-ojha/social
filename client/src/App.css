@@ -1625,6 +1625,8 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 10px 10px 0px 0px;
   background-color: #fff5fd;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
 }
 .MessageBox_InnerMessage_Message_Container::-webkit-scrollbar {
   width: 7px;

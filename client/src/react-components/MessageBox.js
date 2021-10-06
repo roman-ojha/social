@@ -7,13 +7,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import LoadingSpinner from "./LoadingSpinner";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import Pusher from "pusher-js";
 import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
-  userMessageFieldAction,
+  appendOnCurrentUserMessage,
+  // userMessageFieldAction,
 } from "../redux-actions/index";
 const MessageBox = () => {
   const dispatch = useDispatch();
@@ -26,13 +27,14 @@ const MessageBox = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  const userMessageFieldStore = useSelector(
-    (state) => state.setUserMessageFieldReducer
-  );
+  // const userMessageFieldStore = useSelector(
+  //   (state) => state.setUserMessageFieldReducer
+  // );
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state) => state.mainPageInnerMessageBoxOnOff
   );
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
+  const [userMessageField, setUserMessageField] = useState("");
   const UserMessage = (props) => {
     const showInnerMessage = async () => {
       const previousMessage = {
@@ -44,7 +46,6 @@ const MessageBox = () => {
       dispatch(currentUserMessageAction(previousMessage));
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      console.log(props.messageInfo.messageTo);
       const resMessage = await fetch("/u/getMessage", {
         // sending receiver userID to get message data of that user
         method: "Post",
@@ -208,6 +209,47 @@ const MessageBox = () => {
       borderRadius: "50%",
       animation: "loadingSpinner 1s linear infinite",
     };
+    const sendMessage = async () => {
+      // sending message to user
+      try {
+        const resBody = {
+          messageTo: props.InternalMessageInfo.messageTo,
+          // messageTo is the userID of user where we are sending the message
+          message: userMessageField,
+        };
+        // dispatch(userMessageFieldAction(""));
+        setUserMessageField("");
+        const res = await fetch("/u/sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(resBody),
+        });
+        if (res.status !== 200) {
+          const error = await res.json();
+          // console.log(error);
+        } else {
+          const message = await res.json();
+          console.log(message);
+          // implementing pusher to show real time message
+          // Pusher.logToConsole = true;
+          const pusher = new Pusher("e77bd77b71d7e73a513b", {
+            cluster: "ap2",
+            encrypted: true,
+          });
+          const channel = pusher.subscribe("chat");
+          console.log("Outer");
+          channel.bind("message", function (data) {
+            dispatch(appendOnCurrentUserMessage(data));
+            console.log("Hello");
+            channel.unbind("message");
+          });
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
     return (
       <>
         <div className="MessageBox_InnerMessage_Container">
@@ -256,10 +298,11 @@ const MessageBox = () => {
               />
               <input
                 type="text"
-                value={userMessageFieldStore}
+                value={userMessageField}
                 autoFocus
                 onChange={(e) => {
-                  dispatch(userMessageFieldAction(e.target.value));
+                  // dispatch(userMessageFieldAction(e.target.value));
+                  setUserMessageField(e.target.value);
                 }}
               />
               <PhotoLibraryIcon
@@ -269,6 +312,7 @@ const MessageBox = () => {
               <SendIcon
                 className="MessageBox_LowerPart_InputField_Buttons"
                 style={{ width: "1.5rem", height: "1.5rem" }}
+                onClick={sendMessage}
               />
             </div>
           </div>

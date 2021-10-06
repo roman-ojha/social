@@ -62,6 +62,13 @@ export const currentUserMessageAction = (message) => {
   };
 };
 
+export const appendOnCurrentUserMessage = (message) => {
+  return {
+    type: "appendOnCurrentUserMessage",
+    payload: message,
+  };
+};
+
 export const userMessageFieldAction = (message) => {
   return {
     type: "userMessageField",

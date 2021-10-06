@@ -46,7 +46,23 @@ const initialMessage = {
 // this action will Store the messge of rootUser message to other people and which is currently fetch
 const setCurrentUserMessageReducer = (state = initialMessage, action) => {
   if (action.type === "currentUserMessage") {
-    return action.payload;
+    return {
+      ...action.payload,
+      message: action.payload.message.reverse(),
+    };
+  } else if (action.type === "appendOnCurrentUserMessage") {
+    const { sender, content, date } = action.payload;
+    return {
+      ...state,
+      message: [
+        {
+          sender,
+          content,
+          date,
+        },
+        ...state.message,
+      ],
+    };
   } else {
     return state;
   }
