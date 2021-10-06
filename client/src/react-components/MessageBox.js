@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,6 +16,7 @@ import {
   appendOnCurrentUserMessage,
   // userMessageFieldAction,
 } from "../redux-actions/index";
+
 const MessageBox = () => {
   const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
@@ -145,6 +146,17 @@ const MessageBox = () => {
       </>
     );
   };
+  useEffect(() => {
+    // Pusher.logToConsole = true;
+    const pusher = new Pusher("e77bd77b71d7e73a513b", {
+      cluster: "ap2",
+      encrypted: true,
+    });
+    const channel = pusher.subscribe("chat");
+    channel.bind("message", function (data) {
+      dispatch(appendOnCurrentUserMessage(data));
+    });
+  }, []);
   const ReturnInnerUserMessageBox = (props) => {
     const UserSingleMessageBox = (props) => {
       return (
@@ -209,6 +221,10 @@ const MessageBox = () => {
       borderRadius: "50%",
       animation: "loadingSpinner 1s linear infinite",
     };
+    const appendMessage = (data) => {
+      dispatch(appendOnCurrentUserMessage(data));
+      // channel.unbind(null, func);
+    };
     const sendMessage = async () => {
       // sending message to user
       try {
@@ -233,23 +249,12 @@ const MessageBox = () => {
           const message = await res.json();
           console.log(message);
           // implementing pusher to show real time message
-          // Pusher.logToConsole = true;
-          const pusher = new Pusher("e77bd77b71d7e73a513b", {
-            cluster: "ap2",
-            encrypted: true,
-          });
-          const channel = pusher.subscribe("chat");
-          console.log("Outer");
-          channel.bind("message", function (data) {
-            dispatch(appendOnCurrentUserMessage(data));
-            console.log("Hello");
-            channel.unbind("message");
-          });
         }
       } catch (err) {
         console.log(err);
       }
     };
+
     return (
       <>
         <div className="MessageBox_InnerMessage_Container">
