@@ -24,6 +24,7 @@
     "multer-gridfs-storage": "^5.0.1",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
+    "pusher": "^5.0.0",
     "sharp": "^0.29.1",
     "uuid-v4": "^0.1.0"
   },

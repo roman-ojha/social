@@ -3,6 +3,7 @@ const router = express.Router();
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
+import pusher from "../middleware/puhserAuth.js";
 
 router.get("/u", authenticate, async (req, res) => {
   // writing logic to get all rootUser and rootUser follow user post
@@ -292,12 +293,11 @@ router.post("/u/follow", authenticate, async (req, res) => {
   res.send("hello");
 });
 
-router.post("/u/message", authenticate, async (req, res) => {
+router.post("/u/createMessage", authenticate, async (req, res) => {
   try {
     const rootUser = req.rootUser;
-    const receiverUser = req.body.messageTo;
-    console.log(req.body);
-    if (!req.body.messageTo) {
+    const receiverUser = req.body.receiver;
+    if (!req.body.receiver) {
       return res.status(401).json({ error: "receiver Doesn't exist" });
     }
     const receiverExist = await userDetail.findOne({
@@ -307,19 +307,17 @@ router.post("/u/message", authenticate, async (req, res) => {
     if (!receiverExist) {
       return res.status(400).json({ error: "User doesn't exist" });
     }
-    console.log("Hello");
     const messageExist = await userDetail.findOne({
       userID: rootUser.userID,
       messages: {
         $elemMatch: {
           messageTo: receiverUser,
-          messageBy: rootUser.userID,
         },
       },
     });
     if (!messageExist) {
       // if initialize message doesn't exist then we have to create a field for both user
-      await userDetail.updateOne(
+      const resSaveRootMsg = await userDetail.updateOne(
         // creating and saving message to rootUser
         {
           userID: rootUser.userID,
@@ -328,13 +326,11 @@ router.post("/u/message", authenticate, async (req, res) => {
           $push: {
             messages: {
               messageTo: receiverUser,
-              messageBy: rootUser.userID,
-              message: [],
             },
           },
         }
       );
-      await userDetail.updateOne(
+      const resSaverReciverMsg = await userDetail.updateOne(
         // creating and saving message to rootUser
         {
           userID: receiverUser,
@@ -343,56 +339,88 @@ router.post("/u/message", authenticate, async (req, res) => {
           $push: {
             messages: {
               messageTo: rootUser.userID,
-              messageBy: receiverUser,
-              message: [],
             },
           },
         }
       );
-      return res.status(200).json({ message: "message created" });
+      if (resSaverReciverMsg && resSaveRootMsg) {
+        // triggering pusher here to create a message
+        // pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
+        //   // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
+        // });
+        return res.status(200).json({ message: "message created" });
+      } else {
+        return res.status(500).json({ error: "server error" });
+      }
     } else {
-      // if message already exist then we just have to put
-      await userDetail.updateOne(
-        // creating and saving message to rootUser
-        {
-          userID: rootUser.userID,
-        },
-        {
-          $push: {
-            "messages.$[messageBy].message": {
-              // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
-              sender: rootUser.userID,
-              content: req.body.message,
-            },
-          },
-        },
-        {
-          arrayFilters: [{ "messageBy.messageBy": rootUser.userID }],
-          // here we are filtering the messageBy
-        }
-      );
-      await userDetail.updateOne(
-        // creating and saving message to rootUser
-        {
-          userID: receiverUser,
-        },
-        {
-          $push: {
-            "messages.$[messageBy].message": {
-              // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
-              sender: rootUser.userID,
-              content: req.body.message,
-            },
-          },
-        },
-        {
-          arrayFilters: [{ "messageBy.messageBy": receiverUser }],
-          // here we are filtering the messageBy
-        }
-      );
-      return res.status(200).json({ message: "message created" });
+      return res.status(200).json({ message: "Message already be created" });
     }
-    res.send("message send");
+  } catch (err) {}
+});
+
+router.post("/u/message", authenticate, async (req, res) => {
+  // we are including pusher package to make message realtime
+  try {
+    const rootUser = req.rootUser;
+    const receiverUser = req.body.messageTo;
+    console.log(req.body);
+    if (!req.body.messageTo) {
+      return res
+        .status(401)
+        .json({ error: "please fill reciver userID properly" });
+    }
+    // if message already created then we just have to save
+    const resSaveReciverMsg = await userDetail.updateOne(
+      // creating and saving message to rootUser
+      {
+        userID: receiverUser,
+      },
+      {
+        $push: {
+          "messages.$[field].message": {
+            // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
+            sender: rootUser.userID,
+            content: req.body.message,
+          },
+        },
+      },
+      {
+        arrayFilters: [{ "field.messageTo": rootUser.userID }],
+        // here we are filtering the messageBy
+      }
+    );
+    if (!resSaveReciverMsg.matchedCount) {
+      // this will run if update doesn't happen in database it might be because of user doesn't exist
+      // NOTE: i am doing this process to reduce the query for database so that the number of query became somall and will be fast
+      return res
+        .status(400)
+        .json({ error: "User doesn't exist or Message doesn't created" });
+    }
+    // if reciver exist and will update the message there then we can update the message for rootuser as well
+    const resSaveSenderMsg = await userDetail.updateOne(
+      // creating and saving message to rootUser
+      {
+        userID: rootUser.userID,
+      },
+      {
+        $push: {
+          "messages.$[field].message": {
+            // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
+            sender: rootUser.userID,
+            content: req.body.message,
+          },
+        },
+      },
+      {
+        arrayFilters: [{ "field.messageTo": receiverUser }],
+        // here we are filtering the messageBy
+      }
+    );
+    if (resSaveReciverMsg && resSaveSenderMsg) {
+      return res.status(200).json({ message: "message send" });
+    } else {
+      return res.status(500).json({ error: "server error" });
+    }
   } catch (err) {}
 });
 
