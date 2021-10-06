@@ -200,7 +200,6 @@ userDetailSchema.methods.uploadPost = async function (postData) {
   try {
     // console.log(postData);
     this.posts.unshift(postData);
-    console.log(this.posts);
     await this.save();
     return this.posts;
   } catch (err) {

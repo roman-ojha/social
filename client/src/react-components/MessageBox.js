@@ -7,6 +7,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
+import LoadingSpinner from "./LoadingSpinner";
+import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
@@ -26,29 +28,60 @@ const MessageBox = () => {
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state) => state.mainPageInnerMessageBoxOnOff
   );
-  const [showInnerMessage, setShowInnerMessage] = useState(false);
-  const UserMessage = () => {
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
+  const UserMessage = (props) => {
+    const showInnerMessage = async () => {
+      const previousMessage = {
+        messageTo: "",
+        picture: "",
+        message: [],
+      };
+      // before getting new message we will reset the previous message stored into redux
+      dispatch(currentUserMessageAction(previousMessage));
+      dispatch(mainPageMessageInnerViewOnOff(true));
+      setShowLoadingSpinner(true);
+      console.log(props.messageInfo.messageTo);
+      const resMessage = await fetch("/u/getMessage", {
+        // sending receiver userID to get message data of that user
+        method: "Post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userID: props.messageInfo.messageTo }),
+      });
+      if (resMessage.status !== 200) {
+        const error = await resMessage.json();
+      } else {
+        const message = await resMessage.json();
+        // after getting message we will store that message into redux
+        dispatch(currentUserMessageAction(message));
+        setShowLoadingSpinner(false);
+      }
+    };
     return (
       <>
         <div
           className="MaiPage_MessageBox_UserMessage_Container"
-          onClick={() => {
-            dispatch(mainPageMessageInnerViewOnOff(true));
-          }}
+          onClick={showInnerMessage}
         >
           <img
-            src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+            src={
+              props.messageInfo.receiverPicture
+                ? props.messageInfo.receiverPicture
+                : User_Profile_Icon
+            }
             alt="user"
             className="MainPage_MessageBox_UserMessage_Picutre"
           />
           <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
-            <h4>Jaklin Smith</h4>
-            <p>Hello ke xa kbr</p>
+            <h4>{props.messageInfo.messageTo}</h4>
+            <p>{props.messageInfo.message[0].content}</p>
           </div>
         </div>
       </>
     );
   };
+
   const ReturnMessageListBox = () => {
     return (
       <>
@@ -74,14 +107,11 @@ const MessageBox = () => {
             />
           </div>
           <div className="MainPage_MessageBox_Message_Container">
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
-            <UserMessage />
+            {/* displaying all current user message */}
+
+            {userProfileDetailStore.messages.map((message) => {
+              return <UserMessage messageInfo={message} key={message._id} />;
+            })}
           </div>
         </div>
         <div className="MainPage_MessageBox_See_More_Message_Container">
@@ -110,12 +140,13 @@ const MessageBox = () => {
       </>
     );
   };
-  const ReturnInnerUserMessageBox = () => {
+  const ReturnInnerUserMessageBox = (props) => {
     const UserSingleMessageBox = (props) => {
       return (
         <>
           <div
             className="MessageBox_Inner_SingleMessage_Container"
+            // styling the position of the message box according the user
             style={
               props.MessageInfo.sender === userProfileDetailStore.userID
                 ? {
@@ -127,10 +158,11 @@ const MessageBox = () => {
             {props.MessageInfo.sender === userProfileDetailStore.userID ? (
               ""
             ) : (
-              <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80" />
+              <img src={props.picture ? props.picture : User_Profile_Icon} />
             )}
             <div
               className="MessageBox_Inner_SingleMessage"
+              // styling the position of the message box according the user
               style={
                 props.MessageInfo.sender === userProfileDetailStore.userID
                   ? {
@@ -155,15 +187,35 @@ const MessageBox = () => {
         </>
       );
     };
+    const loadingContainerSpinnerStyle = {
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgb(199 199 199 / 22%)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    const loadingSpinnerStyle = {
+      border: "5px dotted #dddddd",
+      borderTop: "5px dotted var(--primary-color-darker-5)",
+      width: "1.5rem",
+      height: "1.5rem",
+      borderRadius: "50%",
+      animation: "loadingSpinner 1s linear infinite",
+    };
     return (
       <>
         <div className="MessageBox_InnerMessage_Container">
           <div className="MessageBox_InnerMessage_Upper_Part_Container">
             <img
-              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnN8ZW58MHx8MHx8&ixlib=rb-1.2.1&w=1000&q=80"
+              src={
+                props.InternalMessageInfo.picture
+                  ? props.InternalMessageInfo.picture
+                  : User_Profile_Icon
+              }
               alt="user"
             />
-            <h3>Mina Ojha</h3>
+            <h3>{props.InternalMessageInfo.messageTo}</h3>
             <CloseIcon
               className="MessageBox_InnerMessage_Upper_Part_Close_Button"
               style={{ width: "1.2rem", height: "1.2rem" }}
@@ -173,9 +225,23 @@ const MessageBox = () => {
             />
           </div>
           <div className="MessageBox_InnerMessage_Message_Container">
-            {currentMessageStore.message.map((message) => {
-              return <UserSingleMessageBox MessageInfo={message} />;
-            })}
+            {showLoadingSpinner ? (
+              <>
+                <div style={loadingContainerSpinnerStyle}>
+                  <div style={loadingSpinnerStyle}></div>
+                </div>
+              </>
+            ) : (
+              currentMessageStore.message.map((message) => {
+                return (
+                  <UserSingleMessageBox
+                    MessageInfo={message}
+                    picture={currentMessageStore.receiverPicture}
+                    key={message._id}
+                  />
+                );
+              })
+            )}
           </div>
           <div className="MessageBox_LowerPart_InputField_Container">
             <div className="MessageBox_LowerPart_InputField_Inner_Container">
@@ -203,7 +269,12 @@ const MessageBox = () => {
       <>
         <div className="MainPage_MessageBox_Container">
           {mainPageInnerMessageBoxOnOffState ? (
-            <ReturnInnerUserMessageBox />
+            <ReturnInnerUserMessageBox
+              InternalMessageInfo={{
+                messageTo: currentMessageStore.messageTo,
+                picture: currentMessageStore.receiverPicture,
+              }}
+            />
           ) : (
             <ReturnMessageListBox />
           )}

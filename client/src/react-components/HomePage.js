@@ -38,6 +38,7 @@ const HomePage = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
+  console.log(userProfileDetailStore);
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (

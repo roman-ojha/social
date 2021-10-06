@@ -356,7 +356,39 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
   } catch (err) {}
 });
 
-router.post("/u/message", authenticate, async (req, res) => {
+router.post("/u/getMessage", authenticate, async (req, res) => {
+  try {
+    const rootUser = req.rootUser;
+    const receiverUserID = req.body.userID;
+    if (!receiverUserID) {
+      return res.status(400).json({ error: "Receiver user doesn't exist" });
+    }
+    const userMessage = await userDetail.findOne(
+      {
+        // getting rootUser message if the given condition match
+        userID: rootUser.userID,
+        messages: {
+          $elemMatch: {
+            messageTo: receiverUserID,
+          },
+        },
+      },
+      {
+        messages: {
+          $elemMatch: {
+            messageTo: receiverUserID,
+          },
+        },
+      }
+    );
+    if (!userMessage) {
+      return res.status(400).json({ error: "receiver user doesn't exist" });
+    }
+    res.status(200).json(userMessage.messages[0]);
+  } catch (err) {}
+});
+
+router.post("/u/sendMessage", authenticate, async (req, res) => {
   // we are including pusher package to make message realtime
   try {
     const rootUser = req.rootUser;
@@ -406,6 +438,7 @@ router.post("/u/message", authenticate, async (req, res) => {
             // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
             sender: rootUser.userID,
             content: req.body.message,
+            date: Date(),
           },
         },
       },
@@ -416,12 +449,12 @@ router.post("/u/message", authenticate, async (req, res) => {
     );
     if (resSaveReciverMsg && resSaveSenderMsg) {
       // triggering pusher here to create a message
-      pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
-        // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
-        sender: rootUser.userID,
-        content: req.body.message,
-        date: new Date(),
-      });
+      // pusher.trigger(`${rootUser.userID} ${receiverUser}`, "social-message", {
+      //   // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
+      //   sender: rootUser.userID,
+      //   content: req.body.message,
+      //   date: Date(),
+      // });
       return res.status(200).json({ message: "message send" });
     } else {
       return res.status(500).json({ error: "server error" });
