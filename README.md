@@ -1,5 +1,5 @@
 
-[<h1 style="font-size:60px; width:100%;">Social  <img src="interface/icons/Social_Icon.ico" style="width:80px;" alt="app Icon"/></h1>](interface/icons/Social_Icon.ico)
+[<h1 style="font-size:60px; width:100%;">Social  <img src="Interface/icons/Social_Icon.ico" style="width:80px;" alt="app Icon"/></h1>](Interface/icons/Social_Icon.ico)
 
 ## Social-Media Application Using:
 1. ReactJs
@@ -25,7 +25,7 @@
 2. Run `npm install` to install all packages
 3. Run `npm start` to run the server
 ### Home Page:
-[<img src="interface/Home_Page.png" alt="Home_Page"></img>](interface/Home_Page.png)
+[<img src="interface/Home_Page.png" alt="Home_Page"></img>](Interface/Home_Page.png)
 ### SignIn Page :
-[<img src="interface/Sign_In_Page.png" alt="webVplayer"></img>](interface/Sign_In_Page.png)
+[<img src="interface/Sign_In_Page.png" alt="webVplayer"></img>](Interface/Sign_In_Page.png)
 <br/>
