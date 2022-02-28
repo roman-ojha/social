@@ -5,8 +5,8 @@ import router from "../router/route.js";
 import storageRouter from "../router/storageRoute.js";
 import google_OAuth_route from "../router/google_OAuth_route.js";
 const app = express();
+dotenv.config();
 app.use(cookieParser());
-dotenv.config({ path: "../config.env" });
 app.use(express.json());
 const PORT = process.env.PORT;
 
