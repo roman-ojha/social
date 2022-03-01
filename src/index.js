@@ -6,8 +6,8 @@ import storageRouter from "../router/storageRoute.js";
 import google_OAuth_route from "../router/google_OAuth_route.js";
 import cors from "cors";
 import bodyParser from "body-parser";
+import { httpServer, app } from "../socket/io.js";
 dotenv.config();
-const app = express();
 const PORT = process.env.PORT;
 app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cookieParser());
@@ -22,12 +22,13 @@ import("../db/userStorageConnection.js");
 // Connection router
 app.use(router);
 app.use(storageRouter);
+import "../socket/io.js";
 
 // using google authentication function
 
 app.use(google_OAuth_route);
 
 // listening to a 'PORT'
-app.listen(PORT, () => {
+httpServer.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });

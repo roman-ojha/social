@@ -17,7 +17,7 @@ import {
   followedUserPostDataAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
-let history;
+import io from "socket.io-client";
 const RoutingMainPage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -84,6 +84,10 @@ const MainPage = () => {
         userDataDispatch(followedUserPostDataAction(userData.followedUserPost));
         // console.log(userData);
         setRenderMainPage(true);
+        const socket = io(process.env.REACT_APP_API_BASE_URL);
+        socket.on("connect", () => {
+          console.log(`connected to id: ${socket.id}`);
+        });
       } catch (err) {
         console.log(err);
         history.push("/signin");

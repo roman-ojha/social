@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
-import io from "socket.io-client";
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
+
 function SignIn() {
   const [signInDetail, setSignInDetail] = useState({
     email: "",
@@ -34,7 +34,6 @@ function SignIn() {
         withCredentials: true,
       });
       const data = await res.data;
-      console.log(data);
       if (res.status === 400 || !data) {
         // console.log(data);
         setSignInDetail({
@@ -42,11 +41,6 @@ function SignIn() {
           password: "",
         });
       } else {
-        // console.log(data);
-        // const socket = io(process.env.REACT_APP_SOCKET_API_BASE_URL);
-        // socket.on("connect", () => {
-        //   console.log(`connected to id: ${socket.id}`);
-        // });
         history.push("/u");
       }
     } catch (err) {
