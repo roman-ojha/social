@@ -14,15 +14,15 @@
 [<img src="Interface/Sign_Up_Page.png" alt="webVplayer"></img>](Interface/Sign_Up_Page.png)
 <br/>
 
-[<h1>Todo</h1>](todo.md "Todo")
-## How to run Locally:
-
 ## Technology Used:
-1. ReactJs
-2. NodeJs
-3. MongoDB (To store userDetail)
-4. Firebase (To store images/files)
+1. ReactJs -> Client Side
+2. NodeJs -> Server Side
+3. MongoDB -> To store userDetail
+4. Firebase -> To store images/files
 
+[<h1>Todo</h1>](todo.md "Todo")
+
+## How to run Locally:
 ### API:
 1. `Social-Application`
 2. Create `.env` file in Root Directory
