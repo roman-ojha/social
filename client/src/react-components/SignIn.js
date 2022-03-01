@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
+import io from "socket.io-client";
+import axios from "axios";
 import { NavLink, useHistory } from "react-router-dom";
 function SignIn() {
   const [signInDetail, setSignInDetail] = useState({
@@ -22,8 +24,9 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/signin`, {
+      const res = await axios({
         method: "POST",
+        url: `${process.env.REACT_APP_API_BASE_URL}/signin`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -37,7 +40,13 @@ function SignIn() {
           password: "",
         });
       } else {
-        history.push("/u");
+        // console.log(data);
+        // const socket = io(process.env.REACT_APP_SOCKET_API_BASE_URL);
+        // socket.on("connect", () => {
+        //   console.log(`connected to id: ${socket.id}`);
+        // });
+        // history.push("/u");
+        console.log(data);
       }
     } catch (err) {
       // console.log(err);
