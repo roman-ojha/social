@@ -47,7 +47,7 @@ function SignIn() {
         // socket.on("connect", () => {
         //   console.log(`connected to id: ${socket.id}`);
         // });
-        // history.push("/u");
+        history.push("/u");
       }
     } catch (err) {
       // console.log(err);

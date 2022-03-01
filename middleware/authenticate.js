@@ -4,7 +4,6 @@ import userDetail from "../models/userDetail_model.js";
 const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.AuthToken;
-    console.log(token);
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
     const rootUser = await userDetail.findOne(
       {

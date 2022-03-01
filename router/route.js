@@ -123,44 +123,33 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
-  // try {
-  //   const { email, password } = req.body;
-  //   if (!email || !password) {
-  //     return res.status(400).json({ error: "Please filled the form properly" });
-  //   }
-  //   const userLogin = await userDetail.findOne({ email: email });
-  //   if (!userLogin) {
-  //     return res.status(400).json({ error: "Error Login! User does't exist" });
-  //   } else {
-  //     const isPasswordMatch = await bcrypt.compare(
-  //       password,
-  //       userLogin.password
-  //     );
-  //     if (!isPasswordMatch) {
-  //       res.status(400).json({ error: "Username and password doesn't match" });
-  //     } else {
-  //       let token = await userLogin.generateAuthToken();
-  //       // console.log(token);
-  //       res.cookie("AuthToken", "fjdskafjdskafjdslk", {
-  //         expires: new Date(Date.now() + 25892000000),
-  //         httpOnly: true,
-  //       });
-  //       res.status(200).json({ message: "Login Successfully" });
-  //     }
-  //   }
-  // } catch (err) {
-  //   console.log(err);
-  // }
-  // const { email, password } = req.body;
-  // const userLogin = await userDetail.findOne({ email: email });
-  // let token = await userLogin.generateAuthToken();
-  // console.log(token);
-  res.cookie("AuthToken", "fjdskafjdskafjdslk", {
-    expires: new Date(Date.now() + 25892000000),
-    // httpOnly: true,
-  });
-  return res.send({ msg: "hello" });
-  // console.log("hello");
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ error: "Please filled the form properly" });
+    }
+    const userLogin = await userDetail.findOne({ email: email });
+    if (!userLogin) {
+      return res.status(400).json({ error: "Error Login! User does't exist" });
+    } else {
+      const isPasswordMatch = await bcrypt.compare(
+        password,
+        userLogin.password
+      );
+      if (!isPasswordMatch) {
+        res.status(400).json({ error: "Username and password doesn't match" });
+      } else {
+        let token = await userLogin.generateAuthToken();
+        res.cookie("AuthToken", token, {
+          expires: new Date(Date.now() + 25892000000),
+          httpOnly: true,
+        });
+        res.status(200).json({ message: "Login Successfully" });
+      }
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 router.get("/u/logout", authenticate, (req, res) => {
