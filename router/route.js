@@ -401,7 +401,6 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
   try {
     const rootUser = req.rootUser;
     const receiverUser = req.body.messageTo;
-    console.log(req.body);
     if (!req.body.messageTo) {
       return res
         .status(401)
@@ -419,6 +418,7 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
             // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
             sender: rootUser.userID,
             content: req.body.message,
+            date: Date(),
           },
         },
       },
@@ -429,7 +429,7 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
     );
     if (!resSaveReciverMsg.matchedCount) {
       // this will run if update doesn't happen in database it might be because of user doesn't exist
-      // NOTE: i am doing this process to reduce the query for database so that the number of query became somall and will be fast
+      // NOTE: i am doing this process to reduce the query for database so that the number of query became small and will be fast
       return res
         .status(400)
         .json({ error: "User doesn't exist or Message doesn't created" });

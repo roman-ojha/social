@@ -8,6 +8,7 @@ import SendIcon from "@mui/icons-material/Send";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import socket from "../services/socket";
 import Pusher from "pusher-js";
 import {
   mainPageMessageViewOnOff,
@@ -48,14 +49,16 @@ const MessageBox = () => {
       dispatch(currentUserMessageAction(previousMessage));
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
+      console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
-        method: "Post",
+        method: "POST",
         url: "/u/getMessage",
         headers: {
           "Content-Type": "application/json",
         },
         data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+        withCredentials: true,
       });
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
@@ -240,24 +243,26 @@ const MessageBox = () => {
           // messageTo is the userID of user where we are sending the message
           message: userMessageField,
         };
-        // dispatch(userMessageFieldAction(""));
-        setUserMessageField("");
-        const res = await axios({
-          method: "POST",
-          url: "/u/sendMessage",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: JSON.stringify(resBody),
-        });
-        if (res.status !== 200) {
-          const error = await res.data;
-          // console.log(error);
-        } else {
-          const message = await res.data;
-          console.log(message);
-          // implementing pusher to show real time message
-        }
+        // // dispatch(userMessageFieldAction(""));
+        // setUserMessageField("");
+        // const res = await axios({
+        //   method: "POST",
+        //   url: "/u/sendMessage",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   data: JSON.stringify(resBody),
+        //   withCredentials: true,
+        // });
+        // if (res.status !== 200) {
+        //   const error = await res.data;
+        //   // console.log(error);
+        // } else {
+        //   const message = await res.data;
+        //   console.log(message);
+        //   // implementing pusher to show real time message
+        // }
+        socket.emit("send-message", resBody);
       } catch (err) {
         console.log(err);
       }

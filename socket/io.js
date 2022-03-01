@@ -8,8 +8,10 @@ const io = new Server(httpServer, {
   cors: { credentials: true, origin: process.env.CLIENT_BASE_URL },
 });
 
-io.on("connection", (socket) => {
-  console.log(socket.id);
+io.on("connect", (socket) => {
+  socket.on("send-message", (message) => {
+    console.log(message);
+  });
 });
 
 export default io;
