@@ -22,7 +22,7 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/signin", {
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,13 +31,12 @@ function SignIn() {
       });
       const data = await res.json();
       if (res.status === 400 || !data) {
-        console.log(data);
+        // console.log(data);
         setSignInDetail({
           email: "",
           password: "",
         });
       } else {
-        console.log(data);
         history.push("/u");
       }
     } catch (err) {

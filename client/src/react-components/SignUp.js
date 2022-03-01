@@ -90,20 +90,23 @@ const SignUp = () => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
     try {
-      const res = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          cpassword,
-          birthday,
-          gender,
-        }),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            cpassword,
+            birthday,
+            gender,
+          }),
+        }
+      );
       const data = await res.json();
       if (res.status === 422 || !data) {
         console.log(data.error);

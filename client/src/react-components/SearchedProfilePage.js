@@ -29,14 +29,17 @@ const SearchedProfilePage = () => {
         picture: searchUserProfileStore.picture,
         name: searchUserProfileStore.name,
       };
-      const response = await fetch("/u/follow", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(followedTo),
-        // sending both follwedTo and FollowedBy
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/u/follow`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(followedTo),
+          // sending both follwedTo and FollowedBy
+        }
+      );
       const data = await response.json();
       console.log(data);
     } catch (err) {}

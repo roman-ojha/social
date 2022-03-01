@@ -25,12 +25,15 @@ const MainPageSearchBar = (props) => {
           onClick={async () => {
             if (userProfileDetailStore.userID !== props.userDetail.userID) {
               // fetching user Detail which current user had search
-              const res = await fetch(`/u/profile/${props.userDetail.userID}`, {
-                method: "GET",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              });
+              const res = await fetch(
+                `${process.env.REACT_APP_API_BASE_URL}/u/profile/${props.userDetail.userID}`,
+                {
+                  method: "GET",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
               const userData = await res.json();
               userDataDispatch(searchedUserProfileAction(userData));
               console.log(userData);

@@ -47,14 +47,17 @@ const MessageBox = () => {
       dispatch(currentUserMessageAction(previousMessage));
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      const resMessage = await fetch("/u/getMessage", {
-        // sending receiver userID to get message data of that user
-        method: "Post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userID: props.messageInfo.messageTo }),
-      });
+      const resMessage = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/u/getMessage`,
+        {
+          // sending receiver userID to get message data of that user
+          method: "Post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userID: props.messageInfo.messageTo }),
+        }
+      );
       if (resMessage.status !== 200) {
         const error = await resMessage.json();
       } else {
@@ -240,13 +243,16 @@ const MessageBox = () => {
         };
         // dispatch(userMessageFieldAction(""));
         setUserMessageField("");
-        const res = await fetch("/u/sendMessage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(resBody),
-        });
+        const res = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/u/sendMessage`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(resBody),
+          }
+        );
         if (res.status !== 200) {
           const error = await res.json();
           // console.log(error);

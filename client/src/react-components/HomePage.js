@@ -119,10 +119,13 @@ const HomePage = () => {
           data.append("image", image);
           data.append("caption", userPostData);
           // we can be able to pass the other form of data like this
-          const res = await fetch("/u/post", {
-            method: "POST",
-            body: data,
-          });
+          const res = await fetch(
+            `${process.env.REACT_APP_API_BASE_URL}/u/post`,
+            {
+              method: "POST",
+              body: data,
+            }
+          );
           const resData = await res.json();
           if (res.status === 201) {
             userPostResponseDataDispatch(userPostResponseData(resData));

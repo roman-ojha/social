@@ -20,7 +20,7 @@ const GetUserIDPage = (props) => {
         history.push("/u");
       }
       const getUserDetail = async () => {
-        const res = await fetch("/u", {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/u`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -50,10 +50,13 @@ const GetUserIDPage = (props) => {
       }
       data.append("userID", userID);
       data.append("profile", profile);
-      const res = await fetch("/u/userId", {
-        method: "POST",
-        body: data,
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/u/userId`,
+        {
+          method: "POST",
+          body: data,
+        }
+      );
       const resData = await res.json();
       if (res.status !== 201) {
         console.log(resData);

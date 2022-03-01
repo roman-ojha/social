@@ -19,14 +19,17 @@ const MainPageSideBar = () => {
   location = useLocation();
   const userLogOut = async () => {
     try {
-      const res = await fetch("/u/logout", {
-        method: "GET",
-        header: {
-          Accpet: "application/josn",
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/u/logout`,
+        {
+          method: "GET",
+          header: {
+            Accpet: "application/josn",
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        }
+      );
       history.push("/signin", { replace: true });
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -148,13 +151,16 @@ const MainPageSideBar = () => {
     setSearchBarData(e.target.value);
     // console.log(e.target.value);
     try {
-      const res = await fetch("/u/search", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: e.target.value }),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/u/search`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: e.target.value }),
+        }
+      );
       const resUser = await res.json();
       // console.log(resUser);
       setUserSearchResult(resUser);

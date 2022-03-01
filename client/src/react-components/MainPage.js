@@ -61,7 +61,7 @@ const MainPage = () => {
     // fetching all user data and current user following user Post data
     const getUserData = async () => {
       try {
-        const res = await fetch("/u", {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/u`, {
           method: "GET",
           headers: {
             Accept: "application/json",
