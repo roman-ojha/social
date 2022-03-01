@@ -22,7 +22,9 @@ const MainPageMsgAndNtfBar = () => {
             src={mainPage_sideBar_message}
             alt="message"
             onClick={() => {
-              messageOnOffDispatch(mainPageMessageViewOnOff());
+              messageOnOffDispatch(
+                mainPageMessageViewOnOff(!mainPageMessageOnOffState)
+              );
             }}
           />
         </div>

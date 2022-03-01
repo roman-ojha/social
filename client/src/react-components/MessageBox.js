@@ -40,13 +40,14 @@ const MessageBox = () => {
   const [userMessageField, setUserMessageField] = useState("");
   const UserMessage = (props) => {
     const showInnerMessage = async () => {
-      const previousMessage = {
-        messageTo: "",
-        picture: "",
-        message: [],
-      };
       // before getting new message we will reset the previous message stored into redux
-      dispatch(currentUserMessageAction(previousMessage));
+      dispatch(
+        currentUserMessageAction({
+          messageTo: props.messageInfo.messageTo,
+          receiverPicture: props.messageInfo.receiverPicture,
+          message: [],
+        })
+      );
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
       console.log(props.messageInfo.messageTo);

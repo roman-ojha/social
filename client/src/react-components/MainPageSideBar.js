@@ -6,16 +6,23 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
+import {
+  mainPageMessageViewOnOff,
+  mainPageMessageInnerViewOnOff,
+  currentUserMessageAction,
+} from "../redux-actions/index";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
 
 const MainPageSideBar = () => {
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const dispatch = useDispatch();
   const history = useHistory();
   location = useLocation();
   const userLogOut = async () => {
@@ -36,10 +43,48 @@ const MainPageSideBar = () => {
       }
     } catch (err) {}
   };
+
   const MainPageFriend = (props) => {
+    const showInnerMessage = async () => {
+      // before getting new message we will reset the previous message stored into redux
+      dispatch(mainPageMessageViewOnOff(true));
+      dispatch(
+        currentUserMessageAction({
+          messageTo: props.friendDetail.userID,
+          receiverPicture: props.friendDetail.picture,
+          message: [],
+        })
+      );
+      dispatch(mainPageMessageInnerViewOnOff(true));
+      setShowLoadingSpinner(true);
+      // console.log(props.friendDetail.userID);
+      const resMessage = await axios({
+        // sending receiver userID to get message data of that user
+        method: "POST",
+        url: "/u/getMessage",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({ userID: props.friendDetail.userID }),
+        withCredentials: true,
+      });
+      if (resMessage.status !== 200) {
+        const error = await resMessage.data;
+      } else {
+        const message = await resMessage.data;
+        // after getting message we will store that message into redux
+        dispatch(currentUserMessageAction(message));
+        setShowLoadingSpinner(false);
+      }
+    };
     return (
       <>
-        <div className="MainPage_SideBar_Friend_Outline">
+        <div
+          className="MainPage_SideBar_Friend_Outline"
+          onClick={showInnerMessage}
+          // dispatch(mainPageMessageViewOnOff(true));
+          // dispatch(mainPageMessageInnerViewOnOff(true));
+        >
           <img
             src={
               props.friendDetail.picture === undefined

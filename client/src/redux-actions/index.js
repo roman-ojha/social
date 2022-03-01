@@ -1,14 +1,16 @@
-export const mainPageMessageViewOnOff = () => {
+export const mainPageMessageViewOnOff = (data) => {
   // this action is for to store the state of message box on and off
   return {
     type: "MainPageMessageViewOnOf",
+    payload: data,
   };
 };
 
-export const mainPageMessageInnerViewOnOff = () => {
+export const mainPageMessageInnerViewOnOff = (data) => {
   // this action is for to store the state of inner user message box on and off
   return {
     type: "mainPageMessageInnerViewOnOff",
+    payload: data,
   };
 };
 
