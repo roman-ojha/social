@@ -16,6 +16,7 @@ import {
   appendOnCurrentUserMessage,
   // userMessageFieldAction,
 } from "../redux-actions/index";
+import { instance as axios } from "../services/axios";
 
 const MessageBox = () => {
   const dispatch = useDispatch();
@@ -47,21 +48,19 @@ const MessageBox = () => {
       dispatch(currentUserMessageAction(previousMessage));
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      const resMessage = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/u/getMessage`,
-        {
-          // sending receiver userID to get message data of that user
-          method: "Post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userID: props.messageInfo.messageTo }),
-        }
-      );
+      const resMessage = await axios({
+        // sending receiver userID to get message data of that user
+        method: "Post",
+        url: "/u/getMessage",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+      });
       if (resMessage.status !== 200) {
-        const error = await resMessage.json();
+        const error = await resMessage.data;
       } else {
-        const message = await resMessage.json();
+        const message = await resMessage.data;
         // after getting message we will store that message into redux
         dispatch(currentUserMessageAction(message));
         setShowLoadingSpinner(false);
@@ -243,21 +242,19 @@ const MessageBox = () => {
         };
         // dispatch(userMessageFieldAction(""));
         setUserMessageField("");
-        const res = await fetch(
-          `${process.env.REACT_APP_API_BASE_URL}/u/sendMessage`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(resBody),
-          }
-        );
+        const res = await axios({
+          method: "POST",
+          url: "/u/sendMessage",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify(resBody),
+        });
         if (res.status !== 200) {
-          const error = await res.json();
+          const error = await res.data;
           // console.log(error);
         } else {
-          const message = await res.json();
+          const message = await res.data;
           console.log(message);
           // implementing pusher to show real time message
         }

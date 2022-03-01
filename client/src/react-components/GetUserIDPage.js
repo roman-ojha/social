@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import User_profile_Icon from "../Images/User_profile_Icon.svg";
 import LoadingSpinner from "./LoadingSpinner";
 import { useHistory } from "react-router";
+import { instance as axios } from "../services/axios";
 
 let userDetail;
 const GetUserIDPage = (props) => {
@@ -20,13 +21,14 @@ const GetUserIDPage = (props) => {
         history.push("/u");
       }
       const getUserDetail = async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/u`, {
+        const res = await axios({
           method: "GET",
+          url: "/u",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        userDetail = await res.json();
+        userDetail = await res.data;
         console.log(userDetail);
       };
       getUserDetail();
@@ -50,14 +52,12 @@ const GetUserIDPage = (props) => {
       }
       data.append("userID", userID);
       data.append("profile", profile);
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/u/userId`,
-        {
-          method: "POST",
-          body: data,
-        }
-      );
-      const resData = await res.json();
+      const res = await axios({
+        method: "POST",
+        url: "/u/userId",
+        data: data,
+      });
+      const resData = await res.data;
       if (res.status !== 201) {
         console.log(resData);
       } else {

@@ -4,6 +4,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "./UserPostFeed";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import { instance as axios } from "../services/axios";
 
 const SearchedProfilePage = () => {
   const searchUserProfileStore = useSelector(
@@ -29,18 +30,16 @@ const SearchedProfilePage = () => {
         picture: searchUserProfileStore.picture,
         name: searchUserProfileStore.name,
       };
-      const response = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/u/follow`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(followedTo),
-          // sending both follwedTo and FollowedBy
-        }
-      );
-      const data = await response.json();
+      const response = await axios({
+        method: "POST",
+        url: "/u/follow",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(followedTo),
+        // sending both follwedTo and FollowedBy
+      });
+      const data = await response.data;
       console.log(data);
     } catch (err) {}
   };

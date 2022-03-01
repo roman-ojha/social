@@ -7,6 +7,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useSelector } from "react-redux";
+import { instance as axios } from "../services/axios";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
@@ -19,17 +20,15 @@ const MainPageSideBar = () => {
   location = useLocation();
   const userLogOut = async () => {
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/u/logout`,
-        {
-          method: "GET",
-          header: {
-            Accpet: "application/josn",
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-        }
-      );
+      const res = await axios({
+        method: "GET",
+        url: "/u/logout",
+        header: {
+          Accpet: "application/josn",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
       history.push("/signin", { replace: true });
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -151,17 +150,15 @@ const MainPageSideBar = () => {
     setSearchBarData(e.target.value);
     // console.log(e.target.value);
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/u/search`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name: e.target.value }),
-        }
-      );
-      const resUser = await res.json();
+      const res = await axios({
+        method: "POST",
+        url: `/u/search`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({ name: e.target.value }),
+      });
+      const resUser = await res.data;
       // console.log(resUser);
       setUserSearchResult(resUser);
     } catch (err) {}

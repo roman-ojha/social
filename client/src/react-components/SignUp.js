@@ -3,6 +3,7 @@ import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import GetUserIDPage from "./GetUserIDPage";
+import { instance as axios } from "../services/axios";
 let previousSelectGenderElement;
 const SignUp = () => {
   const [viewGetUserIDPage, setViewGetUserIDPage] = useState(false);
@@ -90,24 +91,22 @@ const SignUp = () => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
     try {
-      const res = await fetch(
-        `${process.env.REACT_APP_API_BASE_URL}/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            cpassword,
-            birthday,
-            gender,
-          }),
-        }
-      );
-      const data = await res.json();
+      const res = await axios({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        url: "/register",
+        data: JSON.stringify({
+          name,
+          email,
+          password,
+          cpassword,
+          birthday,
+          gender,
+        }),
+      });
+      const data = await res.data;
       if (res.status === 422 || !data) {
         console.log(data.error);
       } else {

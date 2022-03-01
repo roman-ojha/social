@@ -3,7 +3,7 @@ import Sign_In_Facebook_Logo from "../Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
 import io from "socket.io-client";
-import axios from "axios";
+import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 function SignIn() {
   const [signInDetail, setSignInDetail] = useState({
@@ -24,15 +24,19 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await axios({
-        method: "POST",
-        url: `${process.env.REACT_APP_API_BASE_URL}/signin`,
-        headers: {
-          "Content-Type": "application/json",
+      const res = await axios(
+        {
+          method: "POST",
+          url: "/signin",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify(signInDetail),
         },
-        body: JSON.stringify(signInDetail),
-      });
-      const data = await res.json();
+        { withCredentials: true }
+      );
+      const data = await res.data;
+      console.log(data);
       if (res.status === 400 || !data) {
         // console.log(data);
         setSignInDetail({
@@ -46,7 +50,6 @@ function SignIn() {
         //   console.log(`connected to id: ${socket.id}`);
         // });
         // history.push("/u");
-        console.log(data);
       }
     } catch (err) {
       // console.log(err);

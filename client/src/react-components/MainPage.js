@@ -16,6 +16,7 @@ import {
   userProfilePostAction,
   followedUserPostDataAction,
 } from "../redux-actions/index";
+import { instance as axios } from "../services/axios";
 let history;
 const RoutingMainPage = () => {
   const userProfileDetailStore = useSelector(
@@ -61,15 +62,17 @@ const MainPage = () => {
     // fetching all user data and current user following user Post data
     const getUserData = async () => {
       try {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/u`, {
+        const res = await axios({
           method: "GET",
+          url: "/u",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           credentials: "include",
+          withCredentials: true,
         });
-        const userData = await res.json();
+        const userData = await res.data;
         if (!res.status === 200) {
           const error = new Error(res.error);
           throw error;

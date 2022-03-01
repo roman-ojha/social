@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { searchedUserProfileAction } from "../redux-actions/index";
+import { instance as axios } from "../services/axios";
 
 const MainPageSearchBar = (props) => {
   const userProfileDetailStore = useSelector(
@@ -25,18 +26,16 @@ const MainPageSearchBar = (props) => {
           onClick={async () => {
             if (userProfileDetailStore.userID !== props.userDetail.userID) {
               // fetching user Detail which current user had search
-              const res = await fetch(
-                `${process.env.REACT_APP_API_BASE_URL}/u/profile/${props.userDetail.userID}`,
-                {
-                  method: "GET",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }
-              );
-              const userData = await res.json();
+              const res = await axios({
+                method: "GET",
+                url: `/u/profile/${props.userDetail.userID}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+              });
+              const userData = await res.data;
               userDataDispatch(searchedUserProfileAction(userData));
-              console.log(userData);
+              // console.log(userData);
             }
           }}
         >

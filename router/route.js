@@ -123,6 +123,7 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/signin", async (req, res) => {
+  console.log(req.body);
   // try {
   //   const { email, password } = req.body;
   //   if (!email || !password) {
@@ -159,8 +160,8 @@ router.post("/signin", async (req, res) => {
     expires: new Date(Date.now() + 25892000000),
     // httpOnly: true,
   });
-  console.log("hello");
-  return res.json({ msg: "hello" });
+  return res.send({ msg: "hello" });
+  // console.log("hello");
 });
 
 router.get("/u/logout", authenticate, (req, res) => {
