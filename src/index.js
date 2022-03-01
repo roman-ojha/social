@@ -9,7 +9,7 @@ import bodyParser from "body-parser";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
-app.use(cors());
+app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cookieParser());
 app.unsubscribe(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));

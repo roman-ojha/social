@@ -24,17 +24,15 @@ function SignIn() {
     e.preventDefault();
 
     try {
-      const res = await axios(
-        {
-          method: "POST",
-          url: "/signin",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: JSON.stringify(signInDetail),
+      const res = await axios({
+        method: "POST",
+        url: "/signin",
+        headers: {
+          "Content-Type": "application/json",
         },
-        { withCredentials: true }
-      );
+        data: JSON.stringify(signInDetail),
+        withCredentials: true,
+      });
       const data = await res.data;
       console.log(data);
       if (res.status === 400 || !data) {
