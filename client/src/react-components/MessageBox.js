@@ -156,27 +156,15 @@ const MessageBox = () => {
     );
   };
   useEffect(() => {
-    // Pusher.logToConsole = true;
-    // const pusher = new Pusher("e77bd77b71d7e73a513b", {
-    //   cluster: "ap2",
-    //   encrypted: true,
-    // });
-    // const channel = pusher.subscribe("chat");
-    // channel.bind("message", function (message) {
-    //   dispatch(
-    //     appendOnCurrentUserMessage({
-    //       ...message,
-    //       _id: `${Math.random()}`,
-    //     })
-    //   );
-    // });
-    socket.on("send-message-client", (messageInfo) => {
-      dispatch(
-        appendOnMessage({
-          ...messageInfo,
-          _id: `${Math.random()}`,
-        })
-      );
+    socket.on("send-message-client", (res) => {
+      if (res.success !== false) {
+        dispatch(
+          appendOnMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          })
+        );
+      }
     });
   }, []);
   const ReturnInnerUserMessageBox = (props) => {
@@ -257,32 +245,16 @@ const MessageBox = () => {
           message: userMessageField,
           roomID: currentMessageStore.roomID,
         };
-        // // dispatch(userMessageFieldAction(""));
-        // setUserMessageField("");
-        // const res = await axios({
-        //   method: "POST",
-        //   url: "/u/sendMessage",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   data: JSON.stringify(resBody),
-        //   withCredentials: true,
-        // });
-        // if (res.status !== 200) {
-        //   const error = await res.data;
-        //   // console.log(error);
-        // } else {
-        //   const message = await res.data;
-        //   console.log(message);
-        //   // implementing pusher to show real time message
-        // }
-        socket.emit("send-message", resBody, (messageInfo) => {
-          dispatch(
-            appendOnMessage({
-              ...messageInfo,
-              _id: `${Math.random()}`,
-            })
-          );
+        setUserMessageField("");
+        socket.emit("send-message", resBody, (res) => {
+          if (res.success !== false) {
+            dispatch(
+              appendOnMessage({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+              })
+            );
+          }
         });
       } catch (err) {
         console.log(err);

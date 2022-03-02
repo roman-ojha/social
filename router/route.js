@@ -1,4 +1,4 @@
-import express, { response } from "express";
+import express from "express";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
@@ -302,6 +302,7 @@ router.post("/u/follow", authenticate, async (req, res) => {
   res.send("hello");
 });
 
+// this route had implemented into "/u/getMessage" route when message doesn't exist
 router.post("/u/createMessage", authenticate, async (req, res) => {
   try {
     const rootUser = req.rootUser;
@@ -446,6 +447,7 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
   } catch (err) {}
 });
 
+// This route had already implemented in socket/io.js
 router.post("/u/sendMessage", authenticate, async (req, res) => {
   // we are including pusher package to make message realtime
   try {
@@ -506,12 +508,12 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
       }
     );
     // triggering pusher here to create a message
-    pusher.trigger("chat", "message", {
-      // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
-      sender: rootUser.userID,
-      content: req.body.message,
-      date: Date(),
-    });
+    // pusher.trigger("chat", "message", {
+    //   // here we are trigurring only those client whose subscript with `${rootUser.userID} ${receiverUser}`
+    //   sender: rootUser.userID,
+    //   content: req.body.message,
+    //   date: Date(),
+    // });
     return res.status(200).json({ message: "message send" });
   } catch (err) {}
 });
