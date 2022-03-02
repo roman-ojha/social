@@ -9,7 +9,6 @@ import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import socket from "../services/socket";
-import Pusher from "pusher-js";
 import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
@@ -64,6 +63,11 @@ const MessageBox = () => {
         // after getting message we will store that message into redux
         dispatch(currentUserMessageAction(message));
         setShowLoadingSpinner(false);
+        // if we are inside the user message then we have to join room through socket
+        // NOTE: this is just for temporary purposes
+        socket.emit("join-room", message.roomID, (resMessage) => {
+          console.log(resMessage);
+        });
       }
     };
     return (
