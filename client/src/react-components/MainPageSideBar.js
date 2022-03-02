@@ -12,19 +12,20 @@ import {
   mainPageMessageViewOnOff,
   mainPageMessageInnerViewOnOff,
   currentUserMessageAction,
+  searchedUserProfileAction,
 } from "../redux-actions/index";
+import socket from "../services/socket";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
 
 const MainPageSideBar = () => {
-  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
   const dispatch = useDispatch();
   const history = useHistory();
   location = useLocation();
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const userLogOut = async () => {
     try {
       const res = await axios({
@@ -45,46 +46,24 @@ const MainPageSideBar = () => {
   };
 
   const MainPageFriend = (props) => {
-    const showInnerMessage = async () => {
-      // before getting new message we will reset the previous message stored into redux
-      dispatch(mainPageMessageViewOnOff(true));
-      dispatch(
-        currentUserMessageAction({
-          messageTo: props.friendDetail.userID,
-          receiverPicture: props.friendDetail.picture,
-          message: [],
-        })
-      );
-      dispatch(mainPageMessageInnerViewOnOff(true));
-      setShowLoadingSpinner(true);
-      // console.log(props.friendDetail.userID);
-      const resMessage = await axios({
-        // sending receiver userID to get message data of that user
-        method: "POST",
-        url: "/u/getMessage",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({ userID: props.friendDetail.userID }),
-        withCredentials: true,
-      });
-      if (resMessage.status !== 200) {
-        const error = await resMessage.data;
-      } else {
-        const message = await resMessage.data;
-        // after getting message we will store that message into redux
-        dispatch(currentUserMessageAction(message));
-        setShowLoadingSpinner(false);
+    const showUser = async () => {
+      if (userProfileDetailStore.userID !== props.friendDetail.userID) {
+        // fetching user Detail which current user had search
+        const res = await axios({
+          method: "GET",
+          url: `/u/profile/${props.friendDetail.userID}`,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const userData = await res.data;
+        dispatch(searchedUserProfileAction(userData));
+        history.push(`/u/profile/${props.friendDetail.userID}`);
       }
     };
     return (
       <>
-        <div
-          className="MainPage_SideBar_Friend_Outline"
-          onClick={showInnerMessage}
-          // dispatch(mainPageMessageViewOnOff(true));
-          // dispatch(mainPageMessageInnerViewOnOff(true));
-        >
+        <div className="MainPage_SideBar_Friend_Outline" onClick={showUser}>
           <img
             src={
               props.friendDetail.picture === undefined

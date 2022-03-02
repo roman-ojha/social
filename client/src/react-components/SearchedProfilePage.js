@@ -38,9 +38,41 @@ const SearchedProfilePage = () => {
         },
         data: JSON.stringify(followedTo),
         // sending both follwedTo and FollowedBy
+        withCredentials: true,
       });
       const data = await response.data;
       console.log(data);
+    } catch (err) {}
+  };
+  const showInnerMessage = async () => {
+    // before getting new message we will reset the previous message stored into redux
+    try {
+      // dispatch(mainPageMessageViewOnOff(true));
+      // dispatch(
+      //   currentUserMessageAction({
+      //     messageTo: props.friendDetail.userID,
+      //     receiverPicture: props.friendDetail.picture,
+      //     message: [],
+      //   })
+      // );
+      // dispatch(mainPageMessageInnerViewOnOff(true));
+      //     const resMessage = await axios({
+      //       // sending receiver userID to get message data of that user
+      //   method: "POST",
+      //   url: "/u/getMessage",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: JSON.stringify({ userID: props.friendDetail.userID }),
+      //   withCredentials: true,
+      // });
+      // if (resMessage.status !== 200) {
+      //   const error = await resMessage.data;
+      // } else {
+      //   const message = await resMessage.data;
+      //   // after getting message we will store that message into redux
+      //   dispatch(currentUserMessageAction(message));
+      // }
     } catch (err) {}
   };
   return (
@@ -63,7 +95,10 @@ const SearchedProfilePage = () => {
                 <h1>{searchUserProfileStore.userID}</h1>
                 <p>{searchUserProfileStore.name}</p>
               </div>
-              <div className="ProfilePage_UserInfo_Message_Icon_Container">
+              <div
+                className="ProfilePage_UserInfo_Message_Icon_Container"
+                onClick={showInnerMessage}
+              >
                 <img src={mainPage_sideBar_message} alt="message" />
               </div>
             </div>

@@ -12,6 +12,10 @@ io.on("connect", (socket) => {
   socket.on("send-message", (message) => {
     console.log(message);
   });
+  socket.on("get-message", (userID) => {
+    console.log(userID);
+    console.log(socket.id);
+  });
 });
 
 export default io;

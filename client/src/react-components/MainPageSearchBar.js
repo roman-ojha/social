@@ -14,7 +14,7 @@ const MainPageSearchBar = (props) => {
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
-  const userDataDispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const SearchBarUser = (props) => {
     // console.log(props.userDetail);
@@ -34,7 +34,7 @@ const MainPageSearchBar = (props) => {
                 },
               });
               const userData = await res.data;
-              userDataDispatch(searchedUserProfileAction(userData));
+              dispatch(searchedUserProfileAction(userData));
               // console.log(userData);
             }
           }}

@@ -1878,6 +1878,7 @@ body::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+  cursor: pointer;
 }
 .ProfilePage_UserInfo_Message_Icon_Container img {
   height: 1.3rem;
