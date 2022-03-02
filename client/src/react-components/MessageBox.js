@@ -15,7 +15,6 @@ import {
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
   appendOnCurrentUserMessage,
-  // userMessageFieldAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 
@@ -30,9 +29,6 @@ const MessageBox = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  // const userMessageFieldStore = useSelector(
-  //   (state) => state.setUserMessageFieldReducer
-  // );
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state) => state.mainPageInnerMessageBoxOnOff
   );
@@ -121,8 +117,15 @@ const MessageBox = () => {
           <div className="MainPage_MessageBox_Message_Container">
             {/* displaying all current user message */}
 
-            {userProfileDetailStore.messages.map((message) => {
-              return <UserMessage messageInfo={message} key={message._id} />;
+            {userProfileDetailStore.messages.map((messageInfo) => {
+              if (messageInfo.message.length !== 0) {
+                return (
+                  <UserMessage
+                    messageInfo={messageInfo}
+                    key={messageInfo._id}
+                  />
+                );
+              }
             })}
           </div>
         </div>

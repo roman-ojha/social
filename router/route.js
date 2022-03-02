@@ -403,6 +403,7 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
     if (!userMessage) {
       // if message doesn't exist already then we have to create a new message which would contain the empty message
       const roomID = crypto.randomBytes(16).toString("hex");
+      // generating new room id for those spacific user room to join on socket
       const resSaveRootMsg = await userDetail.updateOne(
         // creating and saving message to rootUser
         {
