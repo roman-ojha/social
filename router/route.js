@@ -353,75 +353,36 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
   if (!unFollowedToUserExist) {
     return res.status(400).json({ success: false, msg: "User doesn't exist" });
   }
-  // const followRes = await rootUser.followUser(unFollowedToUserExist);
-  // if (!followRes) {
-  //   return res.status(500).json({ success: false, msg: "Server error" });
-  // }
-
-  // const rootUserExistInFollowUser = await userDetail.findOne({
-  //   userID: userID,
-  //   following: {
-  //     $elemMatch: {
-  //       userID: rootUser.userID,
-  //     },
-  //   },
-  // });
-  // if (rootUserExistInFollowUser) {
-  //   // if root userExist in followed user only at that time we are porforming this task
-  //   const followUserExistInRootUser = await userDetail.findOne({
-  //     userID: rootUser.userID,
-  //     following: {
-  //       $elemMatch: {
-  //         userID: userID,
-  //       },
-  //     },
-  //   });
-  //   if (followUserExistInRootUser) {
-  //     // if both of them follow then this will run
-  //     // storing as a friend to rootuser
-  //     await userDetail.updateOne(
-  //       {
-  //         userID: rootUser.userID,
-  //       },
-  //       {
-  //         // pushing the new followers into followed to user database
-  //         $push: {
-  //           friends: {
-  //             name: followedToUser.name,
-  //             email: followedToUser.email,
-  //             userID: followedToUser.userID,
-  //             picture: followedToUser.picture,
-  //           },
-  //         },
-  //         $inc: {
-  //           friendsNo: 1,
-  //         },
-  //       }
-  //     );
-  //     // storing as a friend to followedToUser
-  //     await userDetail.updateOne(
-  //       {
-  //         userID: followedToUser.userID,
-  //       },
-  //       {
-  //         // pushing the new followers into followed to user database
-  //         $push: {
-  //           friends: {
-  //             name: rootUser.name,
-  //             email: rootUser.email,
-  //             userID: rootUser.userID,
-  //             picture: rootUser.picture,
-  //           },
-  //         },
-  //         $inc: {
-  //           friendsNo: 1,
-  //         },
-  //       }
-  //     );
-  //   }
-  // }
-  // return res.status(200).json({ success: true, msg: "Follow successfully" });
-  res.send("hello");
+  // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
+  let unFollowRes = await userDetail.updateOne(
+    {
+      userID: rootUser.userID,
+    },
+    {
+      $pull: { following: { userID: userID } },
+      $inc: {
+        followingNo: -1,
+      },
+    }
+  );
+  if (!unFollowRes) {
+    return res.status(500).json({ success: false, msg: "Server error" });
+  }
+  unFollowRes = await userDetail.updateOne(
+    {
+      userID: userID,
+    },
+    {
+      $pull: { followers: { userID: rootUser.userID } },
+      $inc: {
+        followersNo: -1,
+      },
+    }
+  );
+  if (!unFollowRes) {
+    return res.status(500).json({ success: false, msg: "Server error" });
+  }
+  return res.status(200).json({ success: true, msg: "unFollow successfully" });
 });
 
 // this route had implemented into "/u/getMessage" route when message doesn't exist
