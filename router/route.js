@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
 import pusher from "../middleware/puhserAuth.js";
 import getMessageRoomID from "../functions/getMessageRoomID.js";
+import createNewMessage from "../functions/createNewMessage.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -303,68 +304,68 @@ router.post("/u/follow", authenticate, async (req, res) => {
 });
 
 router.post("/u/createMessage", authenticate, async (req, res) => {
-  // try {
-  //   const rootUser = req.rootUser;
-  //   const receiverUser = req.body.receiver;
-  //   if (!req.body.receiver) {
-  //     return res.status(401).json({ error: "receiver Doesn't exist" });
-  //   }
-  //   const receiverExist = await userDetail.findOne({
-  //     // searching that user to message if it exist
-  //     userID: receiverUser,
-  //   });
-  //   if (!receiverExist) {
-  //     return res.status(400).json({ error: "User doesn't exist" });
-  //   }
-  //   const messageExist = await userDetail.findOne({
-  //     userID: rootUser.userID,
-  //     messages: {
-  //       $elemMatch: {
-  //         messageTo: receiverUser,
-  //       },
-  //     },
-  //   });
-  //   if (!messageExist) {
-  //     // if initialize message doesn't exist then we have to create a field for both user
-  //     const resSaveRootMsg = await userDetail.updateOne(
-  //       // creating and saving message to rootUser
-  //       {
-  //         userID: rootUser.userID,
-  //       },
-  //       {
-  //         $push: {
-  //           messages: {
-  //             messageTo: receiverUser,
-  //             receiverPicture: receiverExist.picture,
-  //             message: [],
-  //           },
-  //         },
-  //       }
-  //     );
-  //     const resSaverReciverMsg = await userDetail.updateOne(
-  //       // creating and saving message to rootUser
-  //       {
-  //         userID: receiverUser,
-  //       },
-  //       {
-  //         $push: {
-  //           messages: {
-  //             messageTo: rootUser.userID,
-  //             receiverPicture: rootUser.picture,
-  //             message: [],
-  //           },
-  //         },
-  //       }
-  //     );
-  //     if (resSaverReciverMsg && resSaveRootMsg) {
-  //       return res.status(200).json({ message: "message created" });
-  //     } else {
-  //       return res.status(500).json({ error: "server error" });
-  //     }
-  //   } else {
-  //     return res.status(200).json({ message: "Message already been created" });
-  //   }
-  // } catch (err) {}
+  try {
+    const rootUser = req.rootUser;
+    const receiverUser = req.body.receiver;
+    if (!req.body.receiver) {
+      return res.status(401).json({ error: "receiver Doesn't exist" });
+    }
+    const receiverExist = await userDetail.findOne({
+      // searching that user to message if it exist
+      userID: receiverUser,
+    });
+    if (!receiverExist) {
+      return res.status(400).json({ error: "User doesn't exist" });
+    }
+    const messageExist = await userDetail.findOne({
+      userID: rootUser.userID,
+      messages: {
+        $elemMatch: {
+          messageTo: receiverUser,
+        },
+      },
+    });
+    if (!messageExist) {
+      // if initialize message doesn't exist then we have to create a field for both user
+      const resSaveRootMsg = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: rootUser.userID,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: receiverUser,
+              receiverPicture: receiverExist.picture,
+              message: [],
+            },
+          },
+        }
+      );
+      const resSaverReciverMsg = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: receiverUser,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: rootUser.userID,
+              receiverPicture: rootUser.picture,
+              message: [],
+            },
+          },
+        }
+      );
+      if (resSaverReciverMsg && resSaveRootMsg) {
+        return res.status(200).json({ message: "message created" });
+      } else {
+        return res.status(500).json({ error: "server error" });
+      }
+    } else {
+      return res.status(200).json({ message: "Message already been created" });
+    }
+  } catch (err) {}
   getMessageRoomID(req.rootUser, req.body.receiver);
   res.send("hello");
 });
@@ -375,6 +376,13 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
     const receiverUserID = req.body.userID;
     if (!receiverUserID) {
       return res.status(400).json({ error: "Receiver user doesn't exist" });
+    }
+    const receiverExist = await userDetail.findOne({
+      // searching that user to message if it exist
+      userID: receiverUserID,
+    });
+    if (!receiverExist) {
+      return res.status(400).json({ error: "User doesn't exist" });
     }
     const userMessage = await userDetail.findOne(
       {
@@ -395,7 +403,48 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
       }
     );
     if (!userMessage) {
-      return res.status(400).json({ error: "receiver user doesn't exist" });
+      // if message doesn't exist already then we have to create a new message which would contain the empty message
+      const roomID = await bcrypt.hash(
+        `${rootUser.userID}&${receiverUserID}`,
+        12
+      );
+      const resSaveRootMsg = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: rootUser.userID,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: receiverUserID,
+              receiverPicture: receiverExist.picture,
+              roomID: roomID,
+              message: [],
+            },
+          },
+        }
+      );
+      const resSaverReciverMsg = await userDetail.updateOne(
+        // creating and saving message to rootUser
+        {
+          userID: receiverUserID,
+        },
+        {
+          $push: {
+            messages: {
+              messageTo: rootUser.userID,
+              receiverPicture: rootUser.picture,
+              roomID: roomID,
+              message: [],
+            },
+          },
+        }
+      );
+      if (resSaverReciverMsg && resSaveRootMsg) {
+        return res.status(200).json({ message: "message created" });
+      } else {
+        return res.status(500).json({ error: "server error" });
+      }
     }
     res.status(200).json(userMessage.messages[0]);
   } catch (err) {}

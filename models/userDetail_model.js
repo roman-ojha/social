@@ -57,7 +57,10 @@ const userDetailSchema = new mongoose.Schema({
       messageTo: {
         type: String,
       },
-      roomID: {},
+      roomID: {
+        type: String,
+        require: true,
+      },
       receiverPicture: {
         type: String,
       },

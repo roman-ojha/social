@@ -8,12 +8,7 @@ import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
-import {
-  mainPageMessageViewOnOff,
-  mainPageMessageInnerViewOnOff,
-  currentUserMessageAction,
-  searchedUserProfileAction,
-} from "../redux-actions/index";
+import { searchedUserProfileAction } from "../redux-actions/index";
 import socket from "../services/socket";
 let previouslySelectedElement;
 let selectedLinkIndex;

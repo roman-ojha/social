@@ -2,9 +2,14 @@ import React from "react";
 import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "./UserPostFeed";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
+import {
+  mainPageMessageViewOnOff,
+  mainPageMessageInnerViewOnOff,
+  currentUserMessageAction,
+} from "../redux-actions/index";
 
 const SearchedProfilePage = () => {
   const searchUserProfileStore = useSelector(
@@ -13,6 +18,9 @@ const SearchedProfilePage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  console.log(searchUserProfileStore);
+  console.log(userProfileDetailStore);
+  const dispatch = useDispatch();
   const searchedUserMainInformation = {
     // store searched user essintal information
     name: searchUserProfileStore.name,
@@ -47,32 +55,33 @@ const SearchedProfilePage = () => {
   const showInnerMessage = async () => {
     // before getting new message we will reset the previous message stored into redux
     try {
-      // dispatch(mainPageMessageViewOnOff(true));
-      // dispatch(
-      //   currentUserMessageAction({
-      //     messageTo: props.friendDetail.userID,
-      //     receiverPicture: props.friendDetail.picture,
-      //     message: [],
-      //   })
-      // );
-      // dispatch(mainPageMessageInnerViewOnOff(true));
-      //     const resMessage = await axios({
-      //       // sending receiver userID to get message data of that user
-      //   method: "POST",
-      //   url: "/u/getMessage",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   data: JSON.stringify({ userID: props.friendDetail.userID }),
-      //   withCredentials: true,
-      // });
-      // if (resMessage.status !== 200) {
-      //   const error = await resMessage.data;
-      // } else {
-      //   const message = await resMessage.data;
-      //   // after getting message we will store that message into redux
-      //   dispatch(currentUserMessageAction(message));
-      // }
+      dispatch(mainPageMessageViewOnOff(true));
+      dispatch(
+        currentUserMessageAction({
+          messageTo: searchUserProfileStore.userID,
+          receiverPicture: searchUserProfileStore.picture,
+          message: [],
+        })
+      );
+      dispatch(mainPageMessageInnerViewOnOff(true));
+      const resMessage = await axios({
+        // sending receiver userID to get message data of that user
+        method: "POST",
+        url: "/u/getMessage",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({ userID: searchUserProfileStore.userID }),
+        withCredentials: true,
+      });
+      console.log(await resMessage.data);
+      if (resMessage.status !== 200) {
+        const error = await resMessage.data;
+      } else {
+        const message = await resMessage.data;
+        // after getting message we will store that message into redux
+        dispatch(currentUserMessageAction(message));
+      }
     } catch (err) {}
   };
   return (
