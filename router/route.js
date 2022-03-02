@@ -3,8 +3,7 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
 import pusher from "../middleware/puhserAuth.js";
-import getMessageRoomID from "../functions/getMessageRoomID.js";
-import createNewMessage from "../functions/createNewMessage.js";
+import crypto from "crypto";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -366,7 +365,6 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
       return res.status(200).json({ message: "Message already been created" });
     }
   } catch (err) {}
-  getMessageRoomID(req.rootUser, req.body.receiver);
   res.send("hello");
 });
 
@@ -404,10 +402,7 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
     );
     if (!userMessage) {
       // if message doesn't exist already then we have to create a new message which would contain the empty message
-      const roomID = await bcrypt.hash(
-        `${rootUser.userID}&${receiverUserID}`,
-        12
-      );
+      const roomID = crypto.randomBytes(16).toString("hex");
       const resSaveRootMsg = await userDetail.updateOne(
         // creating and saving message to rootUser
         {
