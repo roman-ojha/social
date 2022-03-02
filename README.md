@@ -7,11 +7,16 @@
 
 ### Home Page:
 [<img src="Interface/Home_Page.png" alt="Home_Page"></img>](Interface/Home_Page.png)
-### SignIn Page :
-[<img src="Interface/Sign_In_Page.png" alt="webVplayer"></img>](Interface/Sign_In_Page.png)
+
+### Profile Page:
+[<img src="Interface/Profile_Page.png" alt="Home_Page"></img>](Interface/Profile_Page.png)
 
 ### SignUp Page :
 [<img src="Interface/Sign_Up_Page.png" alt="webVplayer"></img>](Interface/Sign_Up_Page.png)
+
+### SignIn Page :
+[<img src="Interface/Sign_In_Page.png" alt="webVplayer"></img>](Interface/Sign_In_Page.png)
+
 <br/>
 
 ## Technology Used:
@@ -29,12 +34,11 @@
 3. Get all the environment variables which are include in `.env.example`
 4. Get Firebase SDK Service Account Key & Connect MongoDB
 5. Include Google Oauth services in application
-6. Include Pusher for real time message services (NOTE: Pusher will soon be replaced)
-7. 2. Run `yarn` to install all packages
-8. Run `yarn start` to run the server
+6. Run `yarn install` to install all packages
+7. Run `yarn start` to run the server
 
 ### Web:
 1. `Social-Application/client`
-2. Run `yarn` to install all packages
+2. Run `yarn install` to install all packages
 3. Run `yarn start` to run the server
 
