@@ -51,10 +51,37 @@ const SearchedProfilePage = () => {
         withCredentials: true,
       });
       const data = await response.data;
-      console.log(data);
       const userObj = {
         ...searchUserProfileStore,
         isRootUserFollowed: true,
+      };
+      if (data.success) {
+        dispatch(searchedUserProfileAction(userObj));
+      }
+    } catch (err) {}
+  };
+  const unFollowUser = async () => {
+    try {
+      const unfollowedTo = {
+        email: searchUserProfileStore.email,
+        userID: searchUserProfileStore.userID,
+        picture: searchUserProfileStore.picture,
+        name: searchUserProfileStore.name,
+      };
+      const response = await axios({
+        method: "POST",
+        url: "/u/unfollow",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(unfollowedTo),
+        // sending both follwedTo and FollowedBy
+        withCredentials: true,
+      });
+      const data = await response.data;
+      const userObj = {
+        ...searchUserProfileStore,
+        isRootUserFollowed: false,
       };
       if (data.success) {
         dispatch(searchedUserProfileAction(userObj));
@@ -137,7 +164,7 @@ const SearchedProfilePage = () => {
             {searchUserProfileStore.isRootUserFollowed ? (
               <button
                 className="ProfilePage_UserInfo_FollowUser_Button"
-                // onClick={followUser}
+                onClick={unFollowUser}
               >
                 Unfollow
               </button>
