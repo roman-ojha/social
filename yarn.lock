@@ -1761,7 +1761,7 @@ firebase-admin@^9.11.1:
     dicer "^0.3.0"
     jsonwebtoken "^8.5.1"
     jwks-rsa "^2.0.2"
-    node-forge "^1.0.0"
+    node-forge "^0.10.0"
   optionalDependencies:
     "@google-cloud/firestore" "^4.5.0"
     "@google-cloud/storage" "^5.3.0"
