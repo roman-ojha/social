@@ -14,7 +14,7 @@ import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
-  appendOnCurrentUserMessage,
+  appendOnMessage,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 
@@ -157,15 +157,23 @@ const MessageBox = () => {
   };
   useEffect(() => {
     // Pusher.logToConsole = true;
-    const pusher = new Pusher("e77bd77b71d7e73a513b", {
-      cluster: "ap2",
-      encrypted: true,
-    });
-    const channel = pusher.subscribe("chat");
-    channel.bind("message", function (message) {
+    // const pusher = new Pusher("e77bd77b71d7e73a513b", {
+    //   cluster: "ap2",
+    //   encrypted: true,
+    // });
+    // const channel = pusher.subscribe("chat");
+    // channel.bind("message", function (message) {
+    //   dispatch(
+    //     appendOnCurrentUserMessage({
+    //       ...message,
+    //       _id: `${Math.random()}`,
+    //     })
+    //   );
+    // });
+    socket.on("send-message-client", (messageInfo) => {
       dispatch(
-        appendOnCurrentUserMessage({
-          ...message,
+        appendOnMessage({
+          ...messageInfo,
           _id: `${Math.random()}`,
         })
       );
@@ -236,16 +244,18 @@ const MessageBox = () => {
       animation: "loadingSpinner 1s linear infinite",
     };
     const appendMessage = (data) => {
-      dispatch(appendOnCurrentUserMessage(data));
+      // dispatch(appendOnCurrentUserMessage(data));
       // channel.unbind(null, func);
     };
     const sendMessage = async () => {
       // sending message to user
       try {
         const resBody = {
-          messageTo: props.InternalMessageInfo.messageTo,
+          sender: userProfileDetailStore.userID,
+          receiver: props.InternalMessageInfo.messageTo,
           // messageTo is the userID of user where we are sending the message
           message: userMessageField,
+          roomID: currentMessageStore.roomID,
         };
         // // dispatch(userMessageFieldAction(""));
         // setUserMessageField("");
@@ -266,7 +276,14 @@ const MessageBox = () => {
         //   console.log(message);
         //   // implementing pusher to show real time message
         // }
-        socket.emit("send-message", resBody);
+        socket.emit("send-message", resBody, (messageInfo) => {
+          dispatch(
+            appendOnMessage({
+              ...messageInfo,
+              _id: `${Math.random()}`,
+            })
+          );
+        });
       } catch (err) {
         console.log(err);
       }

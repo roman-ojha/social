@@ -64,9 +64,9 @@ export const currentUserMessageAction = (message) => {
   };
 };
 
-export const appendOnCurrentUserMessage = (message) => {
+export const appendOnMessage = (message) => {
   return {
-    type: "appendOnCurrentUserMessage",
+    type: "appendOnMessage",
     payload: message,
   };
 };

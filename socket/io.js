@@ -9,9 +9,17 @@ const io = new Server(httpServer, {
 });
 
 io.on("connect", (socket) => {
-  // socket.on("send-message", (message) => {
-  //   console.log(message);
-  // });
+  socket.on("send-message", (messageInfo, cb) => {
+    const emittingMessageInfo = {
+      sender: messageInfo.sender,
+      content: messageInfo.message,
+      date: Date(),
+    };
+    socket
+      .to(messageInfo.roomID)
+      .emit("send-message-client", emittingMessageInfo);
+    cb(emittingMessageInfo);
+  });
   socket.on("join-room", (roomID, cb) => {
     socket.join(roomID);
     cb(`joined on ${roomID}`);
