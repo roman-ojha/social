@@ -10,6 +10,7 @@ import {
   mainPageMessageInnerViewOnOff,
   currentUserMessageAction,
 } from "../redux-actions/index";
+import socket from "../services/socket";
 
 const SearchedProfilePage = () => {
   const searchUserProfileStore = useSelector(
@@ -74,13 +75,17 @@ const SearchedProfilePage = () => {
         data: JSON.stringify({ userID: searchUserProfileStore.userID }),
         withCredentials: true,
       });
-      console.log(await resMessage.data);
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
         const message = await resMessage.data;
         // after getting message we will store that message into redux
         dispatch(currentUserMessageAction(message));
+        // if we are inside the user message then we have to join room through socket
+        // NOTE: this is just for temporary purposes
+        socket.emit("join-room", message.roomID, (resMessage) => {
+          console.log(resMessage);
+        });
       }
     } catch (err) {}
   };
