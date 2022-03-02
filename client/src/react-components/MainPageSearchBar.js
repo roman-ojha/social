@@ -32,10 +32,14 @@ const MainPageSearchBar = (props) => {
                 headers: {
                   "Content-Type": "application/json",
                 },
+                withCredentials: true,
               });
               const userData = await res.data;
-              dispatch(searchedUserProfileAction(userData));
-              // console.log(userData);
+              const userObj = {
+                ...userData.searchedUser,
+                isRootUserFollowed: userData.isRootUserFollowed,
+              };
+              dispatch(searchedUserProfileAction(userObj));
             }
           }}
         >

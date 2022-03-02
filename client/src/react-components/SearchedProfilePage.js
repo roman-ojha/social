@@ -9,6 +9,7 @@ import {
   mainPageMessageViewOnOff,
   mainPageMessageInnerViewOnOff,
   currentUserMessageAction,
+  searchedUserProfileAction,
 } from "../redux-actions/index";
 import socket from "../services/socket";
 
@@ -51,6 +52,13 @@ const SearchedProfilePage = () => {
       });
       const data = await response.data;
       console.log(data);
+      const userObj = {
+        ...searchUserProfileStore,
+        isRootUserFollowed: true,
+      };
+      if (data.success) {
+        dispatch(searchedUserProfileAction(userObj));
+      }
     } catch (err) {}
   };
   const showInnerMessage = async () => {
@@ -126,12 +134,21 @@ const SearchedProfilePage = () => {
             <div className="ProfilePage_UserInfo_More_Icon_Container">
               <MoreVertIcon />
             </div>
-            <button
-              className="ProfilePage_UserInfo_FollowUser_Button"
-              onClick={followUser}
-            >
-              Follow
-            </button>
+            {searchUserProfileStore.isRootUserFollowed ? (
+              <button
+                className="ProfilePage_UserInfo_FollowUser_Button"
+                // onClick={followUser}
+              >
+                Unfollow
+              </button>
+            ) : (
+              <button
+                className="ProfilePage_UserInfo_FollowUser_Button"
+                onClick={followUser}
+              >
+                Follow
+              </button>
+            )}
           </div>
         </div>
         <div className="ProfilePage_UserContent_Route_Container">

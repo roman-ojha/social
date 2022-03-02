@@ -50,9 +50,14 @@ const MainPageSideBar = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
         });
         const userData = await res.data;
-        dispatch(searchedUserProfileAction(userData));
+        const userObj = {
+          ...userData.searchedUser,
+          isRootUserFollowed: userData.isRootUserFollowed,
+        };
+        dispatch(searchedUserProfileAction(userObj));
         history.push(`/u/profile/${props.friendDetail.userID}`);
       }
     };

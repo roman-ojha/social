@@ -175,17 +175,30 @@ router.post("/u/search", async (req, res) => {
   }
 });
 
-router.get("/u/profile/:userid", async (req, res) => {
+router.get("/u/profile/:userid", authenticate, async (req, res) => {
   try {
-    // getting userid form url parameter
+    const rootUser = req.rootUser;
     const userID = req.params.userid;
-    // console.log("hello");
-    // console.log(userID);
-    const rootUser = await userDetail.findOne({ userID: userID });
-    if (!rootUser) {
+    const searchedUser = await userDetail.findOne({ userID: userID });
+    if (!searchedUser) {
       return res.status(401).json({ error: "User doesnot exist" });
+    } else {
+      const isRootUserFollowed = await userDetail.findOne({
+        userID: rootUser.userID,
+        following: {
+          $elemMatch: {
+            userID: userID,
+          },
+        },
+      });
+      if (!isRootUserFollowed) {
+        return res
+          .status(201)
+          .json({ searchedUser, isRootUserFollowed: false });
+      } else {
+        return res.status(201).json({ searchedUser, isRootUserFollowed: true });
+      }
     }
-    return res.status(201).json(rootUser);
   } catch (err) {}
 });
 
@@ -196,7 +209,7 @@ router.post("/u/follow", authenticate, async (req, res) => {
     const { email, userID } = req.body;
     // these are the followed to user id and email
     if (!email && !userID) {
-      return res.status(400).json({ error: "unauthorized user" });
+      return res.status(400).json({ success: false, msg: "unauthorized user" });
     }
     const followUserExist = await userDetail.findOne({
       // here we are finding only the user which is followed by rootuser to user who is being followed
@@ -209,9 +222,10 @@ router.post("/u/follow", authenticate, async (req, res) => {
       },
     });
     if (followUserExist) {
-      return res
-        .status(200)
-        .json({ message: "you had already followed this user" });
+      return res.status(200).json({
+        success: false,
+        message: "you had already followed this user",
+      });
     }
     const followedToUser = await userDetail.findOne(
       {
@@ -225,11 +239,13 @@ router.post("/u/follow", authenticate, async (req, res) => {
       }
     );
     if (!followedToUser) {
-      return res.status(400).json({ error: "User doesn't exist" });
+      return res
+        .status(400)
+        .json({ success: false, msg: "User doesn't exist" });
     }
     const followRes = await rootUser.followUser(followedToUser);
     if (!followRes) {
-      return res.status(500).json({ error: "Server error" });
+      return res.status(500).json({ success: false, msg: "Server error" });
     }
     // logic to store as a friend if both of them had followed
     // we had already check for rootUser that that does rootUser followed the other user
@@ -297,7 +313,7 @@ router.post("/u/follow", authenticate, async (req, res) => {
         );
       }
     }
-    return res.status(200).json({ message: "Follow successfully" });
+    return res.status(200).json({ success: true, msg: "Follow successfully" });
   } catch (err) {}
   res.send("hello");
 });
