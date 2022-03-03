@@ -28,17 +28,22 @@
 [<h1>Todo</h1>](todo.md "Todo")
 
 ## How to run Locally:
+### NOTE: firstly you need to install node.js in you local computer
 ### API:
 1. `Social-Application`
-2. Create `.env` file in Root Directory
+2. Create `.env` file in Project Directory
 3. Get all the environment variables which are include in `.env.example`
 4. Get Firebase SDK Service Account Key & Connect MongoDB
 5. Include Google Oauth services in application
-6. Run `yarn install` to install all packages
-7. Run `yarn start` to run the server
+6. Run `npm install --global yarn` to install yarn
+8. Run `yarn install` to install all packages
+9. Run `yarn start` to run the server
 
 ### Web:
 1. `Social-Application/client`
-2. Run `yarn install` to install all packages
-3. Run `yarn start` to run the server
+2. 2. Create `.env` file in Project Directory
+3. Get all the environment variables which are include in `.env.example`
+4. Run `npm install -g nodemon` to install nodemon
+5. Run `yarn install` to install all packages
+6. Run `yarn start` to run the server
 
