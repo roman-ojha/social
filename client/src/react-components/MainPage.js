@@ -8,7 +8,6 @@ import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
-import SearchedProfilePage from "./SearchedProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -32,11 +31,7 @@ const RoutingMainPage = () => {
         <Route exact path="/u/video" component={VideoPage} />
         <Route exact path="/u/message" component={MessagePage} />
         <Route exact path="/u/setting" component={SettingPage} />
-        <Route
-          exact
-          path={`/u/profile/:userID`}
-          component={SearchedProfilePage}
-        />
+        <Route exact path={`/u/profile/:userID`} component={ProfilePage} />
       </Switch>
     </>
   );

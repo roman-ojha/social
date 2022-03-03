@@ -4,7 +4,7 @@ import setUserPostResponseData from "./UserPostResponseData";
 import homePageUserPostFieldDataReducer from "./homePageUserPostFieldData";
 import setUserProfileDetailReducer from "./UserProfileDetailReducer";
 import setUserProfilePostReducer from "./UserProfilePostReducer";
-import setSearchUserProfileReducer from "./SearchedUserProfileReducer";
+import profilePageDataReducer from "./profilePageDataReducer";
 import setFollowedUserPostDataReducer from "./FollowedUserPostDataReducer";
 import setCurrentUserMessageReducer from "./CurrentUserMessageReducer";
 import mainPageInnerMessageBoxOnOff from "./mainPageInnerMessageBoxOnOff";
@@ -16,7 +16,7 @@ const rootReducers = combineReducers({
   homePageUserPostFieldDataReducer,
   setUserProfileDetailReducer,
   setUserProfilePostReducer,
-  setSearchUserProfileReducer,
+  profilePageDataReducer,
   setFollowedUserPostDataReducer,
   setCurrentUserMessageReducer,
   mainPageInnerMessageBoxOnOff,

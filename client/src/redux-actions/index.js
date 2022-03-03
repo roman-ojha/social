@@ -42,9 +42,9 @@ export const userProfilePostAction = (value) => {
   };
 };
 
-export const searchedUserProfileAction = (value) => {
+export const profilePageDataAction = (value) => {
   return {
-    type: "searchedUserProfile",
+    type: "profilePageDataAction",
     payload: value,
   };
 };
