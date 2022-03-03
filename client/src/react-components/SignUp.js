@@ -7,7 +7,6 @@ import { instance as axios } from "../services/axios";
 let previousSelectGenderElement;
 const SignUp = () => {
   const history = useHistory();
-  const [viewGetUserIDPage, setViewGetUserIDPage] = useState(false);
   let today = new Date();
   let birthdayYear = [];
   for (let i = today.getFullYear() - 100; i <= today.getFullYear(); i++) {
@@ -119,13 +118,6 @@ const SignUp = () => {
 
   return (
     <>
-      {viewGetUserIDPage ? (
-        <GetUserIDPage
-          userDetail={{ email: userData.email, password: userData.password }}
-        />
-      ) : (
-        ""
-      )}
       <div className="SignUp_Page_Container">
         <div className="SignUp_Page_Left_Half">
           <div className="SignUp_Page_Title_Container">
