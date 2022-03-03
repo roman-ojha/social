@@ -250,7 +250,6 @@ router.post("/u/follow", authenticate, async (req, res) => {
     // logic to store as a friend if both of them had followed
     // we had already check for rootUser that that does rootUser followed the other user
     // now we just have to check does other user follow rootUser if then then save it as a friend
-
     const rootUserExistInFollowUser = await userDetail.findOne({
       userID: userID,
       following: {
@@ -321,6 +320,7 @@ router.post("/u/follow", authenticate, async (req, res) => {
 router.post("/u/unfollow", authenticate, async (req, res) => {
   const rootUser = req.rootUser;
   const { email, userID } = req.body;
+  // NOTE userID = user that rootUser is trying to search or query
   if (!email && !userID) {
     return res.status(400).json({ success: false, msg: "unauthorized user" });
   }
@@ -380,6 +380,48 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
     }
   );
   if (!unFollowRes) {
+    return res.status(500).json({ success: false, msg: "Server error" });
+  }
+  const friendExist = await userDetail.findOne({
+    userID: rootUser.userID,
+    friends: {
+      $elemMatch: {
+        userID: userID,
+      },
+    },
+  });
+  if (!friendExist) {
+    console.log("friend doens't exsit");
+    return res
+      .status(200)
+      .json({ success: true, msg: "unFollow successfully" });
+  }
+  let unfriendRes = await userDetail.updateOne(
+    {
+      userID: rootUser.userID,
+    },
+    {
+      $pull: { friends: { userID: userID } },
+      $inc: {
+        friendsNo: -1,
+      },
+    }
+  );
+  if (!unfriendRes) {
+    return res.status(500).json({ success: false, msg: "Server error" });
+  }
+  unfriendRes = await userDetail.updateOne(
+    {
+      userID: userID,
+    },
+    {
+      $pull: { friends: { userID: rootUser.userID } },
+      $inc: {
+        friendsNo: -1,
+      },
+    }
+  );
+  if (!unfriendRes) {
     return res.status(500).json({ success: false, msg: "Server error" });
   }
   return res.status(200).json({ success: true, msg: "unFollow successfully" });
