@@ -177,9 +177,9 @@ const SearchedProfilePage = () => {
                 </div>
               </div>
               <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
-                <p>188k followers</p>
-                <p>60 followers</p>
-                <p>1,001 Posts</p>
+                <p>{profilePageData.followersNo} Followers</p>
+                <p>{profilePageData.followingNo} Following</p>
+                <p>{profilePageData.postNo} Post</p>
               </div>
             </div>
             <div className="ProfilePage_UserInfo_Follow_and_More_Button_Container">
