@@ -127,11 +127,11 @@ const MainPageSideBar = () => {
         case "/u/setting":
           selectedLinkIndex = 3;
           break;
-        case "/u/profile":
-          selectedLinkIndex = 4;
-          break;
         default:
           break;
+      }
+      if (location.pathname.includes("/u/profile")) {
+        selectedLinkIndex = 4;
       }
 
       const selectedLinkElement = document.getElementsByClassName(
