@@ -38,7 +38,6 @@ const HomePage = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
-  console.log(userProfileDetailStore);
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (
@@ -260,20 +259,6 @@ const HomePage = () => {
       );
     }
   };
-  const defaultFeedData = [
-    {
-      id: "",
-      useremail: "",
-      username: "Katherin",
-      userID: "",
-      caption: "",
-      picture: {
-        url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80",
-      },
-      like: "",
-      date: "Tue Sep 28 2021 08:53:49 GMT+0545 (Nepal Time)",
-    },
-  ];
   const DisplayFollowedUserPost = () => {
     // Displaying Followed User Post
     let userPostFeedElement = [];

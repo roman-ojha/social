@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 
 const MainPageSideBar = () => {
-  let previouslySelectedElement;
   let selectedLinkIndex;
   let location;
   const history = useHistory();
@@ -114,7 +113,6 @@ const MainPageSideBar = () => {
         "var(--primary-color-point-7)";
       selectedLinkElement.firstElementChild.nextElementSibling.style.color =
         "var(--primary-color-point-7)";
-      previouslySelectedElement = selectedLinkElement;
     } catch (err) {}
   };
   useEffect(() => {
