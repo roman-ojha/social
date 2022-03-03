@@ -8,11 +8,11 @@ import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
-let previouslySelectedElement;
-let selectedLinkIndex;
-let location;
 
 const MainPageSideBar = () => {
+  let previouslySelectedElement;
+  let selectedLinkIndex;
+  let location;
   const history = useHistory();
   location = useLocation();
   const userProfileDetailStore = useSelector(
@@ -82,37 +82,9 @@ const MainPageSideBar = () => {
       </>
     );
   };
-  const colorSelectedMainPage = (e) => {
-    let parentElement;
-    try {
-      if (e.target.tagName === "A") {
-        // this will execute if clicked tagName is "A" which is the parent element
-        parentElement = e.target;
-      } else {
-        parentElement = e.target.parentElement;
-      }
-      parentElement.firstElementChild.style.backgroundColor =
-        "var(--primary-color-point-7)";
-      parentElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-        "var(--primary-color-point-7)";
-      parentElement.firstElementChild.nextElementSibling.style.color =
-        "var(--primary-color-point-7)";
-      if (
-        previouslySelectedElement !== parentElement &&
-        previouslySelectedElement !== undefined
-      ) {
-        previouslySelectedElement.firstElementChild.style.backgroundColor =
-          "transparent";
-        previouslySelectedElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-          "var(--medium-opacity-font-color)";
-        previouslySelectedElement.firstElementChild.nextElementSibling.style.color =
-          "var(--logo-icon-low-opacity-black-color-point-3)";
-      }
-      previouslySelectedElement = parentElement;
-    } catch (err) {}
-  };
   // coloring the selected url page side bar onload
   const colorSelectedUrl = () => {
+    // updating color of sidebar tab through useEffect
     try {
       switch (location.pathname) {
         case "/u":
@@ -133,7 +105,6 @@ const MainPageSideBar = () => {
       if (location.pathname.includes("/u/profile")) {
         selectedLinkIndex = 4;
       }
-
       const selectedLinkElement = document.getElementsByClassName(
         "MainPage_SideBar_Link"
       )[selectedLinkIndex];
@@ -244,7 +215,6 @@ const MainPageSideBar = () => {
             <NavLink
               to="/u"
               className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
-              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <span
@@ -256,7 +226,6 @@ const MainPageSideBar = () => {
             <NavLink
               to="/u/video"
               className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
-              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <span
@@ -268,7 +237,6 @@ const MainPageSideBar = () => {
             <NavLink
               to="/u/message"
               className="MainPage_SideBar_Menu_Message_Container MainPage_SideBar_Link"
-              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <span
@@ -280,7 +248,6 @@ const MainPageSideBar = () => {
             <NavLink
               to="/u/setting"
               className="MainPage_SideBar_Menu_Setting_Container MainPage_SideBar_Link"
-              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <span
@@ -292,7 +259,6 @@ const MainPageSideBar = () => {
             <NavLink
               to={`/u/profile/${userProfileDetailStore.userID}`}
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
-              onClick={colorSelectedMainPage}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <span

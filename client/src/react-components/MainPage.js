@@ -9,7 +9,7 @@ import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   userProfileDetailAction,
   userProfilePostAction,
