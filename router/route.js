@@ -2,7 +2,6 @@ import express from "express";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
-import pusher from "../middleware/puhserAuth.js";
 import crypto from "crypto";
 const router = express.Router();
 

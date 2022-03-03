@@ -4,8 +4,11 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "./UserPostFeed";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
+  const params = useParams();
+  console.log(params);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );

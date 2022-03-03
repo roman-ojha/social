@@ -42,28 +42,33 @@ const MainPageSideBar = () => {
 
   const MainPageFriend = (props) => {
     const showUser = async () => {
-      if (userProfileDetailStore.userID !== props.friendDetail.userID) {
-        // fetching user Detail which current user had search
-        const res = await axios({
-          method: "GET",
-          url: `/u/profile/${props.friendDetail.userID}`,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
-        const userData = await res.data;
-        const userObj = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-        };
-        dispatch(searchedUserProfileAction(userObj));
-        history.push(`/u/profile/${props.friendDetail.userID}`);
-      }
+      // if (userProfileDetailStore.userID !== props.friendDetail.userID) {
+      //   // fetching user Detail which current user had search
+      //   const res = await axios({
+      //     method: "GET",
+      //     url: `/u/profile/${props.friendDetail.userID}`,
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     withCredentials: true,
+      //   });
+      //   const userData = await res.data;
+      //   const userObj = {
+      //     ...userData.searchedUser,
+      //     isRootUserFollowed: userData.isRootUserFollowed,
+      //   };
+      //   dispatch(searchedUserProfileAction(userObj));
+      //   history.push(`/u/profile/${props.friendDetail.userID}`);
+      // }
     };
     return (
       <>
-        <div className="MainPage_SideBar_Friend_Outline" onClick={showUser}>
+        <div
+          className="MainPage_SideBar_Friend_Outline"
+          onClick={() => {
+            history.push(`/u/profile/${props.friendDetail.userID}`);
+          }}
+        >
           <img
             src={
               props.friendDetail.picture === undefined

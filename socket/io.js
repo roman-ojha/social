@@ -2,6 +2,8 @@ import { createServer } from "http";
 import express from "express";
 import { Server } from "socket.io";
 import userDetail from "../models/userDetail_model.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);

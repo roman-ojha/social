@@ -34,12 +34,7 @@ const RoutingMainPage = () => {
         <Route exact path="/u/setting" component={SettingPage} />
         <Route
           exact
-          path={`/u/profile/${userProfileDetailStore.userID}`}
-          component={ProfilePage}
-        />
-        <Route
-          exact
-          path={`/u/profile/${searchUserProfileStore.userID}`}
+          path={`/u/profile/:userID`}
           component={SearchedProfilePage}
         />
       </Switch>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "./UserPostFeed";
@@ -12,16 +12,17 @@ import {
   searchedUserProfileAction,
 } from "../redux-actions/index";
 import socket from "../services/socket";
+import { useParams } from "react-router-dom";
 
 const SearchedProfilePage = () => {
+  const params = useParams();
+  const [fetchedAllData, setFetchedAllData] = useState(false);
   const searchUserProfileStore = useSelector(
     (state) => state.setSearchUserProfileReducer
   );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  console.log(searchUserProfileStore);
-  console.log(userProfileDetailStore);
   const dispatch = useDispatch();
   const searchedUserMainInformation = {
     // store searched user essintal information
@@ -124,91 +125,120 @@ const SearchedProfilePage = () => {
       }
     } catch (err) {}
   };
+  useEffect(async () => {
+    if (params.userID === userProfileDetailStore.userID) {
+      dispatch(searchedUserProfileAction(userProfileDetailStore));
+      setFetchedAllData(true);
+    } else {
+      try {
+        // fetching user Detail which current user had search
+        const res = await axios({
+          method: "GET",
+          url: `/u/profile/${params.userID}`,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        });
+        const userData = await res.data;
+        const userObj = {
+          ...userData.searchedUser,
+          isRootUserFollowed: userData.isRootUserFollowed,
+        };
+        dispatch(searchedUserProfileAction(userObj));
+        setFetchedAllData(true);
+      } catch (err) {}
+    }
+  });
   return (
     <>
-      <div className="ProfilePage_Container">
-        <div className="ProfilePage_UserInfo_Container">
-          <div className="ProfilePage_UserInfo_Picture_Container">
-            <img
-              src={
-                searchUserProfileStore.picture === undefined
-                  ? User_Profile_Icon
-                  : searchUserProfileStore.picture
-              }
-              alt="profile"
-            />
-          </div>
-          <div className="ProfilePage_UserInfo_Detail_Container">
-            <div className="ProfilePage_UserInfo_UserName_Msg_Container">
-              <div className="ProfilePage_UserInfo_UserName_Container">
-                <h1>{searchUserProfileStore.userID}</h1>
-                <p>{searchUserProfileStore.name}</p>
+      {fetchedAllData ? (
+        <div className="ProfilePage_Container">
+          <div className="ProfilePage_UserInfo_Container">
+            <div className="ProfilePage_UserInfo_Picture_Container">
+              <img
+                src={
+                  searchUserProfileStore.picture === undefined
+                    ? User_Profile_Icon
+                    : searchUserProfileStore.picture
+                }
+                alt="profile"
+              />
+            </div>
+            <div className="ProfilePage_UserInfo_Detail_Container">
+              <div className="ProfilePage_UserInfo_UserName_Msg_Container">
+                <div className="ProfilePage_UserInfo_UserName_Container">
+                  <h1>{searchUserProfileStore.userID}</h1>
+                  <p>{searchUserProfileStore.name}</p>
+                </div>
+                <div
+                  className="ProfilePage_UserInfo_Message_Icon_Container"
+                  onClick={showInnerMessage}
+                >
+                  <img src={mainPage_sideBar_message} alt="message" />
+                </div>
               </div>
-              <div
-                className="ProfilePage_UserInfo_Message_Icon_Container"
-                onClick={showInnerMessage}
-              >
-                <img src={mainPage_sideBar_message} alt="message" />
+              <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
+                <p>188k followers</p>
+                <p>60 followers</p>
+                <p>1,001 Posts</p>
               </div>
             </div>
-            <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
-              <p>188k followers</p>
-              <p>60 followers</p>
-              <p>1,001 Posts</p>
+            <div className="ProfilePage_UserInfo_Follow_and_More_Button_Container">
+              <div className="ProfilePage_UserInfo_More_Icon_Container">
+                <MoreVertIcon />
+              </div>
+              {searchUserProfileStore.isRootUserFollowed ? (
+                <button
+                  className="ProfilePage_UserInfo_FollowUser_Button"
+                  onClick={unFollowUser}
+                >
+                  Unfollow
+                </button>
+              ) : (
+                <button
+                  className="ProfilePage_UserInfo_FollowUser_Button"
+                  onClick={followUser}
+                >
+                  Follow
+                </button>
+              )}
             </div>
           </div>
-          <div className="ProfilePage_UserInfo_Follow_and_More_Button_Container">
-            <div className="ProfilePage_UserInfo_More_Icon_Container">
-              <MoreVertIcon />
+          <div className="ProfilePage_UserContent_Route_Container">
+            <div className="ProfilePage_UserContent_Feed_Route_Container">
+              <span
+                className="ProfilePage_UserContent_Feed_Icon iconify"
+                data-icon="gg:feed"
+              ></span>
             </div>
-            {searchUserProfileStore.isRootUserFollowed ? (
-              <button
-                className="ProfilePage_UserInfo_FollowUser_Button"
-                onClick={unFollowUser}
-              >
-                Unfollow
-              </button>
-            ) : (
-              <button
-                className="ProfilePage_UserInfo_FollowUser_Button"
-                onClick={followUser}
-              >
-                Follow
-              </button>
-            )}
+            <div className="ProfilePage_UserContent_Picture_Route_Container">
+              <span
+                className="ProfilePage_UserContent_Picture_Icon iconify"
+                data-icon="akar-icons:image"
+              ></span>
+            </div>
+            <div className="ProfilePage_UserContent_Friends_Route_Container">
+              <span
+                className="ProfilePage_UserContent_Friends_Icon iconify"
+                data-icon="fa-solid:user-friends"
+              ></span>
+            </div>
+          </div>
+          <div className="ProfilePage_UserContent_Divider_Line"></div>
+          <div className="ProfilePage_UserContent_Container">
+            {searchedUserFeed.map((value) => (
+              <UserPostFeed
+                userMainInformation={searchedUserMainInformation}
+                userFeedData={value}
+                key={value._id}
+              />
+            ))}
           </div>
         </div>
-        <div className="ProfilePage_UserContent_Route_Container">
-          <div className="ProfilePage_UserContent_Feed_Route_Container">
-            <span
-              className="ProfilePage_UserContent_Feed_Icon iconify"
-              data-icon="gg:feed"
-            ></span>
-          </div>
-          <div className="ProfilePage_UserContent_Picture_Route_Container">
-            <span
-              className="ProfilePage_UserContent_Picture_Icon iconify"
-              data-icon="akar-icons:image"
-            ></span>
-          </div>
-          <div className="ProfilePage_UserContent_Friends_Route_Container">
-            <span
-              className="ProfilePage_UserContent_Friends_Icon iconify"
-              data-icon="fa-solid:user-friends"
-            ></span>
-          </div>
-        </div>
-        <div className="ProfilePage_UserContent_Divider_Line"></div>
-        <div className="ProfilePage_UserContent_Container">
-          {searchedUserFeed.map((value) => (
-            <UserPostFeed
-              userMainInformation={searchedUserMainInformation}
-              userFeedData={value}
-              key={value._id}
-            />
-          ))}
-        </div>
-      </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };
