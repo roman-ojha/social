@@ -8,6 +8,6 @@ const storage = multer.diskStorage({
       cb(null, filename);
     });
   },
-  destination: "../db/Images",
+  destination: "./db/Images",
 });
 export default multer({ storage });

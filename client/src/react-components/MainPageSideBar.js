@@ -6,7 +6,7 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 let previouslySelectedElement;
 let selectedLinkIndex;

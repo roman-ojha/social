@@ -20,7 +20,7 @@ const convertToJpg = async (input) => {
 };
 const compressFile = async (filePath) => {
   await imagemin([filePath], {
-    destination: "../db/build",
+    destination: "./db/build",
     plugins: [convertToJpg, mozjpeg({ quality: 70 })],
   });
 };
@@ -71,7 +71,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         // uploading image to firebase Storage
         await compressFile(req.file.path);
         // deleting uncompressed file after compressed
-        fs.unlink(`../db/Images/${req.file.filename}`, (err) => {});
+        fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
         const metadata = {
           metadata: {
             firebaseStorageDownloadTokens: uuid(),
@@ -79,7 +79,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           cacheControl: "public, max-age=31536000",
         };
         const uploadRes = await bucket.upload(
-          `../db/build/${req.file.filename}`,
+          `./db/build/${req.file.filename}`,
           {
             destination: `images/${rootUser.email}/${req.file.filename}`,
             gzip: true,
@@ -87,7 +87,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           }
         );
         // here we are again deleting the compressed file after upload to firebase
-        fs.unlink(`../db/build/${req.file.filename}`, (err) => {});
+        fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
         // console.log(uploadRes);
         const caption = req.body.caption;
         const picName = req.file.filename;
