@@ -48,7 +48,7 @@ function SignIn() {
     }
   };
   const signInWithGoogle = async () => {
-    window.open("http://localhost:8080/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, "_self");
     // window.open("<URL>", "<MODE>");
     // here this will open the google authentication
   };

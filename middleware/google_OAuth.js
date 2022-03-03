@@ -1,7 +1,5 @@
 import passport from "passport";
 import userDetail from "../models/userDetail_model.js";
-import dotenv from "dotenv";
-dotenv.config();
 
 import GoogleOauth2 from "passport-google-oauth2";
 const GoogleStrategy = GoogleOauth2.Strategy;
@@ -13,13 +11,10 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:8080/google/callback",
+      callbackURL: `${process.env.API_BASE_URL}/google/callback`,
       passReqToCallback: true,
     },
     async function (request, accessToken, refreshToken, profile, done) {
-      // userDetail.findOrCreate({ googleId: profile.id }, function (err, user) {
-      //   return done(err, user);
-      // });
       try {
         let token;
         const userExist = await userDetail.findOne({ email: profile.email });

@@ -169,7 +169,7 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
         return res.status(201).json({ message: "Register Successfully" });
       } else {
         await compressFile(req.file.path);
-        fs.unlink(`../db/Images/${req.file.filename}`, (err) => {});
+        fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
         const metadata = {
           metadata: {
             firebaseStorageDownloadTokens: uuid(),
@@ -177,7 +177,7 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           cacheControl: "public, max-age=31536000",
         };
         const uploadRes = await bucket.upload(
-          `../db/build/${req.file.filename}`,
+          `./db/build/${req.file.filename}`,
           {
             destination: `images/${rootUser.email}/${req.file.filename}`,
             gzip: true,
@@ -185,7 +185,7 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           }
         );
         // here we are again deleting the compressed file after upload to firebase
-        fs.unlink(`../db/build/${req.file.filename}`, (err) => {});
+        fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
         // console.log(uploadRes);
         const userID = req.body.userID;
         const caption = `${userID} Update The Profile Picture`;

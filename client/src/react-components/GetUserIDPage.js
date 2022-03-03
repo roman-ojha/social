@@ -27,6 +27,7 @@ const GetUserIDPage = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
+          withCredentials: true,
         });
         userDetail = await res.data;
         console.log(userDetail);
@@ -56,6 +57,7 @@ const GetUserIDPage = (props) => {
         method: "POST",
         url: "/u/userId",
         data: data,
+        withCredentials: true,
       });
       const resData = await res.data;
       if (res.status !== 201) {
