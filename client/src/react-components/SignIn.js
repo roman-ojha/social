@@ -124,7 +124,7 @@ function SignIn() {
                 alt="Facebook"
               />
               <p className="SignIn_page_Facebook_Button_Paragraph">
-                Sign in With Facegbook
+                Sign in With Facebook
               </p>
             </button>
           </div>

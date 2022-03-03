@@ -20,7 +20,6 @@ const GetUserIDPage = (props) => {
     if (uid === "undefined") {
       // if UserID page will be open using google authnetication
       // then we have to get user Detail to save userID of the user
-      console.log("here");
       const getUserDetail = async () => {
         const res = await axios({
           method: "GET",
@@ -31,7 +30,7 @@ const GetUserIDPage = (props) => {
           withCredentials: true,
         });
         const data = await res.data;
-        setUserDetail(data.userProfileDetail);
+        setUserDetail(data);
       };
       getUserDetail();
     }

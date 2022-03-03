@@ -41,7 +41,7 @@ const MainPage = () => {
       try {
         const res = await axios({
           method: "GET",
-          url: "/u",
+          url: "/",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

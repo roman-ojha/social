@@ -5,15 +5,7 @@ import authenticate from "../middleware/authenticate.js";
 import crypto from "crypto";
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.cookie("AuthToken", "fjdskafjdskafjdslk", {
-    expires: new Date(Date.now() + 25892000000),
-    httpOnly: true,
-  });
-  res.send("hello");
-});
-
-router.get("/u", authenticate, async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   // writing logic to get all rootUser and rootUser follow user post
   // console.log(req.rootUser.friends);
   let getUserPost;
@@ -78,7 +70,14 @@ router.get("/u", authenticate, async (req, res) => {
   });
 });
 
-//NOTE: get user data for userID page on client
+router.get("/u", authenticate, (req, res) => {
+  try {
+    const rootUser = req.rootUser;
+    return res.status(200).json(rootUser);
+  } catch (err) {
+    return res.status(500).json({ error: "Server Error!" });
+  }
+});
 
 router.post("/register", async (req, res) => {
   try {
