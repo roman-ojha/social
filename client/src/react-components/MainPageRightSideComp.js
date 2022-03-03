@@ -6,7 +6,6 @@ const MainPageRightSideComp = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
-  const messageOnOffDispatch = useDispatch();
   const UserSuggession = () => {
     const SuggestedUser = () => {
       return (

@@ -8,9 +8,9 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 const UserPostFeed = (props) => {
   let uploadedTime;
   const userPostdate = new Date(props.userFeedData.date);
-  const userPostUTCTime = userPostdate.toUTCString();
+  // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
-  const currentUTCTime = currentDate.toUTCString();
+  // const currentUTCTime = currentDate.toUTCString();
   const difference = (currentDate.getTime() - userPostdate.getTime()) / 1000;
   const monthNames = [
     "Jan",

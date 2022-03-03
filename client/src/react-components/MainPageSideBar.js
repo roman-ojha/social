@@ -8,14 +8,11 @@ import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
-import { searchedUserProfileAction } from "../redux-actions/index";
-import socket from "../services/socket";
 let previouslySelectedElement;
 let selectedLinkIndex;
 let location;
 
 const MainPageSideBar = () => {
-  const dispatch = useDispatch();
   const history = useHistory();
   location = useLocation();
   const userProfileDetailStore = useSelector(
@@ -41,26 +38,6 @@ const MainPageSideBar = () => {
   };
 
   const MainPageFriend = (props) => {
-    const showUser = async () => {
-      // if (userProfileDetailStore.userID !== props.friendDetail.userID) {
-      //   // fetching user Detail which current user had search
-      //   const res = await axios({
-      //     method: "GET",
-      //     url: `/u/profile/${props.friendDetail.userID}`,
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     withCredentials: true,
-      //   });
-      //   const userData = await res.data;
-      //   const userObj = {
-      //     ...userData.searchedUser,
-      //     isRootUserFollowed: userData.isRootUserFollowed,
-      //   };
-      //   dispatch(searchedUserProfileAction(userObj));
-      //   history.push(`/u/profile/${props.friendDetail.userID}`);
-      // }
-    };
     return (
       <>
         <div
@@ -177,7 +154,6 @@ const MainPageSideBar = () => {
   const [userSearchResult, setUserSearchResult] = useState([]);
   const getUserSearchData = async (e) => {
     setSearchBarData(e.target.value);
-    // console.log(e.target.value);
     try {
       const res = await axios({
         method: "POST",
@@ -186,9 +162,9 @@ const MainPageSideBar = () => {
           "Content-Type": "application/json",
         },
         data: JSON.stringify({ name: e.target.value }),
+        withCredentials: true,
       });
       const resUser = await res.data;
-      // console.log(resUser);
       setUserSearchResult(resUser);
     } catch (err) {}
   };

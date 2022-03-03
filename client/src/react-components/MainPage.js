@@ -9,7 +9,7 @@ import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   userProfileDetailAction,
   userProfilePostAction,
@@ -18,12 +18,6 @@ import {
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
 const RoutingMainPage = () => {
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
-  const searchUserProfileStore = useSelector(
-    (state) => state.setSearchUserProfileReducer
-  );
   return (
     <>
       <Switch>
@@ -38,14 +32,7 @@ const RoutingMainPage = () => {
 };
 
 const MainPage = () => {
-  const userDataDispatch = useDispatch();
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
-  const userProfileDetailDispatch = useDispatch();
-  const userProfilePostStore = useSelector(
-    (state) => state.setUserProfilePostReducer
-  );
+  const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
   useEffect(() => {
@@ -67,11 +54,9 @@ const MainPage = () => {
           const error = new Error(res.error);
           throw error;
         }
-        userDataDispatch(userProfileDetailAction(userData.userProfileDetail));
-        userDataDispatch(
-          userProfilePostAction(userData.userProfileDetail.posts)
-        );
-        userDataDispatch(followedUserPostDataAction(userData.followedUserPost));
+        dispatch(userProfileDetailAction(userData.userProfileDetail));
+        dispatch(userProfilePostAction(userData.userProfileDetail.posts));
+        dispatch(followedUserPostDataAction(userData.followedUserPost));
         // console.log(userData);
         setRenderMainPage(true);
         socket.on("connect", () => {

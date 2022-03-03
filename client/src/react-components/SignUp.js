@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import GetUserIDPage from "./GetUserIDPage";
 import { instance as axios } from "../services/axios";
 let previousSelectGenderElement;
@@ -86,7 +86,6 @@ const SignUp = () => {
       gender: element.value,
     });
   };
-  const history = useHistory();
   const registerData = async (e) => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
@@ -105,6 +104,7 @@ const SignUp = () => {
           birthday,
           gender,
         }),
+        withCredentials: true,
       });
       const data = await res.data;
       if (res.status === 422 || !data) {

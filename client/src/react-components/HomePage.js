@@ -124,6 +124,7 @@ const HomePage = () => {
             method: "POST",
             url: "/u/post",
             data: data,
+            withCredentials: true,
           });
           const resData = await res.data;
           if (res.status === 201) {
