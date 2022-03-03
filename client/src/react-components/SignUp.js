@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import GetUserIDPage from "./GetUserIDPage";
 import { instance as axios } from "../services/axios";
 let previousSelectGenderElement;
 const SignUp = () => {
+  const history = useHistory();
   const [viewGetUserIDPage, setViewGetUserIDPage] = useState(false);
   let today = new Date();
   let birthdayYear = [];
@@ -111,8 +112,7 @@ const SignUp = () => {
         console.log(data.error);
       } else {
         console.log(data.message);
-        // history.push("/signin");
-        setViewGetUserIDPage(true);
+        history.push("/userid?uid=undefined");
       }
     } catch (err) {}
   };

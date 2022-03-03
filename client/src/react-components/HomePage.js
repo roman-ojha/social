@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import {
   userPostResponseData,
-  mainPageMessageViewOnOff,
   homePageUserPostFieldDataAction,
 } from "../redux-actions/index";
 import UserPostFeed from "./UserPostFeed";

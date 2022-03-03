@@ -78,47 +78,51 @@ router.get("/u", authenticate, async (req, res) => {
   });
 });
 
-router.post("/register", (req, res) => {
-  const { name, email, password, cpassword, birthday, gender } = req.body;
-  if (!name || !email || !password || !cpassword || !birthday || !gender) {
-    return res.status(422).json({ error: "Plz fill the field properly" });
-  }
-  if (password !== cpassword) {
-    return res.status(422).json({ error: "Password doesn't match" });
-  }
-  userDetail
-    .findOne({ email: email })
-    .then((userExist) => {
-      if (userExist) {
-        return res.status(422).json({ error: "Email already Exist" });
-      }
-      const creatingUserData = new userDetail({
-        name,
-        email,
-        password,
-        cpassword,
-        birthday,
-        cpassword,
-        gender,
-        followersNo: 0,
-        followingNo: 0,
-        postNo: 0,
-        friendsNo: 0,
-      });
-      creatingUserData
-        .save()
-        .then(() => {
-          return res
-            .status(201)
-            .json({ message: "User register successfully" });
-        })
-        .catch((err) => {
-          return res.status(500).json({ error: "Failed registerd!!!" });
-        });
-    })
-    .catch((err) => {
-      console.log(err);
+//NOTE: get user data for userID page on client
+
+router.post("/register", async (req, res) => {
+  try {
+    const { name, email, password, cpassword, birthday, gender } = req.body;
+    if (!name || !email || !password || !cpassword || !birthday || !gender) {
+      return res.status(422).json({ error: "Plz fill the field properly" });
+    }
+    if (password !== cpassword) {
+      return res.status(422).json({ error: "Password doesn't match" });
+    }
+    const emailExist = await userDetail.findOne({ email: email });
+    if (emailExist) {
+      console.log(emailExist);
+      return res.status(422).json({ error: "Email already Exist" });
+    }
+    const creatingNewUserData = new userDetail({
+      name,
+      email,
+      password,
+      cpassword,
+      birthday,
+      cpassword,
+      gender,
+      followersNo: 0,
+      followingNo: 0,
+      postNo: 0,
+      friendsNo: 0,
     });
+    const saveUserRes = await creatingNewUserData.save();
+    if (!saveUserRes) {
+      return res
+        .status(500)
+        .json({ error: "Server Error!,Failed registerd!!!" });
+    }
+    let token;
+    token = await saveUserRes.generateAuthToken();
+    res.cookie("AuthToken", token, {
+      expires: new Date(Date.now() + 25892000000),
+      httpOnly: true,
+    });
+    return res.status(201).json({ message: "User register successfully" });
+  } catch (err) {
+    return res.status(500).json({ error: "Server Error!,Failed registerd!!!" });
+  }
 });
 
 router.post("/signin", async (req, res) => {
