@@ -79,7 +79,6 @@ router.get("/u", authenticate, async (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-  console.log("register");
   const { name, email, password, cpassword, birthday, gender } = req.body;
   if (!name || !email || !password || !cpassword || !birthday || !gender) {
     return res.status(422).json({ error: "Plz fill the field properly" });

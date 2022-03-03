@@ -4,22 +4,23 @@ import LoadingSpinner from "./LoadingSpinner";
 import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 
-let userDetail;
 const GetUserIDPage = (props) => {
   const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
+  const [userDetail, setUserDetail] = useState();
   const history = useHistory();
   const [userID, setUserID] = useState("");
   const url = new URL(window.location.href);
   const uid = url.searchParams.get("uid");
   useEffect(() => {
     // if user is login for the first time then the userID will be undefined
-    if (props.userDetail === undefined) {
+    if (uid !== "undefined") {
+      // and if user had already login then we can push route into homepage
+      history.push("/u");
+    }
+    if (uid === "undefined") {
       // if UserID page will be open using google authnetication
       // then we have to get user Detail to save userID of the user
-      if (uid !== "undefined") {
-        // and if user had already login then we can push route into homepage
-        history.push("/u");
-      }
+      console.log("here");
       const getUserDetail = async () => {
         const res = await axios({
           method: "GET",
@@ -29,12 +30,13 @@ const GetUserIDPage = (props) => {
           },
           withCredentials: true,
         });
-        userDetail = await res.data;
-        console.log(userDetail);
+        const data = await res.data;
+        setUserDetail(data.userProfileDetail);
       };
       getUserDetail();
     }
   }, []);
+  console.log(userDetail);
   const submitDetail = async (e) => {
     try {
       setOnLoadingSpinner(true);
