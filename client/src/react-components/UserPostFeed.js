@@ -1,9 +1,14 @@
 import React from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import { instance as axios } from "../services/axios";
+import { useSelector } from "react-redux";
 
 const UserPostFeed = (props) => {
   let uploadedTime;
   const userPostdate = new Date(props.userFeedData.date);
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
   // const currentUTCTime = currentDate.toUTCString();
@@ -42,6 +47,21 @@ const UserPostFeed = (props) => {
     let getMonth = userPostdate.getMonth();
     uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
   }
+  const like = async () => {
+    try {
+      const res = await axios({
+        method: "POST",
+        url: "/post/like",
+        data: {
+          postID: props.userFeedData.id,
+          to: props.userMainInformation.userID,
+        },
+        withCredentials: true,
+      });
+      const data = await res.data;
+      console.log(data);
+    } catch (err) {}
+  };
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -78,26 +98,26 @@ const UserPostFeed = (props) => {
             <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>
           </div>
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
-            <div className="HomePage_Feed_Icon_Container">
+            <div className="HomePage_Feed_Icon_Container" onClick={like}>
               <span
-                class="iconify HomePage_Feed_Love_Icon"
+                className="iconify HomePage_Feed_Love_Icon"
                 data-icon="fluent:thumb-like-16-regular"
               ></span>
-              <p>30</p>
+              <p>{props.userFeedData.likes.No}</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
               <span
-                class="iconify HomePage_Feed__Comment_Icon"
+                className="iconify HomePage_Feed__Comment_Icon"
                 data-icon="akar-icons:comment"
               ></span>
-              <p>7k</p>
+              <p>{props.userFeedData.comments.No}</p>
             </div>
             <span
               data-icon="bx:share"
               className="iconify HomePage_Feed_Share_Icon"
             ></span>
             <span
-              class="iconify HomePage_Feed_More_Info_Icon"
+              className="iconify HomePage_Feed_More_Info_Icon"
               data-icon="ep:more"
             ></span>
           </div>

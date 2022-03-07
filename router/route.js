@@ -645,8 +645,56 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
   } catch (err) {}
 });
 
-router.post("/post/like", (req, res) => {
-  res.send("hello");
+router.post("/post/like", authenticate, async (req, res) => {
+  try {
+    const { postID, to } = req.body;
+    if (!postID || !to) {
+      return res
+        .status(422)
+        .json({ success: false, msg: "Please Send PostID, by, To Filled" });
+    }
+    const findUser = await userDetail.findOne(
+      {
+        userID: to,
+      },
+      {
+        name: 1,
+        email: 1,
+        userID: 1,
+      }
+    );
+    if (!findUser) {
+      return res
+        .status(400)
+        .json({ success: false, msg: "User Doesn't exist" });
+    }
+    const likePostRes = await userDetail.updateOne(
+      {
+        userID: to,
+      },
+      {
+        $push: {
+          "posts.$[field].likes.by": {
+            userID: req.rootUser.userID,
+          },
+        },
+        $inc: {
+          "posts.$[field].likes.No": 1,
+        },
+      },
+      {
+        arrayFilters: [{ "field.id": postID }],
+      }
+    );
+    console.log(likePostRes);
+    res.send("hello");
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  }
 });
 
 export default router;
