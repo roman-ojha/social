@@ -645,4 +645,8 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
   } catch (err) {}
 });
 
+router.post("/post/like", (req, res) => {
+  res.send("hello");
+});
+
 export default router;

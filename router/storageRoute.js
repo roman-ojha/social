@@ -11,6 +11,7 @@ import fs from "fs";
 import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
+import crypto from "crypto";
 const bucket = storage.bucket();
 const convertToJpg = async (input) => {
   if (isJpg(input)) {
@@ -39,7 +40,9 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
       // if user only fill content field
       if (rootUser) {
         const caption = req.body.caption;
+        const postID = crypto.randomBytes(16).toString("hex");
         const userPostDetail = {
+          id: postID,
           caption: caption,
           likes: {
             No: 0,
@@ -50,14 +53,15 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
         const resData = {
-          id: postRes[0]._id,
+          id: postRes[0].id,
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
           profilePicture: rootUser.picture,
           caption: postRes[0].caption,
           picture: "",
-          like: postRes[0].like,
+          likes: postRes[0].likes,
+          comments: postRes[0].comments,
           date: postRes[0].date,
         };
         return res.status(201).json(resData);
@@ -104,7 +108,9 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
           picPath
         )}?alt=media&token=${picToken}`;
+        const postID = crypto.randomBytes(16).toString("hex");
         const userPostDetail = {
+          id: postID,
           caption: caption,
           picture: {
             name: picName,
@@ -122,14 +128,15 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
         const resData = {
-          id: postRes[0]._id,
+          id: postRes[0].id,
           useremail: rootUser.email,
           username: rootUser.name,
           userID: rootUser.userID,
           profilePicture: rootUser.picture,
           caption: postRes[0].caption,
           picture: postRes[0].picture,
-          like: postRes[0].like,
+          likes: postRes[0].likes,
+          comments: postRes[0].comments,
           date: postRes[0].date,
         };
         return res.status(201).json(resData);
@@ -210,7 +217,9 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           picPath
         )}?alt=media&token=${picToken}`;
         // here we also have to post to the feed and also have to save picture as profile
+        const postID = crypto.randomBytes(16).toString("hex");
         const userPostDetail = {
+          id: postID,
           caption: caption,
           picture: {
             name: picName,

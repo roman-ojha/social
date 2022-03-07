@@ -146,6 +146,9 @@ const userDetailSchema = new mongoose.Schema({
   ],
   posts: [
     {
+      id: {
+        type: String,
+      },
       caption: {
         type: String,
       },
