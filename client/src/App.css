@@ -1416,7 +1416,8 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.8rem;
 }
 
-.HomePage_Feed_Love_Icon,
+.HomePage_Feed_UnLiked_Love_Icon,
+.HomePage_Feed_Liked_Love_Icon,
 .HomePage_Feed__Comment_Icon,
 .HomePage_Feed_Share_Icon,
 .HomePage_Feed_More_Info_Icon {
@@ -1427,10 +1428,16 @@ body::-webkit-scrollbar-thumb:hover {
   width: 1.2rem;
   height: 1.2rem;
 }
+.HomePage_Feed_Liked_Love_Icon {
+  color: var(--primary-color);
+}
+.HomePage_Feed_Liked_Love_Icon:hover {
+  filter: opacity(0.8);
+}
 .HomePage_Feed_More_Info_Icon {
   transform: rotate(90deg);
 }
-.HomePage_Feed_Love_Icon:hover,
+.HomePage_Feed_UnLiked_Love_Icon:hover,
 .HomePage_Feed__Comment_Icon:hover,
 .HomePage_Feed_Share_Icon:hover,
 .HomePage_Feed_More_Info_Icon:hover {

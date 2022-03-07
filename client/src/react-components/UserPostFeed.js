@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
 import { useSelector } from "react-redux";
+import { Icon } from "@iconify/react";
 
 const UserPostFeed = (props) => {
   let uploadedTime;
+  const [isLikedPost, setIsLikedPost] = useState(false);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const userPostdate = new Date(props.userFeedData.date);
-  const [isLikedPost, setIsLikedPost] = useState(false);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
   // const currentUTCTime = currentDate.toUTCString();
@@ -60,20 +61,24 @@ const UserPostFeed = (props) => {
         withCredentials: true,
       });
       const data = await res.data;
-      if (data.success & !data.remove) {
+      if (data.success === true && data.removed === false) {
+        // console.log("not removed");
+        // Liked the post
         setIsLikedPost(true);
-      } else if (data.success & data.remove) {
+      } else if (data.success === true && data.removed === true) {
+        // console.log("remove");
+        // Removed Like from the post Post
         setIsLikedPost(false);
       }
-      console.log(data);
+      // console.log(data);
     } catch (err) {}
   };
   useEffect(() => {
-    // setIsLikedPost(
-    //   props.userFeedData.likes.by.some(
-    //     (el) => el.userID === userProfileDetailStore.userID
-    //   )
-    // );
+    setIsLikedPost(
+      props.userFeedData.likes.by.some(
+        (el) => el.userID === userProfileDetailStore.userID
+      )
+    );
   }, []);
   return (
     <>
@@ -113,23 +118,23 @@ const UserPostFeed = (props) => {
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
             <div className="HomePage_Feed_Icon_Container" onClick={like}>
               {isLikedPost ? (
-                <span
-                  className="iconify HomePage_Feed_Love_Icon"
-                  data-icon="fluent:thumb-like-20-filled"
-                ></span>
+                <Icon
+                  className="HomePage_Feed_Liked_Love_Icon"
+                  icon="fluent:thumb-like-20-filled"
+                />
               ) : (
-                <span
-                  className="iconify HomePage_Feed_Love_Icon"
-                  data-icon="fluent:thumb-like-20-regular"
-                ></span>
+                <Icon
+                  className="HomePage_Feed_UnLiked_Love_Icon"
+                  icon="fluent:thumb-like-20-regular"
+                />
               )}
               <p>{props.userFeedData.likes.No}</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
-              <span
-                className="iconify HomePage_Feed__Comment_Icon"
-                data-icon="akar-icons:comment"
-              ></span>
+              <Icon
+                className="HomePage_Feed__Comment_Icon"
+                icon="akar-icons:comment"
+              />
               <p>{props.userFeedData.comments.No}</p>
             </div>
             <span

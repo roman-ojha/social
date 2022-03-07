@@ -277,13 +277,22 @@ const HomePage = () => {
           }
           userPostFeedElement.push(
             <UserPostFeed
-              key={followedUserPostDataStore[j].posts[i]._id}
+              key={followedUserPostDataStore[j].posts[i].id}
               userMainInformation={followedUserPostDataStore[j]}
               userFeedData={followedUserPostDataStore[j].posts[i]}
             />
           );
         }
       }
+      return (
+        <>
+          <UserPostFeed
+            key={followedUserPostDataStore[0].posts[0].id}
+            userMainInformation={followedUserPostDataStore[0]}
+            userFeedData={followedUserPostDataStore[0].posts[0]}
+          />
+        </>
+      );
       return <>{userPostFeedElement}</>;
     } else {
       return <></>;
