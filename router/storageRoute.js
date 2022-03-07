@@ -41,6 +41,12 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         const caption = req.body.caption;
         const userPostDetail = {
           caption: caption,
+          likes: {
+            No: 0,
+          },
+          comments: {
+            No: 0,
+          },
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
         const resData = {
@@ -106,6 +112,12 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
             url: picUrl,
             firebaseStorageDownloadToken: picToken,
             bucket: picBucket,
+          },
+          likes: {
+            No: 0,
+          },
+          comments: {
+            No: 0,
           },
         };
         const postRes = await rootUser.uploadPost(userPostDetail);
@@ -206,6 +218,12 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
             url: picUrl,
             firebaseStorageDownloadToken: picToken,
             bucket: picBucket,
+          },
+          likes: {
+            No: 0,
+          },
+          comments: {
+            No: 0,
           },
         };
         // here we are posting user news Feed

@@ -166,8 +166,32 @@ const userDetailSchema = new mongoose.Schema({
           type: String,
         },
       },
-      like: {
-        type: Number,
+      likes: {
+        No: {
+          type: Number,
+        },
+        by: [
+          {
+            userID: {
+              type: String,
+            },
+          },
+        ],
+      },
+      comments: {
+        No: {
+          type: Number,
+        },
+        by: [
+          {
+            userID: {
+              type: String,
+            },
+            comment: {
+              type: String,
+            },
+          },
+        ],
       },
       date: {
         type: Date,
