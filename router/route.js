@@ -702,7 +702,7 @@ router.post("/post/like", authenticate, async (req, res) => {
           userID: to,
         },
         {
-          $pop: {
+          $pull: {
             "posts.$[field].likes.by": {
               userID: req.rootUser.userID,
             },
@@ -715,7 +715,6 @@ router.post("/post/like", authenticate, async (req, res) => {
           arrayFilters: [{ "field.id": postID }],
         }
       );
-      console.log(removeLikedPostRes);
       if (!removeLikedPostRes) {
         return res.status(500).json({
           success: false,
@@ -755,7 +754,7 @@ router.post("/post/like", authenticate, async (req, res) => {
     return res.json({
       success: true,
       msg: "Successfully Liked the post",
-      removed: true,
+      removed: false,
     });
   } catch (err) {
     return res.status(500).json({
