@@ -697,9 +697,35 @@ router.post("/post/like", authenticate, async (req, res) => {
       }
     );
     if (doesRootUserAlreadyLiked) {
+      const removeLikedPostRes = await userDetail.updateOne(
+        {
+          userID: to,
+        },
+        {
+          $pop: {
+            "posts.$[field].likes.by": {
+              userID: req.rootUser.userID,
+            },
+          },
+          $inc: {
+            "posts.$[field].likes.No": -1,
+          },
+        },
+        {
+          arrayFilters: [{ "field.id": postID }],
+        }
+      );
+      console.log(removeLikedPostRes);
+      if (!removeLikedPostRes) {
+        return res.status(500).json({
+          success: false,
+          msg: "server Error, Please try again letter!!!",
+        });
+      }
       return res.json({
-        success: false,
-        msg: "You had already liked this post",
+        success: true,
+        msg: "Removed Like",
+        removed: true,
       });
     }
     const likePostRes = await userDetail.updateOne(
@@ -720,9 +746,18 @@ router.post("/post/like", authenticate, async (req, res) => {
         arrayFilters: [{ "field.id": postID }],
       }
     );
-    res.send("hello");
+    if (!likePostRes) {
+      return res.status(500).json({
+        success: false,
+        msg: "server Error, Please try again letter!!!",
+      });
+    }
+    return res.json({
+      success: true,
+      msg: "Successfully Liked the post",
+      removed: true,
+    });
   } catch (err) {
-    console.log(err);
     return res.status(500).json({
       success: false,
       msg: "server Error, Please try again letter!!!",

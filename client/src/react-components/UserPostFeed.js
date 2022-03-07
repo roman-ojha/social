@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
 import { useSelector } from "react-redux";
 
 const UserPostFeed = (props) => {
   let uploadedTime;
-  const userPostdate = new Date(props.userFeedData.date);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const userPostdate = new Date(props.userFeedData.date);
+  const [isLikedPost, setIsLikedPost] = useState(false);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
   // const currentUTCTime = currentDate.toUTCString();
@@ -59,9 +60,21 @@ const UserPostFeed = (props) => {
         withCredentials: true,
       });
       const data = await res.data;
+      if (data.success & !data.remove) {
+        setIsLikedPost(true);
+      } else if (data.success & data.remove) {
+        setIsLikedPost(false);
+      }
       console.log(data);
     } catch (err) {}
   };
+  useEffect(() => {
+    // setIsLikedPost(
+    //   props.userFeedData.likes.by.some(
+    //     (el) => el.userID === userProfileDetailStore.userID
+    //   )
+    // );
+  }, []);
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -99,10 +112,17 @@ const UserPostFeed = (props) => {
           </div>
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
             <div className="HomePage_Feed_Icon_Container" onClick={like}>
-              <span
-                className="iconify HomePage_Feed_Love_Icon"
-                data-icon="fluent:thumb-like-16-regular"
-              ></span>
+              {isLikedPost ? (
+                <span
+                  className="iconify HomePage_Feed_Love_Icon"
+                  data-icon="fluent:thumb-like-20-filled"
+                ></span>
+              ) : (
+                <span
+                  className="iconify HomePage_Feed_Love_Icon"
+                  data-icon="fluent:thumb-like-20-regular"
+                ></span>
+              )}
               <p>{props.userFeedData.likes.No}</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
