@@ -668,6 +668,40 @@ router.post("/post/like", authenticate, async (req, res) => {
         .status(400)
         .json({ success: false, msg: "User Doesn't exist" });
     }
+    const doesRootUserAlreadyLiked = await userDetail.findOne(
+      // here we are finding the post using postID and does rootuser already liked this post of not
+      {
+        userID: to,
+        posts: {
+          $elemMatch: {
+            id: postID,
+            "likes.by": {
+              $elemMatch: {
+                userID: req.rootUser.userID,
+              },
+            },
+          },
+        },
+      },
+      {
+        posts: {
+          $elemMatch: {
+            id: postID,
+            "likes.by": {
+              $elemMatch: {
+                userID: req.rootUser.userID,
+              },
+            },
+          },
+        },
+      }
+    );
+    if (doesRootUserAlreadyLiked) {
+      return res.json({
+        success: false,
+        msg: "You had already liked this post",
+      });
+    }
     const likePostRes = await userDetail.updateOne(
       {
         userID: to,
@@ -686,7 +720,6 @@ router.post("/post/like", authenticate, async (req, res) => {
         arrayFilters: [{ "field.id": postID }],
       }
     );
-    console.log(likePostRes);
     res.send("hello");
   } catch (err) {
     console.log(err);
