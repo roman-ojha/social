@@ -6,10 +6,13 @@ import { Icon } from "@iconify/react";
 
 const UserPostFeed = (props) => {
   let uploadedTime;
-  const [isLikedPost, setIsLikedPost] = useState(false);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const [likeValue, setLikeValue] = useState({
+    isLikedPost: false,
+    likeNo: props.userFeedData.likes.No,
+  });
   const userPostdate = new Date(props.userFeedData.date);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
@@ -64,21 +67,28 @@ const UserPostFeed = (props) => {
       if (data.success === true && data.removed === false) {
         // console.log("not removed");
         // Liked the post
-        setIsLikedPost(true);
+        setLikeValue({
+          likeNo: likeValue.likeNo + 1,
+          isLikedPost: true,
+        });
       } else if (data.success === true && data.removed === true) {
         // console.log("remove");
         // Removed Like from the post Post
-        setIsLikedPost(false);
+        setLikeValue({
+          likeNo: likeValue.likeNo - 1,
+          isLikedPost: false,
+        });
       }
       // console.log(data);
     } catch (err) {}
   };
   useEffect(() => {
-    setIsLikedPost(
-      props.userFeedData.likes.by.some(
+    setLikeValue({
+      ...likeValue,
+      isLikedPost: props.userFeedData.likes.by.some(
         (el) => el.userID === userProfileDetailStore.userID
-      )
-    );
+      ),
+    });
   }, []);
   return (
     <>
@@ -117,7 +127,7 @@ const UserPostFeed = (props) => {
           </div>
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
             <div className="HomePage_Feed_Icon_Container" onClick={like}>
-              {isLikedPost ? (
+              {likeValue.isLikedPost ? (
                 <Icon
                   className="HomePage_Feed_Liked_Love_Icon"
                   icon="fluent:thumb-like-20-filled"
@@ -128,7 +138,7 @@ const UserPostFeed = (props) => {
                   icon="fluent:thumb-like-20-regular"
                 />
               )}
-              <p>{props.userFeedData.likes.No}</p>
+              <p>{likeValue.likeNo}</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
               <Icon

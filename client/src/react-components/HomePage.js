@@ -284,15 +284,6 @@ const HomePage = () => {
           );
         }
       }
-      return (
-        <>
-          <UserPostFeed
-            key={followedUserPostDataStore[0].posts[0].id}
-            userMainInformation={followedUserPostDataStore[0]}
-            userFeedData={followedUserPostDataStore[0].posts[0]}
-          />
-        </>
-      );
       return <>{userPostFeedElement}</>;
     } else {
       return <></>;
