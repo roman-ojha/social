@@ -8,6 +8,7 @@ import MainPageSearchBar from "../react-components/MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
+import { Icon } from "@iconify/react";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -215,10 +216,10 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <span
+              <Icon
                 className="MainPage_SideBar_Menu_Home_Logo iconify"
-                data-icon="ant-design:home-filled"
-              ></span>
+                icon="ant-design:home-filled"
+              />
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
             <NavLink
@@ -226,10 +227,10 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <span
+              <Icon
                 className="MainPage_SideBar_Menu_Home_Logo iconify"
-                data-icon="clarity:video-gallery-solid"
-              ></span>
+                icon="clarity:video-gallery-solid"
+              />
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
             </NavLink>
             <NavLink
@@ -237,10 +238,10 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Menu_Message_Container MainPage_SideBar_Link"
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <span
+              <Icon
                 className="MainPage_SideBar_Menu_Home_Logo iconify"
-                data-icon="ant-design:message-filled"
-              ></span>
+                icon="ant-design:message-filled"
+              />
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
             </NavLink>
             <NavLink
@@ -248,10 +249,10 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Menu_Setting_Container MainPage_SideBar_Link"
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <span
+              <Icon
                 className="MainPage_SideBar_Menu_Home_Logo iconify"
-                data-icon="ant-design:setting-filled"
-              ></span>
+                icon="ant-design:setting-filled"
+              />
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
             <NavLink
@@ -259,10 +260,10 @@ const MainPageSideBar = () => {
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <span
+              <Icon
                 className="MainPage_SideBar_Menu_Home_Logo iconify"
-                data-icon="gg:profile"
-              ></span>
+                icon="gg:profile"
+              />
               <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
             </NavLink>
           </div>
