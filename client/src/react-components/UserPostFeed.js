@@ -1,8 +1,4 @@
 import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
-import ShareIcon from "@mui/icons-material/Share";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const UserPostFeed = (props) => {
@@ -87,7 +83,7 @@ const UserPostFeed = (props) => {
                 class="iconify HomePage_Feed_Love_Icon"
                 data-icon="fluent:thumb-like-16-regular"
               ></span>
-              <p>998k</p>
+              <p>30</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
               <span
