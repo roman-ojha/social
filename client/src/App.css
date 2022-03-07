@@ -1402,26 +1402,39 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 5px 0px 5px 0px;
+}
+.HomePage_Feed_Icon_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  /* border: 1px solid red; */
+}
+.HomePage_Feed_Icon_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
 }
 
-.HomePage_Feed_Love_Icon {
-  color: var(--logo-icon-low-opacity-black-color);
-  cursor: pointer;
-}
-.HomePage_Feed_Love_Icon:hover {
-  fill: var(--primary-color);
-}
-.HomePage_Feed__Comment_Icon {
-  color: var(--logo-icon-low-opacity-black-color);
-  cursor: pointer;
-}
-.HomePage_Feed_Share_Icon {
-  color: var(--logo-icon-low-opacity-black-color);
-  cursor: pointer;
-}
+.HomePage_Feed_Love_Icon,
+.HomePage_Feed__Comment_Icon,
+.HomePage_Feed_Share_Icon,
 .HomePage_Feed_More_Info_Icon {
   color: var(--logo-icon-low-opacity-black-color);
   cursor: pointer;
+  margin-right: 3px;
+  transition-duration: 100ms;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.HomePage_Feed_More_Info_Icon {
+  transform: rotate(90deg);
+}
+.HomePage_Feed_Love_Icon:hover,
+.HomePage_Feed__Comment_Icon:hover,
+.HomePage_Feed_Share_Icon:hover,
+.HomePage_Feed_More_Info_Icon:hover {
+  color: var(--primary-color);
 }
 
 /* 

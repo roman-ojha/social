@@ -82,22 +82,28 @@ const UserPostFeed = (props) => {
             <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>
           </div>
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
-            <FavoriteBorderIcon
-              className="HomePage_Feed_Love_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <CommentRoundedIcon
-              className="HomePage_Feed__Comment_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <ShareIcon
-              className="HomePage_Feed_Share_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
-            <MoreVertIcon
-              className="HomePage_Feed_More_Info_Icon"
-              style={{ width: "1.7rem", height: "1.7rem" }}
-            />
+            <div className="HomePage_Feed_Icon_Container">
+              <span
+                class="iconify HomePage_Feed_Love_Icon"
+                data-icon="fluent:thumb-like-16-regular"
+              ></span>
+              <p>998k</p>
+            </div>
+            <div className="HomePage_Feed_Icon_Container">
+              <span
+                class="iconify HomePage_Feed__Comment_Icon"
+                data-icon="akar-icons:comment"
+              ></span>
+              <p>7k</p>
+            </div>
+            <span
+              data-icon="bx:share"
+              className="iconify HomePage_Feed_Share_Icon"
+            ></span>
+            <span
+              class="iconify HomePage_Feed_More_Info_Icon"
+              data-icon="ep:more"
+            ></span>
           </div>
         </div>
       </div>
