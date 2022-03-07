@@ -90,10 +90,11 @@ router.post("/register", async (req, res) => {
     }
     const emailExist = await userDetail.findOne({ email: email });
     if (emailExist) {
-      console.log(emailExist);
       return res.status(422).json({ error: "Email already Exist" });
     }
+    const id = crypto.randomBytes(16).toString("hex");
     const creatingNewUserData = new userDetail({
+      id,
       name,
       email,
       password,

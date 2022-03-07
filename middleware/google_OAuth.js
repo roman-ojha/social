@@ -1,5 +1,6 @@
 import passport from "passport";
 import userDetail from "../models/userDetail_model.js";
+import crypto from "crypto";
 
 import GoogleOauth2 from "passport-google-oauth2";
 const GoogleStrategy = GoogleOauth2.Strategy;
@@ -23,9 +24,10 @@ passport.use(
           // i had not complete this feture but, will be complete in future
           return done(null, userExist);
         } else {
-          console.log(profile.picture);
+          const id = crypto.randomBytes(16).toString("hex");
           const userData = new userDetail({
             googleID: profile.id,
+            id,
             name: profile.displayName,
             email: profile.email,
             picture: profile.picture,

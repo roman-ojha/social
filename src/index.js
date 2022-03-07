@@ -9,6 +9,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
 const PORT = process.env.PORT;
+// app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cookieParser());
 app.unsubscribe(express.json());

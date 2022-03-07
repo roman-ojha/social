@@ -6,6 +6,10 @@ const userDetailSchema = new mongoose.Schema({
   googleID: {
     type: Number,
   },
+  id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     require: true,
