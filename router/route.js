@@ -3,8 +3,13 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
 import crypto from "crypto";
-import fetch from "node-fetch";
+import fs from "fs";
 const router = express.Router();
+
+var botUser = [];
+fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
+  botUser = JSON.parse(user);
+});
 
 router.get("/", authenticate, async (req, res) => {
   // writing logic to get all rootUser and rootUser follow user post
@@ -69,7 +74,7 @@ router.get("/", authenticate, async (req, res) => {
       }
     }
     // getting/creating data for Suggestion for You and followed By block
-    const userSuggestion = await userDetail.aggregate([
+    let userSuggestion = await userDetail.aggregate([
       //getting the document that is not rootUser & and the user which is not friend of rootUser
       {
         $match: {
@@ -91,14 +96,18 @@ router.get("/", authenticate, async (req, res) => {
       },
       { $sample: { size: 5 } },
     ]);
-    const finalSuggestedUser = [];
-    res.status(200).json({
+    for (let i = 0; i < 5 - userSuggestion.length; i++) {
+      // pushing but user according to the user that are avilable in original userSuggestion data
+      userSuggestion.push(botUser[i]);
+    }
+    return res.status(200).json({
       userProfileDetail: req.rootUser,
       followedUserPost: getUserPost,
       userSuggestion: userSuggestion,
     });
   } catch (err) {
-    res
+    console.log(err);
+    return res
       .status(500)
       .json({ success: false, msg: "Server Error, Please Try again letter" });
   }
