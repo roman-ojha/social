@@ -78,6 +78,15 @@ router.get("/", authenticate, async (req, res) => {
           ],
         },
       },
+      {
+        // getting only required field
+        $project: {
+          picture: 1,
+          name: 1,
+          userID: 1,
+          _id: 0,
+        },
+      },
       { $sample: { size: 5 } },
     ]);
     console.log(getUserSuggestionRes);
