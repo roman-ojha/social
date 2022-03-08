@@ -1,0 +1,63 @@
+[
+  {
+    "id": 1,
+    "name": "Mark Mark",
+    "userID": "MarkMark95",
+    "email": "MarkMark95@gmail.com",
+    "picture": "https://images.unsplash.com/photo-1534614971-6be99a7a3ffd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "DOB": {
+      "year": 1999,
+      "month": 7,
+      "day": 13
+    }
+  },
+  {
+    "id": 2,
+    "name": "James Smith",
+    "userID": "JamesSmith95",
+    "email": "JamesSmith95@gmail.com",
+    "picture": "https://images.unsplash.com/photo-1597204081767-4c14a6b7cbec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2luZ2xlJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+    "DOB": {
+      "year": 2010,
+      "month": 8,
+      "day": 12
+    }
+  },
+  {
+    "id": 3,
+    "name": "John Johnson",
+    "userID": "JohnJohnson345",
+    "email": "JohnJohnson345@gmail.com",
+    "picture": "https://images.unsplash.com/photo-1597204081767-4c14a6b7cbec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "DOB": {
+      "year": 1998,
+      "month": 9,
+      "day": 10
+    }
+  },
+  {
+    "id": 4,
+    "name": "Michael Williams",
+    "userID": "MichaelWilliams987",
+    "email": "MichaelWilliams987@gmail.com",
+    "picture": "https://images.unsplash.com/photo-1502258097612-43e695deebad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+
+    "DOB": {
+      "year": 1998,
+      "month": 12,
+      "day": 28
+    }
+  },
+  {
+    "id": 5,
+    "name": "Jessica Miller",
+    "userID": "JessicaMiller23",
+    "email": "JessicaMiller23@gmail.com",
+    "picture": "https://images.unsplash.com/photo-1583423420318-93a4598b4798?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    "DOB": {
+      "year": 1995,
+      "month": 3,
+      "day": 20
+    }
+  }
+]

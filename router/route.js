@@ -3,6 +3,7 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
 import crypto from "crypto";
+import fetch from "node-fetch";
 const router = express.Router();
 
 router.get("/", authenticate, async (req, res) => {
@@ -74,6 +75,7 @@ router.get("/", authenticate, async (req, res) => {
         $match: {
           $and: [
             { "friends.userID": { $not: { $eq: req.rootUser.userID } } },
+            { "followers.userID": { $not: { $eq: req.rootUser.userID } } },
             { userID: { $not: { $eq: req.rootUser.userID } } },
           ],
         },
@@ -89,7 +91,7 @@ router.get("/", authenticate, async (req, res) => {
       },
       { $sample: { size: 5 } },
     ]);
-
+    const finalSuggestedUser = [];
     res.status(200).json({
       userProfileDetail: req.rootUser,
       followedUserPost: getUserPost,
