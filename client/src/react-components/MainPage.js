@@ -15,6 +15,7 @@ import {
   userProfilePostAction,
   followedUserPostDataAction,
   userSuggestionAction,
+  followedByUserAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
@@ -62,6 +63,7 @@ const MainPage = () => {
           dispatch(userProfilePostAction(userData.userProfileDetail.posts));
           dispatch(followedUserPostDataAction(userData.followedUserPost));
           dispatch(userSuggestionAction(userData.userSuggestion));
+          dispatch(followedByUserAction(userData.followedBy));
           setRenderMainPage(true);
         }
         socket.on("connect", () => {

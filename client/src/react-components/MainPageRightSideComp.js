@@ -77,19 +77,23 @@ const MainPageRightSideComp = () => {
   };
 
   const FollowedBy = () => {
-    const FollowedUser = () => {
+    const FollowedUser = (props) => {
       return (
         <>
           <div className="MainPage_Followed_User_Container">
             <img
               className="MainPage_Followed_User_Image"
-              src="https://www.dmarge.com/wp-content/uploads/2021/01/dwayne-the-rock-.jpg"
+              src={props.userInformation.picture}
               alt=""
             />
             <div className="MainPage_Followed_User_Name_Container">
-              <p className="MainPage_Followed_User_Name">Jaklin</p>
+              <p className="MainPage_Followed_User_Name">
+                {props.userInformation.name}
+              </p>
               <p className="MainPage_Followed_User_Follower_Name">
-                Follow By John
+                {/* Followed By John */}
+                {/* NOTE We need to implement Follow by <user> feature but for right now we will who userID here */}
+                {props.userInformation.userID}
               </p>
             </div>
             <div className="MainPage_Followed_User_Follow_Button">
@@ -102,20 +106,18 @@ const MainPageRightSideComp = () => {
       );
     };
     const ReturnFollowedBy = () => {
-      if (mainPageMessageOnOffState === false) {
-        return (
-          <>
-            <FollowedUser />
-            <FollowedUser />
-          </>
-        );
-      } else if (mainPageMessageOnOffState === true) {
-        return (
-          <>
-            <FollowedUser />
-          </>
-        );
-      }
+      const followedBy = useSelector((state) => state.followedByUserReducer);
+      return (
+        <>
+          {followedBy.map((user, index) => {
+            if (mainPageMessageOnOffState === false && index < 2) {
+              return <FollowedUser key={index} userInformation={user} />;
+            } else if (mainPageMessageOnOffState === true && index < 1) {
+              return <FollowedUser key={index} userInformation={user} />;
+            }
+          })}
+        </>
+      );
     };
     return (
       <>
