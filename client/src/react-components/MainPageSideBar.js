@@ -82,6 +82,7 @@ const MainPageSideBar = () => {
       </>
     );
   };
+
   // coloring the selected url page side bar onload
   const colorSelectedUrl = () => {
     // updating color of sidebar tab through useEffect
@@ -110,9 +111,11 @@ const MainPageSideBar = () => {
       )[selectedLinkIndex];
       selectedLinkElement.firstElementChild.style.backgroundColor =
         "var(--primary-color-point-7)";
+      selectedLinkElement.firstElementChild.nextElementSibling.setAttribute(
+        "color",
+        "var(--primary-color-point-7)"
+      );
       selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-        "var(--primary-color-point-7)";
-      selectedLinkElement.firstElementChild.nextElementSibling.style.color =
         "var(--primary-color-point-7)";
     } catch (err) {}
   };
@@ -217,7 +220,7 @@ const MainPageSideBar = () => {
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <Icon
-                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:home-filled"
               />
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
@@ -228,7 +231,7 @@ const MainPageSideBar = () => {
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <Icon
-                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                className="MainPage_SideBar_Menu_Home_Logo"
                 icon="clarity:video-gallery-solid"
               />
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
@@ -239,7 +242,7 @@ const MainPageSideBar = () => {
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <Icon
-                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:message-filled"
               />
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
@@ -250,7 +253,7 @@ const MainPageSideBar = () => {
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <Icon
-                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:setting-filled"
               />
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
@@ -261,7 +264,7 @@ const MainPageSideBar = () => {
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
               <Icon
-                className="MainPage_SideBar_Menu_Home_Logo iconify"
+                className="MainPage_SideBar_Menu_Home_Logo"
                 icon="gg:profile"
               />
               <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>

@@ -8,66 +8,89 @@ const router = express.Router();
 router.get("/", authenticate, async (req, res) => {
   // writing logic to get all rootUser and rootUser follow user post
   // console.log(req.rootUser.friends);
-  let getUserPost;
-  const currentDate = new Date();
-  const getUserPostFunction = async (getPastDate) => {
-    // getPastDate will get those date from which we want to user post filed
-    const dateCurrentDateEarly = new Date(currentDate);
-    dateCurrentDateEarly.setDate(dateCurrentDateEarly.getDate() - getPastDate);
-    getUserPost = await userDetail.find(
-      // finding those user which i follow and get the posts of them
-      // and finding post which is {getPastDate} days early
-      {
-        followers: {
-          $elemMatch: {
-            userID: req.rootUser.userID,
+  try {
+    let getUserPost;
+    const currentDate = new Date();
+    const getUserPostFunction = async (getPastDate) => {
+      // getPastDate will get those date from which we want to user post filed
+      const dateCurrentDateEarly = new Date(currentDate);
+      dateCurrentDateEarly.setDate(
+        dateCurrentDateEarly.getDate() - getPastDate
+      );
+      getUserPost = await userDetail.find(
+        // finding those user which i follow and get the posts of them
+        // and finding post which is {getPastDate} days early
+        {
+          followers: {
+            $elemMatch: {
+              userID: req.rootUser.userID,
+            },
+          },
+          posts: {
+            $elemMatch: {
+              date: { $gt: dateCurrentDateEarly },
+            },
           },
         },
-        posts: {
-          $elemMatch: {
-            date: { $gt: dateCurrentDateEarly },
-          },
-        },
-      },
-      {
-        posts: { $slice: [0, 5] },
-        userID: 1,
-        name: 1,
-        picture: 1,
-        email: 1,
-      }
-    );
-    return getUserPost;
-  };
-  getUserPost = await getUserPostFunction(5);
-  if (getUserPost.length === 0) {
-    // if there is not any post which is fivedays early
-    getUserPost = await getUserPostFunction(30);
+        {
+          posts: { $slice: [0, 5] },
+          userID: 1,
+          name: 1,
+          picture: 1,
+          email: 1,
+        }
+      );
+      return getUserPost;
+    };
+    getUserPost = await getUserPostFunction(5);
     if (getUserPost.length === 0) {
-      // if there is not any post which is 30 days early
-      getUserPost = await getUserPostFunction(90);
+      // if there is not any post which is fivedays early
+      getUserPost = await getUserPostFunction(30);
       if (getUserPost.length === 0) {
-        // if there is not any post which is 90 days early
-        getUserPost = await getUserPostFunction(180);
+        // if there is not any post which is 30 days early
+        getUserPost = await getUserPostFunction(90);
         if (getUserPost.length === 0) {
-          // if there is not any post which is 180 days early
-          getUserPost = await getUserPostFunction(365);
+          // if there is not any post which is 90 days early
+          getUserPost = await getUserPostFunction(180);
           if (getUserPost.length === 0) {
-            // if there is not any post which is 365 days early
-            getUserPost = await getUserPostFunction(1825);
-          } else {
-            // if there is not any post which is 5 year early
-            getUserPost = await getUserPostFunction(36500);
-            // then post which is 100 years early
+            // if there is not any post which is 180 days early
+            getUserPost = await getUserPostFunction(365);
+            if (getUserPost.length === 0) {
+              // if there is not any post which is 365 days early
+              getUserPost = await getUserPostFunction(1825);
+            } else {
+              // if there is not any post which is 5 year early
+              getUserPost = await getUserPostFunction(36500);
+              // then post which is 100 years early
+            }
           }
         }
       }
     }
+    // getting/creating data for Suggestion for You and followed By block
+    const getUserSuggestionRes = await userDetail.aggregate([
+      //getting the document that is not rootUser & and the user which is not friend of rootUser
+      {
+        $match: {
+          $and: [
+            { "friends.userID": { $not: { $eq: req.rootUser.userID } } },
+            { userID: { $not: { $eq: req.rootUser.userID } } },
+          ],
+        },
+      },
+      { $sample: { size: 5 } },
+    ]);
+    console.log(getUserSuggestionRes);
+
+    res.status(200).json({
+      userProfileDetail: req.rootUser,
+      followedUserPost: getUserPost,
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ success: false, msg: "Server Error, Please Try again letter" });
   }
-  res.status(200).json({
-    userProfileDetail: req.rootUser,
-    followedUserPost: getUserPost,
-  });
 });
 
 router.get("/u", authenticate, (req, res) => {
