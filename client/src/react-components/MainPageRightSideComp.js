@@ -7,19 +7,23 @@ const MainPageRightSideComp = () => {
     (state) => state.changeMainPageMessageView
   );
   const UserSuggession = () => {
-    const SuggestedUser = () => {
+    const SuggestedUser = (props) => {
       return (
         <>
           <div className="MainPage_Suggested_User_Container">
             <img
               className="MainPage_Suggested_User_Image"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
-              alt=""
+              src={props.userInformation.picture}
+              alt="user"
             />
             <div className="MainPage_Suggested_User_Name_Container">
-              <p className="MainPage_Suggested_User_Name">Jaklin</p>
+              <p className="MainPage_Suggested_User_Name">
+                {props.userInformation.name}
+              </p>
               <p className="MainPage_Suggested_User_Follower_Name">
-                Follow By John
+                {/* Followed By John */}
+                {/* NOTE We need to implement Follow by <user> feature but for right now we will who userID here */}
+                {props.userInformation.userID}
               </p>
             </div>
             <div className="MainPage_Suggested_User_Follow_Button">
@@ -33,21 +37,24 @@ const MainPageRightSideComp = () => {
     };
 
     const ReturnSuggestedUser = () => {
-      if (mainPageMessageOnOffState === false) {
-        return (
-          <>
-            <SuggestedUser />
-            <SuggestedUser />
-            <SuggestedUser />
-          </>
-        );
-      } else if (mainPageMessageOnOffState === true) {
-        return (
-          <>
-            <SuggestedUser />
-          </>
-        );
-      }
+      const userSuggestion = useSelector(
+        (state) => state.userSuggestionReducer
+      );
+      return (
+        <>
+          {userSuggestion.map((user, index) => {
+            if (index < 3 && mainPageMessageOnOffState === false) {
+              return (
+                <SuggestedUser key={index.toString()} userInformation={user} />
+              );
+            } else if (index < 1 && mainPageMessageOnOffState === true) {
+              return (
+                <SuggestedUser key={index.toString()} userInformation={user} />
+              );
+            }
+          })}
+        </>
+      );
     };
 
     return (
