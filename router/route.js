@@ -100,10 +100,29 @@ router.get("/", authenticate, async (req, res) => {
       // pushing but user according to the user that are avilable in original userSuggestion data
       userSuggestion.push(botUser[i]);
     }
+
+    // getting/create data for Followed by user block in client site
+    let followedBy = await userDetail.aggregate([
+      {
+        $match: {
+          $and: [
+            { "friends.userID": { $not: { $eq: req.rootUser.userID } } },
+            { "following.userID": req.rootUser.userID },
+          ],
+        },
+      },
+      { $sample: { size: 5 } },
+    ]);
+    // console.log(botUser.length);
+    for (let i = botUser.length - 1; i >= followedBy.length; i--) {
+      followedBy.push(botUser[i]);
+    }
+
     return res.status(200).json({
       userProfileDetail: req.rootUser,
       followedUserPost: getUserPost,
       userSuggestion: userSuggestion,
+      followedBy: followedBy,
     });
   } catch (err) {
     console.log(err);
