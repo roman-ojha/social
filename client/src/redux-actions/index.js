@@ -84,3 +84,10 @@ export const userSuggestionAction = (data) => {
     payload: data,
   };
 };
+
+export const followedByUserAction = (data) => {
+  return {
+    type: "followedByUser",
+    payload: data,
+  };
+};
