@@ -77,3 +77,10 @@ export const userMessageFieldAction = (message) => {
     payload: message,
   };
 };
+
+export const userSuggestionAction = (data) => {
+  return {
+    type: "userSugestion",
+    payload: data,
+  };
+};

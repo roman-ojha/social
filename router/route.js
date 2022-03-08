@@ -68,7 +68,7 @@ router.get("/", authenticate, async (req, res) => {
       }
     }
     // getting/creating data for Suggestion for You and followed By block
-    const getUserSuggestionRes = await userDetail.aggregate([
+    const userSuggestion = await userDetail.aggregate([
       //getting the document that is not rootUser & and the user which is not friend of rootUser
       {
         $match: {
@@ -89,11 +89,11 @@ router.get("/", authenticate, async (req, res) => {
       },
       { $sample: { size: 5 } },
     ]);
-    console.log(getUserSuggestionRes);
 
     res.status(200).json({
       userProfileDetail: req.rootUser,
       followedUserPost: getUserPost,
+      userSuggestion: userSuggestion,
     });
   } catch (err) {
     res
