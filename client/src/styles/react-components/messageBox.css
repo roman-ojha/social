@@ -1,0 +1,290 @@
+/* 
+@ Designing MainPage MessageBox
+*/
+.MainPage_MessageBox_Container {
+  /* border: 1px solid red; */
+  height: 59%;
+  overflow: hidden;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+}
+.MainPage_Scrollable_MessageBox_Container {
+  height: 94%;
+  overflow-y: auto;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  /* border: 1px solid red; */
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin-top: 1.5rem;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MainPage_Scrollable_MessageBox_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MainPage_Scrollable_MessageBox_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+.MainPage_MessageBox_Title_Container {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-between;
+  height: 7%;
+}
+.MainPage_MessageBox_Title_Container h4 {
+  margin-left: 5%;
+  font-family: var(--primary-font-family);
+  letter-spacing: 1px;
+  font-size: 1rem;
+  color: rgb(66, 66, 66);
+}
+.MainPage_MessageBox_Title_More_Icon {
+  margin-right: 2%;
+  color: var(--logo-icon-low-opacity-black-color);
+}
+.MainPage_MessageBox_Title_Search_Divider {
+  /* margin: 0.4% 0% 0.4% 0%; */
+  margin: 1%;
+}
+.MainPage_MessageBox_Search_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1.5px solid rgb(65, 65, 65);
+  border-radius: 1rem;
+  margin: 0% 3% 0% 3%;
+  height: 8%;
+}
+.MainPage_MessageBox_Search_Input_Field {
+  border-width: 0px;
+  width: 20%;
+  margin-left: 2%;
+}
+.MainPage_MessageBox_Search_Input_Field::placeholder {
+  color: var(--medium-opacity-font-color);
+}
+.MainPage_MessageBox_Search_Input_Field:read-write {
+  outline: none;
+  color: var(--medium-opacity-font-color);
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.MainPage_MessageBox_Search_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+}
+.MainPage_MessageBox_Message_Container {
+  /* border: 1px solid blue; */
+  height: max-content;
+  max-height: 79.5%;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  margin-top: 1%;
+}
+.MaiPage_MessageBox_UserMessage_Container {
+  /* border: 1px solid black; */
+  display: flex;
+  margin: 0.5% 2% 1% 2%;
+  border-radius: 0.5rem;
+  height: 18.5%;
+  align-items: center;
+  justify-content: start;
+  background-color: #9066b150;
+  cursor: pointer;
+  padding: 0.5% 0%;
+  transition-duration: 100ms;
+}
+.MaiPage_MessageBox_UserMessage_Container:hover {
+  background-color: #a183b950;
+}
+.MainPage_MessageBox_UserMessage_Picutre {
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 5%;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container {
+  margin-left: 4%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container h4 {
+  font-family: var(--primary-font-family);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.MainPage_MessageBox_UserMessage_Name_Message_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.MainPage_MessageBox_See_More_Message_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.MainPage_MessageBox_See_More_Message_Container a {
+  font-size: 0.7rem;
+  text-decoration: none;
+  font-family: var(--primary-font-family);
+}
+.MainPage_MessageBox_See_More_Message_Container a:hover {
+  text-decoration: underline;
+}
+
+/* Designing Inner Box of the Message Box */
+.MessageBox_InnerMessage_Container {
+  /* border: 1px solid red; */
+  background-color: #9066b150;
+  width: 100%;
+  height: 100%;
+}
+.MessageBox_InnerMessage_Upper_Part_Container {
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  border-radius: 10px 10px 10px 10px;
+  margin: 0% 1% 0% 1%;
+  padding: 1% 0% 1% 0%;
+}
+.MessageBox_InnerMessage_Upper_Part_Container img {
+  width: 1.7rem;
+  height: 1.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-left: 5%;
+  cursor: pointer;
+}
+.MessageBox_InnerMessage_Upper_Part_Container h3 {
+  font-family: var(--primary-font-family);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 2%;
+  cursor: pointer;
+}
+.MessageBox_InnerMessage_Upper_Part_Container h3:hover {
+  text-decoration: underline;
+}
+.MessageBox_InnerMessage_Upper_Part_Close_Button {
+  position: absolute;
+  right: 5%;
+  cursor: pointer;
+  /* border: 1px solid blue; */
+  border-radius: 50%;
+  /* background-color: var(--primary-color); */
+  color: black;
+  padding: 1%;
+}
+.MessageBox_InnerMessage_Upper_Part_Close_Button:hover {
+  background-color: #e7e7e75d;
+}
+.MessageBox_InnerMessage_Message_Container {
+  /* background-color: var(--secondary-color-point-1-transparent-0); */
+  /* border: 1px solid black; */
+  height: 75%;
+  margin: 1% 2% 0% 2%;
+  border-radius: 10px 10px 0px 0px;
+  background-color: #fff5fd;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+  margin-top: 1.5rem;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MessageBox_InnerMessage_Message_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MessageBox_InnerMessage_Message_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+.MessageBox_Inner_SingleMessage_Container {
+  width: 67%;
+  /* height: 20%; */
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1%;
+  margin: 0.5% 0% 0.5% 0%;
+  position: relative;
+  /* left: 31%; */
+}
+.MessageBox_Inner_SingleMessage_Container img {
+  width: 1.4rem;
+  height: 1.4rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.MessageBox_Inner_SingleMessage {
+  /* border: 1px solid blue; */
+  background-color: #9066b150;
+  width: 80%;
+  height: auto;
+  margin-left: 3%;
+  padding: 2%;
+  border-radius: 7px;
+  overflow: hidden;
+}
+.MessageBox_Inner_SingleMessage p {
+  font-family: var(--primary-font-family);
+  font-size: 0.75rem;
+}
+.MessageBox_LowerPart_InputField_Container {
+  /* border: 1px solid red; */
+  height: 10%;
+  margin: 0% 2% 0% 2%;
+  border-radius: 0px 0px 10px 10px;
+  background-color: #fff5fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.MessageBox_LowerPart_InputField_Inner_Container {
+  /* border: 1px solid blue; */
+  margin: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fffafe;
+  width: 100%;
+  padding: 0% 1% 0% 1%;
+  border-radius: 5px;
+  height: 90%;
+}
+.MessageBox_LowerPart_InputField_Inner_Container input {
+  border-width: 0px;
+  width: 68%;
+  height: 80%;
+  background-color: #fffafe;
+}
+.MessageBox_LowerPart_InputField_Inner_Container input:read-write {
+  outline: none;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+}
+.MessageBox_LowerPart_InputField_Buttons {
+  color: rgb(108, 91, 109);
+  cursor: pointer;
+}

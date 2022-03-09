@@ -4,7 +4,7 @@ import SignUpPage from "./pages/SignUpPage";
 import Index from "./pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
-import GetUserIDPage from "./react-components/GetUserIDPage";
+import GetUserIDPage from "./pages/GetUserIDPage";
 
 const MainRoot = () => {
   const history = useHistory();

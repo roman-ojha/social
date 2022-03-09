@@ -5,6 +5,7 @@ import notification_icon from "../Images/notification_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { mainPageMessageViewOnOff } from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import "../styles/react-components/mainPageMsgAndNtfBar.css";
 
 const MainPageMsgAndNtfBar = () => {
   const userProfileDetailStore = useSelector(

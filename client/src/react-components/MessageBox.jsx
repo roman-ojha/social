@@ -16,6 +16,7 @@ import {
   appendOnMessage,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
+import "../styles/react-components/messageBox.css";
 
 const MessageBox = () => {
   const dispatch = useDispatch();

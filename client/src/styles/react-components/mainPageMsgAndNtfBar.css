@@ -1,0 +1,50 @@
+/* Designing Main Page Message and Notification Bar----------------- */
+.MainPage_Message_and_Notification_Bar_Container {
+  width: 30%;
+  /* border: 1px solid red; */
+  height: 14%;
+  position: fixed;
+  left: 70%;
+  top: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.MainPage_Message_and_Notification_Bar_Container div {
+  border-radius: 50%;
+  display: flex;
+  border: 2px solid rgb(145, 145, 145);
+  cursor: pointer;
+  transition-duration: 100ms;
+  box-shadow: 0px 0px 10px rgba(163, 162, 162, 0.486);
+}
+.MainPage_Message_and_Notification_Bar_Container div:hover {
+  background-color: rgba(214, 214, 214, 0.836);
+}
+.MainPage_Message_Bar_Message_Outline {
+  padding: 1.2%;
+}
+.MainPage_Message_Bar_Notification_Outline {
+  padding: 1.2% 1.5% 1.2% 1.5%;
+}
+
+.MainPage_Message_Bar_Message_Outline img {
+  height: 1.9rem;
+}
+.MainPage_Message_Bar_Notification_Outline img {
+  height: 1.9rem;
+}
+.MainPage_Message_Bar_More_Outline {
+  padding: 4% 3% 3% 3%;
+}
+.MainPage_Message_Bar_More_Outline img {
+  height: 1rem;
+}
+
+.MainPage_Message_Bar_Profile {
+  height: 2.6rem;
+  width: 2.6rem;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}

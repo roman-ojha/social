@@ -1,0 +1,90 @@
+/* Desing GetUserID Page ---------------------------------------*/
+.GetUserIDPage_Container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(20, 12, 20, 0.219);
+}
+.GetUserIDPage_Form_Container {
+  width: 30%;
+  background-color: white;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 15px;
+}
+.GetUserIDPage_Form_Title {
+  font-family: var(--primary-font-family);
+  font-size: 1.8rem;
+  color: var(--lower-opacity-font-color);
+  margin-top: 5%;
+}
+.GetUserIDPage_Form_Explained_Paragraph {
+  /* border: 1px solid red; */
+  width: 80%;
+  font-size: 0.8rem;
+  font-family: var(--primary-font-family);
+  text-align: center;
+  margin: 1%;
+}
+.GetUserIDPage_Name_Form_Field {
+  margin: 5%;
+  width: 80%;
+  height: 2rem;
+  border-radius: 6px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: rgb(134, 133, 133);
+}
+.GetUserIDPage_Name_Form_Field:focus {
+  outline: none;
+}
+.GetUserIDPage_Name_Form_Field:read-write {
+  padding-left: 4%;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lower-opacity-font-color);
+}
+.GetUserIDPage_Form_Udate_Profile_Text {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  color: var(--medium-opacity-font-color);
+}
+.GetUserIDPage_Form_Update_Profile_Label {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 5%;
+}
+.GetUserIDPage_Form_Profile {
+  width: 8rem;
+  height: 8rem;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 50%;
+  transition-duration: 200ms;
+}
+.GetUserIDPage_Form_Profile:hover {
+  transform: scale(1.05);
+}
+.GetUserIDPage_Form_Submit_Button {
+  border-width: 0px;
+  padding: 2.5% 10% 2.5% 10%;
+  background-color: var(--primary-color);
+  font-size: 1.1rem;
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  cursor: pointer;
+  transition-duration: 100ms;
+}
+.GetUserIDPage_Form_Submit_Button:hover {
+  background-color: var(--primary-color-button-hover-color);
+}
