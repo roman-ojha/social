@@ -1,6 +1,6 @@
 import React from "react";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 import Index from "./pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
@@ -18,8 +18,8 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={MainRoot} />
         <Route path="/u" component={Index} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/register" component={SignUp} />
+        <Route exact path="/signin" component={SignInPage} />
+        <Route exact path="/register" component={SignUpPage} />
         <Route path="/userid" component={GetUserIDPage} />
       </Switch>
     </>

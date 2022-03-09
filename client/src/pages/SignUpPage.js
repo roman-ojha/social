@@ -3,8 +3,9 @@ import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../Images/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
+import "../styles/pages/signUpPage.css";
 let previousSelectGenderElement;
-const SignUp = () => {
+const SignUpPage = () => {
   const history = useHistory();
   let today = new Date();
   let birthdayYear = [];
@@ -284,4 +285,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

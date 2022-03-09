@@ -4,8 +4,9 @@ import Sign_In_Google_Logo from "../Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustration.svg";
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
+import "../styles/pages/signInPage.css";
 
-function SignIn() {
+const SignInPage = () => {
   const [signInDetail, setSignInDetail] = useState({
     email: "",
     password: "",
@@ -132,6 +133,6 @@ function SignIn() {
       </div>
     </>
   );
-}
+};
 
-export default SignIn;
+export default SignInPage;

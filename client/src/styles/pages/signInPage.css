@@ -1,0 +1,199 @@
+.SignIn_Page_Container {
+  background-color: var(--Page-Background-Color);
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+.SignIn_Page_Left_Half {
+  height: 100%;
+  width: 50%;
+}
+.SignIn_Page_Left_side_Upper_Logo_Part {
+  padding: 5% 0% 0% 18%;
+  height: 15%;
+}
+.SignIn_Page_Social_Logo {
+  font-size: 2rem;
+  letter-spacing: 4px;
+  color: var(--primary-color);
+  font-family: "Raleway", sans-serif;
+}
+.SignIn_Page_Social_Logo::first-letter {
+  font-size: 3rem;
+  font-family: "Aladin", cursive;
+  font-weight: 100;
+}
+.SignIn_Page_Sign_In_Logo {
+  margin-left: 65px;
+  margin-top: -20px;
+  font-size: 1.4rem;
+  font-family: "Ramaraja", serif;
+  font-weight: 100;
+  letter-spacing: 3px;
+  color: rgb(51, 51, 51);
+}
+.SignIn_Container_Outline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 78%;
+}
+.SignIn_Container {
+  border: 1px solid rgb(189, 189, 189);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 80%;
+  width: 60%;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgb(182, 182, 182);
+  background-color: white;
+}
+.SignIn_Container input {
+  width: 70%;
+  height: 11%;
+  border-radius: 7px;
+  font-family: var(--input-field-font-family);
+  font-weight: 600;
+  border-color: rgb(180, 180, 180);
+  border-style: solid;
+}
+.SignIn_Container input::placeholder {
+  font-size: 0.9rem;
+  color: rgb(68, 68, 68);
+  letter-spacing: 1px;
+}
+.SignIn_Container input:focus {
+  outline: none;
+  box-shadow: 0px 0px 10px rgb(211, 211, 211);
+}
+.SignIn_Container input:read-write {
+  padding-left: 5%;
+  color: rgb(83, 83, 83);
+}
+.SignIn_Email_Input_Field {
+  margin-top: 10%;
+}
+.SingIn_Password_Field {
+  margin-top: 5%;
+}
+.SignIn_Page_SignIn_Button {
+  margin-top: 5%;
+  width: 75%;
+  height: 12%;
+  border-radius: 10rem;
+  border-width: 0px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 1.2rem;
+  letter-spacing: 2.5px;
+  cursor: pointer;
+  transition-duration: 100ms;
+}
+.SignIn_Page_SignIn_Button:hover {
+  background-color: var(--primary-color-point-9);
+}
+.SignIn_Page_Create_Account_Button {
+  margin-top: 3%;
+  width: 60%;
+  height: 12%;
+  border-radius: 10rem;
+  border-width: 0px;
+  background-color: var(--secondary-color);
+  color: white;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition-duration: 100ms;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SignIn_Page_Create_Account_Button:hover {
+  background-color: var(--secondary-color-point-9);
+}
+.SignIn_Page_Forgot_Password_Button {
+  margin-top: 5%;
+  margin-bottom: 10%;
+  cursor: pointer;
+  font-size: 0.77rem;
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
+  transition-property: text-decoration;
+}
+.SignIn_Page_Forgot_Password_Button:hover {
+  text-decoration: underline;
+}
+.SignIn_Page_Right_Half_container {
+  width: 50%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.SignIn_Page_Right_Half {
+  /* border: 1px solid red; */
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.SignIn_RightSide_Issustration_container {
+  width: 55%;
+}
+.SignIn_RightSide_Issustration {
+  width: 100%;
+}
+.SignIn_Page_Right_Half button {
+  display: flex;
+  width: 70%;
+  height: 11%;
+  align-items: center;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: #cc4fb133;
+  box-shadow: 0px 0px 5px #7e2a6cb0;
+  cursor: pointer;
+  transition-duration: 100ms;
+}
+.SignIn_Page_Right_Half button:hover {
+  background-color: rgba(218, 98, 192, 0.199);
+}
+.SignIn_page_Google_Button {
+  margin-top: 7%;
+}
+.SignIn_page_Google_Button_Paragraph {
+  margin-left: 5%;
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  word-spacing: 1px;
+}
+.SignIn_page_Google_Button_Logo {
+  width: 10%;
+  margin-left: 10%;
+}
+.SignIn_page_Facebook_Button {
+  margin-top: 4%;
+}
+.SignIn_page_Facebook_Button_Paragraph {
+  margin-left: 5%;
+  font-family: "Raleway", sans-serif;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  word-spacing: 1px;
+}
+.SignIn_page_Facebook_Button_Logo {
+  width: 10%;
+  margin-left: 10%;
+}

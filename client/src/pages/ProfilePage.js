@@ -13,6 +13,7 @@ import {
 } from "../redux-actions/index";
 import socket from "../services/socket";
 import { useParams } from "react-router-dom";
+import "../styles/pages/profilePage.css";
 
 const SearchedProfilePage = () => {
   const params = useParams();
