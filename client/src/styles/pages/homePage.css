@@ -1,0 +1,338 @@
+/*Designing Home Page ---------------------------------  */
+/* Designing User Post filed */
+.HomePage_Container {
+  width: 50%;
+  /* border: 1px solid red; */
+  position: relative;
+  left: 20%;
+  top: 14vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 1rem;
+}
+
+.HomePage_User_Post_Field_Container {
+  width: var(--home-page-content-width);
+  min-height: 3rem;
+  /* border: 1px solid red; */
+  margin-top: 1.2rem;
+  background-color: var(--secondary-color-point-7);
+  border-radius: 10px;
+}
+.HomePage_MinView_UserPost_Field_Container {
+  width: 100%;
+  height: 3rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.HomePage_MinField_UserPost_Field_Image {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.HomePage_MinView_UserPost_Input_Field {
+  width: 75%;
+  height: 2rem;
+  border-radius: 0.7rem;
+  border-width: 0px;
+  background-color: var(--secondary-color-point-1-transparent-0);
+}
+.HomePage_MinView_UserPost_Input_Field:read-write {
+  font-family: var(--input-field-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 5%;
+  color: rgb(68, 68, 68);
+  padding-right: 2%;
+}
+.HomePage_MinView_UserPost_Input_Field:focus {
+  outline: none;
+}
+/* HomePage MaxView UserPost Field --------------------------------------------------------*/
+.HomePage_MaxView_UserPost_Field_Container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: auto;
+}
+.HomePage_MaxView_UserPost_Field_Upper_Part_Container {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.HomePage_MaxField_UserPost_Field_Image_Container {
+  /* border: 1px solid blue; */
+  height: 6rem;
+  margin-left: 1%;
+  margin-bottom: 0.3rem;
+}
+.HomePage_MaxField_UserPost_Field_Image {
+  width: 2.3rem;
+  height: 2.3rem;
+  object-fit: cover;
+  border-radius: 50%;
+  /* border: 1px solid red; */
+}
+
+.HomePage_MaxView_UserPost_Input_Field {
+  width: 70%;
+  height: 5rem;
+  border-radius: 0.5rem;
+  border-width: 0px;
+  background-color: var(--secondary-color-point-1-transparent-0);
+}
+.HomePage_MaxView_UserPost_Input_Field:read-write {
+  font-family: var(--input-field-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2% 3% 2% 3%;
+  color: rgb(68, 68, 68);
+  resize: none;
+}
+.HomePage_MaxView_UserPost_Input_Field:focus {
+  outline: none;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar {
+  width: 7px;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.HomePage_MaxView_UserPost_Input_Field:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.HomePage_MaxView_UserPost_Input_Field::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+
+.HomePage_MaxView_UserPost_Field_Icons_Container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 6rem;
+  width: 10%;
+  position: relative;
+}
+
+.HomePage_MaxView_UserPost_Field_Icon {
+  color: var(--primary-color-darker-5);
+  cursor: pointer;
+}
+.HomePage_MaxView_UserPost_Field_Icon:hover {
+  color: var(--primary-color-lighter-1);
+}
+.HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid red; */
+  margin-bottom: 0.5rem;
+}
+.HomePage_MaxView_UserPost_Field_Back_Icon {
+  margin-left: 3.5%;
+  color: var(--primary-color-darker-5);
+  cursor: pointer;
+}
+.HomePage_MaxView_UserPost_Field_Back_Icon:hover {
+  color: var(--primary-color-lighter-1);
+}
+.HomePage_MaxView_UserPost_Field_Post_Button {
+  width: 76%;
+  height: 1.4rem;
+  margin-left: 1%;
+  border-radius: 0.4rem;
+  border-width: 0px;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+  font-weight: 700;
+  background-color: var(--primary-color-darker-5);
+  color: white;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+.HomePage_MaxView_UserPost_Field_Post_Button:hover {
+  background-color: var(--primary-color-lighter-1);
+}
+.MaxView_UserPost_Image_Container {
+  width: 75%;
+  /* border: 1px solid red; */
+  max-height: 17rem;
+  margin-bottom: 0.5rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.MaxView_UserPost_Image {
+  width: 100%;
+  object-fit: cover;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar {
+  width: 7px;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MaxView_UserPost_Image_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+
+/* Designing HomePage Feed -------------------------------------------------*/
+.HomePage_Feed_Main_Container {
+  width: var(--home-page-content-width);
+  height: auto;
+}
+.HomePage_Feed_Content_Container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--secondary-color-point-2);
+  border-radius: 5px;
+}
+.HomePage_Feed_Image_Container {
+  width: 97%;
+  margin-top: 0.3rem;
+}
+.HomePage_Feed_Image_Container img {
+  width: 100%;
+}
+.HomePage_Feed_Info_Container {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.HomePage_Feed_Info_User_Image img {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  /* border: 1px solid red; */
+  margin-left: 5%;
+}
+.HomePage_Feed_User_Caption_Container {
+  width: 95%;
+  /* border: 1px solid red; */
+  margin: 10px 0px 10px 0px;
+  word-wrap: break-word;
+}
+.HomePage_Feed_User_Caption_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+}
+.HomePage_Feed_User_Name_And_ID_Info_Container {
+  width: 45%;
+  /* border: 1px solid blue; */
+  margin-left: 1%;
+  display: flex;
+}
+.HomePage_Feed_User_Name_Info_Container {
+  width: 70%;
+  /* border: 1px solid purple; */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.HomePage_Feed_User_ID_Text {
+  /* border: 1px solid green; */
+  max-width: 95%;
+  overflow: hidden;
+  font-family: var(--primary-font-family);
+  font-size: 0.89rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.HomePage_Feed_User_ID_Text:hover {
+  text-decoration: underline;
+}
+.HomePage_Feed_User_Time_Text {
+  /* border: 1px solid red; */
+  width: 30%;
+  height: 2rem;
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  word-wrap: break-word;
+}
+
+.HomePage_Feed_User_Name_Text {
+  /* border: 1px solid black; */
+  overflow: hidden;
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.HomePage_Feed_User_Name_Text:hover {
+  text-decoration: underline;
+}
+.HomePage_Feed_Love_Comment_Share_Info_Container {
+  /* border: 1px solid purple; */
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0px 5px 0px;
+}
+.HomePage_Feed_Icon_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  /* border: 1px solid red; */
+}
+.HomePage_Feed_Icon_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+}
+
+.HomePage_Feed_UnLiked_Love_Icon,
+.HomePage_Feed_Liked_Love_Icon,
+.HomePage_Feed__Comment_Icon,
+.HomePage_Feed_Share_Icon,
+.HomePage_Feed_More_Info_Icon {
+  color: var(--logo-icon-low-opacity-black-color);
+  cursor: pointer;
+  margin-right: 3px;
+  transition-duration: 100ms;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.HomePage_Feed_Liked_Love_Icon {
+  color: var(--primary-color);
+}
+.HomePage_Feed_Liked_Love_Icon:hover {
+  filter: opacity(0.8);
+}
+.HomePage_Feed_More_Info_Icon {
+  transform: rotate(90deg);
+}
+.HomePage_Feed_UnLiked_Love_Icon:hover,
+.HomePage_Feed__Comment_Icon:hover,
+.HomePage_Feed_Share_Icon:hover,
+.HomePage_Feed_More_Info_Icon:hover {
+  color: var(--primary-color);
+}

@@ -14,6 +14,7 @@ import {
 } from "../redux-actions/index";
 import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
+import "../styles/pages/homePage.css";
 
 const HomePage = () => {
   // storing user Profile Detail
