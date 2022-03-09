@@ -4,7 +4,7 @@ import mainPage_sideBar_search from "../Images/mainPage_sideBar_Search.svg";
 import mainPage_Logout_Icon from "../Images/mainPage_Logout_Icon.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import MainPageSearchBar from "../react-components/MainPageSearchBar";
+import MainPageSearchBar from "./MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
