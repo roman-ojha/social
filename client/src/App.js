@@ -1,7 +1,7 @@
 import React from "react";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
-import MainPage from "./pages/MainPage";
+import Index from "./pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./react-components/GetUserIDPage";
@@ -17,7 +17,7 @@ const App = () => {
     <>
       <Switch>
         <Route exact path="/" component={MainRoot} />
-        <Route path="/u" component={MainPage} />
+        <Route path="/u" component={Index} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/register" component={SignUp} />
         <Route path="/userid" component={GetUserIDPage} />

@@ -3,7 +3,7 @@ import MainPageSideBar from "../react-components/MainPageSideBar";
 import MainPageStory from "../react-components/MainPageStory";
 import MainPageMsgAndNtfBar from "../react-components/MainPageMsgAndNtfBar";
 import MainPageRightSideComp from "../react-components/MainPageRightSideComp";
-import HomePage from "./Home";
+import HomePage from "./HomePage";
 import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
@@ -33,7 +33,7 @@ const RoutingMainPage = () => {
   );
 };
 
-const MainPage = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
@@ -96,4 +96,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Index;
