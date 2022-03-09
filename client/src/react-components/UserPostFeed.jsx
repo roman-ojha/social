@@ -3,6 +3,7 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
 import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
+import "../styles/react-components/userPostFeed.css";
 
 const UserPostFeed = (props) => {
   let uploadedTime;

@@ -15,6 +15,7 @@ import {
 import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/homePage.css";
+import "../styles/others/emojiMarPacakge.css";
 
 const HomePage = () => {
   // storing user Profile Detail

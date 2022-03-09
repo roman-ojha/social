@@ -9,6 +9,7 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";
+import "../styles/react-components/mainPageSideBar.css";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;

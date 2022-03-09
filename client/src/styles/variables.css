@@ -1,0 +1,24 @@
+:root {
+  --Page-Background-Color: #f3f3f3;
+  --primary-color: #8b37ca;
+  --primary-color-point-9: #8a37caf1;
+  --primary-color-point-7: #8e3fcad7;
+  --primary-color-darker-5: #7931b1;
+  --primary-color-lighter-1: #873cc0;
+  --primary-color-button-hover-color: #8f44c9;
+  --secondary-color: #c929a6;
+  --secondary-color-point-1-transparent-0: #f7e0f2;
+  --secondary-color-point-2: #b359a021;
+  --secondary-color-point-4: #e665ca36;
+  --secondary-color-point-7: #d8a3cdd8;
+  --secondary-color-point-9: #d43eb4e8;
+  --input-field-font-family: "Raleway", sans-serif;
+  --primary-font-family: "Raleway", sans-serif;
+  --lower-opacity-font-color: rgb(73, 73, 73);
+  --medium-opacity-font-color: rgb(54, 54, 54);
+  --home-page-content-width: 80%;
+  --logo-icon-low-opacity-black-color: #333333;
+  --logo-icon-low-opacity-black-color-point-3: #555555;
+  /* --emoji-picker-background-color: rgb(85, 38, 85); */
+  --emoji-picker-background-color: #674086;
+}

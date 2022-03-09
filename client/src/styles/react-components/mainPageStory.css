@@ -1,0 +1,83 @@
+/* Designing Main Page User Stories ----------------------------- */
+.MainPage_User_Stories_Container {
+  width: 50%;
+  height: 14%;
+  position: fixed;
+  left: 20%;
+  background-color: white;
+  box-shadow: 12px 5px 15px rgb(211, 211, 211);
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 2;
+}
+
+.Current_User_Story_Container,
+.Friends_Story_Container {
+  /* border: 1px solid blue; */
+  width: 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.Current_User_Story_Picure_Container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Current_User_Story_Picture {
+  width: 2.7rem;
+  height: 2.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 1.5px;
+  width: 2.7rem;
+  border-radius: 50%;
+  filter: brightness(0.89);
+  cursor: pointer;
+  transition-duration: 50ms;
+  z-index: 1;
+}
+.Current_User_Story_Picture:hover {
+  transform: scale(1.05);
+}
+.Current_User_Story_Add_Icon {
+  position: absolute;
+  filter: brightness(0.97);
+  cursor: pointer;
+  z-index: 2;
+}
+.Current_User_Story_Add_Icon:hover + .Current_User_Story_Picture {
+  transform: scale(1.05);
+}
+.Friend_Story_Name {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(78, 78, 78);
+  cursor: pointer;
+}
+.Current_User_Story_Name:hover,
+.Friend_Story_Name:hover {
+  text-decoration: underline;
+}
+.Friend_Story_Picture {
+  width: 2.7rem;
+  height: 2.7rem;
+  object-fit: cover;
+  border-radius: 50%;
+  border-width: 2px;
+  border-style: dotted;
+  border-color: rgba(230, 94, 207, 0.425);
+  padding: 1.5px;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+.Friend_Story_Picture:hover {
+  transform: scale(1.03);
+}
