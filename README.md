@@ -43,8 +43,8 @@
 9. Run `yarn start` to run the server
 
 ### Web:
-1. `Social-Application/client`
-2. 2. Create `.env` file in Project Directory
+1. Directory `Social-Application/client`
+2. Create `.env` file in Project Directory
 3. Get all the environment variables which are include in `.env.example`
 4. Run `yarn` to install all packages
 5. Run `yarn start` to run the client Site
