@@ -4,7 +4,7 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "emoji-mart/css/emoji-mart.css";
-import LoadingSpinner from "./LoadingSpinner";
+import LoadingSpinner from "../react-components/LoadingSpinner";
 import { Picker } from "emoji-mart";
 import { useDispatch, useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
@@ -12,7 +12,7 @@ import {
   userPostResponseData,
   homePageUserPostFieldDataAction,
 } from "../redux-actions/index";
-import UserPostFeed from "./UserPostFeed";
+import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
 
 const HomePage = () => {

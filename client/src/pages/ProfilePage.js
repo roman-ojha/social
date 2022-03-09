@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import UserPostFeed from "./UserPostFeed";
+import UserPostFeed from "../react-components/UserPostFeed";
 import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";

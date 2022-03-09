@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import MainPageSideBar from "./MainPageSideBar";
-import MainPageStory from "./MainPageStory";
-import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
-import MainPageRightSideComp from "./MainPageRightSideComp";
+import MainPageSideBar from "../react-components/MainPageSideBar";
+import MainPageStory from "../react-components/MainPageStory";
+import MainPageMsgAndNtfBar from "../react-components/MainPageMsgAndNtfBar";
+import MainPageRightSideComp from "../react-components/MainPageRightSideComp";
 import HomePage from "./HomePage";
 import VideoPage from "./VideoPage";
-import MessagePage from "./MessagePage";
-import SettingPage from "./SettingPage";
+import MessagePage from "../react-components/MessagePage";
+import SettingPage from "../react-components/SettingPage";
 import ProfilePage from "./ProfilePage";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";

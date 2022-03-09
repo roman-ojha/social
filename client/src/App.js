@@ -1,7 +1,7 @@
 import React from "react";
-import SignIn from "./react-components/SignIn";
-import SignUp from "./react-components/SignUp";
-import MainPage from "./react-components/MainPage";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import MainPage from "./pages/MainPage";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./react-components/GetUserIDPage";
