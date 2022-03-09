@@ -3,28 +3,14 @@ import storage from "../db/userStorageConnection.js";
 const router = express.Router();
 import upload from "../middleware/uploadFile.js";
 import uuid from "uuid-v4";
-import imagemin from "imagemin";
-import isJpg from "is-jpg";
-import sharp from "sharp";
-import mozjpeg from "imagemin-mozjpeg";
 import fs from "fs";
 import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+// import convertToJpg from "../functions/convertToJpg.js";
+import compressFile from "../functions/compressFile.js";
 const bucket = storage.bucket();
-const convertToJpg = async (input) => {
-  if (isJpg(input)) {
-    return input;
-  }
-  return sharp(input).jpeg().toBuffer();
-};
-const compressFile = async (filePath) => {
-  await imagemin([filePath], {
-    destination: "./db/build",
-    plugins: [convertToJpg, mozjpeg({ quality: 70 })],
-  });
-};
 router.post("/u/post", upload.single("image"), async (req, res) => {
   try {
     const token = req.cookies.AuthToken;
