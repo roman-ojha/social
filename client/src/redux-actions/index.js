@@ -91,3 +91,10 @@ export const followedByUserAction = (data) => {
     payload: data,
   };
 };
+
+export const userStoriesAction = (data) => {
+  return {
+    type: "userStories",
+    payload: data,
+  };
+};
