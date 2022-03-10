@@ -19,6 +19,7 @@ const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
       const res = await axios({
@@ -91,21 +92,26 @@ const MainPageSideBar = () => {
       switch (location.pathname) {
         case "/u":
           selectedLinkIndex = 0;
+          setSelectedIndex(0);
           break;
         case "/u/video":
           selectedLinkIndex = 1;
+          setSelectedIndex(1);
           break;
         case "/u/message":
           selectedLinkIndex = 2;
+          setSelectedIndex(2);
           break;
         case "/u/setting":
           selectedLinkIndex = 3;
+          setSelectedIndex(3);
           break;
         default:
           break;
       }
       if (location.pathname.includes("/u/profile")) {
         selectedLinkIndex = 4;
+        setSelectedIndex(4);
       }
       const selectedLinkElement = document.getElementsByClassName(
         "MainPage_SideBar_Link"
@@ -223,6 +229,9 @@ const MainPageSideBar = () => {
               <Icon
                 className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:home-filled"
+                color={
+                  selectedIndex === 0 ? "var(--primary-color-point-7)" : ""
+                }
               />
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
@@ -234,6 +243,9 @@ const MainPageSideBar = () => {
               <Icon
                 className="MainPage_SideBar_Menu_Home_Logo"
                 icon="clarity:video-gallery-solid"
+                color={
+                  selectedIndex === 1 ? "var(--primary-color-point-7)" : ""
+                }
               />
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
             </NavLink>
@@ -245,6 +257,9 @@ const MainPageSideBar = () => {
               <Icon
                 className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:message-filled"
+                color={
+                  selectedIndex === 2 ? "var(--primary-color-point-7)" : ""
+                }
               />
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
             </NavLink>
@@ -256,6 +271,9 @@ const MainPageSideBar = () => {
               <Icon
                 className="MainPage_SideBar_Menu_Home_Logo"
                 icon="ant-design:setting-filled"
+                color={
+                  selectedIndex === 3 ? "var(--primary-color-point-7)" : ""
+                }
               />
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
@@ -267,6 +285,9 @@ const MainPageSideBar = () => {
               <Icon
                 className="MainPage_SideBar_Menu_Home_Logo"
                 icon="gg:profile"
+                color={
+                  selectedIndex === 4 ? "var(--primary-color-point-7)" : ""
+                }
               />
               <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
             </NavLink>
