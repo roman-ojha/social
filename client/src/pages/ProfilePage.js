@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import mainPage_sideBar_message from "../Images/mainPage_sideBar_message.svg";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "../react-components/UserPostFeed";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +13,7 @@ import {
 import socket from "../services/socket";
 import { useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
+import { Icon } from "@iconify/react";
 
 const SearchedProfilePage = () => {
   const params = useParams();
@@ -174,7 +174,7 @@ const SearchedProfilePage = () => {
                   className="ProfilePage_UserInfo_Message_Icon_Container"
                   onClick={showInnerMessage}
                 >
-                  <img src={mainPage_sideBar_message} alt="message" />
+                  <Icon icon="ant-design:message-filled" />
                 </div>
               </div>
               <div className="ProfilePage_UserInfo_User_follow_Detail_Container">

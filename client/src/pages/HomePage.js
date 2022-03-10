@@ -173,10 +173,6 @@ const HomePage = () => {
 
               <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
                 <label htmlFor="image-input">
-                  {/* <PhotoLibraryIcon
-                    className=" HomePage_MaxView_UserPost_Field_Icon "
-                    style={{ width: "2rem", height: "2rem" }}
-                  /> */}
                   <Icon
                     className=" HomePage_MaxView_UserPost_Field_Icon "
                     icon="ic:baseline-photo-library"

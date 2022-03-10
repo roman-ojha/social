@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import mainPage_Logo from "../Images/mainPage_Logo.svg";
-import mainPage_sideBar_search from "../Images/mainPage_sideBar_Search.svg";
-import mainPage_Logout_Icon from "../Images/mainPage_Logout_Icon.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "./MainPageSearchBar";
