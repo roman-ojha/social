@@ -118,9 +118,6 @@ export default {
       },
     },
   ],
-  postNo: {
-    type: Number,
-  },
   friendsNo: {
     type: Number,
   },
@@ -140,7 +137,68 @@ export default {
       },
     },
   ],
+  postNo: {
+    type: Number,
+  },
   posts: [
+    {
+      id: {
+        type: String,
+      },
+      caption: {
+        type: String,
+      },
+      picture: {
+        name: {
+          type: String,
+        },
+        path: {
+          type: String,
+        },
+        url: {
+          type: String,
+        },
+        firebaseStorageDownloadToken: {
+          type: String,
+        },
+        bucket: {
+          type: String,
+        },
+      },
+      likes: {
+        No: {
+          type: Number,
+        },
+        by: [
+          {
+            userID: {
+              type: String,
+            },
+          },
+        ],
+      },
+      comments: {
+        No: {
+          type: Number,
+        },
+        by: [
+          {
+            userID: {
+              type: String,
+            },
+            comment: {
+              type: String,
+            },
+          },
+        ],
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+  story: [
     {
       id: {
         type: String,
