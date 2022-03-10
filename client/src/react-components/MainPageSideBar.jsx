@@ -159,11 +159,7 @@ const MainPageSideBar = () => {
             alt="logo"
           />
           <div className="MainPage_SideBar_Search_Outline">
-            <img
-              className="MainPage_SideBar_Search_Icon"
-              src={mainPage_sideBar_search}
-              alt="search"
-            />
+            <Icon className="MainPage_SideBar_Search_Icon" icon="bi:search" />
             <input
               className="MainPage_SideBar_Search_Input_Field"
               type="text"
@@ -316,10 +312,9 @@ const MainPageSideBar = () => {
                 ? userProfileDetailStore.name
                 : userProfileDetailStore.userID}
             </h3>
-            <img
-              src={mainPage_Logout_Icon}
+            <Icon
               className="MainPage_LogOut_Icon"
-              alt="logout"
+              icon="ri:logout-circle-line"
               onClick={userLogOut}
             />
             <button

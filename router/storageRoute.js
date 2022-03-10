@@ -61,7 +61,6 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         _id: verifyToken._id,
         "tokens.token": token,
       });
-      // console.log(rootUser);
       if (rootUser) {
         // uploading image to firebase Storage
         await compressFile(req.file.path);
@@ -158,7 +157,6 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
       { userID: 1, name: 1, email: 1 }
     );
     if (userIDExist) {
-      console.log(userIDExist);
       return res.json({ msg: "userID Already Exist, Please Try Another One" });
     } else {
       const rootUser = await userDetail.findOne({ email: email });

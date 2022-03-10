@@ -1,8 +1,8 @@
 import React from "react";
-import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
+import { Icon } from "@iconify/react";
 
 const MainPageStory = () => {
   const userProfileDetailStore = useSelector(
@@ -14,9 +14,10 @@ const MainPageStory = () => {
       <>
         <div className="Current_User_Story_Container">
           <div className="Current_User_Story_Picure_Container">
-            <AddCircleOutlineRoundedIcon
+            <Icon
               className="Current_User_Story_Add_Icon"
-              style={{ color: "white", height: "1.2rem" }}
+              icon="akar-icons:circle-plus"
+              style={{ color: "white", height: "1.4rem" }}
             />
             <img
               src={

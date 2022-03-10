@@ -16,6 +16,7 @@ import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
+import { Icon } from "@iconify/react";
 
 const HomePage = () => {
   // storing user Profile Detail
@@ -172,8 +173,13 @@ const HomePage = () => {
 
               <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
                 <label htmlFor="image-input">
-                  <PhotoLibraryIcon
+                  {/* <PhotoLibraryIcon
                     className=" HomePage_MaxView_UserPost_Field_Icon "
+                    style={{ width: "2rem", height: "2rem" }}
+                  /> */}
+                  <Icon
+                    className=" HomePage_MaxView_UserPost_Field_Icon "
+                    icon="ic:baseline-photo-library"
                     style={{ width: "2rem", height: "2rem" }}
                   />
                 </label>

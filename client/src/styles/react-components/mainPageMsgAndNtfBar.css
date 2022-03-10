@@ -27,9 +27,9 @@
 .MainPage_Message_Bar_Notification_Outline {
   padding: 1.2% 1.5% 1.2% 1.5%;
 }
-
-.MainPage_Message_Bar_Message_Outline img {
+.MainPage_Message_and_Notification_Bar_Icon {
   height: 1.9rem;
+  width: 1.9rem;
 }
 .MainPage_Message_Bar_Notification_Outline img {
   height: 1.9rem;

@@ -148,14 +148,8 @@ const UserPostFeed = (props) => {
               />
               <p>{props.userFeedData.comments.No}</p>
             </div>
-            <span
-              data-icon="bx:share"
-              className="iconify HomePage_Feed_Share_Icon"
-            ></span>
-            <span
-              className="iconify HomePage_Feed_More_Info_Icon"
-              data-icon="ep:more"
-            ></span>
+            <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
+            <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
           </div>
         </div>
       </div>
