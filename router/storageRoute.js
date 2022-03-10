@@ -152,6 +152,14 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
     }
     if (!userID) {
       return res.status(422).json({ error: "Please Fill Field Properly" });
+    }
+    const userIDExist = await userDetail.findOne(
+      { userID: userID },
+      { userID: 1, name: 1, email: 1 }
+    );
+    if (userIDExist) {
+      console.log(userIDExist);
+      return res.json({ msg: "userID Already Exist, Please Try Another One" });
     } else {
       const rootUser = await userDetail.findOne({ email: email });
       if (!rootUser) {
