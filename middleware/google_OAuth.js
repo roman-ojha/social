@@ -35,6 +35,7 @@ passport.use(
             followingNo: 0,
             postNo: 0,
             friendsNo: 0,
+            storiesNo: 0,
           });
           const createUser = await userData.save();
           return done(null, createUser);

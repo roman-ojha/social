@@ -100,7 +100,6 @@ router.get("/", authenticate, async (req, res) => {
       // pushing but user according to the user that are avilable in original userSuggestion data
       userSuggestion.push(botUser[i]);
     }
-
     // getting/create data for Followed by user block in client site
     let followedBy = await userDetail.aggregate([
       {
@@ -126,6 +125,30 @@ router.get("/", authenticate, async (req, res) => {
     for (let i = botUser.length - 1; i >= followedBy.length; i--) {
       followedBy.push(botUser[i]);
     }
+
+    let userStories = await userDetail.aggregate([
+      {
+        $match: {
+          $and: [
+            { "followers.userID": req.rootUser.userID },
+            { storiesNo: { $gt: 0 } },
+          ],
+        },
+      },
+      {
+        $project: {
+          picture: 1,
+          userID: 1,
+          name: 1,
+          stories: 1,
+          _id: 0,
+        },
+      },
+      {
+        $sample: { size: 10 },
+      },
+    ]);
+    console.log(userStories);
 
     return res.status(200).json({
       userProfileDetail: req.rootUser,
@@ -177,6 +200,7 @@ router.post("/register", async (req, res) => {
       followingNo: 0,
       postNo: 0,
       friendsNo: 0,
+      storiesNo: 0,
     });
     const saveUserRes = await creatingNewUserData.save();
     if (!saveUserRes) {

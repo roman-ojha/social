@@ -198,7 +198,10 @@ export default {
       },
     },
   ],
-  story: [
+  storiesNo: {
+    type: Number,
+  },
+  stories: [
     {
       id: {
         type: String,
