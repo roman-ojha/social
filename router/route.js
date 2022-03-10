@@ -96,7 +96,8 @@ router.get("/", authenticate, async (req, res) => {
       },
       { $sample: { size: 5 } },
     ]);
-    for (let i = 0; i < 5 - userSuggestion.length; i++) {
+    const lengthOfuserSuggestion = userSuggestion.length;
+    for (let i = 0; i < 5 - lengthOfuserSuggestion; i++) {
       // pushing but user according to the user that are avilable in original userSuggestion data
       userSuggestion.push(botUser[i]);
     }
@@ -121,8 +122,8 @@ router.get("/", authenticate, async (req, res) => {
       },
       { $sample: { size: 5 } },
     ]);
-    // console.log(botUser.length);
-    for (let i = botUser.length - 1; i >= followedBy.length; i--) {
+    const lengthOfFollowedBy = followedBy.length;
+    for (let i = botUser.length - 1; i >= lengthOfFollowedBy; i--) {
       followedBy.push(botUser[i]);
     }
 
@@ -148,13 +149,16 @@ router.get("/", authenticate, async (req, res) => {
         $sample: { size: 10 },
       },
     ]);
-    console.log(userStories);
-
+    const lengthOfUserStories = userStories.length;
+    for (let i = botUser.length - 1; i >= lengthOfUserStories; i--) {
+      userStories.push(botUser[i]);
+    }
     return res.status(200).json({
       userProfileDetail: req.rootUser,
       followedUserPost: getUserPost,
-      userSuggestion: userSuggestion,
-      followedBy: followedBy,
+      userSuggestion,
+      followedBy,
+      userStories,
     });
   } catch (err) {
     console.log(err);
