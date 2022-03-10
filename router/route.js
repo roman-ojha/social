@@ -173,7 +173,9 @@ router.get("/u", authenticate, (req, res) => {
     const rootUser = req.rootUser;
     return res.status(200).json(rootUser);
   } catch (err) {
-    return res.status(500).json({ error: "Server Error!" });
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
   }
 });
 
@@ -250,7 +252,9 @@ router.post("/signin", async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
   }
 });
 
@@ -272,7 +276,9 @@ router.post("/u/search", async (req, res) => {
     );
     return res.status(201).json(resUser);
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
   }
 });
 
@@ -300,7 +306,11 @@ router.get("/u/profile/:userid", authenticate, async (req, res) => {
         return res.status(201).json({ searchedUser, isRootUserFollowed: true });
       }
     }
-  } catch (err) {}
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 // this is for user follow logic if both of them follow then they will be as a friends
@@ -414,118 +424,131 @@ router.post("/u/follow", authenticate, async (req, res) => {
       }
     }
     return res.status(200).json({ success: true, msg: "Follow successfully" });
-  } catch (err) {}
-  res.send("hello");
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 router.post("/u/unfollow", authenticate, async (req, res) => {
-  const rootUser = req.rootUser;
-  const { email, userID } = req.body;
-  // NOTE userID = user that rootUser is trying to search or query
-  if (!email && !userID) {
-    return res.status(400).json({ success: false, msg: "unauthorized user" });
-  }
-  const unFollowUserExistOnRootUser = await userDetail.findOne({
-    userID: rootUser.userID,
-    following: {
-      $elemMatch: {
-        userID: userID,
-      },
-    },
-  });
-
-  if (!unFollowUserExistOnRootUser) {
-    return res.status(200).json({
-      success: false,
-      message: "you hadn't followed this user yet",
-    });
-  }
-  const unFollowedToUserExist = await userDetail.findOne(
-    {
-      userID: userID,
-    },
-    {
-      email: 1,
-      name: 1,
-      userID: 1,
-      picture: 1,
+  try {
+    const rootUser = req.rootUser;
+    const { email, userID } = req.body;
+    // NOTE userID = user that rootUser is trying to search or query
+    if (!email && !userID) {
+      return res.status(400).json({ success: false, msg: "unauthorized user" });
     }
-  );
-  if (!unFollowedToUserExist) {
-    return res.status(400).json({ success: false, msg: "User doesn't exist" });
-  }
-  // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
-  let unFollowRes = await userDetail.updateOne(
-    {
+    const unFollowUserExistOnRootUser = await userDetail.findOne({
       userID: rootUser.userID,
-    },
-    {
-      $pull: { following: { userID: userID } },
-      $inc: {
-        followingNo: -1,
+      following: {
+        $elemMatch: {
+          userID: userID,
+        },
       },
+    });
+
+    if (!unFollowUserExistOnRootUser) {
+      return res.status(200).json({
+        success: false,
+        message: "you hadn't followed this user yet",
+      });
     }
-  );
-  if (!unFollowRes) {
-    return res.status(500).json({ success: false, msg: "Server error" });
-  }
-  unFollowRes = await userDetail.updateOne(
-    {
-      userID: userID,
-    },
-    {
-      $pull: { followers: { userID: rootUser.userID } },
-      $inc: {
-        followersNo: -1,
-      },
-    }
-  );
-  if (!unFollowRes) {
-    return res.status(500).json({ success: false, msg: "Server error" });
-  }
-  const friendExist = await userDetail.findOne({
-    userID: rootUser.userID,
-    friends: {
-      $elemMatch: {
+    const unFollowedToUserExist = await userDetail.findOne(
+      {
         userID: userID,
       },
-    },
-  });
-  if (!friendExist) {
-    console.log("friend doens't exsit");
+      {
+        email: 1,
+        name: 1,
+        userID: 1,
+        picture: 1,
+      }
+    );
+    if (!unFollowedToUserExist) {
+      return res
+        .status(400)
+        .json({ success: false, msg: "User doesn't exist" });
+    }
+    // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
+    let unFollowRes = await userDetail.updateOne(
+      {
+        userID: rootUser.userID,
+      },
+      {
+        $pull: { following: { userID: userID } },
+        $inc: {
+          followingNo: -1,
+        },
+      }
+    );
+    if (!unFollowRes) {
+      return res.status(500).json({ success: false, msg: "Server error" });
+    }
+    unFollowRes = await userDetail.updateOne(
+      {
+        userID: userID,
+      },
+      {
+        $pull: { followers: { userID: rootUser.userID } },
+        $inc: {
+          followersNo: -1,
+        },
+      }
+    );
+    if (!unFollowRes) {
+      return res.status(500).json({ success: false, msg: "Server error" });
+    }
+    const friendExist = await userDetail.findOne({
+      userID: rootUser.userID,
+      friends: {
+        $elemMatch: {
+          userID: userID,
+        },
+      },
+    });
+    if (!friendExist) {
+      console.log("friend doens't exsit");
+      return res
+        .status(200)
+        .json({ success: true, msg: "unFollow successfully" });
+    }
+    let unfriendRes = await userDetail.updateOne(
+      {
+        userID: rootUser.userID,
+      },
+      {
+        $pull: { friends: { userID: userID } },
+        $inc: {
+          friendsNo: -1,
+        },
+      }
+    );
+    if (!unfriendRes) {
+      return res.status(500).json({ success: false, msg: "Server error" });
+    }
+    unfriendRes = await userDetail.updateOne(
+      {
+        userID: userID,
+      },
+      {
+        $pull: { friends: { userID: rootUser.userID } },
+        $inc: {
+          friendsNo: -1,
+        },
+      }
+    );
+    if (!unfriendRes) {
+      return res.status(500).json({ success: false, msg: "Server error" });
+    }
     return res
       .status(200)
       .json({ success: true, msg: "unFollow successfully" });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
   }
-  let unfriendRes = await userDetail.updateOne(
-    {
-      userID: rootUser.userID,
-    },
-    {
-      $pull: { friends: { userID: userID } },
-      $inc: {
-        friendsNo: -1,
-      },
-    }
-  );
-  if (!unfriendRes) {
-    return res.status(500).json({ success: false, msg: "Server error" });
-  }
-  unfriendRes = await userDetail.updateOne(
-    {
-      userID: userID,
-    },
-    {
-      $pull: { friends: { userID: rootUser.userID } },
-      $inc: {
-        friendsNo: -1,
-      },
-    }
-  );
-  if (!unfriendRes) {
-    return res.status(500).json({ success: false, msg: "Server error" });
-  }
-  return res.status(200).json({ success: true, msg: "unFollow successfully" });
 });
 
 // this route had implemented into "/u/getMessage" route when message doesn't exist
@@ -591,8 +614,11 @@ router.post("/u/createMessage", authenticate, async (req, res) => {
     } else {
       return res.status(200).json({ message: "Message already been created" });
     }
-  } catch (err) {}
-  res.send("hello");
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 router.post("/u/getMessage", authenticate, async (req, res) => {
@@ -670,7 +696,11 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
       }
     }
     res.status(200).json(userMessage.messages[0]);
-  } catch (err) {}
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 // This route had already implemented in socket/io.js
@@ -741,7 +771,11 @@ router.post("/u/sendMessage", authenticate, async (req, res) => {
     //   date: Date(),
     // });
     return res.status(200).json({ message: "message send" });
-  } catch (err) {}
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 router.post("/post/like", authenticate, async (req, res) => {

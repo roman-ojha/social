@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-// import convertToJpg from "../functions/convertToJpg.js";
 import compressFile from "../functions/compressFile.js";
 const bucket = storage.bucket();
 router.post("/u/post", upload.single("image"), async (req, res) => {
@@ -130,7 +129,11 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         return res.status(401).json({ error: "Authetication error" });
       }
     }
-  } catch (err) {}
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
+  }
 });
 
 router.post("/u/userId", upload.single("profile"), async (req, res) => {
@@ -232,7 +235,9 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err);
+    return res
+      .status(500)
+      .json({ error: "Server Error!!, Please Try again letter" });
   }
 });
 
