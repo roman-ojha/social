@@ -8,6 +8,7 @@ const MainPageStory = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const userStoriesStore = useSelector((state) => state.userStoriesReducer);
   const AddStory = () => {
     return (
       <>
@@ -32,18 +33,20 @@ const MainPageStory = () => {
       </>
     );
   };
-  const FriendStory = () => {
+  const FriendStory = (props) => {
     return (
       <>
         <div className="Friends_Story_Container">
           <div className="Friends_Story_Picutre_Container">
             <img
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+              src={props.storiesInformation.picture}
               alt=""
               className="Friend_Story_Picture"
             />
           </div>
-          <p className="Friend_Story_Name">Jaklin</p>
+          <p className="Friend_Story_Name">
+            {props.storiesInformation.name.split(" ")[0]}
+          </p>
         </div>
       </>
     );
@@ -53,13 +56,12 @@ const MainPageStory = () => {
       <div className="MainPage_User_Stories_Container">
         <AddStory />
         {/* showing friends story */}
-        <FriendStory />
-        <FriendStory />
-        <FriendStory />
-        <FriendStory />
-        <FriendStory />
-        <FriendStory />
-        <FriendStory />
+
+        {userStoriesStore.map((stories, index) => {
+          if (index <= 6) {
+            return <FriendStory storiesInformation={stories} key={index} />;
+          }
+        })}
       </div>
     </>
   );

@@ -16,15 +16,15 @@ const SponsoredBy = () => {
             <div className="MainPage_SponsoredBy_Inner_Container">
               <img
                 className="MainPage_Sponsored_Image"
-                src="https://play-lh.googleusercontent.com/JRd05pyBH41qjgsJuWduRJpDeZG0Hnb0yjf2nWqO7VaGKL10-G5UIygxED-WNOc3pg"
+                src="https://logowik.com/content/uploads/images/985_google_g_icon.jpg"
                 alt=""
               />
               <div className="MainPage_Sponsored_Name_Container">
-                <p className="MainPage_Sponsored_Name">Pubg</p>
+                <p className="MainPage_Sponsored_Name">Google</p>
                 <p className="MainPage_Sponsored_Info">
-                  PlayerUnknown's Battlegrounds
+                  Best Place To Search Anything
                 </p>
-                <p className="MainPage_Sponsored_genre">Video Game</p>
+                <p className="MainPage_Sponsored_genre">Platform</p>
               </div>
             </div>
           </div>

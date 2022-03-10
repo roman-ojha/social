@@ -15,7 +15,6 @@
 
 .Current_User_Story_Container,
 .Friends_Story_Container {
-  /* border: 1px solid blue; */
   width: 10%;
   height: 100%;
   display: flex;
@@ -38,7 +37,7 @@
   padding: 1.5px;
   width: 2.7rem;
   border-radius: 50%;
-  filter: brightness(0.89);
+  filter: brightness(0.8);
   cursor: pointer;
   transition-duration: 50ms;
   z-index: 1;
@@ -55,12 +54,17 @@
 .Current_User_Story_Add_Icon:hover + .Current_User_Story_Picture {
   transform: scale(1.05);
 }
-.Friend_Story_Name {
+.Friend_Story_Name,
+.Current_User_Story_Name {
   font-family: var(--primary-font-family);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: rgb(78, 78, 78);
   cursor: pointer;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .Current_User_Story_Name:hover,
 .Friend_Story_Name:hover {
