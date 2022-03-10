@@ -4,8 +4,10 @@ import { instance as axios } from "../services/axios";
 import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
+import { useHistory } from "react-router-dom";
 
 const UserPostFeed = (props) => {
+  const history = useHistory();
   let uploadedTime;
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -112,15 +114,32 @@ const UserPostFeed = (props) => {
                   ? User_Profile_Icon
                   : props.userMainInformation.picture
               }
+              onClick={() => {
+                history.push(`/u/profile/${props.userMainInformation.userID}`);
+              }}
               alt="user"
             />
           </div>
           <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
             <div className="HomePage_Feed_User_Name_Info_Container">
-              <p className="HomePage_Feed_User_ID_Text">
+              <p
+                className="HomePage_Feed_User_ID_Text"
+                onClick={() => {
+                  history.push(
+                    `/u/profile/${props.userMainInformation.userID}`
+                  );
+                }}
+              >
                 {props.userMainInformation.userID}
               </p>
-              <p className="HomePage_Feed_User_Name_Text">
+              <p
+                className="HomePage_Feed_User_Name_Text"
+                onClick={() => {
+                  history.push(
+                    `/u/profile/${props.userMainInformation.userID}`
+                  );
+                }}
+              >
                 {props.userMainInformation.name}
               </p>
             </div>

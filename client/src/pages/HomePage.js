@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -17,8 +16,10 @@ import { instance as axios } from "../services/axios";
 import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router-dom";
 
 const HomePage = () => {
+  const history = useHistory();
   // storing user Profile Detail
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -53,6 +54,9 @@ const HomePage = () => {
                   : userProfileDetailStore.picture
               }
               className="HomePage_MinField_UserPost_Field_Image"
+              onClick={() => {
+                history.push(`/u/profile/${userProfileDetailStore.userID}`);
+              }}
               alt="profile"
             />
             <input
@@ -151,6 +155,9 @@ const HomePage = () => {
                       : userProfileDetailStore.picture
                   }
                   className="HomePage_MaxField_UserPost_Field_Image"
+                  onClick={() => {
+                    history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                  }}
                   alt="profile"
                 />
               </div>

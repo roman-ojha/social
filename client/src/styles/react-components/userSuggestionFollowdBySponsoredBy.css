@@ -84,6 +84,10 @@
   cursor: pointer;
   width: fit-content;
 }
+.MainPage_Suggested_User_Name:hover,
+.MainPage_Followed_User_Name:hover {
+  text-decoration: underline;
+}
 .MainPage_Suggested_User_Follower_Name,
 .MainPage_Followed_User_Follower_Name {
   font-family: var(--primary-font-family);
@@ -92,6 +96,10 @@
   color: var(--lower-opacity-font-color);
   cursor: pointer;
   width: fit-content;
+}
+.MainPage_Suggested_User_Follower_Name:hover,
+.MainPage_Followed_User_Follower_Name:hover {
+  text-decoration: underline;
 }
 .MainPage_Suggested_User_Follow_Button,
 .MainPage_Followed_User_Follow_Button {

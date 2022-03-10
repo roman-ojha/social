@@ -150,12 +150,14 @@ const MainPageSideBar = () => {
     <>
       <div className="MainPage_SideBar_Container">
         <div className="MainPage_SideBar_Logo_Search_Container">
-          <img
-            className="MainPage_SideBar_Page_Logo"
-            id="MainPage_Logo"
-            src={mainPage_Logo}
-            alt="logo"
-          />
+          <NavLink to="/">
+            <img
+              className="MainPage_SideBar_Page_Logo"
+              id="MainPage_Logo"
+              src={mainPage_Logo}
+              alt="logo"
+            />
+          </NavLink>
           <div className="MainPage_SideBar_Search_Outline">
             <Icon className="MainPage_SideBar_Search_Icon" icon="bi:search" />
             <input
@@ -303,9 +305,17 @@ const MainPageSideBar = () => {
                   : userProfileDetailStore.picture
               }
               className="MainPage_SideBar_User_Account_Img"
+              onClick={() => {
+                history.push(`/u/profile/${userProfileDetailStore.userID}`);
+              }}
               alt="profile"
             />
-            <h3 className="MainPage_SideBar_User_Account_Name">
+            <h3
+              className="MainPage_SideBar_User_Account_Name"
+              onClick={() => {
+                history.push(`/u/profile/${userProfileDetailStore.userID}`);
+              }}
+            >
               {userProfileDetailStore.userID === undefined
                 ? userProfileDetailStore.name
                 : userProfileDetailStore.userID}

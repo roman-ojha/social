@@ -1,8 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
+import { useHistory } from "react-router-dom";
 
 const FollowedBy = () => {
+  const history = useHistory();
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
@@ -13,13 +15,32 @@ const FollowedBy = () => {
           <img
             className="MainPage_Followed_User_Image"
             src={props.userInformation.picture}
+            onClick={() => {
+              if (props.userInformation.type !== "bot") {
+                history.push(`/u/profile/${props.userInformation.userID}`);
+              }
+            }}
             alt=""
           />
           <div className="MainPage_Followed_User_Name_Container">
-            <p className="MainPage_Followed_User_Name">
+            <p
+              className="MainPage_Followed_User_Name"
+              onClick={() => {
+                if (props.userInformation.type !== "bot") {
+                  history.push(`/u/profile/${props.userInformation.userID}`);
+                }
+              }}
+            >
               {props.userInformation.name}
             </p>
-            <p className="MainPage_Followed_User_Follower_Name">
+            <p
+              className="MainPage_Followed_User_Follower_Name"
+              onClick={() => {
+                if (props.userInformation.type !== "bot") {
+                  history.push(`/u/profile/${props.userInformation.userID}`);
+                }
+              }}
+            >
               {/* Followed By John */}
               {/* NOTE We need to implement Follow by <user> feature but for right now we will who userID here */}
               {props.userInformation.userID}

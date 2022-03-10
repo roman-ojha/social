@@ -5,8 +5,10 @@ import { mainPageMessageViewOnOff } from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
+import { useHistory } from "react-router-dom";
 
 const MainPageMsgAndNtfBar = () => {
+  const history = useHistory();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -45,6 +47,9 @@ const MainPageMsgAndNtfBar = () => {
               ? User_Profile_Icon
               : userProfileDetailStore.picture
           }
+          onClick={() => {
+            history.push(`/u/profile/${userProfileDetailStore.userID}`);
+          }}
           alt="profile"
         />
       </div>
