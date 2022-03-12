@@ -1,7 +1,6 @@
 /* Designing MainPage SideBar---------------------------------------- */
 
 .MainPage_SideBar_Container {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   width: 20%;
@@ -184,6 +183,7 @@
   width: 50%;
   overflow: hidden;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 .MainPage_SideBar_Friend_Name:hover {
   text-decoration: underline;
@@ -267,4 +267,129 @@
   margin-left: 5%;
   /* height: 0.5px; */
   background-color: rgb(197, 197, 197);
+}
+
+@media screen and (min-width: 1900px) {
+}
+
+@media screen and (max-width: 1900px) and (min-width: 1300px) and (min-height: 1000px) {
+  .MainPage_SideBar_Logo_Search_Container {
+    height: 12%;
+  }
+  .MainPage_SideBar_Menu_Container {
+    height: 34%;
+  }
+  .MainPage_SideBar_Friends_Container {
+    height: 35%;
+    margin: 1% 3% 2% 3%;
+  }
+  .MainPage_SideBar_Friends_Title {
+    margin: 2% 0% 0% 5%;
+    height: 8%;
+  }
+  .MainPage_SideBar_Friend_Active_Status {
+    width: 19%;
+  }
+  .MainPage_SideBar_User_Account_LogOut_Container {
+    height: 17%;
+  }
+  .MainPage_SideBar_Account_Title {
+    height: 20%;
+  }
+  .MainPage_SideBar_User_Account_Logout_Outline {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .MainPage_SideBar_User_Account_Img {
+    margin-right: 3%;
+    padding-left: 5%;
+  }
+  .MainPage_SideBar_User_Account_Name {
+    width: 60%;
+  }
+  .MainPage_LogOut_Icon {
+    margin-right: 4%;
+  }
+}
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+  .MainPage_SideBar_Search_Outline {
+    width: 60%;
+  }
+}
+@media screen and (max-width: 1300px) and (min-width: 1000px) {
+  .MainPage_SideBar_Container {
+    width: 15%;
+  }
+  .MainPage_SideBar_Logo_Search_Container {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 12%;
+    margin-left: 0%;
+  }
+  .MainPage_SideBar_Page_Logo {
+    height: 3rem;
+    margin-left: 6%;
+  }
+  .MainPage_SideBar_Search_Outline {
+    width: 70%;
+    margin-left: 0%;
+    height: 30%;
+    border-radius: 0.9rem;
+    padding-left: 7px;
+    text-overflow: ellipsis;
+  }
+  .MainPage_SideBar_Search_Input_Field {
+    margin-left: 0%;
+    background-color: transparent;
+  }
+  .MainPage_SideBar_Search_Input_Field:read-write {
+    padding-left: 5px;
+  }
+  .MainPage_SideBar_Menu_Container {
+    height: 30%;
+  }
+  .MainPage_SideBar_Friends_Container {
+    height: 42%;
+    margin: 1% 4% 3% 4%;
+  }
+  .MainPage_SideBar_Friends_Title {
+    margin: 3% 0% 0% 5%;
+    height: 8%;
+  }
+  .MainPage_SideBar_Friend_Name {
+    width: 60%;
+  }
+  .MainPage_SideBar_Friend_Active_Status {
+    visibility: hidden;
+    position: absolute;
+  }
+  .MainPage_SideBar_User_Account_LogOut_Container {
+    height: 14%;
+  }
+  .MainPage_SideBar_User_Account_Logout_Outline {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .MainPage_SideBar_User_Account_Img {
+    margin-right: 3%;
+    padding-left: 5%;
+  }
+  .MainPage_SideBar_User_Account_Name {
+    width: 100%;
+    text-align: center;
+  }
+  .MainPage_LogOut_Icon {
+    margin-right: 4%;
+  }
+}
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1100px) {
+}
+@media screen and (max-width: 1100px) and (min-width: 900px) {
+}
+@media screen and (max-width: 900px) and (min-width: 700px) {
 }

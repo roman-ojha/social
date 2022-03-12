@@ -12,3 +12,35 @@
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 1900px) and (min-width: 1700px) {
+  * {
+    font-size: 27px;
+  }
+}
+@media screen and (max-width: 1700px) and (min-width: 1500px) {
+  * {
+    font-size: 25px;
+  }
+}
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+  * {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 1300px) and (min-width: 1100px) {
+  * {
+    font-size: 23px;
+  }
+}
+@media screen and (max-width: 1100px) and (min-width: 900px) {
+  * {
+    font-size: 22px;
+  }
+}
+@media screen and (max-width: 900px) and (min-width: 700px) {
+  * {
+    font-size: 21px;
+  }
+}
