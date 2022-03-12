@@ -91,7 +91,7 @@
 }
 @media screen and (max-width: 1300px) and (min-width: 1150px) {
   .MainPage_User_Stories_Container {
-    width: 50%;
+    width: 55%;
     height: 5.5rem;
     left: 15%;
   }
@@ -102,7 +102,7 @@
 }
 @media screen and (max-width: 1150px) and (min-width: 1000px) {
   .MainPage_User_Stories_Container {
-    width: 50%;
+    width: 55%;
     height: 5rem;
     left: 15%;
   }
@@ -122,7 +122,7 @@
     width: 12%;
   }
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
   .MainPage_User_Stories_Container {
     width: calc(100% - 90px);
     height: 4.8rem;

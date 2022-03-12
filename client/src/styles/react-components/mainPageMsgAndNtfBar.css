@@ -48,3 +48,74 @@
   border-radius: 50%;
   cursor: pointer;
 }
+
+@media screen and (max-width: 1300px) and (min-width: 1150px) {
+  .MainPage_Message_and_Notification_Bar_Container {
+    width: 30%;
+    height: 5.5rem;
+  }
+}
+@media screen and (max-width: 1150px) and (min-width: 1000px) {
+  .MainPage_Message_and_Notification_Bar_Container {
+    width: 30%;
+    height: 5rem;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .MainPage_Message_and_Notification_Bar_Container {
+    width: 30%;
+    height: 5rem;
+  }
+  .MainPage_Message_and_Notification_Bar_Container div:hover {
+    background-color: rgba(214, 214, 214, 0.836);
+  }
+  .MainPage_Message_Bar_Message_Outline {
+    padding: 1.2%;
+  }
+  .MainPage_Message_and_Notification_Bar_Icon {
+    height: 1.7rem;
+    width: 1.7rem;
+  }
+  .MainPage_Message_Bar_More_Outline {
+    padding: 4% 3% 3% 3%;
+  }
+  .MainPage_Message_Bar_More_Outline img {
+    height: 0.9rem;
+  }
+  .MainPage_Message_Bar_Profile {
+    height: 2.3rem;
+    width: 2.3rem;
+  }
+}
+@media screen and (max-width: 950px) {
+  .MainPage_Message_and_Notification_Bar_Container {
+    width: 30%;
+    height: 5rem;
+    justify-content: space-evenly;
+  }
+  .MainPage_Message_and_Notification_Bar_Container div:hover {
+    background-color: rgba(214, 214, 214, 0.836);
+  }
+  .MainPage_Message_Bar_Message_Outline {
+    padding: 1.2%;
+  }
+  .MainPage_Message_and_Notification_Bar_Icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+  .MainPage_Message_Bar_More_Outline {
+    padding: 4% 3% 3% 3%;
+  }
+  .MainPage_Message_Bar_More_Outline img {
+    height: 0.8rem;
+  }
+  .MainPage_Message_Bar_Profile {
+    height: 2.1rem;
+    width: 2.1rem;
+  }
+}
+@media screen and (max-width: 850px) {
+  .MainPage_Message_and_Notification_Bar_Container {
+    visibility: hidden;
+  }
+}

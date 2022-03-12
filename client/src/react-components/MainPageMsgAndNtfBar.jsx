@@ -30,7 +30,6 @@ const MainPageMsgAndNtfBar = () => {
             }}
           />
         </div>
-
         <div className="MainPage_Message_Bar_Notification_Outline">
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
