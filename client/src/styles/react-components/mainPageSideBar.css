@@ -570,8 +570,6 @@
     margin-right: 4%;
   }
 }
-@media screen and (max-width: 1400px) and (min-width: 900px) and (max-height: 700px) {
-}
 @media screen and (max-width: 700px) and (min-width: 600px) {
   .MainPage_SideBar_Container {
     width: 90px;
@@ -809,7 +807,4 @@
   .MainPage_SideBar_User_Logout_Button {
     font-size: 0.45rem;
   }
-}
-
-@media screen and (max-width: 900px) and (min-width: 700px) {
 }
