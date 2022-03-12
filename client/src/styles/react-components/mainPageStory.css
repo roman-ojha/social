@@ -35,7 +35,6 @@
   object-fit: cover;
   border-radius: 50%;
   padding: 1.5px;
-  width: 2.7rem;
   border-radius: 50%;
   filter: brightness(0.8);
   cursor: pointer;
@@ -84,4 +83,130 @@
 }
 .Friend_Story_Picture:hover {
   transform: scale(1.03);
+}
+
+@media screen and (max-width: 1900px) and (min-width: 1300px) and (min-height: 1000px) {
+}
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+}
+@media screen and (max-width: 1300px) and (min-width: 1150px) {
+  .MainPage_User_Stories_Container {
+    width: 50%;
+    height: 5.5rem;
+    left: 15%;
+  }
+  .Current_User_Story_Container,
+  .Friends_Story_Container {
+    width: 12%;
+  }
+}
+@media screen and (max-width: 1150px) and (min-width: 1000px) {
+  .MainPage_User_Stories_Container {
+    width: 50%;
+    height: 5rem;
+    left: 15%;
+  }
+  .Current_User_Story_Container,
+  .Friends_Story_Container {
+    width: 12%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .MainPage_User_Stories_Container {
+    width: 60%;
+    height: 5rem;
+    left: 100px;
+  }
+  .Current_User_Story_Container,
+  .Friends_Story_Container {
+    width: 12%;
+  }
+}
+@media screen and (max-width: 700px) {
+  .MainPage_User_Stories_Container {
+    width: calc(100% - 90px);
+    height: 4.8rem;
+    left: 90px;
+  }
+  .Current_User_Story_Container,
+  .Friends_Story_Container {
+    width: 12%;
+  }
+  .Current_User_Story_Picure_Container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .Current_User_Story_Picture {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .Friend_Story_Picture {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+@media screen and (max-width: 600px) and (min-width: 500px) {
+  .MainPage_User_Stories_Container {
+    width: calc(100% - 85px);
+    height: 4.8rem;
+    left: 85px;
+  }
+  .Current_User_Story_Picture {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .Friend_Story_Picture {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+@media screen and (max-width: 700px) and (max-height: 800px) {
+  .MainPage_User_Stories_Container {
+    width: calc(100% - 60px);
+    left: 60px;
+  }
+}
+@media screen and (max-width: 500px) and (max-height: 1000px) {
+  .MainPage_User_Stories_Container {
+    width: calc(100% - 45px);
+    left: 45px;
+    height: 4.1rem;
+  }
+  .Current_User_Story_Picture {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .Friend_Story_Picture {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .Friend_Story_Name,
+  .Current_User_Story_Name {
+    font-size: 0.5rem;
+  }
+}
+@media screen and (max-width: 300px) and (max-height: 1000px) {
+  .MainPage_User_Stories_Container {
+    width: calc(100% - 40px);
+    left: 40px;
+    height: 3.5rem;
+  }
+  .Current_User_Story_Container,
+  .Friends_Story_Container {
+    width: 16%;
+  }
+  .Current_User_Story_Picture {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  .Friend_Story_Picture {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  .Friend_Story_Name,
+  .Current_User_Story_Name {
+    font-size: 0.4rem;
+  }
 }

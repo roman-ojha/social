@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
 import { Icon } from "@iconify/react";
+import { useMediaQuery } from "react-responsive";
 
 const MainPageStory = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
+  const is = useMediaQuery({
+    query: "(max-width: 300px)",
+  });
   const AddStory = () => {
     return (
       <>
@@ -59,7 +63,11 @@ const MainPageStory = () => {
         {/* showing friends story */}
 
         {userStoriesStore.map((stories, index) => {
-          if (index <= 6) {
+          if (is) {
+            if (index <= 4) {
+              return <FriendStory storiesInformation={stories} key={index} />;
+            }
+          } else if (index <= 6) {
             return <FriendStory storiesInformation={stories} key={index} />;
           }
         })}
