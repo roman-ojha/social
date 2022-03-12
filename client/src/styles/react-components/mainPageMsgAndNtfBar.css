@@ -117,5 +117,6 @@
 @media screen and (max-width: 850px) {
   .MainPage_Message_and_Notification_Bar_Container {
     visibility: hidden;
+    position: absolute;
   }
 }

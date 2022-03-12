@@ -133,8 +133,17 @@
 .HomePage_MaxView_UserPost_Field_Icon {
   color: var(--primary-color-darker-5);
   cursor: pointer;
+  width: 2rem;
+  height: 2rem;
 }
-.HomePage_MaxView_UserPost_Field_Icon:hover {
+.HomePage_MaxView_UserPost_Field_Emoji_Icon {
+  color: var(--primary-color-darker-5);
+  cursor: pointer;
+  width: 20rem;
+  height: 20rem;
+}
+.HomePage_MaxView_UserPost_Field_Icon:hover,
+.HomePage_MaxView_UserPost_Field_Emoji_Icon:hover {
   color: var(--primary-color-lighter-1);
 }
 .HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container {
@@ -196,4 +205,153 @@
 }
 .MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb:hover {
   background-color: #6b4a81;
+}
+@media screen and (max-width: 1300px) and (min-width: 1000px) {
+  .HomePage_Container {
+    width: 55%;
+    left: 15%;
+    top: 130px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .HomePage_Container {
+    width: 60%;
+    left: 100px;
+    top: 115px;
+  }
+}
+@media screen and (max-width: 850px) {
+  .HomePage_Container {
+    width: calc(100% - 105px);
+    left: 100px;
+    top: 110px;
+  }
+}
+@media screen and (max-width: 500px) {
+  .HomePage_Container {
+    width: calc(100% - 45px);
+    left: 45px;
+    top: 70px;
+  }
+  .HomePage_User_Post_Field_Container {
+    border-radius: 5px;
+    width: 90%;
+  }
+  .HomePage_MinField_UserPost_Field_Image {
+    width: 2rem;
+    height: 2rem;
+  }
+  .HomePage_MinView_UserPost_Input_Field {
+    width: 75%;
+    height: 2rem;
+  }
+  .HomePage_MinView_UserPost_Input_Field:read-write {
+    font-size: 0.7rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image_Container {
+    /* border: 1px solid blue; */
+    height: 5.5rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image {
+    width: 2rem;
+    height: 2rem;
+  }
+  .HomePage_MaxView_UserPost_Input_Field {
+    width: 65%;
+    border-radius: 7px;
+  }
+  .HomePage_MaxView_UserPost_Input_Field:read-write {
+    font-size: 0.7rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
+    width: 10rem;
+    height: 10rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Back_Icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Post_Button {
+    width: 71%;
+    border-radius: 5px;
+  }
+  .MaxView_UserPost_Image_Container {
+    width: 70%;
+    max-height: 17rem;
+    margin-bottom: 4px;
+    margin-left: 10px;
+  }
+  .MaxView_UserPost_Image {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .HomePage_Container {
+    width: calc(100% - 45px);
+    left: 40px;
+    top: 70px;
+  }
+  .HomePage_User_Post_Field_Container {
+    border-radius: 5px;
+    width: 90%;
+  }
+  .HomePage_MinField_UserPost_Field_Image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MinView_UserPost_Input_Field {
+    width: 70%;
+    height: 2rem;
+    border-radius: 5px;
+  }
+  .HomePage_MinView_UserPost_Input_Field:read-write {
+    font-size: 0.6rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image_Container {
+    /* border: 1px solid blue; */
+    height: 5.5rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MaxView_UserPost_Input_Field {
+    width: 60%;
+    border-radius: 7px;
+  }
+  .HomePage_MaxView_UserPost_Input_Field:read-write {
+    font-size: 0.6rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Back_Icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Post_Button {
+    width: 60%;
+    border-radius: 4px;
+  }
+  .MaxView_UserPost_Image_Container {
+    width: 70%;
+    max-height: 17rem;
+    margin-bottom: 4px;
+    margin-left: 10px;
+  }
+  .MaxView_UserPost_Image {
+    width: 100%;
+    object-fit: cover;
+  }
 }

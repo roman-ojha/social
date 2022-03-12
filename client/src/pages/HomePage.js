@@ -181,9 +181,8 @@ const HomePage = () => {
               <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
                 <label htmlFor="image-input">
                   <Icon
-                    className=" HomePage_MaxView_UserPost_Field_Icon "
-                    icon="ic:baseline-photo-library"
-                    style={{ width: "2rem", height: "2rem" }}
+                    className="HomePage_MaxView_UserPost_Field_Icon"
+                    icon="ic:outline-photo-library"
                   />
                 </label>
                 <input
@@ -195,9 +194,9 @@ const HomePage = () => {
                   name="image"
                 />
                 <label htmlFor="video-input">
-                  <VideoLibraryIcon
-                    className=" HomePage_MaxView_UserPost_Field_Icon "
-                    style={{ width: "2rem", height: "2rem" }}
+                  <Icon
+                    className="HomePage_MaxView_UserPost_Field_Icon"
+                    icon="ic:outline-video-library"
                   />
                 </label>
                 <input
@@ -205,9 +204,9 @@ const HomePage = () => {
                   type="file"
                   style={{ visibility: "hidden" }}
                 />
-                <InsertEmoticonIcon
-                  className=" HomePage_MaxView_UserPost_Field_Icon "
-                  style={{ width: "2rem", height: "2rem" }}
+                <Icon
+                  className="HomePage_MaxView_UserPost_Field_Emoji_Icon"
+                  icon="entypo:emoji-happy"
                   onClick={() => {
                     homePageUserPostFieldDataDispatch(
                       homePageUserPostFieldDataAction({
@@ -232,9 +231,10 @@ const HomePage = () => {
               />
             </div>
             <div className="HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container">
-              <ArrowBackIcon
+              {/* <ArrowBackIcon/> */}
+              <Icon
                 className="HomePage_MaxView_UserPost_Field_Back_Icon"
-                style={{ width: "2rem" }}
+                icon="eva:arrow-back-fill"
                 onClick={() => {
                   homePageUserPostFieldDataDispatch(
                     homePageUserPostFieldDataAction({
