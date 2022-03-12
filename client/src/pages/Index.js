@@ -85,7 +85,7 @@ const Index = () => {
         <MainPageStory />
         {/* <RoutingMainPage /> */}
         <MainPageMsgAndNtfBar />
-        {/* <MainPageRightSideComp /> */}
+        <MainPageRightSideComp />
       </>
     );
   };

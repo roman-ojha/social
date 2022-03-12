@@ -207,3 +207,131 @@
   cursor: pointer;
   width: fit-content;
 }
+
+@media screen and (max-width: 1300px) {
+  .MainPage_Rignt_Side_Component_Container {
+    width: 29%;
+    top: 13%;
+    height: 99%;
+  }
+  .MainPage_UserSuggession_Container {
+    border-radius: 5px;
+  }
+  .MainPage_UserSuggession_Container_MinView {
+    border-radius: 5px;
+  }
+  .MainPage_UserSuggession_Title,
+  .MainPage_FollowedBy_Title,
+  .MainPage_SponsoredBy_Title {
+    font-size: 0.8rem;
+  }
+  .MainPage_UserSuggession_Inner_Container,
+  .MainPage_FollowedBy_Inner_Container {
+    height: 90%;
+  }
+  .MainPage_Suggested_User_Container,
+  .MainPage_Followed_User_Container {
+    /* border: 1px solid black; */
+    display: flex;
+    width: 96%;
+  }
+  .MainPage_Suggested_User_Image,
+  .MainPage_Followed_User_Image {
+    height: 2.2rem;
+    width: 2.2rem;
+  }
+  .MainPage_Suggested_User_Name,
+  .MainPage_Followed_User_Name {
+    font-size: 0.8rem;
+  }
+  .MainPage_FollowedBy_Container_MinView {
+    border-radius: 5px;
+  }
+  .MainPage_Suggested_User_Follower_Name,
+  .MainPage_Followed_User_Follower_Name {
+    font-size: 0.6rem;
+  }
+  .MainPage_Suggested_User_Follow_Button,
+  .MainPage_Followed_User_Follow_Button {
+    width: 23%;
+    height: 45%;
+  }
+  .MainPage_Suggested_User_Follow_Button_Text,
+  .MainPage_Followed_User_Follow_Button_Text {
+    font-size: 0.6rem;
+  }
+  .MainPage_FollowedBy_Container {
+    border-radius: 5px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .MainPage_Rignt_Side_Component_Container {
+    width: 29%;
+    top: 13%;
+    height: 99%;
+  }
+  .MainPage_UserSuggession_Title,
+  .MainPage_FollowedBy_Title,
+  .MainPage_SponsoredBy_Title {
+    font-size: 0.75rem;
+  }
+  .MainPage_UserSuggession_Inner_Container,
+  .MainPage_FollowedBy_Inner_Container {
+    height: 90%;
+  }
+  .MainPage_Suggested_User_Container,
+  .MainPage_Followed_User_Container {
+    width: 95%;
+    border-radius: 5px;
+  }
+  .MainPage_Suggested_User_Image,
+  .MainPage_Followed_User_Image {
+    margin-left: 3%;
+    height: 2rem;
+    width: 2rem;
+  }
+  .MainPage_Suggested_User_Name,
+  .MainPage_Followed_User_Name {
+    font-size: 0.7rem;
+  }
+  .MainPage_Suggested_User_Name:hover,
+  .MainPage_Followed_User_Name:hover {
+    text-decoration: underline;
+  }
+  .MainPage_Suggested_User_Follower_Name,
+  .MainPage_Followed_User_Follower_Name {
+    font-size: 0.6rem;
+  }
+  .MainPage_Suggested_User_Follow_Button,
+  .MainPage_Followed_User_Follow_Button {
+    width: 20%;
+    height: 45%;
+    border-radius: 10px;
+  }
+  .MainPage_Suggested_User_Follow_Button_Text,
+  .MainPage_Followed_User_Follow_Button_Text {
+    font-size: 0.55rem;
+  }
+  .MainPage_FollowedBy_Container_MinView {
+    border-radius: 5px;
+  }
+  .MainPage_SponsoredBy_Container {
+    border-radius: 5px;
+  }
+  .MainPage_Sponsored_Name {
+    font-size: 0.8rem;
+  }
+  .MainPage_Sponsored_Info {
+    font-size: 0.65rem;
+  }
+  .MainPage_Sponsored_genre {
+    font-size: 0.6rem;
+  }
+}
+@media screen and (max-width: 850px) {
+  .MainPage_Rignt_Side_Component_Container {
+    visibility: hidden;
+    position: absolute;
+  }
+}
