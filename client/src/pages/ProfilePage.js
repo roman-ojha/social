@@ -174,7 +174,10 @@ const SearchedProfilePage = () => {
                   className="ProfilePage_UserInfo_Message_Icon_Container"
                   onClick={showInnerMessage}
                 >
-                  <Icon icon="ant-design:message-filled" />
+                  <Icon
+                    className="ProfilePage_UserInfo_Message_Icon"
+                    icon="ant-design:message-filled"
+                  />
                 </div>
               </div>
               <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
@@ -185,7 +188,10 @@ const SearchedProfilePage = () => {
             </div>
             <div className="ProfilePage_UserInfo_Follow_and_More_Button_Container">
               <div className="ProfilePage_UserInfo_More_Icon_Container">
-                <MoreVertIcon />
+                <Icon
+                  className="ProfilePage_UserInfo_More_Icon"
+                  icon="ep:more"
+                />
               </div>
               {profilePageData.userID === userProfileDetailStore.userID ? (
                 // if profilePage is of root user then we don't have to show follow & unfollow button
