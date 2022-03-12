@@ -138,3 +138,82 @@
 .HomePage_Feed_More_Info_Icon:hover {
   color: var(--primary-color);
 }
+
+@media screen and (max-width: 700px) {
+  .HomePage_Feed_Main_Container {
+    width: 90%;
+  }
+  .HomePage_Feed_Info_User_Image img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 5px;
+  }
+  .HomePage_Feed_User_Caption_Container p {
+    font-size: 0.8rem;
+  }
+  .HomePage_Feed_User_ID_Text {
+    font-size: 0.78rem;
+  }
+  .HomePage_Feed_User_Time_Text {
+    font-size: 0.78rem;
+  }
+  .HomePage_Feed_User_Name_Text {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_Icon_Container p {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_UnLiked_Love_Icon,
+  .HomePage_Feed_Liked_Love_Icon,
+  .HomePage_Feed__Comment_Icon,
+  .HomePage_Feed_Share_Icon,
+  .HomePage_Feed_More_Info_Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .HomePage_Feed_Main_Container {
+    width: 90%;
+  }
+  .HomePage_Feed_Info_User_Image img {
+    width: 1.9rem;
+    height: 1.9rem;
+    margin-left: 5px;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .HomePage_Feed_Main_Container {
+    width: 90%;
+  }
+  .HomePage_Feed_Info_User_Image img {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin-left: 5px;
+  }
+  .HomePage_Feed_User_Caption_Container p {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_User_ID_Text {
+    font-size: 0.6rem;
+  }
+  .HomePage_Feed_User_Time_Text {
+    font-size: 0.6rem;
+  }
+  .HomePage_Feed_User_Name_Text {
+    font-size: 0.5rem;
+  }
+  .HomePage_Feed_Icon_Container p {
+    font-size: 0.5rem;
+  }
+  .HomePage_Feed_UnLiked_Love_Icon,
+  .HomePage_Feed_Liked_Love_Icon,
+  .HomePage_Feed__Comment_Icon,
+  .HomePage_Feed_Share_Icon,
+  .HomePage_Feed_More_Info_Icon {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}

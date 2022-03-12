@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
-import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { Picker } from "emoji-mart";

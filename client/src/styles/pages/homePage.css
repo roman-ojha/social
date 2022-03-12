@@ -227,12 +227,7 @@
     top: 110px;
   }
 }
-@media screen and (max-width: 500px) {
-  .HomePage_Container {
-    width: calc(100% - 45px);
-    left: 45px;
-    top: 70px;
-  }
+@media screen and (max-width: 700px) {
   .HomePage_User_Post_Field_Container {
     border-radius: 5px;
     width: 90%;
@@ -288,6 +283,13 @@
   .MaxView_UserPost_Image {
     width: 100%;
     object-fit: cover;
+  }
+}
+@media screen and (max-width: 500px) {
+  .HomePage_Container {
+    width: calc(100% - 45px);
+    left: 45px;
+    top: 70px;
   }
 }
 
