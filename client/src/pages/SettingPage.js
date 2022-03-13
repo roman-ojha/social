@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
+import { useSelector } from "react-redux";
+import { Icon } from "@iconify/react";
 
 const SettingPage = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const [settingInputFieldData, setSettingInputFieldData] = useState({
     userID: "",
     name: "",
@@ -22,12 +27,59 @@ const SettingPage = () => {
   const changeName = () => {};
   const chnagePassword = () => {};
   const deleteUser = () => {};
+  const getNewProfilePicture = (e) => {
+    try {
+      e.preventDefault();
+      const image = document.getElementById("user-profile-input").files[0];
+      const imageElement = document.getElementsByClassName(
+        "Setting_Page_Change_Profile_Image"
+      )[0];
+      imageElement.setAttribute("src", URL.createObjectURL(image));
+    } catch (e) {}
+  };
   return (
     <>
       <div className="SettingPage_Container">
         <Helmet>
           <title>Setting</title>
         </Helmet>
+        <div className="Setting_Page_Change_Profile_Picture_Container">
+          <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">
+            <label htmlFor="user-profile-input">
+              <img
+                src={userProfileDetailStore.picture}
+                className="Setting_Page_Change_Profile_Image"
+              />
+              <div className="Setting_Page_Change_Profile_Image_Info">
+                <Icon
+                  icon="entypo:upload"
+                  className="Setting_Page_Change_Profile_Image_Upload_Icon"
+                />
+                <p>upload</p>
+              </div>
+            </label>
+            <input
+              id="user-profile-input"
+              type="file"
+              accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
+              onChange={getNewProfilePicture}
+            />
+            <div className="Setting_Page_Change_Profile_Input_and_Button_Container">
+              <input
+                type="text"
+                placeholder="image url"
+                className="Setting_Page_Change_Profile_Url_Image_Input_Field"
+              />
+              <button>Change Profile Picture</button>
+            </div>
+          </div>
+          <div className="Setting_Page_Change_Profile_Picture_Container_Bottom_Part">
+            <p>
+              NOTE : Consider using image url rather then uploading files
+              because cloud database have limited Storage
+            </p>
+          </div>
+        </div>
         <div className="Setting_Container_With_Input_Field">
           <h1>Change UserID</h1>
           <form>
@@ -74,7 +126,7 @@ const SettingPage = () => {
           />
           <form>
             <input
-              type="password"
+              type="gmail"
               placeholder="Conform password"
               name="cNewPassword"
               value={settingInputFieldData.cNewPassword}
