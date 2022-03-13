@@ -88,7 +88,13 @@ const MessageBox = () => {
           />
           <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
             <h4>{props.messageInfo.messageTo}</h4>
-            <p>{props.messageInfo.message[0].content}</p>
+            <p>
+              {
+                props.messageInfo.message[props.messageInfo.message.length - 1]
+                  .content
+                // showing current message
+              }
+            </p>
           </div>
         </div>
       </>
@@ -138,7 +144,7 @@ const MessageBox = () => {
           <NavLink
             to="/u/message"
             onClick={() => {
-              dispatch(mainPageMessageViewOnOff());
+              dispatch(mainPageMessageViewOnOff(false));
               let previouslySelectedElement;
               try {
                 const selectedLinkElement = document.getElementsByClassName(

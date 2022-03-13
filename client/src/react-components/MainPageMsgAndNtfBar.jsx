@@ -5,7 +5,7 @@ import { mainPageMessageViewOnOff } from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
@@ -19,7 +19,7 @@ const MainPageMsgAndNtfBar = () => {
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
-        <div className="MainPage_Message_Bar_Message_Outline">
+        <NavLink to="/u" className="MainPage_Message_Bar_Message_Outline">
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="ant-design:message-filled"
@@ -29,7 +29,7 @@ const MainPageMsgAndNtfBar = () => {
               );
             }}
           />
-        </div>
+        </NavLink>
         <div className="MainPage_Message_Bar_Notification_Outline">
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"

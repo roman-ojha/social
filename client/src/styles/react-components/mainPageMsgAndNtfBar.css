@@ -10,13 +10,15 @@
   align-items: center;
   justify-content: space-around;
 }
-.MainPage_Message_and_Notification_Bar_Container div {
+.MainPage_Message_and_Notification_Bar_Container div,
+.MainPage_Message_Bar_Message_Outline {
   border-radius: 50%;
   display: flex;
   border: 2px solid rgb(145, 145, 145);
   cursor: pointer;
   transition-duration: 100ms;
   box-shadow: 0px 0px 10px rgba(163, 162, 162, 0.486);
+  color: var(--logo-icon-low-opacity-black-color);
 }
 .MainPage_Message_and_Notification_Bar_Container div:hover {
   background-color: rgba(214, 214, 214, 0.836);
