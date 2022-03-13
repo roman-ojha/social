@@ -51,7 +51,6 @@ const setCurrentUserMessageReducer = (state = initialMessage, action) => {
       message: action.payload.message.reverse(),
     };
   } else if (action.type === "appendOnMessage") {
-    console.log(action.payload);
     return {
       ...state,
       message: [action.payload, ...state.message],

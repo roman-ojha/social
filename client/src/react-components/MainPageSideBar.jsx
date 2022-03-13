@@ -150,7 +150,7 @@ const MainPageSideBar = () => {
     <>
       <div className="MainPage_SideBar_Container">
         <div className="MainPage_SideBar_Logo_Search_Container">
-          <NavLink to="/">
+          <NavLink to="/u">
             <img
               className="MainPage_SideBar_Page_Logo"
               id="MainPage_Logo"

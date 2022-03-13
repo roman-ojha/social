@@ -46,7 +46,7 @@ const MessageBox = () => {
       );
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      console.log(props.messageInfo.messageTo);
+      // console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",
@@ -243,6 +243,9 @@ const MessageBox = () => {
     const sendMessage = async () => {
       // sending message to user
       try {
+        if (userMessageField === "") {
+          return;
+        }
         const resBody = {
           sender: userProfileDetailStore.userID,
           receiver: props.InternalMessageInfo.messageTo,
@@ -262,7 +265,7 @@ const MessageBox = () => {
           }
         });
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
 
@@ -319,6 +322,13 @@ const MessageBox = () => {
                 onChange={(e) => {
                   // dispatch(userMessageFieldAction(e.target.value));
                   setUserMessageField(e.target.value);
+                  const eventOnPressEnter = (e) => {
+                    if (e.key === "Enter") {
+                      sendMessage();
+                    }
+                    window.removeEventListener("keydown", eventOnPressEnter);
+                  };
+                  window.addEventListener("keydown", eventOnPressEnter);
                 }}
               />
               <PhotoLibraryIcon
