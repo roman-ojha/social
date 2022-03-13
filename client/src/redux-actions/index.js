@@ -14,6 +14,13 @@ export const mainPageMessageInnerViewOnOff = (data) => {
   };
 };
 
+export const messageListAction = (data) => {
+  return {
+    type: "messageList",
+    payload: data,
+  };
+};
+
 export const userPostResponseData = (data) => {
   return {
     type: "UserPostResponseData",

@@ -17,6 +17,7 @@ import {
   userSuggestionAction,
   followedByUserAction,
   userStoriesAction,
+  messageListAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
@@ -66,6 +67,7 @@ const Index = () => {
           dispatch(userSuggestionAction(userData.userSuggestion));
           dispatch(followedByUserAction(userData.followedBy));
           dispatch(userStoriesAction(userData.userStories));
+          dispatch(messageListAction(userData.userProfileDetail.messages));
           setRenderMainPage(true);
         }
         socket.on("connect", () => {

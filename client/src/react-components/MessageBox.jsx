@@ -32,6 +32,7 @@ const MessageBox = () => {
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state) => state.mainPageInnerMessageBoxOnOff
   );
+  const messageList = useSelector((state) => state.messageListReducer);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
   const UserMessage = (props) => {
@@ -128,7 +129,7 @@ const MessageBox = () => {
           <div className="MainPage_MessageBox_Message_Container">
             {/* displaying all current user message */}
 
-            {userProfileDetailStore.messages.map((messageInfo) => {
+            {messageList.map((messageInfo) => {
               if (messageInfo.message.length !== 0) {
                 return (
                   <UserMessage

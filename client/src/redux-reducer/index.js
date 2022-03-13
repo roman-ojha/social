@@ -12,6 +12,7 @@ import setUserMessageFieldReducer from "./userMessageFieldReducer";
 import userSuggestionReducer from "./userSuggestionReducer";
 import followedByUserReducer from "./followedByUserReducer";
 import userStoriesReducer from "./userStoriesReducer";
+import messageListReducer from "./messageListReducer";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -27,6 +28,7 @@ const rootReducers = combineReducers({
   userSuggestionReducer,
   followedByUserReducer,
   userStoriesReducer,
+  messageListReducer,
 });
 
 export default rootReducers;

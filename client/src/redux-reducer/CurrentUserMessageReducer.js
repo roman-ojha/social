@@ -7,6 +7,7 @@ const initialMessage = {
 // this action will Store the messge of rootUser message to other people and which is currently fetch
 const setCurrentUserMessageReducer = (state = initialMessage, action) => {
   if (action.type === "currentUserMessage") {
+    console.log(state);
     return {
       ...action.payload,
       message: action.payload.message.reverse(),
