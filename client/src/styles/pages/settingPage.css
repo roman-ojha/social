@@ -10,23 +10,25 @@
   align-items: center;
 }
 
-.Setting_Container_With_Input_Field {
+.Setting_Container_With_Input_Field,
+.Setting_Page_Delete_User_Profile_Container {
   width: 80%;
   /* height: 100px; */
-  border-width: 1px;
+  border-width: 0px;
   border-style: solid;
   border-color: rgb(223, 223, 223);
   margin: 2%;
   border-radius: 10px;
   padding: 15px;
-  background-color: white;
+  background-color: var(--secondary-color-point-2);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  box-shadow: 0px 0px 10px rgb(204, 204, 204);
+  /* box-shadow: 0px 0px 10px rgb(204, 204, 204); */
 }
-.Setting_Container_With_Input_Field h1 {
+.Setting_Container_With_Input_Field h1,
+.Setting_Page_Delete_User_Profile_Container h1 {
   font-family: var(--primary-font-family);
   font-size: 0.9rem;
   margin-bottom: 10px;
@@ -42,7 +44,7 @@
   border-radius: 5px;
   border-width: 2px;
   box-shadow: 0px 0px 5px rgb(231, 231, 231);
-  border-color: rgb(194, 194, 194);
+  border-color: rgb(209, 209, 209);
   border-style: solid;
   height: 55px;
   margin-bottom: 10px;
@@ -50,7 +52,7 @@
 }
 .Setting_Container_With_Input_Field form input:focus,
 .Setting_Container_With_Input_Field input:focus {
-  box-shadow: 0px 0px 5px rgb(158, 158, 158);
+  box-shadow: 0px 0px 10px rgb(202, 202, 202);
 }
 .Setting_Container_With_Input_Field form input:read-write,
 .Setting_Container_With_Input_Field input:read-write {
@@ -71,13 +73,28 @@
   cursor: pointer;
   margin-bottom: 10px;
   margin-top: 10px;
+  font-family: var(--primary-font-family);
 }
 .Setting_Container_With_Input_Field form button:hover {
   background-color: var(--primary-color-button-hover-color);
 }
-.Setting_Container_With_Input_Field p {
+.Setting_Container_With_Input_Field p,
+.Setting_Page_Delete_User_Profile_Container p {
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
+  margin-top: 5px;
+}
+.Setting_Page_Delete_User_Profile_Container button {
+  padding: 0px 10px 0px 10px;
+  height: 55px;
+  border-radius: 5px;
+  border-width: 0px;
+  background-color: var(--primary-color);
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-top: 15px;
+  font-family: var(--primary-font-family);
 }
 
 @media screen and (max-width: 1400px) and (min-width: 1000px) {
@@ -86,6 +103,9 @@
     height: 40px;
   }
   .Setting_Container_With_Input_Field form button {
+    height: 40px;
+  }
+  .Setting_Page_Delete_User_Profile_Container button {
     height: 40px;
   }
 }
