@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import "../styles/pages/settingPage.css";
 
 const SettingPage = () => {
   return (
@@ -8,7 +9,32 @@ const SettingPage = () => {
         <Helmet>
           <title>Setting</title>
         </Helmet>
-        <h1>Setting Page</h1>
+        <div className="Setting_Container_With_Input_Field">
+          <h1>Change UserID</h1>
+          <form>
+            <input type="text" placeholder="UserID" />
+            <button>Change</button>
+          </form>
+          <p>You can only be able to set unique ID for your profile</p>
+        </div>
+        <div className="Setting_Container_With_Input_Field">
+          <h1>Change display name</h1>
+          <form>
+            <input type="text" placeholder="Display Name" />
+            <button>Change</button>
+          </form>
+          <p>Not require to be unique</p>
+        </div>
+        <div className="Setting_Container_With_Input_Field">
+          <h1>Change Password</h1>
+          <input type="password" placeholder="Old password" />
+          <input type="password" placeholder="New password" />
+          <form>
+            <input type="password" placeholder="Conform password" />
+            <button>Change</button>
+          </form>
+          <p>Don't Forgot Your Password</p>
+        </div>
       </div>
     </>
   );
