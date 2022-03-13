@@ -1,6 +1,6 @@
 {
   "name": "social_media_application",
-  "version": "1.0.0",
+  "version": "0.1.0-beta",
   "description": "",
   "main": "index.js",
   "type": "module",
