@@ -24,10 +24,18 @@ const SettingPage = () => {
       [name]: value,
     });
   };
-  const changeUserID = () => {};
-  const changeName = () => {};
-  const chnagePassword = () => {};
-  const deleteUser = () => {};
+  const changeUserID = (e) => {
+    e.preventDefault();
+  };
+  const changeName = (e) => {
+    e.preventDefault();
+  };
+  const chnagePassword = (e) => {
+    e.preventDefault();
+  };
+  const deleteUser = (e) => {
+    e.preventDefault();
+  };
   const getNewProfilePicture = (e) => {
     try {
       e.preventDefault();
