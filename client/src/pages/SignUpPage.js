@@ -4,6 +4,7 @@ import SignUp_illustration from "../Images/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
+import { Helmet } from "react-helmet";
 let previousSelectGenderElement;
 const SignUpPage = () => {
   const history = useHistory();
@@ -119,6 +120,9 @@ const SignUpPage = () => {
   return (
     <>
       <div className="SignUp_Page_Container">
+        <Helmet>
+          <title>Register</title>
+        </Helmet>
         <div className="SignUp_Page_Left_Half">
           <div className="SignUp_Page_Title_Container">
             <h1 className="SignUp_Page_Logo">Social</h1>

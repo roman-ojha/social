@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import UserPostFeed from "../react-components/UserPostFeed";
 import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
@@ -14,6 +13,7 @@ import socket from "../services/socket";
 import { useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
+import { Helmet } from "react-helmet";
 
 const SearchedProfilePage = () => {
   const params = useParams();
@@ -153,6 +153,9 @@ const SearchedProfilePage = () => {
     <>
       {fetchedAllData ? (
         <div className="ProfilePage_Container">
+          <Helmet>
+            <title>{params.userID}</title>
+          </Helmet>
           <div className="ProfilePage_UserInfo_Container">
             <div className="ProfilePage_UserInfo_Picture_Container">
               <img

@@ -4,6 +4,7 @@ import LoadingSpinner from "../react-components/LoadingSpinner";
 import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
+import { Helmet } from "react-helmet";
 
 const GetUserIDPage = (props) => {
   const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
@@ -79,6 +80,9 @@ const GetUserIDPage = (props) => {
     <>
       {onLoadingSpinner ? <LoadingSpinner /> : ""}
       <div className="GetUserIDPage_Container">
+        <Helmet>
+          <title>userID/undefine</title>
+        </Helmet>
         <div className="GetUserIDPage_Form_Container">
           <h1 className="GetUserIDPage_Form_Title">Almost There...</h1>
           <p className="GetUserIDPage_Form_Explained_Paragraph">

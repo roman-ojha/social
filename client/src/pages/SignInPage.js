@@ -5,10 +5,9 @@ import SignIn_RightSide_Issustration from "../Images/SignIn_RightSide_Issustrati
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
-import { useMediaQuery } from "react-responsive";
+import { Helmet } from "react-helmet";
 
 const SignInPage = () => {
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 900px)" });
   const [signInDetail, setSignInDetail] = useState({
     email: "",
     password: "",
@@ -58,6 +57,9 @@ const SignInPage = () => {
   return (
     <>
       <div className="SignIn_Page_Container">
+        <Helmet>
+          <title>SignIn</title>
+        </Helmet>
         <div className="SignIn_Page_Left_Half">
           <div className="SignIn_Page_Left_side_Upper_Logo_Part">
             <h1 className="SignIn_Page_Social_Logo">Social</h1>

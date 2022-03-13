@@ -14,6 +14,7 @@ import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const HomePage = () => {
   const history = useHistory();
@@ -44,6 +45,9 @@ const HomePage = () => {
       return (
         <>
           <div className="HomePage_MinView_UserPost_Field_Container">
+            <Helmet>
+              <title>Social</title>
+            </Helmet>
             <img
               src={
                 userProfileDetailStore.picture === undefined
