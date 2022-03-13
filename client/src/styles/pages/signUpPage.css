@@ -59,7 +59,7 @@
   box-shadow: 0px 0px 15px rgb(182, 182, 182);
   background-color: white;
   margin: 7% 13% 10% 13%;
-  height: 85%;
+  height: 30rem;
 }
 .SignUp_Page_Input_Field_Container {
   display: flex;
@@ -214,6 +214,12 @@
   color: rgb(71, 71, 71);
 }
 
+@media screen and (min-width: 2000px) {
+  .SignUp_Page_SignUp_Container {
+    height: 85%;
+  }
+}
+
 @media screen and (max-width: 1500px) and (min-width: 1300px) {
   .SignUp_Page_Logo {
     font-size: 1.95rem;
@@ -231,7 +237,7 @@
   .SignUp_Page_SignUp_Container {
     border-radius: 14px;
     box-shadow: 0px 0px 14px rgb(182, 182, 182);
-    margin: 7% 13% 10% 12%;
+    margin: 5% 13% 10% 12%;
     height: 30rem;
   }
   .SignUp_Page_SignUp_Form input:read-write {
@@ -280,7 +286,7 @@
     border-radius: 13px;
     box-shadow: 0px 0px 14px rgb(182, 182, 182);
     margin: 10% 13% 10% 11%;
-    height: 29rem;
+    height: 650px;
   }
   .SignUp_Page_Input_Field_Container input {
     height: 2.4rem;
@@ -338,6 +344,9 @@
   .SignUp_Page_Sign_Up_Logo {
     font-size: 1.2rem;
   }
+  .SignUp_Page_SignUp_Container {
+    height: 650px;
+  }
   .SignUp_Page_Illustration {
     width: 18rem;
     height: 18rem;
@@ -349,231 +358,340 @@
 
 @media screen and (max-width: 900px) {
   .SignUp_Page_Container {
-    background-color: var(--Page-Background-Color);
-    width: 100%;
-    height: 100vh;
-    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
   }
   .SignUp_Page_Left_Half {
-    margin: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 40%;
-  }
-  .SignUp_Page_Title_Container {
-    width: 100%;
-    margin-left: 20%;
-  }
-  .SignUp_Page_Logo {
-    font-size: 2rem;
-    letter-spacing: 4px;
-    color: var(--primary-color);
-    font-family: "Raleway", sans-serif;
-  }
-  .SignUp_Page_Logo::first-letter {
-    font-size: 3rem;
-    font-family: "Aladin", cursive;
-    font-weight: 100;
-  }
-  .SignUp_Page_Sign_Up_Logo {
-    margin-left: 65px;
-    margin-top: -20px;
-    font-size: 1.4rem;
-    font-family: "Ramaraja", serif;
-    font-weight: 100;
-    letter-spacing: 3px;
-    color: rgb(51, 51, 51);
-  }
-  .SignUp_Page_Illustration {
-    width: 20rem;
-    height: 20rem;
-    position: relative;
-    bottom: 5%;
-  }
-  .SignUp_Page_Rignt_Half {
-    width: 50%;
-  }
-  .SignUp_Page_SignUp_Form {
+    margin: 3% 0% 0% 0%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    width: 100%;
   }
   .SignUp_Page_SignUp_Container {
-    border: 1px solid rgb(189, 189, 189);
-    border-radius: 15px;
-    box-shadow: 0px 0px 15px rgb(182, 182, 182);
-    background-color: white;
-    margin: 7% 13% 10% 13%;
-    height: 85%;
+    height: 650px;
   }
-  .SignUp_Page_Input_Field_Container {
+  .SignUp_Page_Logo {
+    font-size: 1.8rem;
+  }
+  .SignUp_Page_Logo::first-letter {
+    font-size: 2.8rem;
+  }
+  .SignUp_Page_Sign_Up_Logo {
+    font-size: 1.2rem;
+  }
+  .SignUp_Page_Illustration {
+    position: absolute;
+    visibility: hidden;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .SignUp_Page_Left_Half {
+    margin: 4% 0% 0% 0%;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     width: 100%;
-    align-items: center;
+  }
+  .SignUp_Page_Title_Container {
+    width: 180px;
+    margin-left: 0%;
+  }
+  .SignUp_Page_Logo {
+    font-size: 1.8rem;
+  }
+  .SignUp_Page_Logo::first-letter {
+    font-size: 2.8rem;
+  }
+  .SignUp_Page_Sign_Up_Logo {
+    font-size: 1.2rem;
+  }
+  .SignUp_Page_Illustration {
+    position: absolute;
+    visibility: hidden;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 90%;
+  }
+  .SignUp_Page_SignUp_Container {
+    height: 550px;
   }
   .SignUp_Page_Input_Field_Container input {
     width: 70%;
-    height: 2.5rem;
-    margin-top: 5%;
-    font-family: "Raleway", sans-serif;
-    border-radius: 7px;
-    font-weight: 600;
-    border-color: rgb(180, 180, 180);
-    border-style: solid;
+    height: 2.4rem;
+    border-radius: 5px;
   }
   .SignUp_Page_SignUp_Form input:read-write {
-    padding-left: 20px;
-    font-size: 0.9rem;
-    color: rgb(83, 83, 83);
-  }
-  .SignUp_Page_Input_Field_Container input:focus {
-    outline: none;
-    box-shadow: 0px 0px 10px rgb(211, 211, 211);
-  }
-
-  .SignUp_Page_Birthday_Selection_Container {
-    /* border: 1px solid red; */
-    width: 75%;
-    margin-top: 3%;
+    font-size: 0.8rem;
   }
   .SignUp_Page_Birthday_Selection_Container p,
   .SignUp_Page_Gender_Checkbox_Container p {
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    color: rgb(102, 102, 102);
-    font-size: 0.9rem;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    font-size: 0.8rem;
   }
   .SignUp_Page_Birthday_Selection_Date_Container select {
-    width: 30%;
-    height: 2rem;
-    border-radius: 7px;
-    border-color: rgb(180, 180, 180);
-    border-style: solid;
-    border-width: 2px;
-    cursor: pointer;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select:focus {
-    outline: none;
-    box-shadow: 0px 0px 5px rgb(211, 211, 211);
+    height: 1.9rem;
+    border-radius: 5px;
   }
   .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
-    padding-left: 10px;
-    color: rgb(107, 106, 106);
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-  .SignUp_Page_Gender_Checkbox_Container {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    margin-top: 2%;
-  }
-  .SignUp_Page_Gender_Checkbox_select_Container {
-    display: flex;
-    justify-content: space-between;
+    padding-left: 8px;
+    font-size: 0.8rem;
   }
   .SignUp_Page_Gender_Checkbox_select_Container div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border: 1px solid red;
-    width: 30%;
-    height: 2rem;
-    border-radius: 7px;
-    border-color: rgb(180, 180, 180);
-    border-style: solid;
-    border-width: 2px;
-    cursor: pointer;
-    transition-duration: 100ms;
+    height: 1.9rem;
+    border-radius: 5px;
   }
-  .SignUp_Page_Gender_Checkbox_select_Container div:hover,
-  .SignUp_Page_Birthday_Selection_Date_Container select:hover {
-    background-color: rgba(240, 240, 240, 0.548);
+  .SignUp_Page_Gender_Checkbox_select_Container p {
+    font-size: 0.8rem;
   }
   .SignUp_Page_Gender_Checkbox_select_Container div input {
     width: 20%;
     height: 40%;
     cursor: pointer;
   }
-  .SignUp_Page_Submit_Container {
-    width: 75%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 3%;
-    margin-bottom: 3%;
-  }
   .SignUp_Page_Submit_Container button {
-    width: 47%;
-    border-radius: 20px;
-    height: 2rem;
-    border-width: 0px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    cursor: pointer;
+    border-radius: 15px;
+    height: 1.9rem;
   }
   .SignUp_Page_SignUp_Button {
-    background-color: var(--primary-color);
-    color: white;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    transition-duration: 100ms;
-  }
-  .SignUp_Page_SignUp_Button:hover {
-    background-color: var(--primary-color-point-9);
+    font-size: 1rem;
   }
   .SignUp_Page_SignIn_Button {
-    width: 47%;
-    border-radius: 20px;
-    height: 2rem;
-    border-width: 0px;
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #b9adb775;
-    transition-duration: 100ms;
-    text-decoration: none;
-  }
-  .SignUp_Page_SignIn_Button:hover {
-    background-color: #c0b8bf75;
+    border-radius: 15px;
+    height: 1.9rem;
   }
   .SignUp_Page_SignIn_Button_Title {
-    font-size: 1.2rem;
-    color: rgb(71, 71, 71);
-    letter-spacing: 1px;
-    margin-right: 5%;
+    font-size: 1rem;
   }
-  .SignUp_Page_SignIn_Button_Icon {
-    color: rgb(71, 71, 71);
-  }
-}
-
-@media screen and (max-width: 700px) {
 }
 
 @media screen and (max-width: 550px) {
+  .SignUp_Page_Left_Half {
+    margin: 5% 0% 0% 0%;
+  }
+  .SignUp_Page_Logo {
+    font-size: 1.7rem;
+  }
+  .SignUp_Page_Logo::first-letter {
+    font-size: 2.7rem;
+  }
+  .SignUp_Page_Sign_Up_Logo {
+    font-size: 1.1rem;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 95%;
+  }
+  .SignUp_Page_SignUp_Container {
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(182, 182, 182);
+    margin: 9% 13% 10% 13%;
+    height: 550px;
+  }
+  .SignUp_Page_Input_Field_Container input {
+    width: 72%;
+    height: 2.3rem;
+    border-radius: 5px;
+  }
+  .SignUp_Page_SignUp_Form input:read-write {
+    padding-left: 10px;
+    font-size: 0.75rem;
+  }
+  .SignUp_Page_Birthday_Selection_Container p,
+  .SignUp_Page_Gender_Checkbox_Container p {
+    font-size: 0.75rem;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select {
+    height: 1.8rem;
+    border-radius: 5px;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
+    padding-left: 8px;
+    font-size: 0.75rem;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container div {
+    height: 1.8rem;
+    border-radius: 5px;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container p {
+    font-size: 0.75rem;
+  }
+  .SignUp_Page_Submit_Container button {
+    border-radius: 15px;
+    height: 1.8rem;
+  }
+  .SignUp_Page_SignUp_Button {
+    font-size: 0.95rem;
+  }
+  .SignUp_Page_SignIn_Button {
+    border-radius: 15px;
+    height: 1.8rem;
+  }
+  .SignUp_Page_SignIn_Button_Title {
+    font-size: 0.95rem;
+  }
 }
 
 @media screen and (max-width: 450px) {
+  .SignUp_Page_Left_Half {
+    margin: 5% 0% 0% 0%;
+  }
+  .SignUp_Page_Logo {
+    font-size: 1.7rem;
+  }
+  .SignUp_Page_Logo::first-letter {
+    font-size: 2.7rem;
+  }
+  .SignUp_Page_Sign_Up_Logo {
+    font-size: 1.1rem;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 97%;
+  }
+  .SignUp_Page_SignUp_Container {
+    height: 500px;
+  }
+  .SignUp_Page_Input_Field_Container input {
+    width: 72%;
+    height: 2.2rem;
+    border-radius: 4px;
+    border-width: 1.5px;
+  }
+  .SignUp_Page_SignUp_Form input:read-write {
+    padding-left: 10px;
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Birthday_Selection_Container p,
+  .SignUp_Page_Gender_Checkbox_Container p {
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select {
+    height: 1.6rem;
+    border-radius: 4px;
+    border-width: 1.5px;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
+    padding-left: 8px;
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container div {
+    height: 1.6rem;
+    border-radius: 4px;
+    border-width: 1.5px;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container p {
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Submit_Container button {
+    border-radius: 10px;
+    height: 1.8rem;
+  }
+  .SignUp_Page_SignUp_Button {
+    font-size: 0.9rem;
+  }
+  .SignUp_Page_SignIn_Button {
+    border-radius: 10px;
+    height: 1.8rem;
+  }
+  .SignUp_Page_SignIn_Button_Title {
+    font-size: 0.9rem;
+  }
 }
 @media screen and (max-width: 400px) {
+  .SignUp_Page_SignUp_Container {
+    border-radius: 7px;
+    box-shadow: 0px 0px 8px rgb(182, 182, 182);
+    margin: 9% 13% 10% 13%;
+    height: 95%;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 100%;
+  }
+  .SignUp_Page_Input_Field_Container input {
+    border-width: 1px;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select {
+    border-width: 1px;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container div {
+    border-width: 1px;
+  }
 }
 
 @media screen and (max-width: 300px) {
+  .SignUp_Page_Left_Half {
+    margin: 6% 0% 0% 0%;
+  }
+  .SignUp_Page_Logo {
+    font-size: 1.5rem;
+  }
+  .SignUp_Page_Logo::first-letter {
+    font-size: 2.5rem;
+  }
+  .SignUp_Page_Sign_Up_Logo {
+    font-size: 1rem;
+  }
+  .SignUp_Page_Rignt_Half {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .SignUp_Page_SignUp_Container {
+    height: 450px;
+    width: 90%;
+    margin: 0px;
+    margin-top: 5%;
+  }
+  .SignUp_Page_Input_Field_Container input {
+    width: 80%;
+    height: 2rem;
+    border-width: 1px;
+  }
+  .SignUp_Page_SignUp_Form input:read-write {
+    padding-left: 10px;
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Birthday_Selection_Container p,
+  .SignUp_Page_Gender_Checkbox_Container p {
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_Birthday_Selection_Container,
+  .SignUp_Page_Gender_Checkbox_Container {
+    width: 80%;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select {
+    height: 1.5rem;
+    border-radius: 3px;
+    border-width: 1px;
+  }
+  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
+    padding-left: 5px;
+    font-size: 0.6rem;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container div {
+    height: 1.5rem;
+    border-radius: 3px;
+    border-width: 1px;
+  }
+  .SignUp_Page_Gender_Checkbox_select_Container p {
+    font-size: 0.6rem;
+  }
+  .SignUp_Page_Submit_Container button {
+    border-radius: 5px;
+    height: 1.5rem;
+  }
+  .SignUp_Page_SignUp_Button {
+    font-size: 0.7rem;
+  }
+  .SignUp_Page_SignIn_Button {
+    border-radius: 5px;
+    height: 1.5rem;
+  }
+  .SignUp_Page_SignIn_Button_Title {
+    font-size: 0.7rem;
+  }
 }
