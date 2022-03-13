@@ -1,9 +1,13 @@
 {
   "name": "social_media_application",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "type": "module",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "start:node": "node src/index.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -32,17 +36,12 @@
     "uuid-v4": "^0.1.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
-    "start:node": "node src/index.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RomanOjha-git/ReactJs-Social-Media-Application.git"
   },
-  "author": "Roman ojha",
-  "license": "ISC",
+  "author": "Roman Ojha",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/RomanOjha-git/ReactJs-Social-Media-Application/issues"
   },
