@@ -21,6 +21,13 @@ export const messageListAction = (data) => {
   };
 };
 
+export const appendMessageOnMessageListAction = (data) => {
+  return {
+    type: "appendMessageOnMessageList",
+    payload: data,
+  };
+};
+
 export const userPostResponseData = (data) => {
   return {
     type: "UserPostResponseData",

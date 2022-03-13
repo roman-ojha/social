@@ -14,6 +14,7 @@ import {
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
   appendOnMessage,
+  appendMessageOnMessageListAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 import "../styles/react-components/messageBox.css";
@@ -267,6 +268,13 @@ const MessageBox = () => {
               appendOnMessage({
                 ...res.msgInfo,
                 _id: `${Math.random()}`,
+              })
+            );
+            dispatch(
+              appendMessageOnMessageListAction({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+                receiver: resBody.receiver,
               })
             );
           }
