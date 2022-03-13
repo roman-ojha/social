@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
 import { useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const SettingPage = () => {
     oldPassword: "",
     newPassword: "",
     cNewPassword: "",
+    imgUrl: "",
   });
   const getInputFieldData = (e) => {
     const name = e.target.name;
@@ -37,6 +38,22 @@ const SettingPage = () => {
       imageElement.setAttribute("src", URL.createObjectURL(image));
     } catch (e) {}
   };
+  useEffect(() => {
+    // checking is url is image or not
+    const imageElement = document.getElementsByClassName(
+      "Setting_Page_Change_Profile_Image"
+    )[0];
+    const img = new Image();
+    img.src = settingInputFieldData.imgUrl;
+    img.onload = () => {
+      // if url is image
+      imageElement.setAttribute("src", settingInputFieldData.imgUrl);
+    };
+    img.onerror = () => {
+      // if url is not image
+      imageElement.setAttribute("src", userProfileDetailStore.picture);
+    };
+  }, [settingInputFieldData.imgUrl]);
   return (
     <>
       <div className="SettingPage_Container">
@@ -69,6 +86,9 @@ const SettingPage = () => {
                 type="text"
                 placeholder="image url"
                 className="Setting_Page_Change_Profile_Url_Image_Input_Field"
+                name="imgUrl"
+                value={settingInputFieldData.imgUrl}
+                onChange={getInputFieldData}
               />
               <button>Change Profile Picture</button>
             </div>
