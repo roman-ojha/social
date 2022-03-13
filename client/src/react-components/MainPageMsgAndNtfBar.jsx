@@ -5,10 +5,11 @@ import { mainPageMessageViewOnOff } from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
+  const location = useLocation();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -19,17 +20,32 @@ const MainPageMsgAndNtfBar = () => {
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
-        <NavLink to="/u" className="MainPage_Message_Bar_Message_Outline">
-          <Icon
-            className="MainPage_Message_and_Notification_Bar_Icon"
-            icon="ant-design:message-filled"
-            onClick={() => {
-              messageOnOffDispatch(
-                mainPageMessageViewOnOff(!mainPageMessageOnOffState)
-              );
-            }}
-          />
-        </NavLink>
+        {location.pathname === "/u/message" ? (
+          <NavLink to="/u" className="MainPage_Message_Bar_Message_Outline">
+            <Icon
+              className="MainPage_Message_and_Notification_Bar_Icon"
+              icon="ant-design:message-filled"
+              onClick={() => {
+                messageOnOffDispatch(
+                  mainPageMessageViewOnOff(!mainPageMessageOnOffState)
+                );
+              }}
+            />
+          </NavLink>
+        ) : (
+          <div className="MainPage_Message_Bar_Message_Outline">
+            {" "}
+            <Icon
+              className="MainPage_Message_and_Notification_Bar_Icon"
+              icon="ant-design:message-filled"
+              onClick={() => {
+                messageOnOffDispatch(
+                  mainPageMessageViewOnOff(!mainPageMessageOnOffState)
+                );
+              }}
+            />
+          </div>
+        )}
         <div className="MainPage_Message_Bar_Notification_Outline">
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
