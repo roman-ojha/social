@@ -250,6 +250,69 @@ router.post(
         });
       }
       const rootUser = await varifyUser(req.cookies.AuthToken);
+      await compressFile(req.file.path);
+      fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
+      const metadata = {
+        metadata: {
+          firebaseStorageDownloadTokens: uuid(),
+        },
+        cacheControl: "public, max-age=31536000",
+      };
+      const uploadRes = await bucket.upload(`./db/build/${req.file.filename}`, {
+        destination: `images/${rootUser.email}/${req.file.filename}`,
+        gzip: true,
+        metadata: metadata,
+      });
+      fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
+      const caption = `${rootUser.userID} Update The Profile Picture`;
+      const picName = req.file.filename;
+      const picPath = `images/${rootUser.email}/${req.file.filename}`;
+      const picToken =
+        uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
+      const picBucket = process.env.FIREBASE_STORAGEBUCKET;
+      const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
+        picPath
+      )}?alt=media&token=${picToken}`;
+      const postID = crypto.randomBytes(16).toString("hex");
+      const userPostDetail = {
+        id: postID,
+        caption: caption,
+        picture: {
+          name: picName,
+          path: picPath,
+          url: picUrl,
+          firebaseStorageDownloadToken: picToken,
+          bucket: picBucket,
+        },
+        likes: {
+          No: 0,
+        },
+        comments: {
+          No: 0,
+        },
+      };
+      const uploadPostRes = await rootUser.uploadPost(userPostDetail);
+      if (uploadPostRes) {
+        const updateProfilePictureRes = await userDetail.updateOne(
+          {
+            userID: rootUser.userID,
+          },
+          { $set: { picture: picUrl } }
+        );
+        if (updateProfilePictureRes) {
+          return res.send({
+            success: true,
+            msg: "Successfully Change Profile Picture",
+            picture: picUrl,
+          });
+        }
+        return res
+          .status(500)
+          .json({ error: "Server Error!!, Please Try again letter" });
+      }
+      return res
+        .status(500)
+        .json({ error: "Server Error!!, Please Try again letter" });
     } catch (err) {
       return res
         .status(500)

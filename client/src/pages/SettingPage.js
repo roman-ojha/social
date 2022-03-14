@@ -65,7 +65,7 @@ const SettingPage = () => {
           withCredentials: true,
         });
         const resData = await res.data;
-        console.log(resData);
+        dispatch(changeUserProfilePictureAction(resData.picture));
       } else {
         const res = await axios({
           method: "POST",

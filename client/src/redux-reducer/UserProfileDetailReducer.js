@@ -6,7 +6,6 @@ const setUserProfileDetailReducer = (state = intitialState, action) => {
     case "userProfileDetail":
       return action.payload;
     case "changeUserProfilePicture":
-      console.log(action.payload);
       return {
         ...state,
         picture: action.payload,
