@@ -979,4 +979,38 @@ router.post("/changeUserID", authenticate, async (req, res) => {
   }
 });
 
+router.post("/changeName", authenticate, async (req, res) => {
+  try {
+    const newName = req.body.newName;
+    const rootUser = req.rootUser;
+    if (!newName) {
+      return res
+        .status(204)
+        .json({ success: false, msg: "Please Fill the displayName Field" });
+    }
+    const changeNameRes = await userDetail.updateOne(
+      {
+        userID: rootUser.userID,
+      },
+      { $set: { name: newName } }
+    );
+    if (changeNameRes) {
+      return res.json({
+        success: true,
+        msg: "Successfully Changed display Name",
+        userID: newUserID,
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  }
+});
+
 export default router;
