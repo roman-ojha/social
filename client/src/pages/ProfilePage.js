@@ -170,8 +170,8 @@ const SearchedProfilePage = () => {
             <div className="ProfilePage_UserInfo_Detail_Container">
               <div className="ProfilePage_UserInfo_UserName_Msg_Container">
                 <div className="ProfilePage_UserInfo_UserName_Container">
-                  <h1>{profilePageData.userID}</h1>
-                  <p>{profilePageData.name}</p>
+                  <h1>{profilePageData.name}</h1>
+                  <p>{profilePageData.userID}</p>
                 </div>
                 <div
                   className="ProfilePage_UserInfo_Message_Icon_Container"

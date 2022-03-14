@@ -7,6 +7,7 @@ import { instance as axios } from "../services/axios";
 import {
   changeUserProfilePictureAction,
   changeRootUserUserIDAction,
+  changeRootUserNameAction,
 } from "../redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 
@@ -50,8 +51,22 @@ const SettingPage = () => {
       }
     } catch (err) {}
   };
-  const changeName = (e) => {
-    e.preventDefault();
+  const changeName = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await axios({
+        method: "POST",
+        url: "/changeName",
+        data: { newName: settingInputFieldData.name },
+        withCredentials: true,
+      });
+      const resData = await res.data;
+      if (resData.success) {
+        dispatch(changeRootUserNameAction(resData.name));
+      } else {
+        // Toast
+      }
+    } catch (err) {}
   };
   const chnagePassword = (e) => {
     e.preventDefault();

@@ -63,6 +63,13 @@ export const changeRootUserUserIDAction = (data) => {
   };
 };
 
+export const changeRootUserNameAction = (data) => {
+  return {
+    type: "changeRootUserName",
+    payload: data,
+  };
+};
+
 export const userProfilePostAction = (value) => {
   return {
     type: "userProfilePost",

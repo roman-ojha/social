@@ -998,7 +998,7 @@ router.post("/changeName", authenticate, async (req, res) => {
       return res.json({
         success: true,
         msg: "Successfully Changed display Name",
-        userID: newUserID,
+        name: newName,
       });
     }
     return res.status(500).json({

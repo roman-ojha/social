@@ -15,6 +15,11 @@ const setUserProfileDetailReducer = (state = intitialState, action) => {
         ...state,
         userID: action.payload,
       };
+    case "changeRootUserName":
+      return {
+        ...state,
+        name: action.payload,
+      };
     default:
       return state;
   }
