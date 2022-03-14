@@ -50,13 +50,22 @@ const SettingPage = () => {
       imageElement.setAttribute("src", URL.createObjectURL(image));
     } catch (e) {}
   };
-  console.log(userProfileDetailStore);
   const changeProfilePicture = async (e) => {
     try {
       e.preventDefault();
       const imageFile = document.getElementById("user-profile-input").files[0];
       const imageUrl = settingInputFieldData.imgUrl;
       if (!isImgUrl) {
+        const data = new FormData();
+        data.append("image", imageFile);
+        const res = await axios({
+          method: "POST",
+          url: "/changeProfile/imgFile",
+          data: data,
+          withCredentials: true,
+        });
+        const resData = await res.data;
+        console.log(resData);
       } else {
         const res = await axios({
           method: "POST",

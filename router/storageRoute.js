@@ -9,15 +9,11 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import compressFile from "../functions/compressFile.js";
+import varifyUser from "../functions/varifyUser.js";
 const bucket = storage.bucket();
 router.post("/u/post", upload.single("image"), async (req, res) => {
   try {
-    const token = req.cookies.AuthToken;
-    const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-    const rootUser = await userDetail.findOne({
-      _id: verifyToken._id,
-      "tokens.token": token,
-    });
+    const rootUser = await varifyUser(req.cookies.AuthToken);
     if (!req.body.caption && !req.file) {
       // if user doesn't fill the any filed
       return res.status(401).json({ error: "Please fill the post properly" });
@@ -54,13 +50,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
         return res.status(401).json({ error: "Authetication error" });
       }
     } else {
-      // if user fill both field
-      const token = req.cookies.AuthToken;
-      const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-      const rootUser = await userDetail.findOne({
-        _id: verifyToken._id,
-        "tokens.token": token,
-      });
+      const rootUser = await varifyUser(req.cookies.AuthToken);
       if (rootUser) {
         // uploading image to firebase Storage
         await compressFile(req.file.path);
@@ -246,5 +236,26 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
       .json({ error: "Server Error!!, Please Try again letter" });
   }
 });
+
+router.post(
+  "/changeProfile/imgFile",
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.json({
+          success: false,
+          msg: "File Doesn't exist, Please Send us File",
+        });
+      }
+      const rootUser = await varifyUser(req.cookies.AuthToken);
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: "Server Error!!, Please Try again letter" });
+    }
+  }
+);
 
 export default router;
