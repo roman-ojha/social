@@ -4,7 +4,10 @@ import "../styles/pages/settingPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { instance as axios } from "../services/axios";
-import { changeUserProfilePictureAction } from "../redux-actions";
+import {
+  changeUserProfilePictureAction,
+  changeRootUserUserIDAction,
+} from "../redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 
 const SettingPage = () => {
@@ -41,6 +44,7 @@ const SettingPage = () => {
       });
       const resData = await res.data;
       if (resData.success) {
+        dispatch(changeRootUserUserIDAction(resData.userID));
       } else {
         // Toast
       }

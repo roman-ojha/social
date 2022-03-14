@@ -964,6 +964,7 @@ router.post("/changeUserID", authenticate, async (req, res) => {
       return res.json({
         success: true,
         msg: "Successfully Changed userID",
+        userID: newUserID,
       });
     }
     return res.status(500).json({

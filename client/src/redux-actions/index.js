@@ -56,6 +56,13 @@ export const changeUserProfilePictureAction = (data) => {
   };
 };
 
+export const changeRootUserUserIDAction = (data) => {
+  return {
+    type: "changeRootUserUserID",
+    payload: data,
+  };
+};
+
 export const userProfilePostAction = (value) => {
   return {
     type: "userProfilePost",
