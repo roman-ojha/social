@@ -897,4 +897,45 @@ router.post("/post/like", authenticate, async (req, res) => {
   }
 });
 
+router.post("/changeProfile/imgUrl", authenticate, async (req, res) => {
+  try {
+    const imageUrl = req.body.imageUrl;
+    const rootUser = req.rootUser;
+    if (!imageUrl) {
+      return res.json({ success: false, msg: "Please Fill Image URL" });
+    }
+    const caption = `${rootUser.userID} Change The Profile Picture`;
+    const postID = crypto.randomBytes(16).toString("hex");
+    const userPostDetail = {
+      id: postID,
+      caption: caption,
+      picture: {
+        url: imageUrl,
+      },
+      likes: {
+        No: 0,
+      },
+      comments: {
+        No: 0,
+      },
+    };
+    await rootUser.uploadPost(userPostDetail);
+    await userDetail.updateOne(
+      {
+        userID: rootUser.userID,
+      },
+      { $set: { picture: imageUrl } }
+    );
+    return res.send({
+      success: true,
+      msg: "Successfully Change Profile Picture",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  }
+});
+
 export default router;

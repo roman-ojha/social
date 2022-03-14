@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
 import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
+import { instance as axios } from "../services/axios";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -16,6 +17,7 @@ const SettingPage = () => {
     cNewPassword: "",
     imgUrl: "",
   });
+  const [isImgUrl, setIsImgUrl] = useState(false);
   const getInputFieldData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -46,6 +48,27 @@ const SettingPage = () => {
       imageElement.setAttribute("src", URL.createObjectURL(image));
     } catch (e) {}
   };
+  const changeProfilePicture = async (e) => {
+    e.preventDefault();
+    const imageFile = document.getElementById("user-profile-input").files[0];
+    const imageUrl = settingInputFieldData.imgUrl;
+    if (!isImgUrl) {
+    } else {
+      const res = await axios({
+        method: "POST",
+        url: "/changeProfile/imgUrl",
+        data: {
+          imageUrl,
+        },
+        withCredentials: true,
+      });
+      const resData = await res.data;
+      if (resData.success) {
+      } else {
+        // toast
+      }
+    }
+  };
   useEffect(() => {
     // checking is url is image or not
     const imageElement = document.getElementsByClassName(
@@ -56,10 +79,21 @@ const SettingPage = () => {
     img.onload = () => {
       // if url is image
       imageElement.setAttribute("src", settingInputFieldData.imgUrl);
+      setIsImgUrl(true);
     };
     img.onerror = () => {
       // if url is not image
-      imageElement.setAttribute("src", userProfileDetailStore.picture);
+      if (document.getElementById("user-profile-input").files[0]) {
+        imageElement.setAttribute(
+          "src",
+          URL.createObjectURL(
+            document.getElementById("user-profile-input").files[0]
+          )
+        );
+      } else {
+        imageElement.setAttribute("src", userProfileDetailStore.picture);
+      }
+      setIsImgUrl(false);
     };
   }, [settingInputFieldData.imgUrl]);
   return (
@@ -98,7 +132,9 @@ const SettingPage = () => {
                 value={settingInputFieldData.imgUrl}
                 onChange={getInputFieldData}
               />
-              <button>Change Profile Picture</button>
+              <button onClick={changeProfilePicture}>
+                Change Profile Picture
+              </button>
             </div>
           </div>
           <div className="Setting_Page_Change_Profile_Picture_Container_Bottom_Part">
