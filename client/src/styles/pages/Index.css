@@ -1,0 +1,81 @@
+.LoadingScreen_Page_Container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.LoadingScreen_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.LoadingScreen_Title {
+  font-family: var(--primary-font-family);
+  font-size: 2.5rem;
+  color: var(--primary-color);
+}
+.LoadingScreen_Title::first-letter {
+  font-size: 3rem;
+}
+.LoadingScreen_App_Icon {
+  width: 6rem;
+  height: 6rem;
+}
+.LoadingScreen_Loading_Div {
+  width: 250px;
+  height: 7px;
+  background-color: white;
+  margin-top: 50px;
+  border-radius: 10px;
+  display: flex;
+  /* justify-content: space-between; */
+  position: relative;
+}
+@keyframes leftPartAnimation {
+  50% {
+    width: 0%;
+    left: 0%;
+  }
+  100% {
+    width: 50%;
+  }
+}
+.LoadingScreen_Loading_Left_Part {
+  height: 100%;
+  position: absolute;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  animation-name: leftPartAnimation;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rightPartAnimation {
+  0% {
+    width: 50%;
+    left: 0%;
+  }
+  50% {
+    width: 50%;
+    left: 50%;
+  }
+  100% {
+    width: 0%;
+    left: 100%;
+  }
+}
+.LoadingScreen_Loading_Right_Part {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  animation-name: rightPartAnimation;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}

@@ -3,6 +3,7 @@ import MainPageSideBar from "../react-components/MainPageSideBar";
 import MainPageStory from "../react-components/MainPageStory";
 import MainPageMsgAndNtfBar from "../react-components/MainPageMsgAndNtfBar";
 import MainPageRightSideComp from "../react-components/MainPageRightSideComp";
+import AppIcon from "../assets/icons/Social_Icon.ico";
 import HomePage from "./HomePage";
 import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
@@ -21,6 +22,7 @@ import {
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
+import "../styles/pages/Index.css";
 const RoutingMainPage = () => {
   return (
     <>
@@ -31,6 +33,23 @@ const RoutingMainPage = () => {
         <Route exact path="/u/setting" component={SettingPage} />
         <Route exact path={`/u/profile/:userID`} component={ProfilePage} />
       </Switch>
+    </>
+  );
+};
+
+const LoadingScreen = () => {
+  return (
+    <>
+      <div className="LoadingScreen_Page_Container">
+        <h1 className="LoadingScreen_Title">Welcome To Social</h1>
+        <div className="LoadingScreen_Container">
+          <img className="LoadingScreen_App_Icon" src={AppIcon} />
+          <div className="LoadingScreen_Loading_Div">
+            <div className="LoadingScreen_Loading_Left_Part"></div>
+            <div className="LoadingScreen_Loading_Right_Part"></div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
@@ -94,7 +113,7 @@ const Index = () => {
   return (
     <>
       <div className="MainPage_Container">
-        {renderMainPage ? <ReturnMainPage /> : ""}
+        {renderMainPage ? <ReturnMainPage /> : <LoadingScreen />}
       </div>
     </>
   );

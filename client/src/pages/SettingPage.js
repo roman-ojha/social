@@ -10,6 +10,8 @@ import {
   changeRootUserNameAction,
 } from "../redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -103,7 +105,6 @@ const SettingPage = () => {
         if (resData.success) {
           dispatch(changeUserProfilePictureAction(resData.picture));
         } else {
-          // Toast
         }
         setUserPostResponseLoading(false);
       } else {
@@ -116,11 +117,11 @@ const SettingPage = () => {
           },
           withCredentials: true,
         });
+        console.log(await res.data);
         const resData = await res.data;
         if (resData.success) {
           dispatch(changeUserProfilePictureAction(imageUrl));
         } else {
-          // toast
         }
         setUserPostResponseLoading(false);
       }
@@ -157,6 +158,7 @@ const SettingPage = () => {
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : ""}
       <div className="SettingPage_Container">
+        <ToastContainer />
         <Helmet>
           <title>Setting</title>
         </Helmet>
