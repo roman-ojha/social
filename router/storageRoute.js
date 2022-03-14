@@ -244,7 +244,7 @@ router.post(
     try {
       const file = req.file;
       if (!file) {
-        return res.json({
+        return res.status(204).json({
           success: false,
           msg: "File Doesn't exist, Please Send us File",
         });

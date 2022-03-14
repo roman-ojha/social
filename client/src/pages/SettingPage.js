@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { instance as axios } from "../services/axios";
 import { changeUserProfilePictureAction } from "../redux-actions";
+import LoadingSpinner from "../react-components/LoadingSpinner";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -20,6 +21,7 @@ const SettingPage = () => {
     imgUrl: "",
   });
   const [isImgUrl, setIsImgUrl] = useState(false);
+  const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
   const getInputFieldData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -56,6 +58,7 @@ const SettingPage = () => {
       const imageFile = document.getElementById("user-profile-input").files[0];
       const imageUrl = settingInputFieldData.imgUrl;
       if (!isImgUrl) {
+        setUserPostResponseLoading(true);
         const data = new FormData();
         data.append("image", imageFile);
         const res = await axios({
@@ -65,8 +68,14 @@ const SettingPage = () => {
           withCredentials: true,
         });
         const resData = await res.data;
-        dispatch(changeUserProfilePictureAction(resData.picture));
+        if (resData.success) {
+          dispatch(changeUserProfilePictureAction(resData.picture));
+        } else {
+          // Toast
+        }
+        setUserPostResponseLoading(false);
       } else {
+        setUserPostResponseLoading(true);
         const res = await axios({
           method: "POST",
           url: "/changeProfile/imgUrl",
@@ -77,10 +86,11 @@ const SettingPage = () => {
         });
         const resData = await res.data;
         if (resData.success) {
+          dispatch(changeUserProfilePictureAction(imageUrl));
         } else {
           // toast
         }
-        dispatch(changeUserProfilePictureAction(imageUrl));
+        setUserPostResponseLoading(false);
       }
     } catch (err) {}
   };
@@ -113,6 +123,7 @@ const SettingPage = () => {
   }, [settingInputFieldData.imgUrl]);
   return (
     <>
+      {userPostResponseLoading ? <LoadingSpinner /> : ""}
       <div className="SettingPage_Container">
         <Helmet>
           <title>Setting</title>
