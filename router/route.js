@@ -938,4 +938,44 @@ router.post("/changeProfile/imgUrl", authenticate, async (req, res) => {
   }
 });
 
+router.post("/changeUserID", authenticate, async (req, res) => {
+  try {
+    const newUserID = req.body.newUserID;
+    const oldUserID = req.rootUser.userID;
+    if (!newUserID) {
+      return res
+        .status(204)
+        .json({ success: false, msg: "Please Fill the userID Field" });
+    }
+    const userIDAlreadyExist = await userDetail.findOne({ userID: newUserID });
+    if (userIDAlreadyExist) {
+      return res.json({
+        success: false,
+        msg: "given userID already Exist, Please Try another one",
+      });
+    }
+    const changeUserIDRes = await userDetail.updateOne(
+      {
+        userID: oldUserID,
+      },
+      { $set: { userID: newUserID } }
+    );
+    if (changeUserIDRes) {
+      return res.json({
+        success: true,
+        msg: "Successfully Changed userID",
+      });
+    }
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      msg: "server Error, Please try again letter!!!",
+    });
+  }
+});
+
 export default router;

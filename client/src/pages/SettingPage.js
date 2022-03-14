@@ -30,8 +30,21 @@ const SettingPage = () => {
       [name]: value,
     });
   };
-  const changeUserID = (e) => {
-    e.preventDefault();
+  const changeUserID = async (e) => {
+    try {
+      e.preventDefault();
+      const res = await axios({
+        method: "POST",
+        url: "/changeUserID",
+        data: { newUserID: settingInputFieldData.userID },
+        withCredentials: true,
+      });
+      const resData = await res.data;
+      if (resData.success) {
+      } else {
+        // Toast
+      }
+    } catch (err) {}
   };
   const changeName = (e) => {
     e.preventDefault();
