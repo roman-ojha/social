@@ -10,6 +10,7 @@ import {
   changeRootUserNameAction,
 } from "../redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
+import Toast, { toastMessage } from "./Toast";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -153,8 +154,10 @@ const SettingPage = () => {
       setIsImgUrl(false);
     };
   }, [settingInputFieldData.imgUrl]);
+  toastMessage("done", "hello");
   return (
     <>
+      <Toast />
       {userPostResponseLoading ? <LoadingSpinner /> : ""}
       <div className="SettingPage_Container">
         <Helmet>

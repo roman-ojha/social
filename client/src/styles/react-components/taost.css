@@ -1,0 +1,9 @@
+.Toast_Container {
+  position: absolute;
+  z-index: 100;
+  width: 500px;
+  height: 100px;
+  background-color: blue;
+  top: 3%;
+  left: calc(50% - 250px);
+}
