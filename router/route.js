@@ -904,7 +904,7 @@ router.post("/changeProfile/imgUrl", authenticate, async (req, res) => {
     if (!imageUrl) {
       return res.json({ success: false, msg: "Please Fill Image URL" });
     }
-    const caption = `${rootUser.userID} Change The Profile Picture`;
+    const caption = `${rootUser.userID} Update The Profile Picture`;
     const postID = crypto.randomBytes(16).toString("hex");
     const userPostDetail = {
       id: postID,

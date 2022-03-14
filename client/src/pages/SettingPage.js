@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { instance as axios } from "../services/axios";
+import { changeUserProfilePictureAction } from "../redux-actions";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const dispatch = useDispatch();
   const [settingInputFieldData, setSettingInputFieldData] = useState({
     userID: "",
     name: "",
@@ -48,26 +50,30 @@ const SettingPage = () => {
       imageElement.setAttribute("src", URL.createObjectURL(image));
     } catch (e) {}
   };
+  console.log(userProfileDetailStore);
   const changeProfilePicture = async (e) => {
-    e.preventDefault();
-    const imageFile = document.getElementById("user-profile-input").files[0];
-    const imageUrl = settingInputFieldData.imgUrl;
-    if (!isImgUrl) {
-    } else {
-      const res = await axios({
-        method: "POST",
-        url: "/changeProfile/imgUrl",
-        data: {
-          imageUrl,
-        },
-        withCredentials: true,
-      });
-      const resData = await res.data;
-      if (resData.success) {
+    try {
+      e.preventDefault();
+      const imageFile = document.getElementById("user-profile-input").files[0];
+      const imageUrl = settingInputFieldData.imgUrl;
+      if (!isImgUrl) {
       } else {
-        // toast
+        const res = await axios({
+          method: "POST",
+          url: "/changeProfile/imgUrl",
+          data: {
+            imageUrl,
+          },
+          withCredentials: true,
+        });
+        const resData = await res.data;
+        if (resData.success) {
+        } else {
+          // toast
+        }
+        dispatch(changeUserProfilePictureAction(imageUrl));
       }
-    }
+    } catch (err) {}
   };
   useEffect(() => {
     // checking is url is image or not
