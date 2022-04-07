@@ -71,18 +71,25 @@ const SettingPage = () => {
     } catch (err) {}
   };
   const changePassword = async (e) => {
-    e.preventDefault();
-    const res = await axios({
-      method: "POST",
-      url: "/changePassword",
-      withCredentials: true,
-      data: {
-        oldPassword: settingInputFieldData.oldPassword,
-        newPassword: settingInputFieldData.newPassword,
-        cNewPassword: settingInputFieldData.cNewPassword,
-      },
-    });
-    console.log(await res.data);
+    try {
+      e.preventDefault();
+      const res = await axios({
+        method: "POST",
+        url: "/changePassword",
+        data: {
+          oldPassword: settingInputFieldData.oldPassword,
+          newPassword: settingInputFieldData.newPassword,
+          cNewPassword: settingInputFieldData.cNewPassword,
+        },
+        withCredentials: true,
+      });
+      const data = await res.data;
+      if (res.status != 200) {
+        // Some Error
+      } else {
+        // console.log(data.msg);
+      }
+    } catch (err) {}
   };
   const deleteUser = (e) => {
     e.preventDefault();

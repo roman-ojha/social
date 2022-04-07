@@ -1014,29 +1014,50 @@ router.post("/changeName", authenticate, async (req, res) => {
 });
 
 router.post("/changePassword", authenticate, async (req, res) => {
-  const { oldPassword, newPassword, cNewPassword } = req.body;
-  if (!cNewPassword || !oldPassword || !newPassword) {
-    return res
-      .status(204)
-      .json({ success: false, msg: "Please fill the field properly" });
-  }
-  if (newPassword !== cNewPassword) {
-    return res
-      .status(204)
-      .json({ success: false, msg: "password doesn't match" });
-  }
-  const nPassword = await bcrypt.hash(newPassword, 12);
-  console.log(nPassword);
-  const changePassRes = await userDetail.updateOne(
-    {
-      userID: rootUser.userID,
-    },
-    {
-      $set: { password: nPassword, cpassword: nPassword },
+  try {
+    const { oldPassword, newPassword, cNewPassword } = req.body;
+    if (!cNewPassword || !oldPassword || !newPassword) {
+      return res
+        .status(204)
+        .json({ success: false, msg: "Please fill the field properly" });
     }
-  );
-  console.log(changePassRes);
-  return res.send("hello");
+    if (newPassword !== cNewPassword) {
+      return res
+        .status(204)
+        .json({ success: false, msg: "password doesn't match" });
+    }
+    const nPassword = await bcrypt.hash(newPassword, 12);
+    const userRes = await userDetail.findOne(
+      {
+        userID: req.rootUser.userID,
+      },
+      {
+        password: 1,
+      }
+    );
+    const isPasswordMatch = await bcrypt.compare(oldPassword, userRes.password);
+    if (!isPasswordMatch) {
+      return res
+        .status(401)
+        .json({ success: false, msg: "Old Password is incorrect" });
+    }
+    const changePassRes = await userDetail.updateOne(
+      {
+        userID: req.rootUser.userID,
+      },
+      {
+        $set: { password: nPassword, cpassword: nPassword },
+      }
+    );
+    if (!changePassRes) {
+      return res.status(500).json({ success: false, msg: "Server Error" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, msg: "Changed Password Successfully" });
+  } catch (err) {
+    return res.status(500).json({ success: false, msg: "Server Error" });
+  }
 });
 
 export default router;
