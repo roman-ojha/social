@@ -1,0 +1,43 @@
+.page404 {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url(../../assets/svg/404_not_found.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-size: 50rem; */
+  background-size: cover;
+}
+.page404_Title_Button_Container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid red; */
+}
+.page404_Title_Button_Container div {
+  display: flex;
+  /* border: 1px solid blue; */
+  position: relative;
+}
+.page404_Title_Button_Container div h1 {
+  color: #b981e4;
+  font-size: 13rem;
+  font-family: var(--primary-font-family);
+}
+.page404_Title_Button_Container button {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: var(--secondary-color);
+  color: white;
+  border-width: 0px;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+.page404_Title_Button_Container button:hover {
+  background-color: var(--secondary-color-point-9);
+}
