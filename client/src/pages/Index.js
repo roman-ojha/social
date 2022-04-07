@@ -9,6 +9,7 @@ import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
+import Page404 from "./Page404";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -23,6 +24,7 @@ import {
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
 import "../styles/pages/Index.css";
+import "../styles/pages/page404.css";
 const RoutingMainPage = () => {
   return (
     <>
@@ -32,6 +34,16 @@ const RoutingMainPage = () => {
         <Route exact path="/u/message" component={MessagePage} />
         <Route exact path="/u/setting" component={SettingPage} />
         <Route exact path={`/u/profile/:userID`} component={ProfilePage} />
+        <Route
+          path="*"
+          component={() => {
+            return (
+              <div className="page404_User_Page">
+                <Page404 />
+              </div>
+            );
+          }}
+        />
       </Switch>
     </>
   );

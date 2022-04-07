@@ -41,3 +41,10 @@
 .page404_Title_Button_Container button:hover {
   background-color: var(--secondary-color-point-9);
 }
+
+.page404_User_Page {
+  position: relative;
+  width: 50%;
+  left: 20%;
+  top: 14vh;
+}

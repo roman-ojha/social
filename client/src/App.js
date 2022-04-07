@@ -21,8 +21,8 @@ const App = () => {
         <Route path="/u" component={Index} />
         <Route exact path="/signin" component={SignInPage} />
         <Route exact path="/register" component={SignUpPage} />
-        <Route path="/userid" component={GetUserIDPage} />
-        <Route path="/404" component={Page404} />
+        <Route exact path="/userid" component={GetUserIDPage} />
+        <Route path="*" component={Page404} />
       </Switch>
     </>
   );
