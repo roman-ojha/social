@@ -1013,4 +1013,30 @@ router.post("/changeName", authenticate, async (req, res) => {
   }
 });
 
+router.post("/changePassword", authenticate, async (req, res) => {
+  const { oldPassword, newPassword, cNewPassword } = req.body;
+  if (!cNewPassword || !oldPassword || !newPassword) {
+    return res
+      .status(204)
+      .json({ success: false, msg: "Please fill the field properly" });
+  }
+  if (newPassword !== cNewPassword) {
+    return res
+      .status(204)
+      .json({ success: false, msg: "password doesn't match" });
+  }
+  const nPassword = await bcrypt.hash(newPassword, 12);
+  console.log(nPassword);
+  const changePassRes = await userDetail.updateOne(
+    {
+      userID: rootUser.userID,
+    },
+    {
+      $set: { password: nPassword, cpassword: nPassword },
+    }
+  );
+  console.log(changePassRes);
+  return res.send("hello");
+});
+
 export default router;

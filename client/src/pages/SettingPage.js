@@ -70,8 +70,19 @@ const SettingPage = () => {
       }
     } catch (err) {}
   };
-  const chnagePassword = (e) => {
+  const changePassword = async (e) => {
     e.preventDefault();
+    const res = await axios({
+      method: "POST",
+      url: "/changePassword",
+      withCredentials: true,
+      data: {
+        oldPassword: settingInputFieldData.oldPassword,
+        newPassword: settingInputFieldData.newPassword,
+        cNewPassword: settingInputFieldData.cNewPassword,
+      },
+    });
+    console.log(await res.data);
   };
   const deleteUser = (e) => {
     e.preventDefault();
@@ -250,13 +261,13 @@ const SettingPage = () => {
           />
           <form>
             <input
-              type="gmail"
+              type="password"
               placeholder="Conform password"
               name="cNewPassword"
               value={settingInputFieldData.cNewPassword}
               onChange={getInputFieldData}
             />
-            <button onClick={chnagePassword}>Change</button>
+            <button onClick={changePassword}>Change</button>
           </form>
           <p>Don't Forgot Your Password</p>
         </div>
