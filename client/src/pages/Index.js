@@ -9,6 +9,7 @@ import VideoPage from "./VideoPage";
 import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
+import CommentBox from "../react-components/CommentBox";
 import Page404 from "./Page404";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -114,6 +115,7 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
+        <CommentBox />
         <MainPageSideBar />
         <MainPageStory />
         <RoutingMainPage />
