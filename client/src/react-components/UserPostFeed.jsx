@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
+import { openCommentBoxAction } from "../redux-actions";
 
 const UserPostFeed = (props) => {
   const history = useHistory();

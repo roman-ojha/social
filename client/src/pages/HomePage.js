@@ -15,6 +15,7 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import CommentBox from "../react-components/CommentBox";
 
 const HomePage = () => {
   const history = useHistory();
@@ -37,6 +38,7 @@ const HomePage = () => {
     (state) => state.setUserProfilePostReducer
   );
   const [viewValue, setViewValue] = useState("min");
+  const [comment, setComment] = useState(false);
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
@@ -303,7 +305,8 @@ const HomePage = () => {
   };
   return (
     <>
-      {userPostResponseLoading ? <LoadingSpinner /> : ""}
+      {userPostResponseLoading ? <LoadingSpinner /> : <></>}
+      {comment ? <CommentBox /> : <></>}
       <div className="HomePage_Container">
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />

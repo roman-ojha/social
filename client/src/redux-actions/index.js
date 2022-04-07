@@ -133,3 +133,10 @@ export const userStoriesAction = (data) => {
     payload: data,
   };
 };
+
+export const openCommentBoxAction = (data) => {
+  return {
+    type: "openCommentBox",
+    payload: data,
+  };
+};
