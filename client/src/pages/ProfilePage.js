@@ -14,13 +14,17 @@ import { useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
+import CommentBox from "../react-components/CommentBox";
 
-const SearchedProfilePage = () => {
+const ProfilePage = () => {
   const params = useParams();
   const [fetchedAllData, setFetchedAllData] = useState(false);
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
+  );
+  const openCommentBoxStore = useSelector(
+    (state) => state.openCommentBoxReducer
   );
   const dispatch = useDispatch();
   const profilePageMainInformation = {
@@ -151,6 +155,7 @@ const SearchedProfilePage = () => {
   });
   return (
     <>
+      {openCommentBoxStore ? <CommentBox /> : <></>}
       {fetchedAllData ? (
         <div className="ProfilePage_Container">
           <Helmet>
@@ -254,4 +259,4 @@ const SearchedProfilePage = () => {
   );
 };
 
-export default SearchedProfilePage;
+export default ProfilePage;
