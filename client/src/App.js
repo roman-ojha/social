@@ -5,6 +5,7 @@ import Index from "./pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./pages/GetUserIDPage";
+import Page404 from "./pages/Page404";
 
 const MainRoot = () => {
   const history = useHistory();
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path="/signin" component={SignInPage} />
         <Route exact path="/register" component={SignUpPage} />
         <Route path="/userid" component={GetUserIDPage} />
+        <Route path="/404" component={Page404} />
       </Switch>
     </>
   );
