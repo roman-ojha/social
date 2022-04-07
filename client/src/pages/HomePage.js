@@ -37,8 +37,10 @@ const HomePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
+  const openCommentBoxStore = useSelector(
+    (state) => state.openCommentBoxReducer
+  );
   const [viewValue, setViewValue] = useState("min");
-  const [comment, setComment] = useState(false);
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
@@ -306,7 +308,7 @@ const HomePage = () => {
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
-      {comment ? <CommentBox /> : <></>}
+      {openCommentBoxStore ? <CommentBox /> : <></>}
       <div className="HomePage_Container">
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />

@@ -1,9 +1,22 @@
 import React from "react";
 import "../styles/react-components/CommentBox.css";
 import { Icon } from "@iconify/react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { openCommentBoxAction } from "../redux-actions";
 const CommentBox = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    document
+      .getElementsByClassName("CommentBox_Container")[0]
+      .addEventListener("click", (e) => {
+        if (
+          !document.getElementsByClassName("CommentBox")[0].contains(e.target)
+        ) {
+          dispatch(openCommentBoxAction(false));
+        }
+      });
+  }, []);
   const userProfileDetail = useSelector(
     (state) => state.setUserProfileDetailReducer
   );

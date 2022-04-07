@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
 import { openCommentBoxAction } from "../redux-actions";
 
 const UserPostFeed = (props) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   let uploadedTime;
   const userProfileDetailStore = useSelector(
@@ -165,6 +166,9 @@ const UserPostFeed = (props) => {
               <Icon
                 className="HomePage_Feed__Comment_Icon"
                 icon="akar-icons:comment"
+                onClick={() => {
+                  dispatch(openCommentBoxAction(true));
+                }}
               />
               <p>{props.userFeedData.comments.No}</p>
             </div>
