@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles/pages/page404.css";
-import Img404 from "../assets/svg/404_not_found.svg";
+import { useHistory } from "react-router-dom";
 
 const Page404 = () => {
+  const history = useHistory();
   return (
     <>
       <div className="page404">
@@ -10,7 +11,13 @@ const Page404 = () => {
           <div className="page404_Title">
             <h1>404</h1>
           </div>
-          <button type="submit">Home</button>
+          <button
+            onClick={() => {
+              history.push("/u");
+            }}
+          >
+            Home
+          </button>
         </div>
         {/* <img src={Img404} alt="404" /> */}
       </div>
