@@ -34,34 +34,34 @@ const CommentBox = () => {
   }, []);
 
   const comment = async () => {
-    dispatch(
-      incrementPostCommentNumber({
-        postID: commentBoxStore.postID,
-        to: commentBoxStore.to,
-      })
-    );
-    // try {
-    //   const res = await axios({
-    //     url: "/post/comment",
-    //     method: "POST",
-    //     data: {
-    //       comment: commentInputFieldData,
-    //       postID: commentBoxStore.postID,
-    //       to: commentBoxStore.to,
-    //     },
-    //     withCredentials: true,
-    //   });
-    //   const data = await res.data;
-    //   if (res.status !== 200 && data.success) {
-    //     // Error
-    //   } else {
-    //     dispatch(
-    //       commentBoxAction({ openCommentBox: false, postID: "", to: "" })
-    //     );
-    //   }
-    // } catch (err) {
-    //   // console.log(err);
-    // }
+    try {
+      const res = await axios({
+        url: "/post/comment",
+        method: "POST",
+        data: {
+          comment: commentInputFieldData,
+          postID: commentBoxStore.postID,
+          to: commentBoxStore.to,
+        },
+        withCredentials: true,
+      });
+      const data = await res.data;
+      if (res.status !== 200 && data.success) {
+        // Error
+      } else {
+        dispatch(
+          incrementPostCommentNumber({
+            postID: commentBoxStore.postID,
+            to: commentBoxStore.to,
+          })
+        );
+        dispatch(
+          commentBoxAction({ openCommentBox: false, postID: "", to: "" })
+        );
+      }
+    } catch (err) {
+      // console.log(err);
+    }
   };
 
   return (
