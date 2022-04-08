@@ -34,7 +34,12 @@ const CommentBox = () => {
   }, []);
 
   const comment = async () => {
-    dispatch(incrementPostCommentNumber(commentBoxStore.postID));
+    dispatch(
+      incrementPostCommentNumber({
+        postID: commentBoxStore.postID,
+        to: commentBoxStore.to,
+      })
+    );
     // try {
     //   const res = await axios({
     //     url: "/post/comment",
