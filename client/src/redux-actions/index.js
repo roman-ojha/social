@@ -77,6 +77,13 @@ export const userProfilePostAction = (value) => {
   };
 };
 
+export const incrementPostCommentNumber = (data) => {
+  return {
+    type: "incrementPostCommentNumber",
+    payload: data,
+  };
+};
+
 export const profilePageDataAction = (value) => {
   return {
     type: "profilePageDataAction",

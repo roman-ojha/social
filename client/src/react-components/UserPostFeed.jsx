@@ -19,6 +19,7 @@ const UserPostFeed = (props) => {
     isLikedPost: false,
     likeNo: props.userFeedData.likes.No,
   });
+  const [postCommentNumber, setPostCommentNumber] = useState(0);
   const userPostdate = new Date(props.userFeedData.date);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
@@ -95,7 +96,12 @@ const UserPostFeed = (props) => {
         (el) => el.userID === userProfileDetailStore.userID
       ),
     });
+    setPostCommentNumber(props.userFeedData.comments.No);
   }, []);
+  const incrementCommentNumber = () => {
+    console.log("hello");
+    setPostCommentNumber(postCommentNumber + 1);
+  };
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -177,7 +183,7 @@ const UserPostFeed = (props) => {
                   );
                 }}
               />
-              <p>{props.userFeedData.comments.No}</p>
+              <p>{postCommentNumber}</p>
             </div>
             <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
             <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />

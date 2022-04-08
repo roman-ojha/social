@@ -28,8 +28,7 @@ const HomePage = () => {
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
-  const userPostResponseDataDispatch = useDispatch();
-  const homePageUserPostFieldDataDispatch = useDispatch();
+  const dispatch = useDispatch();
   const followedUserPostDataStore = useSelector(
     (state) => state.setFollowedUserPostDataReducer
   );
@@ -86,7 +85,7 @@ const HomePage = () => {
             <Picker
               set="facebook"
               onSelect={(emoji) => {
-                homePageUserPostFieldDataDispatch(
+                dispatch(
                   homePageUserPostFieldDataAction({
                     ...homePageUserPostFieldData,
                     content: homePageUserPostFieldData.content + emoji.native,
@@ -135,7 +134,7 @@ const HomePage = () => {
           });
           const resData = await res.data;
           if (res.status === 201) {
-            userPostResponseDataDispatch(userPostResponseData(resData));
+            dispatch(userPostResponseData(resData));
           }
           console.log(resData);
           setUserPostResponseLoading(false);
@@ -210,7 +209,7 @@ const HomePage = () => {
                   className="HomePage_MaxView_UserPost_Field_Emoji_Icon"
                   icon="entypo:emoji-happy"
                   onClick={() => {
-                    homePageUserPostFieldDataDispatch(
+                    dispatch(
                       homePageUserPostFieldDataAction({
                         ...homePageUserPostFieldData,
                         content: userPostData,
@@ -238,7 +237,7 @@ const HomePage = () => {
                 className="HomePage_MaxView_UserPost_Field_Back_Icon"
                 icon="eva:arrow-back-fill"
                 onClick={() => {
-                  homePageUserPostFieldDataDispatch(
+                  dispatch(
                     homePageUserPostFieldDataAction({
                       ...homePageUserPostFieldData,
                       content: userPostData,

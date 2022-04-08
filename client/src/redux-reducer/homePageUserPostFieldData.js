@@ -11,6 +11,10 @@ const homePageUserPostFieldDataReducer = (state = initialState, action) => {
       content,
       image,
     };
+  } else if (action.type === "incrementPostCommentNumber") {
+    console.log(state);
+    console.log(action.payload);
+    return state;
   } else {
     return state;
   }

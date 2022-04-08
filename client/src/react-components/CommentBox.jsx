@@ -3,7 +3,7 @@ import "../styles/react-components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { commentBoxAction } from "../redux-actions";
+import { commentBoxAction, incrementPostCommentNumber } from "../redux-actions";
 import { instance as axios } from "../services/axios";
 import { useState } from "react";
 
@@ -34,22 +34,29 @@ const CommentBox = () => {
   }, []);
 
   const comment = async () => {
-    try {
-      const res = await axios({
-        url: "/post/comment",
-        method: "POST",
-        data: {
-          comment: commentInputFieldData,
-          postID: commentBoxStore.postID,
-          to: commentBoxStore.to,
-        },
-        withCredentials: true,
-      });
-      const data = await res.data;
-      console.log(data);
-    } catch (err) {
-      // console.log(err);
-    }
+    dispatch(incrementPostCommentNumber(commentBoxStore.postID));
+    // try {
+    //   const res = await axios({
+    //     url: "/post/comment",
+    //     method: "POST",
+    //     data: {
+    //       comment: commentInputFieldData,
+    //       postID: commentBoxStore.postID,
+    //       to: commentBoxStore.to,
+    //     },
+    //     withCredentials: true,
+    //   });
+    //   const data = await res.data;
+    //   if (res.status !== 200 && data.success) {
+    //     // Error
+    //   } else {
+    //     dispatch(
+    //       commentBoxAction({ openCommentBox: false, postID: "", to: "" })
+    //     );
+    //   }
+    // } catch (err) {
+    //   // console.log(err);
+    // }
   };
 
   return (
