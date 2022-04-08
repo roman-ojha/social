@@ -4,12 +4,17 @@ import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { commentBoxAction } from "../redux-actions";
-import axios from "axios";
+import { instance as axios } from "../services/axios";
 import { useState } from "react";
+
 const CommentBox = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
+  const userProfileDetail = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+
   useEffect(() => {
     document
       .getElementsByClassName("CommentBox_Container")[0]
@@ -27,13 +32,11 @@ const CommentBox = () => {
         }
       });
   }, []);
-  const userProfileDetail = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
+
   const comment = async () => {
     try {
       const res = await axios({
-        url: "/comment",
+        url: "/post/comment",
         method: "POST",
         data: {
           comment: commentInputFieldData,
@@ -48,6 +51,7 @@ const CommentBox = () => {
       // console.log(err);
     }
   };
+
   return (
     <>
       <div className="CommentBox_Container">
