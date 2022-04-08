@@ -98,10 +98,6 @@ const UserPostFeed = (props) => {
     });
     setPostCommentNumber(props.userFeedData.comments.No);
   }, []);
-  const incrementCommentNumber = () => {
-    console.log("hello");
-    setPostCommentNumber(postCommentNumber + 1);
-  };
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -179,6 +175,7 @@ const UserPostFeed = (props) => {
                       openCommentBox: true,
                       postID: props.userFeedData.id,
                       to: props.userMainInformation.userID,
+                      comments: props.userFeedData.comments.by,
                     })
                   );
                 }}

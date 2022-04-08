@@ -17,7 +17,7 @@ const CommentBox = () => {
 
   useEffect(() => {
     document
-      .getElementsByClassName("CommentBox_Container")[0]
+      .getElementsByClassName("CommentBox_Background")[0]
       .addEventListener("click", (e) => {
         if (
           !document.getElementsByClassName("CommentBox")[0].contains(e.target)
@@ -64,9 +64,23 @@ const CommentBox = () => {
     }
   };
 
+  const ViewSingleComment = (props) => {
+    return (
+      <>
+        <div className="CommentBox_UserComment">
+          <img src={props.comment.picture} />
+          <div>
+            <h3>{props.comment.userID}</h3>
+            <p>{props.comment.comment}</p>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
-      <div className="CommentBox_Container">
+      <div className="CommentBox_Background">
         <div className="CommentBox">
           <div className="CommentBox_RootUser_Post_Field_Container">
             <img
@@ -92,6 +106,11 @@ const CommentBox = () => {
               icon="bx:send"
               onClick={comment}
             />
+          </div>
+          <div className="CommentBox_CommentList">
+            {commentBoxStore.comments.map((comment, index) => {
+              return <ViewSingleComment comment={comment} key={index} />;
+            })}
           </div>
         </div>
       </div>

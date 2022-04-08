@@ -1,4 +1,4 @@
-.CommentBox_Container {
+.CommentBox_Background {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -12,13 +12,13 @@
 }
 .CommentBox {
   width: 70%;
-  max-height: 60vh;
   background-color: white;
   border-radius: 15px;
   background-color: #f0e3ed;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
 }
 
 .CommentBox_RootUser_Post_Field_Container {
@@ -61,4 +61,53 @@
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+}
+
+.CommentBox_CommentList {
+  height: 15vh;
+  overflow-y: scroll;
+  width: 90%;
+  margin: 0.5rem;
+}
+
+.CommentBox_UserComment {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  margin-bottom: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  box-sizing: border-box;
+  align-items: flex-start;
+}
+
+.CommentBox_UserComment img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.CommentBox_UserComment div {
+  /* border: 1px solid red; */
+  padding: 0.5rem;
+  background-color: #f8f1fa;
+  border-radius: 0.3rem;
+}
+
+.CommentBox_UserComment div h3 {
+  /* border: 1px solid blue; */
+  font-family: var(--primary-font-family);
+  max-width: 10rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.CommentBox_UserComment div p {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  /* border: 1px solid blue; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30rem;
 }

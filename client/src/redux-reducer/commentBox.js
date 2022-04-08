@@ -2,6 +2,7 @@ const initialState = {
   openCommentBox: false,
   postID: "",
   to: "",
+  comments: [],
 };
 
 const commentBoxReducer = (state = initialState, action) => {
