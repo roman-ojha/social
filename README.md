@@ -14,22 +14,24 @@
 [<img src="Interface/Home_Page.png" alt="Home_Page"></img>](Interface/Home_Page.png)
 
 ### Profile Page:
-[<img src="Interface/Profile_Page.png" alt="Home_Page"></img>](Interface/Profile_Page.png)
+[<img src="Interface/Profile_Page.png" alt="Profile_Page"></img>](Interface/Profile_Page.png)
 
 ### SignUp Page :
-[<img src="Interface/Sign_Up_Page.png" alt="webVplayer"></img>](Interface/Sign_Up_Page.png)
+[<img src="Interface/Sign_Up_Page.png" alt="SignUp_Page"></img>](Interface/Sign_Up_Page.png)
 
 ### SignIn Page :
-[<img src="Interface/Sign_In_Page.png" alt="webVplayer"></img>](Interface/Sign_In_Page.png)
+[<img src="Interface/Sign_In_Page.png" alt="SignIn_Page"></img>](Interface/Sign_In_Page.png)
 
 
 ### Home Page Mobile View:
 <div align="center">
 
-[<img src="Interface/Home_Page_Mobile_View.png" alt="webVplayer"></img>](Interface/Home_Page_Mobile_View.png)
+[<img src="Interface/Home_Page_Mobile_View.png" alt="Mobile_View"></img>](Interface/Home_Page_Mobile_View.png)
 
 </div>
 <br/>
+
+[<img src="Interface/Comment_Box.png" alt="Comment_Box"></img>](Interface/Comment_Box.png)
 
 ## Technology Used:
 1. ReactJs -> Client Side
