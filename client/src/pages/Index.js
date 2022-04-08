@@ -10,8 +10,9 @@ import MessagePage from "./MessagePage";
 import SettingPage from "./SettingPage";
 import ProfilePage from "./ProfilePage";
 import Page404 from "./Page404";
+import CommentBox from "../react-components/CommentBox";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   userProfileDetailAction,
   userProfilePostAction,
@@ -25,6 +26,7 @@ import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
 import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
+
 const RoutingMainPage = () => {
   return (
     <>
@@ -67,6 +69,7 @@ const LoadingScreen = () => {
 };
 
 const Index = () => {
+  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
@@ -114,6 +117,7 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
+        {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />
         <RoutingMainPage />

@@ -15,7 +15,6 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import CommentBox from "../react-components/CommentBox";
 
 const HomePage = () => {
   const history = useHistory();
@@ -306,7 +305,6 @@ const HomePage = () => {
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
-      {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
       <div className="HomePage_Container">
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />

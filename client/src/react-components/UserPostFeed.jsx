@@ -6,7 +6,6 @@ import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
 import { commentBoxAction } from "../redux-actions";
-import CommentBox from "./CommentBox";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -99,7 +98,6 @@ const UserPostFeed = (props) => {
   }, []);
   return (
     <>
-      {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
           {props.userFeedData.picture === undefined ? (

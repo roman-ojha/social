@@ -7,6 +7,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* top: 0px;
+  left: 0px; */
 }
 .CommentBox {
   width: 70%;
