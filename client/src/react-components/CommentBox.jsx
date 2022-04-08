@@ -3,7 +3,7 @@ import "../styles/react-components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { openCommentBoxAction } from "../redux-actions";
+import { commentBoxAction } from "../redux-actions";
 const CommentBox = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -13,7 +13,13 @@ const CommentBox = () => {
         if (
           !document.getElementsByClassName("CommentBox")[0].contains(e.target)
         ) {
-          dispatch(openCommentBoxAction(false));
+          dispatch(
+            commentBoxAction({
+              openCommentBox: false,
+              postID: "",
+              to: "",
+            })
+          );
         }
       });
   }, []);

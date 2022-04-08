@@ -189,6 +189,9 @@ export default {
             comment: {
               type: String,
             },
+            picture: {
+              type: String,
+            },
           },
         ],
       },

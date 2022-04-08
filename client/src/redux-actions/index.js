@@ -134,9 +134,9 @@ export const userStoriesAction = (data) => {
   };
 };
 
-export const openCommentBoxAction = (data) => {
+export const commentBoxAction = (data) => {
   return {
-    type: "openCommentBox",
+    type: "commentBox",
     payload: data,
   };
 };

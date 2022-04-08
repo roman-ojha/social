@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
-import { openCommentBoxAction } from "../redux-actions";
+import { commentBoxAction } from "../redux-actions";
+import CommentBox from "./CommentBox";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const UserPostFeed = (props) => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const [likeValue, setLikeValue] = useState({
     isLikedPost: false,
     likeNo: props.userFeedData.likes.No,
@@ -97,6 +99,7 @@ const UserPostFeed = (props) => {
   }, []);
   return (
     <>
+      {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
           {props.userFeedData.picture === undefined ? (
@@ -167,7 +170,13 @@ const UserPostFeed = (props) => {
                 className="HomePage_Feed__Comment_Icon"
                 icon="akar-icons:comment"
                 onClick={() => {
-                  dispatch(openCommentBoxAction(true));
+                  dispatch(
+                    commentBoxAction({
+                      openCommentBox: true,
+                      postID: "",
+                      to: "",
+                    })
+                  );
                 }}
               />
               <p>{props.userFeedData.comments.No}</p>

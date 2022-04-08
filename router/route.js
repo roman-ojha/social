@@ -1060,4 +1060,16 @@ router.post("/changePassword", authenticate, async (req, res) => {
   }
 });
 
+router.post("/comment", async (req, res) => {
+  try {
+    console.log(req.body);
+    res.send("Hello");
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      msg: "Server Error, Please try again Letter...",
+    });
+  }
+});
+
 export default router;
