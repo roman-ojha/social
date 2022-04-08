@@ -4,7 +4,11 @@ import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { commentBoxAction } from "../redux-actions";
+import axios from "axios";
+import { useState } from "react";
 const CommentBox = () => {
+  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
     document
@@ -26,6 +30,24 @@ const CommentBox = () => {
   const userProfileDetail = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const comment = async () => {
+    try {
+      const res = await axios({
+        url: "/comment",
+        method: "POST",
+        data: {
+          comment: commentInputFieldData,
+          postID: commentBoxStore.postID,
+          to: commentBoxStore.to,
+        },
+        withCredentials: true,
+      });
+      const data = await res.data;
+      console.log(data);
+    } catch (err) {
+      // console.log(err);
+    }
+  };
   return (
     <>
       <div className="CommentBox_Container">
@@ -40,12 +62,20 @@ const CommentBox = () => {
               className="CommentBox_Input_Field"
               placeholder="Give some thought on this post..."
               type="text"
+              value={commentInputFieldData}
+              onChange={(e) => {
+                setCommentInputFieldData(e.target.value);
+              }}
             />
             <Icon
               className="CommentBox_Input_Emoji"
               icon="fluent:emoji-24-regular"
             />
-            <Icon className="CommentBox_Input_Emoji" icon="bx:send" />
+            <Icon
+              className="CommentBox_Input_Emoji"
+              icon="bx:send"
+              onClick={comment}
+            />
           </div>
         </div>
       </div>

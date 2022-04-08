@@ -171,8 +171,8 @@ const UserPostFeed = (props) => {
                   dispatch(
                     commentBoxAction({
                       openCommentBox: true,
-                      postID: "",
-                      to: "",
+                      postID: props.userFeedData.id,
+                      to: props.userMainInformation.userID,
                     })
                   );
                 }}
