@@ -64,10 +64,27 @@
 }
 
 .CommentBox_CommentList {
-  height: 15vh;
+  max-height: 45vh;
   overflow-y: scroll;
   width: 90%;
   margin: 0.5rem;
+}
+
+.CommentBox_CommentList::-webkit-scrollbar {
+  width: 7px;
+}
+.CommentBox_CommentList::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.CommentBox_CommentList::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.CommentBox_CommentList:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.CommentBox_CommentList::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
 }
 
 .CommentBox_UserComment {
