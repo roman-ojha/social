@@ -10,13 +10,17 @@ import {
   profilePageDataAction,
 } from "../redux-actions/index";
 import socket from "../services/socket";
-import { useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
 import CommentBox from "../react-components/CommentBox";
+import { Switch, Route } from "react-router-dom";
+import ProfileFriends from "../react-components/ProfileFriends";
+import ProfileAlbums from "../react-components/ProfileAlbums";
 
 const ProfilePage = () => {
+  const history = useHistory();
   const params = useParams();
   const [fetchedAllData, setFetchedAllData] = useState(false);
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
@@ -222,19 +226,34 @@ const ProfilePage = () => {
             </div>
           </div>
           <div className="ProfilePage_UserContent_Route_Container">
-            <div className="ProfilePage_UserContent_Feed_Route_Container">
+            <div
+              className="ProfilePage_UserContent_Feed_Route_Container"
+              onClick={() => {
+                history.push(`/u/profile/${profilePageData.userID}`);
+              }}
+            >
               <span
                 className="ProfilePage_UserContent_Feed_Icon iconify"
                 data-icon="gg:feed"
               ></span>
             </div>
-            <div className="ProfilePage_UserContent_Picture_Route_Container">
+            <div
+              className="ProfilePage_UserContent_Picture_Route_Container"
+              onClick={() => {
+                history.push(`/u/profile/${profilePageData.userID}/albums`);
+              }}
+            >
               <span
                 className="ProfilePage_UserContent_Picture_Icon iconify"
                 data-icon="akar-icons:image"
               ></span>
             </div>
-            <div className="ProfilePage_UserContent_Friends_Route_Container">
+            <div
+              className="ProfilePage_UserContent_Friends_Route_Container"
+              onClick={() => {
+                history.push(`/u/profile/${profilePageData.userID}/friends`);
+              }}
+            >
               <span
                 className="ProfilePage_UserContent_Friends_Icon iconify"
                 data-icon="fa-solid:user-friends"
@@ -243,13 +262,35 @@ const ProfilePage = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            {profilePageUserFeed.map((value) => (
-              <UserPostFeed
-                userMainInformation={profilePageMainInformation}
-                userFeedData={value}
-                key={value._id}
+            <Switch>
+              <Route
+                exact
+                path="/u/profile/:userID"
+                component={() => {
+                  return (
+                    <>
+                      {profilePageUserFeed.map((value) => (
+                        <UserPostFeed
+                          userMainInformation={profilePageMainInformation}
+                          userFeedData={value}
+                          key={value._id}
+                        />
+                      ))}
+                    </>
+                  );
+                }}
               />
-            ))}
+              <Route
+                exact
+                path="/u/profile/:userID/albums"
+                component={ProfileAlbums}
+              />
+              <Route
+                exact
+                path="/u/profile/:userID/friends"
+                component={ProfileFriends}
+              />
+            </Switch>
           </div>
         </div>
       ) : (

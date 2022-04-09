@@ -35,7 +35,7 @@ const RoutingMainPage = () => {
         <Route exact path="/u/video" component={VideoPage} />
         <Route exact path="/u/message" component={MessagePage} />
         <Route exact path="/u/setting" component={SettingPage} />
-        <Route exact path={`/u/profile/:userID`} component={ProfilePage} />
+        <Route path="/u/profile/:userID" component={ProfilePage} />
         <Route
           path="*"
           component={() => {
