@@ -4,9 +4,15 @@ import {
   mainPageMessageViewOnOff,
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
+  appendOnMessage,
+  appendMessageOnMessageListAction,
 } from "../redux-actions/index";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
+import SendIcon from "@mui/icons-material/Send";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
+import CloseIcon from "@mui/icons-material/Close";
 import { Helmet } from "react-helmet";
 import "../styles/pages/MessagePage.css";
 import { NavLink } from "react-router-dom";
@@ -16,9 +22,33 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const MessagePage = () => {
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(mainPageMessageViewOnOff(false));
-  // }, []);
+  useEffect(() => {
+    // dispatch(mainPageMessageViewOnOff(false));
+    socket.on("send-message-client", (res) => {
+      if (res.success !== false) {
+        dispatch(
+          appendOnMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          })
+        );
+      }
+    });
+
+    // Showing First User Message
+  }, []);
+  const mainPageMessageOnOffState = useSelector(
+    (state) => state.changeMainPageMessageView
+  );
+  const currentMessageStore = useSelector(
+    (state) => state.setCurrentUserMessageReducer
+  );
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+  const mainPageInnerMessageBoxOnOffState = useSelector(
+    (state) => state.mainPageInnerMessageBoxOnOff
+  );
   const messageList = useSelector((state) => state.messageListReducer);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
@@ -90,6 +120,218 @@ const MessagePage = () => {
     );
   };
 
+  const MessagePageLeftPart = () => {
+    return (
+      <div
+        className="MainPage_Scrollable_MessageBox_Container"
+        style={{ height: "100%" }}
+      >
+        <div className="MainPage_MessageBox_Title_Container">
+          <h4>Message</h4>
+          <MoreHorizIcon
+            className="MainPage_MessageBox_Title_More_Icon"
+            style={{ height: "1.3rem", width: "1.3rem" }}
+          />
+        </div>
+        <hr className="MainPage_MessageBox_Title_Search_Divider" />
+
+        <div className="MainPage_MessageBox_Search_Container">
+          <SearchIcon
+            className="MainPage_MessageBox_Search_Icon"
+            style={{ height: "1.3rem", width: "1.3rem" }}
+          />
+          <input
+            type="text"
+            placeholder="Search"
+            className="MainPage_MessageBox_Search_Input_Field"
+          />
+        </div>
+        <div className="MainPage_MessageBox_Message_Container">
+          {/* displaying all current user message */}
+          {messageList.map((messageInfo) => {
+            if (messageInfo.message.length !== 0) {
+              return (
+                <UserMessage messageInfo={messageInfo} key={messageInfo._id} />
+              );
+            }
+          })}
+        </div>
+      </div>
+    );
+  };
+
+  const MessagePageRightPart = (props) => {
+    const UserSingleMessageBox = (props) => {
+      return (
+        <>
+          <div
+            className="MessageBox_Inner_SingleMessage_Container"
+            // styling the position of the message box according the user
+            style={
+              props.MessageInfo.sender === userProfileDetailStore.userID
+                ? {
+                    left: "31%",
+                  }
+                : {}
+            }
+          >
+            {props.MessageInfo.sender === userProfileDetailStore.userID ? (
+              ""
+            ) : (
+              <img src={props.picture ? props.picture : User_Profile_Icon} />
+            )}
+            <div
+              className="MessageBox_Inner_SingleMessage"
+              // styling the position of the message box according the user
+              style={
+                props.MessageInfo.sender === userProfileDetailStore.userID
+                  ? {
+                      backgroundColor: "var(--primary-color-point-7)",
+                    }
+                  : {}
+              }
+            >
+              <p
+                style={
+                  props.MessageInfo.sender === userProfileDetailStore.userID
+                    ? {
+                        color: "white",
+                      }
+                    : {}
+                }
+              >
+                {props.MessageInfo.content}
+              </p>
+            </div>
+          </div>
+        </>
+      );
+    };
+    // Styling Loading Spinner
+    const loadingContainerSpinnerStyle = {
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgb(199 199 199 / 22%)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
+    const loadingSpinnerStyle = {
+      border: "5px dotted #dddddd",
+      borderTop: "5px dotted var(--primary-color-darker-5)",
+      width: "1.5rem",
+      height: "1.5rem",
+      borderRadius: "50%",
+      animation: "loadingSpinner 1s linear infinite",
+    };
+
+    // const sendMessage = async () => {
+    //   // sending message to user
+    //   try {
+    //     if (userMessageField === "") {
+    //       return;
+    //     }
+    //     const resBody = {
+    //       sender: userProfileDetailStore.userID,
+    //       receiver: props.InternalMessageInfo.messageTo,
+    //       // messageTo is the userID of user where we are sending the message
+    //       message: userMessageField,
+    //       roomID: currentMessageStore.roomID,
+    //     };
+    //     setUserMessageField("");
+    //     socket.emit("send-message", resBody, (res) => {
+    //       if (res.success !== false) {
+    //         dispatch(
+    //           appendOnMessage({
+    //             ...res.msgInfo,
+    //             _id: `${Math.random()}`,
+    //           })
+    //         );
+    //         dispatch(
+    //           appendMessageOnMessageListAction({
+    //             ...res.msgInfo,
+    //             _id: `${Math.random()}`,
+    //             receiver: resBody.receiver,
+    //           })
+    //         );
+    //       }
+    //     });
+    //   } catch (err) {
+    //     // console.log(err);
+    //   }
+    // };
+
+    return (
+      <>
+        <div className="MessageBox_InnerMessage_Container">
+          <div className="MessageBox_InnerMessage_Upper_Part_Container">
+            <img
+              src={
+                props.InternalMessageInfo.picture
+                  ? props.InternalMessageInfo.picture
+                  : User_Profile_Icon
+              }
+              alt="user"
+            />
+            <h3>{props.InternalMessageInfo.messageTo}</h3>
+          </div>
+          <div className="MessageBox_InnerMessage_Message_Container">
+            {showLoadingSpinner ? (
+              <>
+                <div style={loadingContainerSpinnerStyle}>
+                  <div style={loadingSpinnerStyle}></div>
+                </div>
+              </>
+            ) : (
+              currentMessageStore.message.map((message) => {
+                return (
+                  <UserSingleMessageBox
+                    MessageInfo={message}
+                    picture={currentMessageStore.receiverPicture}
+                    key={message._id}
+                  />
+                );
+              })
+            )}
+          </div>
+          <div className="MessageBox_LowerPart_InputField_Container">
+            <div className="MessageBox_LowerPart_InputField_Inner_Container">
+              <EmojiEmotionsIcon
+                className="MessageBox_LowerPart_InputField_Buttons"
+                style={{ width: "1.5rem", height: "1.5rem" }}
+              />
+              <input
+                type="text"
+                // value={userMessageField}
+                autoFocus
+                // onChange={(e) => {
+                //   // dispatch(userMessageFieldAction(e.target.value));
+                //   setUserMessageField(e.target.value);
+                //   const eventOnPressEnter = (e) => {
+                //     if (e.key === "Enter") {
+                //       sendMessage();
+                //     }
+                //     window.removeEventListener("keydown", eventOnPressEnter);
+                //   };
+                //   window.addEventListener("keydown", eventOnPressEnter);
+                // }}
+              />
+              <PhotoLibraryIcon
+                className="MessageBox_LowerPart_InputField_Buttons"
+                style={{ width: "1.5rem", height: "1.5rem" }}
+              />
+              <SendIcon
+                className="MessageBox_LowerPart_InputField_Buttons"
+                style={{ width: "1.5rem", height: "1.5rem" }}
+                // onClick={sendMessage}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   return (
     <>
       <div className="MessagePage_Container">
@@ -97,46 +339,16 @@ const MessagePage = () => {
           <title>Message</title>
         </Helmet>
         <div className="MessagePage_List_Of_Message_Container">
-          <div
-            className="MainPage_Scrollable_MessageBox_Container"
-            style={{ height: "100%" }}
-          >
-            <div className="MainPage_MessageBox_Title_Container">
-              <h4>Message</h4>
-              <MoreHorizIcon
-                className="MainPage_MessageBox_Title_More_Icon"
-                style={{ height: "1.3rem", width: "1.3rem" }}
-              />
-            </div>
-            <hr className="MainPage_MessageBox_Title_Search_Divider" />
-
-            <div className="MainPage_MessageBox_Search_Container">
-              <SearchIcon
-                className="MainPage_MessageBox_Search_Icon"
-                style={{ height: "1.3rem", width: "1.3rem" }}
-              />
-              <input
-                type="text"
-                placeholder="Search"
-                className="MainPage_MessageBox_Search_Input_Field"
-              />
-            </div>
-            <div className="MainPage_MessageBox_Message_Container">
-              {/* displaying all current user message */}
-              {messageList.map((messageInfo) => {
-                if (messageInfo.message.length !== 0) {
-                  return (
-                    <UserMessage
-                      messageInfo={messageInfo}
-                      key={messageInfo._id}
-                    />
-                  );
-                }
-              })}
-            </div>
-          </div>
+          <MessagePageLeftPart />
         </div>
-        <div className="MessagePage_Single_User_Message_Container"></div>
+        <div className="MessagePage_Single_User_Message_Container">
+          <MessagePageRightPart
+            InternalMessageInfo={{
+              messageTo: currentMessageStore.messageTo,
+              picture: currentMessageStore.receiverPicture,
+            }}
+          />
+        </div>
       </div>
     </>
   );
