@@ -1,12 +1,14 @@
 import React from "react";
 import more_icon from "../Images/more_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { mainPageMessageViewOnOff } from "../redux-actions/index";
+import {
+  mainPageMessageViewOnOff,
+  progressBarAction,
+} from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
-import { showProgressBarAction } from "../redux-actions";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
@@ -49,12 +51,28 @@ const MainPageMsgAndNtfBar = () => {
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="carbon:notification-new"
             onClick={() => {
-              dispatch(showProgressBarAction(!progressBarState));
+              dispatch(
+                progressBarAction({
+                  ...progressBarState,
+                  showProgressBar: !progressBarState.showProgressBar,
+                })
+              );
             }}
           />
         </div>
         <div className="MainPage_Message_Bar_More_Outline">
-          <img src={more_icon} alt="more" />
+          <img
+            src={more_icon}
+            alt="more"
+            onClick={() => {
+              dispatch(
+                progressBarAction({
+                  ...progressBarState,
+                  isCompleted: true,
+                })
+              );
+            }}
+          />
         </div>
         <img
           className="MainPage_Message_Bar_Profile"

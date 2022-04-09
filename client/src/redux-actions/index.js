@@ -148,7 +148,7 @@ export const commentBoxAction = (data) => {
   };
 };
 
-export const showProgressBarAction = (data) => {
+export const progressBarAction = (data) => {
   return {
     type: "showProgressBar",
     payload: data,

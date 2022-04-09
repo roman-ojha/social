@@ -1,4 +1,7 @@
-const initialState = false;
+const initialState = {
+  showProgressBar: false,
+  isCompleted: false,
+};
 
 const progressBarReducer = (state = initialState, action) => {
   if (action.type === "showProgressBar") {
