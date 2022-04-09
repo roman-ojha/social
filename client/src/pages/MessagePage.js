@@ -22,21 +22,6 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const MessagePage = () => {
   const dispatch = useDispatch();
-  useEffect(() => {
-    // dispatch(mainPageMessageViewOnOff(false));
-    socket.on("send-message-client", (res) => {
-      if (res.success !== false) {
-        dispatch(
-          appendOnMessage({
-            ...res.msgInfo,
-            _id: `${Math.random()}`,
-          })
-        );
-      }
-    });
-
-    // Showing First User Message
-  }, []);
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
@@ -50,22 +35,30 @@ const MessagePage = () => {
     (state) => state.mainPageInnerMessageBoxOnOff
   );
   const messageList = useSelector((state) => state.messageListReducer);
-  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
-  const [userMessageField, setUserMessageField] = useState("");
+  useEffect(async () => {
+    // dispatch(mainPageMessageViewOnOff(false));
 
-  const UserMessage = (props) => {
-    const showInnerMessage = async () => {
-      // before getting new message we will reset the previous message stored into redux
+    socket.on("send-message-client", (res) => {
+      if (res.success !== false) {
+        dispatch(
+          appendOnMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          })
+        );
+      }
+    });
+
+    // Showing First User Message
+    if (messageList.length >= 0) {
       dispatch(
         currentUserMessageAction({
-          messageTo: props.messageInfo.messageTo,
-          receiverPicture: props.messageInfo.receiverPicture,
+          messageTo: messageList[0].messageTo,
+          receiverPicture: messageList[0].receiverPicture,
           message: [],
         })
       );
-      dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      // console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",
@@ -73,7 +66,7 @@ const MessagePage = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+        data: JSON.stringify({ userID: messageList[0].messageTo }),
         withCredentials: true,
       });
       if (resMessage.status !== 200) {
@@ -89,38 +82,79 @@ const MessagePage = () => {
           console.log(resMessage);
         });
       }
-    };
-    return (
-      <>
-        <div
-          className="MaiPage_MessageBox_UserMessage_Container"
-          onClick={showInnerMessage}
-        >
-          <img
-            src={
-              props.messageInfo.receiverPicture
-                ? props.messageInfo.receiverPicture
-                : User_Profile_Icon
-            }
-            alt="user"
-            className="MainPage_MessageBox_UserMessage_Picutre"
-          />
-          <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
-            <h4>{props.messageInfo.messageTo}</h4>
-            <p>
-              {
-                props.messageInfo.message[props.messageInfo.message.length - 1]
-                  .content
-                // showing current message
-              }
-            </p>
-          </div>
-        </div>
-      </>
-    );
-  };
-
+    }
+  }, []);
+  const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
+  const [userMessageField, setUserMessageField] = useState("");
   const MessagePageLeftPart = () => {
+    const UserMessage = (props) => {
+      const showInnerMessage = async () => {
+        // before getting new message we will reset the previous message stored into redux
+        dispatch(
+          currentUserMessageAction({
+            messageTo: props.messageInfo.messageTo,
+            receiverPicture: props.messageInfo.receiverPicture,
+            message: [],
+          })
+        );
+        dispatch(mainPageMessageInnerViewOnOff(true));
+        setShowLoadingSpinner(true);
+        // console.log(props.messageInfo.messageTo);
+        const resMessage = await axios({
+          // sending receiver userID to get message data of that user
+          method: "POST",
+          url: "/u/getMessage",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+          withCredentials: true,
+        });
+        if (resMessage.status !== 200) {
+          const error = await resMessage.data;
+        } else {
+          const message = await resMessage.data;
+          // after getting message we will store that message into redux
+          dispatch(currentUserMessageAction(message));
+          setShowLoadingSpinner(false);
+          // if we are inside the user message then we have to join room through socket
+          // NOTE: this is just for temporary purposes
+          socket.emit("join-room", message.roomID, (resMessage) => {
+            console.log(resMessage);
+          });
+        }
+      };
+      return (
+        <>
+          <div
+            className="MaiPage_MessageBox_UserMessage_Container"
+            onClick={showInnerMessage}
+          >
+            <img
+              src={
+                props.messageInfo.receiverPicture
+                  ? props.messageInfo.receiverPicture
+                  : User_Profile_Icon
+              }
+              alt="user"
+              className="MainPage_MessageBox_UserMessage_Picutre"
+            />
+            <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
+              <h4>{props.messageInfo.messageTo}</h4>
+              <p>
+                {
+                  props.messageInfo.message[
+                    props.messageInfo.message.length - 1
+                  ].content
+                  // showing current message
+                }
+              </p>
+            </div>
+          </div>
+        </>
+      );
+    };
+
     return (
       <div
         className="MainPage_Scrollable_MessageBox_Container"
@@ -225,41 +259,41 @@ const MessagePage = () => {
       animation: "loadingSpinner 1s linear infinite",
     };
 
-    // const sendMessage = async () => {
-    //   // sending message to user
-    //   try {
-    //     if (userMessageField === "") {
-    //       return;
-    //     }
-    //     const resBody = {
-    //       sender: userProfileDetailStore.userID,
-    //       receiver: props.InternalMessageInfo.messageTo,
-    //       // messageTo is the userID of user where we are sending the message
-    //       message: userMessageField,
-    //       roomID: currentMessageStore.roomID,
-    //     };
-    //     setUserMessageField("");
-    //     socket.emit("send-message", resBody, (res) => {
-    //       if (res.success !== false) {
-    //         dispatch(
-    //           appendOnMessage({
-    //             ...res.msgInfo,
-    //             _id: `${Math.random()}`,
-    //           })
-    //         );
-    //         dispatch(
-    //           appendMessageOnMessageListAction({
-    //             ...res.msgInfo,
-    //             _id: `${Math.random()}`,
-    //             receiver: resBody.receiver,
-    //           })
-    //         );
-    //       }
-    //     });
-    //   } catch (err) {
-    //     // console.log(err);
-    //   }
-    // };
+    const sendMessage = async () => {
+      // sending message to user
+      try {
+        if (userMessageField === "") {
+          return;
+        }
+        const resBody = {
+          sender: userProfileDetailStore.userID,
+          receiver: props.InternalMessageInfo.messageTo,
+          // messageTo is the userID of user where we are sending the message
+          message: userMessageField,
+          roomID: currentMessageStore.roomID,
+        };
+        setUserMessageField("");
+        socket.emit("send-message", resBody, (res) => {
+          if (res.success !== false) {
+            dispatch(
+              appendOnMessage({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+              })
+            );
+            dispatch(
+              appendMessageOnMessageListAction({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+                receiver: resBody.receiver,
+              })
+            );
+          }
+        });
+      } catch (err) {
+        // console.log(err);
+      }
+    };
 
     return (
       <>
@@ -302,19 +336,18 @@ const MessagePage = () => {
               />
               <input
                 type="text"
-                // value={userMessageField}
+                value={userMessageField}
                 autoFocus
-                // onChange={(e) => {
-                //   // dispatch(userMessageFieldAction(e.target.value));
-                //   setUserMessageField(e.target.value);
-                //   const eventOnPressEnter = (e) => {
-                //     if (e.key === "Enter") {
-                //       sendMessage();
-                //     }
-                //     window.removeEventListener("keydown", eventOnPressEnter);
-                //   };
-                //   window.addEventListener("keydown", eventOnPressEnter);
-                // }}
+                onChange={(e) => {
+                  setUserMessageField(e.target.value);
+                  const eventOnPressEnter = (e) => {
+                    if (e.key === "Enter") {
+                      sendMessage();
+                    }
+                    window.removeEventListener("keydown", eventOnPressEnter);
+                  };
+                  window.addEventListener("keydown", eventOnPressEnter);
+                }}
               />
               <PhotoLibraryIcon
                 className="MessageBox_LowerPart_InputField_Buttons"
@@ -323,7 +356,7 @@ const MessagePage = () => {
               <SendIcon
                 className="MessageBox_LowerPart_InputField_Buttons"
                 style={{ width: "1.5rem", height: "1.5rem" }}
-                // onClick={sendMessage}
+                onClick={sendMessage}
               />
             </div>
           </div>
