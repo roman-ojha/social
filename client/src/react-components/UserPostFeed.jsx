@@ -112,7 +112,6 @@ const UserPostFeed = (props) => {
         withCredentials: true,
       });
       const data = await res.data;
-      console.log("hello");
       if (res.status !== 200 && data.success) {
         // Error
       } else {
@@ -122,7 +121,6 @@ const UserPostFeed = (props) => {
             to: props.userMainInformation.userID,
           })
         );
-        setCommentInputField("");
       }
     } catch (err) {
       // console.log(err);
