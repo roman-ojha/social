@@ -139,6 +139,77 @@
   color: var(--primary-color);
 }
 
+/* Post feed Comment Box */
+.UserPostFeed_Comment_Box {
+  width: 95%;
+  /* background-color: #f0e3ed; */
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.UserPostFeed_CommentBox_RootUser_Post_Field_Container {
+  width: 100%;
+  height: 1.8rem;
+  background-color: var(--secondary-color-point-7);
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+.UserPostFeed_CommentBox_Image {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.UserPostFeed_CommentBox_Input_Field {
+  width: 70%;
+  height: 100%;
+  border-radius: 10px;
+  border-width: 0px;
+  background-color: var(--secondary-color-point-1-transparent-0);
+  font-family: var(--primary-font-family);
+}
+
+.UserPostFeed_CommentBox_Input_Field:read-write {
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.85rem;
+}
+
+.UserPostFeed_CommentBox_Input_Field:focus {
+  outline: none;
+}
+
+.UserPostFeed_CommentBox_Input_Emoji {
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+  color: rgb(49, 49, 49);
+}
+
+.UserPostFeed_CommentBox_CommentList {
+  max-height: 5rem;
+}
+
+.UserPostFeed_CommentBox_UserComment {
+}
+
+.UserPostFeed_CommentBox_UserComment img {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 700px) {
   .HomePage_Feed_Main_Container {
     width: 90%;

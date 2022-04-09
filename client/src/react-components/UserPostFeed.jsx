@@ -186,6 +186,47 @@ const UserPostFeed = (props) => {
             <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
           </div>
         </div>
+        {/* <hr className="UserPostFeed_Post_and_Comment_Break_Line" /> */}
+        <div className="UserPostFeed_Comment_Box">
+          <div className="UserPostFeed_CommentBox_RootUser_Post_Field_Container">
+            <img
+              className="UserPostFeed_CommentBox_Image"
+              src={userProfileDetailStore.picture}
+              img="User"
+            />
+            <input
+              className="UserPostFeed_CommentBox_Input_Field"
+              placeholder="Give some thought on this post..."
+              type="text"
+            />
+            <Icon
+              className="UserPostFeed_CommentBox_Input_Emoji"
+              icon="fluent:emoji-24-regular"
+            />
+            <Icon
+              className="UserPostFeed_CommentBox_Input_Emoji"
+              icon="bx:send"
+            />
+          </div>
+          <div className="UserPostFeed_CommentBox_CommentList">
+            {props.userFeedData.comments.by.map((comment, index) => {
+              if (index < 2) {
+                return (
+                  <div
+                    className="UserPostFeed_CommentBox_UserComment"
+                    key={index}
+                  >
+                    <img src={comment.picture} />
+                    <div>
+                      <h3>{comment.userID}</h3>
+                      <p>{comment.comment}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        </div>
       </div>
     </>
   );

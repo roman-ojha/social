@@ -61,6 +61,7 @@
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+  color: rgb(49, 49, 49);
 }
 
 .CommentBox_CommentList {
