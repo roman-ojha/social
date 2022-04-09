@@ -1,0 +1,20 @@
+.MessagePage_Container {
+  width: 50%;
+  border: 1px solid red;
+  position: relative;
+  left: 20%;
+  top: 14vh;
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.MessagePage_List_Of_Message_Container {
+  width: 50%;
+  height: calc(100vh - 15vh);
+  /* border: 1px solid red; */
+}
+.MessagePage_Single_User_Message_Container {
+  width: 50%;
+  height: calc(100vh - 15vh);
+  border: 1px solid blue;
+}

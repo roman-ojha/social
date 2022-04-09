@@ -36,6 +36,7 @@ const MessageBox = () => {
   const messageList = useSelector((state) => state.messageListReducer);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
+
   const UserMessage = (props) => {
     const showInnerMessage = async () => {
       // before getting new message we will reset the previous message stored into redux

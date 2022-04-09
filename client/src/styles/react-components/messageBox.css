@@ -38,7 +38,7 @@
   /* border: 1px solid blue; */
   display: flex;
   justify-content: space-between;
-  height: 7%;
+  height: 1.3rem;
 }
 .MainPage_MessageBox_Title_Container h4 {
   margin-left: 5%;
@@ -62,7 +62,7 @@
   border: 1.5px solid rgb(65, 65, 65);
   border-radius: 1rem;
   margin: 0% 3% 0% 3%;
-  height: 8%;
+  height: 1.5rem;
 }
 .MainPage_MessageBox_Search_Input_Field {
   border-width: 0px;
@@ -130,6 +130,9 @@
   font-family: var(--primary-font-family);
   font-size: 0.75rem;
   font-weight: 500;
+  height: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .MainPage_MessageBox_See_More_Message_Container {
   display: flex;
