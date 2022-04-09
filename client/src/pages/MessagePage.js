@@ -36,7 +36,7 @@ const MessagePage = () => {
   );
   const messageList = useSelector((state) => state.messageListReducer);
   useEffect(async () => {
-    // dispatch(mainPageMessageViewOnOff(false));
+    dispatch(mainPageMessageViewOnOff(false));
 
     socket.on("send-message-client", (res) => {
       if (res.success !== false) {
