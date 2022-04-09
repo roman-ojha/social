@@ -70,6 +70,7 @@ const LoadingScreen = () => {
 };
 
 const Index = () => {
+  const progressBarState = useSelector((state) => state.progressBarReducer);
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -118,7 +119,7 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
-        <ProgressBar />
+        {progressBarState ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />

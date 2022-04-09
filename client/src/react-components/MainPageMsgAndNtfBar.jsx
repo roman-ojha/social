@@ -6,17 +6,19 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { showProgressBarAction } from "../redux-actions";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
   const location = useLocation();
+  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
-  const messageOnOffDispatch = useDispatch();
+  const progressBarState = useSelector((state) => state.progressBarReducer);
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
@@ -26,9 +28,7 @@ const MainPageMsgAndNtfBar = () => {
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
               onClick={() => {
-                messageOnOffDispatch(
-                  mainPageMessageViewOnOff(!mainPageMessageOnOffState)
-                );
+                dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
               }}
             />
           </NavLink>
@@ -39,9 +39,7 @@ const MainPageMsgAndNtfBar = () => {
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
               onClick={() => {
-                messageOnOffDispatch(
-                  mainPageMessageViewOnOff(!mainPageMessageOnOffState)
-                );
+                dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
               }}
             />
           </div>
@@ -50,6 +48,9 @@ const MainPageMsgAndNtfBar = () => {
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="carbon:notification-new"
+            onClick={() => {
+              dispatch(showProgressBarAction(!progressBarState));
+            }}
           />
         </div>
         <div className="MainPage_Message_Bar_More_Outline">
