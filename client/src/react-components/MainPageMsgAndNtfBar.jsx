@@ -50,29 +50,10 @@ const MainPageMsgAndNtfBar = () => {
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="carbon:notification-new"
-            onClick={() => {
-              dispatch(
-                progressBarAction({
-                  ...progressBarState,
-                  showProgressBar: !progressBarState.showProgressBar,
-                })
-              );
-            }}
           />
         </div>
         <div className="MainPage_Message_Bar_More_Outline">
-          <img
-            src={more_icon}
-            alt="more"
-            onClick={() => {
-              dispatch(
-                progressBarAction({
-                  ...progressBarState,
-                  isCompleted: true,
-                })
-              );
-            }}
-          />
+          <img src={more_icon} alt="more" />
         </div>
         <img
           className="MainPage_Message_Bar_Profile"

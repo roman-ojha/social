@@ -61,7 +61,7 @@ const ProgressBar = () => {
             isCompleted: false,
           })
         );
-      }, 200);
+      }, 500);
       return () => {
         clearTimeout(progressCompleteTimeOut);
       };

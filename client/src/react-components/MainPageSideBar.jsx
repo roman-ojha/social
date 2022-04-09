@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/mainPageSideBar.css";
-import { profilePageDataAction } from "../redux-actions";
+import { profilePageDataAction, progressBarAction } from "../redux-actions";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -19,6 +19,7 @@ const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const progressBarState = useSelector((state) => state.progressBarReducer);
   const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
@@ -46,6 +47,12 @@ const MainPageSideBar = () => {
           className="MainPage_SideBar_Friend_Outline"
           onClick={async () => {
             try {
+              dispatch(
+                progressBarAction({
+                  isCompleted: false,
+                  showProgressBar: true,
+                })
+              );
               const res = await axios({
                 method: "GET",
                 url: `/u/profile/${props.friendDetail.userID}`,
@@ -55,12 +62,24 @@ const MainPageSideBar = () => {
                 withCredentials: true,
               });
               const userData = await res.data;
-              const userObj = {
-                ...userData.searchedUser,
-                isRootUserFollowed: userData.isRootUserFollowed,
-              };
-              dispatch(profilePageDataAction(userObj));
-              history.push(`/u/profile/${props.friendDetail.userID}`);
+              if (res.status !== 200 && !userData.success) {
+                // error
+              } else {
+                // success
+
+                const userObj = {
+                  ...userData.searchedUser,
+                  isRootUserFollowed: userData.isRootUserFollowed,
+                };
+                dispatch(profilePageDataAction(userObj));
+                dispatch(
+                  progressBarAction({
+                    showProgressBar: true,
+                    isCompleted: true,
+                  })
+                );
+                history.push(`/u/profile/${props.friendDetail.userID}`);
+              }
             } catch (err) {}
           }}
         >
