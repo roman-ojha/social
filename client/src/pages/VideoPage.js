@@ -1,14 +1,15 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import "../styles/pages/videoPage.css";
 
 const VideoPage = () => {
   return (
     <>
-      <div className="HomePage_Container">
+      <div className="VideoPage_Container">
         <Helmet>
           <title>Video</title>
         </Helmet>
-        <h1>Video Page</h1>
+        <h1>Coming Soon...</h1>
       </div>
     </>
   );

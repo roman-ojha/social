@@ -1,0 +1,21 @@
+.VideoPage_Container {
+  width: 50%;
+  /* border: 1px solid red; */
+  position: relative;
+  left: 20%;
+  top: 14vh;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  height: calc(100vh - 18vh);
+}
+
+.VideoPage_Container h1 {
+  font-family: var(--primary-font-family);
+  font-size: 3rem;
+  color: var(--primary-color);
+  word-wrap: break-word;
+}
