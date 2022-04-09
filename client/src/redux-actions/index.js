@@ -147,3 +147,10 @@ export const commentBoxAction = (data) => {
     payload: data,
   };
 };
+
+export const showProgressBarAction = (data) => {
+  return {
+    type: "showProgressBar",
+    payload: data,
+  };
+};
