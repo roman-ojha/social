@@ -6,6 +6,7 @@
   justify-content: space-between;
   align-items: center;
   row-gap: 10px;
+  margin-bottom: 10px;
 }
 .ProfilePage_Albums_Image {
   width: 8.5rem;

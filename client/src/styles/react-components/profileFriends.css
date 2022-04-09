@@ -1,0 +1,46 @@
+.ProfilePage_Friends_Container {
+  /* border: 1px solid red; */
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background-color: var(--secondary-color-point-2);
+  border-radius: 15px;
+}
+.ProfilePage_Friend_Outline {
+  /* border: 1px solid blue; */
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  position: relative;
+}
+.ProfilePage_Friend_Image {
+  width: 2rem;
+  height: 2rem;
+  margin: 0rem 1rem 0rem 1rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ProfilePage_Friend_Name {
+  font-family: var(--primary-font-family);
+  font-weight: 600;
+  width: 60%;
+  /* border: 1px solid red; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ProfilePage_Friend_Active_Status {
+  position: absolute;
+  right: 0px;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: var(--primary-color-point-7);
+  padding: 0.1rem 0.4rem;
+}
+
+.ProfilePage_Friend_Active_Status p {
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  color: white;
+}
