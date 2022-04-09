@@ -26,6 +26,7 @@ import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
 import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
+import ProgressBar from "../react-components/ProgressBar";
 
 const RoutingMainPage = () => {
   return (
@@ -117,6 +118,7 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
+        <ProgressBar />
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />

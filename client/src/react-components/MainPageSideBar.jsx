@@ -4,15 +4,17 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "./MainPageSearchBar";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/mainPageSideBar.css";
+import { profilePageDataAction } from "../redux-actions";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
   let location;
   const history = useHistory();
+  const dispatch = useDispatch();
   location = useLocation();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -42,8 +44,24 @@ const MainPageSideBar = () => {
       <>
         <div
           className="MainPage_SideBar_Friend_Outline"
-          onClick={() => {
-            history.push(`/u/profile/${props.friendDetail.userID}`);
+          onClick={async () => {
+            try {
+              const res = await axios({
+                method: "GET",
+                url: `/u/profile/${props.friendDetail.userID}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                withCredentials: true,
+              });
+              const userData = await res.data;
+              const userObj = {
+                ...userData.searchedUser,
+                isRootUserFollowed: userData.isRootUserFollowed,
+              };
+              dispatch(profilePageDataAction(userObj));
+              history.push(`/u/profile/${props.friendDetail.userID}`);
+            } catch (err) {}
           }}
         >
           <img
