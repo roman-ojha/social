@@ -12,27 +12,19 @@ import SearchIcon from "@mui/icons-material/Search";
 import SendIcon from "@mui/icons-material/Send";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import CloseIcon from "@mui/icons-material/Close";
 import { Helmet } from "react-helmet";
 import "../styles/pages/MessagePage.css";
-import { NavLink } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import socket from "../services/socket";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 
 const MessagePage = () => {
   const dispatch = useDispatch();
-  const mainPageMessageOnOffState = useSelector(
-    (state) => state.changeMainPageMessageView
-  );
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
   );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
-  );
-  const mainPageInnerMessageBoxOnOffState = useSelector(
-    (state) => state.mainPageInnerMessageBoxOnOff
   );
   const messageList = useSelector((state) => state.messageListReducer);
   useEffect(async () => {
