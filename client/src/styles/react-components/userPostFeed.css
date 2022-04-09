@@ -142,14 +142,12 @@
 /* Post feed Comment Box */
 .UserPostFeed_Comment_Box {
   width: 95%;
-  /* background-color: #f0e3ed; */
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  /* border: 1px solid red; */
   margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 0.2rem;
 }
 
 .UserPostFeed_CommentBox_RootUser_Post_Field_Container {
@@ -199,15 +197,52 @@
 
 .UserPostFeed_CommentBox_CommentList {
   max-height: 5rem;
+  width: 100%;
+  margin-bottom: 0.3rem;
 }
 
 .UserPostFeed_CommentBox_UserComment {
+  width: 100%;
+  display: flex;
+  margin-bottom: 0.3rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  box-sizing: border-box;
+  align-items: flex-start;
 }
 
 .UserPostFeed_CommentBox_UserComment img {
   width: 1.5rem;
   height: 1.5rem;
+  border-radius: 50%;
+  margin-right: 0.5rem;
   object-fit: cover;
+}
+
+.UserPostFeed_CommentBox_UserComment div {
+  /* border: 1px solid red; */
+  padding: 0.3rem;
+  background-color: #f8f1fa;
+  border-radius: 0.3rem;
+  overflow: hidden;
+}
+
+.UserPostFeed_CommentBox_UserComment div h3 {
+  /* border: 1px solid blue; */
+  font-family: var(--primary-font-family);
+  font-size: 0.8rem;
+  max-width: 10rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.UserPostFeed_CommentBox_UserComment div p {
+  font-family: var(--primary-font-family);
+  font-size: 0.7rem;
+  /* border: 1px solid blue; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20rem;
 }
 
 @media screen and (max-width: 700px) {

@@ -188,6 +188,24 @@ const UserPostFeed = (props) => {
         </div>
         {/* <hr className="UserPostFeed_Post_and_Comment_Break_Line" /> */}
         <div className="UserPostFeed_Comment_Box">
+          <div className="UserPostFeed_CommentBox_CommentList">
+            {props.userFeedData.comments.by.map((comment, index) => {
+              if (index < 2) {
+                return (
+                  <div
+                    className="UserPostFeed_CommentBox_UserComment"
+                    key={index}
+                  >
+                    <img src={comment.picture} />
+                    <div>
+                      <h3>{comment.userID}</h3>
+                      <p>{comment.comment}</p>
+                    </div>
+                  </div>
+                );
+              }
+            })}
+          </div>
           <div className="UserPostFeed_CommentBox_RootUser_Post_Field_Container">
             <img
               className="UserPostFeed_CommentBox_Image"
@@ -207,24 +225,6 @@ const UserPostFeed = (props) => {
               className="UserPostFeed_CommentBox_Input_Emoji"
               icon="bx:send"
             />
-          </div>
-          <div className="UserPostFeed_CommentBox_CommentList">
-            {props.userFeedData.comments.by.map((comment, index) => {
-              if (index < 2) {
-                return (
-                  <div
-                    className="UserPostFeed_CommentBox_UserComment"
-                    key={index}
-                  >
-                    <img src={comment.picture} />
-                    <div>
-                      <h3>{comment.userID}</h3>
-                      <p>{comment.comment}</p>
-                    </div>
-                  </div>
-                );
-              }
-            })}
           </div>
         </div>
       </div>
