@@ -1,0 +1,44 @@
+.ProfilePage_Albums_Container {
+  /* border: 1px solid red; */
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(3, 8.5rem);
+  justify-content: space-between;
+  align-items: center;
+  row-gap: 10px;
+}
+.ProfilePage_Albums_Image {
+  width: 8.5rem;
+  height: 8.5rem;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.ProfilePage_Albums_Image:hover {
+  transform: scale(1.02);
+}
+
+@media screen and (max-width: 1800px) and (min-width: 1500px) {
+  .ProfilePage_Albums_Container {
+    grid-template-columns: repeat(3, 8rem);
+    align-items: center;
+    row-gap: 10px;
+  }
+  .ProfilePage_Albums_Image {
+    width: 8rem;
+    height: 8rem;
+  }
+}
+@media screen and (max-width: 1500px) and (min-width: 1300px) {
+  .ProfilePage_Albums_Container {
+    grid-template-columns: repeat(3, 7.5rem);
+    align-items: center;
+    row-gap: 10px;
+  }
+  .ProfilePage_Albums_Image {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+}

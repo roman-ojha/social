@@ -269,11 +269,11 @@ const ProfilePage = () => {
                 component={() => {
                   return (
                     <>
-                      {profilePageUserFeed.map((value) => (
+                      {profilePageUserFeed.map((value, index) => (
                         <UserPostFeed
                           userMainInformation={profilePageMainInformation}
                           userFeedData={value}
-                          key={value._id}
+                          key={index}
                         />
                       ))}
                     </>
@@ -283,7 +283,19 @@ const ProfilePage = () => {
               <Route
                 exact
                 path="/u/profile/:userID/albums"
-                component={ProfileAlbums}
+                component={() => {
+                  return (
+                    <div className="ProfilePage_Albums_Container">
+                      {profilePageUserFeed.map((value, index) => (
+                        <ProfileAlbums
+                          userMainInformation={profilePageMainInformation}
+                          userFeedData={value}
+                          key={index}
+                        />
+                      ))}
+                    </div>
+                  );
+                }}
               />
               <Route
                 exact

@@ -1,13 +1,16 @@
 import React from "react";
-import { userProfileDetailAction } from "../redux-actions";
-import { useDispatch, useSelector } from "react-redux";
+import "../styles/react-components/profileAlbum.css";
 
-const ProfileAlbums = () => {
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+const ProfileAlbums = (props) => {
+  return (
+    <div className="ProfilePage_Album_Container">
+      <img
+        src={props.userFeedData.picture.url}
+        className="ProfilePage_Albums_Image"
+        alt="album"
+      />
+    </div>
   );
-  console.log(userProfileDetailStore);
-  return <div>ProfileAlbums</div>;
 };
 
 export default ProfileAlbums;
