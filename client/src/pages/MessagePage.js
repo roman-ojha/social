@@ -97,7 +97,10 @@ const MessagePage = () => {
           <title>Message</title>
         </Helmet>
         <div className="MessagePage_List_Of_Message_Container">
-          <div className="MainPage_Scrollable_MessageBox_Container">
+          <div
+            className="MainPage_Scrollable_MessageBox_Container"
+            style={{ height: "100%" }}
+          >
             <div className="MainPage_MessageBox_Title_Container">
               <h4>Message</h4>
               <MoreHorizIcon
@@ -120,7 +123,6 @@ const MessagePage = () => {
             </div>
             <div className="MainPage_MessageBox_Message_Container">
               {/* displaying all current user message */}
-
               {messageList.map((messageInfo) => {
                 if (messageInfo.message.length !== 0) {
                   return (
