@@ -19,7 +19,7 @@
   height: 8rem;
   align-items: center;
   padding-top: 1%;
-  background-color: rgb(164 145 178 / 33%);
+  background-color: var(--primary-color-darker-1);
   /* background-color: black; */
 }
 .ProfilePage_UserInfo_Picture_Container {

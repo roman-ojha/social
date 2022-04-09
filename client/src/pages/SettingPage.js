@@ -181,6 +181,7 @@ const SettingPage = () => {
           <title>Setting</title>
         </Helmet>
         <div className="Setting_Page_Change_Profile_Picture_Container">
+          <h1>Change Profile Picture</h1>
           <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">
             <label htmlFor="user-profile-input">
               <img

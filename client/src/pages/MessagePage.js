@@ -28,53 +28,54 @@ const MessagePage = () => {
   );
   const messageList = useSelector((state) => state.messageListReducer);
   useEffect(async () => {
-    dispatch(mainPageMessageViewOnOff(false));
+    try {
+      dispatch(mainPageMessageViewOnOff(false));
+      socket.on("send-message-client", (res) => {
+        if (res.success !== false) {
+          dispatch(
+            appendOnMessage({
+              ...res.msgInfo,
+              _id: `${Math.random()}`,
+            })
+          );
+        }
+      });
 
-    socket.on("send-message-client", (res) => {
-      if (res.success !== false) {
+      // Showing First User Message
+      if (messageList.length >= 0) {
         dispatch(
-          appendOnMessage({
-            ...res.msgInfo,
-            _id: `${Math.random()}`,
+          currentUserMessageAction({
+            messageTo: messageList[0].messageTo,
+            receiverPicture: messageList[0].receiverPicture,
+            message: [],
           })
         );
-      }
-    });
-
-    // Showing First User Message
-    if (messageList.length >= 0) {
-      dispatch(
-        currentUserMessageAction({
-          messageTo: messageList[0].messageTo,
-          receiverPicture: messageList[0].receiverPicture,
-          message: [],
-        })
-      );
-      setShowLoadingSpinner(true);
-      const resMessage = await axios({
-        // sending receiver userID to get message data of that user
-        method: "POST",
-        url: "/u/getMessage",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({ userID: messageList[0].messageTo }),
-        withCredentials: true,
-      });
-      if (resMessage.status !== 200) {
-        const error = await resMessage.data;
-      } else {
-        const message = await resMessage.data;
-        // after getting message we will store that message into redux
-        dispatch(currentUserMessageAction(message));
-        setShowLoadingSpinner(false);
-        // if we are inside the user message then we have to join room through socket
-        // NOTE: this is just for temporary purposes
-        socket.emit("join-room", message.roomID, (resMessage) => {
-          console.log(resMessage);
+        setShowLoadingSpinner(true);
+        const resMessage = await axios({
+          // sending receiver userID to get message data of that user
+          method: "POST",
+          url: "/u/getMessage",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify({ userID: messageList[0].messageTo }),
+          withCredentials: true,
         });
+        if (resMessage.status !== 200) {
+          const error = await resMessage.data;
+        } else {
+          const message = await resMessage.data;
+          // after getting message we will store that message into redux
+          dispatch(currentUserMessageAction(message));
+          setShowLoadingSpinner(false);
+          // if we are inside the user message then we have to join room through socket
+          // NOTE: this is just for temporary purposes
+          socket.emit("join-room", message.roomID, (resMessage) => {
+            console.log(resMessage);
+          });
+        }
       }
-    }
+    } catch (err) {}
   }, []);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
