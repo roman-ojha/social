@@ -2,7 +2,7 @@
   /* border: 1px solid red; */
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(3, 8.5rem);
+  grid-template-columns: repeat(auto-fill, 8.5rem);
   justify-content: space-between;
   align-items: center;
   row-gap: 10px;
@@ -23,8 +23,7 @@
 
 @media screen and (max-width: 1800px) and (min-width: 1500px) {
   .ProfilePage_Albums_Container {
-    grid-template-columns: repeat(3, 8rem);
-    align-items: center;
+    grid-template-columns: repeat(auto-fill, 8rem);
     row-gap: 10px;
   }
   .ProfilePage_Albums_Image {
@@ -34,8 +33,7 @@
 }
 @media screen and (max-width: 1500px) and (min-width: 1300px) {
   .ProfilePage_Albums_Container {
-    grid-template-columns: repeat(3, 7.5rem);
-    align-items: center;
+    grid-template-columns: repeat(auto-fill, 7.5rem);
     row-gap: 10px;
   }
   .ProfilePage_Albums_Image {

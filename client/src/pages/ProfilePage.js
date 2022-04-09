@@ -136,7 +136,7 @@ const ProfilePage = () => {
     if (params.userID === userProfileDetailStore.userID) {
       dispatch(profilePageDataAction(userProfileDetailStore));
       setFetchedAllData(true);
-    } else {
+    } else if (profilePageData.userID != params.userID) {
       try {
         // fetching user Detail which current user had search
         const res = await axios({
@@ -155,8 +155,10 @@ const ProfilePage = () => {
         dispatch(profilePageDataAction(userObj));
         setFetchedAllData(true);
       } catch (err) {}
+    } else {
+      setFetchedAllData(true);
     }
-  });
+  }, []);
   return (
     <>
       {openCommentBoxStore ? <CommentBox /> : <></>}
@@ -283,19 +285,7 @@ const ProfilePage = () => {
               <Route
                 exact
                 path="/u/profile/:userID/albums"
-                component={() => {
-                  return (
-                    <div className="ProfilePage_Albums_Container">
-                      {profilePageUserFeed.map((value, index) => (
-                        <ProfileAlbums
-                          userMainInformation={profilePageMainInformation}
-                          userFeedData={value}
-                          key={index}
-                        />
-                      ))}
-                    </div>
-                  );
-                }}
+                component={ProfileAlbums}
               />
               <Route
                 exact
@@ -306,7 +296,7 @@ const ProfilePage = () => {
           </div>
         </div>
       ) : (
-        ""
+        <></>
       )}
     </>
   );
