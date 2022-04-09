@@ -12,12 +12,14 @@
 }
 .ProfilePage_UserInfo_Container {
   /* border: 1px solid blue; */
-  width: 100%;
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 95%;
   display: flex;
   height: 8rem;
   align-items: center;
   padding-top: 1%;
-  background-color: #ccbec93a;
+  background-color: rgb(164 145 178 / 33%);
   /* background-color: black; */
 }
 .ProfilePage_UserInfo_Picture_Container {
@@ -73,7 +75,7 @@
   border-radius: 50%;
   cursor: pointer;
 }
-.ProfilePage_UserInfo_Message_Icon_Container img {
+.ProfilePage_UserInfo_Message_Icon {
   height: 1.3rem;
   width: 1.3rem;
 }
@@ -144,32 +146,22 @@
   justify-content: space-around;
   align-items: center;
 }
-.ProfilePage_UserContent_Feed_Icon {
-  color: var(--primary-color-point-7);
+.ProfilePage_UserContent_Icon {
   width: 1.7rem;
+  color: var(--logo-icon-low-opacity-black-color-point-3);
   height: 1.7rem;
 }
 .ProfilePage_UserContent_Feed_Route_Container {
   border-width: 0px 0px 7px 0px;
   border-style: solid;
-  border-color: var(--primary-color-point-7);
+  border-color: transparent;
   z-index: 2;
-}
-.ProfilePage_UserContent_Picture_Icon {
-  color: var(--logo-icon-low-opacity-black-color-point-3);
-  width: 1.7rem;
-  height: 1.7rem;
 }
 .ProfilePage_UserContent_Picture_Route_Container {
   border-width: 0px 0px 7px 0px;
   border-style: solid;
   border-color: transparent;
   z-index: 2;
-}
-.ProfilePage_UserContent_Friends_Icon {
-  color: var(--logo-icon-low-opacity-black-color-point-3);
-  width: 1.7rem;
-  height: 1.7rem;
 }
 .ProfilePage_UserContent_Friends_Route_Container {
   border-width: 0px 0px 7px 0px;

@@ -10,18 +10,24 @@ import {
   profilePageDataAction,
 } from "../redux-actions/index";
 import socket from "../services/socket";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+import {
+  useLocation,
+  Switch,
+  Route,
+  useHistory,
+  useParams,
+} from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
 import CommentBox from "../react-components/CommentBox";
-import { Switch, Route } from "react-router-dom";
 import ProfileFriends from "../react-components/ProfileFriends";
 import ProfileAlbums from "../react-components/ProfileAlbums";
 
 const ProfilePage = () => {
   const history = useHistory();
   const params = useParams();
+  const location = useLocation();
   const [fetchedAllData, setFetchedAllData] = useState(false);
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const userProfileDetailStore = useSelector(
@@ -39,6 +45,7 @@ const ProfilePage = () => {
     userID: profilePageData.userID,
   };
   const profilePageUserFeed = profilePageData.posts;
+
   const followUser = async () => {
     // writing logic for followuser
     try {
@@ -68,6 +75,7 @@ const ProfilePage = () => {
       }
     } catch (err) {}
   };
+
   const unFollowUser = async () => {
     try {
       const unfollowedTo = {
@@ -96,6 +104,7 @@ const ProfilePage = () => {
       }
     } catch (err) {}
   };
+
   const showInnerMessage = async () => {
     // before getting new message we will reset the previous message stored into redux
     try {
@@ -132,6 +141,29 @@ const ProfilePage = () => {
       }
     } catch (err) {}
   };
+
+  const fillColorOnRoute = () => {
+    try {
+      let selectedRouteIndex;
+      // console.log(location.pathname);
+      if (location.pathname.includes("/albums")) {
+        // console.log("albums");
+        selectedRouteIndex = 1;
+      } else if (location.pathname.includes("/friends")) {
+        selectedRouteIndex = 2;
+      } else {
+        selectedRouteIndex = 0;
+      }
+      document.getElementsByClassName("ProfilePage_Route")[
+        selectedRouteIndex
+      ].style.borderColor = "var(--primary-color-point-7)";
+
+      document.getElementsByClassName("ProfilePage_UserContent_Icon")[
+        selectedRouteIndex
+      ].style.color = "var(--primary-color-point-7)";
+    } catch (err) {}
+  };
+
   useEffect(async () => {
     if (params.userID === userProfileDetailStore.userID) {
       dispatch(profilePageDataAction(userProfileDetailStore));
@@ -159,6 +191,9 @@ const ProfilePage = () => {
       setFetchedAllData(true);
     }
   }, []);
+  useEffect(() => {
+    fillColorOnRoute();
+  });
   return (
     <>
       {openCommentBoxStore ? <CommentBox /> : <></>}
@@ -229,35 +264,35 @@ const ProfilePage = () => {
           </div>
           <div className="ProfilePage_UserContent_Route_Container">
             <div
-              className="ProfilePage_UserContent_Feed_Route_Container"
+              className="ProfilePage_UserContent_Feed_Route_Container ProfilePage_Route"
               onClick={() => {
                 history.push(`/u/profile/${profilePageData.userID}`);
               }}
             >
               <span
-                className="ProfilePage_UserContent_Feed_Icon iconify"
+                className="ProfilePage_UserContent_Icon iconify"
                 data-icon="gg:feed"
               ></span>
             </div>
             <div
-              className="ProfilePage_UserContent_Picture_Route_Container"
+              className="ProfilePage_UserContent_Picture_Route_Container ProfilePage_Route"
               onClick={() => {
                 history.push(`/u/profile/${profilePageData.userID}/albums`);
               }}
             >
               <span
-                className="ProfilePage_UserContent_Picture_Icon iconify"
+                className="ProfilePage_UserContent_Icon iconify"
                 data-icon="akar-icons:image"
               ></span>
             </div>
             <div
-              className="ProfilePage_UserContent_Friends_Route_Container"
+              className="ProfilePage_UserContent_Friends_Route_Container ProfilePage_Route"
               onClick={() => {
                 history.push(`/u/profile/${profilePageData.userID}/friends`);
               }}
             >
               <span
-                className="ProfilePage_UserContent_Friends_Icon iconify"
+                className="ProfilePage_UserContent_Icon iconify"
                 data-icon="fa-solid:user-friends"
               ></span>
             </div>
