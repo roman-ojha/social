@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
-import { commentBoxAction } from "../redux-actions";
+import { commentBoxAction, incrementPostCommentNumber } from "../redux-actions";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ const UserPostFeed = (props) => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  const [commentInputField, setCommentInputField] = useState("");
   const [likeValue, setLikeValue] = useState({
     isLikedPost: false,
     likeNo: props.userFeedData.likes.No,
@@ -98,6 +98,37 @@ const UserPostFeed = (props) => {
     });
     setPostCommentNumber(props.userFeedData.comments.No);
   }, []);
+
+  const comment = async () => {
+    try {
+      const res = await axios({
+        url: "/post/comment",
+        method: "POST",
+        data: {
+          comment: commentInputField,
+          postID: props.userFeedData.id,
+          to: props.userMainInformation.userID,
+        },
+        withCredentials: true,
+      });
+      const data = await res.data;
+      console.log("hello");
+      if (res.status !== 200 && data.success) {
+        // Error
+      } else {
+        dispatch(
+          incrementPostCommentNumber({
+            postID: props.userFeedData.id,
+            to: props.userMainInformation.userID,
+          })
+        );
+        setCommentInputField("");
+      }
+    } catch (err) {
+      // console.log(err);
+    }
+  };
+
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -190,7 +221,7 @@ const UserPostFeed = (props) => {
         <div className="UserPostFeed_Comment_Box">
           <div className="UserPostFeed_CommentBox_CommentList">
             {props.userFeedData.comments.by.map((comment, index) => {
-              if (index < 2) {
+              if (index < 1) {
                 return (
                   <div
                     className="UserPostFeed_CommentBox_UserComment"
@@ -216,6 +247,10 @@ const UserPostFeed = (props) => {
               className="UserPostFeed_CommentBox_Input_Field"
               placeholder="Give some thought on this post..."
               type="text"
+              value={commentInputField}
+              onChange={(e) => {
+                setCommentInputField(e.target.value);
+              }}
             />
             <Icon
               className="UserPostFeed_CommentBox_Input_Emoji"
@@ -224,6 +259,7 @@ const UserPostFeed = (props) => {
             <Icon
               className="UserPostFeed_CommentBox_Input_Emoji"
               icon="bx:send"
+              onClick={comment}
             />
           </div>
         </div>

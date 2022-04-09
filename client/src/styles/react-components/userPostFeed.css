@@ -204,7 +204,6 @@
 .UserPostFeed_CommentBox_UserComment {
   width: 100%;
   display: flex;
-  margin-bottom: 0.3rem;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
   box-sizing: border-box;
@@ -234,6 +233,11 @@
   max-width: 10rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.UserPostFeed_CommentBox_UserComment div h3:hover {
+  text-decoration: underline;
 }
 
 .UserPostFeed_CommentBox_UserComment div p {
