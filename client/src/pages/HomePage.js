@@ -15,11 +15,12 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import Stories from "../react-components/Stories";
+import StoriesCarouse from "../react-components/StoriesCarousel";
 
 const HomePage = () => {
   const history = useHistory();
   // storing user Profile Detail
+  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -29,14 +30,13 @@ const HomePage = () => {
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
-  const dispatch = useDispatch();
   const followedUserPostDataStore = useSelector(
     (state) => state.setFollowedUserPostDataReducer
   );
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  const userStoriesStore = useSelector((state) => state.userStoriesReducer);
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
@@ -137,7 +137,7 @@ const HomePage = () => {
           if (res.status === 201) {
             dispatch(userPostResponseData(resData));
           }
-          console.log(resData);
+          // console.log(resData);
           setUserPostResponseLoading(false);
           setViewValue("min");
         } catch (err) {}
@@ -309,7 +309,7 @@ const HomePage = () => {
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>
-        <Stories />
+        {userStoriesStore.viewStories ? <StoriesCarouse /> : <></>}
         <div className="HomePage_Feed_Main_Container">
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {

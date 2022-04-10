@@ -4,8 +4,11 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
 import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";
+import { showUserStories } from "../redux-actions";
+import { useDispatch } from "react-redux";
 
 const MainPageStory = () => {
+  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -39,17 +42,23 @@ const MainPageStory = () => {
     );
   };
   const FriendStory = (props) => {
+    const showStories = () => {
+      dispatch(showUserStories(true));
+    };
     return (
       <>
         <div className="Friends_Story_Container">
-          <div className="Friends_Story_Picutre_Container">
+          <div
+            className="Friends_Story_Picutre_Container"
+            onClick={showStories}
+          >
             <img
               src={props.storiesInformation.picture}
               alt=""
               className="Friend_Story_Picture"
             />
           </div>
-          <p className="Friend_Story_Name">
+          <p className="Friend_Story_Name" onClick={showStories}>
             {props.storiesInformation.name.split(" ")[0]}
           </p>
         </div>

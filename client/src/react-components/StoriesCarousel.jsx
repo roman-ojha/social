@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import "../styles/react-components/stories.css";
-const Stories = () => {
+const StoriesCarousel = () => {
   useEffect(() => {
     const text1_options = [
       "Why art is so important",
@@ -111,4 +111,4 @@ const Stories = () => {
   );
 };
 
-export default Stories;
+export default StoriesCarousel;

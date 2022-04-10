@@ -9,7 +9,7 @@ const userStoriesReducer = (state = initialState, action) => {
       ...state,
       stories: action.payload,
     };
-  } else if (action.type === "viewUserStories") {
+  } else if (action.type === "showUserStories") {
     return {
       ...state,
       viewStories: action.payload,
