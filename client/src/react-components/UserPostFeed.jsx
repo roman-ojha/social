@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
-import { commentBoxAction, incrementPostCommentNumber } from "../redux-actions";
+import {
+  commentBoxAction,
+  incrementPostCommentNumber,
+  startProgressBar,
+  stopProgressBar,
+} from "../redux-actions";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -16,7 +21,9 @@ const UserPostFeed = (props) => {
   );
   const [commentInputField, setCommentInputField] = useState("");
   const [likeValue, setLikeValue] = useState({
-    isLikedPost: false,
+    isLikedPost: props.userFeedData.likes.by.some(
+      (el) => el.userID === userProfileDetailStore.userID
+    ),
     likeNo: props.userFeedData.likes.No,
   });
   const [postCommentNumber, setPostCommentNumber] = useState(0);
@@ -61,6 +68,7 @@ const UserPostFeed = (props) => {
   }
   const like = async () => {
     try {
+      dispatch(startProgressBar());
       const res = await axios({
         method: "POST",
         url: "/post/like",
@@ -78,6 +86,7 @@ const UserPostFeed = (props) => {
           likeNo: likeValue.likeNo + 1,
           isLikedPost: true,
         });
+        dispatch(stopProgressBar());
       } else if (data.success === true && data.removed === true) {
         // console.log("remove");
         // Removed Like from the post Post
@@ -85,19 +94,20 @@ const UserPostFeed = (props) => {
           likeNo: likeValue.likeNo - 1,
           isLikedPost: false,
         });
+        dispatch(stopProgressBar());
       }
       // console.log(data);
-    } catch (err) {}
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
   };
-  useEffect(() => {
-    setLikeValue({
-      ...likeValue,
-      isLikedPost: props.userFeedData.likes.by.some(
-        (el) => el.userID === userProfileDetailStore.userID
-      ),
-    });
-    setPostCommentNumber(props.userFeedData.comments.No);
-  }, []);
+  // useEffect(() => {
+  //   // setPostCommentNumber(props.userFeedData.comments.No);
+  //   // console.log(likeValue.current);
+  //   return () => {
+  //     console.log("unmount");
+  //   };
+  // }, []);
 
   const comment = async () => {
     try {

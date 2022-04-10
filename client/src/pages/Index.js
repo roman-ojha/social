@@ -28,53 +28,53 @@ import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import ProgressBar from "../react-components/ProgressBar";
 
-const RoutingMainPage = () => {
-  return (
-    <>
-      <Switch>
-        <Route exact path="/u" component={HomePage} />
-        <Route exact path="/u/video" component={VideoPage} />
-        <Route exact path="/u/message" component={MessagePage} />
-        <Route exact path="/u/setting" component={SettingPage} />
-        <Route path="/u/profile/:userID" component={ProfilePage} />
-        <Route
-          path="*"
-          component={() => {
-            return (
-              <div className="page404_User_Page">
-                <Page404 />
-              </div>
-            );
-          }}
-        />
-      </Switch>
-    </>
-  );
-};
-
-const LoadingScreen = () => {
-  return (
-    <>
-      <div className="LoadingScreen_Page_Container">
-        <h1 className="LoadingScreen_Title">Welcome To Social</h1>
-        <div className="LoadingScreen_Container">
-          <img className="LoadingScreen_App_Icon" src={AppIcon} />
-          <div className="LoadingScreen_Loading_Div">
-            <div className="LoadingScreen_Loading_Left_Part"></div>
-            <div className="LoadingScreen_Loading_Right_Part"></div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
 const Index = () => {
   const progressBarState = useSelector((state) => state.progressBarReducer);
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
+
+  const RoutingMainPage = () => {
+    return (
+      <>
+        <Switch>
+          <Route exact path="/u" component={HomePage} />
+          <Route exact path="/u/video" component={VideoPage} />
+          <Route exact path="/u/message" component={MessagePage} />
+          <Route exact path="/u/setting" component={SettingPage} />
+          <Route path="/u/profile/:userID" component={ProfilePage} />
+          <Route
+            path="*"
+            component={() => {
+              return (
+                <div className="page404_User_Page">
+                  <Page404 />
+                </div>
+              );
+            }}
+          />
+        </Switch>
+      </>
+    );
+  };
+
+  const LoadingScreen = () => {
+    return (
+      <>
+        <div className="LoadingScreen_Page_Container">
+          <h1 className="LoadingScreen_Title">Welcome To Social</h1>
+          <div className="LoadingScreen_Container">
+            <img className="LoadingScreen_App_Icon" src={AppIcon} />
+            <div className="LoadingScreen_Loading_Div">
+              <div className="LoadingScreen_Loading_Left_Part"></div>
+              <div className="LoadingScreen_Loading_Right_Part"></div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
   useEffect(() => {
     // fetching all user data and current user following user Post data
     const getUserData = async () => {
@@ -119,6 +119,7 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
+        {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />

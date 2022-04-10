@@ -8,6 +8,8 @@ import {
   mainPageMessageInnerViewOnOff,
   currentUserMessageAction,
   profilePageDataAction,
+  startProgressBar,
+  stopProgressBar,
 } from "../redux-actions/index";
 import socket from "../services/socket";
 import {
@@ -49,6 +51,7 @@ const ProfilePage = () => {
   const followUser = async () => {
     // writing logic for followuser
     try {
+      dispatch(startProgressBar());
       const followedTo = {
         email: profilePageData.email,
         userID: profilePageData.userID,
@@ -72,12 +75,16 @@ const ProfilePage = () => {
       };
       if (data.success) {
         dispatch(profilePageDataAction(userObj));
+        dispatch(stopProgressBar());
       }
-    } catch (err) {}
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
   };
 
   const unFollowUser = async () => {
     try {
+      dispatch(startProgressBar());
       const unfollowedTo = {
         email: profilePageData.email,
         userID: profilePageData.userID,
@@ -101,8 +108,11 @@ const ProfilePage = () => {
       };
       if (data.success) {
         dispatch(profilePageDataAction(userObj));
+        dispatch(stopProgressBar());
       }
-    } catch (err) {}
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
   };
 
   const showInnerMessage = async () => {

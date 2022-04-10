@@ -6,8 +6,6 @@ import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./pages/GetUserIDPage";
 import Page404 from "./pages/Page404";
-import { useSelector } from "react-redux";
-import ProgressBar from "./react-components/ProgressBar";
 
 const MainRoot = () => {
   const history = useHistory();
@@ -16,10 +14,8 @@ const MainRoot = () => {
 };
 
 const App = () => {
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   return (
     <>
-      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
       <Switch>
         <Route exact path="/" component={MainRoot} />
         <Route path="/u" component={Index} />

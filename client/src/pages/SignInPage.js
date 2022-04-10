@@ -7,7 +7,8 @@ import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
 import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ProgressBar from "../react-components/ProgressBar";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SignInPage = () => {
       [name]: value,
     });
   };
+  const progressBarState = useSelector((state) => state.progressBarReducer);
   const history = useHistory();
   const signingIn = async (e) => {
     e.preventDefault();
@@ -61,6 +63,7 @@ const SignInPage = () => {
   };
   return (
     <>
+      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
       <div className="SignIn_Page_Container">
         <Helmet>
           <title>SignIn</title>

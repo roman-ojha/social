@@ -68,7 +68,6 @@ const MainPageSideBar = () => {
                 // error
               } else {
                 // success
-
                 const userObj = {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
