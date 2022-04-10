@@ -80,7 +80,14 @@ const MainPageSideBar = () => {
                 );
                 history.push(`/u/profile/${props.friendDetail.userID}`);
               }
-            } catch (err) {}
+            } catch (err) {
+              dispatch(
+                progressBarAction({
+                  showProgressBar: true,
+                  isCompleted: true,
+                })
+              );
+            }
           }}
         >
           <img

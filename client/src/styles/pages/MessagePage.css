@@ -8,13 +8,13 @@
 }
 
 .MessagePage_List_Of_Message_Container {
-  width: 50%;
+  width: 45%;
   height: calc(100vh - 16vh);
   /* border: 1px solid red; */
   margin-right: 10px;
 }
 .MessagePage_Single_User_Message_Container {
-  width: 50%;
+  width: 55%;
   height: calc(100vh - 16vh);
   /* border: 1px solid blue; */
 }

@@ -119,7 +119,6 @@ const Index = () => {
   const ReturnMainPage = () => {
     return (
       <>
-        {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />
