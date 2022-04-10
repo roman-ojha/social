@@ -100,9 +100,9 @@ const Stories = () => {
               ></span>
             </div>
             <div id="image"></div>
-            <div>
-              <button id="previous-option"></button>
+            <div id="button-container">
               <button id="next-option"></button>
+              <button id="previous-option"></button>
             </div>
           </div>
         </div>

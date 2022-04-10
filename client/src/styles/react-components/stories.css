@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins|Lato|Roboto+Mono&display=swap");
 #carousel-stories-container {
-  width: 90%;
+  width: var(--home-page-content-width);
   height: 320px;
   /* overflow: hidden; */
   margin-top: 15px;
@@ -34,7 +34,7 @@
   border-radius: 10px;
 }
 #menu {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -43,32 +43,34 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   vertical-align: middle;
   transition: all 0.6s ease-in-out;
+  justify-content: space-evenly;
 }
 #current-option {
   /* border: 1px solid red; */
   position: relative;
-  width: 100%;
+  width: 35%;
   height: 100%;
   /* transform: translate(-30%, 0%); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 }
 #current-option-text1 {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   font-size: 1.3rem;
   line-height: 2rem;
-  width: 180px;
-  height: 180px;
+  /* width: 180px; */
+  max-height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  text-align: start;
+  overflow: hidden;
 }
 #current-option-text1::before {
   content: attr(data-next-text);
@@ -124,6 +126,13 @@
   align-items: flex-start;
   justify-content: flex-end;
 }
+#button-container {
+  /* border: 1px solid red; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #previous-option {
   /* border: 1px solid red; */
   width: 1.2rem;
@@ -135,6 +144,7 @@
   background-size: cover;
   /* position: absolute; */
   /* transform: translate(240px, 50px); */
+  margin-top: 100%;
 }
 #next-option {
   width: 1.2rem;
@@ -147,6 +157,7 @@
   /* position: absolute; */
   transform: rotate(180deg);
   /* transform: translate(240px, -50px) rotate(180deg); */
+  margin-bottom: 100%;
 }
 #image {
   /* border: 1px solid red; */
@@ -161,40 +172,40 @@
   /* position: absolute; */
   /* transform: translate(60px, 0); */
 }
-#carousel-wrapper.anim-next {
+.anim-next {
   pointer-events: none;
 }
-#carousel-wrapper.anim-next #current-option-text1 {
+.anim-next #current-option-text1 {
   animation: next-text 0.65s 0.085s;
 }
-#carousel-wrapper.anim-next #current-option-text2 {
+.anim-next #current-option-text2 {
   animation: next-text 0.65s 0.085s;
 }
-#carousel-wrapper.anim-next #previous-option {
+.anim-next #previous-option {
   animation: next-top-arrow 0.65s 0.085s;
 }
-#carousel-wrapper.anim-next #next-option {
+.anim-next #next-option {
   animation: next-bottom-arrow 0.65s 0.085s;
 }
-#carousel-wrapper.anim-next #menu #image {
+.anim-next #image {
   animation: next-image 0.65s 0.085s;
 }
-#carousel-wrapper.anim-previous {
+.anim-previous {
   pointer-events: none;
 }
-#carousel-wrapper.anim-previous #current-option-text1 {
+.anim-previous #current-option-text1 {
   animation: previous-text 0.65s 0.085s;
 }
-#carousel-wrapper.anim-previous #current-option-text2 {
+.anim-previous #current-option-text2 {
   animation: previous-text 0.65s 0.085s;
 }
-#carousel-wrapper.anim-previous #previous-option {
+.anim-previous #previous-option {
   animation: previous-top-arrow 0.65s 0.085s;
 }
-#carousel-wrapper.anim-previous #next-option {
+.anim-previous #next-option {
   animation: previous-bottom-arrow 0.65s 0.085s;
 }
-#carousel-wrapper.anim-previous #menu #image {
+.anim-previous #image {
   animation: previous-image 0.65s 0.085s;
 }
 
@@ -209,12 +220,12 @@
 }
 @keyframes previous-top-arrow {
   50% {
-    transform: translate(310px, 53px);
+    /* transform: translate(310px, 53px); */
   }
 }
 @keyframes previous-bottom-arrow {
   50% {
-    transform: translate(310px, -47px) rotate(180deg);
+    transform: rotate(180deg);
   }
 }
 @keyframes previous-image {
@@ -242,12 +253,12 @@
 }
 @keyframes next-top-arrow {
   50% {
-    transform: translate(310px, 47px);
+    /* transform: translate(310px, 47px); */
   }
 }
 @keyframes next-bottom-arrow {
   50% {
-    transform: translate(310px, -53px) rotate(180deg);
+    transform: rotate(180deg);
   }
 }
 @keyframes next-image {
