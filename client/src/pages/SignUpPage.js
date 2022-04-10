@@ -5,8 +5,12 @@ import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
 import { Helmet } from "react-helmet";
+import { startProgressBar, stopProgressBar } from "../redux-actions";
+import { useDispatch } from "react-redux";
+
 let previousSelectGenderElement;
 const SignUpPage = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   let today = new Date();
   let birthdayYear = [];
@@ -20,6 +24,7 @@ const SignUpPage = () => {
   ];
   // getting user Input data
   let name, value;
+
   const [userData, setuserData] = useState({
     name: "",
     email: "",
@@ -32,6 +37,7 @@ const SignUpPage = () => {
     },
     gender: "",
   });
+
   const getUserData = (event) => {
     name = event.target.name;
     value = event.target.value;
@@ -50,6 +56,7 @@ const SignUpPage = () => {
       });
     }
   };
+
   // Login of selecting gender
   const selectGender = (event) => {
     let element = event.target;
@@ -87,10 +94,12 @@ const SignUpPage = () => {
       gender: element.value,
     });
   };
+
   const registerData = async (e) => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
     try {
+      dispatch(startProgressBar());
       const res = await axios({
         method: "POST",
         headers: {
@@ -108,13 +117,16 @@ const SignUpPage = () => {
         withCredentials: true,
       });
       const data = await res.data;
+      dispatch(stopProgressBar());
       if (res.status === 422 || !data) {
         console.log(data.error);
       } else {
         console.log(data.message);
         history.push("/userid?uid=undefined");
       }
-    } catch (err) {}
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
   };
 
   return (

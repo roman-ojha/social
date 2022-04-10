@@ -1,18 +1,62 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  startProgressBar,
+  stopProgressBar,
+  profilePageDataAction,
+} from "../redux-actions";
+import { instance as axios } from "../services/axios";
 
 const MainPageSearchBar = (props) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   let noResultFound = true;
   // Storing Searched userData into redux
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
 
   const SearchBarUser = (props) => {
     // console.log(props.userDetail);
     return (
       <>
-        <NavLink
+        <div
           className="MainPage_SearchBar_User_Container"
-          to={`/u/profile/${props.userDetail.userID}`}
+          onClick={async () => {
+            if (props.userDetail.userID === userProfileDetailStore.userID) {
+              history.push(`/u/profile/${props.userDetail.userID}`);
+            } else {
+              try {
+                dispatch(startProgressBar());
+                const res = await axios({
+                  method: "GET",
+                  url: `/u/profile/${props.userDetail.userID}`,
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  withCredentials: true,
+                });
+                const userData = await res.data;
+                if (res.status !== 200 && !userData.success) {
+                  // error
+                } else {
+                  // success
+                  const userObj = {
+                    ...userData.searchedUser,
+                    isRootUserFollowed: userData.isRootUserFollowed,
+                  };
+                  dispatch(profilePageDataAction(userObj));
+                  dispatch(stopProgressBar());
+                  history.push(`/u/profile/${props.userDetail.userID}`);
+                }
+              } catch (err) {
+                dispatch(stopProgressBar());
+              }
+            }
+          }}
         >
           {/* here link goes to there user profile  using userid link*/}
           <img
@@ -24,7 +68,7 @@ const MainPageSearchBar = (props) => {
             alt="user"
           />
           <p>{props.userDetail.userID}</p>
-        </NavLink>
+        </div>
       </>
     );
   };

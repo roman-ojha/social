@@ -21,12 +21,7 @@ const ProgressBar = () => {
       progressBarState.isCompleted === true &&
       progressBarState.showProgressBar === false
     ) {
-      dispatch(
-        progressBarState({
-          showProgressBar: false,
-          isCompleted: false,
-        })
-      );
+      dispatch(progressBarState(hideProgressBar()));
     }
     if (!progressBarState.isCompleted) {
       let previousWidth = 15;

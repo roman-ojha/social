@@ -23,10 +23,10 @@ const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
+      dispatch(startProgressBar());
       const res = await axios({
         method: "GET",
         url: "/u/logout",
@@ -36,12 +36,15 @@ const MainPageSideBar = () => {
         },
         withCredentials: true,
       });
+      dispatch(stopProgressBar());
       history.push("/signin", { replace: true });
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
       }
-    } catch (err) {}
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
   };
 
   const MainPageFriend = (props) => {
