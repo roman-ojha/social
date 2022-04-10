@@ -1,13 +1,13 @@
 const initialState = {
   showStories: false,
-  stories: [],
+  data: [],
 };
 
 const userStoriesReducer = (state = initialState, action) => {
   if (action.type === "setUserStories") {
     return {
       ...state,
-      stories: action.payload,
+      data: action.payload,
     };
   } else if (action.type === "showUserStories") {
     return {

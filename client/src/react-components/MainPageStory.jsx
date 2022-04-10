@@ -73,7 +73,7 @@ const MainPageStory = () => {
         <AddStory />
         {/* showing friends story */}
 
-        {userStoriesStore.stories.map((stories, index) => {
+        {userStoriesStore.data.map((stories, index) => {
           if (is) {
             if (index <= 4) {
               return <FriendStory storiesInformation={stories} key={index} />;
