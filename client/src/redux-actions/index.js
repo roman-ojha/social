@@ -165,3 +165,10 @@ export const hideProgressBar = () => {
     type: "hideProgressBar",
   };
 };
+
+export const changeLikeNo = (data) => {
+  return {
+    type: "changeLikeNo",
+    payload: data,
+  };
+};

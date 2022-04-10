@@ -15,6 +15,7 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import Stories from "../react-components/Stories";
 
 const HomePage = () => {
   const history = useHistory();
@@ -305,6 +306,7 @@ const HomePage = () => {
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
       <div className="HomePage_Container">
+        <Stories />
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>

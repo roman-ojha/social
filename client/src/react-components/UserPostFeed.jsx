@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,6 @@ import { useHistory } from "react-router-dom";
 import {
   commentBoxAction,
   incrementPostCommentNumber,
-  startProgressBar,
   stopProgressBar,
 } from "../redux-actions";
 
@@ -26,7 +25,9 @@ const UserPostFeed = (props) => {
     ),
     likeNo: props.userFeedData.likes.No,
   });
-  const [postCommentNumber, setPostCommentNumber] = useState(0);
+  const [postCommentNumber, setPostCommentNumber] = useState(
+    props.userFeedData.comments.No
+  );
   const userPostdate = new Date(props.userFeedData.date);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
@@ -68,7 +69,6 @@ const UserPostFeed = (props) => {
   }
   const like = async () => {
     try {
-      dispatch(startProgressBar());
       const res = await axios({
         method: "POST",
         url: "/post/like",
@@ -86,7 +86,6 @@ const UserPostFeed = (props) => {
           likeNo: likeValue.likeNo + 1,
           isLikedPost: true,
         });
-        dispatch(stopProgressBar());
       } else if (data.success === true && data.removed === true) {
         // console.log("remove");
         // Removed Like from the post Post
@@ -94,21 +93,12 @@ const UserPostFeed = (props) => {
           likeNo: likeValue.likeNo - 1,
           isLikedPost: false,
         });
-        dispatch(stopProgressBar());
       }
       // console.log(data);
     } catch (err) {
       dispatch(stopProgressBar());
     }
   };
-  // useEffect(() => {
-  //   // setPostCommentNumber(props.userFeedData.comments.No);
-  //   // console.log(likeValue.current);
-  //   return () => {
-  //     console.log("unmount");
-  //   };
-  // }, []);
-
   const comment = async () => {
     try {
       const res = await axios({
