@@ -19,7 +19,7 @@ import {
   followedUserPostDataAction,
   userSuggestionAction,
   followedByUserAction,
-  userStoriesAction,
+  setUserStories,
   messageListAction,
 } from "../redux-actions/index";
 import { instance as axios } from "../services/axios";
@@ -102,7 +102,7 @@ const Index = () => {
           dispatch(followedUserPostDataAction(userData.followedUserPost));
           dispatch(userSuggestionAction(userData.userSuggestion));
           dispatch(followedByUserAction(userData.followedBy));
-          dispatch(userStoriesAction(userData.userStories));
+          dispatch(setUserStories(userData.userStories));
           dispatch(messageListAction(userData.userProfileDetail.messages));
           setRenderMainPage(true);
         }

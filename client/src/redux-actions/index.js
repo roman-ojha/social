@@ -134,13 +134,6 @@ export const followedByUserAction = (data) => {
   };
 };
 
-export const userStoriesAction = (data) => {
-  return {
-    type: "userStories",
-    payload: data,
-  };
-};
-
 export const commentBoxAction = (data) => {
   return {
     type: "commentBox",
@@ -169,6 +162,20 @@ export const hideProgressBar = () => {
 export const changeLikeNo = (data) => {
   return {
     type: "changeLikeNo",
+    payload: data,
+  };
+};
+
+export const setUserStories = (data) => {
+  return {
+    type: "setUserStories",
+    payload: data,
+  };
+};
+
+export const viewUserStories = (data) => {
+  return {
+    type: "viewUserStories",
     payload: data,
   };
 };

@@ -11,10 +11,10 @@ import mainPageInnerMessageBoxOnOff from "./mainPageInnerMessageBoxOnOff";
 import setUserMessageFieldReducer from "./userMessageFieldReducer";
 import userSuggestionReducer from "./userSuggestionReducer";
 import followedByUserReducer from "./followedByUserReducer";
-import userStoriesReducer from "./userStoriesReducer";
 import messageListReducer from "./messageListReducer";
 import commentBoxReducer from "./commentBox";
 import progressBarReducer from "./progressBar";
+import userStoriesReducer from "./userStories";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -29,10 +29,10 @@ const rootReducers = combineReducers({
   setUserMessageFieldReducer,
   userSuggestionReducer,
   followedByUserReducer,
-  userStoriesReducer,
   messageListReducer,
   commentBoxReducer,
   progressBarReducer,
+  userStoriesReducer,
 });
 
 export default rootReducers;
