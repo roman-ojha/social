@@ -6,7 +6,7 @@ import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
 import { Helmet } from "react-helmet";
-import { progressBarAction } from "../redux-actions";
+import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch } from "react-redux";
 
 const SignInPage = () => {
@@ -29,12 +29,7 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      dispatch(
-        progressBarAction({
-          isCompleted: false,
-          showProgressBar: true,
-        })
-      );
+      dispatch(startProgressBar());
       const res = await axios({
         method: "POST",
         url: "/signin",
@@ -45,12 +40,7 @@ const SignInPage = () => {
         withCredentials: true,
       });
       const data = await res.data;
-      dispatch(
-        progressBarAction({
-          showProgressBar: true,
-          isCompleted: true,
-        })
-      );
+      dispatch(stopProgressBar());
       if (res.status === 400 || !data) {
         // console.log(data);
         setSignInDetail({
@@ -61,13 +51,7 @@ const SignInPage = () => {
         history.push("/u");
       }
     } catch (err) {
-      // console.log(err);
-      dispatch(
-        progressBarAction({
-          showProgressBar: true,
-          isCompleted: true,
-        })
-      );
+      dispatch(stopProgressBar());
     }
   };
   const signInWithGoogle = async () => {

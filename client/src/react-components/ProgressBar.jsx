@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { progressBarAction } from "../redux-actions";
+import { hideProgressBar } from "../redux-actions";
 
 const ProgressBar = () => {
   const updateIntervalIn = 100;
@@ -58,12 +58,7 @@ const ProgressBar = () => {
       progressBar.style.width = "100%";
       progressBar.style.transitionDuration = "500ms";
       const progressCompleteTimeOut = setTimeout(() => {
-        dispatch(
-          progressBarAction({
-            showProgressBar: false,
-            isCompleted: false,
-          })
-        );
+        dispatch(hideProgressBar());
       }, 500);
       return () => {
         clearTimeout(progressCompleteTimeOut);

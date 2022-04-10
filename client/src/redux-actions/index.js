@@ -148,9 +148,20 @@ export const commentBoxAction = (data) => {
   };
 };
 
-export const progressBarAction = (data) => {
+export const startProgressBar = () => {
   return {
-    type: "showProgressBar",
-    payload: data,
+    type: "startProgressBar",
+  };
+};
+
+export const stopProgressBar = () => {
+  return {
+    type: "stopProgressBar",
+  };
+};
+
+export const hideProgressBar = () => {
+  return {
+    type: "hideProgressBar",
   };
 };
