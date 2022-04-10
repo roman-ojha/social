@@ -306,10 +306,10 @@ const HomePage = () => {
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
       <div className="HomePage_Container">
-        <Stories />
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>
+        <Stories />
         <div className="HomePage_Feed_Main_Container">
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {
