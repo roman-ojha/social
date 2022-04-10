@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins|Lato|Roboto+Mono&display=swap");
+body {
+  /* width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #d3979a;
+  font-family: "Helvetica Neue", "Roboto Mono", "Poppins", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+}
+
+* {
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+}
+
+#carousel-wrapper {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#carousel-wrapper #menu {
+  height: 380px;
+  width: 720px;
+  overflow: hidden;
+  font-weight: 700;
+  line-height: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  transition: all 0.6s ease-in-out;
+}
+#carousel-wrapper #menu #current-option {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translate(-25%, 0%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#carousel-wrapper #menu #current-option #current-option-text1 {
+  font-size: 1.6rem;
+  line-height: 3rem;
+  width: 220px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text1::before {
+  content: attr(data-next-text);
+  position: absolute;
+  transform: translate(0%, 380px);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text1::after {
+  content: attr(data-previous-text);
+  position: absolute;
+  transform: translate(0%, -380px);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+#carousel-wrapper #menu #current-option #current-option-text2 {
+  font-size: 0.8rem;
+  width: 220px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #current-option #current-option-text2::before {
+  content: attr(data-next-text);
+  position: absolute;
+  transform: translate(0%, 380px);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #current-option #current-option-text2::after {
+  content: attr(data-previous-text);
+  position: absolute;
+  transform: translate(0%, -380px);
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+#carousel-wrapper #menu #previous-option {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: block;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+  background-size: cover;
+  position: absolute;
+  transform: translate(310px, 50px);
+}
+#carousel-wrapper #menu #next-option {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: none;
+  display: block;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
+  background-size: cover;
+  position: absolute;
+  transform: translate(310px, -50px) rotate(180deg);
+}
+#carousel-wrapper #image {
+  height: 240px;
+  width: 240px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 101;
+  position: absolute;
+  transform: translate(140px, 0);
+}
+#carousel-wrapper.anim-next {
+  pointer-events: none;
+}
+#carousel-wrapper.anim-next #current-option-text1 {
+  animation: next-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #current-option-text2 {
+  animation: next-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #previous-option {
+  animation: next-top-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #next-option {
+  animation: next-bottom-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-next #image {
+  animation: next-image 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous {
+  pointer-events: none;
+}
+#carousel-wrapper.anim-previous #current-option-text1 {
+  animation: previous-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #current-option-text2 {
+  animation: previous-text 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #previous-option {
+  animation: previous-top-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #next-option {
+  animation: previous-bottom-arrow 0.65s 0.085s;
+}
+#carousel-wrapper.anim-previous #image {
+  animation: previous-image 0.65s 0.085s;
+}
+
+@keyframes previous-text {
+  50%,
+  55% {
+    transform: translate(0%, 390px);
+  }
+  to {
+    transform: translate(0%, 380px);
+  }
+}
+@keyframes previous-top-arrow {
+  50% {
+    transform: translate(310px, 53px);
+  }
+}
+@keyframes previous-bottom-arrow {
+  50% {
+    transform: translate(310px, -47px) rotate(180deg);
+  }
+}
+@keyframes previous-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes next-text {
+  50%,
+  55% {
+    transform: translate(0%, -390px);
+  }
+  to {
+    transform: translate(0%, -380px);
+  }
+}
+@keyframes next-top-arrow {
+  50% {
+    transform: translate(310px, 47px);
+  }
+}
+@keyframes next-bottom-arrow {
+  50% {
+    transform: translate(310px, -53px) rotate(180deg);
+  }
+}
+@keyframes next-image {
+  0% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(140px, 0) scale(1.1);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(140px, 0) scale(1);
+    opacity: 1;
+  }
+}
