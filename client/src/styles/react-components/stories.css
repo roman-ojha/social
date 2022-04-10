@@ -33,6 +33,20 @@
   vertical-align: middle;
   transition: all 0.6s ease-in-out;
   justify-content: space-evenly;
+  position: relative;
+}
+#Carousel-Stories-Close-icon {
+  font-size: 1.3rem;
+  position: absolute;
+  z-index: 10;
+  top: 7px;
+  right: 7px;
+  cursor: pointer;
+  transition-duration: 300ms;
+  color: var(--logo-icon-low-opacity-black-color);
+}
+#Carousel-Stories-Close-icon:hover {
+  transform: scale(1.05);
 }
 #current-option {
   position: relative;

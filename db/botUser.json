@@ -10,6 +10,11 @@
       "month": 7,
       "day": 13
     },
+    "stories": {
+      "caption": "Life is full of surprises.",
+      "picture": "https://images.unsplash.com/photo-1534614971-6be99a7a3ffd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "date": "Mar 5, 2020"
+    },
     "type": "bot"
   },
   {
@@ -22,6 +27,11 @@
       "year": 2010,
       "month": 8,
       "day": 12
+    },
+    "stories": {
+      "caption": "To be the best, you must be able to handle the worst.",
+      "picture": "https://images.unsplash.com/photo-1597204081767-4c14a6b7cbec?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c2luZ2xlJTIwcGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+      "date": "Apr 5, 2021"
     },
     "type": "bot"
   },
@@ -36,6 +46,11 @@
       "month": 9,
       "day": 10
     },
+    "stories": {
+      "caption": "I’m saying yes to new adventures.",
+      "picture": "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnxlbnwwfHwwfHw%3D&w=1000&q=80",
+      "date": "May 10, 2022"
+    },
     "type": "bot"
   },
   {
@@ -44,11 +59,15 @@
     "userID": "MichaelWilliams987",
     "email": "MichaelWilliams987@gmail.com",
     "picture": "https://images.unsplash.com/photo-1502258097612-43e695deebad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-
     "DOB": {
       "year": 1998,
       "month": 12,
       "day": 28
+    },
+    "stories": {
+      "caption": "Let life surprise you.",
+      "picture": "https://images.unsplash.com/photo-1502258097612-43e695deebad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "date": "Jan 13, 2019"
     },
     "type": "bot"
   },
@@ -63,6 +82,11 @@
       "month": 3,
       "day": 20
     },
+    "stories": {
+      "caption": "There’s no place like home.",
+      "picture": "https://images.unsplash.com/photo-1583423420318-93a4598b4798?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "date": "Aug 4, 2020"
+    },
     "type": "bot"
   },
   {
@@ -75,6 +99,11 @@
       "year": 1995,
       "month": 3,
       "day": 20
+    },
+    "stories": {
+      "caption": "Little by little; day by day.",
+      "picture": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80",
+      "date": "Oct 7, 2020"
     },
     "type": "bot"
   },
@@ -89,6 +118,11 @@
       "month": 3,
       "day": 20
     },
+    "stories": {
+      "caption": "I always wear my smile like a sword.",
+      "picture": "https://images.unsplash.com/photo-1614436163996-25cee5f54290?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=742&q=80",
+      "date": "Mar 19, 2021"
+    },
     "type": "bot"
   },
   {
@@ -101,6 +135,11 @@
       "year": 1995,
       "month": 3,
       "day": 20
+    },
+    "stories": {
+      "caption": "Smile, it confuses people.",
+      "picture": "https://images.unsplash.com/photo-1605993439219-9d09d2020fa5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "date": "Mar 4, 2022"
     },
     "type": "bot"
   },
@@ -115,6 +154,11 @@
       "month": 3,
       "day": 20
     },
+    "stories": {
+      "caption": "Simplicity is the key to brilliance",
+      "picture": "https://images.unsplash.com/photo-1522228115018-d838bcce5c3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      "date": "Dec 5, 2020"
+    },
     "type": "bot"
   },
   {
@@ -128,6 +172,11 @@
       "month": 3,
       "day": 20
     },
+    "stories": {
+      "caption": "There is beauty in simplicity.",
+      "picture": "https://images.unsplash.com/photo-1499887142886-791eca5918cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+      "date": "Feb 3, 2022"
+    },
     "type": "bot"
   },
   {
@@ -140,6 +189,11 @@
       "year": 1995,
       "month": 3,
       "day": 20
+    },
+    "stories": {
+      "caption": "This profile belongs to a lost soul.",
+      "picture": "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
+      "date": "Jun 25, 2019"
     },
     "type": "bot"
   }

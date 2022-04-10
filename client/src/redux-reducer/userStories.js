@@ -1,5 +1,5 @@
 const initialState = {
-  viewStories: false,
+  showStories: false,
   stories: [],
 };
 
@@ -12,7 +12,7 @@ const userStoriesReducer = (state = initialState, action) => {
   } else if (action.type === "showUserStories") {
     return {
       ...state,
-      viewStories: action.payload,
+      showStories: action.payload,
     };
   } else {
     return state;

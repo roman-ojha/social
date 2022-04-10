@@ -309,7 +309,7 @@ const HomePage = () => {
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>
-        {userStoriesStore.viewStories ? <StoriesCarouse /> : <></>}
+        {userStoriesStore.showStories ? <StoriesCarouse /> : <></>}
         <div className="HomePage_Feed_Main_Container">
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {

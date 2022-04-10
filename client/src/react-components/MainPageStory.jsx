@@ -43,7 +43,9 @@ const MainPageStory = () => {
   };
   const FriendStory = (props) => {
     const showStories = () => {
-      dispatch(showUserStories(true));
+      if (!userStoriesStore.showStories) {
+        dispatch(showUserStories(true));
+      }
     };
     return (
       <>

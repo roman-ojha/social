@@ -1,7 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import "../styles/react-components/stories.css";
+import { Icon } from "@iconify/react";
+import { showUserStories } from "../redux-actions";
+import { useDispatch, useSelector } from "react-redux";
+
 const StoriesCarousel = () => {
+  const dispatch = useDispatch();
+  const userStoriesStore = useSelector((state) => state.userStoriesReducer);
+  console.log(userStoriesStore);
   useEffect(() => {
     const text1_options = [
       "Why art is so important",
@@ -87,6 +94,14 @@ const StoriesCarousel = () => {
       <div id="carousel-stories-container">
         <div id="carousel-wrapper">
           <div id="menu">
+            <Icon
+              icon="ep:close-bold"
+              id="Carousel-Stories-Close-icon"
+              onClick={() => {
+                dispatch(showUserStories(false));
+              }}
+            />
+            <div id="image"></div>
             <div id="current-option">
               <span
                 id="current-option-text1"
@@ -99,7 +114,6 @@ const StoriesCarousel = () => {
                 data-next-text=""
               ></span>
             </div>
-            <div id="image"></div>
             <div id="button-container">
               <button id="next-option"></button>
               <button id="previous-option"></button>
