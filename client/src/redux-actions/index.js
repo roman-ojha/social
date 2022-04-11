@@ -173,9 +173,9 @@ export const setUserStories = (data) => {
   };
 };
 
-export const showUserStories = (data) => {
+export const storyIndex = (data) => {
   return {
-    type: "showUserStories",
+    type: "storyIndex",
     payload: data,
   };
 };

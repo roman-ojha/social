@@ -4,7 +4,6 @@ import { Icon } from "@iconify/react";
 import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
-import mainPage_Logo from "../Images/mainPage_Logo.svg";
 
 const StoriesPage = () => {
   const history = useHistory();
@@ -41,7 +40,7 @@ const StoriesPage = () => {
       background_option[index] = color[index % color.length][1];
       image_options[index] = data.stories.picture;
     });
-    var i = 0;
+    var i = userStoriesStore.storyIndex;
     const currentOptionText1 = document.getElementById("current-option-text1");
     const currentOptionText2 = document.getElementById("current-option-text2");
     const currentOptionImage = document.getElementById("image");

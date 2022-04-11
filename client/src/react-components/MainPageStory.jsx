@@ -4,11 +4,12 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
 import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";
-import { showUserStories } from "../redux-actions";
+import { storyIndex } from "../redux-actions";
 import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 const MainPageStory = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -46,16 +47,28 @@ const MainPageStory = () => {
     return (
       <>
         <div className="Friends_Story_Container">
-          <NavLink to="/u/stories" className="Friends_Story_Picutre_Container">
+          <div
+            onClick={() => {
+              dispatch(storyIndex(props.index));
+              history.push("/u/story");
+            }}
+            className="Friends_Story_Picutre_Container"
+          >
             <img
               src={props.storiesInformation.picture}
               alt=""
               className="Friend_Story_Picture"
             />
-          </NavLink>
-          <NavLink to="/u/stories" className="Friend_Story_Name">
+          </div>
+          <div
+            className="Friend_Story_Name"
+            onClick={() => {
+              dispatch(storyIndex(props.index));
+              history.push("/u/story");
+            }}
+          >
             {props.storiesInformation.name.split(" ")[0]}
-          </NavLink>
+          </div>
         </div>
       </>
     );
@@ -69,10 +82,22 @@ const MainPageStory = () => {
         {userStoriesStore.data.map((stories, index) => {
           if (is) {
             if (index <= 4) {
-              return <FriendStory storiesInformation={stories} key={index} />;
+              return (
+                <FriendStory
+                  storiesInformation={stories}
+                  key={index}
+                  index={index}
+                />
+              );
             }
           } else if (index <= 6) {
-            return <FriendStory storiesInformation={stories} key={index} />;
+            return (
+              <FriendStory
+                storiesInformation={stories}
+                key={index}
+                index={index}
+              />
+            );
           }
         })}
       </div>
