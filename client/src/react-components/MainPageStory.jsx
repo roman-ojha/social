@@ -6,6 +6,7 @@ import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";
 import { showUserStories } from "../redux-actions";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const MainPageStory = () => {
   const dispatch = useDispatch();
@@ -42,27 +43,19 @@ const MainPageStory = () => {
     );
   };
   const FriendStory = (props) => {
-    const showStories = () => {
-      if (!userStoriesStore.showStories) {
-        dispatch(showUserStories(true));
-      }
-    };
     return (
       <>
         <div className="Friends_Story_Container">
-          <div
-            className="Friends_Story_Picutre_Container"
-            onClick={showStories}
-          >
+          <NavLink to="/u/stories" className="Friends_Story_Picutre_Container">
             <img
               src={props.storiesInformation.picture}
               alt=""
               className="Friend_Story_Picture"
             />
-          </div>
-          <p className="Friend_Story_Name" onClick={showStories}>
+          </NavLink>
+          <NavLink to="/u/stories" className="Friend_Story_Name">
             {props.storiesInformation.name.split(" ")[0]}
-          </p>
+          </NavLink>
         </div>
       </>
     );
