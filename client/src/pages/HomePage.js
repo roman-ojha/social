@@ -15,7 +15,6 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import StoriesCarouse from "../react-components/StoriesCarousel";
 
 const HomePage = () => {
   const history = useHistory();
@@ -36,7 +35,6 @@ const HomePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const userStoriesStore = useSelector((state) => state.userStoriesReducer);
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
@@ -309,7 +307,6 @@ const HomePage = () => {
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>
-        {userStoriesStore.showStories ? <StoriesCarouse /> : <></>}
         <div className="HomePage_Feed_Main_Container">
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {
