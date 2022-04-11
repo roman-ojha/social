@@ -12,7 +12,7 @@
   background-color: white;
   border-radius: 10px;
   height: 40%;
-  transition-duration: 500ms;
+  /* transition-duration: 500ms; */
 }
 
 .MainPage_UserSuggession_Container_MinView {

@@ -1,13 +1,23 @@
 /* 
 @ Designing MainPage MessageBox
 */
+@keyframes animate-message-box {
+  0% {
+    height: 0%;
+  }
+  100% {
+    height: 59%;
+  }
+}
+
 .MainPage_MessageBox_Container {
-  /* border: 1px solid red; */
   height: 59%;
   overflow: hidden;
   background-color: white;
   margin-bottom: 1%;
   border-radius: 10px;
+  animation-name: animate-message-box;
+  animation-duration: 200ms;
 }
 .MainPage_Scrollable_MessageBox_Container {
   height: 94%;
