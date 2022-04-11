@@ -9,6 +9,8 @@ import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -43,7 +45,8 @@ const SignInPage = () => {
       });
       const data = await res.data;
       dispatch(stopProgressBar());
-      if (res.status === 400 || !data) {
+      console.log(res.status);
+      if (res.status !== 400) {
         // console.log(data);
         setSignInDetail({
           email: "",
@@ -53,6 +56,28 @@ const SignInPage = () => {
         history.push("/u");
       }
     } catch (err) {
+      console.log(err.response.data);
+      if (err.response.data.success === false) {
+        toast.error(err.response.data.err, {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error("Some Problem Occur, Please Try again Letter!!!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
       dispatch(stopProgressBar());
     }
   };
@@ -63,6 +88,7 @@ const SignInPage = () => {
   };
   return (
     <>
+      <ToastContainer />
       {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
       <div className="SignIn_Page_Container">
         <Helmet>

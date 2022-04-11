@@ -230,31 +230,39 @@ router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      return res.status(400).json({ error: "Please filled the form properly" });
+      return res
+        .status(400)
+        .json({ success: false, err: "Please filled the form properly!!!" });
     }
     const userLogin = await userDetail.findOne({ email: email });
     if (!userLogin) {
-      return res.status(400).json({ error: "Error Login! User does't exist" });
+      return res
+        .status(404)
+        .json({ success: false, err: "Error Login! User does't exist" });
     } else {
       const isPasswordMatch = await bcrypt.compare(
         password,
         userLogin.password
       );
       if (!isPasswordMatch) {
-        res.status(400).json({ error: "Username and password doesn't match" });
+        res.status(403).json({
+          success: false,
+          err: "Username and password doesn't match",
+        });
       } else {
         let token = await userLogin.generateAuthToken();
         res.cookie("AuthToken", token, {
           expires: new Date(Date.now() + 25892000000),
           httpOnly: true,
         });
-        res.status(200).json({ message: "Login Successfully" });
+        res.status(200).json({ success: true, msg: "Login Successfully" });
       }
     }
   } catch (err) {
-    return res
-      .status(500)
-      .json({ error: "Server Error!!, Please Try again letter" });
+    return res.status(500).json({
+      success: false,
+      err: "Server Error!!, Please Try again letter",
+    });
   }
 });
 
