@@ -9,7 +9,8 @@ const VideoPage = () => {
         <Helmet>
           <title>Video</title>
         </Helmet>
-        <h1>Coming Soon...</h1>
+        <h1>Under </h1>
+        <h1>Development...</h1>
       </div>
     </>
   );

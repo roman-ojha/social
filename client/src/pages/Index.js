@@ -27,6 +27,7 @@ import socket from "../services/socket";
 import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import ProgressBar from "../react-components/ProgressBar";
+import StoriesPage from "./StoriesPage";
 
 const Index = () => {
   const progressBarState = useSelector((state) => state.progressBarReducer);
@@ -44,6 +45,7 @@ const Index = () => {
           <Route exact path="/u/message" component={MessagePage} />
           <Route exact path="/u/setting" component={SettingPage} />
           <Route path="/u/profile/:userID" component={ProfilePage} />
+          <Route page="/u/stories" component={StoriesPage} />
           <Route
             path="*"
             component={() => {
