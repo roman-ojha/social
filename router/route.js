@@ -183,14 +183,20 @@ router.post("/register", async (req, res) => {
   try {
     const { name, email, password, cpassword, birthday, gender } = req.body;
     if (!name || !email || !password || !cpassword || !birthday || !gender) {
-      return res.status(422).json({ error: "Plz fill the field properly" });
+      return res
+        .status(422)
+        .json({ success: false, err: "Please Fill all Required Field!!!" });
     }
     if (password !== cpassword) {
-      return res.status(422).json({ error: "Password doesn't match" });
+      return res
+        .status(422)
+        .json({ success: false, err: "Password doesn't match" });
     }
     const emailExist = await userDetail.findOne({ email: email });
     if (emailExist) {
-      return res.status(422).json({ error: "Email already Exist" });
+      return res
+        .status(422)
+        .json({ success: false, err: "Email already Exist" });
     }
     const id = crypto.randomBytes(16).toString("hex");
     const creatingNewUserData = new userDetail({
@@ -212,7 +218,7 @@ router.post("/register", async (req, res) => {
     if (!saveUserRes) {
       return res
         .status(500)
-        .json({ error: "Server Error!,Failed registerd!!!" });
+        .json({ success: false, err: "Server Error!,Failed registerd!!!" });
     }
     let token;
     token = await saveUserRes.generateAuthToken();
@@ -220,9 +226,13 @@ router.post("/register", async (req, res) => {
       expires: new Date(Date.now() + 25892000000),
       httpOnly: true,
     });
-    return res.status(201).json({ message: "User register successfully" });
+    return res
+      .status(201)
+      .json({ success: true, msg: "User register successfully" });
   } catch (err) {
-    return res.status(500).json({ error: "Server Error!,Failed registerd!!!" });
+    return res
+      .status(500)
+      .json({ success: false, err: "Server Error!,Failed registerd!!!" });
   }
 });
 
@@ -247,7 +257,7 @@ router.post("/signin", async (req, res) => {
       if (!isPasswordMatch) {
         res.status(403).json({
           success: false,
-          err: "Username and password doesn't match",
+          err: "Email and password doesn't match",
         });
       } else {
         let token = await userLogin.generateAuthToken();

@@ -132,27 +132,32 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
     if (auth === "google") {
       // if user is login using google authetication and user doesnot have a password
       if (!email) {
-        return res.status(422).json({ error: "Please Register Frist" });
+        return res.status(401).json({ success: false, err: "UnAuthorized" });
       }
     } else {
       // if user is register using social account then will have a password
       if (!email && !password) {
-        return res.status(422).json({ error: "Please Register Frist" });
+        return res.status(401).json({ success: false, err: "UnAuthorized" });
       }
     }
     if (!userID) {
-      return res.status(422).json({ error: "Please Fill Field Properly" });
+      return res
+        .status(400)
+        .json({ success: false, err: "Please fill the required field!!!" });
     }
     const userIDExist = await userDetail.findOne(
       { userID: userID },
       { userID: 1, name: 1, email: 1 }
     );
     if (userIDExist) {
-      return res.json({ msg: "userID Already Exist, Please Try Another One" });
+      return res.status(409).json({
+        success: false,
+        err: "Sorry..., UserID already exist",
+      });
     } else {
       const rootUser = await userDetail.findOne({ email: email });
       if (!rootUser) {
-        return res.status(422).json({ error: "User doesn't exist" });
+        return res.status(401).json({ success: false, err: "UnAuthorized" });
       }
       if (auth !== "google") {
         // if user is login using google authetication and user doesnot have a password
@@ -163,7 +168,7 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
         if (!isPasswordMatch) {
           return res
             .status(400)
-            .json({ error: "email and password doesn't match" });
+            .json({ success: false, err: "Email and Password doesn't match" });
         }
       }
       if (!req.file) {
@@ -171,7 +176,9 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           { email: email },
           { $set: { userID: userID } }
         );
-        return res.status(201).json({ message: "Register Successfully" });
+        return res
+          .status(200)
+          .json({ success: true, msg: "Register Successfully" });
       } else {
         await compressFile(req.file.path);
         fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
@@ -228,13 +235,13 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
           { email: email },
           { $set: { userID: userID, picture: picUrl } }
         );
-        res.status(201).json({ message: "Register Successfully" });
+        res.status(200).json({ success: true, msg: "Register Successfully" });
       }
     }
   } catch (err) {
     return res
       .status(500)
-      .json({ error: "Server Error!!, Please Try again letter" });
+      .json({ success: false, err: "Server Error!!, Please Try again letter" });
   }
 });
 
