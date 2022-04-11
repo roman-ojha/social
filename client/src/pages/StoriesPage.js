@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { Icon } from "@iconify/react";
 import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import mainPage_Logo from "../Images/mainPage_Logo.svg";
 
 const StoriesPage = () => {
+  const history = useHistory();
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
   useEffect(() => {
     const caption = [];
@@ -29,7 +31,7 @@ const StoriesPage = () => {
     const image_options = [];
     const background_option = [];
     userStoriesStore.data.map((data, index) => {
-      if (data.stories.caption.length > 55) {
+      if (data.stories.caption.length > 150) {
         caption[index] = data.stories.caption.slice(0, 55);
       } else {
         caption[index] = data.stories.caption;
@@ -91,6 +93,7 @@ const StoriesPage = () => {
       currentOptionText2.dataset.previousText = date[i];
 
       mainMenu.style.background = color_options[i];
+      storiesPageContainer.style.background = background_option[i];
       carousel.classList.add("anim-previous");
 
       setTimeout(() => {
@@ -104,6 +107,17 @@ const StoriesPage = () => {
         carousel.classList.remove("anim-previous");
       }, 650);
     };
+    document
+      .getElementById("Stories_Page_Container")
+      .addEventListener("click", (e) => {
+        if (
+          !document
+            .getElementById("carousel-stories-container")
+            .contains(e.target)
+        ) {
+          history.push("/u");
+        }
+      });
   });
   return (
     <>

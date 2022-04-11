@@ -21,6 +21,7 @@
 }
 .MainPage_SideBar_Page_Logo {
   height: 3rem;
+  display: inline-block;
 }
 .MainPage_SideBar_Search_Outline {
   background-color: white;
