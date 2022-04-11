@@ -16,12 +16,18 @@
 ### Profile Page:
 [<img src="Interface/Profile_Page.png" alt="Profile_Page"></img>](Interface/Profile_Page.png)
 
+### Stories Page:
+[<img src="Interface/Story_Page.png" alt="Story_Page"></img>](Interface/Story_Page.png)
+
 ### SignUp Page :
 [<img src="Interface/Sign_Up_Page.png" alt="SignUp_Page"></img>](Interface/Sign_Up_Page.png)
 
 ### SignIn Page :
 [<img src="Interface/Sign_In_Page.png" alt="SignIn_Page"></img>](Interface/Sign_In_Page.png)
 
+
+### Comment Box:
+[<img src="Interface/Comment_Box.png" alt="Comment_Box"></img>](Interface/Comment_Box.png)
 
 ### Home Page Mobile View:
 <div align="center">
@@ -31,7 +37,6 @@
 </div>
 <br/>
 
-[<img src="Interface/Comment_Box.png" alt="Comment_Box"></img>](Interface/Comment_Box.png)
 
 ## Technology Used:
 1. ReactJs -> Client Side
