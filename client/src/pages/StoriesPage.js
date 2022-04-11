@@ -40,7 +40,6 @@ const StoriesPage = () => {
       background_option[index] = color[index % color.length][1];
       image_options[index] = data.stories.picture;
     });
-    var i = userStoriesStore.storyIndex;
     const currentOptionText1 = document.getElementById("current-option-text1");
     const currentOptionText2 = document.getElementById("current-option-text2");
     const currentOptionImage = document.getElementById("image");
@@ -52,13 +51,14 @@ const StoriesPage = () => {
       "Stories_Page_Container"
     );
 
+    var i = userStoriesStore.storyIndex;
     currentOptionText1.innerText = caption[i];
     currentOptionText2.innerText = date[i];
     currentOptionImage.style.backgroundImage = "url(" + image_options[i] + ")";
     mainMenu.style.background = color_options[i];
     storiesPageContainer.style.background = background_option[i];
 
-    optionNext.onclick = function () {
+    optionNext.onclick = () => {
       i = i + 1;
       i = i % caption.length;
       currentOptionText1.dataset.nextText = caption[i];
@@ -141,8 +141,19 @@ const StoriesPage = () => {
                 ></span>
               </div>
               <div id="button-container">
-                <button id="next-option"></button>
-                <button id="previous-option"></button>
+                {/* <button id="next-option"></button> */}
+                <span id="next-option">
+                  <Icon
+                    icon="akar-icons:circle-chevron-down-fill"
+                    className="Next_Button"
+                  />
+                </span>
+                <span id="previous-option">
+                  <Icon
+                    icon="akar-icons:circle-chevron-down-fill"
+                    className="Previous_Button"
+                  />
+                </span>
               </div>
             </div>
           </div>

@@ -98,7 +98,8 @@
   right: 10px;
   cursor: pointer;
   transition-duration: 300ms;
-  color: var(--logo-icon-low-opacity-black-color);
+  /* color: var(--logo-icon-low-opacity-black-color); */
+  color: black;
 }
 #Carousel-Stories-Close-icon:hover {
   transform: scale(1.05);
@@ -192,23 +193,15 @@
   justify-content: center;
   gap: 20%;
 }
-#previous-option {
-  width: 1.2rem;
-  height: 1.2rem;
-  border: none;
-  display: block;
+
+.Next_Button,
+.Previous_Button {
+  width: 1.9rem;
+  height: 1.9rem;
   cursor: pointer;
-  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
-  background-size: cover;
 }
+
 #next-option {
-  width: 1.2rem;
-  height: 1.2rem;
-  border: none;
-  display: block;
-  cursor: pointer;
-  background: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 256 256'%3E%3Cpolygon points='225.813,48.907 128,146.72 30.187,48.907 0,79.093 128,207.093 256,79.093' fill='%23333'%3E%3C/polygon%3E%3C/svg%3E");
-  background-size: cover;
   transform: rotate(180deg);
 }
 #image {
