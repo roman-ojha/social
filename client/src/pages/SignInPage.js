@@ -9,8 +9,7 @@ import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ const SignInPage = () => {
       const data = await res.data;
       dispatch(stopProgressBar());
       console.log(res.status);
-      if (res.status !== 400) {
+      if (res.status !== 200) {
         // console.log(data);
         setSignInDetail({
           email: "",
@@ -56,26 +55,27 @@ const SignInPage = () => {
         history.push("/u");
       }
     } catch (err) {
-      console.log(err.response.data);
       if (err.response.data.success === false) {
         toast.error(err.response.data.err, {
           position: "bottom-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          pauseOnFocusLoss: false,
         });
       } else {
         toast.error("Some Problem Occur, Please Try again Letter!!!", {
           position: "bottom-right",
-          autoClose: 5000,
+          autoClose: 3000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
+          pauseOnFocusLoss: false,
         });
       }
       dispatch(stopProgressBar());
@@ -88,7 +88,6 @@ const SignInPage = () => {
   };
   return (
     <>
-      <ToastContainer />
       {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
       <div className="SignIn_Page_Container">
         <Helmet>
@@ -127,7 +126,24 @@ const SignInPage = () => {
               >
                 Create New Account
               </NavLink>
-              <p className="SignIn_Page_Forgot_Password_Button">
+              <p
+                className="SignIn_Page_Forgot_Password_Button"
+                onClick={() => {
+                  toast.info(
+                    "Email aren't verified, So can't use this feature",
+                    {
+                      position: "bottom-right",
+                      autoClose: 3000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      pauseOnFocusLoss: false,
+                    }
+                  );
+                }}
+              >
                 Forgot Password?
               </p>
             </form>

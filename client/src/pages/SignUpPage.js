@@ -8,6 +8,8 @@ import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
+import { toast } from "react-toastify";
+import validator from "email-validator";
 
 let previousSelectGenderElement;
 const SignUpPage = () => {
@@ -100,6 +102,31 @@ const SignUpPage = () => {
   const registerData = async (e) => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
+    if ((!name || !email || !password || !cpassword, !birthday, !gender)) {
+      toast.error("Please Fill all Required Field!!!", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        pauseOnFocusLoss: false,
+      });
+      return;
+    } else if (!validator.validate(email)) {
+      toast.warn("Email is not Valid", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        pauseOnFocusLoss: false,
+      });
+      return;
+    }
     try {
       dispatch(startProgressBar());
       const res = await axios({
@@ -127,6 +154,29 @@ const SignUpPage = () => {
         history.push("/userid?uid=undefined");
       }
     } catch (err) {
+      if (err.response.data.success === false) {
+        toast.error(err.response.data.err, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      } else {
+        toast.error("Some Problem Occur, Please Try again Letter!!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
       dispatch(stopProgressBar());
     }
   };
@@ -158,6 +208,7 @@ const SignUpPage = () => {
                   type="text"
                   placeholder="Full name"
                   name="name"
+                  required
                   value={userData.name}
                   onChange={getUserData}
                 />

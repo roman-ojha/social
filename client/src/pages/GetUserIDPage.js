@@ -5,14 +5,20 @@ import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
+import { startProgressBar, stopProgressBar } from "../redux-actions";
+import { useDispatch, useSelector } from "react-redux";
+import ProgressBar from "../react-components/ProgressBar";
 
 const GetUserIDPage = (props) => {
+  const dispatch = useDispatch();
   const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
   const [userDetail, setUserDetail] = useState();
   const history = useHistory();
   const [userID, setUserID] = useState("");
   const url = new URL(window.location.href);
   const uid = url.searchParams.get("uid");
+  const progressBarState = useSelector((state) => state.progressBarReducer);
   useEffect(() => {
     // if user is login for the first time then the userID will be undefined
     if (uid !== "undefined") {
@@ -37,10 +43,10 @@ const GetUserIDPage = (props) => {
       getUserDetail();
     }
   }, []);
-  console.log(userDetail);
+  // console.log(userDetail);
   const submitDetail = async (e) => {
+    dispatch(startProgressBar());
     try {
-      setOnLoadingSpinner(true);
       const profile = document.getElementById("image-input").files[0];
       const data = new FormData();
       if (props.userDetail === undefined) {
@@ -63,22 +69,47 @@ const GetUserIDPage = (props) => {
         withCredentials: true,
       });
       const resData = await res.data;
-      if (res.status !== 201) {
-        console.log(resData);
+      if (res.status !== 200) {
+        // console.log(resData);
       } else {
-        console.log(resData);
+        // console.log(resData);
         if (props.userDetail === undefined) {
           history.push("/");
         } else {
           history.push("/signin");
         }
       }
-      setOnLoadingSpinner(false);
-    } catch (err) {}
+      dispatch(stopProgressBar());
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toast.error(err.response.data.err, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      } else {
+        toast.error("Some Problem Occur, Please Try again Letter!!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
+      dispatch(stopProgressBar());
+    }
   };
   return (
     <>
-      {onLoadingSpinner ? <LoadingSpinner /> : ""}
+      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
       <div className="GetUserIDPage_Container">
         <Helmet>
           <title>userID/undefine</title>
@@ -91,7 +122,7 @@ const GetUserIDPage = (props) => {
           <input
             className="GetUserIDPage_Name_Form_Field"
             type="text"
-            placeholder="Name"
+            placeholder="UserID"
             value={userID}
             onChange={(e) => {
               setUserID(e.target.value);
