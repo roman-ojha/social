@@ -124,10 +124,10 @@ const Index = () => {
         {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
-        <MainPageStory />
-        <RoutingMainPage />
-        <MainPageMsgAndNtfBar />
-        <MainPageRightSideComp />
+        {/* <MainPageStory /> */}
+        {/* <RoutingMainPage /> */}
+        {/* <MainPageMsgAndNtfBar /> */}
+        {/* <MainPageRightSideComp /> */}
       </>
     );
   };
