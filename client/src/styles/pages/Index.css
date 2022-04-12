@@ -79,3 +79,83 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
+
+@media screen and (max-width: 1360px) and (min-width: 1200px) {
+  .LoadingScreen_Title {
+    font-size: 2.3rem;
+  }
+
+  .LoadingScreen_App_Icon {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .LoadingScreen_Title {
+    font-size: 2rem;
+  }
+  .LoadingScreen_Title::first-letter {
+    font-size: 2.8rem;
+    text-align: center;
+  }
+  .LoadingScreen_App_Icon {
+    width: 5rem;
+    height: 5rem;
+  }
+  .LoadingScreen_Loading_Div {
+    width: 225px;
+    height: 6px;
+    margin-top: 40px;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .LoadingScreen_Title {
+    font-size: 1.7rem;
+  }
+  .LoadingScreen_Title::first-letter {
+    font-size: 2.5rem;
+  }
+  .LoadingScreen_App_Icon {
+    width: 4rem;
+    height: 4rem;
+  }
+  .LoadingScreen_Loading_Div {
+    width: 180px;
+    height: 5px;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  .LoadingScreen_Title {
+    font-size: 1.5rem;
+  }
+  .LoadingScreen_Title::first-letter {
+    font-size: 2.2rem;
+  }
+  .LoadingScreen_App_Icon {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+  .LoadingScreen_Loading_Div {
+    width: 150px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .LoadingScreen_Title {
+    font-size: 1.1rem;
+  }
+  .LoadingScreen_Title::first-letter {
+    font-size: 2rem;
+  }
+  .LoadingScreen_App_Icon {
+    width: 3rem;
+    height: 3rem;
+  }
+  .LoadingScreen_Loading_Div {
+    width: 130px;
+    height: 3px;
+  }
+}

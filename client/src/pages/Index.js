@@ -134,7 +134,8 @@ const Index = () => {
   return (
     <>
       <div className="MainPage_Container">
-        {renderMainPage ? <ReturnMainPage /> : <LoadingScreen />}
+        {/* {renderMainPage ? <ReturnMainPage /> : <LoadingScreen />} */}
+        <LoadingScreen />
       </div>
     </>
   );

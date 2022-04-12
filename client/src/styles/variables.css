@@ -23,6 +23,8 @@
   --logo-icon-low-opacity-black-color-point-3: #555555;
   /* --emoji-picker-background-color: rgb(85, 38, 85); */
   --emoji-picker-background-color: #674086;
+  --very-small-screen-min-width: 280px;
+  --very-small-screen-max-width: 320px;
   --mobile-min-width: 320px;
   --mobile-max-width: 480px;
   --tablets-min-width: 480px;

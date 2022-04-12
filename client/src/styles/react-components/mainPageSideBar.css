@@ -277,7 +277,7 @@
   .MainPage_SideBar_Logo_Search_Container {
     width: 100%;
     margin-left: 0%;
-    height: 11%;
+    height: 12%;
   }
   .MainPage_SideBar_Search_Outline {
     height: 1.5rem;
@@ -289,10 +289,10 @@
   .MainPage_SideBar_Menu_Container {
     height: 40%;
   }
-  /* .MainPage_SideBar_Friends_Container {
-    height: 35%;
+  .MainPage_SideBar_Friends_Container {
+    height: 32%;
     margin: 1% 3% 2% 3%;
-  } */
+  }
   /* .MainPage_SideBar_Friends_Title {
     margin: 2% 0% 0% 5%;
     height: 8%;
