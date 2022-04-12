@@ -15,8 +15,8 @@ const MainPageStory = () => {
     (state) => state.setUserProfileDetailReducer
   );
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
-  const is = useMediaQuery({
-    query: "(max-width: 300px)",
+  const isMobile = useMediaQuery({
+    query: "(max-width: 480px)",
   });
   const AddStory = () => {
     return (
@@ -80,7 +80,7 @@ const MainPageStory = () => {
         {/* showing friends story */}
 
         {userStoriesStore.data.map((stories, index) => {
-          if (is) {
+          if (isMobile) {
             if (index <= 4) {
               return (
                 <FriendStory

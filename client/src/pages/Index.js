@@ -113,7 +113,7 @@ const Index = () => {
           console.log(`connected to id: ${socket.id}`);
         });
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         history.push("/signin");
       }
     };
@@ -124,12 +124,11 @@ const Index = () => {
       <>
         {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
-        {/* <MainPageSideBar /> */}
-        {/* <MainPageStory /> */}
+        <MainPageSideBar />
+        <MainPageStory />
         {/* <RoutingMainPage /> */}
         {/* <MainPageMsgAndNtfBar /> */}
         {/* <MainPageRightSideComp /> */}
-        <LoadingSpinner />
       </>
     );
   };

@@ -38,10 +38,10 @@
 
 @media screen and (max-width: 1360px) and (min-width: 1200px) {
   .HomePage_Post_Field_Response_Loading_Spinner {
-    width: 3.2rem;
-    height: 3.2rem;
-    border: 12px solid #dddddd;
-    border-top: 12px solid var(--primary-color-darker-5);
+    width: 3.1rem;
+    height: 3.1rem;
+    border: 11px solid #dddddd;
+    border-top: 11px solid var(--primary-color-darker-5);
   }
 }
 

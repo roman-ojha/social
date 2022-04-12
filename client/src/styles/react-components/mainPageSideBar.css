@@ -277,7 +277,7 @@
   .MainPage_SideBar_Logo_Search_Container {
     width: 100%;
     margin-left: 0%;
-    height: 12%;
+    height: 11%;
   }
   .MainPage_SideBar_Search_Outline {
     height: 1.5rem;
@@ -289,10 +289,10 @@
   .MainPage_SideBar_Menu_Container {
     height: 40%;
   }
-  .MainPage_SideBar_Friends_Container {
-    height: 32%;
+  /* .MainPage_SideBar_Friends_Container {
+    height: 35%;
     margin: 1% 3% 2% 3%;
-  }
+  } */
   /* .MainPage_SideBar_Friends_Title {
     margin: 2% 0% 0% 5%;
     height: 8%;
@@ -547,7 +547,7 @@
     width: 80px;
   }
 }
-@media screen and (max-width: 768px) and (min-width: 480px) {
+/* @media screen and (max-width: 768px) and (min-width: 480px) {
   .MainPage_SideBar_Container {
     width: 85px;
   }
@@ -561,7 +561,7 @@
     margin-right: 3%;
     padding-left: 5%;
   }
-}
+} */
 @media screen and (max-width: 768px) and (min-width: 480px) {
   .MainPage_SideBar_Container {
     width: 60px;
