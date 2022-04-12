@@ -28,6 +28,7 @@ import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import ProgressBar from "../react-components/ProgressBar";
 import StoriesPage from "./StoriesPage";
+import LoadingSpinner from "../react-components/LoadingSpinner";
 
 const Index = () => {
   const progressBarState = useSelector((state) => state.progressBarReducer);
@@ -128,6 +129,7 @@ const Index = () => {
         {/* <RoutingMainPage /> */}
         {/* <MainPageMsgAndNtfBar /> */}
         {/* <MainPageRightSideComp /> */}
+        <LoadingSpinner />
       </>
     );
   };
