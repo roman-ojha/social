@@ -123,7 +123,7 @@ const Index = () => {
       <>
         {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
-        <MainPageSideBar />
+        {/* <MainPageSideBar /> */}
         {/* <MainPageStory /> */}
         {/* <RoutingMainPage /> */}
         {/* <MainPageMsgAndNtfBar /> */}
@@ -134,8 +134,7 @@ const Index = () => {
   return (
     <>
       <div className="MainPage_Container">
-        {/* {renderMainPage ? <ReturnMainPage /> : <LoadingScreen />} */}
-        <LoadingScreen />
+        {renderMainPage ? <ReturnMainPage /> : <LoadingScreen />}
       </div>
     </>
   );

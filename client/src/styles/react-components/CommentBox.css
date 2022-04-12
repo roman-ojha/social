@@ -129,3 +129,382 @@
   text-overflow: ellipsis;
   max-width: 30rem;
 }
+
+@media screen and (max-width: 1360px) and (min-width: 1200px) {
+  .CommentBox_RootUser_Post_Field_Container {
+    height: 2.7rem;
+  }
+  .CommentBox_Image {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+  .CommentBox_Input_Emoji {
+    width: 1.9rem;
+    height: 1.9rem;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  .CommentBox {
+    border-radius: 12px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    width: 99%;
+    height: 2.5rem;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+  }
+  .CommentBox_Image {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+  .CommentBox_Input_Field {
+    border-radius: 12px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 0.9rem;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+
+  .CommentBox_CommentList {
+    max-height: 45vh;
+    margin: 0.4rem;
+  }
+
+  .CommentBox_UserComment {
+    margin-bottom: 0.4rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-right: 0.4rem;
+  }
+
+  .CommentBox_UserComment div {
+    padding: 0.4rem;
+    border-radius: 0.3rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    max-width: 8rem;
+    font-size: 0.9rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.7rem;
+    max-width: 25rem;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .CommentBox {
+    border-radius: 10px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    height: 2.1rem;
+  }
+  .CommentBox_Image {
+    width: 1.7rem;
+    height: 1.7rem;
+  }
+  .CommentBox_Input_Field {
+    border-radius: 10px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    font-size: 0.8rem;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    font-size: 0.85rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.65rem;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .CommentBox {
+    width: 70%;
+    border-radius: 8px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    border-radius: 8px;
+    height: 2rem;
+    width: 97%;
+  }
+  .CommentBox_Image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .CommentBox_Input_Field {
+    width: 70%;
+    height: 70%;
+    border-radius: 8px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    font-size: 0.8rem;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .CommentBox_CommentList {
+    max-height: 50vh;
+    margin: 0.3rem;
+  }
+
+  .CommentBox_UserComment {
+    margin-bottom: 0.3rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.4rem;
+  }
+
+  .CommentBox_UserComment div {
+    padding: 0.3rem;
+    border-radius: 0.3rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    max-width: 8rem;
+    font-size: 0.75rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.6rem;
+    max-width: 25rem;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .CommentBox {
+    width: 75%;
+    border-radius: 8px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    border-radius: 8px;
+    height: 2rem;
+    width: 97%;
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+  .CommentBox_Image {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .CommentBox_Input_Field {
+    width: 65%;
+    height: 70%;
+    border-radius: 8px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    font-size: 0.7rem;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .CommentBox_CommentList {
+    max-height: 60vh;
+    margin: 0.3rem;
+  }
+
+  .CommentBox_UserComment {
+    margin-bottom: 0.3rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.4rem;
+  }
+
+  .CommentBox_UserComment div {
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    max-width: 7rem;
+    font-size: 0.7rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.55rem;
+    max-width: 20rem;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  .CommentBox {
+    width: 85%;
+    border-radius: 7px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    border-radius: 7px;
+    height: 1.8rem;
+    width: 97%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .CommentBox_Image {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .CommentBox_Input_Field {
+    width: 60%;
+    height: 70%;
+    border-radius: 7px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    font-size: 0.6rem;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .CommentBox_CommentList {
+    max-height: 60vh;
+    margin: 0.2rem;
+  }
+
+  .CommentBox_UserComment {
+    margin-bottom: 0.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.3rem;
+  }
+
+  .CommentBox_UserComment div {
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    max-width: 6rem;
+    font-size: 0.6rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.5rem;
+    max-width: 15rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .CommentBox {
+    width: 90%;
+    border-radius: 5px;
+  }
+
+  .CommentBox_RootUser_Post_Field_Container {
+    border-radius: 5px;
+    height: 1.5rem;
+    width: 95%;
+    margin-top: 3px;
+    margin-bottom: 3px;
+  }
+  .CommentBox_Image {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .CommentBox_Input_Field {
+    width: 60%;
+    height: 70%;
+    border-radius: 5px;
+  }
+
+  .CommentBox_Input_Field:read-write {
+    font-size: 0.5rem;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .CommentBox_Input_Emoji {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .CommentBox_CommentList {
+    max-height: 65vh;
+    margin: 0.1rem;
+  }
+
+  .CommentBox_UserComment {
+    margin-bottom: 0.1rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+  }
+
+  .CommentBox_UserComment img {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.3rem;
+  }
+
+  .CommentBox_UserComment div {
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  .CommentBox_UserComment div h3 {
+    max-width: 5rem;
+    font-size: 0.5rem;
+  }
+
+  .CommentBox_UserComment div p {
+    font-size: 0.4rem;
+    max-width: 10rem;
+  }
+}

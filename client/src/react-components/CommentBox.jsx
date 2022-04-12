@@ -111,6 +111,14 @@ const CommentBox = () => {
             {commentBoxStore.comments.map((comment, index) => {
               return <ViewSingleComment comment={comment} key={index} />;
             })}
+
+            {commentBoxStore.comments.map((comment, index) => {
+              return <ViewSingleComment comment={comment} key={index} />;
+            })}
+
+            {commentBoxStore.comments.map((comment, index) => {
+              return <ViewSingleComment comment={comment} key={index} />;
+            })}
           </div>
         </div>
       </div>

@@ -34,4 +34,6 @@
   --large-screen-Desktops-min-width: 1024px;
   --large-screen-Desktop-max-width: 1200px;
   --extra-large-screen-min-width: 1200px;
+  --extra-large-screen-max-width: 1360px;
+  --beyond-extra-large-screen-min-width: 1360px;
 }
