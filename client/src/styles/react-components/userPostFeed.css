@@ -299,27 +299,14 @@
 
   .HomePage_Feed_User_Name_And_ID_Info_Container {
     width: 45%;
-    /* border: 1px solid blue; */
     margin-left: 1%;
-    display: flex;
   }
   .HomePage_Feed_User_Name_Info_Container {
     width: 60%;
-    /* border: 1px solid purple; */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
   }
   .HomePage_Feed_User_ID_Text {
-    /* border: 1px solid green; */
     max-width: 95%;
-    overflow: hidden;
-    font-family: var(--primary-font-family);
     font-size: 0.89rem;
-    font-weight: 600;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: pointer;
   }
   .HomePage_Feed_User_ID_Text {
     font-size: 0.7rem;
@@ -340,6 +327,70 @@
   .HomePage_Feed_More_Info_Icon {
     width: 0.9rem;
     height: 0.9rem;
+  }
+
+  .UserPostFeed_Comment_Box {
+    width: 90%;
+  }
+
+  .UserPostFeed_CommentBox_RootUser_Post_Field_Container {
+    height: 1.7rem;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .UserPostFeed_CommentBox_Image {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .UserPostFeed_CommentBox_Input_Field {
+    width: 65%;
+    border-radius: 5px;
+  }
+
+  .UserPostFeed_CommentBox_Input_Field:read-write {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 0.7rem;
+  }
+
+  .UserPostFeed_CommentBox_Input_Emoji {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .UserPostFeed_CommentBox_CommentList {
+    max-height: 5rem;
+    width: 100%;
+    margin-bottom: 0.3rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment img {
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: 0.4rem;
+    object-fit: cover;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div {
+    padding: 0.2rem;
+    border-radius: 0.2rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div h3 {
+    font-size: 0.7rem;
+    max-width: 8rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div p {
+    font-size: 0.65rem;
+    max-width: 15rem;
   }
 }
 
@@ -374,5 +425,101 @@
   .HomePage_Feed_More_Info_Icon {
     width: 0.9rem;
     height: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .HomePage_Feed_Main_Container {
+    width: 90%;
+  }
+  .HomePage_Feed_Info_User_Image img {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: 5px;
+  }
+  .HomePage_Feed_User_Caption_Container p {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_User_ID_Text {
+    font-size: 0.6rem;
+  }
+  .HomePage_Feed_User_Time_Text {
+    font-size: 0.6rem;
+  }
+  .HomePage_Feed_User_Name_Text {
+    font-size: 0.5rem;
+  }
+  .HomePage_Feed_Icon_Container p {
+    font-size: 0.5rem;
+  }
+  .HomePage_Feed_UnLiked_Love_Icon,
+  .HomePage_Feed_Liked_Love_Icon,
+  .HomePage_Feed__Comment_Icon,
+  .HomePage_Feed_Share_Icon,
+  .HomePage_Feed_More_Info_Icon {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+  .UserPostFeed_Comment_Box {
+    width: 90%;
+  }
+
+  .UserPostFeed_CommentBox_RootUser_Post_Field_Container {
+    height: 1.5rem;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .UserPostFeed_CommentBox_Image {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .UserPostFeed_CommentBox_Input_Field {
+    width: 55%;
+    border-radius: 3px;
+  }
+
+  .UserPostFeed_CommentBox_Input_Field:read-write {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: 0.65rem;
+  }
+
+  .UserPostFeed_CommentBox_Input_Emoji {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .UserPostFeed_CommentBox_CommentList {
+    max-height: 3rem;
+    width: 100%;
+    margin-bottom: 0.25rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment {
+    padding-left: 0.15rem;
+    padding-right: 0.15rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment img {
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.3rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div {
+    padding: 0.15rem;
+    border-radius: 0.15rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div h3 {
+    font-size: 0.65rem;
+    max-width: 6rem;
+  }
+
+  .UserPostFeed_CommentBox_UserComment div p {
+    font-size: 0.6rem;
+    max-width: 13rem;
   }
 }

@@ -24,7 +24,7 @@
 .HomePage_MinView_UserPost_Field_Container {
   width: 100%;
   height: 3rem;
-  /* border: 1px solid blue; */
+  /* border: 1px solid red; */
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -69,10 +69,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  /* border: 1px solid red; */
 }
 
 .HomePage_MaxField_UserPost_Field_Image_Container {
-  /* border: 1px solid blue; */
   height: 6rem;
   margin-left: 1%;
   margin-bottom: 0.3rem;
@@ -408,7 +408,7 @@
   }
   .HomePage_MaxView_UserPost_Input_Field {
     width: 60%;
-    border-radius: 7px;
+    border-radius: 5px;
   }
   .HomePage_MaxView_UserPost_Input_Field:read-write {
     font-size: 0.6rem;
@@ -446,5 +446,61 @@
     width: calc(100% - 40px);
     left: 40px;
     top: 3.2rem;
+  }
+
+  .HomePage_User_Post_Field_Container {
+    margin-top: 1rem;
+    border-radius: 5px;
+    width: 90%;
+    min-height: 2.2rem;
+  }
+  .HomePage_MinView_UserPost_Field_Container {
+    height: 2.2rem;
+  }
+  .HomePage_MinView_UserPost_Input_Field {
+    width: 70%;
+    height: 1.6rem;
+    border-radius: 5px;
+  }
+  .HomePage_MinField_UserPost_Field_Image {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Upper_Part_Container {
+    height: 5rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image_Container {
+    height: 4.5rem;
+  }
+
+  .HomePage_MaxView_UserPost_Input_Field {
+    height: 4rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Icons_Container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 4.5rem;
+    width: 10%;
+    position: relative;
+  }
+  .HomePage_MaxView_UserPost_Field_Post_Button {
+    width: 68%;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 6%;
+  }
+  .HomePage_MaxView_UserPost_Field_Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Back_Icon {
+    width: 1rem;
+    height: 1rem;
   }
 }
