@@ -16,7 +16,7 @@
 .HomePage_User_Post_Field_Container {
   width: var(--home-page-content-width);
   min-height: 3rem;
-  /* border: 1px solid red; */
+  /* border: 1px solid yellow; */
   margin-top: 1.2rem;
   background-color: var(--secondary-color-point-7);
   border-radius: 10px;
@@ -61,6 +61,7 @@
   align-items: center;
   justify-content: space-around;
   height: auto;
+  /* border: 1px solid red; */
 }
 .HomePage_MaxView_UserPost_Field_Upper_Part_Container {
   width: 100%;
@@ -130,17 +131,21 @@
   position: relative;
 }
 
+.HomePage_MaxView_UserPost_Field_Icons_Container input {
+  display: none;
+}
+
 .HomePage_MaxView_UserPost_Field_Icon {
   color: var(--primary-color-darker-5);
   cursor: pointer;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .HomePage_MaxView_UserPost_Field_Emoji_Icon {
   color: var(--primary-color-darker-5);
   cursor: pointer;
-  width: 20rem;
-  height: 20rem;
+  width: 1.3rem;
+  height: 1.3rem;
 }
 .HomePage_MaxView_UserPost_Field_Icon:hover,
 .HomePage_MaxView_UserPost_Field_Emoji_Icon:hover {
@@ -157,14 +162,16 @@
   margin-left: 3.5%;
   color: var(--primary-color-darker-5);
   cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .HomePage_MaxView_UserPost_Field_Back_Icon:hover {
   color: var(--primary-color-lighter-1);
 }
 .HomePage_MaxView_UserPost_Field_Post_Button {
-  width: 76%;
+  width: 77%;
   height: 1.4rem;
-  margin-left: 1%;
+  margin-left: 2.5%;
   border-radius: 0.4rem;
   border-width: 0px;
   font-family: var(--primary-font-family);
@@ -180,14 +187,13 @@
 }
 .MaxView_UserPost_Image_Container {
   width: 75%;
-  /* border: 1px solid red; */
   max-height: 17rem;
   margin-bottom: 0.5rem;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 .MaxView_UserPost_Image {
-  width: 100%;
+  width: 80%;
   object-fit: cover;
 }
 .MaxView_UserPost_Image_Container::-webkit-scrollbar {
@@ -206,28 +212,37 @@
 .MaxView_UserPost_Image_Container::-webkit-scrollbar-thumb:hover {
   background-color: #6b4a81;
 }
-@media screen and (max-width: 1300px) and (min-width: 1000px) {
+
+@media screen and (max-width: 1200px) {
   .HomePage_Container {
     width: 55%;
     left: 15%;
-    top: 130px;
+    top: 5rem;
   }
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
   .HomePage_Container {
     width: 60%;
-    left: 100px;
-    top: 115px;
-  }
-}
-@media screen and (max-width: 850px) {
-  .HomePage_Container {
-    width: calc(100% - 105px);
     left: 100px;
     top: 110px;
   }
 }
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 850px) {
+  .HomePage_Container {
+    width: calc(100% - 100px);
+    left: 100px;
+    top: 4.8rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .HomePage_Container {
+    width: calc(100% - 60px);
+    left: 60px;
+    top: 4.8rem;
+  }
+
   .HomePage_User_Post_Field_Container {
     border-radius: 5px;
     width: 90%;
@@ -244,7 +259,6 @@
     font-size: 0.7rem;
   }
   .HomePage_MaxField_UserPost_Field_Image_Container {
-    /* border: 1px solid blue; */
     height: 5.5rem;
   }
   .HomePage_MaxField_UserPost_Field_Image {
@@ -263,8 +277,8 @@
     height: 1.8rem;
   }
   .HomePage_MaxView_UserPost_Field_Emoji_Icon {
-    width: 10rem;
-    height: 10rem;
+    width: 1.7rem;
+    height: 1.7rem;
   }
   .HomePage_MaxView_UserPost_Field_Back_Icon {
     width: 1.8rem;
@@ -285,23 +299,93 @@
     object-fit: cover;
   }
 }
-@media screen and (max-width: 500px) {
+
+@media screen and (max-width: 480px) {
   .HomePage_Container {
     width: calc(100% - 45px);
     left: 45px;
-    top: 70px;
+    top: 4rem;
+  }
+
+  .HomePage_User_Post_Field_Container {
+    margin-top: 1rem;
+    border-radius: 5px;
+    width: 90%;
+    /* border: 1px solid red; */
+    min-height: 2.5rem;
+  }
+  .HomePage_MinView_UserPost_Field_Container {
+    height: 2.5rem;
+    /* border: 1px solid red; */
+  }
+  .HomePage_MinField_UserPost_Field_Image {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .HomePage_MinView_UserPost_Input_Field {
+    width: 70%;
+    height: 1.7rem;
+    border-radius: 5px;
+  }
+  .HomePage_MinView_UserPost_Input_Field:read-write {
+    font-size: 0.6rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image_Container {
+    height: 5.5rem;
+  }
+  .HomePage_MaxField_UserPost_Field_Image {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MaxView_UserPost_Input_Field {
+    width: 60%;
+    border-radius: 7px;
+  }
+  .HomePage_MaxView_UserPost_Input_Field:read-write {
+    font-size: 0.6rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Back_Icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .HomePage_MaxView_UserPost_Field_Post_Button {
+    width: 70%;
+    border-radius: 4px;
+  }
+  .MaxView_UserPost_Image_Container {
+    width: 70%;
+    max-height: 17rem;
+    margin-bottom: 4px;
+    margin-left: 10px;
+  }
+  .MaxView_UserPost_Image {
+    width: 100%;
+    object-fit: cover;
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
   .HomePage_Container {
-    width: calc(100% - 45px);
+    width: calc(100% - 40px);
     left: 40px;
-    top: 70px;
+    top: 3.5rem;
   }
   .HomePage_User_Post_Field_Container {
+    margin-top: 1rem;
     border-radius: 5px;
     width: 90%;
+    min-height: 2.5rem;
+  }
+  .HomePage_MinView_UserPost_Field_Container {
+    height: 2.5rem;
   }
   .HomePage_MinField_UserPost_Field_Image {
     width: 1.5rem;
@@ -316,7 +400,6 @@
     font-size: 0.6rem;
   }
   .HomePage_MaxField_UserPost_Field_Image_Container {
-    /* border: 1px solid blue; */
     height: 5.5rem;
   }
   .HomePage_MaxField_UserPost_Field_Image {
@@ -335,15 +418,15 @@
     height: 1.2rem;
   }
   .HomePage_MaxView_UserPost_Field_Emoji_Icon {
-    width: 2rem;
-    height: 2rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
   .HomePage_MaxView_UserPost_Field_Back_Icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
   .HomePage_MaxView_UserPost_Field_Post_Button {
-    width: 60%;
+    width: 70%;
     border-radius: 4px;
   }
   .MaxView_UserPost_Image_Container {
@@ -355,5 +438,13 @@
   .MaxView_UserPost_Image {
     width: 100%;
     object-fit: cover;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .HomePage_Container {
+    width: calc(100% - 40px);
+    left: 40px;
+    top: 3.2rem;
   }
 }

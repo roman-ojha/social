@@ -126,7 +126,7 @@ const Index = () => {
         {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
         <MainPageSideBar />
         <MainPageStory />
-        {/* <RoutingMainPage /> */}
+        <RoutingMainPage />
         {/* <MainPageMsgAndNtfBar /> */}
         {/* <MainPageRightSideComp /> */}
       </>

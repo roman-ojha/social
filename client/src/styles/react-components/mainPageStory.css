@@ -11,6 +11,7 @@
   justify-content: space-around;
   align-items: center;
   z-index: 2;
+  /* border: 1px solid blue; */
 }
 
 .Current_User_Story_Container,

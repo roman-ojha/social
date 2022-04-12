@@ -110,7 +110,7 @@ const HomePage = () => {
           var image = document.getElementsByClassName(
             "MaxView_UserPost_Image"
           )[0];
-          image.style.visibility = "visible";
+          image.style.display = "inline";
           image.style.position = "static";
           image.src = URL.createObjectURL(event.target.files[0]);
         } catch (err) {}
@@ -227,11 +227,10 @@ const HomePage = () => {
                 className="MaxView_UserPost_Image"
                 src=""
                 alt="img"
-                style={{ visibility: "hidden", position: "absolute" }}
+                style={{ position: "absolute", display: "none" }}
               />
             </div>
             <div className="HomePage_MaxView_UserPost_Field_Back_and_Post_Button_Container">
-              {/* <ArrowBackIcon/> */}
               <Icon
                 className="HomePage_MaxView_UserPost_Field_Back_Icon"
                 icon="eva:arrow-back-fill"
