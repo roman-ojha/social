@@ -29,7 +29,7 @@
   }
 }
 
-@media screen and (max-width: 1360px) and (min-width: 1200px) {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   * {
     font-size: 21px;
   }

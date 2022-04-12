@@ -366,6 +366,12 @@
     margin-bottom: 4px;
     margin-left: 10px;
   }
+  .HomePage_MaxView_UserPost_Field_Post_Button {
+    width: 67%;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-left: 5%;
+  }
   .MaxView_UserPost_Image {
     width: 100%;
     object-fit: cover;

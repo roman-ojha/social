@@ -21,7 +21,6 @@
   --home-page-content-width: 85%;
   --logo-icon-low-opacity-black-color: #333333;
   --logo-icon-low-opacity-black-color-point-3: #555555;
-  /* --emoji-picker-background-color: rgb(85, 38, 85); */
   --emoji-picker-background-color: #674086;
   --very-small-screen-min-width: 280px;
   --very-small-screen-max-width: 320px;
@@ -34,6 +33,6 @@
   --large-screen-Desktops-min-width: 1024px;
   --large-screen-Desktop-max-width: 1200px;
   --extra-large-screen-min-width: 1200px;
-  --extra-large-screen-max-width: 1360px;
-  --beyond-extra-large-screen-min-width: 1360px;
+  --extra-large-screen-max-width: 1366px;
+  --beyond-extra-large-screen-min-width: 1366px;
 }
