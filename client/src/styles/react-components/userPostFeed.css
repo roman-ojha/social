@@ -50,13 +50,13 @@
   /* border: 1px solid blue; */
   margin-left: 1%;
   display: flex;
+  justify-content: space-between;
 }
 .HomePage_Feed_User_Name_Info_Container {
   width: 70%;
   /* border: 1px solid purple; */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
 }
 .HomePage_Feed_User_ID_Text {
   /* border: 1px solid green; */
@@ -75,7 +75,7 @@
 .HomePage_Feed_User_Time_Text {
   /* border: 1px solid red; */
   width: 30%;
-  height: 2rem;
+  /* height: 2rem; */
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
   word-wrap: break-word;
@@ -87,6 +87,7 @@
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
   cursor: pointer;
+  text-overflow: ellipsis;
 }
 .HomePage_Feed_User_Name_Text:hover {
   text-decoration: underline;
@@ -249,7 +250,7 @@
   max-width: 20rem;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .HomePage_Feed_Main_Container {
     width: 90%;
   }
@@ -283,24 +284,72 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .HomePage_Feed_Main_Container {
     width: 90%;
   }
   .HomePage_Feed_Info_User_Image img {
-    width: 1.9rem;
-    height: 1.9rem;
+    width: 1.6rem;
+    height: 1.6rem;
     margin-left: 5px;
+  }
+  .HomePage_Feed_User_Caption_Container p {
+    font-size: 0.8rem;
+  }
+
+  .HomePage_Feed_User_Name_And_ID_Info_Container {
+    width: 45%;
+    /* border: 1px solid blue; */
+    margin-left: 1%;
+    display: flex;
+  }
+  .HomePage_Feed_User_Name_Info_Container {
+    width: 60%;
+    /* border: 1px solid purple; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .HomePage_Feed_User_ID_Text {
+    /* border: 1px solid green; */
+    max-width: 95%;
+    overflow: hidden;
+    font-family: var(--primary-font-family);
+    font-size: 0.89rem;
+    font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .HomePage_Feed_User_ID_Text {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_User_Time_Text {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_User_Name_Text {
+    font-size: 0.65rem;
+  }
+  .HomePage_Feed_Icon_Container p {
+    font-size: 0.7rem;
+  }
+  .HomePage_Feed_UnLiked_Love_Icon,
+  .HomePage_Feed_Liked_Love_Icon,
+  .HomePage_Feed__Comment_Icon,
+  .HomePage_Feed_Share_Icon,
+  .HomePage_Feed_More_Info_Icon {
+    width: 0.9rem;
+    height: 0.9rem;
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
   .HomePage_Feed_Main_Container {
     width: 90%;
   }
   .HomePage_Feed_Info_User_Image img {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-left: 5px;
   }
   .HomePage_Feed_User_Caption_Container p {

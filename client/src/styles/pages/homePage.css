@@ -345,16 +345,16 @@
     font-size: 0.6rem;
   }
   .HomePage_MaxView_UserPost_Field_Icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
     width: 1.4rem;
     height: 1.4rem;
   }
+  .HomePage_MaxView_UserPost_Field_Emoji_Icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
   .HomePage_MaxView_UserPost_Field_Back_Icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.4rem;
+    height: 1.4rem;
   }
   .HomePage_MaxView_UserPost_Field_Post_Button {
     width: 70%;
