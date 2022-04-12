@@ -274,9 +274,21 @@
   /* .MainPage_SideBar_Logo_Search_Container {
     height: 12%;
   } */
-  /* .MainPage_SideBar_Menu_Container {
-    height: 34%;
-  } */
+  .MainPage_SideBar_Logo_Search_Container {
+    width: 100%;
+    margin-left: 0%;
+    height: 11%;
+  }
+  .MainPage_SideBar_Search_Outline {
+    height: 1.5rem;
+  }
+  .MainPage_SideBar_Page_Logo {
+    height: 2.7rem;
+    margin-left: 6%;
+  }
+  .MainPage_SideBar_Menu_Container {
+    height: 40%;
+  }
   /* .MainPage_SideBar_Friends_Container {
     height: 35%;
     margin: 1% 3% 2% 3%;
@@ -765,27 +777,7 @@
     font-size: 0.45rem;
   }
 }
-
-/* @media screen and (max-height: 800px) and (min-height: 600px) {
-  .MainPage_SideBar_Logo_Search_Container {
-    height: 15%;
-  }
-  .MainPage_SideBar_Menu_Container {
-    height: 30%;
-    overflow-y: scroll;
-  }
-  .MainPage_SideBar_Horizontal_Line {
-    display: none;
-  }
-  .MainPage_SideBar_Friends_Container {
-    height: 30%;
-  }
-  .MainPage_SideBar_User_Account_LogOut_Container {
-    height: 20%;
-  }
-} */
-
-@media screen and (max-height: 600px) and (min-height: 400px) {
+@media screen and (max-height: 600px) {
   .MainPage_SideBar_Logo_Search_Container {
     height: 15%;
   }
