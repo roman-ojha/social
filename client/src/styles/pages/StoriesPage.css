@@ -310,7 +310,7 @@
   }
 }
 
-@media screen and (max-width: 768px) and (min-width: 480px) {
+@media screen and (max-width: 768px) {
   #carousel-stories-container {
     width: 75%;
     height: 90vh;
@@ -394,199 +394,132 @@
   }
 }
 
-@media screen and (max-width: 480px) and (min-width: 480px) {
-  #Stories_Page_Container {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    animation-name: Stories-Page-Main-Animation;
-    animation-duration: 300ms;
-    animation-timing-function: ease-out;
-    background-color: #615028e5;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition-duration: 300ms;
-  }
-
+@media screen and (max-width: 480px) and (min-width: 320px) {
   #carousel-stories-container {
-    width: 75%;
+    width: 80%;
     height: 90vh;
-    font-family: "Helvetica Neue", "Roboto Mono", "Poppins", sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #carousel-wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 10px;
   }
 
   #menu {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-weight: 700;
-    line-height: 1;
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    vertical-align: middle;
-    transition: all 0.6s ease-in-out;
-    justify-content: space-evenly;
-    position: relative;
-    transition: 2s;
   }
   #Carousel-Stories-Close-icon {
-    font-size: 1.3rem;
-    position: absolute;
-    z-index: 10;
-    top: 1rem;
-    right: 1rem;
-    cursor: pointer;
-    transition-duration: 300ms;
-    color: black;
-  }
-  #Carousel-Stories-Close-icon:hover {
-    transform: scale(1.05);
+    font-size: 1.1rem;
   }
   #current-option {
-    /* border: 1px solid red; */
-    position: relative;
     width: 90%;
     height: 25%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-evenly;
   }
   #current-option-text1 {
-    font-size: 1.4rem;
-    line-height: 1.7rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: start;
-    overflow: hidden;
-  }
-  #current-option-text1::before {
-    content: attr(data-next-text);
-    position: absolute;
-    transform: translate(-100vw, 0%);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    opacity: 0;
-  }
-
-  #current-option-text1::after {
-    content: attr(data-previous-text);
-    position: absolute;
-    transform: translate(100vw, 0%);
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    opacity: 0;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
   }
   #current-option-text2 {
-    font-size: 0.8rem;
-    width: 180px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
+    font-size: 0.7rem;
+    width: 150px;
+    height: 20px;
   }
-  #current-option-text2::before {
-    content: attr(data-next-text);
-    position: absolute;
-    transform: translate(-100vw, 0%);
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    opacity: 0;
-  }
-  #current-option-text2::after {
-    content: attr(data-previous-text);
-    position: absolute;
-    transform: translate(-100vw, 0%);
-    width: 100%;
-    height: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    opacity: 0;
-  }
+
   #button-container {
-    /* border: 1px solid red; */
-    height: 10%;
-    width: 100%;
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-direction: row-reverse;
-    gap: 25%;
+    height: 8%;
   }
 
   .Next_Button,
   .Previous_Button {
-    width: 1.7rem;
-    height: 1.7rem;
-    cursor: pointer;
-  }
-
-  #next-option {
-    transform: rotate(-90deg);
-  }
-
-  #previous-option {
-    transform: rotate(90deg);
+    width: 1.6rem;
+    height: 1.6rem;
   }
 
   #image {
-    border-radius: 8px;
     height: 55%;
     width: 70%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 101;
   }
-  @keyframes next-text {
-    50%,
-    55% {
-      transform: translate(-100vw, 0%);
-    }
-    to {
-      transform: translate(-90vw, 0%);
-    }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  #carousel-stories-container {
+    width: 80%;
+    height: 80vh;
   }
-  @keyframes previous-text {
-    50%,
-    55% {
-      transform: translate(90vw, 0%);
-    }
-    to {
-      transform: translate(100vw, 0%);
-    }
+
+  #menu {
+    flex-direction: column;
+  }
+  #Carousel-Stories-Close-icon {
+    font-size: 1rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  #current-option {
+    width: 90%;
+    height: 25%;
+  }
+  #current-option-text1 {
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+  }
+  #current-option-text2 {
+    font-size: 0.6rem;
+    width: 150px;
+    height: 20px;
+  }
+
+  #button-container {
+    height: 5%;
+  }
+
+  .Next_Button,
+  .Previous_Button {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  #image {
+    height: 50%;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  #carousel-stories-container {
+    width: 240px;
+    height: 80vh;
+  }
+
+  #menu {
+    flex-direction: column;
+  }
+  #Carousel-Stories-Close-icon {
+    font-size: 0.8rem;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  #current-option {
+    width: 90%;
+    height: 25%;
+  }
+  #current-option-text1 {
+    font-size: 0.9rem;
+    line-height: 1rem;
+  }
+  #current-option-text2 {
+    font-size: 0.5rem;
+    width: 100px;
+    height: 10px;
+  }
+
+  #button-container {
+    height: 3%;
+  }
+
+  .Next_Button,
+  .Previous_Button {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  #image {
+    height: 50%;
+    width: 85%;
   }
 }
