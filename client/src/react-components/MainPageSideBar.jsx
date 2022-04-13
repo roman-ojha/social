@@ -13,6 +13,8 @@ import {
   startProgressBar,
   stopProgressBar,
 } from "../redux-actions";
+import constant, { is1024 } from "../constant/constant";
+import { useMediaQuery } from "react-responsive";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -23,6 +25,7 @@ const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+
   const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
@@ -183,189 +186,200 @@ const MainPageSideBar = () => {
   };
   return (
     <>
-      <div className="MainPage_SideBar_Container">
-        <div className="MainPage_SideBar_Logo_Search_Container">
-          <NavLink to="/u">
-            <img
-              className="MainPage_SideBar_Page_Logo"
-              id="MainPage_Logo"
-              src={mainPage_Logo}
-              alt="logo"
-            />
-          </NavLink>
-          <div className="MainPage_SideBar_Search_Outline">
-            <Icon className="MainPage_SideBar_Search_Icon" icon="bi:search" />
-            <input
-              className="MainPage_SideBar_Search_Input_Field"
-              type="text"
-              placeholder="Search"
-              onClick={(e) => {
-                document.getElementById("MainPage_Logo").style =
-                  "visibility:hidden;position:absolute";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Outline"
-                ).style.width = "85%";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Back_Icon"
-                ).style = "visibility: visible;position: static;";
-                document.querySelector(".MainPage_SideBar_Search_Icon").style =
-                  "visibility:hidden;position:absolute;";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Input_Field"
-                ).style = "width:80%";
-                setOnSearchBar(true);
-              }}
-              value={searchBarData}
-              onChange={getUserSearchData}
-            />
-
-            <ArrowForwardIcon
-              className="MainPage_SideBar_Search_Back_Icon"
-              style={{ width: "1.5rem", height: "1.5rem" }}
-              onClick={() => {
-                document.getElementById("MainPage_Logo").style =
-                  "visibility:visible;position:static";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Outline"
-                ).style.width = "65%";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Back_Icon"
-                ).style = "visibility: hidden;";
-                document.querySelector(".MainPage_SideBar_Search_Icon").style =
-                  "visibility:visible;position:static;";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Input_Field"
-                ).style = "width:65%";
-                document.querySelector(
-                  ".MainPage_SideBar_Search_Input_Field"
-                ).value = "";
-                setOnSearchBar(false);
-              }}
-            />
-          </div>
-        </div>
-        {onSearchBar ? (
-          <MainPageSearchBar userSearchResult={userSearchResult} />
+      <div className="SideBar_Drawer_Container">
+        {useMediaQuery({
+          query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
+        }) ? (
+          <h1>Hello</h1>
         ) : (
-          ""
+          <></>
         )}
-        <div className="MainPage_SideBar_Menu_Container">
-          <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
-          <div className="MainPage_SideBar_Menu_NavLink_Container">
-            <NavLink
-              to="/u"
-              className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
-            >
-              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <Icon
-                className="MainPage_SideBar_Menu_Home_Logo"
-                icon="ant-design:home-filled"
-                color={
-                  selectedIndex === 0 ? "var(--primary-color-point-7)" : ""
-                }
+        <div className="MainPage_SideBar_Container">
+          <div className="MainPage_SideBar_Logo_Search_Container">
+            <NavLink to="/u">
+              <img
+                className="MainPage_SideBar_Page_Logo"
+                id="MainPage_Logo"
+                src={mainPage_Logo}
+                alt="logo"
               />
-              <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
-            <NavLink
-              to="/u/video"
-              className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
-            >
-              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <Icon
-                className="MainPage_SideBar_Menu_Home_Logo"
-                icon="clarity:video-gallery-solid"
-                color={
-                  selectedIndex === 1 ? "var(--primary-color-point-7)" : ""
-                }
+            <div className="MainPage_SideBar_Search_Outline">
+              <Icon className="MainPage_SideBar_Search_Icon" icon="bi:search" />
+              <input
+                className="MainPage_SideBar_Search_Input_Field"
+                type="text"
+                placeholder="Search"
+                onClick={(e) => {
+                  document.getElementById("MainPage_Logo").style =
+                    "visibility:hidden;position:absolute";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Outline"
+                  ).style.width = "85%";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Back_Icon"
+                  ).style = "visibility: visible;position: static;";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Icon"
+                  ).style = "visibility:hidden;position:absolute;";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Input_Field"
+                  ).style = "width:80%";
+                  setOnSearchBar(true);
+                }}
+                value={searchBarData}
+                onChange={getUserSearchData}
               />
-              <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
-            </NavLink>
-            <NavLink
-              to="/u/message"
-              className="MainPage_SideBar_Menu_Message_Container MainPage_SideBar_Link"
-            >
-              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <Icon
-                className="MainPage_SideBar_Menu_Home_Logo"
-                icon="ant-design:message-filled"
-                color={
-                  selectedIndex === 2 ? "var(--primary-color-point-7)" : ""
-                }
+
+              <ArrowForwardIcon
+                className="MainPage_SideBar_Search_Back_Icon"
+                style={{ width: "1.5rem", height: "1.5rem" }}
+                onClick={() => {
+                  document.getElementById("MainPage_Logo").style =
+                    "visibility:visible;position:static";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Outline"
+                  ).style.width = "65%";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Back_Icon"
+                  ).style = "visibility: hidden;";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Icon"
+                  ).style = "visibility:visible;position:static;";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Input_Field"
+                  ).style = "width:65%";
+                  document.querySelector(
+                    ".MainPage_SideBar_Search_Input_Field"
+                  ).value = "";
+                  setOnSearchBar(false);
+                }}
               />
-              <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
-            </NavLink>
-            <NavLink
-              to="/u/setting"
-              className="MainPage_SideBar_Menu_Setting_Container MainPage_SideBar_Link"
-            >
-              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <Icon
-                className="MainPage_SideBar_Menu_Home_Logo"
-                icon="ant-design:setting-filled"
-                color={
-                  selectedIndex === 3 ? "var(--primary-color-point-7)" : ""
-                }
-              />
-              <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
-            </NavLink>
-            <NavLink
-              to={`/u/profile/${userProfileDetailStore.userID}`}
-              className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
-            >
-              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-              <Icon
-                className="MainPage_SideBar_Menu_Home_Logo"
-                icon="gg:profile"
-                color={
-                  selectedIndex === 4 ? "var(--primary-color-point-7)" : ""
-                }
-              />
-              <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
-            </NavLink>
+            </div>
+          </div>
+          {onSearchBar ? (
+            <MainPageSearchBar userSearchResult={userSearchResult} />
+          ) : (
+            ""
+          )}
+          <div className="MainPage_SideBar_Menu_Container">
+            <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
+            <div className="MainPage_SideBar_Menu_NavLink_Container">
+              <NavLink
+                to="/u"
+                className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
+              >
+                <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+                <Icon
+                  className="MainPage_SideBar_Menu_Home_Logo"
+                  icon="ant-design:home-filled"
+                  color={
+                    selectedIndex === 0 ? "var(--primary-color-point-7)" : ""
+                  }
+                />
+                <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
+              </NavLink>
+              <NavLink
+                to="/u/video"
+                className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
+              >
+                <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+                <Icon
+                  className="MainPage_SideBar_Menu_Home_Logo"
+                  icon="clarity:video-gallery-solid"
+                  color={
+                    selectedIndex === 1 ? "var(--primary-color-point-7)" : ""
+                  }
+                />
+                <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
+              </NavLink>
+              <NavLink
+                to="/u/message"
+                className="MainPage_SideBar_Menu_Message_Container MainPage_SideBar_Link"
+              >
+                <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+                <Icon
+                  className="MainPage_SideBar_Menu_Home_Logo"
+                  icon="ant-design:message-filled"
+                  color={
+                    selectedIndex === 2 ? "var(--primary-color-point-7)" : ""
+                  }
+                />
+                <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
+              </NavLink>
+              <NavLink
+                to="/u/setting"
+                className="MainPage_SideBar_Menu_Setting_Container MainPage_SideBar_Link"
+              >
+                <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+                <Icon
+                  className="MainPage_SideBar_Menu_Home_Logo"
+                  icon="ant-design:setting-filled"
+                  color={
+                    selectedIndex === 3 ? "var(--primary-color-point-7)" : ""
+                  }
+                />
+                <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
+              </NavLink>
+              <NavLink
+                to={`/u/profile/${userProfileDetailStore.userID}`}
+                className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
+              >
+                <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+                <Icon
+                  className="MainPage_SideBar_Menu_Home_Logo"
+                  icon="gg:profile"
+                  color={
+                    selectedIndex === 4 ? "var(--primary-color-point-7)" : ""
+                  }
+                />
+                <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
+              </NavLink>
+            </div>
+            <hr className="MainPage_SideBar_Horizontal_Line" />
+          </div>
+          <div className="MainPage_SideBar_Friends_Container">
+            <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
+            <ShowFriends />
           </div>
           <hr className="MainPage_SideBar_Horizontal_Line" />
-        </div>
-        <div className="MainPage_SideBar_Friends_Container">
-          <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
-          <ShowFriends />
-        </div>
-        <hr className="MainPage_SideBar_Horizontal_Line" />
-        <div className="MainPage_SideBar_User_Account_LogOut_Container">
-          <h2 className="MainPage_SideBar_Account_Title">Account</h2>
-          <div className="MainPage_SideBar_User_Account_Logout_Outline">
-            <img
-              src={
-                userProfileDetailStore.picture === undefined
-                  ? User_Profile_Icon
-                  : userProfileDetailStore.picture
-              }
-              className="MainPage_SideBar_User_Account_Img"
-              onClick={() => {
-                history.push(`/u/profile/${userProfileDetailStore.userID}`);
-              }}
-              alt="profile"
-            />
-            <h3
-              className="MainPage_SideBar_User_Account_Name"
-              onClick={() => {
-                history.push(`/u/profile/${userProfileDetailStore.userID}`);
-              }}
-            >
-              {userProfileDetailStore.userID === undefined
-                ? userProfileDetailStore.name
-                : userProfileDetailStore.userID}
-            </h3>
-            <Icon
-              className="MainPage_LogOut_Icon"
-              icon="ri:logout-circle-line"
-              onClick={userLogOut}
-            />
-            <button
-              className="MainPage_SideBar_User_Logout_Button"
-              onClick={userLogOut}
-            >
-              Log Out
-            </button>
+          <div className="MainPage_SideBar_User_Account_LogOut_Container">
+            <h2 className="MainPage_SideBar_Account_Title">Account</h2>
+            <div className="MainPage_SideBar_User_Account_Logout_Outline">
+              <img
+                src={
+                  userProfileDetailStore.picture === undefined
+                    ? User_Profile_Icon
+                    : userProfileDetailStore.picture
+                }
+                className="MainPage_SideBar_User_Account_Img"
+                onClick={() => {
+                  history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                }}
+                alt="profile"
+              />
+              <h3
+                className="MainPage_SideBar_User_Account_Name"
+                onClick={() => {
+                  history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                }}
+              >
+                {userProfileDetailStore.userID === undefined
+                  ? userProfileDetailStore.name
+                  : userProfileDetailStore.userID}
+              </h3>
+              <Icon
+                className="MainPage_LogOut_Icon"
+                icon="ri:logout-circle-line"
+                onClick={userLogOut}
+              />
+              <button
+                className="MainPage_SideBar_User_Logout_Button"
+                onClick={userLogOut}
+              >
+                Log Out
+              </button>
+            </div>
           </div>
         </div>
       </div>
