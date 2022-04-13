@@ -187,15 +187,24 @@ const MainPageSideBar = () => {
   return (
     <>
       <div className="SideBar_Drawer_Container">
-        {useMediaQuery({
-          query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
-        }) ? (
-          <h1>Hello</h1>
-        ) : (
-          <></>
-        )}
         <div className="MainPage_SideBar_Container">
           <div className="MainPage_SideBar_Logo_Search_Container">
+            {useMediaQuery({
+              query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
+            }) ? (
+              <div className="SideBar_Drawer_Open_Icons">
+                <Icon
+                  icon="ic:outline-navigate-next"
+                  className="SideBar_Drawer_Open_1st_Icon"
+                />
+                <Icon
+                  icon="ic:outline-navigate-next"
+                  className="SideBar_Drawer_Open_2nd_Icon"
+                />
+              </div>
+            ) : (
+              <></>
+            )}
             <NavLink to="/u">
               <img
                 className="MainPage_SideBar_Page_Logo"

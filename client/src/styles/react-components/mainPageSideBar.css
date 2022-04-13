@@ -270,6 +270,22 @@
   background-color: rgb(197, 197, 197);
 }
 
+/* SideBar Drawer Open Icon Style ================ */
+.SideBar_Drawer_Container {
+  border: 1px solid red;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
+  background-color: #4a374694;
+}
+.SideBar_Drawer_Open_Icons {
+}
+.SideBar_Drawer_Open_1st_Icon {
+}
+.SideBar_Drawer_Open_2nd_Icon {
+}
+
 @media screen and (max-width: 1360px) and (min-width: 1200px) {
   /* .MainPage_SideBar_Logo_Search_Container {
     height: 12%;

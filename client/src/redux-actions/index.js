@@ -179,3 +179,10 @@ export const storyIndex = (data) => {
     payload: data,
   };
 };
+
+export const openSideBarDrawer = (data) => {
+  return {
+    type: "openSideBarDrawer",
+    payload: data,
+  };
+};

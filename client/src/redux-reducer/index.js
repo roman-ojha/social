@@ -15,6 +15,7 @@ import messageListReducer from "./messageListReducer";
 import commentBoxReducer from "./commentBox";
 import progressBarReducer from "./progressBar";
 import userStoriesReducer from "./userStories";
+import sideBarDrawerReducer from "./sideBarDrawer";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -33,6 +34,7 @@ const rootReducers = combineReducers({
   commentBoxReducer,
   progressBarReducer,
   userStoriesReducer,
+  sideBarDrawerReducer,
 });
 
 export default rootReducers;
