@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { Picker } from "emoji-mart";
@@ -7,7 +7,8 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import {
   userPostResponseData,
   homePageUserPostFieldDataAction,
-} from "../redux-actions/index";
+  openSideBarDrawer,
+} from "../redux-actions";
 import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/homePage.css";
@@ -15,6 +16,8 @@ import "../styles/others/emojiMarPacakge.css";
 import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import constant from "../constant/constant";
+import { useMediaQuery } from "react-responsive";
 
 const HomePage = () => {
   const history = useHistory();
@@ -35,6 +38,7 @@ const HomePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
+  const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
   const [viewValue, setViewValue] = useState("min");
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
@@ -303,6 +307,27 @@ const HomePage = () => {
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
       <div className="HomePage_Container">
+        {useMediaQuery({
+          query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
+        }) && sideBarDrawerState === false ? (
+          <div
+            className="SideBar_Drawer_Open_Icons"
+            onClick={() => {
+              dispatch(openSideBarDrawer(true));
+            }}
+          >
+            <Icon
+              icon="ic:outline-navigate-next"
+              className="SideBar_Drawer_Open_1st_Icon"
+            />
+            <Icon
+              icon="ic:outline-navigate-next"
+              className="SideBar_Drawer_Open_2nd_Icon"
+            />
+          </div>
+        ) : (
+          <></>
+        )}
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>

@@ -14,8 +14,6 @@ import {
   stopProgressBar,
   openSideBarDrawer,
 } from "../redux-actions";
-import constant from "../constant/constant";
-import { useMediaQuery } from "react-responsive";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -184,10 +182,16 @@ const MainPageSideBar = () => {
       document
         .getElementsByClassName("SideBar_Drawer_Container")[0]
         .classList.add("Open_SideBar_Drawer");
+      document
+        .getElementsByClassName("SideBar_Drawer_Container")[0]
+        .classList.remove("Close_SideBar_Drawer");
     } else {
       document
         .getElementsByClassName("SideBar_Drawer_Container")[0]
         .classList.remove("Open_SideBar_Drawer");
+      document
+        .getElementsByClassName("SideBar_Drawer_Container")[0]
+        .classList.add("Close_SideBar_Drawer");
     }
   }, [sideBarDrawerState]);
   const [onSearchBar, setOnSearchBar] = useState(false);
@@ -211,30 +215,9 @@ const MainPageSideBar = () => {
   };
   return (
     <>
-      <div className="SideBar_Drawer_Container">
+      <div className="SideBar_Drawer_Container Close_SideBar_Drawer">
         <div className="MainPage_SideBar_Container">
           <div className="MainPage_SideBar_Logo_Search_Container">
-            {useMediaQuery({
-              query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
-            }) && sideBarDrawerState === false ? (
-              <div
-                className="SideBar_Drawer_Open_Icons"
-                onClick={() => {
-                  dispatch(openSideBarDrawer(true));
-                }}
-              >
-                <Icon
-                  icon="ic:outline-navigate-next"
-                  className="SideBar_Drawer_Open_1st_Icon"
-                />
-                <Icon
-                  icon="ic:outline-navigate-next"
-                  className="SideBar_Drawer_Open_2nd_Icon"
-                />
-              </div>
-            ) : (
-              <></>
-            )}
             <NavLink to="/u">
               <img
                 className="MainPage_SideBar_Page_Logo"
