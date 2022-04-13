@@ -10,6 +10,12 @@
 
 </div>
 
+## Technology Used:
+1. ReactJs -> Client Side
+2. NodeJs -> Server Side
+3. MongoDB -> To store userDetail
+4. Firebase -> To store images/files
+
 ### Home Page:
 [<img src="Interface/Home_Page.png" alt="Home_Page"></img>](Interface/Home_Page.png)
 
@@ -29,20 +35,14 @@
 ### Comment Box:
 [<img src="Interface/Comment_Box.png" alt="Comment_Box"></img>](Interface/Comment_Box.png)
 
-### Home Page Mobile View:
-<div align="center">
+### Mobile View:
 
-[<img src="Interface/Home_Page_Mobile_View.png" alt="Mobile_View"></img>](Interface/Home_Page_Mobile_View.png)
+[<img src="Interface/Home_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](Interface/Home_Page_Mobile_View.png)
+[<img src="Interface/Story_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](Interface/Story_Page_Mobile_View.png)
 
-</div>
 <br/>
 
 
-## Technology Used:
-1. ReactJs -> Client Side
-2. NodeJs -> Server Side
-3. MongoDB -> To store userDetail
-4. Firebase -> To store images/files
 
 [<h1>Todo</h1>](todo.md "Todo")
 

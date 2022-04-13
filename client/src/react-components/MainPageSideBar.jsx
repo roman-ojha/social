@@ -173,6 +173,20 @@ const MainPageSideBar = () => {
             .contains(e.target)
         ) {
           dispatch(openSideBarDrawer(false));
+          document.getElementById("MainPage_Logo").style =
+            "visibility:visible;position:static";
+          document.querySelector(
+            ".MainPage_SideBar_Search_Outline"
+          ).style.width = "65%";
+          document.querySelector(".MainPage_SideBar_Search_Back_Icon").style =
+            "visibility: hidden;";
+          document.querySelector(".MainPage_SideBar_Search_Icon").style =
+            "visibility:visible;position:static;";
+          document.querySelector(".MainPage_SideBar_Search_Input_Field").style =
+            "width:65%";
+          document.querySelector(".MainPage_SideBar_Search_Input_Field").value =
+            "";
+          setOnSearchBar(false);
         }
       });
   }, []);
@@ -227,7 +241,13 @@ const MainPageSideBar = () => {
               />
             </NavLink>
             <div className="MainPage_SideBar_Search_Outline">
-              <Icon className="MainPage_SideBar_Search_Icon" icon="bi:search" />
+              <Icon
+                className="MainPage_SideBar_Search_Icon"
+                icon="bi:search"
+                onClick={() => {
+                  dispatch(openSideBarDrawer(true));
+                }}
+              />
               <input
                 className="MainPage_SideBar_Search_Input_Field"
                 type="text"
