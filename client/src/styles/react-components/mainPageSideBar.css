@@ -271,7 +271,7 @@
 }
 
 /* SideBar Drawer Open Icon Style ================ */
-.SideBar_Drawer_Container {
+.Open_SideBar_Drawer {
   border: 1px solid red;
   position: fixed;
   width: 100%;

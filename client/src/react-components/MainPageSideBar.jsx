@@ -12,8 +12,9 @@ import {
   profilePageDataAction,
   startProgressBar,
   stopProgressBar,
+  openSideBarDrawer,
 } from "../redux-actions";
-import constant, { is1024 } from "../constant/constant";
+import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
 
 const MainPageSideBar = () => {
@@ -25,7 +26,7 @@ const MainPageSideBar = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-
+  const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
   const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
@@ -164,7 +165,31 @@ const MainPageSideBar = () => {
   };
   useEffect(() => {
     colorSelectedUrl();
+
+    document
+      .getElementsByClassName("SideBar_Drawer_Container")[0]
+      .addEventListener("click", (e) => {
+        if (
+          !document
+            .getElementsByClassName("MainPage_SideBar_Container")[0]
+            .contains(e.target)
+        ) {
+          dispatch(openSideBarDrawer(false));
+        }
+      });
   }, []);
+
+  useEffect(() => {
+    if (sideBarDrawerState) {
+      document
+        .getElementsByClassName("SideBar_Drawer_Container")[0]
+        .classList.add("Open_SideBar_Drawer");
+    } else {
+      document
+        .getElementsByClassName("SideBar_Drawer_Container")[0]
+        .classList.remove("Open_SideBar_Drawer");
+    }
+  }, [sideBarDrawerState]);
   const [onSearchBar, setOnSearchBar] = useState(false);
   const [searchBarData, setSearchBarData] = useState("");
   const [userSearchResult, setUserSearchResult] = useState([]);
@@ -191,8 +216,13 @@ const MainPageSideBar = () => {
           <div className="MainPage_SideBar_Logo_Search_Container">
             {useMediaQuery({
               query: `(max-width:${constant.mediaQueryRes.screen1024}px)`,
-            }) ? (
-              <div className="SideBar_Drawer_Open_Icons">
+            }) && sideBarDrawerState === false ? (
+              <div
+                className="SideBar_Drawer_Open_Icons"
+                onClick={() => {
+                  dispatch(openSideBarDrawer(true));
+                }}
+              >
                 <Icon
                   icon="ic:outline-navigate-next"
                   className="SideBar_Drawer_Open_1st_Icon"
