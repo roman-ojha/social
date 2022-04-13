@@ -43,6 +43,7 @@ const HomePage = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
+
   const SelectUserPostFieldView = () => {
     const MinViewUserPostField = () => {
       return (

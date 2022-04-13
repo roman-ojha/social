@@ -296,14 +296,15 @@
   }
 }
 
-@keyframes slide_SideBar_On_Open {
+@keyframes slide_SideBar_On_Close {
   0% {
-    width: 100px;
-    /* the value of width depend om the width of sidebar on close drawer media query max-width:1024px */
+    z-index: 3;
+  }
+  75% {
+    z-index: 3;
   }
   100% {
-    width: 300px;
-    /* the value of width depend on the width of sidebar on open drawer width on media query max-width:1024*/
+    z-index: 1;
   }
 }
 
@@ -313,13 +314,21 @@
   width: 100%;
   height: 100vh;
   z-index: 3;
-  background-color: #4a374694;
+  background-color: #4a374656;
   transition-duration: 300ms;
 }
+
+.Close_SideBar_Drawer .MainPage_SideBar_Container {
+  animation-name: slide_SideBar_On_Close;
+  animation-duration: 200ms;
+  animation-timing-function: ease-in;
+  transition: width 200ms, background-color 500ms;
+}
+
 .Open_SideBar_Drawer .MainPage_SideBar_Container {
   /* the value of width is on media query max-width:1024px */
   width: 300px;
-  animation-name: slide_SideBar_On_Open;
+  transition: width 200ms, background-color 200ms;
 }
 .SideBar_Drawer_Open_Icons {
   position: absolute;
