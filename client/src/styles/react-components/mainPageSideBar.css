@@ -710,10 +710,10 @@
   } */
 }
 @media screen and (max-width: 800px) and (min-width: 768px) {
-  .MainPage_SideBar_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Container {
     width: 90px;
   }
-  .MainPage_SideBar_User_Account_Name {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Name {
     width: 80px;
   }
 }
@@ -733,10 +733,10 @@
   }
 } */
 @media screen and (max-width: 768px) and (min-width: 480px) {
-  .MainPage_SideBar_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Container {
     width: 60px;
   }
-  .MainPage_SideBar_Logo_Search_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
     height: 12%;
     margin-left: 0%;
     display: flex;
@@ -744,278 +744,278 @@
     align-items: center;
     flex-direction: column;
   }
-  .MainPage_SideBar_Page_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Page_Logo {
     height: 2.2rem;
     margin-top: 5px;
   }
-  .MainPage_SideBar_Search_Icon {
+  .Close_SideBar_Drawer .MainPage_SideBar_Search_Icon {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 35%;
   }
-  .MainPage_SideBar_Menu_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Title {
     font-size: 0.8rem;
     margin-bottom: 3px;
   }
-  .MainPage_SideBar_Menu_NavLink_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container {
     width: 100%;
   }
-  .MainPage_SideBar_Menu_Home_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Home_Logo {
     margin-right: 20%;
     height: 1.6rem;
     width: 1.6rem;
   }
-  .MainPage_SideBar_Horizontal_Line {
+  .Close_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
     width: 85%;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 35.5%;
     border-radius: 5px;
   }
-  .MainPage_SideBar_Friends_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Title {
     font-size: 0.7rem;
     margin: 5px 0% 0% 5%;
     height: 7%;
   }
-  .MainPage_SideBar_Friends_Inner_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Inner_Container {
     height: 90%;
   }
-  .MainPage_SideBar_Friend_Image {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friend_Image {
     width: 1.8rem;
     height: 1.8rem;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 16%;
   }
-  .MainPage_SideBar_Account_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Account_Title {
     font-size: 0.7rem;
     margin: -20px 0% -10px 5%;
     height: 25%;
   }
-  .MainPage_SideBar_User_Account_Img {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Img {
     margin-left: 0%;
     height: 1.8rem;
     width: 1.8rem;
     margin-right: 3%;
     padding-left: 5%;
   }
-  .MainPage_SideBar_User_Account_Name {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Name {
     width: 55px;
     text-align: center;
     font-size: 0.7rem;
   }
-  .MainPage_LogOut_Icon {
+  .Close_SideBar_Drawer .MainPage_LogOut_Icon {
     margin-right: 4%;
     width: 0.8rem;
     height: 0.8rem;
   }
-  .MainPage_SideBar_User_Logout_Button {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Logout_Button {
     font-size: 0.7rem;
   }
 }
 @media screen and (max-width: 480px) and (min-width: 320px) {
-  .MainPage_SideBar_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Container {
     width: 45px;
   }
-  .MainPage_SideBar_Page_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Page_Logo {
     height: 2rem;
     margin-top: 5px;
   }
-  .MainPage_SideBar_Search_Icon {
+  .Close_SideBar_Drawer .MainPage_SideBar_Search_Icon {
     width: 1.1rem;
     height: 1.1rem;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 35%;
   }
-  .MainPage_SideBar_Menu_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Title {
     font-size: 0.75rem;
     margin-bottom: 3px;
   }
-  .MainPage_SideBar_Menu_SelectBar_Colored {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_SelectBar_Colored {
     width: 6px;
     height: 110%;
   }
-  .MainPage_SideBar_Menu_Home_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Home_Logo {
     margin-right: 20%;
     height: 1.5rem;
     width: 1.5rem;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 37.5%;
     border-radius: 3px;
   }
-  .MainPage_SideBar_Friends_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Title {
     font-size: 0.6rem;
   }
-  .MainPage_SideBar_Friends_Inner_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Inner_Container {
     height: 90%;
   }
-  .MainPage_SideBar_Friend_Image {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friend_Image {
     width: 1.6rem;
     height: 1.6rem;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 14%;
     justify-content: center;
   }
-  .MainPage_SideBar_Account_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Account_Title {
     font-size: 0.6rem;
     margin: 0px 0px 0px 0px;
   }
-  .MainPage_SideBar_User_Account_Img {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Img {
     height: 1.6rem;
     width: 1.6rem;
   }
-  .MainPage_SideBar_User_Account_Name {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Name {
     width: 43px;
     text-align: center;
     font-size: 0.6rem;
   }
-  .MainPage_LogOut_Icon {
+  .Close_SideBar_Drawer .MainPage_LogOut_Icon {
     margin-right: 4%;
     width: 0.7rem;
     height: 0.7rem;
   }
-  .MainPage_SideBar_User_Logout_Button {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Logout_Button {
     font-size: 0.6rem;
   }
 }
 @media screen and (max-width: 320px) {
-  .MainPage_SideBar_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Container {
     width: 40px;
   }
-  .MainPage_SideBar_Page_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Page_Logo {
     height: 1.7rem;
     margin-top: 5px;
   }
-  .MainPage_SideBar_Search_Icon {
+  .Close_SideBar_Drawer .MainPage_SideBar_Search_Icon {
     width: 0.9rem;
     height: 0.9rem;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 35%;
   }
-  .MainPage_SideBar_Menu_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Title {
     font-size: 0.6rem;
     margin-bottom: 3px;
   }
-  .MainPage_SideBar_Menu_SelectBar_Colored {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_SelectBar_Colored {
     width: 6px;
     height: 110%;
   }
-  .MainPage_SideBar_Menu_Home_Logo {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Home_Logo {
     margin-right: 20%;
     height: 1.3rem;
     width: 1.3rem;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 37.5%;
     border-radius: 3px;
   }
-  .MainPage_SideBar_Friends_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Title {
     font-size: 0.45rem;
   }
-  .MainPage_SideBar_Friends_Inner_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Inner_Container {
     height: 90%;
   }
-  .MainPage_SideBar_Friend_Image {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friend_Image {
     width: 1.4rem;
     height: 1.4rem;
   }
-  .MainPage_SideBar_Account_Title {
+  .Close_SideBar_Drawer .MainPage_SideBar_Account_Title {
     font-size: 0.45rem;
     margin: 0px 0px 0px 0px;
   }
-  .MainPage_SideBar_User_Account_Img {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Img {
     height: 1.4rem;
     width: 1.4rem;
   }
-  .MainPage_SideBar_User_Account_Name {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_Name {
     width: 37px;
     text-align: center;
     font-size: 0.45rem;
   }
-  .MainPage_LogOut_Icon {
+  .Close_SideBar_Drawer .MainPage_LogOut_Icon {
     margin-right: 4%;
     width: 0.5rem;
     height: 0.5rem;
   }
-  .MainPage_SideBar_User_Logout_Button {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Logout_Button {
     font-size: 0.45rem;
   }
 }
 @media screen and (max-height: 600px) {
-  .MainPage_SideBar_Logo_Search_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
     height: 15%;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .MainPage_SideBar_Horizontal_Line {
+  .Close_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
     display: none;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 25%;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 23%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 600px) and (min-height: 500px) {
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 33%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 500px) and (min-height: 400px) {
-  .MainPage_SideBar_Logo_Search_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
     height: 15%;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 30%;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 20%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 400px) and (min-height: 300px) {
-  .MainPage_SideBar_Logo_Search_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
     height: 17%;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 25%;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 22%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 300px) and (min-height: 150px) {
-  .MainPage_SideBar_Logo_Search_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
     height: 20%;
   }
-  .MainPage_SideBar_Menu_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
     height: 23%;
     overflow-y: scroll;
   }
-  .MainPage_SideBar_Friends_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
     height: 20%;
   }
-  .MainPage_SideBar_User_Account_LogOut_Container {
+  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
     height: 28%;
   }
 }
