@@ -459,7 +459,7 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
     const { email, userID } = req.body;
     // NOTE userID = user that rootUser is trying to search or query
     if (!email && !userID) {
-      return res.status(400).json({ success: false, msg: "unauthorized user" });
+      return res.status(404).json({ success: false, err: "unauthorized user" });
     }
     const unFollowUserExistOnRootUser = await userDetail.findOne({
       userID: rootUser.userID,
@@ -471,9 +471,9 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
     });
 
     if (!unFollowUserExistOnRootUser) {
-      return res.status(200).json({
+      return res.status(404).json({
         success: false,
-        message: "you hadn't followed this user yet",
+        err: "you hadn't followed this user yet",
       });
     }
     const unFollowedToUserExist = await userDetail.findOne(
@@ -489,8 +489,8 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
     );
     if (!unFollowedToUserExist) {
       return res
-        .status(400)
-        .json({ success: false, msg: "User doesn't exist" });
+        .status(404)
+        .json({ success: false, err: "User doesn't exist" });
     }
     // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
     let unFollowRes = await userDetail.updateOne(
@@ -505,7 +505,12 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
       }
     );
     if (!unFollowRes) {
-      return res.status(500).json({ success: false, msg: "Server error" });
+      return res
+        .status(500)
+        .json({
+          success: false,
+          err: "Server error!!, Please try again later",
+        });
     }
     unFollowRes = await userDetail.updateOne(
       {
@@ -519,7 +524,12 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
       }
     );
     if (!unFollowRes) {
-      return res.status(500).json({ success: false, msg: "Server error" });
+      return res
+        .status(500)
+        .json({
+          success: false,
+          err: "Server error!!, Please Try again later",
+        });
     }
     const friendExist = await userDetail.findOne({
       userID: rootUser.userID,
@@ -530,10 +540,9 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
       },
     });
     if (!friendExist) {
-      console.log("friend doens't exsit");
       return res
         .status(200)
-        .json({ success: true, msg: "unFollow successfully" });
+        .json({ success: true, msg: "UnFollowed User Successfully" });
     }
     let unfriendRes = await userDetail.updateOne(
       {
@@ -547,7 +556,12 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
       }
     );
     if (!unfriendRes) {
-      return res.status(500).json({ success: false, msg: "Server error" });
+      return res
+        .status(500)
+        .json({
+          success: false,
+          msg: "Server error!!, Please Try again later",
+        });
     }
     unfriendRes = await userDetail.updateOne(
       {
@@ -561,11 +575,16 @@ router.post("/u/unfollow", authenticate, async (req, res) => {
       }
     );
     if (!unfriendRes) {
-      return res.status(500).json({ success: false, msg: "Server error" });
+      return res
+        .status(500)
+        .json({
+          success: false,
+          msg: "Server error!!, Please Try again later",
+        });
     }
     return res
       .status(200)
-      .json({ success: true, msg: "unFollow successfully" });
+      .json({ success: true, msg: "UnFollowed User Successfully" });
   } catch (err) {
     return res
       .status(500)
