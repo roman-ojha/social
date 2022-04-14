@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
   .VideoPage_Container {
-    width: 55%;
+    width: calc(100% - 29% - 15%);
     left: 15%;
     top: 5rem;
     height: calc(100vh - 6rem);

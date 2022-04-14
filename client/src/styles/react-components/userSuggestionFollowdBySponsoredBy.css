@@ -208,7 +208,7 @@
   width: fit-content;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1200px) {
   .MainPage_Rignt_Side_Component_Container {
     width: 29%;
     top: 13%;
@@ -265,7 +265,7 @@
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
   .MainPage_Rignt_Side_Component_Container {
     width: 29%;
     top: 13%;

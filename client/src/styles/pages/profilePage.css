@@ -4,7 +4,7 @@
   /* border: 1px solid red; */
   position: relative;
   left: 20%;
-  top: 14vh;
+  top: 5rem;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,6 @@
   cursor: pointer;
 }
 .ProfilePage_UserInfo_Detail_Container {
-  /* border: 1px solid purple; */
   width: 48%;
   height: 100%;
 }
@@ -50,6 +49,11 @@
   letter-spacing: 1.5px;
   color: var(--lower-opacity-font-color);
   cursor: pointer;
+  width: 150px;
+  height: 1.4rem;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
 }
 
 .ProfilePage_UserInfo_UserName_Container p {
@@ -188,32 +192,77 @@
   width: 80%;
 }
 
-@media screen and (max-width: 1300px) and (min-width: 1000px) {
+/* @media screen and (max-width: 1366px) and (min-width: 1000px) {
   .ProfilePage_Container {
     width: 55%;
     left: 15%;
     top: 115px;
   }
-}
-@media screen and (max-width: 1000px) {
+} */
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
   .ProfilePage_Container {
-    width: 60%;
-    left: 100px;
-    top: 115px;
+    /* border: 1px solid red; */
+    width: calc(100% - 29% - 15%);
+    left: 15%;
+    top: 5rem;
   }
 }
+@media screen and (max-width: 1024px) {
+  .ProfilePage_Container {
+    width: calc(100% - 29% - 100px);
+    left: 100px;
+    top: 100px;
+  }
+}
+
 @media screen and (max-width: 850px) {
   .ProfilePage_Container {
     width: calc(100% - 100px);
-    left: 100px;
-    top: 100px;
   }
 }
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 800px) {
   .ProfilePage_Container {
     width: calc(100% - 90px);
     left: 90px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ProfilePage_Container {
+    width: calc(100% - 60px);
+    left: 60px;
     top: 100px;
+  }
+  .ProfilePage_UserInfo_Picture_Container img {
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .ProfilePage_UserInfo_Detail_Container {
+    width: 70%;
+    height: 100%;
+  }
+  .ProfilePage_UserInfo_UserName_Container h1 {
+    font-size: 1.1rem;
+    letter-spacing: 1.2px;
+    width: 100%;
+    height: 1.4rem;
+  }
+
+  .ProfilePage_UserInfo_UserName_Container p {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
+  .ProfilePage_UserInfo_Message_Icon_Container {
+    height: 1.3rem;
+    width: 1.3rem;
+  }
+  .ProfilePage_UserInfo_Message_Icon {
+    height: 1.1rem;
+    width: 1.1rem;
   }
   .ProfilePage_UserInfo_User_follow_Detail_Container p {
     font-size: 0.65rem;
@@ -227,9 +276,9 @@
   .ProfilePage_UserContent_Route_Container {
     width: 90%;
   }
-  .ProfilePage_UserContent_Feed_Icon,
-  .ProfilePage_UserContent_Picture_Icon,
-  .ProfilePage_UserContent_Friends_Icon {
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon {
     width: 1.6rem;
     height: 1.6rem;
   }
@@ -240,66 +289,77 @@
     width: 90%;
   }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 480px) {
   .ProfilePage_Container {
     width: calc(100% - 45px);
     left: 45px;
-    top: 70px;
+    top: 4rem;
   }
   .ProfilePage_UserInfo_Container {
+    margin-top: 13px;
+    border-radius: 8px;
     height: 6.5rem;
-    padding-top: 2.5%;
+    width: 95%;
+  }
+  .ProfilePage_UserInfo_Picture_Container {
+    padding: 0% 2% 0% 2%;
   }
   .ProfilePage_UserInfo_Picture_Container img {
-    width: 5rem;
-    height: 5rem;
+    width: 4.9rem;
+    height: 4.9rem;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
   }
   .ProfilePage_UserInfo_Detail_Container {
-    width: 48%;
+    width: 45%;
     height: 100%;
-  }
-  .ProfilePage_UserInfo_UserName_Msg_Container {
-    display: flex;
-    height: 25%;
   }
   .ProfilePage_UserInfo_UserName_Container h1 {
     font-size: 0.9rem;
+    letter-spacing: 1.2px;
+    width: 100%;
+    height: 1.2rem;
   }
+
   .ProfilePage_UserInfo_UserName_Container p {
     font-size: 0.65rem;
+    letter-spacing: 1px;
   }
   .ProfilePage_UserInfo_Message_Icon_Container {
-    height: 1.3rem;
-    width: 1.3rem;
+    margin-left: 2%;
+    border: 1px solid black;
+    height: 1.2rem;
+    width: 1.2rem;
   }
-  .ProfilePage_UserInfo_Message_Icon_Container img {
-    height: 1.3rem;
-    width: 1.3rem;
-  }
-  .ProfilePage_UserInfo_More_Icon {
-    width: 1.1rem;
-    height: 1.1rem;
-  }
-  .ProfilePage_UserInfo_User_follow_Detail_Container {
-    height: 50%;
+  .ProfilePage_UserInfo_Message_Icon {
+    height: 1rem;
+    width: 1rem;
   }
   .ProfilePage_UserInfo_User_follow_Detail_Container p {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+  }
+  .ProfilePage_UserInfo_More_Icon {
+    width: 1rem;
+    height: 1rem;
   }
   .ProfilePage_UserInfo_FollowUser_Button {
-    border-width: 0px;
-    border-radius: 10px;
-    font-size: 0.7rem;
-    margin-bottom: 10px;
+    border-radius: 6px;
+    font-size: 0.55rem;
+    margin-bottom: 8px;
+    margin-right: 0px;
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 3.5px;
   }
   .ProfilePage_UserContent_Route_Container {
     width: 90%;
   }
-  .ProfilePage_UserContent_Feed_Icon,
-  .ProfilePage_UserContent_Picture_Icon,
-  .ProfilePage_UserContent_Friends_Icon {
-    width: 1.5rem;
-    height: 1.5rem;
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon {
+    width: 1.4rem;
+    height: 1.4rem;
   }
   .ProfilePage_UserContent_Divider_Line {
     width: 90%;
@@ -309,66 +369,82 @@
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
   .ProfilePage_Container {
-    width: calc(100% - 45px);
-    left: 45px;
-    top: 70px;
+    width: calc(100% - 40px);
+    left: 40px;
+    top: 3.5rem;
   }
   .ProfilePage_UserInfo_Container {
+    margin-top: 6px;
+    border-radius: 5px;
     height: 5rem;
-    padding-top: 2.5%;
+    width: 95%;
   }
   .ProfilePage_UserInfo_Picture_Container {
-    padding: 0% 2.5% 0% 0.5%;
+    padding: 0% 1% 0% 1%;
   }
   .ProfilePage_UserInfo_Picture_Container img {
-    width: 3rem;
-    height: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
   }
   .ProfilePage_UserInfo_Detail_Container {
-    width: 48%;
+    width: 45%;
     height: 100%;
-  }
-  .ProfilePage_UserInfo_UserName_Msg_Container {
-    display: flex;
-    height: 25%;
   }
   .ProfilePage_UserInfo_UserName_Container h1 {
     font-size: 0.7rem;
+    letter-spacing: 1px;
+    width: 100%;
+    height: 1rem;
   }
+
   .ProfilePage_UserInfo_UserName_Container p {
-    font-size: 0.6rem;
+    font-size: 0.5rem;
+    letter-spacing: 1px;
   }
   .ProfilePage_UserInfo_Message_Icon_Container {
-    height: 0.9rem;
-    width: 0.9rem;
+    margin-left: 2%;
+    border: 1px solid black;
+    height: 1rem;
+    width: 1rem;
   }
   .ProfilePage_UserInfo_Message_Icon {
+    height: 0.8rem;
     width: 0.8rem;
-    width: 0.8rem;
-  }
-  .ProfilePage_UserInfo_More_Icon {
-    width: 0.9rem;
-    height: 0.9rem;
-  }
-  .ProfilePage_UserInfo_User_follow_Detail_Container {
-    height: 45%;
-    margin-top: 10px;
   }
   .ProfilePage_UserInfo_User_follow_Detail_Container p {
     font-size: 0.5rem;
   }
-  .ProfilePage_UserInfo_FollowUser_Button {
-    border-width: 0px;
-    border-radius: 7px;
-    font-size: 0.45rem;
-    margin-bottom: 10px;
+  .ProfilePage_UserInfo_More_Icon {
+    width: 1rem;
+    height: 1rem;
   }
-  .ProfilePage_UserContent_Feed_Icon,
-  .ProfilePage_UserContent_Picture_Icon,
-  .ProfilePage_UserContent_Friends_Icon {
+  .ProfilePage_UserInfo_FollowUser_Button {
+    border-radius: 5px;
+    font-size: 0.45rem;
+    margin-bottom: 6px;
+    margin-right: 0px;
+    width: fit-content;
+    height: fit-content;
+    padding: 4px 3px;
+  }
+  .ProfilePage_UserContent_Route_Container {
+    width: 90%;
+  }
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon,
+  .ProfilePage_UserContent_Icon {
     width: 1.2rem;
     height: 1.2rem;
+  }
+  .ProfilePage_UserContent_Divider_Line {
+    width: 90%;
+  }
+  .ProfilePage_UserContent_Container {
+    width: 90%;
   }
 }
