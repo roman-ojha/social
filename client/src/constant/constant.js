@@ -1,5 +1,3 @@
-import { useMediaQuery } from "react-responsive";
-
 export default {
   mediaQueryRes: {
     screen1024: 1024,

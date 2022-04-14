@@ -3,7 +3,7 @@
   /* border: 1px solid red; */
   position: relative;
   left: 20%;
-  top: 14vh;
+  top: 5rem;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -18,4 +18,98 @@
   font-size: 3rem;
   color: var(--primary-color);
   word-wrap: break-word;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  .VideoPage_Container {
+    width: 55%;
+    left: 15%;
+    top: 5rem;
+    height: calc(100vh - 6rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .VideoPage_Container {
+    width: 60%;
+    left: 100px;
+    top: 5rem;
+    height: calc(100vh - 6rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 2.7rem;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .VideoPage_Container {
+    width: calc(100% - 100px);
+    left: 100px;
+    top: 5rem;
+    height: calc(100vh - 6rem);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .VideoPage_Container {
+    left: 90px;
+    width: calc(100% - 90px);
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .VideoPage_Container {
+    width: calc(100% - 60px);
+    left: 60px;
+    top: 5rem;
+    height: calc(100vh - 6rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 2.7rem;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .VideoPage_Container {
+    width: calc(100% - 45px);
+    left: 45px;
+    top: 4rem;
+    height: calc(100vh - 5rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  .VideoPage_Container {
+    width: calc(100% - 40px);
+    left: 40px;
+    top: 3.5rem;
+    height: calc(100vh - 4.5rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .VideoPage_Container {
+    width: calc(100% - 40px);
+    left: 40px;
+    top: 3rem;
+    height: calc(100vh - 4rem);
+  }
+
+  .VideoPage_Container h1 {
+    font-size: 1.2rem;
+  }
 }
