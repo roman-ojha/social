@@ -308,7 +308,7 @@ router.get("/u/profile/:userid", authenticate, async (req, res) => {
     if (!searchedUser) {
       return res
         .status(401)
-        .json({ success: false, msg: "User doesnot exist" });
+        .json({ success: false, err: "User doesn't exist" });
     } else {
       const isRootUserFollowed = await userDetail.findOne({
         userID: rootUser.userID,
@@ -331,7 +331,7 @@ router.get("/u/profile/:userid", authenticate, async (req, res) => {
   } catch (err) {
     return res
       .status(500)
-      .json({ success: false, msg: "Server Error!!, Please Try again letter" });
+      .json({ success: false, err: "Server Error!!, Please Try again letter" });
   }
 });
 

@@ -25,6 +25,8 @@ import { Helmet } from "react-helmet";
 import CommentBox from "../react-components/CommentBox";
 import ProfileFriends from "../react-components/ProfileFriends";
 import ProfileAlbums from "../react-components/ProfileAlbums";
+import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -196,7 +198,32 @@ const ProfilePage = () => {
         };
         dispatch(profilePageDataAction(userObj));
         setFetchedAllData(true);
-      } catch (err) {}
+      } catch (err) {
+        if (err.response.data.success === false) {
+          toast.error(err.response.data.err, {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            pauseOnFocusLoss: false,
+          });
+        } else {
+          toast.error("Some Problem Occur, Please Try again Letter!!!", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            pauseOnFocusLoss: false,
+          });
+        }
+        history.push("/u");
+      }
     } else {
       setFetchedAllData(true);
     }
@@ -204,6 +231,7 @@ const ProfilePage = () => {
   useEffect(() => {
     fillColorOnRoute();
   });
+
   return (
     <>
       {openCommentBoxStore ? <CommentBox /> : <></>}
@@ -212,6 +240,7 @@ const ProfilePage = () => {
           <Helmet>
             <title>{params.userID}</title>
           </Helmet>
+          <OpenSideBarDrawerButton />
           <div className="ProfilePage_UserInfo_Container">
             <div className="ProfilePage_UserInfo_Picture_Container">
               <img
