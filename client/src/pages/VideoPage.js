@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
+import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 
 const VideoPage = () => {
   return (
@@ -9,6 +10,7 @@ const VideoPage = () => {
         <Helmet>
           <title>Video</title>
         </Helmet>
+        <OpenSideBarDrawerButton />
         <h1>Under </h1>
         <h1>Development...</h1>
       </div>
