@@ -151,7 +151,31 @@ const ProfilePage = () => {
           console.log(resMessage);
         });
       }
-    } catch (err) {}
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toast.error(err.response.data.err, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      } else {
+        toast.error("Some Problem Occur, Please Try again Letter!!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
+    }
   };
 
   const fillColorOnRoute = () => {

@@ -648,14 +648,18 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
     const rootUser = req.rootUser;
     const receiverUserID = req.body.userID;
     if (!receiverUserID) {
-      return res.status(400).json({ error: "Receiver user doesn't exist" });
+      return res
+        .status(404)
+        .json({ success: false, err: "Receiver user doesn't exist" });
     }
     const receiverExist = await userDetail.findOne({
       // searching that user to message if it exist
       userID: receiverUserID,
     });
     if (!receiverExist) {
-      return res.status(400).json({ error: "User doesn't exist" });
+      return res
+        .status(404)
+        .json({ success: false, err: "User doesn't exist" });
     }
     const userMessage = await userDetail.findOne(
       {
@@ -712,16 +716,16 @@ router.post("/u/getMessage", authenticate, async (req, res) => {
         }
       );
       if (resSaverReciverMsg && resSaveRootMsg) {
-        return res.status(200).json({ message: "message created" });
+        return res.status(200).json({ success: true, msg: "message created" });
       } else {
-        return res.status(500).json({ error: "server error" });
+        return res.status(500).json({ success: false, err: "server error" });
       }
     }
     res.status(200).json(userMessage.messages[0]);
   } catch (err) {
     return res
       .status(500)
-      .json({ error: "Server Error!!, Please Try again letter" });
+      .json({ success: false, err: "Server Error!!, Please Try again letter" });
   }
 });
 
