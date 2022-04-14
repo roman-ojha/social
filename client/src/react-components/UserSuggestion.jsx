@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserSuggestion = () => {
   const history = useHistory();
@@ -18,6 +19,17 @@ const UserSuggestion = () => {
             onClick={() => {
               if (props.userInformation.type !== "bot") {
                 history.push(`/u/profile/${props.userInformation.userID}`);
+              } else {
+                toast.error("Sorry!!, can't be able to open bot Profile", {
+                  position: "bottom-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  pauseOnFocusLoss: false,
+                });
               }
             }}
             alt="user"
@@ -28,6 +40,17 @@ const UserSuggestion = () => {
               onClick={() => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
+                } else {
+                  toast.error("Sorry!!, can't be able to open bot Profile", {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    pauseOnFocusLoss: false,
+                  });
                 }
               }}
             >
@@ -38,6 +61,17 @@ const UserSuggestion = () => {
               onClick={() => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
+                } else {
+                  toast.error("Sorry!!, can't be able to open bot Profile", {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    pauseOnFocusLoss: false,
+                  });
                 }
               }}
             >
@@ -47,7 +81,27 @@ const UserSuggestion = () => {
             </p>
           </div>
           <div className="MainPage_Suggested_User_Follow_Button">
-            <p className="MainPage_Suggested_User_Follow_Button_Text">Follow</p>
+            <p
+              className="MainPage_Suggested_User_Follow_Button_Text"
+              onClick={() => {
+                if (props.userInformation.type !== "bot") {
+                  // Follow user
+                } else {
+                  toast.error("Sorry!!, can't be able to Follow bot", {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    pauseOnFocusLoss: false,
+                  });
+                }
+              }}
+            >
+              Follow
+            </p>
           </div>
         </div>
       </>
