@@ -201,6 +201,10 @@ const SettingPage = () => {
               type="file"
               accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
               onChange={getNewProfilePicture}
+              style={{
+                display: "none",
+                position: "absolute",
+              }}
             />
             <div className="Setting_Page_Change_Profile_Input_and_Button_Container">
               <input
