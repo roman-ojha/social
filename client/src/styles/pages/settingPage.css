@@ -212,15 +212,184 @@
     height: 40px;
   }
 }
+
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
   .SettingPage_Container {
-    /* border: 1px solid red; */
     top: 5rem;
     left: 15%;
     width: 55%;
   }
   .Setting_Page_Change_Profile_Picture_Container {
-    /* border: 1px solid red; */
+    margin-top: 10px;
+    border-radius: 9px;
+  }
+  .Setting_Page_Change_Profile_Picture_Container h1 {
+    font-size: 0.85rem;
+    margin: 9px 0px 0px 9px;
+  }
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part {
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 13px 0px 13px 0px;
+  }
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part label img {
+    width: 7rem;
+    height: 7rem;
+  }
+  .Setting_Page_Change_Profile_Url_Image_Input_Field {
+    border-radius: 7px;
+    height: 40px;
+  }
+
+  .Setting_Page_Change_Profile_Picture_Container_Bottom_Part p {
+    font-size: 0.75rem;
+    margin: 0px 1rem 0.8rem 1rem;
+  }
+
+  .Setting_Container_With_Input_Field,
+  .Setting_Page_Delete_User_Profile_Container {
+    margin: 2%;
+    border-radius: 8px;
+    padding: 13px;
+  }
+  .Setting_Container_With_Input_Field h1,
+  .Setting_Page_Delete_User_Profile_Container h1,
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part label h1 {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .Setting_Container_With_Input_Field form input,
+  .Setting_Container_With_Input_Field input {
+    width: 65%;
+    border-radius: 5px;
+    height: 40px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  .Setting_Container_With_Input_Field form input:read-write,
+  .Setting_Container_With_Input_Field input:read-write,
+  .Setting_Page_Change_Profile_Url_Image_Input_Field:read-write {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 0.75rem;
+  }
+  .Setting_Container_With_Input_Field form button {
+    border-radius: 8px;
+    font-size: 0.7rem;
+    height: 40px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  .Setting_Container_With_Input_Field p,
+  .Setting_Page_Delete_User_Profile_Container p {
+    font-size: 0.75rem;
+    margin-top: 5px;
+  }
+  .Setting_Page_Delete_User_Profile_Container button,
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part button {
+    padding: 0px 10px 0px 10px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .SettingPage_Container {
+    top: 5rem;
+    left: 100px;
+    width: calc(100% - 100px - 30%);
+  }
+  .Setting_Page_Change_Profile_Picture_Container {
+    margin-top: 10px;
+    border-radius: 9px;
+  }
+  .Setting_Page_Change_Profile_Picture_Container h1 {
+    font-size: 0.85rem;
+  }
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part label img {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+  .Setting_Page_Change_Profile_Image_Info {
+    border-radius: 4px;
+  }
+  .Setting_Page_Change_Profile_Image_Upload_Icon {
+    width: 0.55rem;
+    height: 0.55rem;
+  }
+  .Setting_Page_Change_Profile_Image_Info p {
+    font-size: 0.55rem;
+  }
+  .Setting_Page_Change_Profile_Url_Image_Input_Field {
+    border-radius: 7px;
+    height: 38px;
+  }
+
+  .Setting_Page_Change_Profile_Picture_Container_Bottom_Part p {
+    font-family: var(--primary-font-family);
+    font-size: 0.73rem;
+    margin: 0px 1rem 0.8rem 1rem;
+  }
+
+  .Setting_Container_With_Input_Field,
+  .Setting_Page_Delete_User_Profile_Container {
+    width: 90%;
+    margin: 2%;
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .Setting_Container_With_Input_Field h1,
+  .Setting_Page_Delete_User_Profile_Container h1,
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part label h1 {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .Setting_Container_With_Input_Field form input,
+  .Setting_Container_With_Input_Field input {
+    border-radius: 5px;
+    border-width: 0px;
+    height: 38px;
+    margin-bottom: 7px;
+    margin-top: 7px;
+  }
+  .Setting_Container_With_Input_Field form input:read-write,
+  .Setting_Container_With_Input_Field input:read-write,
+  .Setting_Page_Change_Profile_Url_Image_Input_Field:read-write {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 0.73rem;
+  }
+  .Setting_Container_With_Input_Field form button {
+    border-radius: 7.5px;
+    font-size: 0.67rem;
+    height: 38px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+  }
+  .Setting_Container_With_Input_Field p,
+  .Setting_Page_Delete_User_Profile_Container p {
+    font-size: 0.75rem;
+    margin-top: 4px;
+  }
+  .Setting_Page_Delete_User_Profile_Container button,
+  .Setting_Page_Change_Profile_Picture_Container_Top_Part button {
+    padding: 0px 10px 0px 10px;
+    height: 38px;
+    border-radius: 7.5px;
+    font-size: 0.67rem;
+    margin-top: 13px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .SettingPage_Container {
+    top: 5rem;
+    left: 100px;
+    width: calc(100% - 100px - 30%);
+  }
+  .Setting_Page_Change_Profile_Picture_Container {
     margin-top: 10px;
     border-radius: 9px;
   }
@@ -244,8 +413,8 @@
     /* border: 1px solid blue; */
   }
   .Setting_Page_Change_Profile_Picture_Container_Top_Part label img {
-    width: 7rem;
-    height: 7rem;
+    width: 6.5rem;
+    height: 6.5rem;
     border-radius: 50%;
     transition-duration: 200ms;
     cursor: pointer;
@@ -255,7 +424,7 @@
     /* border: 1px solid black; */
     background-color: #464646;
     width: fit-content;
-    border-radius: 5px;
+    border-radius: 4px;
     position: absolute;
     bottom: 0px;
     left: 0px;
@@ -270,12 +439,12 @@
     transform: scale(1.05);
   }
   .Setting_Page_Change_Profile_Image_Upload_Icon {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.55rem;
+    height: 0.55rem;
     color: wheat;
   }
   .Setting_Page_Change_Profile_Image_Info p {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     color: white;
     margin-left: 3px;
   }
@@ -297,7 +466,7 @@
     /* box-shadow: 0px 0px 5px rgb(231, 231, 231); */
     border-color: rgb(180, 180, 180);
     /* border-style: solid; */
-    height: 40px;
+    height: 38px;
     margin-bottom: 10px;
     margin-top: 10px;
     /* border: 1px solid red; */
@@ -305,26 +474,26 @@
 
   .Setting_Page_Change_Profile_Picture_Container_Bottom_Part p {
     font-family: var(--primary-font-family);
-    font-size: 0.75rem;
-    margin: 0px 1rem 1rem 1rem;
+    font-size: 0.73rem;
+    margin: 0px 1rem 0.8rem 1rem;
   }
 
   .Setting_Container_With_Input_Field,
   .Setting_Page_Delete_User_Profile_Container {
-    /* border: 1px solid red; */
     width: 90%;
     /* height: 100px; */
     border-width: 0px;
     border-style: solid;
     border-color: rgb(223, 223, 223);
     margin: 2%;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 14px;
     background-color: var(--primary-color-darker-1);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+    border: 1px solid red;
     /* box-shadow: 0px 0px 10px rgb(204, 204, 204); */
   }
   .Setting_Container_With_Input_Field h1,
@@ -332,7 +501,7 @@
   .Setting_Page_Change_Profile_Picture_Container_Top_Part label h1 {
     font-family: var(--primary-font-family);
     font-size: 0.85rem;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .Setting_Container_With_Input_Field form {
     width: 100%;
@@ -347,9 +516,9 @@
     /* box-shadow: 0px 0px 5px rgb(231, 231, 231); */
     border-color: rgb(180, 180, 180);
     border-style: solid;
-    height: 40px;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    height: 38px;
+    margin-bottom: 7px;
+    margin-top: 7px;
   }
   .Setting_Container_With_Input_Field form input:focus,
   .Setting_Container_With_Input_Field input:focus,
@@ -363,53 +532,42 @@
     padding-left: 8px;
     padding-right: 8px;
     font-family: var(--primary-font-family);
-    font-size: 0.8rem;
+    font-size: 0.73rem;
   }
   .Setting_Container_With_Input_Field form button {
     width: 15%;
-    border-radius: 8px;
+    border-radius: 7.5px;
     border-width: 0px;
     background-color: var(--primary-color);
     color: white;
-    font-size: 0.7rem;
-    height: 40px;
+    font-size: 0.67rem;
+    height: 38px;
     cursor: pointer;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 8px;
+    margin-top: 8px;
     font-family: var(--primary-font-family);
     transition-duration: 100ms;
-  }
-  .Setting_Container_With_Input_Field form button:hover,
-  .Setting_Page_Delete_User_Profile_Container button:hover,
-  .Setting_Page_Change_Profile_Picture_Container_Top_Part button:hover {
-    background-color: var(--primary-color-button-hover-color);
   }
   .Setting_Container_With_Input_Field p,
   .Setting_Page_Delete_User_Profile_Container p {
     font-family: var(--primary-font-family);
     font-size: 0.75rem;
-    margin-top: 5px;
+    margin-top: 4px;
   }
   .Setting_Page_Delete_User_Profile_Container button,
   .Setting_Page_Change_Profile_Picture_Container_Top_Part button {
     padding: 0px 10px 0px 10px;
-    height: 40px;
-    border-radius: 8px;
+    height: 38px;
+    border-radius: 7.5px;
     border-width: 0px;
     background-color: var(--primary-color);
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.67rem;
     cursor: pointer;
     margin-top: 15px;
     font-family: var(--primary-font-family);
     transition-duration: 100ms;
   }
-}
-
-@media screen and (max-width: 1024px) and (min-width: 768px) {
-}
-
-@media screen and (max-width: 768px) and (min-width: 480px) {
 }
 
 @media screen and (max-width: 480px) and (min-width: 320px) {
