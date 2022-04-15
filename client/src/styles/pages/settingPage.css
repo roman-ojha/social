@@ -295,7 +295,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+@media screen and (max-width: 1024px) {
   .SettingPage_Container {
     top: 5rem;
     left: 100px;
@@ -383,11 +383,32 @@
   }
 }
 
-@media screen and (max-width: 768px) and (min-width: 480px) {
+@media screen and (max-width: 850px) {
+  .SettingPage_Container {
+    width: calc(100% - 100px);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .SettingPage_Container {
+    width: calc(100% - 90px);
+    left: 90px;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .SettingPage_Container {
     top: 5rem;
-    left: 100px;
-    width: calc(100% - 100px - 30%);
+    left: 60px;
+    width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .SettingPage_Container {
+    top: 5rem;
+    left: 60px;
+    width: calc(100% - 60px);
   }
   .Setting_Page_Change_Profile_Picture_Container {
     margin-top: 10px;
@@ -568,9 +589,6 @@
     font-family: var(--primary-font-family);
     transition-duration: 100ms;
   }
-}
-
-@media screen and (max-width: 480px) and (min-width: 320px) {
 }
 
 @media screen and (max-width: 320px) and (min-width: 280px) {
