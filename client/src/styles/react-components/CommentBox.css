@@ -130,7 +130,7 @@
   max-width: 30rem;
 }
 
-@media screen and (max-width: 1360px) and (min-width: 1200px) {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   .CommentBox_RootUser_Post_Field_Container {
     height: 2.7rem;
   }

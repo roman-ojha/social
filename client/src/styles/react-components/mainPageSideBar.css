@@ -355,7 +355,7 @@
   height: 1.5rem;
 }
 
-@media screen and (max-width: 1360px) and (min-width: 1200px) {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   /* .MainPage_SideBar_Logo_Search_Container {
     height: 12%;
   } */

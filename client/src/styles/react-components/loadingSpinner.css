@@ -36,7 +36,7 @@
   }
 }
 
-@media screen and (max-width: 1360px) and (min-width: 1200px) {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   .HomePage_Post_Field_Response_Loading_Spinner {
     width: 3.1rem;
     height: 3.1rem;
