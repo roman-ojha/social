@@ -6,7 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(20, 12, 20, 0.219);
+  background-color: #4a374694;
 }
 .GetUserIDPage_Form_Container {
   width: 30%;
@@ -87,4 +87,174 @@
 }
 .GetUserIDPage_Form_Submit_Button:hover {
   background-color: var(--primary-color-button-hover-color);
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .GetUserIDPage_Form_Container {
+    border-radius: 13px;
+    width: 40%;
+  }
+  .GetUserIDPage_Form_Title {
+    font-size: 1.5rem;
+  }
+  .GetUserIDPage_Form_Explained_Paragraph {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Name_Form_Field {
+    height: 1.9rem;
+    border-width: 1px;
+  }
+  .GetUserIDPage_Name_Form_Field:read-write {
+    font-size: 0.8rem;
+  }
+  .GetUserIDPage_Form_Udate_Profile_Text {
+    font-size: 0.8rem;
+  }
+  .GetUserIDPage_Form_Profile {
+    width: 7rem;
+    height: 7rem;
+  }
+  .GetUserIDPage_Form_Submit_Button {
+    padding: 5px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .GetUserIDPage_Form_Container {
+    width: 55%;
+    border-radius: 12px;
+  }
+  .GetUserIDPage_Form_Title {
+    font-size: 1.4rem;
+  }
+  .GetUserIDPage_Form_Explained_Paragraph {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Name_Form_Field {
+    height: 1.9rem;
+    border-width: 1px;
+    border-radius: 6px;
+  }
+  .GetUserIDPage_Name_Form_Field:read-write {
+    font-size: 0.8rem;
+  }
+  .GetUserIDPage_Form_Udate_Profile_Text {
+    font-size: 0.8rem;
+  }
+  .GetUserIDPage_Form_Profile {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+  .GetUserIDPage_Form_Submit_Button {
+    padding: 5px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .GetUserIDPage_Form_Container {
+    width: 70%;
+    border-radius: 10px;
+  }
+  .GetUserIDPage_Form_Title {
+    font-size: 1.3rem;
+  }
+  .GetUserIDPage_Form_Explained_Paragraph {
+    font-size: 0.6rem;
+  }
+  .GetUserIDPage_Name_Form_Field {
+    height: 1.8rem;
+    border-width: 1px;
+  }
+  .GetUserIDPage_Name_Form_Field:read-write {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Form_Udate_Profile_Text {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Form_Profile {
+    width: 6rem;
+    height: 6rem;
+  }
+  .GetUserIDPage_Form_Submit_Button {
+    padding: 5px 20px;
+    font-size: 0.9rem;
+    border-radius: 7px;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  .GetUserIDPage_Form_Container {
+    width: 80%;
+    border-radius: 10px;
+  }
+  .GetUserIDPage_Form_Title {
+    font-size: 1.2rem;
+    margin-top: 5%;
+  }
+  .GetUserIDPage_Form_Explained_Paragraph {
+    width: 80%;
+    font-size: 0.6rem;
+    margin: 1%;
+  }
+  .GetUserIDPage_Name_Form_Field {
+    height: 1.7rem;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+  .GetUserIDPage_Name_Form_Field:read-write {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Form_Udate_Profile_Text {
+    font-size: 0.7rem;
+  }
+  .GetUserIDPage_Form_Profile {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+  .GetUserIDPage_Form_Submit_Button {
+    border-width: 0px;
+    padding: 5px 20px;
+    font-size: 0.8rem;
+    border-radius: 7px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .GetUserIDPage_Form_Container {
+    width: 90%;
+    border-radius: 7px;
+  }
+  .GetUserIDPage_Form_Title {
+    font-size: 1.1rem;
+    margin-top: 5%;
+  }
+  .GetUserIDPage_Form_Explained_Paragraph {
+    width: 80%;
+    font-size: 0.6rem;
+  }
+  .GetUserIDPage_Name_Form_Field {
+    height: 1.6rem;
+    border-width: 1px;
+    border-radius: 5px;
+  }
+  .GetUserIDPage_Name_Form_Field:read-write {
+    font-size: 0.6rem;
+  }
+  .GetUserIDPage_Form_Udate_Profile_Text {
+    font-size: 0.6rem;
+  }
+  .GetUserIDPage_Form_Profile {
+    width: 5rem;
+    height: 5rem;
+  }
+  .GetUserIDPage_Form_Submit_Button {
+    border-width: 0px;
+    padding: 5px 15px;
+    font-size: 0.7rem;
+    border-radius: 5px;
+  }
 }
