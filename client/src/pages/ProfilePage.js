@@ -315,15 +315,19 @@ const ProfilePage = () => {
                   <h1>{profilePageData.name}</h1>
                   <p>{profilePageData.userID}</p>
                 </div>
-                <div
-                  className="ProfilePage_UserInfo_Message_Icon_Container"
-                  onClick={showInnerMessage}
-                >
-                  <Icon
-                    className="ProfilePage_UserInfo_Message_Icon"
-                    icon="ant-design:message-filled"
-                  />
-                </div>
+                {profilePageData.userID === userProfileDetailStore.userID ? (
+                  <></>
+                ) : (
+                  <div
+                    className="ProfilePage_UserInfo_Message_Icon_Container"
+                    onClick={showInnerMessage}
+                  >
+                    <Icon
+                      className="ProfilePage_UserInfo_Message_Icon"
+                      icon="ant-design:message-filled"
+                    />
+                  </div>
+                )}
               </div>
               <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
                 <p>{profilePageData.followersNo} Followers</p>
