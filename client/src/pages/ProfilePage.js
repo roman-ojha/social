@@ -369,10 +369,7 @@ const ProfilePage = () => {
                 history.push(`/u/profile/${profilePageData.userID}`);
               }}
             >
-              <span
-                className="ProfilePage_UserContent_Icon iconify"
-                data-icon="gg:feed"
-              ></span>
+              <Icon className="ProfilePage_UserContent_Icon" icon="gg:feed" />
             </div>
             <div
               className="ProfilePage_UserContent_Picture_Route_Container ProfilePage_Route"
@@ -380,10 +377,10 @@ const ProfilePage = () => {
                 history.push(`/u/profile/${profilePageData.userID}/albums`);
               }}
             >
-              <span
-                className="ProfilePage_UserContent_Icon iconify"
-                data-icon="akar-icons:image"
-              ></span>
+              <Icon
+                className="ProfilePage_UserContent_Icon"
+                icon="akar-icons:image"
+              />
             </div>
             <div
               className="ProfilePage_UserContent_Friends_Route_Container ProfilePage_Route"
@@ -391,10 +388,10 @@ const ProfilePage = () => {
                 history.push(`/u/profile/${profilePageData.userID}/friends`);
               }}
             >
-              <span
+              <Icon
                 className="ProfilePage_UserContent_Icon iconify"
-                data-icon="fa-solid:user-friends"
-              ></span>
+                icon="fa-solid:user-friends"
+              />
             </div>
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
