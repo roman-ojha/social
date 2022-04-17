@@ -7,14 +7,14 @@
   display: flex;
   height: calc(100vh - 5rem);
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .MessagePage_Container .MainPage_MessageBox_Container {
   position: relative;
   top: 5px;
   width: 97%;
-  height: 96%;
+  height: 97%;
   animation-name: none;
 }
 
@@ -95,9 +95,9 @@
 
   .MessagePage_Container .MainPage_MessageBox_Container {
     border-radius: 5px;
-    top: 0px;
+    top: 5px;
     width: 97%;
-    height: 97%;
+    height: 90%;
   }
   .MessagePage_Container .MessageBox_InnerMessage_Container {
     border-radius: 5px;
@@ -114,10 +114,6 @@
 
   .MessagePage_Container .MainPage_MessageBox_Title_Container h4 {
     font-size: 0.95rem;
-  }
-
-  .MessagePage_Container .MainPage_MessageBox_Message_Container {
-    max-height: calc(100% - 3rem);
   }
 
   .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
@@ -179,29 +175,20 @@
     width: calc(100vw - 40px);
     left: 40px;
     top: 3.3rem;
-    display: flex;
     height: calc(100vh - 3.3rem);
-    justify-content: center;
-    align-items: center;
   }
 
   .MessagePage_Container .MainPage_MessageBox_Container {
     border-radius: 5px;
-    position: relative;
-    top: 0px;
+    top: 5px;
     width: 97%;
-    height: 97%;
-    animation-name: none;
+    height: 90%;
   }
   .MessagePage_Container .MainPage_MessageBox_Title_Container h4 {
     font-size: 0.9rem;
   }
   .MessagePage_Container .MessageBox_InnerMessage_Container {
     border-radius: 5px;
-  }
-
-  .MessagePage_Container .MainPage_MessageBox_Message_Container {
-    max-height: calc(100% - 3rem);
   }
 
   .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
