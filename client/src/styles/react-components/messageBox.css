@@ -16,7 +16,7 @@
   background-color: white;
   margin-bottom: 1%;
   border-radius: 10px;
-  animation-name: animate-message-box;
+  /* animation-name: animate-message-box; */
   animation-duration: 200ms;
 }
 .MainPage_Scrollable_MessageBox_Container {

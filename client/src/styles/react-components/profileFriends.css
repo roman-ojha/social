@@ -49,3 +49,79 @@
   font-size: 0.8rem;
   color: white;
 }
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .ProfilePage_Friends_Container {
+    margin-top: 20px;
+    border-radius: 10px;
+  }
+  .ProfilePage_Friend_Name {
+    width: 55%;
+    font-size: 0.9rem;
+  }
+  .ProfilePage_Friend_Active_Status {
+    border-radius: 7px;
+  }
+
+  .ProfilePage_Friend_Active_Status p {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .ProfilePage_Friends_Container {
+    margin-top: 15px;
+    border-radius: 10px;
+  }
+  .ProfilePage_Friend_Outline {
+    height: 2.8rem;
+  }
+  .ProfilePage_Friend_Image {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0rem 0.5rem;
+  }
+  .ProfilePage_Friend_Name {
+    font-weight: 600;
+    width: 55%;
+    font-size: 0.8rem;
+  }
+  .ProfilePage_Friend_Active_Status {
+    margin: 0.5rem;
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .ProfilePage_Friend_Active_Status p {
+    color: white;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .ProfilePage_Friends_Container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  .ProfilePage_Friend_Outline {
+    height: 2rem;
+  }
+  .ProfilePage_Friend_Image {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0rem 0.5rem;
+  }
+  .ProfilePage_Friend_Name {
+    width: 55%;
+    font-size: 0.6rem;
+  }
+  .ProfilePage_Friend_Active_Status {
+    margin: 0.5rem;
+    border-radius: 5px;
+    padding: 0.1rem 0.3rem;
+  }
+
+  .ProfilePage_Friend_Active_Status p {
+    font-size: 0.4rem;
+  }
+}
