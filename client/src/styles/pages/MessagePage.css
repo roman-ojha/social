@@ -1,7 +1,7 @@
 .MessagePage_Container {
   width: 50.5%;
   /* border: 1px solid red; */
-  position: relative;
+  position: fixed;
   left: 20%;
   top: 5rem;
   display: flex;
@@ -29,4 +29,161 @@
 .MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {
   width: 2.5rem;
   height: 2.5rem;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  .MessagePage_Container {
+    width: 55.5%;
+    left: 15%;
+    height: calc(100vh - 5rem);
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .MessagePage_Container {
+    width: calc(100% - 100px - 29.5%);
+    left: 100px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .MessagePage_Container {
+    width: calc(100% - 100px);
+    left: 100px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .MessagePage_Container {
+    width: calc(100% - 90px);
+    left: 90px;
+  }
+  .MessagePage_Container .MainPage_MessageBox_Container {
+    top: 0px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .MessagePage_Container {
+    width: calc(100% - 60px);
+    left: 60px;
+    top: 5rem;
+    height: calc(100vh - 5rem);
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_Container {
+    top: 0px;
+  }
+
+  .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
+    height: 2.5rem;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .MessagePage_Container {
+    width: calc(100vw - 41px);
+    left: 45px;
+    top: 4rem;
+    height: calc(100vh - 4rem);
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_Container {
+    border-radius: 5px;
+    top: 0px;
+    width: 97%;
+    height: 97%;
+  }
+  .MessagePage_Container .MessageBox_InnerMessage_Container {
+    border-radius: 5px;
+  }
+
+  .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
+    height: 2.5rem;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+}
+
+@media screen and (max-width: 320px) and (min-width: 280px) {
+  .MessagePage_Container {
+    width: calc(100vw - 40px);
+    left: 40px;
+    top: 3.3rem;
+    display: flex;
+    height: calc(100vh - 3.3rem);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_Container {
+    border-radius: 5px;
+    position: relative;
+    top: 0px;
+    width: 97%;
+    height: 97%;
+    animation-name: none;
+  }
+  .MessagePage_Container .MainPage_MessageBox_Title_Container h4 {
+    font-size: 0.9rem;
+  }
+  .MessagePage_Container .MessageBox_InnerMessage_Container {
+    border-radius: 5px;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_Message_Container {
+    max-height: calc(100% - 3rem);
+  }
+
+  .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
+    height: 2.5rem;
+    border-radius: 5px;
+  }
+
+  .MessagePage_Container
+    .MainPage_MessageBox_UserMessage_Name_Message_Container
+    h4 {
+    font-size: 0.8rem;
+  }
+
+  .MessagePage_Container
+    .MainPage_MessageBox_UserMessage_Name_Message_Container
+    p {
+    font-size: 0.6rem;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .MessagePage_Container .MessageBox_InnerMessage_Upper_Part_Container h3 {
+    font-size: 0.8rem;
+  }
+
+  .MessagePage_Container .MessageBox_InnerMessage_Message_Container {
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .MessagePage_Container .MessageBox_LowerPart_InputField_Container {
+    border-radius: 0px 0px 5px 5px;
+  }
+  .MessagePage_Container
+    .MessageBox_LowerPart_InputField_Inner_Container
+    input {
+    border: 1px solid red;
+    width: 50%;
+  }
+  .MessagePage_Container .MessageBox_LowerPart_InputField_Buttons {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
 }

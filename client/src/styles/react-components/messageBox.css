@@ -174,7 +174,7 @@
   /* border: 1px solid red; */
   display: flex;
   align-items: center;
-  border-radius: 10px 10px 10px 10px;
+  border-radius: 10px;
   margin: 0px 0.3rem 0px 0.3rem;
   padding: 0.2rem 0px 0.1rem 0px;
 }
@@ -305,4 +305,6 @@
 .MessageBox_LowerPart_InputField_Buttons {
   color: rgb(108, 91, 109);
   cursor: pointer;
+  width: 1.5rem;
+  height: 1.5rem;
 }

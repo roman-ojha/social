@@ -18,6 +18,7 @@ import {
 import { instance as axios } from "../services/axios";
 import "../styles/react-components/messageBox.css";
 import "../styles/pages/MessagePage.css";
+import { Icon } from "@iconify/react";
 
 const MessageBox = () => {
   const dispatch = useDispatch();
@@ -296,9 +297,9 @@ const MessageBox = () => {
           </div>
           <div className="MessageBox_LowerPart_InputField_Container">
             <div className="MessageBox_LowerPart_InputField_Inner_Container">
-              <EmojiEmotionsIcon
+              <Icon
                 className="MessageBox_LowerPart_InputField_Buttons"
-                style={{ width: "1.5rem", height: "1.5rem" }}
+                icon="entypo:emoji-happy"
               />
               <input
                 type="text"
@@ -315,13 +316,13 @@ const MessageBox = () => {
                   window.addEventListener("keydown", eventOnPressEnter);
                 }}
               />
-              <PhotoLibraryIcon
+              <Icon
                 className="MessageBox_LowerPart_InputField_Buttons"
-                style={{ width: "1.5rem", height: "1.5rem" }}
+                icon="akar-icons:image"
               />
-              <SendIcon
+              <Icon
+                icon="akar-icons:send"
                 className="MessageBox_LowerPart_InputField_Buttons"
-                style={{ width: "1.5rem", height: "1.5rem" }}
                 onClick={sendMessage}
               />
             </div>
