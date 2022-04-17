@@ -1,18 +1,20 @@
 .MessagePage_Container {
-  width: 50%;
+  width: 50.5%;
   /* border: 1px solid red; */
   position: relative;
   left: 20%;
   top: 5rem;
   display: flex;
-  height: calc(100vh - 16vh);
+  height: calc(100vh - 5rem);
   justify-content: center;
   align-items: center;
 }
 
 .MessagePage_Container .MainPage_MessageBox_Container {
-  width: 95%;
-  height: 95%;
+  position: relative;
+  top: 5px;
+  width: 97%;
+  height: 96%;
   animation-name: none;
 }
 
@@ -21,7 +23,7 @@
 }
 
 .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
-  height: 3rem;
+  height: 2.8rem;
 }
 
 .MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {

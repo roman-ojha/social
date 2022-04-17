@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink, useLocation } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
@@ -22,9 +21,6 @@ import "../styles/pages/MessagePage.css";
 
 const MessageBox = () => {
   const dispatch = useDispatch();
-  const mainPageMessageOnOffState = useSelector(
-    (state) => state.changeMainPageMessageView
-  );
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
   );
@@ -37,7 +33,6 @@ const MessageBox = () => {
   const messageList = useSelector((state) => state.messageListReducer);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
-  const location = useLocation();
 
   const UserMessage = (props) => {
     const showInnerMessage = async () => {
@@ -131,41 +126,6 @@ const MessageBox = () => {
             />
           </div>
           <div className="MainPage_MessageBox_Message_Container">
-            {/* displaying all current user message */}
-
-            {messageList.map((messageInfo) => {
-              if (messageInfo.message.length !== 0) {
-                return (
-                  <UserMessage
-                    messageInfo={messageInfo}
-                    key={messageInfo._id}
-                  />
-                );
-              }
-            })}
-
-            {messageList.map((messageInfo) => {
-              if (messageInfo.message.length !== 0) {
-                return (
-                  <UserMessage
-                    messageInfo={messageInfo}
-                    key={messageInfo._id}
-                  />
-                );
-              }
-            })}
-
-            {messageList.map((messageInfo) => {
-              if (messageInfo.message.length !== 0) {
-                return (
-                  <UserMessage
-                    messageInfo={messageInfo}
-                    key={messageInfo._id}
-                  />
-                );
-              }
-            })}
-
             {messageList.map((messageInfo) => {
               if (messageInfo.message.length !== 0) {
                 return (
@@ -258,10 +218,6 @@ const MessageBox = () => {
       borderRadius: "50%",
       animation: "loadingSpinner 1s linear infinite",
     };
-    const appendMessage = (data) => {
-      // dispatch(appendOnCurrentUserMessage(data));
-      // channel.unbind(null, func);
-    };
     const sendMessage = async () => {
       // sending message to user
       try {
@@ -349,7 +305,6 @@ const MessageBox = () => {
                 value={userMessageField}
                 autoFocus
                 onChange={(e) => {
-                  // dispatch(userMessageFieldAction(e.target.value));
                   setUserMessageField(e.target.value);
                   const eventOnPressEnter = (e) => {
                     if (e.key === "Enter") {
