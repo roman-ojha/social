@@ -319,7 +319,7 @@
 }
 
 .Close_SideBar_Drawer .MainPage_SideBar_Container {
-  animation-name: slide_SideBar_On_Close;
+  /* animation-name: slide_SideBar_On_Close; */
   animation-duration: 200ms;
   animation-timing-function: ease-in;
   transition: width 200ms, background-color 500ms;

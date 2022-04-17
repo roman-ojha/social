@@ -1,10 +1,7 @@
 import React from "react";
 import more_icon from "../Images/more_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  mainPageMessageViewOnOff,
-  progressBarAction,
-} from "../redux-actions/index";
+import { mainPageMessageViewOnOff } from "../redux-actions/index";
 import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
@@ -20,7 +17,6 @@ const MainPageMsgAndNtfBar = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">

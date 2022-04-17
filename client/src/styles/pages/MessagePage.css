@@ -1,20 +1,30 @@
 .MessagePage_Container {
-  width: 49.5%;
+  width: 50%;
   /* border: 1px solid red; */
   position: relative;
-  left: 20.5%;
-  top: 15vh;
+  left: 20%;
+  top: 5rem;
   display: flex;
+  height: calc(100vh - 16vh);
+  justify-content: center;
+  align-items: center;
 }
 
-.MessagePage_List_Of_Message_Container {
-  width: 45%;
-  height: calc(100vh - 16vh);
-  /* border: 1px solid red; */
-  margin-right: 10px;
+.MessagePage_Container .MainPage_MessageBox_Container {
+  width: 95%;
+  height: 95%;
+  animation-name: none;
 }
-.MessagePage_Single_User_Message_Container {
-  width: 55%;
-  height: calc(100vh - 16vh);
-  /* border: 1px solid blue; */
+
+.MessagePage_Container .MainPage_MessageBox_Message_Container {
+  max-height: calc(100% - 3rem);
+}
+
+.MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
+  height: 3rem;
+}
+
+.MessagePage_Container .MainPage_MessageBox_UserMessage_Picutre {
+  width: 2.5rem;
+  height: 2.5rem;
 }
