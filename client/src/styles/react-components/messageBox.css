@@ -267,6 +267,7 @@
 .MessageBox_Inner_SingleMessage p {
   font-family: var(--primary-font-family);
   font-size: 0.75rem;
+  padding: 2px;
 }
 .MessageBox_LowerPart_InputField_Container {
   /* border: 1px solid red; */

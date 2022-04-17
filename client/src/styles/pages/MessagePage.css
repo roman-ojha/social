@@ -111,9 +111,70 @@
     width: 2.3rem;
     height: 2.3rem;
   }
+
+  .MessagePage_Container .MainPage_MessageBox_Title_Container h4 {
+    font-size: 0.95rem;
+  }
+
+  .MessagePage_Container .MainPage_MessageBox_Message_Container {
+    max-height: calc(100% - 3rem);
+  }
+
+  .MessagePage_Container .MaiPage_MessageBox_UserMessage_Container {
+    height: 2.5rem;
+    border-radius: 8px;
+  }
+
+  .MessagePage_Container
+    .MainPage_MessageBox_UserMessage_Name_Message_Container
+    h4 {
+    font-size: 0.85rem;
+  }
+
+  .MessagePage_Container
+    .MainPage_MessageBox_UserMessage_Name_Message_Container
+    p {
+    font-size: 0.65rem;
+  }
+
+  .MessagePage_Container .MessageBox_InnerMessage_Upper_Part_Container h3 {
+    font-size: 0.85rem;
+  }
+
+  .MessagePage_Container .MessageBox_InnerMessage_Message_Container {
+    border-radius: 7px 7px 0px 0px;
+  }
+
+  .MessagePage_Container .MessageBox_LowerPart_InputField_Container {
+    border-radius: 0px 0px 7px 7px;
+  }
+  .MessagePage_Container
+    .MessageBox_LowerPart_InputField_Inner_Container
+    input {
+    width: 55%;
+  }
+
+  .MessagePage_Container
+    .MessageBox_LowerPart_InputField_Inner_Container
+    input:read-write {
+    font-size: 0.85rem;
+  }
+
+  .MessagePage_Container .MessageBox_Inner_SingleMessage {
+    border-radius: 5px;
+  }
+
+  .MessagePage_Container .MessageBox_Inner_SingleMessage p {
+    font-size: 0.75rem;
+  }
+
+  .MessagePage_Container .MessageBox_LowerPart_InputField_Buttons {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
 }
 
-@media screen and (max-width: 320px) and (min-width: 280px) {
+@media screen and (max-width: 320px) {
   .MessagePage_Container {
     width: calc(100vw - 40px);
     left: 40px;
@@ -179,9 +240,23 @@
   .MessagePage_Container
     .MessageBox_LowerPart_InputField_Inner_Container
     input {
-    border: 1px solid red;
     width: 50%;
   }
+
+  .MessagePage_Container
+    .MessageBox_LowerPart_InputField_Inner_Container
+    input:read-write {
+    font-size: 0.8rem;
+  }
+
+  .MessagePage_Container .MessageBox_Inner_SingleMessage {
+    border-radius: 3px;
+  }
+
+  .MessagePage_Container .MessageBox_Inner_SingleMessage p {
+    font-size: 0.7rem;
+  }
+
   .MessagePage_Container .MessageBox_LowerPart_InputField_Buttons {
     width: 1.3rem;
     height: 1.3rem;
