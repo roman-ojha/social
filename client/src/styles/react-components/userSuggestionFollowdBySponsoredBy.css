@@ -1,18 +1,12 @@
 /* Designing Main Page rignt side component ---------------------------------*/
 /* Suggestion User Design and Followed By */
-.MainPage_Rignt_Side_Component_Container {
-  width: 28.5%;
-  height: 96%;
-  /* border: 1px solid red; */
-  position: fixed;
-  top: 14%;
-  left: 70.5%;
-}
+
 .MainPage_UserSuggession_Container {
   background-color: white;
   border-radius: 10px;
   height: 40%;
   /* transition-duration: 500ms; */
+  /* border: 1px solid blue; */
 }
 
 .MainPage_UserSuggession_Container_MinView {
@@ -327,11 +321,5 @@
   }
   .MainPage_Sponsored_genre {
     font-size: 0.6rem;
-  }
-}
-@media screen and (max-width: 850px) {
-  .MainPage_Rignt_Side_Component_Container {
-    visibility: hidden;
-    position: absolute;
   }
 }

@@ -1,14 +1,13 @@
 /* Designing Main Page Message and Notification Bar----------------- */
 .MainPage_Message_and_Notification_Bar_Container {
-  width: 30%;
-  /* border: 1px solid red; */
-  height: 14%;
-  position: fixed;
-  left: 70%;
-  top: 0px;
+  width: 100%;
+  /* border: 1px solid green; */
+  height: 15%;
+  /* position: fixed; */
   display: flex;
   align-items: center;
   justify-content: space-around;
+  /* background-color: white; */
 }
 .MainPage_Message_and_Notification_Bar_Container div,
 .MainPage_Message_Bar_Message_Outline {
@@ -52,23 +51,23 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 1300px) and (min-width: 1150px) {
-  .MainPage_Message_and_Notification_Bar_Container {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
+  /* .MainPage_Message_and_Notification_Bar_Container {
     width: 30%;
     height: 5.5rem;
-  }
+  } */
 }
-@media screen and (max-width: 1150px) and (min-width: 1000px) {
-  .MainPage_Message_and_Notification_Bar_Container {
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  /* .MainPage_Message_and_Notification_Bar_Container {
     width: 30%;
     height: 5rem;
-  }
+  } */
 }
-@media screen and (max-width: 1000px) {
-  .MainPage_Message_and_Notification_Bar_Container {
+@media screen and (max-width: 1024px) {
+  /* .MainPage_Message_and_Notification_Bar_Container {
     width: 30%;
     height: 5rem;
-  }
+  } */
   .MainPage_Message_and_Notification_Bar_Container div:hover {
     background-color: rgba(214, 214, 214, 0.836);
   }
@@ -91,11 +90,11 @@
   }
 }
 @media screen and (max-width: 950px) {
-  .MainPage_Message_and_Notification_Bar_Container {
+  /* .MainPage_Message_and_Notification_Bar_Container {
     width: 30%;
     height: 5rem;
     justify-content: space-evenly;
-  }
+  } */
   .MainPage_Message_and_Notification_Bar_Container div:hover {
     background-color: rgba(214, 214, 214, 0.836);
   }
@@ -117,9 +116,17 @@
     width: 2.1rem;
   }
 }
+
 @media screen and (max-width: 850px) {
-  .MainPage_Message_and_Notification_Bar_Container {
-    visibility: hidden;
-    position: absolute;
+  .Close_RightPart_Drawer .MainPage_Message_and_Notification_Bar_Container {
+    width: 0%;
+  }
+  .Open_RightPart_Drawer .MainPage_Message_and_Notification_Bar_Container {
+    background-color: white;
+    height: 14%;
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 5px;
+    width: 100%;
   }
 }

@@ -5,4 +5,21 @@
   z-index: 3;
   background-color: #4a374656;
   transition-duration: 300ms;
+  top: 0px;
+}
+
+.MainPage_Rignt_Side_Component_Container {
+  width: 28.5%;
+  height: 96%;
+  /* border: 1px solid red; */
+  position: fixed;
+  top: 0px;
+  left: 70.5%;
+}
+
+@media screen and (max-width: 850px) {
+  .Close_RightPart_Drawer .MainPage_Rignt_Side_Component_Container {
+    display: none;
+    width: 0px;
+  }
 }

@@ -5,7 +5,9 @@ import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
 import { openRightPartDrawer } from "../redux-actions";
+import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/react-components/mainPageRightSideComp.css";
+// import "../styles/react-components/mainPageMsgAndNtfBar.css";
 
 const MainPageRightSideComp = () => {
   const dispatch = useDispatch();
@@ -63,7 +65,8 @@ const MainPageRightSideComp = () => {
   return (
     <>
       <div className="RightPart_Drawer_Container Close_RightPart_Drawer">
-        <div className="MainPage_Rignt_Side_Component_Container">
+        <div className="MainPage_Rignt_Side_Component_Container ">
+          <MainPageMsgAndNtfBar />
           <MessageBox />
           <UserSuggestion />
           <FollowedBy />
