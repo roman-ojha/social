@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
+import OpenRightPartDrawerButton from "../react-components/OpenRightPartDrawerButton";
 
 const HomePage = () => {
   const history = useHistory();
@@ -308,6 +309,7 @@ const HomePage = () => {
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
       <div className="HomePage_Container">
         <OpenSideBarDrawerButton />
+        <OpenRightPartDrawerButton />
         <div className="HomePage_User_Post_Field_Container">
           <SelectUserPostFieldView />
         </div>
