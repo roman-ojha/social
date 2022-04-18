@@ -1,0 +1,8 @@
+.Open_RightPart_Drawer {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  z-index: 3;
+  background-color: #4a374656;
+  transition-duration: 300ms;
+}
