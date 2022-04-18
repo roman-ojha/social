@@ -1,19 +1,26 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import constant from "../constant/constant";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/react-components/rightPartDrawerOpenButton.css";
+import { openRightPartDrawer } from "../redux-actions";
 
 const OpenRightPartDrawerButton = () => {
   const dispatch = useDispatch();
-  const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
+  const rightPartDrawerState = useSelector(
+    (state) => state.rightPartDrawerReducer
+  );
   return (
     <>
       {useMediaQuery({
         query: "(max-width:850px)",
-      }) && sideBarDrawerState === false ? (
-        <div className="RightPart_Drawer_Open_Icons">
+      }) && rightPartDrawerState === false ? (
+        <div
+          className="RightPart_Drawer_Open_Icons"
+          onClick={() => {
+            dispatch(openRightPartDrawer(true));
+          }}
+        >
           <Icon
             icon="ic:outline-navigate-next"
             className="RightPart_Drawer_Open_1st_Icon"

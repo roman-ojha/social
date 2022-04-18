@@ -186,3 +186,10 @@ export const openSideBarDrawer = (data) => {
     payload: data,
   };
 };
+
+export const openRightPartDrawer = (bool) => {
+  return {
+    type: "openRightPartDrawer",
+    bool,
+  };
+};
