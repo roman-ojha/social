@@ -1,9 +1,9 @@
 import express from "express";
 import userDetail from "../models/userDetail_model.js";
 import authenticate from "../middleware/authenticate.js";
-const router = express.Router();
+const postRoute = express.Router();
 
-router.post("/post/like", authenticate, async (req, res) => {
+postRoute.post("/post/like", authenticate, async (req, res) => {
   try {
     const { postID, to } = req.body;
     if (!postID || !to) {
@@ -122,7 +122,7 @@ router.post("/post/like", authenticate, async (req, res) => {
   }
 });
 
-router.post("/post/comment", authenticate, async (req, res) => {
+postRoute.post("/post/comment", authenticate, async (req, res) => {
   try {
     const { comment, postID, to } = req.body;
     if (!comment) {
@@ -177,4 +177,4 @@ router.post("/post/comment", authenticate, async (req, res) => {
   }
 });
 
-export default router;
+export default postRoute;
