@@ -1,8 +1,6 @@
 import express from "express";
 import userDetail from "../models/userDetail_model.js";
-import bcrypt from "bcryptjs";
 import authenticate from "../middleware/authenticate.js";
-import crypto from "crypto";
 const router = express.Router();
 
 router.post("/u/search", async (req, res) => {
