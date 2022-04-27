@@ -44,7 +44,7 @@ const SignInPage = () => {
       });
       const data = await res.data;
       dispatch(stopProgressBar());
-      console.log(res.status);
+      // console.log(res.status);
       if (res.status !== 200) {
         // console.log(data);
         setSignInDetail({
