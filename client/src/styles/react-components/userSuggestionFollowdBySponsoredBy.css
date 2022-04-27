@@ -259,7 +259,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1024px) and (min-width: 850px) {
   .MainPage_Rignt_Side_Component_Container {
     width: 29%;
     top: 13%;

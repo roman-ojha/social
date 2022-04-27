@@ -44,7 +44,6 @@ const MainPageRightSideComp = () => {
   });
 
   useEffect(() => {
-    console.log(rightPartDrawerState);
     if (rightPartDrawerState) {
       document
         .getElementsByClassName("RightPart_Drawer_Container")[0]
