@@ -177,4 +177,39 @@ userRoute.get("/u", authenticate, (req, res) => {
   }
 });
 
+userRoute.get("/u/profile/:userid", authenticate, async (req, res) => {
+  try {
+    const rootUser = req.rootUser;
+    const userID = req.params.userid;
+    const searchedUser = await userDetail.findOne({ userID: userID });
+    if (!searchedUser) {
+      return res
+        .status(401)
+        .json({ success: false, err: "User doesn't exist" });
+    } else {
+      const isRootUserFollowed = await userDetail.findOne({
+        userID: rootUser.userID,
+        following: {
+          $elemMatch: {
+            userID: userID,
+          },
+        },
+      });
+      if (!isRootUserFollowed) {
+        return res
+          .status(200)
+          .json({ success: true, searchedUser, isRootUserFollowed: false });
+      } else {
+        return res
+          .status(200)
+          .json({ success: true, searchedUser, isRootUserFollowed: true });
+      }
+    }
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, err: "Server Error!!, Please Try again letter" });
+  }
+});
+
 export default userRoute;
