@@ -6,6 +6,7 @@ import router from "../router/route.js";
 import userRoute from "../router/user.js";
 import userAuthRoute from "../router/userAuth.js";
 import messageRoute from "../router/message.js";
+import settingRoute from "../router/setting.js";
 import storageRouter from "../router/storageRoute.js";
 import google_OAuth_route from "../router/google_OAuth_route.js";
 import cors from "cors";
@@ -28,6 +29,7 @@ app.use(router);
 app.use(userRoute);
 app.use(userAuthRoute);
 app.use(messageRoute);
+app.use(settingRoute);
 app.use(storageRouter);
 import "../socket/io.js";
 
