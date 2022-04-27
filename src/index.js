@@ -3,6 +3,7 @@ dotenv.config();
 import express from "express";
 import cookieParser from "cookie-parser";
 import router from "../router/route.js";
+import userRoute from "../router/user.js";
 import storageRouter from "../router/storageRoute.js";
 import google_OAuth_route from "../router/google_OAuth_route.js";
 import cors from "cors";
@@ -22,6 +23,7 @@ import("../db/userStorageConnection.js");
 
 // Connection router
 app.use(router);
+app.use(userRoute);
 app.use(storageRouter);
 import "../socket/io.js";
 
