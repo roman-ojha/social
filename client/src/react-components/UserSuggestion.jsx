@@ -5,7 +5,11 @@ import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import { instance as axios } from "../services/axios";
 import { useState } from "react";
-import { startProgressBar, stopProgressBar } from "../redux-actions";
+import {
+  startProgressBar,
+  stopProgressBar,
+  followOrOnFollowSuggestedUser,
+} from "../redux-actions";
 
 const UserSuggestion = () => {
   const history = useHistory();
@@ -18,7 +22,7 @@ const UserSuggestion = () => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
         try {
-          // dispatch(startProgressBar());
+          dispatch(startProgressBar());
           const followedTo = {
             email: props.userInformation.email,
             userID: props.userInformation.userID,
@@ -47,8 +51,13 @@ const UserSuggestion = () => {
               progress: undefined,
               pauseOnFocusLoss: false,
             });
-            // dispatch(stopProgressBar());
-            setFollowedUser(true);
+            dispatch(
+              followOrOnFollowSuggestedUser({
+                userID: props.userInformation.userID,
+                followed: true,
+              })
+            );
+            dispatch(stopProgressBar());
           }
         } catch (err) {
           if (err.response.data.success === false) {
@@ -74,7 +83,7 @@ const UserSuggestion = () => {
               pauseOnFocusLoss: false,
             });
           }
-          // dispatch(stopProgressBar());
+          dispatch(stopProgressBar());
         }
       } else {
         toast.error("Sorry!!, can't be able to Follow bot", {
@@ -93,7 +102,7 @@ const UserSuggestion = () => {
     const unFollowUser = async () => {
       if (props.userInformation.type !== "bot") {
         try {
-          // dispatch(startProgressBar());
+          dispatch(startProgressBar());
           const unfollowedTo = {
             email: props.userInformation.email,
             userID: props.userInformation.userID,
@@ -122,8 +131,13 @@ const UserSuggestion = () => {
               progress: undefined,
               pauseOnFocusLoss: false,
             });
-            // dispatch(stopProgressBar());
-            setFollowedUser(false);
+            dispatch(
+              followOrOnFollowSuggestedUser({
+                userID: props.userInformation.userID,
+                followed: false,
+              })
+            );
+            dispatch(stopProgressBar());
           }
         } catch (err) {
           if (err.response.data.success === false) {
@@ -149,7 +163,7 @@ const UserSuggestion = () => {
               pauseOnFocusLoss: false,
             });
           }
-          // dispatch(stopProgressBar());
+          dispatch(stopProgressBar());
         }
       } else {
         toast.error("Sorry!!, can't be able to Follow bot", {
@@ -236,7 +250,7 @@ const UserSuggestion = () => {
             </p>
           </div>
           <div className="MainPage_Suggested_User_Follow_Button">
-            {followedUser ? (
+            {props.userInformation.followed ? (
               <p
                 className="MainPage_Suggested_User_Follow_Button_Text"
                 onClick={unFollowUser}
