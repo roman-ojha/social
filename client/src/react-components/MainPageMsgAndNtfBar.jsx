@@ -1,8 +1,8 @@
 import React from "react";
-import more_icon from "../Images/more_icon.svg";
+import more_icon from "../assets/Images/more_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { mainPageMessageViewOnOff } from "../redux-actions/index";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";

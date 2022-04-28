@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
 import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";

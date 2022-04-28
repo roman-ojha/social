@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import mainPage_Logo from "../Images/mainPage_Logo.svg";
+import mainPage_Logo from "../assets/Images/mainPage_Logo.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "./MainPageSearchBar";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";

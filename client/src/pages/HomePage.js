@@ -3,7 +3,7 @@ import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { Picker } from "emoji-mart";
 import { useDispatch, useSelector } from "react-redux";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import {
   userPostResponseData,
   homePageUserPostFieldDataAction,

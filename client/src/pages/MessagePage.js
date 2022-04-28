@@ -3,10 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
-import SendIcon from "@mui/icons-material/Send";
-import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
-import PhotoLibraryIcon from "@mui/icons-material/PhotoLibrary";
-import User_Profile_Icon from "../Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import socket from "../services/socket";
 import {
   mainPageMessageViewOnOff,

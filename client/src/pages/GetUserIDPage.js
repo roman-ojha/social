@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import User_profile_Icon from "../Images/User_profile_Icon.svg";
+import User_profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";

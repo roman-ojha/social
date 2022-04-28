@@ -1,6 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import User_profile_icon from "../Images/User_profile_Icon_color_white.svg";
+import User_profile_icon from "../assets/Images/User_profile_Icon_color_white.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
