@@ -225,7 +225,11 @@ const UserPostFeed = (props) => {
                     className="UserPostFeed_CommentBox_UserComment"
                     key={index}
                   >
-                    <img src={comment.picture} />
+                    <img
+                      src={
+                        comment.picture ? comment.picture : User_Profile_Icon
+                      }
+                    />
                     <div>
                       <h3>{comment.userID}</h3>
                       <p>{comment.comment}</p>
@@ -238,7 +242,11 @@ const UserPostFeed = (props) => {
           <div className="UserPostFeed_CommentBox_RootUser_Post_Field_Container">
             <img
               className="UserPostFeed_CommentBox_Image"
-              src={userProfileDetailStore.picture}
+              src={
+                userProfileDetailStore.picture
+                  ? userProfileDetailStore.picture
+                  : User_Profile_Icon
+              }
               img="User"
             />
             <input

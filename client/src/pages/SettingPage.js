@@ -12,6 +12,7 @@ import {
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -135,7 +136,6 @@ const SettingPage = () => {
           },
           withCredentials: true,
         });
-        console.log(await res.data);
         const resData = await res.data;
         if (resData.success) {
           dispatch(changeUserProfilePictureAction(imageUrl));
@@ -188,6 +188,7 @@ const SettingPage = () => {
               <img
                 src={userProfileDetailStore.picture}
                 className="Setting_Page_Change_Profile_Image"
+                alt={userProfileDetailStore.userID}
               />
               <div className="Setting_Page_Change_Profile_Image_Info">
                 <Icon

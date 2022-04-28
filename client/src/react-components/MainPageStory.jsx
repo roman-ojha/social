@@ -55,7 +55,11 @@ const MainPageStory = () => {
             className="Friends_Story_Picutre_Container"
           >
             <img
-              src={props.storiesInformation.picture}
+              src={
+                props.storiesInformation.picture
+                  ? props.storiesInformation.picture
+                  : User_Profile_Icon
+              }
               alt=""
               className="Friend_Story_Picture"
             />

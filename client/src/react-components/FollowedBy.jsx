@@ -9,6 +9,7 @@ import {
   stopProgressBar,
 } from "../redux-actions";
 import { instance as axios } from "../services/axios";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 
 const FollowedBy = () => {
   const history = useHistory();
@@ -110,7 +111,11 @@ const FollowedBy = () => {
         <div className="MainPage_Followed_User_Container">
           <img
             className="MainPage_Followed_User_Image"
-            src={props.userInformation.picture}
+            src={
+              props.userInformation.picture
+                ? props.userInformation.picture
+                : User_Profile_Icon
+            }
             onClick={() => {
               if (props.userInformation.type !== "bot") {
                 history.push(`/u/profile/${props.userInformation.userID}`);

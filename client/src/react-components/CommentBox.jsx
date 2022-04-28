@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { commentBoxAction, incrementPostCommentNumber } from "../redux-actions";
 import { instance as axios } from "../services/axios";
 import { useState } from "react";
+import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 
 const CommentBox = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
@@ -68,7 +69,11 @@ const CommentBox = () => {
     return (
       <>
         <div className="CommentBox_UserComment">
-          <img src={props.comment.picture} />
+          <img
+            src={
+              props.comment.picture ? props.comment.picture : User_Profile_Icon
+            }
+          />
           <div>
             <h3>{props.comment.userID}</h3>
             <p>{props.comment.comment}</p>
@@ -85,7 +90,11 @@ const CommentBox = () => {
           <div className="CommentBox_RootUser_Post_Field_Container">
             <img
               className="CommentBox_Image"
-              src={userProfileDetail.picture}
+              src={
+                userProfileDetail.picture
+                  ? userProfileDetail.picture
+                  : User_Profile_Icon
+              }
               img="User"
             />
             <input
