@@ -26,6 +26,7 @@ passport.use(
         } else {
           const id = crypto.randomBytes(16).toString("hex");
           const postID = crypto.randomBytes(16).toString("hex");
+          const today = new Date();
           const userData = new userDetail({
             googleID: profile.id,
             id,
@@ -52,12 +53,19 @@ passport.use(
                 },
               },
             ],
+            stories: {
+              caption: `${profile.displayName} Update the Profile Picture`,
+              picture: profile.picture,
+              date: `${today.toLocaleString("default", {
+                month: "long",
+              })} ${today.getDate()}, ${today.getFullYear()}`,
+            },
           });
           const createUser = await userData.save();
           return done(null, createUser);
         }
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     }
   )

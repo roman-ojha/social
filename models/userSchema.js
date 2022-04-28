@@ -201,25 +201,17 @@ export default {
       },
     },
   ],
-  storiesNo: {
-    type: Number,
-  },
-  stories: [
-    {
-      caption: {
-        type: String,
-      },
-      picture: {
-        url: {
-          type: String,
-        },
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
+  stories: {
+    caption: {
+      type: String,
     },
-  ],
+    picture: {
+      type: String,
+    },
+    date: {
+      type: String,
+    },
+  },
   tokens: [
     {
       token: {

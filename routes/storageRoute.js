@@ -4,7 +4,6 @@ const router = express.Router();
 import upload from "../middleware/uploadFile.js";
 import uuid from "uuid-v4";
 import fs from "fs";
-import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
@@ -84,6 +83,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
           picPath
         )}?alt=media&token=${picToken}`;
         const postID = crypto.randomBytes(16).toString("hex");
+        const today = new Date();
         const userPostDetail = {
           id: postID,
           caption: caption,
@@ -101,7 +101,17 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
             No: 0,
           },
         };
-        const postRes = await rootUser.uploadPost(userPostDetail);
+        const userStoryDetail = {
+          caption: caption,
+          picture: picUrl,
+          date: `${today.toLocaleString("default", {
+            month: "long",
+          })} ${today.getDate()}, ${today.getFullYear()}`,
+        };
+        const postRes = await rootUser.uploadPost(
+          userPostDetail,
+          userStoryDetail
+        );
         const resData = {
           id: postRes[0].id,
           useremail: rootUser.email,
@@ -211,6 +221,7 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
         )}?alt=media&token=${picToken}`;
         // here we also have to post to the feed and also have to save picture as profile
         const postID = crypto.randomBytes(16).toString("hex");
+        const today = new Date();
         const userPostDetail = {
           id: postID,
           caption: caption,
@@ -228,8 +239,18 @@ router.post("/u/userId", upload.single("profile"), async (req, res) => {
             No: 0,
           },
         };
+        const userStoryDetail = {
+          caption: caption,
+          picture: picUrl,
+          date: `${today.toLocaleString("default", {
+            month: "long",
+          })} ${today.getDate()}, ${today.getFullYear()}`,
+        };
         // here we are posting user news Feed
-        const resPost = await rootUser.uploadPost(userPostDetail);
+        const resPost = await rootUser.uploadPost(
+          userPostDetail,
+          userStoryDetail
+        );
         // now we will save picture as profile picture
         const resData = await userDetail.updateOne(
           { email: email },
@@ -282,6 +303,7 @@ router.post(
         picPath
       )}?alt=media&token=${picToken}`;
       const postID = crypto.randomBytes(16).toString("hex");
+      const today = new Date();
       const userPostDetail = {
         id: postID,
         caption: caption,
@@ -299,7 +321,17 @@ router.post(
           No: 0,
         },
       };
-      const uploadPostRes = await rootUser.uploadPost(userPostDetail);
+      const userStoryDetail = {
+        caption: caption,
+        picture: picUrl,
+        date: `${today.toLocaleString("default", {
+          month: "long",
+        })} ${today.getDate()}, ${today.getFullYear()}`,
+      };
+      const uploadPostRes = await rootUser.uploadPost(
+        userPostDetail,
+        userStoryDetail
+      );
       if (uploadPostRes) {
         const updateProfilePictureRes = await userDetail.updateOne(
           {

@@ -98,6 +98,7 @@ const Index = () => {
         if (!userData.userProfileDetail.userID) {
           history.push("/userid?uid=undefined");
         } else {
+          console.log(userData.userProfileDetail);
           dispatch(userProfileDetailAction(userData.userProfileDetail));
           dispatch(userProfilePostAction(userData.userProfileDetail.posts));
           dispatch(followedUserPostDataAction(userData.followedUserPost));

@@ -143,6 +143,7 @@ const SettingPage = () => {
         }
         setUserPostResponseLoading(false);
       }
+      setSettingInputFieldData({ ...settingInputFieldData, imgUrl: "" });
     } catch (err) {}
   };
   useEffect(() => {

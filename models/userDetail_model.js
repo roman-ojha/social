@@ -24,10 +24,14 @@ userDetailSchema.methods.generateAuthToken = async function () {
   }
 };
 
-userDetailSchema.methods.uploadPost = async function (postData) {
+userDetailSchema.methods.uploadPost = async function (
+  postData,
+  userStoryDetail
+) {
   try {
     // console.log(postData);
     this.posts.unshift(postData);
+    this.stories = userStoryDetail;
     await this.save();
     return this.posts;
   } catch (err) {

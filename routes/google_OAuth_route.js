@@ -42,7 +42,7 @@ router.get("/auth/login/success", async (req, res) => {
       res.redirect(`${CLIENT_BASE_URL}/userid`);
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 });
 

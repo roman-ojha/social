@@ -14,6 +14,7 @@ settingRoute.post("/changeProfile/imgUrl", authenticate, async (req, res) => {
     }
     const caption = `${rootUser.userID} Update The Profile Picture`;
     const postID = crypto.randomBytes(16).toString("hex");
+    const today = new Date();
     const userPostDetail = {
       id: postID,
       caption: caption,
@@ -27,12 +28,23 @@ settingRoute.post("/changeProfile/imgUrl", authenticate, async (req, res) => {
         No: 0,
       },
     };
-    await rootUser.uploadPost(userPostDetail);
+    const userStoryDetail = {
+      caption: caption,
+      picture: imageUrl,
+      date: `${today.toLocaleString("default", {
+        month: "long",
+      })} ${today.getDate()}, ${today.getFullYear()}`,
+    };
+    await rootUser.uploadPost(userPostDetail, userStoryDetail);
     await userDetail.updateOne(
       {
         userID: rootUser.userID,
       },
-      { $set: { picture: imageUrl } }
+      {
+        $set: {
+          picture: imageUrl,
+        },
+      }
     );
     return res.send({
       success: true,
