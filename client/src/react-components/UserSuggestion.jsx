@@ -2,9 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toastError, toastSuccess } from "../services/toast";
 import { instance as axios } from "../services/axios";
-import { useState } from "react";
 import {
   startProgressBar,
   stopProgressBar,
@@ -18,7 +17,6 @@ const UserSuggestion = () => {
     (state) => state.changeMainPageMessageView
   );
   const SuggestedUser = (props) => {
-    const [followedUser, setFollowedUser] = useState(false);
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
         try {
@@ -41,16 +39,7 @@ const UserSuggestion = () => {
           });
           const data = await response.data;
           if (response.status === 200 && data.success === true) {
-            toast.success(data.msg, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastSuccess(data.msg);
             dispatch(
               followOrOnFollowSuggestedUser({
                 userID: props.userInformation.userID,
@@ -61,41 +50,14 @@ const UserSuggestion = () => {
           }
         } catch (err) {
           if (err.response.data.success === false) {
-            toast.error(err.response.data.err, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastError(err.response.data.err);
           } else {
-            toast.error("Some Problem Occur, Please Try again Letter!!!", {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastError("Some Problem Occur, Please Try again Letter!!!");
           }
           dispatch(stopProgressBar());
         }
       } else {
-        toast.error("Sorry!!, can't be able to Follow bot", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Sorry!!, can't be able to Follow bot");
       }
     };
 
@@ -121,16 +83,7 @@ const UserSuggestion = () => {
           });
           const data = await response.data;
           if (response.status === 200 && data.success === true) {
-            toast.success(data.msg, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastSuccess(data.msg);
             dispatch(
               followOrOnFollowSuggestedUser({
                 userID: props.userInformation.userID,
@@ -141,41 +94,14 @@ const UserSuggestion = () => {
           }
         } catch (err) {
           if (err.response.data.success === false) {
-            toast.error(err.response.data.err, {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastError(err.response.data.err);
           } else {
-            toast.error("Some Problem Occur, Please Try again Letter!!!", {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              pauseOnFocusLoss: false,
-            });
+            toastError("Some Problem Occur, Please Try again Letter!!!");
           }
           dispatch(stopProgressBar());
         }
       } else {
-        toast.error("Sorry!!, can't be able to Follow bot", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Sorry!!, can't be able to Follow bot");
       }
     };
 
@@ -189,16 +115,7 @@ const UserSuggestion = () => {
               if (props.userInformation.type !== "bot") {
                 history.push(`/u/profile/${props.userInformation.userID}`);
               } else {
-                toast.error("Sorry!!, can't be able to open bot Profile", {
-                  position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  pauseOnFocusLoss: false,
-                });
+                toastError("Sorry!!, can't be able to open bot Profile");
               }
             }}
             alt="user"
@@ -210,16 +127,7 @@ const UserSuggestion = () => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
                 } else {
-                  toast.error("Sorry!!, can't be able to open bot Profile", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
+                  toastError("Sorry!!, can't be able to open bot Profile");
                 }
               }}
             >
@@ -231,16 +139,7 @@ const UserSuggestion = () => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
                 } else {
-                  toast.error("Sorry!!, can't be able to open bot Profile", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
+                  toastError("Sorry!!, can't be able to open bot Profile");
                 }
               }}
             >
