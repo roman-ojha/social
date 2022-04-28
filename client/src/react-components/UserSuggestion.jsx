@@ -1,15 +1,170 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { instance as axios } from "../services/axios";
+import { useState } from "react";
+import { startProgressBar, stopProgressBar } from "../redux-actions";
 
 const UserSuggestion = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
   const SuggestedUser = (props) => {
+    const [followedUser, setFollowedUser] = useState(false);
+    const followUser = async () => {
+      if (props.userInformation.type !== "bot") {
+        try {
+          // dispatch(startProgressBar());
+          const followedTo = {
+            email: props.userInformation.email,
+            userID: props.userInformation.userID,
+            picture: props.userInformation.picture,
+            name: props.userInformation.picture,
+          };
+          const response = await axios({
+            method: "POST",
+            url: "/u/follow",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: JSON.stringify(followedTo),
+            // sending both follwedTo and FollowedBy
+            withCredentials: true,
+          });
+          const data = await response.data;
+          if (response.status === 200 && data.success === true) {
+            toast.success(data.msg, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+            // dispatch(stopProgressBar());
+            setFollowedUser(true);
+          }
+        } catch (err) {
+          if (err.response.data.success === false) {
+            toast.error(err.response.data.err, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+          } else {
+            toast.error("Some Problem Occur, Please Try again Letter!!!", {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+          }
+          // dispatch(stopProgressBar());
+        }
+      } else {
+        toast.error("Sorry!!, can't be able to Follow bot", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
+    };
+
+    const unFollowUser = async () => {
+      if (props.userInformation.type !== "bot") {
+        try {
+          // dispatch(startProgressBar());
+          const unfollowedTo = {
+            email: props.userInformation.email,
+            userID: props.userInformation.userID,
+            picture: props.userInformation.picture,
+            name: props.userInformation.name,
+          };
+          const response = await axios({
+            method: "POST",
+            url: "/u/unfollow",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: JSON.stringify(unfollowedTo),
+            // sending both follwedTo and FollowedBy
+            withCredentials: true,
+          });
+          const data = await response.data;
+          if (response.status === 200 && data.success === true) {
+            toast.success(data.msg, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+            // dispatch(stopProgressBar());
+            setFollowedUser(false);
+          }
+        } catch (err) {
+          if (err.response.data.success === false) {
+            toast.error(err.response.data.err, {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+          } else {
+            toast.error("Some Problem Occur, Please Try again Letter!!!", {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              pauseOnFocusLoss: false,
+            });
+          }
+          // dispatch(stopProgressBar());
+        }
+      } else {
+        toast.error("Sorry!!, can't be able to Follow bot", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
+    };
+
     return (
       <>
         <div className="MainPage_Suggested_User_Container">
@@ -81,27 +236,21 @@ const UserSuggestion = () => {
             </p>
           </div>
           <div className="MainPage_Suggested_User_Follow_Button">
-            <p
-              className="MainPage_Suggested_User_Follow_Button_Text"
-              onClick={() => {
-                if (props.userInformation.type !== "bot") {
-                  // Follow user
-                } else {
-                  toast.error("Sorry!!, can't be able to Follow bot", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
-                }
-              }}
-            >
-              Follow
-            </p>
+            {followedUser ? (
+              <p
+                className="MainPage_Suggested_User_Follow_Button_Text"
+                onClick={unFollowUser}
+              >
+                UnFollow
+              </p>
+            ) : (
+              <p
+                className="MainPage_Suggested_User_Follow_Button_Text"
+                onClick={followUser}
+              >
+                Follow
+              </p>
+            )}
           </div>
         </div>
       </>

@@ -89,6 +89,7 @@ userRoute.get("/", authenticate, async (req, res) => {
           picture: 1,
           name: 1,
           userID: 1,
+          email: 1,
           _id: 0,
         },
       },
