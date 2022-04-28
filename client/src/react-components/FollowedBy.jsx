@@ -1,15 +1,110 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { toastError, toastSuccess } from "../services/toast";
+import {
+  isFollowedFollowedByUser,
+  startProgressBar,
+  stopProgressBar,
+} from "../redux-actions";
+import { instance as axios } from "../services/axios";
 
 const FollowedBy = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
   const FollowedUser = (props) => {
+    const followUser = async () => {
+      if (props.userInformation.type !== "bot") {
+        try {
+          dispatch(startProgressBar());
+          const followedTo = {
+            email: props.userInformation.email,
+            userID: props.userInformation.userID,
+            picture: props.userInformation.picture,
+            name: props.userInformation.picture,
+          };
+          const response = await axios({
+            method: "POST",
+            url: "/u/follow",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: JSON.stringify(followedTo),
+            // sending both follwedTo and FollowedBy
+            withCredentials: true,
+          });
+          const data = await response.data;
+          if (response.status === 200 && data.success === true) {
+            toastSuccess(data.msg);
+            dispatch(
+              isFollowedFollowedByUser({
+                userID: props.userInformation.userID,
+                followed: true,
+              })
+            );
+            dispatch(stopProgressBar());
+          }
+        } catch (err) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.err);
+          } else {
+            toastError("Some Problem Occur, Please Try again Letter!!!");
+          }
+          dispatch(stopProgressBar());
+        }
+      } else {
+        toastError("Sorry!!, can't be able to Follow bot");
+      }
+    };
+
+    const unFollowUser = async () => {
+      if (props.userInformation.type !== "bot") {
+        try {
+          dispatch(startProgressBar());
+          const unfollowedTo = {
+            email: props.userInformation.email,
+            userID: props.userInformation.userID,
+            picture: props.userInformation.picture,
+            name: props.userInformation.name,
+          };
+          const response = await axios({
+            method: "POST",
+            url: "/u/unfollow",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            data: JSON.stringify(unfollowedTo),
+            // sending both follwedTo and FollowedBy
+            withCredentials: true,
+          });
+          const data = await response.data;
+          if (response.status === 200 && data.success === true) {
+            toastSuccess(data.msg);
+            dispatch(
+              isFollowedFollowedByUser({
+                userID: props.userInformation.userID,
+                followed: false,
+              })
+            );
+            dispatch(stopProgressBar());
+          }
+        } catch (err) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.err);
+          } else {
+            toastError("Some Problem Occur, Please Try again Letter!!!");
+          }
+          dispatch(stopProgressBar());
+        }
+      } else {
+        toastError("Sorry!!, can't be able to Follow bot");
+      }
+    };
+
     return (
       <>
         <div className="MainPage_Followed_User_Container">
@@ -20,16 +115,7 @@ const FollowedBy = () => {
               if (props.userInformation.type !== "bot") {
                 history.push(`/u/profile/${props.userInformation.userID}`);
               } else {
-                toast.error("Sorry!!, can't be able to open bot Profile", {
-                  position: "bottom-right",
-                  autoClose: 3000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  progress: undefined,
-                  pauseOnFocusLoss: false,
-                });
+                toastError("Sorry!!, can't be able to open bot Profile");
               }
             }}
             alt=""
@@ -41,16 +127,7 @@ const FollowedBy = () => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
                 } else {
-                  toast.error("Sorry!!, can't be able to open bot Profile", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
+                  toastError("Sorry!!, can't be able to open bot Profile");
                 }
               }}
             >
@@ -62,16 +139,7 @@ const FollowedBy = () => {
                 if (props.userInformation.type !== "bot") {
                   history.push(`/u/profile/${props.userInformation.userID}`);
                 } else {
-                  toast.error("Sorry!!, can't be able to open bot Profile", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
+                  toastError("Sorry!!, can't be able to open bot Profile");
                 }
               }}
             >
@@ -81,27 +149,21 @@ const FollowedBy = () => {
             </p>
           </div>
           <div className="MainPage_Followed_User_Follow_Button">
-            <p
-              className="MainPage_Followed_User_Follow_Button_Text"
-              onClick={() => {
-                if (props.userInformation.type !== "bot") {
-                  // Follow user
-                } else {
-                  toast.error("Sorry!!, can't be able to Follow bot", {
-                    position: "bottom-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    pauseOnFocusLoss: false,
-                  });
-                }
-              }}
-            >
-              Follow
-            </p>
+            {props.userInformation.followed ? (
+              <p
+                className="MainPage_Followed_User_Follow_Button_Text"
+                onClick={unFollowUser}
+              >
+                UnFollow
+              </p>
+            ) : (
+              <p
+                className="MainPage_Followed_User_Follow_Button_Text"
+                onClick={followUser}
+              >
+                Follow
+              </p>
+            )}
           </div>
         </div>
       </>
