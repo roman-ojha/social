@@ -25,6 +25,7 @@ passport.use(
           return done(null, userExist);
         } else {
           const id = crypto.randomBytes(16).toString("hex");
+          const postID = crypto.randomBytes(16).toString("hex");
           const userData = new userDetail({
             googleID: profile.id,
             id,
@@ -33,9 +34,24 @@ passport.use(
             picture: profile.picture,
             followersNo: 0,
             followingNo: 0,
-            postNo: 0,
+            postNo: 1,
             friendsNo: 0,
             storiesNo: 0,
+            posts: [
+              {
+                id: postID,
+                caption: `${profile.displayName} Update the Profile Picture`,
+                picture: {
+                  url: profile.picture,
+                },
+                likes: {
+                  No: 0,
+                },
+                comments: {
+                  No: 0,
+                },
+              },
+            ],
           });
           const createUser = await userData.save();
           return done(null, createUser);

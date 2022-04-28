@@ -7,8 +7,9 @@ const ProgressBar = () => {
   const ProgressBarStyle = {
     width: "0%",
     height: "3px",
-    position: "absolute",
+    position: "fixed",
     backgroundColor: "var(--primary-color)",
+    top: "0px",
     zIndex: "3",
     transitionDuration: `1s`,
   };

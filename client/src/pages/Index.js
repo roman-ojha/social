@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MainPageSideBar from "../react-components/MainPageSideBar";
 import MainPageStory from "../react-components/MainPageStory";
-import MainPageMsgAndNtfBar from "../react-components/MainPageMsgAndNtfBar";
 import MainPageRightSideComp from "../react-components/MainPageRightSideComp";
 import AppIcon from "../assets/icons/Social_Icon.ico";
 import HomePage from "./HomePage";
@@ -28,7 +27,6 @@ import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import ProgressBar from "../react-components/ProgressBar";
 import StoriesPage from "./StoriesPage";
-import LoadingSpinner from "../react-components/LoadingSpinner";
 
 const Index = () => {
   const progressBarState = useSelector((state) => state.progressBarReducer);

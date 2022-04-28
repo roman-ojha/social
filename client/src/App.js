@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import Index from "./pages/Index";
@@ -6,7 +6,7 @@ import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./pages/GetUserIDPage";
 import Page404 from "./pages/Page404";
-import { Flip, Slide, ToastContainer } from "react-toastify";
+import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MainRoot = () => {

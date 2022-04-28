@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { Picker } from "emoji-mart";
@@ -7,7 +7,6 @@ import User_Profile_Icon from "../Images/User_profile_Icon.svg";
 import {
   userPostResponseData,
   homePageUserPostFieldDataAction,
-  openSideBarDrawer,
 } from "../redux-actions";
 import UserPostFeed from "../react-components/UserPostFeed";
 import { instance as axios } from "../services/axios";
