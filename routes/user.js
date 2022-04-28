@@ -238,7 +238,7 @@ userRoute.post("/u/follow", authenticate, async (req, res) => {
     const { email, userID } = req.body;
     // these are the followed to user id and email
     if (!email && !userID) {
-      return res.status(400).json({ success: false, msg: "unauthorized user" });
+      return res.status(404).json({ success: false, msg: "unauthorized user" });
     }
     const followUserExist = await userDetail.findOne({
       // here we are finding only the user which is followed by rootuser to user who is being followed

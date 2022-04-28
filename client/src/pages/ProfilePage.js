@@ -76,10 +76,45 @@ const ProfilePage = () => {
         isRootUserFollowed: true,
       };
       if (data.success) {
+      }
+      if (response.status === 200 && data.success === true) {
+        toast.success(data.msg, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
         dispatch(profilePageDataAction(userObj));
         dispatch(stopProgressBar());
       }
     } catch (err) {
+      if (err.response.data.success === false) {
+        toast.error(err.response.data.err, {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      } else {
+        toast.error("Some Problem Occur, Please Try again Letter!!!", {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          pauseOnFocusLoss: false,
+        });
+      }
       dispatch(stopProgressBar());
     }
   };
@@ -109,8 +144,6 @@ const ProfilePage = () => {
         isRootUserFollowed: false,
       };
       if (response.status === 200 && data.success === true) {
-        dispatch(profilePageDataAction(userObj));
-        dispatch(stopProgressBar());
         toast.success(data.msg, {
           position: "bottom-right",
           autoClose: 3000,
@@ -121,6 +154,8 @@ const ProfilePage = () => {
           progress: undefined,
           pauseOnFocusLoss: false,
         });
+        dispatch(profilePageDataAction(userObj));
+        dispatch(stopProgressBar());
       }
     } catch (err) {
       if (err.response.data.success === false) {
