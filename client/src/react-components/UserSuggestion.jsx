@@ -7,7 +7,7 @@ import { instance as axios } from "../services/axios";
 import {
   startProgressBar,
   stopProgressBar,
-  followOrOnFollowSuggestedUser,
+  isFollowedSuggestedUser,
 } from "../redux-actions";
 
 const UserSuggestion = () => {
@@ -41,7 +41,7 @@ const UserSuggestion = () => {
           if (response.status === 200 && data.success === true) {
             toastSuccess(data.msg);
             dispatch(
-              followOrOnFollowSuggestedUser({
+              isFollowedSuggestedUser({
                 userID: props.userInformation.userID,
                 followed: true,
               })
@@ -85,7 +85,7 @@ const UserSuggestion = () => {
           if (response.status === 200 && data.success === true) {
             toastSuccess(data.msg);
             dispatch(
-              followOrOnFollowSuggestedUser({
+              isFollowedSuggestedUser({
                 userID: props.userInformation.userID,
                 followed: false,
               })

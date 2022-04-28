@@ -127,9 +127,9 @@ export const userSuggestionAction = (data) => {
   };
 };
 
-export const followOrOnFollowSuggestedUser = (data) => {
+export const isFollowedSuggestedUser = (data) => {
   return {
-    type: "followOrOnFollowSuggestedUser",
+    type: "isFollowedSuggestedUser",
     payload: data,
   };
 };
@@ -137,6 +137,13 @@ export const followOrOnFollowSuggestedUser = (data) => {
 export const followedByUserAction = (data) => {
   return {
     type: "followedByUser",
+    payload: data,
+  };
+};
+
+export const isFollowedFollowedByUser = (data) => {
+  return {
+    type: "isFollowedFollowedByUser",
     payload: data,
   };
 };

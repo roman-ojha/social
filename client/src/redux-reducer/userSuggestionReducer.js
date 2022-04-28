@@ -8,7 +8,7 @@ const userSuggestionReducer = (state = initialState, action) => {
         followed: false,
       };
     });
-  } else if (action.type == "followOrOnFollowSuggestedUser") {
+  } else if (action.type == "isFollowedSuggestedUser") {
     return state.map((user) =>
       user.userID == action.payload.userID
         ? { ...user, followed: action.payload.followed }
