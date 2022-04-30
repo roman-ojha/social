@@ -1270,74 +1270,74 @@
   }
 }
 @media screen and (max-height: 600px) {
-  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
+  .MainPage_SideBar_Logo_Search_Container {
     height: 15%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
+  .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
+  .MainPage_SideBar_Horizontal_Line {
     display: none;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
+  .MainPage_SideBar_Friends_Container {
     height: 25%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
+  .MainPage_SideBar_User_Account_LogOut_Container {
     height: 23%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 600px) and (min-height: 500px) {
-  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
+  .MainPage_SideBar_Friends_Container {
     height: 33%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 500px) and (min-height: 400px) {
-  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
+  .MainPage_SideBar_Logo_Search_Container {
     height: 15%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
+  .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
+  .MainPage_SideBar_Friends_Container {
     height: 30%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
+  .MainPage_SideBar_User_Account_LogOut_Container {
     height: 20%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 400px) and (min-height: 300px) {
-  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
+  .MainPage_SideBar_Logo_Search_Container {
     height: 17%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
+  .MainPage_SideBar_Menu_Container {
     height: 30%;
     overflow-y: scroll;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
+  .MainPage_SideBar_Friends_Container {
     height: 25%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
+  .MainPage_SideBar_User_Account_LogOut_Container {
     height: 22%;
   }
 }
 
 @media screen and (max-width: 768px) and (max-height: 300px) and (min-height: 150px) {
-  .Close_SideBar_Drawer .MainPage_SideBar_Logo_Search_Container {
+  .MainPage_SideBar_Logo_Search_Container {
     height: 20%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_Container {
+  .MainPage_SideBar_Menu_Container {
     height: 23%;
     overflow-y: scroll;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Friends_Container {
+  .MainPage_SideBar_Friends_Container {
     height: 20%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_User_Account_LogOut_Container {
+  .MainPage_SideBar_User_Account_LogOut_Container {
     height: 28%;
   }
 }
