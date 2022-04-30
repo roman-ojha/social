@@ -220,7 +220,7 @@
   }
 }
 
-@media screen and (max-width: 1500px) and (min-width: 1300px) {
+@media screen and (max-width: 1500px) and (min-width: 1366px) {
   .SignUp_Page_Logo {
     font-size: 1.95rem;
   }
@@ -260,7 +260,7 @@
     font-size: 1.15rem;
   }
 }
-@media screen and (max-width: 1300px) and (min-width: 1100px) {
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   .SignUp_Page_Left_Half {
     margin: 7% 3% 5% 4%;
     width: 35%;
@@ -329,7 +329,7 @@
   }
 }
 
-@media screen and (max-width: 1100px) and (min-width: 900px) {
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
   .SignUp_Page_Left_Half {
     margin: 7% 0% 5% 4%;
     width: 35%;
@@ -356,7 +356,7 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
   .SignUp_Page_Container {
     flex-direction: column;
     align-items: center;
@@ -391,7 +391,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .SignUp_Page_Left_Half {
     margin: 4% 0% 0% 0%;
     display: flex;
@@ -469,7 +469,7 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 468px) {
   .SignUp_Page_Left_Half {
     margin: 5% 0% 0% 0%;
   }
@@ -621,7 +621,7 @@
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
   .SignUp_Page_Left_Half {
     margin: 6% 0% 0% 0%;
   }

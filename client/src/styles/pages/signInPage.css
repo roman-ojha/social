@@ -522,11 +522,13 @@
     height: 10%;
     font-size: 1.1rem;
     margin-top: 0%;
+    border-radius: 15px;
   }
   .SignIn_Page_Create_Account_Button {
     height: 10%;
     font-size: 0.7rem;
     margin-top: 0%;
+    border-radius: 15px;
   }
   .SignIn_Page_Forgot_Password_Button {
     margin-top: 0%;
@@ -600,10 +602,14 @@
   }
   .SignIn_Container {
     height: 100%;
-    width: 65%;
+    width: 85%;
+    border-radius: 8px;
   }
   .SignIn_Container input {
     height: 10%;
+  }
+  .SignIn_Container input::placeholder {
+    font-size: 0.8rem;
   }
   .SignIn_Email_Input_Field {
     margin-top: 5%;
@@ -613,17 +619,19 @@
   }
   .SignIn_Page_SignIn_Button {
     height: 10%;
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin-top: 0%;
+    border-radius: 10px;
   }
   .SignIn_Page_Create_Account_Button {
     height: 10%;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     margin-top: 0%;
+    border-radius: 10px;
   }
   .SignIn_Page_Forgot_Password_Button {
     margin-top: 0%;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
   .SignIn_Page_Right_Half_container {
     width: 100%;
@@ -631,58 +639,6 @@
     position: relative;
     display: flex;
     justify-content: center;
-  }
-  .SignIn_Page_Right_Half {
-    width: 65%;
-    height: 60%;
-    top: 0%;
-  }
-  .SignIn_Page_Right_Half button {
-    width: 100%;
-  }
-  .SignIn_page_Google_Button {
-    margin-top: 1%;
-  }
-  .SignIn_page_Google_Button_Paragraph {
-    font-size: 0.7rem;
-  }
-  .SignIn_page_Google_Button_Logo {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
-  .SignIn_page_Facebook_Button {
-    margin-top: 4%;
-  }
-  .SignIn_page_Facebook_Button_Logo {
-    width: 1.4rem;
-    height: 1.4rem;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .SignIn_Container {
-    height: 100%;
-    width: 75%;
-    border-radius: 8px;
-  }
-  .SignIn_Container input::placeholder {
-    font-size: 0.8rem;
-  }
-}
-@media screen and (max-width: 400px) {
-  .SignIn_Page_SignIn_Button {
-    height: 10%;
-    font-size: 1rem;
-    margin-top: 0%;
-  }
-  .SignIn_Page_Create_Account_Button {
-    height: 10%;
-    font-size: 0.6rem;
-    margin-top: 0%;
-  }
-  .SignIn_Page_Forgot_Password_Button {
-    margin-top: 0%;
-    font-size: 0.6rem;
   }
   .SignIn_Page_Right_Half {
     width: 70%;
@@ -704,9 +660,6 @@
   }
   .SignIn_page_Facebook_Button {
     margin-top: 4%;
-  }
-  .SignIn_page_Facebook_Button_Paragraph {
-    font-size: 0.6rem;
   }
   .SignIn_page_Facebook_Button_Logo {
     width: 1.2rem;
