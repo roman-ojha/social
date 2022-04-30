@@ -200,7 +200,7 @@
   margin-left: 10%;
 }
 
-@media screen and (max-width: 1500px) and (min-width: 1300px) {
+@media screen and (max-width: 1500px) and (min-width: 1366px) {
   .SignIn_Page_Social_Logo::first-letter {
     font-size: 2.8rem;
   }
@@ -226,7 +226,8 @@
     height: 10%;
   }
 }
-@media screen and (max-width: 1300px) and (min-width: 1100px) {
+
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
   .SignIn_Page_Social_Logo::first-letter {
     font-size: 2.8rem;
   }
@@ -293,7 +294,7 @@
   }
 }
 
-@media screen and (max-width: 1100px) and (min-width: 900px) {
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
   .SignIn_Page_Social_Logo::first-letter {
     font-size: 2.7rem;
   }
@@ -364,21 +365,25 @@
   }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1024px) {
   .SignIn_Page_Container {
     width: 100%;
-    height: 100vh;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
   }
   .SignIn_Page_Left_Half {
-    height: 75%;
+    height: 600px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   .SignIn_Page_Left_side_Upper_Logo_Part {
-    padding: 2% 0% 0% 18%;
+    padding: 1% 0% 1% 0%;
     height: 15%;
   }
   .SignIn_Page_Social_Logo {
@@ -423,15 +428,17 @@
   }
   .SignIn_Page_Right_Half_container {
     width: 100%;
-    height: 20%;
+    height: 200px;
     position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
   }
   .SignIn_Page_Right_Half {
     width: 70%;
     height: 70%;
     top: 0%;
+    position: static;
   }
   .SignIn_RightSide_Issustration_container {
     visibility: hidden;
@@ -463,17 +470,17 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 768px) {
   .SignIn_Page_Container {
     width: 100%;
-    height: 100vh;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
   }
   .SignIn_Page_Left_Half {
-    height: 75%;
+    height: 600px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -527,7 +534,7 @@
   }
   .SignIn_Page_Right_Half_container {
     width: 100%;
-    height: 20%;
+    height: 200px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -567,13 +574,15 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 480px) {
   .SignIn_Page_Container {
+    height: max-content;
     justify-content: center;
   }
   .SignIn_Page_Left_Half {
-    height: 70%;
+    height: 450px;
     width: 100%;
+    justify-content: space-around;
   }
   .SignIn_Page_Social_Logo {
     font-size: 1.6rem;
@@ -585,8 +594,9 @@
     font-size: 1rem;
   }
   .SignIn_Container_Outline {
-    height: 65%;
+    height: 75%;
     margin-top: 0px;
+    /* border: 1px solid red; */
   }
   .SignIn_Container {
     height: 100%;
@@ -617,7 +627,7 @@
   }
   .SignIn_Page_Right_Half_container {
     width: 100%;
-    height: 20%;
+    height: 150px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -704,7 +714,7 @@
   }
 }
 
-@media screen and (max-width: 300px) {
+@media screen and (max-width: 320px) {
   .SignIn_Page_Social_Logo {
     font-size: 1.4rem;
   }
