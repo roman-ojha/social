@@ -57,3 +57,80 @@
   height: 2rem;
   font-size: 0.9rem;
 }
+
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 12rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 7.5rem;
+    height: 2rem;
+    border-radius: 9px;
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 1024px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 11rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 7rem;
+    height: 2rem;
+    border-radius: 8px;
+    border-width: 0px;
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 10rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 6.5rem;
+    height: 2rem;
+    border-radius: 8px;
+    border-width: 0px;
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 9rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 6rem;
+    height: 1.8rem;
+    border-radius: 8px;
+    border-width: 0px;
+    font-size: 0.75rem;
+  }
+}
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 8rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 5.5rem;
+    height: 1.7rem;
+    border-radius: 5px;
+    border-width: 0px;
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .page404_Title_Button_Container div h1 {
+    font-size: 5rem;
+  }
+  .page404_Title_Button_Container button {
+    width: 3.5rem;
+    height: 1.3rem;
+    border-radius: 4px;
+    border-width: 0px;
+    font-size: 0.5rem;
+  }
+}
