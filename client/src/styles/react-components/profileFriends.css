@@ -93,7 +93,7 @@
   }
 
   .ProfilePage_Friend_Active_Status p {
-    color: white;
+    font-size: 0.6rem;
   }
 }
 

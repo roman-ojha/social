@@ -8,6 +8,7 @@ import {
   profilePageDataAction,
 } from "../redux-actions";
 import { instance as axios } from "../services/axios";
+import "../styles/react-components/mainPageSearchBar.css";
 
 const MainPageSearchBar = (props) => {
   const history = useHistory();
