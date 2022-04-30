@@ -28,6 +28,25 @@
   /* background-color: white; */
   margin-top: 2%;
   margin-left: 5%;
+  max-height: 15rem;
+  overflow-y: scroll;
+}
+
+.MainPage_SearchBar_All_User_Container::-webkit-scrollbar {
+  width: 4px;
+}
+.MainPage_SearchBar_All_User_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.MainPage_SearchBar_All_User_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.MainPage_SearchBar_All_User_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.MainPage_SearchBar_All_User_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
 }
 .MainPage_SearchBar_No_Result_Container {
   width: 100%;
@@ -73,4 +92,55 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .MainPage_SearchBar_Container {
+    border-radius: 8px;
+  }
+  .MainPage_SearchBar_Container h3 {
+    font-size: 0.75rem;
+  }
+  .MainPage_SearchBar_Container hr {
+    margin: 0% 4% 0% 4%;
+  }
+  .MainPage_SearchBar_No_Result_Container p {
+    font-size: 0.75rem;
+  }
+  .MainPage_SearchBar_User_Container img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+  .MainPage_SearchBar_User_Container p {
+    font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .MainPage_SearchBar_Container {
+    border-radius: 5px;
+  }
+  .MainPage_SearchBar_Container h3 {
+    font-size: 0.7rem;
+  }
+  .MainPage_SearchBar_Container hr {
+    margin: 0% 4% 0% 4%;
+  }
+  .MainPage_SearchBar_No_Result_Container p {
+    font-size: 0.7rem;
+  }
+  .MainPage_SearchBar_User_Container {
+    margin-top: 0.3rem;
+    margin-bottom: 0.3rem;
+    border-radius: 3px;
+    padding: 0.15rem 0rem 0.15rem 0rem;
+  }
+  .MainPage_SearchBar_User_Container img {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .MainPage_SearchBar_User_Container p {
+    font-size: 0.7rem;
+    margin-left: 5%;
+  }
 }
