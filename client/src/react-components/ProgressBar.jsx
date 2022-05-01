@@ -10,7 +10,7 @@ const ProgressBar = () => {
     position: "fixed",
     backgroundColor: "var(--primary-color)",
     top: "0px",
-    zIndex: "3",
+    zIndex: "10",
     transitionDuration: `1s`,
   };
   const progressBarState = useSelector((state) => state.progressBarReducer);

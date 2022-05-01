@@ -3,10 +3,17 @@ import "../styles/react-components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { commentBoxAction, incrementPostCommentNumber } from "../redux-actions";
+import {
+  commentBoxAction,
+  incrementPostCommentNumber,
+  startProgressBar,
+  stopProgressBar,
+} from "../redux-actions";
 import { instance as axios } from "../services/axios";
 import { useState } from "react";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import { toastError, toastSuccess, toastWarn } from "../services/toast";
+import { isEmptyString } from "../functions/isEmptyString";
 
 const CommentBox = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
@@ -36,32 +43,44 @@ const CommentBox = () => {
 
   const comment = async () => {
     try {
-      const res = await axios({
-        url: "/post/comment",
-        method: "POST",
-        data: {
-          comment: commentInputFieldData,
-          postID: commentBoxStore.postID,
-          to: commentBoxStore.to,
-        },
-        withCredentials: true,
-      });
-      const data = await res.data;
-      if (res.status !== 200 && data.success) {
-        // Error
+      dispatch(startProgressBar());
+      if (isEmptyString(commentInputFieldData)) {
+        toastWarn("Please Fill the Comment Field Properly");
       } else {
-        dispatch(
-          incrementPostCommentNumber({
+        const res = await axios({
+          url: "/post/comment",
+          method: "POST",
+          data: {
+            comment: commentInputFieldData,
             postID: commentBoxStore.postID,
             to: commentBoxStore.to,
-          })
-        );
-        dispatch(
-          commentBoxAction({ openCommentBox: false, postID: "", to: "" })
-        );
+          },
+          withCredentials: true,
+        });
+        const data = await res.data;
+        if (res.status !== 200 && data.success) {
+          toastError(data.msg);
+        } else {
+          dispatch(
+            incrementPostCommentNumber({
+              postID: commentBoxStore.postID,
+              to: commentBoxStore.to,
+            })
+          );
+          dispatch(
+            commentBoxAction({ openCommentBox: false, postID: "", to: "" })
+          );
+          toastSuccess(data.msg);
+        }
       }
+      dispatch(stopProgressBar());
     } catch (err) {
-      // console.log(err);
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again Letter!!!");
+      }
+      dispatch(stopProgressBar());
     }
   };
 

@@ -138,6 +138,7 @@ const UserPostFeed = (props) => {
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
+      dispatch(stopProgressBar());
     }
   };
 
