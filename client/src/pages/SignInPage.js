@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
-import { toast } from "react-toastify";
+import { toastError, toastInfo } from "../services/toast";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
@@ -56,27 +56,9 @@ const SignInPage = () => {
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toast.error(err.response.data.err, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError(err.response.data.err);
       } else {
-        toast.error("Some Problem Occur, Please Try again Letter!!!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Some Problem Occur, Please Try again Letter!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -129,19 +111,7 @@ const SignInPage = () => {
               <p
                 className="SignIn_Page_Forgot_Password_Button"
                 onClick={() => {
-                  toast.info(
-                    "Email aren't verified, So can't use this feature",
-                    {
-                      position: "bottom-right",
-                      autoClose: 3000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      pauseOnFocusLoss: false,
-                    }
-                  );
+                  toastInfo("Email aren't verified, So can't use this feature");
                 }}
               >
                 Forgot Password?

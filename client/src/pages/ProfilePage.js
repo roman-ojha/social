@@ -26,7 +26,7 @@ import CommentBox from "../react-components/CommentBox";
 import ProfileFriends from "../react-components/ProfileFriends";
 import ProfileAlbums from "../react-components/ProfileAlbums";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
-import { toast } from "react-toastify";
+import { toastSuccess, toastError } from "../services/toast";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -124,42 +124,15 @@ const ProfilePage = () => {
       if (data.success) {
       }
       if (response.status === 200 && data.success === true) {
-        toast.success(data.msg, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastSuccess(data.msg);
         dispatch(profilePageDataAction(userObj));
         dispatch(stopProgressBar());
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toast.error(err.response.data.err, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError(err.response.data.err);
       } else {
-        toast.error("Some Problem Occur, Please Try again Letter!!!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Some Problem Occur, Please Try again Letter!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -190,42 +163,15 @@ const ProfilePage = () => {
         isRootUserFollowed: false,
       };
       if (response.status === 200 && data.success === true) {
-        toast.success(data.msg, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastSuccess(data.msg);
         dispatch(profilePageDataAction(userObj));
         dispatch(stopProgressBar());
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toast.error(err.response.data.err, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError(err.response.data.err);
       } else {
-        toast.error("Some Problem Occur, Please Try again Letter!!!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Some Problem Occur, Please Try again Letter!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -267,27 +213,9 @@ const ProfilePage = () => {
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toast.error(err.response.data.err, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError(err.response.data.err);
       } else {
-        toast.error("Some Problem Occur, Please Try again Letter!!!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Some Problem Occur, Please Try again Letter!!!");
       }
     }
   };
@@ -342,27 +270,9 @@ const ProfilePage = () => {
         setFetchedAllData(true);
       } catch (err) {
         if (err.response.data.success === false) {
-          toast.error(err.response.data.err, {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            pauseOnFocusLoss: false,
-          });
+          toastError(err.response.data.err);
         } else {
-          toast.error("Some Problem Occur, Please Try again Letter!!!", {
-            position: "bottom-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            pauseOnFocusLoss: false,
-          });
+          toastError("Some Problem Occur, Please Try again Letter!!!");
         }
         history.push("/u");
       }

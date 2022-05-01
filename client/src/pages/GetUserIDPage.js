@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import User_profile_Icon from "../assets/Images/User_profile_Icon.svg";
-import LoadingSpinner from "../react-components/LoadingSpinner";
 import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
-import { toast } from "react-toastify";
+import { toastError } from "../services/toast";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 
 const GetUserIDPage = (props) => {
   const dispatch = useDispatch();
-  const [onLoadingSpinner, setOnLoadingSpinner] = useState(false);
   const [userDetail, setUserDetail] = useState();
   const history = useHistory();
   const [userID, setUserID] = useState("");
@@ -82,27 +80,9 @@ const GetUserIDPage = (props) => {
       dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {
-        toast.error(err.response.data.err, {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError(err.response.data.err);
       } else {
-        toast.error("Some Problem Occur, Please Try again Letter!!!", {
-          position: "bottom-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          pauseOnFocusLoss: false,
-        });
+        toastError("Some Problem Occur, Please Try again Letter!!!");
       }
       dispatch(stopProgressBar());
     }
