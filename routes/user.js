@@ -131,7 +131,7 @@ userRoute.get("/", authenticate, async (req, res) => {
         $match: {
           $and: [
             { "followers.userID": req.rootUser.userID },
-            { storiesNo: { $gt: 0 } },
+            { stories: { $not: { $eq: null } } },
           ],
         },
       },

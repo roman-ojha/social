@@ -130,9 +130,9 @@ const SignUpPage = () => {
       const data = await res.data;
       dispatch(stopProgressBar());
       if (res.status === 422 || !data) {
-        console.log(data.error);
+        // console.log(data.error);
       } else {
-        console.log(data.message);
+        // console.log(data.message);
         history.push("/userid?uid=undefined");
       }
     } catch (err) {

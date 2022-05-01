@@ -314,6 +314,11 @@ const HomePage = () => {
           <SelectUserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
+          {followedUserPostDataStore.length == 0 ? (
+            <DefaultSocialPost />
+          ) : (
+            <></>
+          )}
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value) => {
             return (
@@ -346,11 +351,6 @@ const HomePage = () => {
           })}
           {/* Displaying current user Followed User post field filed */}
           <DisplayFollowedUserPost />
-          {followedUserPostDataStore.length == 0 ? (
-            <DefaultSocialPost />
-          ) : (
-            <></>
-          )}
         </div>
       </div>
     </>
