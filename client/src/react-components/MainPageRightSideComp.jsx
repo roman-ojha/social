@@ -16,7 +16,6 @@ const MainPageRightSideComp = () => {
     (state) => state.rightPartDrawerReducer
   );
   const notificationBoxState = useSelector((state) => state.notificationBox);
-  console.log(notificationBoxState);
   useEffect(() => {
     document
       .getElementsByClassName("RightPart_Drawer_Container")[0]

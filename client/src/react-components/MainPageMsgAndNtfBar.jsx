@@ -31,6 +31,7 @@ const MainPageMsgAndNtfBar = () => {
               icon="ant-design:message-filled"
               onClick={() => {
                 dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
+                dispatch(openNotificationBox(false));
               }}
             />
           </NavLink>
@@ -42,6 +43,7 @@ const MainPageMsgAndNtfBar = () => {
               icon="ant-design:message-filled"
               onClick={() => {
                 dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
+                dispatch(openNotificationBox(false));
               }}
             />
           </div>
@@ -52,6 +54,7 @@ const MainPageMsgAndNtfBar = () => {
             icon="carbon:notification-new"
             onClick={() => {
               dispatch(openNotificationBox(!notificationBoxState));
+              dispatch(mainPageMessageViewOnOff(false));
             }}
           />
         </div>

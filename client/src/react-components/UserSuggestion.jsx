@@ -10,9 +10,6 @@ import {
   isFollowedSuggestedUser,
 } from "../redux-actions";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
-import { useMediaQuery } from "react-responsive";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const UserSuggestion = () => {
   const history = useHistory();
@@ -20,6 +17,7 @@ const UserSuggestion = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
+  const notificationBoxState = useSelector((state) => state.notificationBox);
   const SuggestedUser = (props) => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
@@ -185,16 +183,26 @@ const UserSuggestion = () => {
       <>
         {userSuggestion.map((user, index) => {
           if (user.userID !== undefined) {
-            if (mainPageMessageOnOffState === false && countUser.current < 3) {
-              countUser.current++;
-              return (
-                <SuggestedUser key={index.toString()} userInformation={user} />
-              );
-            } else if (countUser < 1 && mainPageMessageOnOffState === true) {
-              countUser.current++;
-              return (
-                <SuggestedUser key={index.toString()} userInformation={user} />
-              );
+            if (!mainPageMessageOnOffState && !notificationBoxState) {
+              if (countUser.current < 3) {
+                countUser.current++;
+                return (
+                  <SuggestedUser
+                    key={index.toString()}
+                    userInformation={user}
+                  />
+                );
+              }
+            } else if (mainPageMessageOnOffState || notificationBoxState) {
+              if (countUser.current < 1) {
+                countUser.current++;
+                return (
+                  <SuggestedUser
+                    key={index.toString()}
+                    userInformation={user}
+                  />
+                );
+              }
             }
           }
         })}
