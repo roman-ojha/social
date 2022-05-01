@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "env-cmd -f .env.prod node src/index.js",
+    "dev:client": "env-cmd -f .env.dev node src/index.js",
+    "dev": "env-cmd -f .env.dev nodemon src/index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -15,6 +16,7 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
+    "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "firebase": "^9.1.0",
