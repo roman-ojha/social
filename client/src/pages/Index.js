@@ -44,7 +44,7 @@ const Index = () => {
           <Route exact path="/u/message" component={MessagePage} />
           <Route exact path="/u/setting" component={SettingPage} />
           <Route path="/u/profile/:userID" component={ProfilePage} />
-          <Route page="/u/stories" component={StoriesPage} />
+          <Route exact page="/u/stories" component={StoriesPage} />
           <Route
             path="*"
             component={() => {

@@ -50,6 +50,52 @@ const ProfilePage = () => {
   };
   const profilePageUserFeed = profilePageData.posts;
 
+  const ReturnProfileRoute = () => {
+    return (
+      <>
+        <Switch>
+          <Route
+            exact
+            path="/u/profile/:userID"
+            component={() => {
+              return (
+                <>
+                  {profilePageUserFeed.map((value, index) => (
+                    <UserPostFeed
+                      userMainInformation={profilePageMainInformation}
+                      userFeedData={value}
+                      key={index}
+                    />
+                  ))}
+                </>
+              );
+            }}
+          />
+          <Route
+            exact
+            path="/u/profile/:userID/albums"
+            component={ProfileAlbums}
+          />
+          <Route
+            exact
+            path="/u/profile/:userID/friends"
+            component={ProfileFriends}
+          />
+          <Route
+            exact
+            path="/u/profile/:userID/followers"
+            component={ProfileFriends}
+          />
+          <Route
+            exact
+            path="/u/profile/:userID/followings"
+            component={ProfileFriends}
+          />
+        </Switch>
+      </>
+    );
+  };
+
   const followUser = async () => {
     // writing logic for followuser
     try {
@@ -253,7 +299,11 @@ const ProfilePage = () => {
       if (location.pathname.includes("/albums")) {
         // console.log("albums");
         selectedRouteIndex = 1;
-      } else if (location.pathname.includes("/friends")) {
+      } else if (
+        location.pathname.includes("/friends") ||
+        location.pathname.includes("/followers") ||
+        location.pathname.includes("/followings")
+      ) {
         selectedRouteIndex = 2;
       } else {
         selectedRouteIndex = 0;
@@ -365,9 +415,31 @@ const ProfilePage = () => {
                 )}
               </div>
               <div className="ProfilePage_UserInfo_User_follow_Detail_Container">
-                <p>{profilePageData.followersNo} Followers</p>
-                <p>{profilePageData.followingNo} Following</p>
-                <p>{profilePageData.postNo} Post</p>
+                <p
+                  onClick={() => {
+                    history.push(
+                      `/u/profile/${profilePageData.userID}/followers`
+                    );
+                  }}
+                >
+                  {profilePageData.followersNo} Followers
+                </p>
+                <p
+                  onClick={() => {
+                    history.push(
+                      `/u/profile/${profilePageData.userID}/followings`
+                    );
+                  }}
+                >
+                  {profilePageData.followingNo} Following
+                </p>
+                <p
+                  onClick={() => {
+                    history.push(`/u/profile/${profilePageData.userID}`);
+                  }}
+                >
+                  {profilePageData.postNo} Post
+                </p>
               </div>
             </div>
             <div className="ProfilePage_UserInfo_Follow_and_More_Button_Container">
@@ -431,35 +503,7 @@ const ProfilePage = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            <Switch>
-              <Route
-                exact
-                path="/u/profile/:userID"
-                component={() => {
-                  return (
-                    <>
-                      {profilePageUserFeed.map((value, index) => (
-                        <UserPostFeed
-                          userMainInformation={profilePageMainInformation}
-                          userFeedData={value}
-                          key={index}
-                        />
-                      ))}
-                    </>
-                  );
-                }}
-              />
-              <Route
-                exact
-                path="/u/profile/:userID/albums"
-                component={ProfileAlbums}
-              />
-              <Route
-                exact
-                path="/u/profile/:userID/friends"
-                component={ProfileFriends}
-              />
-            </Switch>
+            <ReturnProfileRoute />
           </div>
         </div>
       ) : (

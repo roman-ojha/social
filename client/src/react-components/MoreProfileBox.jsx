@@ -86,10 +86,7 @@ const MoreProfileBox = () => {
             icon="akar-icons:github-fill"
             className="More_Profile_Box_Github_Icon"
             onClick={() => {
-              window.open(
-                "https://github.com/Roman-Ojha/Social-Application",
-                "_blank"
-              );
+              window.open("https://github.com/Roman-Ojha/Social", "_blank");
             }}
           />
         </div>
