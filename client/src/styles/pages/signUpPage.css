@@ -6,16 +6,17 @@
   display: flex;
 }
 .SignUp_Page_Left_Half {
-  margin: 5%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 40%;
+  width: 50%;
+  height: 100%;
 }
 .SignUp_Page_Title_Container {
   width: 100%;
   margin-left: 20%;
+  margin-top: 5%;
 }
 .SignUp_Page_Logo {
   font-size: 2rem;
@@ -45,6 +46,20 @@
 }
 .SignUp_Page_Rignt_Half {
   width: 50%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.SignUp_Page_SignUp_Container {
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgb(182, 182, 182);
+  background-color: white;
+  /* margin: 7% 13% 10% 13%; */
+  padding: 2% 0%;
+  height: max-content;
+  width: 80%;
 }
 .SignUp_Page_SignUp_Form {
   display: flex;
@@ -52,14 +67,6 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-}
-.SignUp_Page_SignUp_Container {
-  border: 1px solid rgb(189, 189, 189);
-  border-radius: 15px;
-  box-shadow: 0px 0px 15px rgb(182, 182, 182);
-  background-color: white;
-  margin: 7% 13% 10% 13%;
-  height: 30rem;
 }
 .SignUp_Page_Input_Field_Container {
   display: flex;
@@ -212,121 +219,6 @@
 }
 .SignUp_Page_SignIn_Button_Icon {
   color: rgb(71, 71, 71);
-}
-
-@media screen and (min-width: 2000px) {
-  .SignUp_Page_SignUp_Container {
-    height: 85%;
-  }
-}
-
-@media screen and (max-width: 1500px) and (min-width: 1366px) {
-  .SignUp_Page_Logo {
-    font-size: 1.95rem;
-  }
-  .SignUp_Page_Logo::first-letter {
-    font-size: 2.95rem;
-  }
-  .SignUp_Page_Sign_Up_Logo {
-    font-size: 1.35rem;
-  }
-  .SignUp_Page_Illustration {
-    width: 20rem;
-    height: 20rem;
-  }
-  .SignUp_Page_SignUp_Container {
-    border-radius: 14px;
-    box-shadow: 0px 0px 14px rgb(182, 182, 182);
-    margin: 5% 13% 10% 12%;
-    height: 30rem;
-  }
-  .SignUp_Page_SignUp_Form input:read-write {
-    font-size: 0.85rem;
-  }
-  .SignUp_Page_Input_Field_Container input:focus {
-    box-shadow: 0px 0px 9px rgb(211, 211, 211);
-  }
-  .SignUp_Page_Birthday_Selection_Container p,
-  .SignUp_Page_Gender_Checkbox_Container p {
-    font-size: 0.85rem;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
-    font-size: 0.85rem;
-  }
-  .SignUp_Page_SignUp_Button {
-    font-size: 1.15rem;
-  }
-  .SignUp_Page_SignIn_Button_Title {
-    font-size: 1.15rem;
-  }
-}
-@media screen and (max-width: 1366px) and (min-width: 1200px) {
-  .SignUp_Page_Left_Half {
-    margin: 7% 3% 5% 4%;
-    width: 35%;
-    height: 29rem;
-  }
-  .SignUp_Page_Logo {
-    font-size: 1.9rem;
-  }
-  .SignUp_Page_Logo::first-letter {
-    font-size: 2.9rem;
-  }
-  .SignUp_Page_Sign_Up_Logo {
-    font-size: 1.3rem;
-  }
-  .SignUp_Page_Illustration {
-    width: 20rem;
-    height: 20rem;
-  }
-  .SignUp_Page_Rignt_Half {
-    width: 55%;
-  }
-  .SignUp_Page_SignUp_Container {
-    border-radius: 13px;
-    box-shadow: 0px 0px 14px rgb(182, 182, 182);
-    margin: 10% 13% 10% 11%;
-    height: 650px;
-  }
-  .SignUp_Page_Input_Field_Container input {
-    height: 2.4rem;
-    border-radius: 6px;
-  }
-  .SignUp_Page_SignUp_Form input:read-write {
-    font-size: 0.8rem;
-  }
-  .SignUp_Page_Input_Field_Container input:focus {
-    box-shadow: 0px 0px 9px rgb(211, 211, 211);
-  }
-  .SignUp_Page_Birthday_Selection_Container p,
-  .SignUp_Page_Gender_Checkbox_Container p {
-    font-size: 0.8rem;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select {
-    height: 1.9rem;
-    border-radius: 6px;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
-    font-size: 0.8rem;
-  }
-  .SignUp_Page_Gender_Checkbox_select_Container div {
-    height: 1.9rem;
-    border-radius: 6px;
-  }
-  .SignUp_Page_Submit_Container button {
-    border-radius: 18px;
-    height: 1.9rem;
-  }
-  .SignUp_Page_SignUp_Button {
-    font-size: 1.1rem;
-  }
-  .SignUp_Page_SignIn_Button {
-    border-radius: 18px;
-    height: 1.9rem;
-  }
-  .SignUp_Page_SignIn_Button_Title {
-    font-size: 1.1rem;
-  }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
