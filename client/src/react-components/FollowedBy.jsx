@@ -208,7 +208,9 @@ const FollowedBy = () => {
     <>
       <div
         className={
-          mainPageMessageOnOffState
+          mainPageMessageOnOffState ||
+          notificationBoxState ||
+          moreProfileBoxState
             ? "MainPage_FollowedBy_Container_MinView"
             : "MainPage_FollowedBy_Container"
         }

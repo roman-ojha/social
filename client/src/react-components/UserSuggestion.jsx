@@ -225,7 +225,9 @@ const UserSuggestion = () => {
     <>
       <div
         className={
-          mainPageMessageOnOffState
+          mainPageMessageOnOffState ||
+          notificationBoxState ||
+          moreProfileBoxState
             ? "MainPage_UserSuggession_Container_MinView"
             : "MainPage_UserSuggession_Container"
         }

@@ -5,7 +5,11 @@ const NotificationBox = () => {
   return (
     <>
       <div className="Notification_Box_Container">
-        <p>Empty</p>
+        <h1>Notification</h1>
+        <hr className="Notification_Title_HR" />
+        <div className="Notification_Container">
+          <p>Empty</p>
+        </div>
       </div>
     </>
   );

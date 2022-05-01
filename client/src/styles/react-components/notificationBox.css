@@ -1,2 +1,34 @@
 .Notification_Box_Container {
+  height: 59%;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.3rem;
+  box-sizing: border-box;
+}
+.Notification_Box_Container h1 {
+  width: 90%;
+  font-family: var(--primary-font-family);
+}
+.Notification_Title_HR {
+  width: 98%;
+}
+.Notification_Container {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Notification_Container p {
+  font-family: var(--primary-font-family);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-style: italic;
 }
