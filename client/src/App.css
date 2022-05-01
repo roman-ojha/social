@@ -5,7 +5,7 @@ body {
 
 /* this has to be in the exact same order */
 body::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 body::-webkit-scrollbar-track {
   background-color: transparent;

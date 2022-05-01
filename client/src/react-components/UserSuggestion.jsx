@@ -10,6 +10,8 @@ import {
   isFollowedSuggestedUser,
 } from "../redux-actions";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import { useState } from "react";
+import { useRef } from "react";
 
 const UserSuggestion = () => {
   const history = useHistory();
@@ -176,18 +178,23 @@ const UserSuggestion = () => {
   };
 
   const ReturnSuggestedUser = () => {
+    const countUser = useRef(0);
     const userSuggestion = useSelector((state) => state.userSuggestionReducer);
     return (
       <>
         {userSuggestion.map((user, index) => {
-          if (index < 3 && mainPageMessageOnOffState === false) {
-            return (
-              <SuggestedUser key={index.toString()} userInformation={user} />
-            );
-          } else if (index < 1 && mainPageMessageOnOffState === true) {
-            return (
-              <SuggestedUser key={index.toString()} userInformation={user} />
-            );
+          if (user.userID !== undefined) {
+            if (countUser.current < 3 && mainPageMessageOnOffState === false) {
+              countUser.current++;
+              return (
+                <SuggestedUser key={index.toString()} userInformation={user} />
+              );
+            } else if (countUser < 1 && mainPageMessageOnOffState === true) {
+              countUser.current++;
+              return (
+                <SuggestedUser key={index.toString()} userInformation={user} />
+              );
+            }
           }
         })}
       </>
