@@ -207,3 +207,10 @@ export const openRightPartDrawer = (bool) => {
     bool,
   };
 };
+
+export const setHomePagePostFieldViewValue = (data) => {
+  return {
+    type: "setHomePagePostFieldViewValue",
+    payload: data,
+  };
+};

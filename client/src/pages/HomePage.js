@@ -17,6 +17,7 @@ import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../react-components/OpenRightPartDrawerButton";
+import { setHomePagePostFieldViewValue } from "../redux-actions";
 
 const HomePage = () => {
   const history = useHistory();
@@ -37,8 +38,8 @@ const HomePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
-  const [viewValue, setViewValue] = useState("min");
+  // const [viewValue, setViewValue] = useState("min");
+  const viewValue = useSelector((state) => state.homePagePostFieldViewValue);
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
@@ -70,7 +71,7 @@ const HomePage = () => {
               value={homePageUserPostFieldData.content}
               onChange={() => {}}
               onClick={() => {
-                setViewValue("max");
+                dispatch(setHomePagePostFieldViewValue("max"));
               }}
             />
           </div>
@@ -141,7 +142,7 @@ const HomePage = () => {
           }
           // console.log(resData);
           setUserPostResponseLoading(false);
-          setViewValue("min");
+          dispatch(setHomePagePostFieldViewValue("min"));
         } catch (err) {}
       };
       return (
@@ -245,7 +246,7 @@ const HomePage = () => {
                       content: userPostData,
                     })
                   );
-                  setViewValue("min");
+                  dispatch(setHomePagePostFieldViewValue("min"));
                 }}
               />
               <button

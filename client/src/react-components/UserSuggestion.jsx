@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
@@ -10,8 +10,6 @@ import {
   isFollowedSuggestedUser,
 } from "../redux-actions";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
-import { useState } from "react";
-import { useRef } from "react";
 
 const UserSuggestion = () => {
   const history = useHistory();

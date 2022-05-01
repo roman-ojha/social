@@ -17,6 +17,7 @@ import progressBarReducer from "./progressBar";
 import userStoriesReducer from "./userStories";
 import sideBarDrawerReducer from "./sideBarDrawer";
 import rightPartDrawerReducer from "./rightPartDrawer";
+import homePagePostFieldViewValue from "./homePagePostFieldViewValue";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -37,6 +38,7 @@ const rootReducers = combineReducers({
   userStoriesReducer,
   sideBarDrawerReducer,
   rightPartDrawerReducer,
+  homePagePostFieldViewValue,
 });
 
 export default rootReducers;

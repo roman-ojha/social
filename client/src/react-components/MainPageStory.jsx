@@ -6,7 +6,7 @@ import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";
 import { storyIndex } from "../redux-actions";
 import { useDispatch } from "react-redux";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const MainPageStory = () => {
   const history = useHistory();
@@ -21,7 +21,7 @@ const MainPageStory = () => {
   const AddStory = () => {
     return (
       <>
-        <div className="Current_User_Story_Container">
+        <div className="Current_User_Story_Container" onClick={() => {}}>
           <div className="Current_User_Story_Picure_Container">
             <Icon
               className="Current_User_Story_Add_Icon"
