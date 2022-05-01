@@ -1,0 +1,74 @@
+.Default_Social_Post_Container {
+  width: 100%;
+  margin-top: 1rem;
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Default_Social_Post {
+  height: max-content;
+  width: 90%;
+  /* border: 1px solid red; */
+  padding: 10px;
+  background-color: var(--secondary-color-point-2);
+  border-radius: 10px;
+}
+.Default_Social_Post_Image_View_Container {
+  background-image: url("https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?cs=srgb&dl=pexels-veeterzy-114979.jpg&fm=jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1.5rem 0px;
+  border-radius: 10px;
+  gap: 15px;
+}
+
+.Default_Social_Post_Image_View_Container img {
+  width: 8rem;
+  height: 8rem;
+}
+
+.Default_Social_Post_Image_View_Container h1 {
+  font-family: var(--primary-font-family);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.Default_Social_Post_Image_View_Container h2 {
+  font-family: "Aladin", cursive;
+  /* border: 1px solid purple; */
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  width: 60%;
+  text-align: center;
+}
+
+.Default_Social_Post_Info_Container {
+  margin: 0.5rem 0.5rem 0rem 0.5rem;
+  /* border: 1px solid red; */
+  list-style-position: inside;
+  background-color: #e22cbb17;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+.Default_Social_Post_Info_Container ul {
+  /* border: 1px solid green; */
+}
+
+.Default_Social_Post_Info_Container li {
+  /* border: 1px solid blue; */
+  font-family: var(--primary-font-family);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}

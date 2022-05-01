@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../react-components/OpenRightPartDrawerButton";
 import { setHomePagePostFieldViewValue } from "../redux-actions";
+import DefaultSocialPost from "../react-components/DefaultSocialPost";
 
 const HomePage = () => {
   const history = useHistory();
@@ -303,6 +304,7 @@ const HomePage = () => {
       return <></>;
     }
   };
+  console.log(followedUserPostDataStore);
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
@@ -345,6 +347,11 @@ const HomePage = () => {
           })}
           {/* Displaying current user Followed User post field filed */}
           <DisplayFollowedUserPost />
+          {followedUserPostDataStore.length == 0 ? (
+            <DefaultSocialPost />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </>
