@@ -8,7 +8,7 @@
 }
 .Default_Social_Post {
   height: max-content;
-  width: 90%;
+  width: 100%;
   /* border: 1px solid red; */
   padding: 10px;
   background-color: var(--secondary-color-point-2);
@@ -60,12 +60,7 @@
   padding: 0.5rem;
 }
 
-.Default_Social_Post_Info_Container ul {
-  /* border: 1px solid green; */
-}
-
 .Default_Social_Post_Info_Container li {
-  /* border: 1px solid blue; */
   font-family: var(--primary-font-family);
   font-style: italic;
   font-weight: 600;

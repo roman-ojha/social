@@ -15,6 +15,8 @@
 * ~~create page for all the user friend in profile page~~
 * ~~create 3D Carousel for use story~~
 * add Material UI of some of the components
-* need to add media query for searchBar, MessageBox, ProfileFriends Components
+* ~~need to add media query for searchBar, MessageBox, ProfileFriends Components~~
+* show followers/following user in profile page
+* create notification/more component
 
 # Server
