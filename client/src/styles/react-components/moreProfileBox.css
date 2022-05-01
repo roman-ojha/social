@@ -22,6 +22,7 @@
   text-decoration: none;
   background-color: #dedede;
   transition-duration: 100ms;
+  cursor: pointer;
 }
 
 .More_Profile_Box_User_Info:hover,
@@ -76,4 +77,26 @@
 .More_Profile_Box_Icon {
   font-size: 1.8rem;
   color: var(--lower-opacity-font-color);
+}
+
+.More_Profile_Box_App_Info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid red; */
+  width: 95%;
+  gap: 10px;
+}
+
+.More_Profile_Box_App_Info p {
+  font-family: var(--primary-font-family);
+  cursor: pointer;
+}
+
+.More_Profile_Box_App_Info p:hover {
+  text-decoration: underline;
+}
+
+.More_Profile_Box_Github_Icon {
+  cursor: pointer;
 }

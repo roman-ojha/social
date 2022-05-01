@@ -1,15 +1,42 @@
 import React from "react";
 import "../styles/react-components/moreProfileBox.css";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { startProgressBar, stopProgressBar } from "../redux-actions";
+import { instance as axios } from "../services/axios";
+import { toastInfo } from "../services/toast";
 
 const MoreProfileBox = () => {
+  const history = useHistory();
+  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const date = new Date();
+  const userLogOut = async () => {
+    try {
+      dispatch(startProgressBar());
+      const res = await axios({
+        method: "GET",
+        url: "/u/logout",
+        header: {
+          Accpet: "application/josn",
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      dispatch(stopProgressBar());
+      history.push("/signin", { replace: true });
+      if (!res.status === 200) {
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      dispatch(stopProgressBar());
+    }
+  };
   return (
     <>
       <div className="More_Profile_Box_Container">
@@ -34,15 +61,38 @@ const MoreProfileBox = () => {
           />
           <p>Setting</p>
         </NavLink>
-        <div className="More_Profile_Box_Help">
+        <div
+          className="More_Profile_Box_Help"
+          onClick={() => {
+            toastInfo("Helping...");
+          }}
+        >
           <Icon icon="bxs:help-circle" className="More_Profile_Box_Icon" />
           <p>Help</p>
         </div>
-        <NavLink to="" className="More_Profile_Box_logout">
+        <div className="More_Profile_Box_logout" onClick={userLogOut}>
           <Icon icon="majesticons:logout" className="More_Profile_Box_Icon" />
           <p>Log Out</p>
-        </NavLink>
-        <p>Social &copy; {date.getFullYear()}</p>
+        </div>
+        <div className="More_Profile_Box_App_Info">
+          <p
+            onClick={() => {
+              toastInfo(`Social ©️ ${date.getFullYear()}`);
+            }}
+          >
+            Social &copy; {date.getFullYear()}
+          </p>
+          <Icon
+            icon="akar-icons:github-fill"
+            className="More_Profile_Box_Github_Icon"
+            onClick={() => {
+              window.open(
+                "https://github.com/Roman-Ojha/Social-Application",
+                "_blank"
+              );
+            }}
+          />
+        </div>
       </div>
     </>
   );

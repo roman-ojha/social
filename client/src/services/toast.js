@@ -25,3 +25,16 @@ export function toastSuccess(message) {
     pauseOnFocusLoss: false,
   });
 }
+
+export function toastInfo(info) {
+  return toast.info(info, {
+    position: "bottom-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+  });
+}
