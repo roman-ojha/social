@@ -19,6 +19,7 @@ import sideBarDrawerReducer from "./sideBarDrawer";
 import rightPartDrawerReducer from "./rightPartDrawer";
 import homePagePostFieldViewValue from "./homePagePostFieldViewValue";
 import notificationBox from "./notificationBox";
+import moreProfileBoxReducer from "./moreProfile";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -41,6 +42,7 @@ const rootReducers = combineReducers({
   rightPartDrawerReducer,
   homePagePostFieldViewValue,
   notificationBox,
+  moreProfileBoxReducer,
 });
 
 export default rootReducers;

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   mainPageMessageViewOnOff,
   openNotificationBox,
+  openMoreProfileBox,
 } from "../redux-actions";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
@@ -20,6 +21,9 @@ const MainPageMsgAndNtfBar = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
+  const moreProfileBoxState = useSelector(
+    (state) => state.moreProfileBoxReducer
+  );
   const notificationBoxState = useSelector((state) => state.notificationBox);
   return (
     <>
@@ -32,33 +36,44 @@ const MainPageMsgAndNtfBar = () => {
               onClick={() => {
                 dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
                 dispatch(openNotificationBox(false));
+                dispatch(openMoreProfileBox(false));
               }}
             />
           </NavLink>
         ) : (
           <div className="MainPage_Message_Bar_Message_Outline">
-            {" "}
             <Icon
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
               onClick={() => {
                 dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
                 dispatch(openNotificationBox(false));
+                dispatch(openMoreProfileBox(false));
               }}
             />
           </div>
         )}
-        <div className="MainPage_Message_Bar_Notification_Outline">
+        <div
+          className="MainPage_Message_Bar_Notification_Outline"
+          onClick={() => {
+            dispatch(openNotificationBox(!notificationBoxState));
+            dispatch(mainPageMessageViewOnOff(false));
+            dispatch(openMoreProfileBox(false));
+          }}
+        >
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="carbon:notification-new"
-            onClick={() => {
-              dispatch(openNotificationBox(!notificationBoxState));
-              dispatch(mainPageMessageViewOnOff(false));
-            }}
           />
         </div>
-        <div className="MainPage_Message_Bar_More_Outline">
+        <div
+          className="MainPage_Message_Bar_More_Outline"
+          onClick={() => {
+            dispatch(openMoreProfileBox(!moreProfileBoxState));
+            dispatch(mainPageMessageViewOnOff(false));
+            dispatch(openNotificationBox(false));
+          }}
+        >
           <img src={more_icon} alt="more" />
         </div>
         <img

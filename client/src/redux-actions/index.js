@@ -221,3 +221,10 @@ export const openNotificationBox = (bool) => {
     bool,
   };
 };
+
+export const openMoreProfileBox = (bool) => {
+  return {
+    type: "openMoreProfileBox",
+    bool,
+  };
+};

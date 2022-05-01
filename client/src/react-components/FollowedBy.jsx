@@ -18,6 +18,9 @@ const FollowedBy = () => {
     (state) => state.changeMainPageMessageView
   );
   const notificationBoxState = useSelector((state) => state.notificationBox);
+  const moreProfileBoxState = useSelector(
+    (state) => state.moreProfileBoxReducer
+  );
   const FollowedUser = (props) => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
@@ -180,11 +183,19 @@ const FollowedBy = () => {
     return (
       <>
         {followedBy.map((user, index) => {
-          if (!mainPageMessageOnOffState && !notificationBoxState) {
+          if (
+            !mainPageMessageOnOffState &&
+            !notificationBoxState &&
+            !moreProfileBoxState
+          ) {
             if (index < 2) {
               return <FollowedUser key={index} userInformation={user} />;
             }
-          } else if (mainPageMessageOnOffState || notificationBoxState) {
+          } else if (
+            mainPageMessageOnOffState ||
+            notificationBoxState ||
+            moreProfileBoxState
+          ) {
             if (index < 1) {
               return <FollowedUser key={index} userInformation={user} />;
             }

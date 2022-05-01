@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
@@ -18,6 +18,9 @@ const UserSuggestion = () => {
     (state) => state.changeMainPageMessageView
   );
   const notificationBoxState = useSelector((state) => state.notificationBox);
+  const moreProfileBoxState = useSelector(
+    (state) => state.moreProfileBoxReducer
+  );
   const SuggestedUser = (props) => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
@@ -183,7 +186,11 @@ const UserSuggestion = () => {
       <>
         {userSuggestion.map((user, index) => {
           if (user.userID !== undefined) {
-            if (!mainPageMessageOnOffState && !notificationBoxState) {
+            if (
+              !mainPageMessageOnOffState &&
+              !notificationBoxState &&
+              !moreProfileBoxState
+            ) {
               if (countUser.current < 3) {
                 countUser.current++;
                 return (
@@ -193,7 +200,11 @@ const UserSuggestion = () => {
                   />
                 );
               }
-            } else if (mainPageMessageOnOffState || notificationBoxState) {
+            } else if (
+              mainPageMessageOnOffState ||
+              notificationBoxState ||
+              moreProfileBoxState
+            ) {
               if (countUser.current < 1) {
                 countUser.current++;
                 return (
