@@ -16,7 +16,8 @@
 * ~~create 3D Carousel for use story~~
 * add Material UI of some of the components
 * ~~need to add media query for searchBar, MessageBox, ProfileFriends Components~~
-* show followers/following user in profile page
-* create notification/more component
+* ~~show followers/following user in profile page~~
+* ~~create notification/more component~~
+* need to add media query for NotificationBox, MoreProfileBox, MessageBox, DefaultSocialPost Component
 
 # Server

@@ -155,6 +155,13 @@ export const commentBoxAction = (data) => {
   };
 };
 
+export const appendCommentData = (data) => {
+  return {
+    type: "appendCommentData",
+    payload: data,
+  };
+};
+
 export const startProgressBar = () => {
   return {
     type: "startProgressBar",

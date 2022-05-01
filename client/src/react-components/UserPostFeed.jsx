@@ -9,7 +9,11 @@ import {
   commentBoxAction,
   incrementPostCommentNumber,
   stopProgressBar,
+  startProgressBar,
+  appendCommentData,
 } from "../redux-actions";
+import { isEmptyString } from "../functions/isEmptyString";
+import { toastWarn, toastError, toastSuccess } from "../services/toast";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -100,31 +104,54 @@ const UserPostFeed = (props) => {
     }
   };
   const comment = async () => {
-    try {
-      const res = await axios({
-        url: "/post/comment",
-        method: "POST",
-        data: {
-          comment: commentInputField,
+    dispatch(startProgressBar());
+    if (isEmptyString(commentInputField)) {
+      toastWarn("Please Fill the Comment Field Properly");
+    } else {
+      dispatch(stopProgressBar());
+      dispatch(
+        incrementPostCommentNumber({
           postID: props.userFeedData.id,
           to: props.userMainInformation.userID,
-        },
-        withCredentials: true,
-      });
-      const data = await res.data;
-      if (res.status !== 200 && data.success) {
-        // Error
-      } else {
-        dispatch(
-          incrementPostCommentNumber({
-            postID: props.userFeedData.id,
-            to: props.userMainInformation.userID,
-          })
-        );
-      }
-    } catch (err) {
-      // console.log(err);
+        })
+      );
+      dispatch(
+        appendCommentData({
+          postID: props.userFeedData.id,
+          to: props.userMainInformation.userID,
+          newComment: {
+            userID: userProfileDetailStore.userID,
+            comment: commentInputField,
+            picture: userProfileDetailStore.userID,
+          },
+        })
+      );
     }
+    // try {
+    //   const res = await axios({
+    //     url: "/post/comment",
+    //     method: "POST",
+    //     data: {
+    //       comment: commentInputField,
+    //       postID: props.userFeedData.id,
+    //       to: props.userMainInformation.userID,
+    //     },
+    //     withCredentials: true,
+    //   });
+    //   const data = await res.data;
+    //   if (res.status !== 200 && data.success) {
+    //     // Error
+    //   } else {
+    //     dispatch(
+    //       incrementPostCommentNumber({
+    //         postID: props.userFeedData.id,
+    //         to: props.userMainInformation.userID,
+    //       })
+    //     );
+    //   }
+    // } catch (err) {
+    //   // console.log(err);
+    // }
   };
 
   return (

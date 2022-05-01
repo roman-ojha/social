@@ -6,9 +6,16 @@ const SponsoredBy = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
-
+  const notificationBoxState = useSelector((state) => state.notificationBox);
+  const moreProfileBoxState = useSelector(
+    (state) => state.moreProfileBoxReducer
+  );
   const ReturnSponsoredBy = () => {
-    if (mainPageMessageOnOffState === false) {
+    if (
+      !mainPageMessageOnOffState &&
+      !notificationBoxState &&
+      !moreProfileBoxState
+    ) {
       return (
         <>
           <div className="MainPage_SponsoredBy_Container">
@@ -30,7 +37,11 @@ const SponsoredBy = () => {
           </div>
         </>
       );
-    } else if (mainPageMessageOnOffState === true) {
+    } else if (
+      mainPageMessageOnOffState ||
+      notificationBoxState ||
+      moreProfileBoxState
+    ) {
       return <></>;
     }
   };
