@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";

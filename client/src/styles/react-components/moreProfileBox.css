@@ -1,0 +1,79 @@
+.More_Profile_Box_Container {
+  height: 59%;
+  background-color: white;
+  margin-bottom: 1%;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  padding: 0.3rem;
+  box-sizing: border-box;
+}
+
+.More_Profile_Box_User_Info,
+.More_Profile_Box_Setting,
+.More_Profile_Box_Help,
+.More_Profile_Box_logout {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  text-decoration: none;
+  background-color: #dedede;
+  transition-duration: 100ms;
+}
+
+.More_Profile_Box_User_Info:hover,
+.More_Profile_Box_Setting:hover,
+.More_Profile_Box_Help:hover,
+.More_Profile_Box_logout:hover {
+  background-color: #c9c9c9;
+}
+
+.More_Profile_Box_User_Info p,
+.More_Profile_Box_Setting p,
+.More_Profile_Box_Help p,
+.More_Profile_Box_logout p {
+  font-family: var(--primary-font-family);
+  color: black;
+  margin-left: 1rem;
+  /* border: 1px solid blue; */
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.More_Profile_Box_User_Info img,
+.More_Profile_Box_Icon {
+  margin-left: 1rem;
+}
+
+.More_Profile_Box_User_Info {
+  /* border: 1px solid red; */
+  width: 95%;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.More_Profile_Box_User_Info img {
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.More_Profile_Box_Setting,
+.More_Profile_Box_Help,
+.More_Profile_Box_logout {
+  /* border: 1px solid red; */
+  width: 95%;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.More_Profile_Box_Icon {
+  font-size: 1.8rem;
+  color: var(--lower-opacity-font-color);
+}
