@@ -31,7 +31,10 @@ userDetailSchema.methods.uploadPost = async function (
   try {
     // console.log(postData);
     this.posts.unshift(postData);
-    this.stories = userStoryDetail;
+    if (userStoryDetail != undefined) {
+      this.stories = userStoryDetail;
+    }
+    this.postNo++;
     await this.save();
     return this.posts;
   } catch (err) {

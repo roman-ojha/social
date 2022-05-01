@@ -32,7 +32,7 @@ router.post("/u/post", upload.single("image"), async (req, res) => {
             No: 0,
           },
         };
-        const postRes = await rootUser.uploadPost(userPostDetail);
+        const postRes = await rootUser.uploadPost(userPostDetail, undefined);
         const resData = {
           id: postRes[0].id,
           useremail: rootUser.email,
