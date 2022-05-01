@@ -126,14 +126,14 @@ postRoute.post("/post/comment", authenticate, async (req, res) => {
   try {
     const { comment, postID, to } = req.body;
     if (!comment) {
-      return res.status(204).json({
+      return res.status(400).json({
         success: false,
         msg: "Comment Field is Empty, Please fill the filed",
       });
     }
     if ((!postID, !to)) {
       return res
-        .status(300)
+        .status(400)
         .json({ success: false, msg: "Client Error, Please Try again later" });
     }
     const findUser = await userDetail.findOne(
