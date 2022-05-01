@@ -406,7 +406,7 @@
     width: 60%;
   }
   .SignIn_Container input {
-    height: 10%;
+    height: 12%;
   }
   .SignIn_Email_Input_Field {
     margin-top: 10%;
@@ -415,11 +415,11 @@
     margin-top: 5%;
   }
   .SignIn_Page_SignIn_Button {
-    height: 10%;
+    height: 12%;
     font-size: 1.1rem;
   }
   .SignIn_Page_Create_Account_Button {
-    height: 10%;
+    height: 12%;
     font-size: 0.8rem;
   }
   .SignIn_Page_Forgot_Password_Button {
@@ -507,10 +507,10 @@
   }
   .SignIn_Container {
     height: 100%;
-    width: 60%;
+    width: 450px;
   }
   .SignIn_Container input {
-    height: 10%;
+    height: 12%;
   }
   .SignIn_Email_Input_Field {
     margin-top: 5%;
@@ -519,13 +519,13 @@
     margin-top: 0%;
   }
   .SignIn_Page_SignIn_Button {
-    height: 10%;
+    height: 12%;
     font-size: 1.1rem;
     margin-top: 0%;
     border-radius: 15px;
   }
   .SignIn_Page_Create_Account_Button {
-    height: 10%;
+    height: 12%;
     font-size: 0.7rem;
     margin-top: 0%;
     border-radius: 15px;
@@ -542,7 +542,7 @@
     justify-content: center;
   }
   .SignIn_Page_Right_Half {
-    width: 70%;
+    width: 400px;
     height: 70%;
     top: 0%;
   }
@@ -606,7 +606,7 @@
     border-radius: 8px;
   }
   .SignIn_Container input {
-    height: 10%;
+    height: 12%;
   }
   .SignIn_Container input::placeholder {
     font-size: 0.8rem;
@@ -618,13 +618,13 @@
     margin-top: 0%;
   }
   .SignIn_Page_SignIn_Button {
-    height: 10%;
+    height: 12%;
     font-size: 1rem;
     margin-top: 0%;
     border-radius: 10px;
   }
   .SignIn_Page_Create_Account_Button {
-    height: 10%;
+    height: 12%;
     font-size: 0.6rem;
     margin-top: 0%;
     border-radius: 10px;

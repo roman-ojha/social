@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import SignUp_illustration from "../assets/Images/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
@@ -10,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 import { toast } from "react-toastify";
 import validator from "email-validator";
+import { Icon } from "@iconify/react";
 
 let previousSelectGenderElement;
 const SignUpPage = () => {
@@ -344,7 +344,10 @@ const SignUpPage = () => {
                   className="SignUp_Page_SignIn_Button"
                 >
                   <p className="SignUp_Page_SignIn_Button_Title">Sign In</p>
-                  <ForwardOutlinedIcon className="SignUp_Page_SignIn_Button_Icon" />
+                  <Icon
+                    icon="ic:outline-forward"
+                    className="SignUp_Page_SignIn_Button_Icon"
+                  />
                 </NavLink>
               </div>
             </form>

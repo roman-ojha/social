@@ -370,21 +370,27 @@
     align-items: center;
     width: 100%;
   }
+  .SignUp_Page_Title_Container {
+    width: 180px;
+    margin-left: 0%;
+  }
   .SignUp_Page_SignUp_Container {
     height: 650px;
   }
   .SignUp_Page_Logo {
     font-size: 1.8rem;
+    width: max-content;
   }
   .SignUp_Page_Logo::first-letter {
     font-size: 2.8rem;
   }
   .SignUp_Page_Sign_Up_Logo {
     font-size: 1.2rem;
+    width: max-content;
   }
   .SignUp_Page_Illustration {
+    display: none;
     position: absolute;
-    visibility: hidden;
   }
   .SignUp_Page_Rignt_Half {
     width: 85%;
@@ -471,7 +477,7 @@
 
 @media screen and (max-width: 468px) {
   .SignUp_Page_Left_Half {
-    margin: 5% 0% 0% 0%;
+    margin: 5% 0% 5% 0%;
   }
   .SignUp_Page_Logo {
     font-size: 1.7rem;
@@ -483,76 +489,18 @@
     font-size: 1.1rem;
   }
   .SignUp_Page_Rignt_Half {
+    height: 500px;
     width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .SignUp_Page_SignUp_Container {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgb(182, 182, 182);
-    margin: 9% 13% 10% 13%;
-    height: 550px;
-  }
-  .SignUp_Page_Input_Field_Container input {
-    width: 72%;
-    height: 2.3rem;
-    border-radius: 5px;
-  }
-  .SignUp_Page_SignUp_Form input:read-write {
-    padding-left: 10px;
-    font-size: 0.75rem;
-  }
-  .SignUp_Page_Birthday_Selection_Container p,
-  .SignUp_Page_Gender_Checkbox_Container p {
-    font-size: 0.75rem;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select {
-    height: 1.8rem;
-    border-radius: 5px;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
-    padding-left: 8px;
-    font-size: 0.75rem;
-  }
-  .SignUp_Page_Gender_Checkbox_select_Container div {
-    height: 1.8rem;
-    border-radius: 5px;
-  }
-  .SignUp_Page_Gender_Checkbox_select_Container p {
-    font-size: 0.75rem;
-  }
-  .SignUp_Page_Submit_Container button {
-    border-radius: 15px;
-    height: 1.8rem;
-  }
-  .SignUp_Page_SignUp_Button {
-    font-size: 0.95rem;
-  }
-  .SignUp_Page_SignIn_Button {
-    border-radius: 15px;
-    height: 1.8rem;
-  }
-  .SignUp_Page_SignIn_Button_Title {
-    font-size: 0.95rem;
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .SignUp_Page_Left_Half {
-    margin: 5% 0% 0% 0%;
-  }
-  .SignUp_Page_Logo {
-    font-size: 1.7rem;
-  }
-  .SignUp_Page_Logo::first-letter {
-    font-size: 2.7rem;
-  }
-  .SignUp_Page_Sign_Up_Logo {
-    font-size: 1.1rem;
-  }
-  .SignUp_Page_Rignt_Half {
-    width: 97%;
-  }
-  .SignUp_Page_SignUp_Container {
-    height: 500px;
+    margin: 0% 0% 0% 0%;
+    width: 85%;
+    height: 100%;
   }
   .SignUp_Page_Input_Field_Container input {
     width: 72%;
@@ -570,16 +518,16 @@
   }
   .SignUp_Page_Birthday_Selection_Date_Container select {
     height: 1.6rem;
-    border-radius: 4px;
+    border-radius: 5px;
     border-width: 1.5px;
   }
   .SignUp_Page_Birthday_Selection_Date_Container select:read-only {
     padding-left: 8px;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
   .SignUp_Page_Gender_Checkbox_select_Container div {
     height: 1.6rem;
-    border-radius: 4px;
+    border-radius: 5px;
     border-width: 1.5px;
   }
   .SignUp_Page_Gender_Checkbox_select_Container p {
@@ -591,6 +539,8 @@
   }
   .SignUp_Page_SignUp_Button {
     font-size: 0.9rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
   }
   .SignUp_Page_SignIn_Button {
     border-radius: 10px;
@@ -599,28 +549,10 @@
   .SignUp_Page_SignIn_Button_Title {
     font-size: 0.9rem;
   }
-}
-@media screen and (max-width: 400px) {
-  .SignUp_Page_SignUp_Container {
-    border-radius: 7px;
-    box-shadow: 0px 0px 8px rgb(182, 182, 182);
-    margin: 9% 13% 10% 13%;
-    height: 95%;
-  }
-  .SignUp_Page_Rignt_Half {
-    width: 100%;
-  }
-  .SignUp_Page_Input_Field_Container input {
-    border-width: 1px;
-  }
-  .SignUp_Page_Birthday_Selection_Date_Container select {
-    border-width: 1px;
-  }
-  .SignUp_Page_Gender_Checkbox_select_Container div {
-    border-width: 1px;
+  .SignUp_Page_SignIn_Button_Icon {
+    font-size: 1rem;
   }
 }
-
 @media screen and (max-width: 320px) {
   .SignUp_Page_Left_Half {
     margin: 6% 0% 0% 0%;
