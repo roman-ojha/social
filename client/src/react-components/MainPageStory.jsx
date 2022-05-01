@@ -1,11 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageStory.css";
 import { Icon } from "@iconify/react";
 import { useMediaQuery } from "react-responsive";
-import { storyIndex } from "../redux-actions";
-import { useDispatch } from "react-redux";
+import { storyIndex, setHomePagePostFieldViewValue } from "../redux-actions";
 import { useHistory } from "react-router-dom";
 
 const MainPageStory = () => {
@@ -21,7 +20,12 @@ const MainPageStory = () => {
   const AddStory = () => {
     return (
       <>
-        <div className="Current_User_Story_Container" onClick={() => {}}>
+        <div
+          className="Current_User_Story_Container"
+          onClick={() => {
+            dispatch(setHomePagePostFieldViewValue("max"));
+          }}
+        >
           <div className="Current_User_Story_Picure_Container">
             <Icon
               className="Current_User_Story_Add_Icon"

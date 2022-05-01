@@ -140,7 +140,6 @@ const HomePage = () => {
           if (res.status === 201) {
             dispatch(userPostResponseData(resData));
           }
-          // console.log(resData);
           setUserPostResponseLoading(false);
           dispatch(setHomePagePostFieldViewValue("min"));
         } catch (err) {}
