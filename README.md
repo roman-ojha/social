@@ -58,13 +58,13 @@
 5. Include Google Oauth services in application
 6. Run `npm install --global yarn` to install yarn
 7.  Run `npm install -g nodemon` to install nodemon
-8. Run `yarn` to install all packages
+8. Run `yarn install` to install all packages
 9. Run `yarn start` to run the server
 
 ### Web:
 1. Directory `Social-Application/client`
 2. Create `.env` file in Project Directory
 3. Get all the environment variables which are include in `.env.example`
-4. Run `yarn` to install all packages
+4. Run `yarn install` to install all packages
 5. Run `yarn start` to run the client Site
 

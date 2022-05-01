@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  client-dev:
-    container_name: social-client
-    image: social-client
+  client:
+    container_name: social-client-dev
+    image: social-client-dev
     build:
       context: .
       dockerfile: Dockerfile
@@ -11,3 +11,4 @@ services:
       - "3000:3000"
     volumes:
       - ./src:/app/src
+    command: yarn start
