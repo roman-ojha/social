@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openRightPartDrawer } from "../redux-actions";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/react-components/mainPageRightSideComp.css";
+import NotificationBox from "./NotificationBox";
 // import "../styles/react-components/mainPageMsgAndNtfBar.css";
 
 const MainPageRightSideComp = () => {
@@ -14,6 +15,8 @@ const MainPageRightSideComp = () => {
   const rightPartDrawerState = useSelector(
     (state) => state.rightPartDrawerReducer
   );
+  const notificationBoxState = useSelector((state) => state.notificationBox);
+  console.log(notificationBoxState);
   useEffect(() => {
     document
       .getElementsByClassName("RightPart_Drawer_Container")[0]
@@ -66,6 +69,7 @@ const MainPageRightSideComp = () => {
       <div className="RightPart_Drawer_Container Close_RightPart_Drawer">
         <div className="MainPage_Rignt_Side_Component_Container ">
           <MainPageMsgAndNtfBar />
+          {notificationBoxState ? <NotificationBox /> : <></>}
           <MessageBox />
           <UserSuggestion />
           <FollowedBy />

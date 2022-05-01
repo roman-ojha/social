@@ -214,3 +214,10 @@ export const setHomePagePostFieldViewValue = (data) => {
     payload: data,
   };
 };
+
+export const openNotificationBox = (bool) => {
+  return {
+    type: "openNotificationBox",
+    bool,
+  };
+};

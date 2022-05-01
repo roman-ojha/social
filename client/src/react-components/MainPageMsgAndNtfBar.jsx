@@ -1,7 +1,10 @@
 import React from "react";
 import more_icon from "../assets/Images/more_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { mainPageMessageViewOnOff } from "../redux-actions/index";
+import {
+  mainPageMessageViewOnOff,
+  openNotificationBox,
+} from "../redux-actions";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import "../styles/react-components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
@@ -17,6 +20,7 @@ const MainPageMsgAndNtfBar = () => {
   const mainPageMessageOnOffState = useSelector(
     (state) => state.changeMainPageMessageView
   );
+  const notificationBoxState = useSelector((state) => state.notificationBox);
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
@@ -46,6 +50,9 @@ const MainPageMsgAndNtfBar = () => {
           <Icon
             className="MainPage_Message_and_Notification_Bar_Icon"
             icon="carbon:notification-new"
+            onClick={() => {
+              dispatch(openNotificationBox(!notificationBoxState));
+            }}
           />
         </div>
         <div className="MainPage_Message_Bar_More_Outline">

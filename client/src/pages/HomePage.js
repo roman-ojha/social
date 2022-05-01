@@ -304,7 +304,6 @@ const HomePage = () => {
       return <></>;
     }
   };
-  console.log(followedUserPostDataStore);
   return (
     <>
       {userPostResponseLoading ? <LoadingSpinner /> : <></>}
