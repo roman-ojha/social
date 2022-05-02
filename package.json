@@ -10,7 +10,8 @@
     "dev": "env-cmd -f .env.dev nodemon src/index.js",
     "docker-compose-down": "docker-compose -f ./docker-compose.dev.yml down",
     "docker-compose-up:clientDev": "docker-compose -f ./docker-compose.dev.yml up -d --build client",
-    "docker:dev": "npm run docker-compose-down & npm run docker-compose-up:clientDev"
+    "docker-compose-up:serverDev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
+    "docker:dev": "npm run docker-compose-down & npm run docker-compose-up:clientDev & npm run docker-compose-up:serverDev"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

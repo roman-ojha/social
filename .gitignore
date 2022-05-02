@@ -4,3 +4,4 @@ node_modules
 /db/firebase_serviceAccountKey.json
 /db/build
 /db/Images
+docker-compose.dev.yml

@@ -24,6 +24,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/user/src/server
+    env_file:
+      - .env.dev
     depends_on:
       - mongo
   mongo:
