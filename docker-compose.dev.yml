@@ -5,10 +5,10 @@ services:
     container_name: social-client-dev
     image: social-client-dev
     build:
-      context: .
+      context: ./client
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     volumes:
-      - ./src:/app/src
+      - ./client:/user/src/client
     command: yarn start

@@ -2,16 +2,16 @@ FROM node:14.17.0-alpine AS development
 
 ENV NODE_ENV development
 
-WORKDIR /user/src/client
+WORKDIR /user/src/server
 
 COPY package.json ./
 
 COPY yarn.lock ./
 
-RUN yarn install
+RUN npm ci
 
-COPY ./ ./
+COPY . .
 
-EXPOSE 3000
+EXPOSE 8080
 
 CMD ["yarn","start"]

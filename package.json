@@ -7,7 +7,10 @@
   "scripts": {
     "start": "env-cmd -f .env.prod node src/index.js",
     "dev:client": "env-cmd -f .env.dev node src/index.js",
-    "dev": "env-cmd -f .env.dev nodemon src/index.js"
+    "dev": "env-cmd -f .env.dev nodemon src/index.js",
+    "docker-compose-down": "docker-compose -f ./docker-compose.dev.yml down",
+    "docker-compose-up:dev": "docker-compose -f ./docker-compose.dev.yml up -d --build client",
+    "docker:dev": "npm run docker-compose-down & npm run docker-compose-up:dev"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
