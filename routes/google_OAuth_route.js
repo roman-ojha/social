@@ -5,7 +5,7 @@ import passport from "passport";
 import session from "express-session";
 const router = express.Router();
 import("../middleware/google_OAuth.js");
-import google_OAuth from "../controllers/googleOAuth.controller.js";
+import googleOAuthController from "../controllers/googleOAuth.controller.js";
 
 router.use(session({ secret: "cat", resave: true, saveUninitialized: true }));
 router.use(passport.initialize());
@@ -23,8 +23,8 @@ router.get(
   })
 );
 
-router.get("/auth/login/success", google_OAuth.loginSuccess);
+router.get("/auth/login/success", googleOAuthController.loginSuccess);
 
-router.get("/auth/login/failed", google_OAuth.loginFail);
+router.get("/auth/login/failed", googleOAuthController.loginFail);
 
 export default router;
