@@ -5,3 +5,4 @@ node_modules
 /db/build
 /db/Images
 docker-compose.dev.yml
+note.txt

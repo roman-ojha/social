@@ -20,12 +20,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    port:
+    ports:
       - "8080:8080"
     volumes:
       - .:/user/src/server
-    env_file:
-      - .env.dev
+    environment:
+      PORT: 8080
+      API_BASE_URL: http://localhost:8080
+      CLIENT_BASE_URL: http://localhost:3000
+      USERDATABASE: mongodb://mongo:27017/Social
+      SECRET_KEY: SECxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxSEC
+      GOOGLE_CLIENT_ID: googleclientid
+      GOOGLE_CLIENT_SECRET: googleclientsecret
+      FIREBASE_STORAGEBUCKET: firebasestoragebucket
     depends_on:
       - mongo
   mongo:
@@ -34,7 +41,7 @@ services:
     restart: always
     volumes:
       - mongo:/data/db
-    port:
+    ports:
       - "2717:27017"
 volumes:
   mongo: {}

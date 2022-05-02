@@ -9,9 +9,9 @@
     "dev:client": "env-cmd -f .env.dev node src/index.js",
     "dev": "env-cmd -f .env.dev nodemon src/index.js",
     "docker-compose-down": "docker-compose -f ./docker-compose.dev.yml down",
-    "docker-compose-up:clientDev": "docker-compose -f ./docker-compose.dev.yml up -d --build client",
-    "docker-compose-up:serverDev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
-    "docker:dev": "npm run docker-compose-down & npm run docker-compose-up:clientDev & npm run docker-compose-up:serverDev"
+    "docker-compose-up:dev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
+    "docker:dev": "yarn docker-compose-down & yarn docker-compose-up:dev",
+    "docker:logServer": "docker-compose -f ./docker-compose.dev.yml logs server"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,7 +27,7 @@
     "firebase-admin": "^10.0.2",
     "gridfs-stream": "^1.1.1",
     "imagemin": "^8.0.1",
-    "imagemin-mozjpeg": "^9.0.0",
+    "imagemin-mozjpeg": "8.0.0",
     "is-jpg": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
@@ -37,11 +37,13 @@
     "node-fetch": "^3.2.2",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
-    "sharp": "^0.29.1",
+    "sharp": "^0.30.4",
     "socket.io": "^4.4.1",
     "uuid-v4": "^0.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RomanOjha-git/ReactJs-Social-Media-Application.git"
