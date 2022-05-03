@@ -23,27 +23,27 @@
 [<h1>Run Locally</h1>](RUN_LOCALLY.md "Run Locally")
 
 ### Home Page:
-[<img src="Interface/Home_Page.png" alt="Home_Page"></img>](Interface/Home_Page.png)
+[<img src="design/Home_Page.png" alt="Home_Page"></img>](design/Home_Page.png)
 
 ### Profile Page:
-[<img src="Interface/Profile_Page.png" alt="Profile_Page"></img>](Interface/Profile_Page.png)
+[<img src="design/Profile_Page.png" alt="Profile_Page"></img>](design/Profile_Page.png)
 
 ### Stories Page:
-[<img src="Interface/Story_Page.png" alt="Story_Page"></img>](Interface/Story_Page.png)
+[<img src="design/Story_Page.png" alt="Story_Page"></img>](design/Story_Page.png)
 
 ### SignUp Page :
-[<img src="Interface/Sign_Up_Page.png" alt="SignUp_Page"></img>](Interface/Sign_Up_Page.png)
+[<img src="design/Sign_Up_Page.png" alt="SignUp_Page"></img>](design/Sign_Up_Page.png)
 
 ### SignIn Page :
-[<img src="Interface/Sign_In_Page.png" alt="SignIn_Page"></img>](Interface/Sign_In_Page.png)
+[<img src="design/Sign_In_Page.png" alt="SignIn_Page"></img>](design/Sign_In_Page.png)
 
 
 ### Comment Box:
-[<img src="Interface/Comment_Box.png" alt="Comment_Box"></img>](Interface/Comment_Box.png)
+[<img src="design/Comment_Box.png" alt="Comment_Box"></img>](design/Comment_Box.png)
 
 ### Mobile View:
 
-[<img src="Interface/Home_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](Interface/Home_Page_Mobile_View.png)
-[<img src="Interface/Story_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](Interface/Story_Page_Mobile_View.png)
+[<img src="design/Home_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](design/Home_Page_Mobile_View.png)
+[<img src="design/Story_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](design/Story_Page_Mobile_View.png)
 
 <br/>

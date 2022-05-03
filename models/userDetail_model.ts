@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../interface/user";
+import User from "../interface/user.js";
 
 const userDetailSchema = new mongoose.Schema<User>({
   googleID: {
