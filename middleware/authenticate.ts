@@ -17,16 +17,16 @@ const authenticate: RequestHandler = async (req, res, next) => {
       },
       // filtering to get only data that is need when page load
       {
-        // name: 1,
-        // email: 1,
-        // birthday: 1,
-        // gender: 1,
-        // picture: 1,
-        // userID: 1,
-        posts: { $slice: [0, 5] },
-        // posts: { caption: 1, date: 1, picture: { url: 1 } },
+        posts: { $slice: -5 },
+        // getting newly uploaded 5 post
         password: 0,
         cpassword: 0,
+        birthday: 0,
+        gender: 0,
+        date: 0,
+        "messages.message": { $slice: -2 },
+        // only getting 2 item from the array of message from single user
+        tokens: 0,
       }
     );
     if (!rootUser) {

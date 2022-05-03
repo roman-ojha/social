@@ -2,6 +2,7 @@ import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
 import ResponseObject from "interface/responseObject.js";
+import User from "interface/user.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -154,15 +155,15 @@ export default {
       for (let i = botUser.length - 1; i >= lengthOfUserStories; i--) {
         userStories.push(botUser[i]);
       }
-      return res.status(200).json({
+      const resData: any = {
         userProfileDetail: req.rootUser,
         followedUserPost: getUserPost,
         userSuggestion,
         followedBy,
         userStories,
-      });
+      };
+      return res.status(200).json(resData);
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error, Please Try again letter",
@@ -190,14 +191,28 @@ export default {
           .status(401)
           .json({ success: false, err: "User doesn't exist" });
       } else {
-        const isRootUserFollowed = await userDetail.findOne({
-          userID: rootUser.userID,
-          following: {
-            $elemMatch: {
-              userID: userID,
+        const isRootUserFollowed = await userDetail.findOne(
+          {
+            userID: rootUser.userID,
+            following: {
+              $elemMatch: {
+                userID: userID,
+              },
             },
           },
-        });
+          {
+            posts: { $slice: -5 },
+            password: 0,
+            cpassword: 0,
+            birthday: 0,
+            gender: 0,
+            date: 0,
+            messages: 0,
+            tokens: 0,
+            email: 0,
+            _id: 0,
+          }
+        );
         if (!isRootUserFollowed) {
           return res
             .status(200)
@@ -224,7 +239,7 @@ export default {
         {
           name: { $regex: "^" + req.body.name, $options: "i" },
         },
-        { name: 1, picture: 1, userID: 1, email: 1 }
+        { name: 1, picture: 1, userID: 1, email: 1, _id: 0 }
       );
       return res.status(201).json(resUser);
     } catch (err) {
@@ -243,16 +258,25 @@ export default {
           .status(404)
           .json({ success: false, msg: "unauthorized user" });
       }
-      const followUserExist = await userDetail.findOne({
-        // here we are finding only the user which is followed by rootuser to user who is being followed
-        // if it doesn't exist only after that we will going to go forther to save the data if it exist it means he had already follwed the user
-        userID: rootUser.userID,
-        following: {
-          $elemMatch: {
-            userID: userID,
+      const followUserExist = await userDetail.findOne(
+        {
+          // here we are finding only the user which is followed by rootuser to user who is being followed
+          // if it doesn't exist only after that we will going to go forther to save the data if it exist it means he had already follwed the user
+          userID: rootUser.userID,
+          following: {
+            $elemMatch: {
+              userID: userID,
+            },
           },
         },
-      });
+        {
+          name: 1,
+          picture: 1,
+          userID: 1,
+          email: 1,
+          _id: 0,
+        }
+      );
       if (followUserExist) {
         return res.status(200).json({
           success: false,
@@ -282,24 +306,42 @@ export default {
       // logic to store as a friend if both of them had followed
       // we had already check for rootUser that that does rootUser followed the other user
       // now we just have to check does other user follow rootUser if then then save it as a friend
-      const rootUserExistInFollowUser = await userDetail.findOne({
-        userID: userID,
-        following: {
-          $elemMatch: {
-            userID: rootUser.userID,
-          },
-        },
-      });
-      if (rootUserExistInFollowUser) {
-        // if root userExist in followed user only at that time we are porforming this task
-        const followUserExistInRootUser = await userDetail.findOne({
-          userID: rootUser.userID,
+      const rootUserExistInFollowUser = await userDetail.findOne(
+        {
+          userID: userID,
           following: {
             $elemMatch: {
-              userID: userID,
+              userID: rootUser.userID,
             },
           },
-        });
+        },
+        {
+          name: 1,
+          picture: 1,
+          userID: 1,
+          email: 1,
+          _id: 0,
+        }
+      );
+      if (rootUserExistInFollowUser) {
+        // if root userExist in followed user only at that time we are porforming this task
+        const followUserExistInRootUser = await userDetail.findOne(
+          {
+            userID: rootUser.userID,
+            following: {
+              $elemMatch: {
+                userID: userID,
+              },
+            },
+          },
+          {
+            name: 1,
+            picture: 1,
+            userID: 1,
+            email: 1,
+            _id: 0,
+          }
+        );
         if (followUserExistInRootUser) {
           // if both of them follow then this will run
           // storing as a friend to rootuser
@@ -363,14 +405,23 @@ export default {
           .status(404)
           .json({ success: false, err: "unauthorized user" });
       }
-      const unFollowUserExistOnRootUser = await userDetail.findOne({
-        userID: rootUser.userID,
-        following: {
-          $elemMatch: {
-            userID: userID,
+      const unFollowUserExistOnRootUser = await userDetail.findOne(
+        {
+          userID: rootUser.userID,
+          following: {
+            $elemMatch: {
+              userID: userID,
+            },
           },
         },
-      });
+        {
+          name: 1,
+          picture: 1,
+          userID: 1,
+          email: 1,
+          _id: 0,
+        }
+      );
 
       if (!unFollowUserExistOnRootUser) {
         return res.status(404).json({
@@ -387,6 +438,7 @@ export default {
           name: 1,
           userID: 1,
           picture: 1,
+          _id: 0,
         }
       );
       if (!unFollowedToUserExist) {
@@ -429,14 +481,23 @@ export default {
           err: "Server error!!, Please Try again later",
         });
       }
-      const friendExist = await userDetail.findOne({
-        userID: rootUser.userID,
-        friends: {
-          $elemMatch: {
-            userID: userID,
+      const friendExist = await userDetail.findOne(
+        {
+          userID: rootUser.userID,
+          friends: {
+            $elemMatch: {
+              userID: userID,
+            },
           },
         },
-      });
+        {
+          name: 1,
+          picture: 1,
+          userID: 1,
+          email: 1,
+          _id: 0,
+        }
+      );
       if (!friendExist) {
         return res
           .status(200)
