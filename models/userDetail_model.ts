@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../interface/user.js";
+import UserDocument from "../interface/userDocument.js";
 
-const userDetailSchema = new mongoose.Schema<User>({
+const userDetailSchema = new mongoose.Schema<UserDocument>({
   googleID: {
     type: Number,
   },
@@ -247,8 +247,8 @@ userDetailSchema.methods.generateAuthToken = async function () {
 };
 
 userDetailSchema.methods.uploadPost = async function (
-  postData: object,
-  userStoryDetail: object
+  postData,
+  userStoryDetail
 ) {
   try {
     // console.log(postData);
@@ -305,5 +305,5 @@ userDetailSchema.methods.saveMessage = async function (message) {
   } catch (err) {}
 };
 
-const UserDetail = mongoose.model<User>("USERDETAIL", userDetailSchema);
+const UserDetail = mongoose.model<UserDocument>("USERDETAIL", userDetailSchema);
 export default UserDetail;

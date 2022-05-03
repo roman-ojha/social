@@ -2,7 +2,7 @@ import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
 import ResponseObject from "interface/responseObject.js";
-import User from "interface/user.js";
+import User from "interface/userDocument.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {

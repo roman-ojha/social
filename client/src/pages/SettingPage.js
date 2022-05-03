@@ -12,7 +12,7 @@ import {
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import Api from "../services/api/pages/settingPageApi";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -40,12 +40,7 @@ const SettingPage = () => {
   const changeUserID = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios({
-        method: "POST",
-        url: "/changeUserID",
-        data: { newUserID: settingInputFieldData.userID },
-        withCredentials: true,
-      });
+      const res = await Api.changeUserID(settingInputFieldData);
       const resData = await res.data;
       if (resData.success) {
         dispatch(changeRootUserUserIDAction(resData.userID));
@@ -57,12 +52,7 @@ const SettingPage = () => {
   const changeName = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios({
-        method: "POST",
-        url: "/changeName",
-        data: { newName: settingInputFieldData.name },
-        withCredentials: true,
-      });
+      const res = Api.changeName(settingInputFieldData);
       const resData = await res.data;
       if (resData.success) {
         dispatch(changeRootUserNameAction(resData.name));
@@ -74,16 +64,7 @@ const SettingPage = () => {
   const changePassword = async (e) => {
     try {
       e.preventDefault();
-      const res = await axios({
-        method: "POST",
-        url: "/changePassword",
-        data: {
-          oldPassword: settingInputFieldData.oldPassword,
-          newPassword: settingInputFieldData.newPassword,
-          cNewPassword: settingInputFieldData.cNewPassword,
-        },
-        withCredentials: true,
-      });
+      const res = await Api.changePassword(settingInputFieldData);
       const data = await res.data;
       if (res.status != 200) {
         // Some Error
@@ -114,12 +95,7 @@ const SettingPage = () => {
         setUserPostResponseLoading(true);
         const data = new FormData();
         data.append("image", imageFile);
-        const res = await axios({
-          method: "POST",
-          url: "/changeProfile/imgFile",
-          data: data,
-          withCredentials: true,
-        });
+        const res = await Api.changeImageUrlProfilePicture(data);
         const resData = await res.data;
         if (resData.success) {
           dispatch(changeUserProfilePictureAction(resData.picture));
@@ -144,7 +120,9 @@ const SettingPage = () => {
         setUserPostResponseLoading(false);
       }
       setSettingInputFieldData({ ...settingInputFieldData, imgUrl: "" });
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
   useEffect(() => {
     // checking is url is image or not

@@ -1,4 +1,6 @@
-export default interface User {
+import { Document } from "mongoose";
+
+export default interface UserDocument extends Document {
   googleID: number;
   id: string;
   name: string;

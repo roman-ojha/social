@@ -267,13 +267,19 @@ export default {
   changeProfileUsingImgFile: async (req, res) => {
     try {
       const file = req.file;
-      if (!file) {
-        return res.status(204).json({
+      if (file === undefined) {
+        return res.status(400).json({
           success: false,
           msg: "File Doesn't exist, Please Send us File",
         });
       }
       const rootUser = await varifyUser(req.cookies.AuthToken);
+      if (!rootUser) {
+        return res.status(401).json({
+          success: false,
+          msg: "UnAuthorized user",
+        });
+      }
       await compressFile(req.file.path);
       fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
       const metadata = {
@@ -327,6 +333,7 @@ export default {
         userPostDetail,
         userStoryDetail
       );
+      console.log(uploadPostRes);
       if (uploadPostRes) {
         const updateProfilePictureRes = await userDetail.updateOne(
           {
@@ -335,23 +342,26 @@ export default {
           { $set: { picture: picUrl } }
         );
         if (updateProfilePictureRes) {
-          return res.send({
+          return res.status(500).json({
             success: true,
             msg: "Successfully Change Profile Picture",
             picture: picUrl,
           });
         }
-        return res
-          .status(500)
-          .json({ error: "Server Error!!, Please Try again letter" });
+        return res.status(500).json({
+          success: false,
+          msg: "Server Error!!, Please Try again letter",
+        });
       }
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+      return res.status(500).json({
+        success: false,
+        msg: "Server Error!!, Please Try again letter",
+      });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+      return res.status(500).json({
+        success: false,
+        msg: "Server Error!!, Please Try again letter",
+      });
     }
   },
 };
