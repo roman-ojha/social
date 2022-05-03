@@ -1,12 +1,14 @@
 import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
+import { Request, Response } from "express";
+
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
   botUser = JSON.parse(user);
 });
 
 export default {
-  main: async (req, res) => {
+  main: async (req: Request, res: Response): Promise<object> => {
     // writing logic to get all rootUser and rootUser follow user post
     // console.log(req.rootUser.friends);
     try {
@@ -163,17 +165,18 @@ export default {
         .json({ success: false, msg: "Server Error, Please Try again letter" });
     }
   },
-  homeUser: (req, res) => {
+  homeUser: (req: Request, res: Response): object => {
     try {
       const rootUser = req.rootUser;
       return res.status(200).json(rootUser);
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+      return res.status(500).json({
+        success: false,
+        error: "Server Error!!, Please Try again letter",
+      });
     }
   },
-  getUserProfile: async (req, res) => {
+  getUserProfile: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const userID = req.params.userid;
@@ -208,7 +211,7 @@ export default {
       });
     }
   },
-  search: async (req, res) => {
+  search: async (req: Request, res: Response): Promise<object> => {
     try {
       if (req.body.name.length === 0) {
         return res.status(201).json([]);
@@ -226,7 +229,7 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
-  followUser: async (req, res) => {
+  followUser: async (req, res): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const { email, userID } = req.body;

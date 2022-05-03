@@ -32,11 +32,9 @@ const authenticate: RequestHandler = async (req, res, next) => {
     req.rootUser = rootUser;
     req.userID = rootUser._id;
     next();
-    return;
   } catch (err) {
-    res.status(401).send("Unauthorized: No token provided");
+    return res.status(401).send("Unauthorized: No token provided");
     // console.log(err);
-    return;
   }
 };
 

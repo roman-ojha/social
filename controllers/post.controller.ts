@@ -1,7 +1,8 @@
 import userDetail from "../models/userDetail_model.js";
+import { Request, Response } from "express";
 
 export default {
-  like: async (req, res) => {
+  like: async (req: Request, res: Response): Promise<object> => {
     try {
       const { postID, to } = req.body;
       if (!postID || !to) {
@@ -119,7 +120,7 @@ export default {
       });
     }
   },
-  comment: async (req, res) => {
+  comment: async (req: Request, res: Response): Promise<object> => {
     try {
       const { comment, postID, to } = req.body;
       if (!comment) {
@@ -128,7 +129,7 @@ export default {
           msg: "Comment Field is Empty, Please fill the filed",
         });
       }
-      if ((!postID, !to)) {
+      if (!postID && !to) {
         return res.status(400).json({
           success: false,
           msg: "Client Error, Please Try again later",
@@ -170,7 +171,7 @@ export default {
         .status(200)
         .json({ success: true, msg: "Commented Successfully" });
     } catch (err) {
-      res.status(500).json({
+      return res.status(500).json({
         success: false,
         msg: "Server Error, Please try again Letter...",
       });
