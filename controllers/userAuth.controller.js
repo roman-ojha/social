@@ -16,7 +16,10 @@ export default {
           .status(422)
           .json({ success: false, err: "Password doesn't match" });
       }
-      const emailExist = await userDetail.findOne({ email: email });
+      const emailExist = await userDetail.findOne(
+        { email: email },
+        { name: 1, userID: 1, email: 1 }
+      );
       if (emailExist) {
         return res
           .status(422)
@@ -67,7 +70,16 @@ export default {
           .status(400)
           .json({ success: false, err: "Please filled the form properly!!!" });
       }
-      const userLogin = await userDetail.findOne({ email: email });
+      const userLogin = await userDetail.findOne(
+        { email: email },
+        {
+          email: 1,
+          password: 1,
+          userID: 1,
+          name: 1,
+          tokens: { $slice: [0, 5] },
+        }
+      );
       if (!userLogin) {
         return res
           .status(404)

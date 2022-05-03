@@ -93,7 +93,6 @@ export default {
             name: 1,
             userID: 1,
             email: 1,
-            _id: 0,
           },
         },
         { $sample: { size: 5 } },
@@ -119,7 +118,6 @@ export default {
             picture: 1,
             name: 1,
             userID: 1,
-            _id: 0,
           },
         },
         { $sample: { size: 5 } },
@@ -144,7 +142,6 @@ export default {
             userID: 1,
             name: 1,
             stories: 1,
-            _id: 0,
           },
         },
         {
@@ -210,7 +207,6 @@ export default {
             messages: 0,
             tokens: 0,
             email: 0,
-            _id: 0,
           }
         );
         if (!isRootUserFollowed) {
@@ -274,7 +270,6 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
-          _id: 0,
         }
       );
       if (followUserExist) {
@@ -320,7 +315,6 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
-          _id: 0,
         }
       );
       if (rootUserExistInFollowUser) {
@@ -339,7 +333,6 @@ export default {
             picture: 1,
             userID: 1,
             email: 1,
-            _id: 0,
           }
         );
         if (followUserExistInRootUser) {
@@ -419,7 +412,6 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
-          _id: 0,
         }
       );
 
@@ -438,7 +430,6 @@ export default {
           name: 1,
           userID: 1,
           picture: 1,
-          _id: 0,
         }
       );
       if (!unFollowedToUserExist) {
@@ -495,7 +486,6 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
-          _id: 0,
         }
       );
       if (!friendExist) {

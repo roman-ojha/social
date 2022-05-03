@@ -29,8 +29,6 @@ import ProgressBar from "../react-components/ProgressBar";
 import StoriesPage from "./StoriesPage";
 
 const Index = () => {
-  const progressBarState = useSelector((state) => state.progressBarReducer);
-  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
@@ -118,6 +116,8 @@ const Index = () => {
     getUserData();
   }, []);
   const ReturnMainPage = () => {
+    const progressBarState = useSelector((state) => state.progressBarReducer);
+    const commentBoxStore = useSelector((state) => state.commentBoxReducer);
     return (
       <>
         {progressBarState.showProgressBar ? <ProgressBar /> : <></>}

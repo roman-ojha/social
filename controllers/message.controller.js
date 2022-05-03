@@ -9,21 +9,35 @@ export default {
       if (!req.body.receiver) {
         return res.status(401).json({ error: "receiver Doesn't exist" });
       }
-      const receiverExist = await userDetail.findOne({
-        // searching that user to message if it exist
-        userID: receiverUser,
-      });
+      const receiverExist = await userDetail.findOne(
+        {
+          // searching that user to message if it exist
+          userID: receiverUser,
+        },
+        {
+          email: 1,
+          userID: 1,
+          name: 1,
+        }
+      );
       if (!receiverExist) {
         return res.status(400).json({ error: "User doesn't exist" });
       }
-      const messageExist = await userDetail.findOne({
-        userID: rootUser.userID,
-        messages: {
-          $elemMatch: {
-            messageTo: receiverUser,
+      const messageExist = await userDetail.findOne(
+        {
+          userID: rootUser.userID,
+          messages: {
+            $elemMatch: {
+              messageTo: receiverUser,
+            },
           },
         },
-      });
+        {
+          email: 1,
+          userID: 1,
+          name: 1,
+        }
+      );
       if (!messageExist) {
         // if initialize message doesn't exist then we have to create a field for both user
         const resSaveRootMsg = await userDetail.updateOne(
@@ -81,10 +95,17 @@ export default {
           .status(404)
           .json({ success: false, err: "Receiver user doesn't exist" });
       }
-      const receiverExist = await userDetail.findOne({
-        // searching that user to message if it exist
-        userID: receiverUserID,
-      });
+      const receiverExist = await userDetail.findOne(
+        {
+          // searching that user to message if it exist
+          userID: receiverUserID,
+        },
+        {
+          name: 1,
+          userID: 1,
+          email: 1,
+        }
+      );
       if (!receiverExist) {
         return res
           .status(404)

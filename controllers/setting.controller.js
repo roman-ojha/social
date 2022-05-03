@@ -64,9 +64,16 @@ export default {
           .status(204)
           .json({ success: false, msg: "Please Fill the userID Field" });
       }
-      const userIDAlreadyExist = await userDetail.findOne({
-        userID: newUserID,
-      });
+      const userIDAlreadyExist = await userDetail.findOne(
+        {
+          userID: newUserID,
+        },
+        {
+          name: 1,
+          userID: 1,
+          email: 1,
+        }
+      );
       if (userIDAlreadyExist) {
         return res.json({
           success: false,

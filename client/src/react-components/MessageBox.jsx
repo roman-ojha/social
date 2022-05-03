@@ -58,6 +58,7 @@ const MessageBox = () => {
         data: JSON.stringify({ userID: props.messageInfo.messageTo }),
         withCredentials: true,
       });
+      console.log(await resMessage.data);
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
