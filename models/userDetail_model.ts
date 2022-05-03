@@ -247,20 +247,20 @@ userDetailSchema.methods.generateAuthToken = async function () {
 };
 
 userDetailSchema.methods.uploadPost = async function (
-  postData,
-  userStoryDetail
+  postData: object,
+  userStoryDetail: object
 ) {
   try {
-    // console.log(postData);
     this.posts.unshift(postData);
-    if (userStoryDetail != undefined) {
+    if (userStoryDetail !== undefined) {
       this.stories = userStoryDetail;
     }
     this.postNo++;
     await this.save();
     return this.posts;
   } catch (err) {
-    // console.log(err);
+    console.log(err);
+    return undefined;
   }
 };
 

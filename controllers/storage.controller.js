@@ -162,7 +162,17 @@ export default {
           err: "Sorry..., UserID already exist",
         });
       } else {
-        const rootUser = await userDetail.findOne({ email: email });
+        const rootUser = await userDetail.findOne(
+          { email: email },
+          {
+            name: 1,
+            userID: 1,
+            email: 1,
+            posts: 1,
+            stories: 1,
+            postNo: 1,
+          }
+        );
         if (!rootUser) {
           return res.status(401).json({ success: false, err: "UnAuthorized" });
         }
@@ -270,7 +280,7 @@ export default {
       if (file === undefined) {
         return res.status(400).json({
           success: false,
-          msg: "File Doesn't exist, Please Send us File",
+          msg: "File/ImgUrl Doesn't exist, Please Send us File/ImgUrl",
         });
       }
       const rootUser = await varifyUser(req.cookies.AuthToken);
@@ -329,11 +339,11 @@ export default {
           month: "long",
         })} ${today.getDate()}, ${today.getFullYear()}`,
       };
+      console.log(rootUser);
       const uploadPostRes = await rootUser.uploadPost(
         userPostDetail,
         userStoryDetail
       );
-      console.log(uploadPostRes);
       if (uploadPostRes) {
         const updateProfilePictureRes = await userDetail.updateOne(
           {
@@ -342,7 +352,7 @@ export default {
           { $set: { picture: picUrl } }
         );
         if (updateProfilePictureRes) {
-          return res.status(500).json({
+          return res.status(200).json({
             success: true,
             msg: "Successfully Change Profile Picture",
             picture: picUrl,

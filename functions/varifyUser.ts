@@ -17,12 +17,14 @@ export default async function varifyUser(token: string) {
       name: 1,
       userID: 1,
       email: 1,
-      tokens: { $slice: [0, 5] },
+      posts: 1,
+      stories: 1,
+      postNo: 1,
     }
   );
   if (!rootUser) {
     // return rootUser;
-    return undefined;
+    return null;
   }
   return rootUser;
 }

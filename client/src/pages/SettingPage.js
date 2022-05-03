@@ -13,6 +13,7 @@ import LoadingSpinner from "../react-components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";
+import { toastError, toastSuccess } from "../services/toast";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -97,9 +98,11 @@ const SettingPage = () => {
         data.append("image", imageFile);
         const res = await Api.changeImageUrlProfilePicture(data);
         const resData = await res.data;
-        if (resData.success) {
+        if (resData.success && res.status === 200) {
+          toastSuccess(resData.msg);
           dispatch(changeUserProfilePictureAction(resData.picture));
         } else {
+          toastError(resData.msg);
         }
         setUserPostResponseLoading(false);
       } else {
@@ -121,7 +124,9 @@ const SettingPage = () => {
       }
       setSettingInputFieldData({ ...settingInputFieldData, imgUrl: "" });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
+      toastError(err.response.data.msg);
+      setUserPostResponseLoading(false);
     }
   };
   useEffect(() => {
