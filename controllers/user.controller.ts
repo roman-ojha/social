@@ -1,6 +1,7 @@
 import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
+import ResponseObject from "interface/responseObject.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -12,9 +13,11 @@ export default {
     // writing logic to get all rootUser and rootUser follow user post
     // console.log(req.rootUser.friends);
     try {
-      let getUserPost;
+      let getUserPost: never[];
       const currentDate = new Date();
-      const getUserPostFunction = async (getPastDate) => {
+      const getUserPostFunction = async (
+        getPastDate: number
+      ): Promise<never[]> => {
         // getPastDate will get those date from which we want to user post filed
         const dateCurrentDateEarly = new Date(currentDate);
         dateCurrentDateEarly.setDate(
@@ -71,7 +74,7 @@ export default {
         }
       }
       // getting/creating data for Suggestion for You and followed By block
-      let userSuggestion = await userDetail.aggregate([
+      let userSuggestion: any[] = await userDetail.aggregate([
         //getting the document that is not rootUser & and the user which is not friend of rootUser
         {
           $match: {
@@ -94,13 +97,13 @@ export default {
         },
         { $sample: { size: 5 } },
       ]);
-      const lengthOfuserSuggestion = userSuggestion.length;
+      const lengthOfuserSuggestion: number = userSuggestion.length;
       for (let i = 0; i < 5 - lengthOfuserSuggestion; i++) {
         // pushing but user according to the user that are avilable in original userSuggestion data
         userSuggestion.push(botUser[i]);
       }
       // getting/create data for Followed by user block in client site
-      let followedBy = await userDetail.aggregate([
+      let followedBy: any[] = await userDetail.aggregate([
         {
           $match: {
             $and: [
@@ -120,12 +123,12 @@ export default {
         },
         { $sample: { size: 5 } },
       ]);
-      const lengthOfFollowedBy = followedBy.length;
+      const lengthOfFollowedBy: number = followedBy.length;
       for (let i = botUser.length - 1; i >= lengthOfFollowedBy; i--) {
         followedBy.push(botUser[i]);
       }
 
-      let userStories = await userDetail.aggregate([
+      let userStories: any[] = await userDetail.aggregate([
         {
           $match: {
             $and: [
@@ -147,7 +150,7 @@ export default {
           $sample: { size: 10 },
         },
       ]);
-      const lengthOfUserStories = userStories.length;
+      const lengthOfUserStories: number = userStories.length;
       for (let i = botUser.length - 1; i >= lengthOfUserStories; i--) {
         userStories.push(botUser[i]);
       }
@@ -160,9 +163,10 @@ export default {
       });
     } catch (err) {
       console.log(err);
-      return res
-        .status(500)
-        .json({ success: false, msg: "Server Error, Please Try again letter" });
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error, Please Try again letter",
+      });
     }
   },
   homeUser: (req: Request, res: Response): object => {

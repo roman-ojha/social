@@ -1,11 +1,15 @@
 import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import { RequestHandler } from "express";
+import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
 
 const authenticate: RequestHandler = async (req, res, next) => {
   try {
     const token = req.cookies.AuthToken;
-    const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+    const verifyToken = jwt.verify(
+      token,
+      process.env.SECRET_KEY!
+    ) as ExtendJWTPayload;
     const rootUser = await userDetail.findOne(
       {
         _id: verifyToken._id,
@@ -30,8 +34,8 @@ const authenticate: RequestHandler = async (req, res, next) => {
     }
     req.token = token;
     req.rootUser = rootUser;
-    // req.userID = rootUser._id; // in javascript
-    req.userID = rootUser.id;
+    req.userID = <any>rootUser._id;
+    // req.userID = rootUser.id;
     next();
   } catch (err) {
     return res.status(401).send("Unauthorized: No token provided");
