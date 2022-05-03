@@ -6,3 +6,4 @@ node_modules
 /db/Images
 docker-compose.dev.yml
 note.txt
+/dist

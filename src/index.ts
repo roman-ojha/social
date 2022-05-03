@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import express from "express";
+import { RequestHandler } from "express";
 import cookieParser from "cookie-parser";
 import postRoute from "../routes/post.js";
 import userRoute from "../routes/user.js";
@@ -12,13 +12,13 @@ import google_OAuth_route from "../routes/google_OAuth_route.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
-const PORT = process.env.PORT;
-// app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
-app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
+import environment from "../constants/environment.js";
+const PORT = environment.PORT;
+app.use(cors({ credentials: true, origin: environment.CLIENT_BASE_URL }));
 app.use(cookieParser());
-app.unsubscribe(express.json());
+// app.unsubscribe(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json() as RequestHandler);
 
 // Database connection
 import("../db/userDataConnection.js");

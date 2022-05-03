@@ -5,9 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "env-cmd -f .env.prod node src/index.js",
-    "dev:node": "env-cmd -f .env.dev node src/index.js",
-    "dev": "env-cmd -f .env.dev nodemon src/index.js",
+    "build": "tsc",
+    "start": "env-cmd -f .env.prod ts-node src/index.ts",
+    "dev": "env-cmd -f .env.dev nodemon src/index.ts",
+    "dev:node": "env-cmd -f .env.dev ts-node src/index.ts",
     "docker-compose-down": "docker-compose -f ./docker-compose.dev.yml down",
     "docker-compose-up:dev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
     "docker:dev": "yarn docker-compose-down & yarn docker-compose-up:dev",
@@ -42,7 +43,11 @@
     "uuid-v4": "^0.1.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.31",
     "nodemon": "^2.0.16",
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.4"
   },
   "repository": {
