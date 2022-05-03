@@ -1,9 +1,9 @@
-import { Schema, model } from "mongoose";
+import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import User from "../interface/user";
 
-const userDetailSchema = new Schema<User>({
+const userDetailSchema = new mongoose.Schema<User>({
   googleID: {
     type: Number,
   },
@@ -305,5 +305,5 @@ userDetailSchema.methods.saveMessage = async function (message) {
   } catch (err) {}
 };
 
-const UserDetail = model<User>("USERDETAIL", userDetailSchema);
+const UserDetail = mongoose.model<User>("USERDETAIL", userDetailSchema);
 export default UserDetail;

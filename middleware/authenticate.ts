@@ -30,7 +30,8 @@ const authenticate: RequestHandler = async (req, res, next) => {
     }
     req.token = token;
     req.rootUser = rootUser;
-    req.userID = rootUser._id;
+    // req.userID = rootUser._id; // in javascript
+    req.userID = rootUser.id;
     next();
   } catch (err) {
     return res.status(401).send("Unauthorized: No token provided");
