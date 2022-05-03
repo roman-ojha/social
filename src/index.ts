@@ -17,7 +17,7 @@ const PORT = environment.PORT;
 app.use(cors({ credentials: true, origin: environment.CLIENT_BASE_URL }));
 app.use(cookieParser());
 // app.unsubscribe(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
 app.use(bodyParser.json() as RequestHandler);
 
 // Database connection

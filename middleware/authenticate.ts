@@ -1,7 +1,8 @@
 import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
+import { RequestHandler } from "express";
 
-const authenticate = async (req, res, next) => {
+const authenticate: RequestHandler = async (req, res, next) => {
   try {
     const token = req.cookies.AuthToken;
     const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
@@ -31,9 +32,11 @@ const authenticate = async (req, res, next) => {
     req.rootUser = rootUser;
     req.userID = rootUser._id;
     next();
+    return;
   } catch (err) {
     res.status(401).send("Unauthorized: No token provided");
     // console.log(err);
+    return;
   }
 };
 

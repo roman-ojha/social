@@ -1,14 +1,13 @@
 import { createServer } from "http";
-import express from "express";
+import express, { Express } from "express";
 import { Server } from "socket.io";
 import userDetail from "../models/userDetail_model.js";
-import dotenv from "dotenv";
-dotenv.config();
+import environment from "../constants/environment.js";
 
-const app = express();
+const app: Express = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: { credentials: true, origin: process.env.CLIENT_BASE_URL },
+  cors: { credentials: true, origin: environment.CLIENT_BASE_URL },
 });
 
 io.on("connect", (socket) => {
