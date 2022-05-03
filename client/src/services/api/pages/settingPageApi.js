@@ -29,11 +29,21 @@ export default {
       withCredentials: true,
     });
   },
-  changeImageUrlProfilePicture: async (data) => {
+  changeImageFileProfilePicture: async (data) => {
     return await axios({
       method: "POST",
       url: "/changeProfile/imgFile",
       data: data,
+      withCredentials: true,
+    });
+  },
+  changeImageUrlProfilePicture: async (imageUrl) => {
+    return await axios({
+      method: "POST",
+      url: "/changeProfile/imgUrl",
+      data: {
+        imageUrl,
+      },
       withCredentials: true,
     });
   },

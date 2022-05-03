@@ -1,6 +1,4 @@
-import { Response } from "express";
-
-export default interface ResponseObject extends Response {
+export default interface ResponseObject {
   success: boolean;
   msg: string;
 }

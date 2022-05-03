@@ -3,17 +3,18 @@ import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import { instance as axios } from "../services/axios";
 import {
   changeUserProfilePictureAction,
   changeRootUserUserIDAction,
   changeRootUserNameAction,
+  startProgressBar,
+  stopProgressBar,
 } from "../redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";
-import { toastError, toastSuccess } from "../services/toast";
+import { toastError, toastInfo, toastSuccess } from "../services/toast";
 
 const SettingPage = () => {
   const userProfileDetailStore = useSelector(
@@ -41,41 +42,59 @@ const SettingPage = () => {
   const changeUserID = async (e) => {
     try {
       e.preventDefault();
+      dispatch(startProgressBar());
       const res = await Api.changeUserID(settingInputFieldData);
       const resData = await res.data;
       if (resData.success) {
+        toastSuccess(resData.msg);
         dispatch(changeRootUserUserIDAction(resData.userID));
       } else {
-        // Toast
+        toastError(resData.msg);
       }
-    } catch (err) {}
+      dispatch(stopProgressBar());
+    } catch (err) {
+      toastError(err.response.data.msg);
+      dispatch(stopProgressBar());
+    }
   };
   const changeName = async (e) => {
     try {
       e.preventDefault();
-      const res = Api.changeName(settingInputFieldData);
+      dispatch(startProgressBar());
+      const res = await Api.changeName(settingInputFieldData);
       const resData = await res.data;
-      if (resData.success) {
+      if (resData.success && res.status === 200) {
+        toastSuccess(resData.msg);
         dispatch(changeRootUserNameAction(resData.name));
       } else {
-        // Toast
+        toastError(resData.msg);
       }
-    } catch (err) {}
+      dispatch(stopProgressBar());
+    } catch (err) {
+      toastError(err.response.data.msg);
+      dispatch(stopProgressBar());
+    }
   };
   const changePassword = async (e) => {
     try {
       e.preventDefault();
+      dispatch(startProgressBar());
       const res = await Api.changePassword(settingInputFieldData);
       const data = await res.data;
-      if (res.status != 200) {
-        // Some Error
+      if (res.status === 200 && data.success) {
+        toastSuccess(data.msg);
       } else {
-        // console.log(data.msg);
+        toastError(data.msg);
       }
-    } catch (err) {}
+      dispatch(stopProgressBar());
+    } catch (err) {
+      toastError(err.response.data.msg);
+      dispatch(stopProgressBar());
+    }
   };
   const deleteUser = (e) => {
     e.preventDefault();
+    toastInfo("Sorry!! this feature is not available right now");
   };
   const getNewProfilePicture = (e) => {
     try {
@@ -96,7 +115,7 @@ const SettingPage = () => {
         setUserPostResponseLoading(true);
         const data = new FormData();
         data.append("image", imageFile);
-        const res = await Api.changeImageUrlProfilePicture(data);
+        const res = await Api.changeImageFileProfilePicture(data);
         const resData = await res.data;
         if (resData.success && res.status === 200) {
           toastSuccess(resData.msg);
@@ -107,18 +126,13 @@ const SettingPage = () => {
         setUserPostResponseLoading(false);
       } else {
         setUserPostResponseLoading(true);
-        const res = await axios({
-          method: "POST",
-          url: "/changeProfile/imgUrl",
-          data: {
-            imageUrl,
-          },
-          withCredentials: true,
-        });
+        const res = await Api.changeImageUrlProfilePicture(imageUrl);
         const resData = await res.data;
-        if (resData.success) {
+        if (resData.success && res.status === 200) {
+          toastSuccess(resData.msg);
           dispatch(changeUserProfilePictureAction(imageUrl));
         } else {
+          toastError(resData.msg);
         }
         setUserPostResponseLoading(false);
       }

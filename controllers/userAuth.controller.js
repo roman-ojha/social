@@ -77,7 +77,7 @@ export default {
           password: 1,
           userID: 1,
           name: 1,
-          tokens: { $slice: [0, 5] },
+          tokens: 1,
         }
       );
       if (!userLogin) {
