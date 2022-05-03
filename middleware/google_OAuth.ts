@@ -1,11 +1,11 @@
 import passport from "passport";
 import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
-
+import { NextFunction, Request, Response } from "express";
 import GoogleOauth2 from "passport-google-oauth2";
 const GoogleStrategy = GoogleOauth2.Strategy;
-let GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
-let GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_CLIENT_ID: string = process.env.GOOGLE_CLIENT_ID as string;
+const GOOGLE_CLIENT_SECRET: string = process.env.GOOGLE_CLIENT_SECRET as string;
 
 passport.use(
   new GoogleStrategy(
@@ -15,10 +15,18 @@ passport.use(
       callbackURL: `${process.env.API_BASE_URL}/google/callback`,
       passReqToCallback: true,
     },
-    async function (request, accessToken, refreshToken, profile, done) {
+    async function (
+      request: any,
+      accessToken: any,
+      refreshToken: any,
+      profile: any,
+      done: any
+    ) {
       try {
-        let token;
-        const userExist = await userDetail.findOne({ email: profile.email });
+        const userExist = await userDetail.findOne(
+          { email: profile.email },
+          { name: 1, email: 1, userID: 1 }
+        );
         if (userExist) {
           // if the user exist but had already signup from the social Accout
           // i had not complete this feture but, will be complete in future
@@ -71,14 +79,14 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function (user: Express.User, done) {
   done(null, user);
 });
-passport.deserializeUser((user, done) => {
+passport.deserializeUser(function (user: Express.User, done) {
   done(null, user);
 });
 
-function isLoggedIn(req, res, next) {
+function isLoggedIn(req: Request, res: Response, next: NextFunction) {
   req.user ? next() : res.sendStatus(401);
 }
 

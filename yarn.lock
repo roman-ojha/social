@@ -695,6 +695,20 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-17.0.31.tgz#a5bb84ecfa27eec5e1c802c6bbf8139bdb163a5d"
   integrity sha512-AR0x5HbXGqkEx9CadRH3EBYx/VkiUgZIhP4wvPn/+5KIsgpNoyFaRlVe0Zlx9gRtg8fA06a9tskE2MSN7TcG4Q==
 
+"@types/passport-google-oauth2@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@types/passport-google-oauth2/-/passport-google-oauth2-0.1.5.tgz#5a001be1d02f35c33125fdb7e8347aed47074140"
+  integrity sha512-naBOrmo8IC6nVb565nKD5S3BCQTIOlGQP7HkDyLJ3taujG9O33Obi0chQa4PtXz82kPSdC7zoBd50hBVQVojtA==
+  dependencies:
+    "@types/express" "*"
+
+"@types/passport@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@types/passport/-/passport-1.0.7.tgz#85892f14932168158c86aecafd06b12f5439467a"
+  integrity sha512-JtswU8N3kxBYgo+n9of7C97YQBT+AYPP2aBfNGTzABqPAZnK/WOAaKfh3XesUYMZRrXFuoPc2Hv0/G/nQFveHw==
+  dependencies:
+    "@types/express" "*"
+
 "@types/pump@^1.1.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/pump/-/pump-1.1.1.tgz#edb3475e2bad0f4552bdaa91c6c43b82e08ff15e"
@@ -718,6 +732,13 @@
   integrity sha512-nCkHGI4w7ZgAdNkrEu0bv+4xNV/XDqW+DydknebMOQwkpDGx8G+HTlj7R7ABI8i8nKxVw0wtKPi1D+lPOkh4YQ==
   dependencies:
     "@types/mime" "^1"
+    "@types/node" "*"
+
+"@types/sharp@^0.30.2":
+  version "0.30.2"
+  resolved "https://registry.yarnpkg.com/@types/sharp/-/sharp-0.30.2.tgz#df5ff34140b3bad165482e6f3d26b08e42a0503a"
+  integrity sha512-uLCBwjDg/BTcQit0dpNGvkIjvH3wsb8zpaJePCjvONBBSfaKHoxXBIuq1MT8DMQEfk2fKYnpC9QExCgFhkGkMQ==
+  dependencies:
     "@types/node" "*"
 
 "@types/strip-bom@^3.0.0":
