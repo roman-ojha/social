@@ -1,7 +1,6 @@
 import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import UserDocument from "interface/userDocument.js";
 import { Request, Response } from "express";
 import ResponseObject from "interface/responseObject.js";
 

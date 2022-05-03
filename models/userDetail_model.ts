@@ -2,8 +2,15 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import UserDocument from "../interface/userDocument.js";
+import SchemaMethodInstance from "interface/userSchemaMethods.js";
+import ModelMethodInstance from "interface/userModelMethods.js";
 
-const userDetailSchema = new mongoose.Schema<UserDocument>({
+const userDetailSchema = new mongoose.Schema<
+  SchemaMethodInstance,
+  ModelMethodInstance,
+  {},
+  {}
+>({
   googleID: {
     type: Number,
   },
@@ -235,14 +242,16 @@ userDetailSchema.pre("save", async function (next) {
   next();
 });
 
-userDetailSchema.methods.generateAuthToken = async function () {
+userDetailSchema.methods.generateAuthToken = async function (): Promise<
+  string | null
+> {
   try {
     let token: string = jwt.sign({ _id: this._id }, process.env.SECRET_KEY!);
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
   } catch (err) {
-    // console.log(err);
+    return null;
   }
 };
 
@@ -260,11 +269,10 @@ userDetailSchema.methods.uploadPost = async function (
     return this.posts;
   } catch (err) {
     console.log(err);
-    return undefined;
+    return null;
   }
 };
-
-userDetailSchema.methods.followUser = async function (followedToUser) {
+userDetailSchema.methods.followUser = async function (followedToUser: any) {
   try {
     // saving following user detail into current user database
     this.following.unshift(followedToUser);
@@ -295,7 +303,9 @@ userDetailSchema.methods.followUser = async function (followedToUser) {
     } else {
       return false;
     }
-  } catch (err) {}
+  } catch (err) {
+    return false;
+  }
 };
 
 userDetailSchema.methods.saveMessage = async function (message) {
@@ -305,5 +315,9 @@ userDetailSchema.methods.saveMessage = async function (message) {
   } catch (err) {}
 };
 
-const UserDetail = mongoose.model<UserDocument>("USERDETAIL", userDetailSchema);
+const UserDetail = mongoose.model<SchemaMethodInstance>(
+  "USERDETAIL",
+  userDetailSchema
+);
+
 export default UserDetail;

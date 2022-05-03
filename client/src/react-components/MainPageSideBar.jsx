@@ -32,10 +32,6 @@ const MainPageSideBar = () => {
       const res = await axios({
         method: "GET",
         url: "/u/logout",
-        header: {
-          Accpet: "application/josn",
-          "Content-Type": "application/json",
-        },
         withCredentials: true,
       });
       dispatch(stopProgressBar());

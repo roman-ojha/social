@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
-import { toastError, toastWarn } from "../services/toast";
+import { toastError, toastSuccess, toastWarn } from "../services/toast";
 
 let previousSelectGenderElement;
 const SignUpPage = () => {
@@ -129,15 +129,15 @@ const SignUpPage = () => {
       });
       const data = await res.data;
       dispatch(stopProgressBar());
-      if (res.status === 422 || !data) {
-        // console.log(data.error);
-      } else {
-        // console.log(data.message);
+      if (res.status === 200 && data.success) {
+        toastSuccess(data.msg);
         history.push("/userid?uid=undefined");
+      } else {
+        toastError(data.msg);
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toastError(err.response.data.err);
+        toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
