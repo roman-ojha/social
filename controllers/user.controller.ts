@@ -229,7 +229,7 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
-  followUser: async (req, res): Promise<object> => {
+  followUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const { email, userID } = req.body;
@@ -349,7 +349,7 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
-  unFollowUser: async (req, res) => {
+  unFollowUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const { email, userID } = req.body;
