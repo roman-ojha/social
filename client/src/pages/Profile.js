@@ -18,7 +18,7 @@ import { Helmet } from "react-helmet";
 import CommentBox from "../react-components/CommentBox";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 import { toastSuccess, toastError } from "../services/toast";
-import ReturnProfileRoute from "../routes/ReturnProfileRoute";
+import RoutingProfilePage from "../routes/RoutingProfilePage";
 
 const Profile = () => {
   const history = useHistory();
@@ -350,7 +350,7 @@ const Profile = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            <ReturnProfileRoute
+            <RoutingProfilePage
               profilePageMainInformation={{
                 // store searched user essintal information
                 name: profilePageData.name,

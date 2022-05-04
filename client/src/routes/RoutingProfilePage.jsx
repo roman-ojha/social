@@ -4,7 +4,7 @@ import ProfileFriends from "../react-components/ProfileFriends";
 import ProfileAlbums from "../react-components/ProfileAlbums";
 import UserPostFeed from "../react-components/UserPostFeed";
 
-const ReturnProfileRoute = (props) => {
+const RoutingProfilePage = (props) => {
   return (
     <div>
       <Switch>
@@ -50,4 +50,4 @@ const ReturnProfileRoute = (props) => {
   );
 };
 
-export default ReturnProfileRoute;
+export default RoutingProfilePage;
