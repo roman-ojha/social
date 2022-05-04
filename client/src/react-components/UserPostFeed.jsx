@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
-import { instance as axios } from "../services/axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
@@ -8,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { commentBoxAction } from "../redux-actions";
 import { isEmptyString } from "../functions/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../services/toast";
+import Api from "../services/api/components/userPostFeed";
 
 const UserPostFeed = (props) => {
   const dispatch = useDispatch();
@@ -30,7 +30,10 @@ const UserPostFeed = (props) => {
     ),
     likeNo: props.userFeedData.likes.No,
     commentNo: props.userFeedData.comments.No,
-    postCommentInfo: props.userFeedData.comments.by[0],
+    postCommentInfo:
+      props.userFeedData.comments.by[
+        Math.floor(Math.random() * props.userFeedData.comments.by.length)
+      ],
   });
   const userPostdate = new Date(props.userFeedData.date);
   // const userPostUTCTime = userPostdate.toUTCString();
@@ -73,14 +76,9 @@ const UserPostFeed = (props) => {
   }
   const like = async () => {
     try {
-      const res = await axios({
-        method: "POST",
-        url: "/post/like",
-        data: {
-          postID: props.userFeedData.id,
-          to: props.userMainInformation.userID,
-        },
-        withCredentials: true,
+      const res = await Api.like({
+        postID: props.userFeedData.id,
+        to: props.userMainInformation.userID,
       });
       const data = await res.data;
       if (data.success === true && data.removed === false) {
@@ -112,15 +110,10 @@ const UserPostFeed = (props) => {
       if (isEmptyString(commentInputField)) {
         toastWarn("Please Fill the Comment Field Properly");
       } else {
-        const res = await axios({
-          url: "/post/comment",
-          method: "POST",
-          data: {
-            comment: commentInputField,
-            postID: props.userFeedData.id,
-            to: props.userMainInformation.userID,
-          },
-          withCredentials: true,
+        const res = await Api.comment({
+          comment: commentInputField,
+          postID: props.userFeedData.id,
+          to: props.userMainInformation.userID,
         });
         const data = await res.data;
         if (res.status !== 200 && data.success) {
@@ -230,30 +223,8 @@ const UserPostFeed = (props) => {
             <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
           </div>
         </div>
-        {/* <hr className="UserPostFeed_Post_and_Comment_Break_Line" /> */}
         <div className="UserPostFeed_Comment_Box">
           <div className="UserPostFeed_CommentBox_CommentList">
-            {/* {props.userFeedData.comments.by.map((comment, index) => {
-              if (index < 1) {
-                return (
-                  <div
-                    className="UserPostFeed_CommentBox_UserComment"
-                    key={index}
-                  >
-                    <img
-                      src={
-                        comment.picture ? comment.picture : User_Profile_Icon
-                      }
-                    />
-                    <div>
-                      <h3>{comment.userID}</h3>
-                      <p>{comment.comment}</p>
-                    </div>
-                  </div>
-                );
-              }
-            })} */}
-
             {postInformation.postCommentInfo ? (
               <div className="UserPostFeed_CommentBox_UserComment">
                 <img
