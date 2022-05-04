@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/react-components/profileFriends.css";
 import { NavLink, useLocation } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import User_profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import User_profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";

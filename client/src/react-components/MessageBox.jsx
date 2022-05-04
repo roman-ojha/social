@@ -4,7 +4,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import socket from "../services/socket";
 import {
   mainPageMessageViewOnOff,

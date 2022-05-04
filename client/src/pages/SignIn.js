@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sign_In_Facebook_Logo from "../assets/Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../assets/Images/Google_Logo.png";
-import SignIn_RightSide_Issustration from "../assets/Images/SignIn_RightSide_Issustration.svg";
+import SignIn_RightSide_Issustration from "../assets/svg/SignIn_RightSide_Issustration.svg";
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";

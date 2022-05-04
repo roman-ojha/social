@@ -9,7 +9,7 @@ import {
   stopProgressBar,
 } from "../redux-actions";
 import { instance as axios } from "../services/axios";
-import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 
 const FollowedBy = () => {
   const history = useHistory();

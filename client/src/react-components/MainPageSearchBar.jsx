@@ -1,5 +1,5 @@
 import React from "react";
-import User_profile_icon from "../assets/Images/User_profile_Icon_color_white.svg";
+import User_profile_icon from "../assets/svg/User_profile_Icon_color_white.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {

@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory } from "react-router";
 import { Flip, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RoutingMainPage from "./routes/RoutingMainPage";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SignUp_illustration from "../assets/Images/SignUp_illustration.svg";
+import SignUp_illustration from "../assets/svg/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
