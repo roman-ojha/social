@@ -3,14 +3,8 @@ import MainPageSideBar from "../react-components/MainPageSideBar";
 import MainPageStory from "../react-components/MainPageStory";
 import MainPageRightSideComp from "../react-components/MainPageRightSideComp";
 import AppIcon from "../assets/icons/Social_Icon.ico";
-import HomePage from "./HomePage";
-import VideoPage from "./VideoPage";
-import MessagePage from "./MessagePage";
-import SettingPage from "./SettingPage";
-import ProfilePage from "./ProfilePage";
-import Page404 from "./Page404";
 import CommentBox from "../react-components/CommentBox";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   userProfileDetailAction,
@@ -26,37 +20,12 @@ import socket from "../services/socket";
 import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import ProgressBar from "../react-components/ProgressBar";
-import StoriesPage from "./StoriesPage";
+import RoutingMainPage from "../routes/RoutingMainPage";
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-
-  const RoutingMainPage = () => {
-    return (
-      <>
-        <Switch>
-          <Route exact path="/u" component={HomePage} />
-          <Route exact path="/u/video" component={VideoPage} />
-          <Route exact path="/u/message" component={MessagePage} />
-          <Route exact path="/u/setting" component={SettingPage} />
-          <Route path="/u/profile/:userID" component={ProfilePage} />
-          <Route exact page="/u/stories" component={StoriesPage} />
-          <Route
-            path="*"
-            component={() => {
-              return (
-                <div className="page404_User_Page">
-                  <Page404 />
-                </div>
-              );
-            }}
-          />
-        </Switch>
-      </>
-    );
-  };
 
   const LoadingScreen = () => {
     return (
