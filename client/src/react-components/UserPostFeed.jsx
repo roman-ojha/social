@@ -5,12 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
-import {
-  commentBoxAction,
-  incrementPostCommentNumber,
-  stopProgressBar,
-  startProgressBar,
-} from "../redux-actions";
+import { commentBoxAction } from "../redux-actions";
 import { isEmptyString } from "../functions/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../services/toast";
 
@@ -22,22 +17,10 @@ const UserPostFeed = (props) => {
     (state) => state.setUserProfileDetailReducer
   );
   const [commentInputField, setCommentInputField] = useState("");
-  const [likeValue, setLikeValue] = useState({
-    isLikedPost: props.userFeedData.likes.by.some(
-      (el) => el.userID === userProfileDetailStore.userID
-    ),
-    likeNo: props.userFeedData.likes.No,
-  });
-  const [postCommentInfo, setPostCommentInfo] = useState(
-    props.userFeedData.comments.by[0]
-  );
-  // console.log(postCommentInfo);
-  const [postCommentNumber, setPostCommentNumber] = useState(
-    props.userFeedData.comments.No
-  );
-
   const [postInformation, setPostInformation] = useState({
-    postPicture: props.userFeedData.picture,
+    postPicture: props.userFeedData.picture
+      ? props.userFeedData.picture.url
+      : undefined,
     postCaption: props.userFeedData.caption,
     userPicture: props.userMainInformation.picture,
     userID: props.userMainInformation.userID,
@@ -101,29 +84,31 @@ const UserPostFeed = (props) => {
       });
       const data = await res.data;
       if (data.success === true && data.removed === false) {
-        // console.log("not removed");
         // Liked the post
-        setLikeValue({
-          likeNo: likeValue.likeNo + 1,
+        setPostInformation({
+          ...postInformation,
+          likeNo: postInformation.likeNo + 1,
           isLikedPost: true,
         });
       } else if (data.success === true && data.removed === true) {
-        // console.log("remove");
         // Removed Like from the post Post
-        setLikeValue({
-          likeNo: likeValue.likeNo - 1,
+        setPostInformation({
+          ...postInformation,
+          likeNo: postInformation.likeNo - 1,
           isLikedPost: false,
         });
       }
-      // console.log(data);
     } catch (err) {
-      dispatch(stopProgressBar());
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again Letter!!!");
+      }
     }
   };
   const comment = async () => {
-    console.log("hello");
     try {
-      dispatch(startProgressBar());
+      // dispatch(startProgressBar());
       if (isEmptyString(commentInputField)) {
         toastWarn("Please Fill the Comment Field Properly");
       } else {
@@ -141,54 +126,49 @@ const UserPostFeed = (props) => {
         if (res.status !== 200 && data.success) {
           toastError(data.msg);
         } else {
-          setPostCommentInfo({
-            userID: userProfileDetailStore.userID,
-            comment: commentInputField,
-            picture: userProfileDetailStore.picture,
+          setPostInformation({
+            ...postInformation,
+            postCommentInfo: {
+              userID: userProfileDetailStore.userID,
+              comment: commentInputField,
+              picture: userProfileDetailStore.picture,
+            },
+            commentNo: postInformation.commentNo + 1,
           });
-          dispatch(
-            incrementPostCommentNumber({
-              postID: props.userFeedData.id,
-              to: props.userMainInformation.userID,
-            })
-          );
           toastSuccess(data.msg);
         }
       }
-      dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
-      dispatch(stopProgressBar());
     }
   };
-
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
         <div className="HomePage_Feed_Image_Container">
-          {props.userFeedData.picture === undefined ? (
+          {postInformation.postPicture === undefined ? (
             ""
           ) : (
-            <img src={props.userFeedData.picture.url} alt="post" />
+            <img src={postInformation.postPicture} alt="post" />
           )}
         </div>
         <div className="HomePage_Feed_User_Caption_Container">
-          <p>{props.userFeedData.caption}</p>
+          <p>{postInformation.postCaption}</p>
         </div>
         <div className="HomePage_Feed_Info_Container">
           <div className="HomePage_Feed_Info_User_Image">
             <img
               src={
-                props.userMainInformation.picture === undefined
+                postInformation.userPicture === undefined
                   ? User_Profile_Icon
-                  : props.userMainInformation.picture
+                  : postInformation.userPicture
               }
               onClick={() => {
-                history.push(`/u/profile/${props.userMainInformation.userID}`);
+                history.push(`/u/profile/${postInformation.userID}`);
               }}
               alt="user"
             />
@@ -198,22 +178,18 @@ const UserPostFeed = (props) => {
               <p
                 className="HomePage_Feed_User_ID_Text"
                 onClick={() => {
-                  history.push(
-                    `/u/profile/${props.userMainInformation.userID}`
-                  );
+                  history.push(`/u/profile/${postInformation.userID}`);
                 }}
               >
-                {props.userMainInformation.userID}
+                {postInformation.userID}
               </p>
               <p
                 className="HomePage_Feed_User_Name_Text"
                 onClick={() => {
-                  history.push(
-                    `/u/profile/${props.userMainInformation.userID}`
-                  );
+                  history.push(`/u/profile/${postInformation.userID}`);
                 }}
               >
-                {props.userMainInformation.name}
+                {postInformation.userName}
               </p>
             </div>
             <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>

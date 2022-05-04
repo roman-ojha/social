@@ -80,7 +80,7 @@ export default {
             msg: "server Error, Please try again letter!!!",
           });
         }
-        return res.json({
+        return res.json(<ResponseObject>{
           success: true,
           msg: "Removed Like",
           removed: true,
@@ -110,7 +110,7 @@ export default {
           msg: "server Error, Please try again letter!!!",
         });
       }
-      return res.json({
+      return res.json(<ResponseObject>{
         success: true,
         msg: "Successfully Liked the post",
         removed: false,
