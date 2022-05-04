@@ -6,10 +6,10 @@ import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
 import { toastError } from "../services/toast";
 import { showLoadingSpinner } from "../redux-actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 
-const GetUserIDPage = (props) => {
+const GetUserID = (props) => {
   const dispatch = useDispatch();
   const [userDetail, setUserDetail] = useState();
   const history = useHistory();
@@ -145,4 +145,4 @@ const GetUserIDPage = (props) => {
   );
 };
 
-export default GetUserIDPage;
+export default GetUserID;

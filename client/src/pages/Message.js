@@ -17,7 +17,7 @@ import "../styles/react-components/messageBox.css";
 import "../styles/pages/MessagePage.css";
 import { Icon } from "@iconify/react";
 
-const MessageBox = () => {
+const Message = () => {
   const dispatch = useDispatch();
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
@@ -348,4 +348,4 @@ const MessageBox = () => {
   );
 };
 
-export default MessageBox;
+export default Message;

@@ -5,7 +5,7 @@ import MainPageStory from "../../react-components/MainPageStoryComp/MainPageStor
 import MainPageRightSideComp from "../../react-components/MainPageRightSideComp";
 import CommentBox from "../../react-components/CommentBox";
 import ProgressBar from "../../react-components/ProgressBar";
-import RoutingMainPage from "../../routes/RoutingMainPage";
+import RoutingUserPage from "../../routes/RoutingUserPage";
 
 const ReturnMainPage = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
@@ -15,7 +15,7 @@ const ReturnMainPage = () => {
       {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
       <MainPageSideBar />
       <MainPageStory />
-      <RoutingMainPage />
+      <RoutingUserPage />
       <MainPageRightSideComp />
     </>
   );

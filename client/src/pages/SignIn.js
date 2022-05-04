@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
 
-const SignInPage = () => {
+const SignIn = () => {
   const dispatch = useDispatch();
   const [signInDetail, setSignInDetail] = useState({
     email: "",
@@ -158,4 +158,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignIn;

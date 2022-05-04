@@ -16,7 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";
 import { toastError, toastInfo, toastSuccess } from "../services/toast";
 
-const SettingPage = () => {
+const Setting = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -294,4 +294,4 @@ const SettingPage = () => {
   );
 };
 
-export default SettingPage;
+export default Setting;

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 
-const VideoPage = () => {
+const Video = () => {
   return (
     <>
       <div className="VideoPage_Container">
@@ -18,4 +18,4 @@ const VideoPage = () => {
   );
 };
 
-export default VideoPage;
+export default Video;

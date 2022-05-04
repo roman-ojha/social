@@ -5,7 +5,7 @@ import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 
-const StoriesPage = () => {
+const Stories = () => {
   const history = useHistory();
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
   useEffect(() => {
@@ -163,4 +163,4 @@ const StoriesPage = () => {
   );
 };
 
-export default StoriesPage;
+export default Stories;

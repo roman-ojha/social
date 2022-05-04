@@ -20,7 +20,7 @@ import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton
 import { toastSuccess, toastError } from "../services/toast";
 import ReturnProfileRoute from "../routes/ReturnProfileRoute";
 
-const ProfilePage = () => {
+const Profile = () => {
   const history = useHistory();
   const params = useParams();
   const location = useLocation();
@@ -369,4 +369,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default Profile;

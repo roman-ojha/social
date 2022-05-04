@@ -12,7 +12,7 @@ import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
 
 let previousSelectGenderElement;
-const SignUpPage = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let today = new Date();
@@ -321,4 +321,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;

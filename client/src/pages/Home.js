@@ -11,7 +11,7 @@ import DefaultSocialPost from "../react-components/DefaultSocialPost";
 import UserPostFieldView from "../react-components/HomePage/UserPostFieldView";
 import DisplayFollowedUserPost from "../react-components/HomePage/DisplayFollowedUserPost";
 
-const HomePage = () => {
+const Home = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -77,4 +77,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
