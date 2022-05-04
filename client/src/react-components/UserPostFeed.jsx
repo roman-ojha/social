@@ -28,9 +28,27 @@ const UserPostFeed = (props) => {
     ),
     likeNo: props.userFeedData.likes.No,
   });
+  const [postCommentInfo, setPostCommentInfo] = useState(
+    props.userFeedData.comments.by[0]
+  );
+  // console.log(postCommentInfo);
   const [postCommentNumber, setPostCommentNumber] = useState(
     props.userFeedData.comments.No
   );
+
+  const [postInformation, setPostInformation] = useState({
+    postPicture: props.userFeedData.picture,
+    postCaption: props.userFeedData.caption,
+    userPicture: props.userMainInformation.picture,
+    userID: props.userMainInformation.userID,
+    userName: props.userMainInformation.name,
+    isLikedPost: props.userFeedData.likes.by.some(
+      (el) => el.userID === userProfileDetailStore.userID
+    ),
+    likeNo: props.userFeedData.likes.No,
+    commentNo: props.userFeedData.comments.No,
+    postCommentInfo: props.userFeedData.comments.by[0],
+  });
   const userPostdate = new Date(props.userFeedData.date);
   // const userPostUTCTime = userPostdate.toUTCString();
   const currentDate = new Date();
@@ -103,6 +121,7 @@ const UserPostFeed = (props) => {
     }
   };
   const comment = async () => {
+    console.log("hello");
     try {
       dispatch(startProgressBar());
       if (isEmptyString(commentInputField)) {
@@ -122,6 +141,11 @@ const UserPostFeed = (props) => {
         if (res.status !== 200 && data.success) {
           toastError(data.msg);
         } else {
+          setPostCommentInfo({
+            userID: userProfileDetailStore.userID,
+            comment: commentInputField,
+            picture: userProfileDetailStore.picture,
+          });
           dispatch(
             incrementPostCommentNumber({
               postID: props.userFeedData.id,
@@ -196,7 +220,7 @@ const UserPostFeed = (props) => {
           </div>
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
             <div className="HomePage_Feed_Icon_Container" onClick={like}>
-              {likeValue.isLikedPost ? (
+              {postInformation.isLikedPost ? (
                 <Icon
                   className="HomePage_Feed_Liked_Love_Icon"
                   icon="fluent:thumb-like-20-filled"
@@ -207,7 +231,7 @@ const UserPostFeed = (props) => {
                   icon="fluent:thumb-like-20-regular"
                 />
               )}
-              <p>{likeValue.likeNo}</p>
+              <p>{postInformation.likeNo}</p>
             </div>
             <div className="HomePage_Feed_Icon_Container">
               <Icon
@@ -224,7 +248,7 @@ const UserPostFeed = (props) => {
                   );
                 }}
               />
-              <p>{postCommentNumber}</p>
+              <p>{postInformation.commentNo}</p>
             </div>
             <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
             <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
@@ -233,7 +257,7 @@ const UserPostFeed = (props) => {
         {/* <hr className="UserPostFeed_Post_and_Comment_Break_Line" /> */}
         <div className="UserPostFeed_Comment_Box">
           <div className="UserPostFeed_CommentBox_CommentList">
-            {props.userFeedData.comments.by.map((comment, index) => {
+            {/* {props.userFeedData.comments.by.map((comment, index) => {
               if (index < 1) {
                 return (
                   <div
@@ -252,7 +276,25 @@ const UserPostFeed = (props) => {
                   </div>
                 );
               }
-            })}
+            })} */}
+
+            {postInformation.postCommentInfo ? (
+              <div className="UserPostFeed_CommentBox_UserComment">
+                <img
+                  src={
+                    postInformation.postCommentInfo.picture
+                      ? postInformation.postCommentInfo.picture
+                      : User_Profile_Icon
+                  }
+                />
+                <div>
+                  <h3>{postInformation.postCommentInfo.userID}</h3>
+                  <p>{postInformation.postCommentInfo.comment}</p>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
           <div className="UserPostFeed_CommentBox_RootUser_Post_Field_Container">
             <img
