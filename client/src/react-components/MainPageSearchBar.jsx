@@ -75,8 +75,10 @@ const MainPageSearchBar = (props) => {
   const ReturnSearchBarUser = () => {
     return (
       <>
-        {props.userSearchResult.map((value) => {
-          return <SearchBarUser userDetail={value} key={value._id} />;
+        {props.userSearchResult.map((user, index) => {
+          if (user.userID) {
+            return <SearchBarUser userDetail={user} key={index} />;
+          }
         })}
       </>
     );

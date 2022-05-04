@@ -1,15 +1,16 @@
 import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
+import "../../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
-import { toastError, toastSuccess } from "../services/toast";
-import { instance as axios } from "../services/axios";
+import { toastError, toastSuccess } from "../../services/toast";
+import { instance as axios } from "../../services/axios";
 import {
   startProgressBar,
   stopProgressBar,
   isFollowedSuggestedUser,
-} from "../redux-actions";
-import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
+} from "../../redux-actions";
+import User_Profile_Icon from "../../assets/Images/User_profile_Icon.svg";
+import { useEffect } from "react";
 
 const UserSuggestion = () => {
   const history = useHistory();
@@ -182,6 +183,9 @@ const UserSuggestion = () => {
   const ReturnSuggestedUser = () => {
     const countUser = useRef(0);
     const userSuggestion = useSelector((state) => state.userSuggestionReducer);
+    useEffect(() => {
+      countUser.current = 0;
+    }, [userSuggestion]);
     return (
       <>
         {userSuggestion.map((user, index) => {

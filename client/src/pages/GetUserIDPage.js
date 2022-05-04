@@ -5,9 +5,9 @@ import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
 import { toastError } from "../services/toast";
-import { startProgressBar, stopProgressBar } from "../redux-actions";
+import { showLoadingSpinner } from "../redux-actions";
 import { useDispatch, useSelector } from "react-redux";
-import ProgressBar from "../react-components/ProgressBar";
+import LoadingSpinner from "../react-components/LoadingSpinner";
 
 const GetUserIDPage = (props) => {
   const dispatch = useDispatch();
@@ -16,7 +16,6 @@ const GetUserIDPage = (props) => {
   const [userID, setUserID] = useState("");
   const url = new URL(window.location.href);
   const uid = url.searchParams.get("uid");
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   useEffect(() => {
     // if user is login for the first time then the userID will be undefined
     if (uid !== "undefined") {
@@ -43,7 +42,7 @@ const GetUserIDPage = (props) => {
   }, []);
   // console.log(userDetail);
   const submitDetail = async (e) => {
-    dispatch(startProgressBar());
+    dispatch(showLoadingSpinner(true));
     try {
       const profile = document.getElementById("image-input").files[0];
       const data = new FormData();
@@ -77,19 +76,19 @@ const GetUserIDPage = (props) => {
           history.push("/signin");
         }
       }
-      dispatch(stopProgressBar());
+      dispatch(showLoadingSpinner(false));
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.err);
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
-      dispatch(stopProgressBar());
+      dispatch(showLoadingSpinner(false));
     }
   };
   return (
     <>
-      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
+      <LoadingSpinner />
       <div className="GetUserIDPage_Container">
         <Helmet>
           <title>userID/undefine</title>

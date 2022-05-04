@@ -14,6 +14,9 @@ const MoreProfileBox = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const moreProfileBoxState = useSelector(
+    (state) => state.moreProfileBoxReducer
+  );
   const date = new Date();
   const userLogOut = async () => {
     try {
@@ -39,58 +42,62 @@ const MoreProfileBox = () => {
   };
   return (
     <>
-      <div className="More_Profile_Box_Container">
-        <NavLink
-          to={`/u/profile/${userProfileDetailStore.userID}`}
-          className="More_Profile_Box_User_Info"
-        >
-          <img
-            src={
-              userProfileDetailStore.picture
-                ? userProfileDetailStore.picture
-                : User_Profile_Icon
-            }
-            alt="user"
-          />
-          <p>Roman Ojha</p>
-        </NavLink>
-        <NavLink to="/u/setting" className="More_Profile_Box_Setting">
-          <Icon
-            icon="ant-design:setting-filled"
-            className="More_Profile_Box_Icon"
-          />
-          <p>Setting</p>
-        </NavLink>
-        <div
-          className="More_Profile_Box_Help"
-          onClick={() => {
-            toastInfo("Helping...");
-          }}
-        >
-          <Icon icon="bxs:help-circle" className="More_Profile_Box_Icon" />
-          <p>Help</p>
-        </div>
-        <div className="More_Profile_Box_logout" onClick={userLogOut}>
-          <Icon icon="majesticons:logout" className="More_Profile_Box_Icon" />
-          <p>Log Out</p>
-        </div>
-        <div className="More_Profile_Box_App_Info">
-          <p
+      {moreProfileBoxState ? (
+        <div className="More_Profile_Box_Container">
+          <NavLink
+            to={`/u/profile/${userProfileDetailStore.userID}`}
+            className="More_Profile_Box_User_Info"
+          >
+            <img
+              src={
+                userProfileDetailStore.picture
+                  ? userProfileDetailStore.picture
+                  : User_Profile_Icon
+              }
+              alt="user"
+            />
+            <p>Roman Ojha</p>
+          </NavLink>
+          <NavLink to="/u/setting" className="More_Profile_Box_Setting">
+            <Icon
+              icon="ant-design:setting-filled"
+              className="More_Profile_Box_Icon"
+            />
+            <p>Setting</p>
+          </NavLink>
+          <div
+            className="More_Profile_Box_Help"
             onClick={() => {
-              toastInfo(`Social ©️ ${date.getFullYear()}`);
+              toastInfo("Helping...");
             }}
           >
-            Social &copy; {date.getFullYear()}
-          </p>
-          <Icon
-            icon="akar-icons:github-fill"
-            className="More_Profile_Box_Github_Icon"
-            onClick={() => {
-              window.open("https://github.com/Roman-Ojha/Social", "_blank");
-            }}
-          />
+            <Icon icon="bxs:help-circle" className="More_Profile_Box_Icon" />
+            <p>Help</p>
+          </div>
+          <div className="More_Profile_Box_logout" onClick={userLogOut}>
+            <Icon icon="majesticons:logout" className="More_Profile_Box_Icon" />
+            <p>Log Out</p>
+          </div>
+          <div className="More_Profile_Box_App_Info">
+            <p
+              onClick={() => {
+                toastInfo(`Social ©️ ${date.getFullYear()}`);
+              }}
+            >
+              Social &copy; {date.getFullYear()}
+            </p>
+            <Icon
+              icon="akar-icons:github-fill"
+              className="More_Profile_Box_Github_Icon"
+              onClick={() => {
+                window.open("https://github.com/Roman-Ojha/Social", "_blank");
+              }}
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

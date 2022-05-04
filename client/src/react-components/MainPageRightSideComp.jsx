@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MessageBox from "./MessageBox";
-import UserSuggestion from "./UserSuggestion";
+import UserSuggestion from "./UserSuggestion/UserSuggestion";
 import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,17 +9,13 @@ import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/react-components/mainPageRightSideComp.css";
 import NotificationBox from "./NotificationBox";
 import MoreProfileBox from "./MoreProfileBox";
-// import "../styles/react-components/mainPageMsgAndNtfBar.css";
 
 const MainPageRightSideComp = () => {
   const dispatch = useDispatch();
   const rightPartDrawerState = useSelector(
     (state) => state.rightPartDrawerReducer
   );
-  const notificationBoxState = useSelector((state) => state.notificationBox);
-  const moreProfileBoxState = useSelector(
-    (state) => state.moreProfileBoxReducer
-  );
+
   useEffect(() => {
     document
       .getElementsByClassName("RightPart_Drawer_Container")[0]
@@ -72,8 +68,8 @@ const MainPageRightSideComp = () => {
       <div className="RightPart_Drawer_Container Close_RightPart_Drawer">
         <div className="MainPage_Rignt_Side_Component_Container ">
           <MainPageMsgAndNtfBar />
-          {notificationBoxState ? <NotificationBox /> : <></>}
-          {moreProfileBoxState ? <MoreProfileBox /> : <></>}
+          <NotificationBox />
+          <MoreProfileBox />
           <MessageBox />
           <UserSuggestion />
           <FollowedBy />

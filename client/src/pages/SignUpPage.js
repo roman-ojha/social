@@ -5,7 +5,7 @@ import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
 import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
@@ -14,7 +14,6 @@ import { toastError, toastSuccess, toastWarn } from "../services/toast";
 let previousSelectGenderElement;
 const SignUpPage = () => {
   const dispatch = useDispatch();
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   const history = useHistory();
   let today = new Date();
   let birthdayYear = [];
@@ -147,7 +146,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
+      <ProgressBar />
       <div className="SignUp_Page_Container">
         <Helmet>
           <title>Register</title>

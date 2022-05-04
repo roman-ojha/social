@@ -7,7 +7,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
 import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../redux-actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import ProgressBar from "../react-components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
 

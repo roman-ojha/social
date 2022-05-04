@@ -9,7 +9,6 @@ import RoutingMainPage from "../../routes/RoutingMainPage";
 
 const ReturnMainPage = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
-  console.log("hello");
   return (
     <>
       <ProgressBar />
