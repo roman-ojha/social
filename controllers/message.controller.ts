@@ -1,8 +1,10 @@
 import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
+import { Request, Response } from "express";
+import ResponseObject from "interface/responseObject.js";
 
 export default {
-  createMessage: async (req, res) => {
+  createMessage: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const receiverUser = req.body.receiver;
@@ -86,14 +88,15 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
-  getMessage: async (req, res) => {
+  getMessage: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const receiverUserID = req.body.userID;
       if (!receiverUserID) {
-        return res
-          .status(404)
-          .json({ success: false, err: "Receiver user doesn't exist" });
+        return res.status(404).json(<ResponseObject>{
+          success: false,
+          msg: "Receiver user doesn't exist",
+        });
       }
       const receiverExist = await userDetail.findOne(
         {
@@ -109,7 +112,7 @@ export default {
       if (!receiverExist) {
         return res
           .status(404)
-          .json({ success: false, err: "User doesn't exist" });
+          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
       const userMessage = await userDetail.findOne(
         {
@@ -168,20 +171,22 @@ export default {
         if (resSaverReciverMsg && resSaveRootMsg) {
           return res
             .status(200)
-            .json({ success: true, msg: "message created" });
+            .json(<ResponseObject>{ success: true, msg: "message created" });
         } else {
-          return res.status(500).json({ success: false, err: "server error" });
+          return res
+            .status(500)
+            .json(<ResponseObject>{ success: false, msg: "server error" });
         }
       }
-      res.status(200).json(userMessage.messages[0]);
+      return res.status(200).json(userMessage.messages[0]);
     } catch (err) {
-      return res.status(500).json({
+      return res.status(500).json(<ResponseObject>{
         success: false,
-        err: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again letter",
       });
     }
   },
-  sendMessage: async (req, res) => {
+  sendMessage: async (req: Request, res: Response): Promise<object> => {
     // we are including pusher package to make message realtime
     try {
       const rootUser = req.rootUser;
