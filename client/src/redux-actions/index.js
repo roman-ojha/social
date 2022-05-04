@@ -228,3 +228,10 @@ export const openMoreProfileBox = (bool) => {
     bool,
   };
 };
+
+export const showLoadingSpinner = (bool) => {
+  return {
+    type: "showLoadingSpinner",
+    bool,
+  };
+};

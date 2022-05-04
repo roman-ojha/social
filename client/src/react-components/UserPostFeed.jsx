@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../styles/react-components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
-import { commentBoxAction } from "../redux-actions";
+import {
+  commentBoxAction,
+  stopProgressBar,
+  startProgressBar,
+} from "../redux-actions";
 import { isEmptyString } from "../functions/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../services/toast";
 import Api from "../services/api/components/userPostFeed";
@@ -106,7 +110,7 @@ const UserPostFeed = (props) => {
   };
   const comment = async () => {
     try {
-      // dispatch(startProgressBar());
+      dispatch(startProgressBar());
       if (isEmptyString(commentInputField)) {
         toastWarn("Please Fill the Comment Field Properly");
       } else {
@@ -131,12 +135,14 @@ const UserPostFeed = (props) => {
           toastSuccess(data.msg);
         }
       }
+      dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
+      dispatch(stopProgressBar());
     }
   };
   return (

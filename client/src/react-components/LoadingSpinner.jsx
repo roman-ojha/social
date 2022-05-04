@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/react-components/loadingSpinner.css";
+import { showLoadingSpinner } from "../redux-actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const LoadingSpinner = () => {
+  const dispatch = useDispatch();
+  const showLoadingSpinnerState = useSelector(
+    (state) => state.showLoadingSpinnerReducer
+  );
   return (
     <>
-      <div className="HomePage_Post_Field_Response_Loading_Spinner_Container">
-        <div className="HomePage_Post_Field_Response_Loading_Spinner"></div>
-      </div>
+      {showLoadingSpinnerState ? (
+        <div className="HomePage_Post_Field_Response_Loading_Spinner_Container">
+          <div className="HomePage_Post_Field_Response_Loading_Spinner"></div>
+        </div>
+      ) : (
+        ""
+      )}
     </>
   );
 };

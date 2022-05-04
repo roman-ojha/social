@@ -4,6 +4,7 @@ import {
   userPostResponseData,
   homePageUserPostFieldDataAction,
   setHomePagePostFieldViewValue,
+  showLoadingSpinner,
 } from "../../redux-actions";
 import { Picker } from "emoji-mart";
 import { instance as axios } from "../../services/axios";
@@ -12,7 +13,7 @@ import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const UserPostFieldView = (props) => {
+const UserPostFieldView = () => {
   const history = useHistory();
   // storing user Profile Detail
   const dispatch = useDispatch();
@@ -102,10 +103,9 @@ const UserPostFieldView = (props) => {
     };
     // uploading post to database
     const uploadUserPost = async (e) => {
-      console.log("hello");
       try {
         e.preventDefault();
-        props.setUserPostResponseLoading(true);
+        dispatch(showLoadingSpinner(true));
         var image = document.getElementById("image-input").files[0];
         let data = new FormData();
         data.append("image", image);
@@ -121,10 +121,10 @@ const UserPostFieldView = (props) => {
         if (res.status === 201) {
           dispatch(userPostResponseData(resData));
         }
-        props.setUserPostResponseLoading(false);
+        dispatch(showLoadingSpinner(false));
         dispatch(setHomePagePostFieldViewValue("min"));
       } catch (err) {
-        props.setUserPostResponseLoading(false);
+        dispatch(showLoadingSpinner(false));
       }
     };
     return (

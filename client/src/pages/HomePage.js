@@ -24,18 +24,14 @@ const HomePage = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
-  const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
-
   return (
     <>
-      {userPostResponseLoading ? <LoadingSpinner /> : <></>}
+      <LoadingSpinner />
       <div className="HomePage_Container">
         <OpenSideBarDrawerButton />
         <OpenRightPartDrawerButton />
         <div className="HomePage_User_Post_Field_Container">
-          <UserPostFieldView
-            setUserPostResponseLoading={setUserPostResponseLoading}
-          />
+          <UserPostFieldView />
         </div>
         <div className="HomePage_Feed_Main_Container">
           {followedUserPostDataStore.length == 0 ? (
