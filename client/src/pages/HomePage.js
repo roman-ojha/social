@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../react-components/LoadingSpinner";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import UserPostFeed from "../react-components/UserPostFeed";
 import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";

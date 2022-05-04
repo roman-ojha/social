@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MessageBox from "./MessageBox";
-import UserSuggestion from "./UserSuggestion/UserSuggestion";
+import UserSuggestion from "./UserSuggestionComp/UserSuggestion";
 import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
