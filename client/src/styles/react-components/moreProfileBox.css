@@ -100,3 +100,79 @@
 .More_Profile_Box_Github_Icon {
   cursor: pointer;
 }
+
+@media screen and (max-width: 400px) and (min-width: 320px) {
+  .More_Profile_Box_User_Info p,
+  .More_Profile_Box_Setting p,
+  .More_Profile_Box_Help p,
+  .More_Profile_Box_logout p {
+    font-size: 0.9rem;
+  }
+
+  .More_Profile_Box_User_Info img,
+  .More_Profile_Box_Icon {
+    margin-left: 0.7rem;
+  }
+
+  .More_Profile_Box_User_Info {
+    padding: 0.3rem;
+  }
+
+  .More_Profile_Box_User_Info img {
+    width: 2.7rem;
+    height: 2.7rem;
+  }
+
+  .More_Profile_Box_Setting,
+  .More_Profile_Box_Help,
+  .More_Profile_Box_logout {
+    width: 95%;
+    padding: 0.3rem;
+  }
+
+  .More_Profile_Box_Icon {
+    font-size: 1.7rem;
+  }
+
+  .More_Profile_Box_App_Info p {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .More_Profile_Box_User_Info p,
+  .More_Profile_Box_Setting p,
+  .More_Profile_Box_Help p,
+  .More_Profile_Box_logout p {
+    font-size: 0.7rem;
+  }
+
+  .More_Profile_Box_User_Info img,
+  .More_Profile_Box_Icon {
+    margin-left: 0.5rem;
+  }
+
+  .More_Profile_Box_User_Info {
+    padding: 0.3rem;
+  }
+
+  .More_Profile_Box_User_Info img {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .More_Profile_Box_Setting,
+  .More_Profile_Box_Help,
+  .More_Profile_Box_logout {
+    width: 95%;
+    padding: 0.2rem;
+  }
+
+  .More_Profile_Box_Icon {
+    font-size: 1.5rem;
+  }
+
+  .More_Profile_Box_App_Info p {
+    font-size: 0.7rem;
+  }
+}
