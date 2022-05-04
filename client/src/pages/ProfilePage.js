@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import UserPostFeed from "../react-components/UserPostFeed";
 import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../assets/Images/User_profile_Icon.svg";
 import { instance as axios } from "../services/axios";
@@ -12,21 +11,14 @@ import {
   stopProgressBar,
 } from "../redux-actions/index";
 import socket from "../services/socket";
-import {
-  useLocation,
-  Switch,
-  Route,
-  useHistory,
-  useParams,
-} from "react-router-dom";
+import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
 import CommentBox from "../react-components/CommentBox";
-import ProfileFriends from "../react-components/ProfileFriends";
-import ProfileAlbums from "../react-components/ProfileAlbums";
 import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 import { toastSuccess, toastError } from "../services/toast";
+import ReturnProfileRoute from "../routes/ReturnProfileRoute";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -41,61 +33,6 @@ const ProfilePage = () => {
     (state) => state.openCommentBoxReducer
   );
   const dispatch = useDispatch();
-  const profilePageMainInformation = {
-    // store searched user essintal information
-    name: profilePageData.name,
-    email: profilePageData.email,
-    picture: profilePageData.picture,
-    userID: profilePageData.userID,
-  };
-  const profilePageUserFeed = profilePageData.posts;
-
-  const ReturnProfileRoute = () => {
-    return (
-      <>
-        <Switch>
-          <Route
-            exact
-            path="/u/profile/:userID"
-            component={() => {
-              return (
-                <>
-                  {profilePageUserFeed.map((value, index) => (
-                    <UserPostFeed
-                      userMainInformation={profilePageMainInformation}
-                      userFeedData={value}
-                      key={index}
-                    />
-                  ))}
-                </>
-              );
-            }}
-          />
-          <Route
-            exact
-            path="/u/profile/:userID/albums"
-            component={ProfileAlbums}
-          />
-          <Route
-            exact
-            path="/u/profile/:userID/friends"
-            component={ProfileFriends}
-          />
-          <Route
-            exact
-            path="/u/profile/:userID/followers"
-            component={ProfileFriends}
-          />
-          <Route
-            exact
-            path="/u/profile/:userID/followings"
-            component={ProfileFriends}
-          />
-        </Switch>
-      </>
-    );
-  };
-
   const followUser = async () => {
     // writing logic for followuser
     try {
@@ -413,7 +350,16 @@ const ProfilePage = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            <ReturnProfileRoute />
+            <ReturnProfileRoute
+              profilePageMainInformation={{
+                // store searched user essintal information
+                name: profilePageData.name,
+                email: profilePageData.email,
+                picture: profilePageData.picture,
+                userID: profilePageData.userID,
+              }}
+              profilePageUserFeed={profilePageData.posts}
+            />
           </div>
         </div>
       ) : (
