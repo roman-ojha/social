@@ -92,6 +92,11 @@
     height: 1.5rem;
     cursor: pointer;
   } */
+
+.MainPage_SideBar_Active_Link {
+  background-color: red;
+}
+
 .MainPage_SideBar_Menu_Home_Logo {
   margin-left: 2%;
   color: var(--logo-icon-low-opacity-black-color-point-3);

@@ -158,7 +158,7 @@ const MainPageSideBar = () => {
     } catch (err) {}
   };
   useEffect(() => {
-    colorSelectedUrl();
+    // colorSelectedUrl();
 
     document
       .getElementsByClassName("SideBar_Drawer_Container")[0]

@@ -1,7 +1,7 @@
 import React from "react";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import Index from "./pages/Index/Index";
+import Index from "./pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router";
 import GetUserIDPage from "./pages/GetUserIDPage";

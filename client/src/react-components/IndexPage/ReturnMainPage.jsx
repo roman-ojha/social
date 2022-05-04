@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import MainPageSideBar from "../../react-components/MainPageSideBar";
 import MainPageStory from "../../react-components/MainPageStory";
@@ -8,11 +8,11 @@ import ProgressBar from "../../react-components/ProgressBar";
 import RoutingMainPage from "../../routes/RoutingMainPage";
 
 const ReturnMainPage = () => {
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  console.log("hello");
   return (
     <>
-      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
+      <ProgressBar />
       {commentBoxStore.openCommentBox ? <CommentBox /> : <></>}
       <MainPageSideBar />
       <MainPageStory />

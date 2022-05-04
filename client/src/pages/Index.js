@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "../../styles/pages/Index.css";
-import "../../styles/pages/page404.css";
-import LoadingScreen from "../../react-components/IndexPage/LoadingScreen";
-import ReturnMainPage from "../../react-components/IndexPage/ReturnMainPage";
+import "../styles/pages/Index.css";
+import "../styles/pages/page404.css";
+import LoadingScreen from "../react-components/IndexPage/LoadingScreen";
+import ReturnMainPage from "../react-components/IndexPage/ReturnMainPage";
 import {
   userProfileDetailAction,
   userProfilePostAction,
@@ -13,9 +13,9 @@ import {
   followedByUserAction,
   setUserStories,
   messageListAction,
-} from "../../redux-actions/index";
-import socket from "../../services/socket";
-import Api from "../../services/api/pages/index";
+} from "../redux-actions/index";
+import socket from "../services/socket";
+import Api from "../services/api/pages/index";
 
 const Index = () => {
   const dispatch = useDispatch();

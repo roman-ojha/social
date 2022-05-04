@@ -26,7 +26,6 @@ const SignInPage = () => {
       [name]: value,
     });
   };
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   const history = useHistory();
   const signingIn = async (e) => {
     e.preventDefault();
@@ -70,7 +69,7 @@ const SignInPage = () => {
   };
   return (
     <>
-      {progressBarState.showProgressBar ? <ProgressBar /> : <></>}
+      <ProgressBar />
       <div className="SignIn_Page_Container">
         <Helmet>
           <title>SignIn</title>
