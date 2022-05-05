@@ -8,5 +8,7 @@ declare namespace NodeJS {
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;
     FIREBASE_STORAGEBUCKET: string;
+    YOUTUBE_API_URL: string;
+    YOUTUBE_BASE_API_KEY: string;
   }
 }

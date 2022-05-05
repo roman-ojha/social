@@ -9,6 +9,7 @@ import messageRoute from "../routes/message.js";
 import settingRoute from "../routes/setting.js";
 import storageRouter from "../routes/storageRoute.js";
 import google_OAuth_route from "../routes/google_OAuth_route.js";
+import youtubeRoute from "../routes/youtube.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
@@ -30,6 +31,7 @@ app.use(messageRoute);
 app.use(settingRoute);
 app.use(postRoute);
 app.use(storageRouter);
+app.use(youtubeRoute);
 import "../socket/io.js";
 
 // using google authentication function
