@@ -1,6 +1,6 @@
 import express from "express";
 const youtubeRoute = express.Router();
-import youtubeController from "../controllers/youtube.controller";
+import youtubeController from "../controllers/youtube.controller.js";
 
 // http://www.googleapis.com/youtube/v3/search?key=apiKey&type=video&part=snippet&q=foo
 
@@ -13,7 +13,7 @@ import youtubeController from "../controllers/youtube.controller";
 
 // Without using 'googleapis' package
 
-youtubeRoute.get("/youtube/video", youtubeController.youtubeVideo);
+youtubeRoute.get("/youtube/videos", youtubeController.youtubeVideo);
 
 // NOTE: you can also use 'googleapis' to do the same task that we did in here
 

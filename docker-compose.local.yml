@@ -33,6 +33,8 @@ services:
       GOOGLE_CLIENT_ID: googleclientid
       GOOGLE_CLIENT_SECRET: googleclientsecret
       FIREBASE_STORAGEBUCKET: firebasestoragebucket
+      YOUTUBE_API_URL: https://www.googleapis.com/youtube/v3
+      YOUTUBE_BASE_API_KEY: AAxxxxxxxxxxxxxxxxxxxxxxBB
     depends_on:
       - mongo
   mongo:

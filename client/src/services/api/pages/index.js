@@ -1,4 +1,5 @@
 import { instance as axios } from "../../axios";
+
 export default {
   index: async () => {
     return await axios({
