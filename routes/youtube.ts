@@ -1,5 +1,7 @@
 import express from "express";
 import youtubeAPI from "../services/api/youtubeAPI.js";
+import dotenv from "dotenv";
+dotenv.config();
 const youtubeRoute = express.Router();
 
 // http://www.googleapis.com/youtube/v3/search?key=apiKey&type=video&part=snippet&q=foo
@@ -12,9 +14,14 @@ const youtubeRoute = express.Router();
 // to fetch data we will use 'axios'
 
 youtubeRoute.get("/youtube/search", async (req, res) => {
-  const response = await youtubeAPI.search("");
-  const data = await response.data;
-  res.json(data);
+  try {
+    const response = await youtubeAPI.search("foo");
+    const data = await response.data;
+    console.log(data);
+    return res.json({ msg: "hello" });
+  } catch (err) {
+    return res.status(500).json({ msg: "Err" });
+  }
 });
 
 export default youtubeRoute;

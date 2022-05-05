@@ -1,0 +1,2 @@
+### Get Youtube Api Response
+GET http://{{host}}/youtube/search

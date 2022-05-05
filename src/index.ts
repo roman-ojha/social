@@ -1,5 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
 import { RequestHandler } from "express";
 import cookieParser from "cookie-parser";
 import postRoute from "../routes/post.js";
