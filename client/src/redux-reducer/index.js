@@ -21,6 +21,7 @@ import homePagePostFieldViewValue from "./homePagePostFieldViewValue";
 import notificationBox from "./notificationBox";
 import moreProfileBoxReducer from "./moreProfile";
 import showLoadingSpinnerReducer from "./showLoadingSpinner";
+import videoPageDataReducer from "./page/video";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -45,6 +46,7 @@ const rootReducers = combineReducers({
   notificationBox,
   moreProfileBoxReducer,
   showLoadingSpinnerReducer,
+  videoPageDataReducer,
 });
 
 export default rootReducers;

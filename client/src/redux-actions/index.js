@@ -235,3 +235,10 @@ export const showLoadingSpinner = (bool) => {
     bool,
   };
 };
+
+export const setVideoPageData = (data) => {
+  return {
+    type: "setVideoPageData",
+    payload: data,
+  };
+};
