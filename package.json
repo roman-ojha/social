@@ -27,6 +27,7 @@
     "express-session": "^1.17.2",
     "firebase": "^9.1.0",
     "firebase-admin": "^10.0.2",
+    "googleapis": "^100.0.0",
     "gridfs-stream": "^1.1.1",
     "imagemin": "^8.0.1",
     "imagemin-mozjpeg": "8.0.0",
