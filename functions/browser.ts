@@ -18,19 +18,21 @@ const launchBrowser = async () => {
       args,
       ignoreDefaultArgs: ["--disable-extensions"],
     });
-    return browser;
+    console.log("Headless Browser launched Successfully");
+    return true;
   } catch (err) {
     return false;
   }
 };
-const exitBrowser = async () => {
+const exitBrowser = async (): Promise<void> => {
   if (!browser) return;
   try {
     await browser.close();
   } catch (err) {}
 };
-
-const newPage = async (): Promise<[puppeteer.Page, () => {}] | null> => {
+const newPage = async (): Promise<
+  [puppeteer.Page, () => {}] | [null, null]
+> => {
   try {
     const page: puppeteer.Page = await browser.newPage();
     const closePage = async (): Promise<boolean> => {
@@ -44,6 +46,9 @@ const newPage = async (): Promise<[puppeteer.Page, () => {}] | null> => {
     };
     return [page, closePage];
   } catch (e) {
-    return null;
+    return [null, null];
   }
 };
+
+export default launchBrowser;
+export { newPage, exitBrowser };
