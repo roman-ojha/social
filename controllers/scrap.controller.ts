@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import launchBrowser from "../functions/browser.js";
-import { newPage, exitBrowser } from "../functions/browser.js";
-import { convert } from "html-to-text";
+import { newPage } from "../functions/browser.js";
 import ResponseObject from "interface/responseObject.js";
 
 await launchBrowser();
@@ -40,20 +39,25 @@ export default {
       await page.waitForSelector("ytd-rich-grid-media");
       // // get videos
       // let link: string[] = [];
-      const link = await page.evaluate(() => {
+      const videoId = await page.evaluate(() => {
         return Array.from(
           document.getElementsByClassName(
             "yt-simple-endpoint focus-on-expand style-scope ytd-rich-grid-media"
           )
-        ).map((el) => "https://www.youtube.com" + el.getAttribute("href"));
+        ).map((el) => {
+          const href = el.getAttribute("href");
+          if (href) {
+            return href.slice(9, href.length);
+          } else {
+            return;
+          }
+        });
       });
-      if (link.length > 0) {
+      if (videoId.length > 0) {
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Successful",
-          data: {
-            link,
-          },
+          data: videoId,
         });
       } else {
         return res.status(404).json(<ResponseObject>{

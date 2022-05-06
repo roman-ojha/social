@@ -1,53 +1,84 @@
-.VideoPage_Container {
+.VideoPage {
   width: 50%;
-  /* border: 1px solid red; */
   position: relative;
+  /* border: 1px solid red; */
   left: 20%;
   top: 5rem;
   z-index: 1;
+  /* height: calc(100vh - 18vh); */
+}
+
+.VideoPage_Header {
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+.VideoPage_Icon_and_Title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* border: 1px solid blue; */
+}
+
+.VideoPage_Icon {
+  font-size: 1.5rem;
+}
+
+.VideoPage_Videos_Container {
+  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding-bottom: 1rem;
-  height: calc(100vh - 18vh);
 }
 
-.VideoPage_Container h1 {
-  font-family: var(--primary-font-family);
-  font-size: 3rem;
-  color: var(--primary-color);
-  word-wrap: break-word;
+.VideoPage_Youtube_Video_Info_Container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.VideoPage_Youtube_Video {
+  width: 90%;
+  height: 450px;
+  margin-top: 1rem;
+}
+
+.VideoPage_Youtube_Video_Image {
+  width: 90%;
+  height: 450px;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 1366px) and (min-width: 1200px) {
+  .VideoPage_Youtube_Video {
+    height: 320px;
+  }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 29% - 15%);
     left: 15%;
     top: 5rem;
     height: calc(100vh - 6rem);
   }
-
-  .VideoPage_Container h1 {
-    font-size: 2.8rem;
-  }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: 60%;
     left: 100px;
     top: 5rem;
     height: calc(100vh - 6rem);
   }
-
-  .VideoPage_Container h1 {
-    font-size: 2.7rem;
-  }
 }
 
 @media screen and (max-width: 850px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 100px);
     left: 100px;
     top: 5rem;
@@ -56,60 +87,44 @@
 }
 
 @media screen and (max-width: 800px) {
-  .VideoPage_Container {
+  .VideoPage {
     left: 90px;
     width: calc(100% - 90px);
   }
 }
 
 @media screen and (max-width: 768px) and (min-width: 480px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 60px);
     left: 60px;
     top: 5rem;
     height: calc(100vh - 6rem);
   }
-
-  .VideoPage_Container h1 {
-    font-size: 2.7rem;
-  }
 }
 
 @media screen and (max-width: 480px) and (min-width: 320px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 45px);
     left: 45px;
     top: 4rem;
     height: calc(100vh - 5rem);
   }
-
-  .VideoPage_Container h1 {
-    font-size: 2rem;
-  }
 }
 
 @media screen and (max-width: 320px) and (min-width: 280px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 40px);
     left: 40px;
     top: 3.5rem;
     height: calc(100vh - 4.5rem);
   }
-
-  .VideoPage_Container h1 {
-    font-size: 1.6rem;
-  }
 }
 
 @media screen and (max-width: 280px) {
-  .VideoPage_Container {
+  .VideoPage {
     width: calc(100% - 40px);
     left: 40px;
     top: 3rem;
     height: calc(100vh - 4rem);
-  }
-
-  .VideoPage_Container h1 {
-    font-size: 1.2rem;
   }
 }
