@@ -29,3 +29,21 @@ const exitBrowser = async () => {
     await browser.close();
   } catch (err) {}
 };
+
+const newPage = async (): Promise<[puppeteer.Page, () => {}] | null> => {
+  try {
+    const page: puppeteer.Page = await browser.newPage();
+    const closePage = async (): Promise<boolean> => {
+      if (!page) return false;
+      try {
+        await page.close();
+        return true;
+      } catch (e) {
+        return false;
+      }
+    };
+    return [page, closePage];
+  } catch (e) {
+    return null;
+  }
+};
