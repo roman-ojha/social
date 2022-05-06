@@ -26,12 +26,10 @@ export default {
   youtubeHome: async (req: Request, res: Response) => {
     try {
       if (!page) {
-        return res
-          .status(500)
-          .json(<ResponseObject>{
-            success: false,
-            msg: "Server Error, Please try again later",
-          });
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Server Error, Please try again later",
+        });
       }
       await page.reload();
       // scroll down one time
@@ -50,7 +48,7 @@ export default {
         ).map((el) => "https://www.youtube.com" + el.getAttribute("href"));
       });
       if (link.length > 0) {
-        return res.send(<ResponseObject>{
+        return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Successful",
           data: {

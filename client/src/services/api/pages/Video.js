@@ -4,7 +4,7 @@ export default {
   getVideos: async () => {
     return await axios({
       method: "GET",
-      url: "/youtube/videos",
+      url: "/scrap/youtube/home",
       withCredentials: true,
     });
   },

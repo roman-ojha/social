@@ -16,7 +16,7 @@ const Video = () => {
       const res = await Api.getVideos();
       const data = await res.data;
       if (res.status === 200 && data.success)
-        dispatch(setVideoPageData(data.videos));
+        dispatch(setVideoPageData(data.data));
     } catch (err) {
       toastError(err.response.data.msg);
     }
