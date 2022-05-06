@@ -5,6 +5,7 @@ import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton
 import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
 import { setVideoPageData } from "../redux-actions";
+import { toastError } from "../services/toast";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,12 @@ const Video = () => {
   const fetchVideo = async () => {
     try {
       const res = await Api.getVideos();
-      const videoList = await res.data;
-      dispatch(setVideoPageData(videoList.videos));
-    } catch (err) {}
+      const data = await res.data;
+      if (res.status === 200 && data.success)
+        dispatch(setVideoPageData(data.videos));
+    } catch (err) {
+      toastError(err.response.data.msg);
+    }
   };
   useEffect(() => {
     if (videoPageData.length === 0) {

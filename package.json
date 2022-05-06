@@ -40,6 +40,7 @@
     "node-fetch": "^3.2.2",
     "passport": "^0.4.1",
     "passport-google-oauth2": "^0.2.0",
+    "puppeteer": "^13.7.0",
     "sharp": "^0.30.4",
     "socket.io": "^4.4.1",
     "uuid-v4": "^0.1.0"
