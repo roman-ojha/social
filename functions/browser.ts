@@ -7,6 +7,7 @@ const args = [
   "--disable-accelerated-2d-canvas",
   "--disable-gpu",
   "--lang=en-US,en",
+  "--window-size=1920,1080",
 ];
 let browser: puppeteer.Browser;
 const launchBrowser = async () => {
@@ -17,6 +18,10 @@ const launchBrowser = async () => {
       ignoreHTTPSErrors: true,
       args,
       ignoreDefaultArgs: ["--disable-extensions"],
+      defaultViewport: {
+        width: 1920,
+        height: 1080,
+      },
     });
     console.log("Headless Browser launched Successfully");
     return true;

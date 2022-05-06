@@ -29,6 +29,7 @@
     "firebase-admin": "^10.0.2",
     "googleapis": "^100.0.0",
     "gridfs-stream": "^1.1.1",
+    "html-to-text": "^8.2.0",
     "imagemin": "^8.0.1",
     "imagemin-mozjpeg": "8.0.0",
     "is-jpg": "^3.0.0",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.13",
+    "@types/html-to-text": "^8.1.0",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/node": "^17.0.31",
     "@types/passport": "^1.0.7",

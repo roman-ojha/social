@@ -1,2 +1,6 @@
 ### Get Youtube Api Response
 GET http://{{host}}/youtube/search
+
+
+### Get Youtube homepage videos
+GET http://{{host}}/scrap/youtube/home
