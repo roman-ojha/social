@@ -7,6 +7,8 @@ import FriendStory from "./FriendStory";
 
 const MainPageStory = () => {
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
+  // console.log(userStoriesStore);
+  const storiesData = userStoriesStore.data;
   const isMobile = useMediaQuery({
     query: "(max-width: 480px)",
   });
