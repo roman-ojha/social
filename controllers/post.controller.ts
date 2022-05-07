@@ -181,4 +181,50 @@ export default {
       });
     }
   },
+  getComment: async (req: Request, res: Response) => {
+    try {
+      const { postID, userID } = req.body;
+      if (!postID || !userID) {
+        return res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Haven't got postID & userID",
+        });
+      }
+      const commentRes = await userDetail.findOne(
+        {
+          userID: userID,
+        },
+        {
+          _id: 0,
+          posts: {
+            $elemMatch: {
+              id: postID,
+            },
+          },
+        }
+      );
+      if (!commentRes) {
+        return res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Can't be able to complete action",
+        });
+      }
+      if (commentRes?.posts[0].id !== postID) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Some problem occur, please report this issues on github repo",
+        });
+      }
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        comment: commentRes?.posts[0].comments,
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!!, please try again later",
+      });
+    }
+  },
 };

@@ -145,6 +145,33 @@ const UserPostFeed = (props) => {
       dispatch(stopProgressBar());
     }
   };
+  const getComment = async () => {
+    // dispatch(
+    //   commentBoxAction({
+    //     openCommentBox: true,
+    //     postID: props.userFeedData.id,
+    //     to: props.userMainInformation.userID,
+    //     comments: props.userFeedData.comments.by,
+    //   })
+    // );
+    try {
+      dispatch(startProgressBar());
+      const res = await Api.getComment({
+        postID: props.userFeedData.id,
+        userID: props.userMainInformation.userID,
+      });
+      console.log(await res.data);
+      dispatch(stopProgressBar());
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again Letter!!!");
+      }
+      dispatch(stopProgressBar());
+    }
+  };
+
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -213,14 +240,15 @@ const UserPostFeed = (props) => {
                 className="HomePage_Feed__Comment_Icon"
                 icon="akar-icons:comment"
                 onClick={() => {
-                  dispatch(
-                    commentBoxAction({
-                      openCommentBox: true,
-                      postID: props.userFeedData.id,
-                      to: props.userMainInformation.userID,
-                      comments: props.userFeedData.comments.by,
-                    })
-                  );
+                  // dispatch(
+                  //   commentBoxAction({
+                  //     openCommentBox: true,
+                  //     postID: props.userFeedData.id,
+                  //     to: props.userMainInformation.userID,
+                  //     comments: props.userFeedData.comments.by,
+                  //   })
+                  // );
+                  getComment();
                 }}
               />
               <p>{postInformation.commentNo}</p>

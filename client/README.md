@@ -11,10 +11,3 @@
 2. NodeJs -> Server Side
 3. MongoDB -> To store userDetail
 4. Firebase -> To store images/files
-
-## How to run Locally:
-1. Directory `Social-Application/client`
-2. Create `.env` file in Project Directory
-3. Get all the environment variables which are include in `.env.example`
-4. Run `yarn` to install all packages
-5. Run `yarn start` to run the client Site

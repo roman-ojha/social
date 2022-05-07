@@ -17,4 +17,12 @@ export default {
       withCredentials: true,
     });
   },
+  getComment: async (data) => {
+    return await axios({
+      url: "/get/comment",
+      method: "POST",
+      data: data,
+      withCredentials: true,
+    });
+  },
 };

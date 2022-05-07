@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import UserDocument from "../interface/userDocument.js";
 import SchemaMethodInstance from "interface/userSchemaMethods.js";
 import ModelMethodInstance from "interface/userModelMethods.js";
 
