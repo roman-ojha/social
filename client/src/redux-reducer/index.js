@@ -14,7 +14,7 @@ import followedByUserReducer from "./followedByUserReducer";
 import messageListReducer from "./messageListReducer";
 import commentBoxReducer from "./commentBox";
 import progressBarReducer from "./progressBar";
-import userStoriesReducer from "./userStories";
+import userStoriesReducer from "./page/stories/userStories";
 import sideBarDrawerReducer from "./sideBarDrawer";
 import rightPartDrawerReducer from "./rightPartDrawer";
 import homePagePostFieldViewValue from "./homePagePostFieldViewValue";
