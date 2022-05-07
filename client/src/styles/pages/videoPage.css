@@ -63,7 +63,6 @@
 }
 
 .VideoPage_Videos_Container {
-  /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,6 +80,7 @@
   width: 90%;
   height: 450px;
   margin-top: 1rem;
+  border-radius: 10px;
 }
 
 .VideoPage_Youtube_Video_Image {
@@ -103,6 +103,7 @@
   font-style: italic;
   /* border: 1px solid red; */
   width: 85%;
+  cursor: pointer;
 }
 
 .VideoPage_LoadingSpinner_Container {
@@ -116,6 +117,16 @@
   flex-direction: column;
   align-items: center;
   height: calc(100vh - 5rem);
+}
+
+.VideoPage_LoadingSpinner {
+  width: 3rem;
+  height: 3rem;
+  border-width: 10px;
+  border-color: var(--primary-color-darker-5) #bc8be2 #bc8be2 #bc8be2;
+  border-style: solid;
+  border-radius: 50%;
+  animation: loadingSpinner 1s linear infinite;
 }
 
 @media screen and (max-width: 1366px) and (min-width: 1200px) {
@@ -232,7 +243,7 @@
   }
   .VideoPage_LoadingSpinner_Container {
     width: calc(100% - 40px);
-    left: 40px;
+    left: 60px;
     top: 3rem;
     height: calc(100vh - 3rem);
   }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import Api from "../services/api/pages/Video";
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setVideoPageData } from "../services/redux-actions";
 import { toastError } from "../services/toast";
 import { Icon } from "@iconify/react";
+import RenderVideo from "../components/VideoPage/RenderVideo";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -50,26 +51,7 @@ const Video = () => {
           <div className="VideoPage_Videos_Container">
             {videoPageData.map((video, index) => {
               return (
-                <div
-                  key={index}
-                  className="VideoPage_Youtube_Video_Info_Container"
-                >
-                  {/* <iframe
-                  src={`https://youtube.com/embed/${videoId}`}
-                  className="VideoPage_Youtube_Video"
-                  frameBorder="0"
-                  allow="accelerometer;clipboard-write;encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe> */}
-                  <img
-                    src={`http://img.youtube.com/vi/${video.videoId}/hqdefault.jpg`}
-                    className="VideoPage_Youtube_Video_Image"
-                    alg={video.title}
-                  />
-                  <h1 className="VidePage_Youtube_Video_Title">
-                    {video.title}
-                  </h1>
-                </div>
+                <RenderVideo videoId={video.videoId} title={video.title} />
               );
             })}
           </div>
