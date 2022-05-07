@@ -8,4 +8,11 @@ export default {
       withCredentials: true,
     });
   },
+  searchVideo: async (query) => {
+    return await axios({
+      method: "GET",
+      url: `/scrap/youtube/search?query=${query}`,
+      withCredentials: true,
+    });
+  },
 };

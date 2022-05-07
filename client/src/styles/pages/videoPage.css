@@ -43,6 +43,12 @@
 
 .VideoPage_Search_Icon {
   color: var(--lower-opacity-font-color);
+  cursor: pointer;
+  transition-duration: 200ms;
+}
+
+.VideoPage_Search_Icon:hover {
+  transform: scale(1.1);
 }
 
 .VideoPage_Search_Input_Field {
