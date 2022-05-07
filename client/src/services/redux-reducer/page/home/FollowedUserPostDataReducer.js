@@ -2,6 +2,7 @@ const initialState = [];
 
 const setFollowedUserPostDataReducer = (state = initialState, action) => {
   if (action.type === "followedUserPostData") {
+    console.log(action.payload);
     return action.payload;
   } else if (action.type === "incrementPostCommentNumber") {
     // state;

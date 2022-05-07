@@ -146,14 +146,6 @@ const UserPostFeed = (props) => {
     }
   };
   const getComment = async () => {
-    // dispatch(
-    //   commentBoxAction({
-    //     openCommentBox: true,
-    //     postID: props.userFeedData.id,
-    //     to: props.userMainInformation.userID,
-    //     comments: props.userFeedData.comments.by,
-    //   })
-    // );
     try {
       dispatch(startProgressBar());
       const res = await Api.getComment({
@@ -161,6 +153,19 @@ const UserPostFeed = (props) => {
         userID: props.userMainInformation.userID,
       });
       console.log(await res.data);
+      const data = await res.data;
+      if (res.status === 200 && data.success) {
+        dispatch(
+          commentBoxAction({
+            openCommentBox: true,
+            postID: props.userFeedData.id,
+            to: props.userMainInformation.userID,
+            comments: data.comment.by,
+          })
+        );
+      } else {
+        toastError(data.msg);
+      }
       dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {

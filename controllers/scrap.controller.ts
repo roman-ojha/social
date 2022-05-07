@@ -39,23 +39,27 @@ export default {
       await page.waitForSelector("ytd-rich-grid-media");
       // // get videos
       // let link: string[] = [];
-      const videoId = await page.evaluate(() => {
+      const videos = await page.evaluate(() => {
         return Array.from(
           document.getElementsByClassName(
             "yt-simple-endpoint focus-on-expand style-scope ytd-rich-grid-media"
           )
         ).map((el) => {
           const href = el.getAttribute("href");
-          if (href) {
-            return href.slice(9, href.length);
+          const title = el.getAttribute("title");
+          if (href && title) {
+            return {
+              videoId: href.slice(9, href.length),
+              title: title,
+            };
           }
         });
       });
-      if (videoId.length > 0) {
+      if (videos.length > 0) {
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Successful",
-          data: videoId,
+          data: videos,
         });
       } else {
         return res.status(404).json(<ResponseObject>{

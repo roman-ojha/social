@@ -51,11 +51,19 @@
   width: 90%;
   height: 450px;
   margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  transition-duration: 200ms;
+}
+
+.VideoPage_Youtube_Video_Image:hover {
+  transform: scale(1.01);
 }
 
 @media screen and (max-width: 1366px) and (min-width: 1200px) {
-  .VideoPage_Youtube_Video {
-    height: 320px;
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 350px;
   }
 }
 

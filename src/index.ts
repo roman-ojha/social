@@ -31,7 +31,7 @@ app.use(settingRoute);
 app.use(postRoute);
 app.use(storageRouter);
 // app.use(youtubeRoute);
-// app.use(scrapRoute);
+app.use(scrapRoute);
 import "../socket/io.js";
 
 // using google authentication function

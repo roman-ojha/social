@@ -23,7 +23,7 @@ const Video = () => {
   };
   useEffect(() => {
     if (videoPageData.length === 0) {
-      // fetchVideo();
+      fetchVideo();
     }
   }, []);
   return (
