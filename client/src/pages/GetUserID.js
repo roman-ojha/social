@@ -5,7 +5,7 @@ import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
 import { toastError } from "../services/toast";
-import { showLoadingSpinner } from "../redux-actions";
+import { showLoadingSpinner } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 

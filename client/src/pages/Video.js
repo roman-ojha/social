@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
-import { setVideoPageData } from "../redux-actions";
+import { setVideoPageData } from "../services/redux-actions";
 import { toastError } from "../services/toast";
 import { Icon } from "@iconify/react";
 

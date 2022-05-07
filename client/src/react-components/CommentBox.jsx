@@ -8,7 +8,7 @@ import {
   incrementPostCommentNumber,
   startProgressBar,
   stopProgressBar,
-} from "../redux-actions";
+} from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { useState } from "react";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";

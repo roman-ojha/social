@@ -9,7 +9,7 @@ import {
   profilePageDataAction,
   startProgressBar,
   stopProgressBar,
-} from "../redux-actions/index";
+} from "../services/redux-actions/index";
 import socket from "../services/socket";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";

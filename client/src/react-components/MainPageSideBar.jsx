@@ -13,7 +13,7 @@ import {
   startProgressBar,
   stopProgressBar,
   openSideBarDrawer,
-} from "../redux-actions";
+} from "../services/redux-actions";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;

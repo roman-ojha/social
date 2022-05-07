@@ -9,7 +9,7 @@ import {
   changeRootUserNameAction,
   startProgressBar,
   stopProgressBar,
-} from "../redux-actions";
+} from "../services/redux-actions";
 import LoadingSpinner from "../react-components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

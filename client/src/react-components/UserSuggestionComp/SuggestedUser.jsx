@@ -5,7 +5,7 @@ import {
   startProgressBar,
   stopProgressBar,
   isFollowedSuggestedUser,
-} from "../../redux-actions";
+} from "../../services/redux-actions";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";

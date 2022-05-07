@@ -11,7 +11,7 @@ import {
   mainPageMessageInnerViewOnOff,
   appendOnMessage,
   appendMessageOnMessageListAction,
-} from "../redux-actions/index";
+} from "../services/redux-actions/index";
 import { instance as axios } from "../services/axios";
 import "../styles/react-components/messageBox.css";
 import "../styles/pages/MessagePage.css";

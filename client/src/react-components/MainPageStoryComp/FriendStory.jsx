@@ -1,6 +1,6 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { storyIndex } from "../../redux-actions";
+import { storyIndex } from "../../services/redux-actions";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 

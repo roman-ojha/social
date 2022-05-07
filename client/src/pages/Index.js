@@ -13,7 +13,7 @@ import {
   followedByUserAction,
   setUserStories,
   messageListAction,
-} from "../redux-actions/index";
+} from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
 

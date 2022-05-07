@@ -4,7 +4,7 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-import { startProgressBar, stopProgressBar } from "../redux-actions";
+import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
 

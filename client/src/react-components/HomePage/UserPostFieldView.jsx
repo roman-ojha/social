@@ -5,7 +5,7 @@ import {
   homePageUserPostFieldDataAction,
   setHomePagePostFieldViewValue,
   showLoadingSpinner,
-} from "../../redux-actions";
+} from "../../services/redux-actions";
 import { Picker } from "emoji-mart";
 import { instance as axios } from "../../services/axios";
 import { Icon } from "@iconify/react";

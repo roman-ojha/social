@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hideProgressBar } from "../redux-actions";
+import { hideProgressBar } from "../services/redux-actions";
 
 const ProgressBar = () => {
   const updateIntervalIn = 100;

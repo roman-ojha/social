@@ -6,7 +6,7 @@ import {
   startProgressBar,
   stopProgressBar,
   profilePageDataAction,
-} from "../redux-actions";
+} from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import "../styles/react-components/mainPageSearchBar.css";
 

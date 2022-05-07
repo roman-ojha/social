@@ -1,6 +1,6 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { openSideBarDrawer } from "../redux-actions";
+import { openSideBarDrawer } from "../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import constant from "../constant/constant";
