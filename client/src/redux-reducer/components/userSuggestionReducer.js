@@ -2,11 +2,18 @@ const initialState = [];
 
 const userSuggestionReducer = (state = initialState, action) => {
   if (action.type === "userSugestion") {
-    return action.payload.map((element) => {
+    const newList = action.payload.map((element) => {
       return {
         ...element,
         followed: false,
       };
+    });
+    return newList.sort((a, b) => {
+      if (a.type !== "bot" || b.type != "bot") {
+        return;
+      } else {
+        return Math.random() - 0.5;
+      }
     });
   } else if (action.type == "isFollowedSuggestedUser") {
     return state.map((user) =>
