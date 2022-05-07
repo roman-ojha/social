@@ -1,15 +1,15 @@
 import React from "react";
 import "emoji-mart/css/emoji-mart.css";
-import LoadingSpinner from "../react-components/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { useSelector } from "react-redux";
-import UserPostFeed from "../react-components/UserPostFeed";
+import UserPostFeed from "../components/UserPostFeed";
 import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
-import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
-import OpenRightPartDrawerButton from "../react-components/OpenRightPartDrawerButton";
-import DefaultSocialPost from "../react-components/DefaultSocialPost";
-import UserPostFieldView from "../react-components/HomePage/UserPostFieldView";
-import DisplayFollowedUserPost from "../react-components/HomePage/DisplayFollowedUserPost";
+import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
+import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
+import DefaultSocialPost from "../components/DefaultSocialPost";
+import UserPostFieldView from "../components/HomePage/UserPostFieldView";
+import DisplayFollowedUserPost from "../components/HomePage/DisplayFollowedUserPost";
 
 const Home = () => {
   const userProfileDetailStore = useSelector(

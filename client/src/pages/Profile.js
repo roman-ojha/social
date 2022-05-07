@@ -15,8 +15,8 @@ import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
-import CommentBox from "../react-components/CommentBox";
-import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
+import CommentBox from "../components/CommentBox";
+import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import { toastSuccess, toastError } from "../services/toast";
 import RoutingProfilePage from "../routes/RoutingProfilePage";
 

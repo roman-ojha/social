@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/react-components/moreProfileBox.css";
+import "../styles/components/moreProfileBox.css";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";

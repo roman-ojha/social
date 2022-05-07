@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/react-components/loadingSpinner.css";
+import "../styles/components/loadingSpinner.css";
 import { useDispatch, useSelector } from "react-redux";
 
 const LoadingSpinner = () => {

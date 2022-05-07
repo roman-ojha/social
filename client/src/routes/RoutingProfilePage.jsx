@@ -1,8 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import ProfileFriends from "../react-components/ProfileFriends";
-import ProfileAlbums from "../react-components/ProfileAlbums";
-import UserPostFeed from "../react-components/UserPostFeed";
+import ProfileFriends from "../components/ProfileFriends";
+import ProfileAlbums from "../components/ProfileAlbums";
+import UserPostFeed from "../components/UserPostFeed";
 
 const RoutingProfilePage = (props) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useSelector } from "react-redux";
-import "../../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
+import "../../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { useEffect } from "react";
 import SuggestedUser from "./SuggestedUser";
 

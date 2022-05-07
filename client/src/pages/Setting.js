@@ -10,7 +10,7 @@ import {
   startProgressBar,
   stopProgressBar,
 } from "../services/redux-actions";
-import LoadingSpinner from "../react-components/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";

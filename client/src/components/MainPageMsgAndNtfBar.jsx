@@ -7,7 +7,7 @@ import {
   openMoreProfileBox,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
-import "../styles/react-components/mainPageMsgAndNtfBar.css";
+import "../styles/components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 

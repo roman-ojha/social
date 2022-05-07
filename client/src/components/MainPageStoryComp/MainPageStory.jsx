@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "../../styles/react-components/mainPageStory.css";
+import "../../styles/components/mainPageStory.css";
 import { useMediaQuery } from "react-responsive";
 import AddStory from "./AddStory";
 import FriendStory from "./FriendStory";

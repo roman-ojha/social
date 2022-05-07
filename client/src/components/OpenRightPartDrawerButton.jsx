@@ -2,7 +2,7 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
-import "../styles/react-components/rightPartDrawerOpenButton.css";
+import "../styles/components/rightPartDrawerOpenButton.css";
 import { openRightPartDrawer } from "../services/redux-actions";
 
 const OpenRightPartDrawerButton = () => {

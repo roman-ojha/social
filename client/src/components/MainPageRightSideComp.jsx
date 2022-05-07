@@ -6,7 +6,7 @@ import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
 import { openRightPartDrawer } from "../services/redux-actions";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
-import "../styles/react-components/mainPageRightSideComp.css";
+import "../styles/components/mainPageRightSideComp.css";
 import NotificationBox from "./NotificationBox";
 import MoreProfileBox from "./MoreProfileBox";
 

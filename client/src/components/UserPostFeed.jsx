@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import "../styles/react-components/userPostFeed.css";
+import "../styles/components/userPostFeed.css";
 import { useHistory } from "react-router-dom";
 import {
   commentBoxAction,

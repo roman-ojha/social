@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
-import LoadingScreen from "../react-components/IndexPage/LoadingScreen";
-import ReturnMainPage from "../react-components/IndexPage/ReturnMainPage";
+import LoadingScreen from "../components/IndexPage/LoadingScreen";
+import ReturnMainPage from "../components/IndexPage/ReturnMainPage";
 import {
   userProfileDetailAction,
   userProfilePostAction,

@@ -7,7 +7,7 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";
-import "../styles/react-components/mainPageSideBar.css";
+import "../styles/components/mainPageSideBar.css";
 import {
   profilePageDataAction,
   startProgressBar,

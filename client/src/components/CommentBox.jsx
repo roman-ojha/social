@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/react-components/CommentBox.css";
+import "../styles/components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";

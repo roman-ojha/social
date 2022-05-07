@@ -6,7 +6,7 @@ import "../styles/pages/signUpPage.css";
 import { Helmet } from "react-helmet";
 import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
-import ProgressBar from "../react-components/ProgressBar";
+import ProgressBar from "../components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";

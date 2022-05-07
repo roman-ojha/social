@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/react-components/notificationBox.css";
+import "../styles/components/notificationBox.css";
 import { useSelector } from "react-redux";
 
 const NotificationBox = () => {

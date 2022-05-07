@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "../styles/react-components/profileAlbum.css";
+import "../styles/components/profileAlbum.css";
 
 const ProfileAlbums = (props) => {
   const profilePageData = useSelector((state) => state.profilePageDataReducer);

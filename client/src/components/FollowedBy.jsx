@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
+import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
 import { toastError, toastSuccess } from "../services/toast";
 import {

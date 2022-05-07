@@ -1,6 +1,6 @@
 import React from "react";
 import AppIcon from "../assets/icons/Social_Icon.ico";
-import "../styles/react-components/defaultSocialPost.css";
+import "../styles/components/defaultSocialPost.css";
 
 const DefaultSocialPost = () => {
   return (

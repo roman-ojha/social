@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 import { toastError } from "../services/toast";
 import { showLoadingSpinner } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
-import LoadingSpinner from "../react-components/LoadingSpinner";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const GetUserID = (props) => {
   const dispatch = useDispatch();

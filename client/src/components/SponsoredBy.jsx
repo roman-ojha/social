@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import "../styles/react-components/userSuggestionFollowdBySponsoredBy.css";
+import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
 
 const SponsoredBy = () => {
   const mainPageMessageOnOffState = useSelector(
