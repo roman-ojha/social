@@ -59,7 +59,7 @@ export default {
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Successful",
-          data: videos,
+          videos,
         });
       } else {
         return res.status(404).json(<ResponseObject>{
