@@ -4,3 +4,6 @@ GET http://{{host}}/youtube/search
 
 ### Get Youtube homepage videos
 GET http://{{host}}/scrap/youtube/home
+
+### Get Youtube search video
+GET http://{{host}}/scrap/youtube/search?q=roman

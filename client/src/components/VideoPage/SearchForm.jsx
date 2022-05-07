@@ -1,14 +1,27 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
-import { toastError } from "../../services/toast";
+import { toastError, toastWarn } from "../../services/toast";
 import Api from "../../services/api/pages/Video";
+import { isEmptyString } from "../../functions/isEmptyString";
+import { setVideoPageData } from "../../services/redux-actions";
+import { useDispatch } from "react-redux";
 
 const SearchForm = () => {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("");
+
   const searchVideo = async (e) => {
     try {
-      const res = await Api.searchVideo(value);
-      console.log(await res.data);
+      e.preventDefault();
+      if (isEmptyString(value)) {
+        toastWarn("Please fill the search field first");
+      } else {
+        const res = await Api.searchVideo(value);
+        const data = await res.data;
+        console.log(data);
+        if (res.status === 200 && data.success)
+          dispatch(setVideoPageData(data.videos));
+      }
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
@@ -16,7 +29,6 @@ const SearchForm = () => {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
     }
-    e.preventDefault();
   };
   return (
     <>

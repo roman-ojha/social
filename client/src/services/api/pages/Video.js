@@ -11,7 +11,7 @@ export default {
   searchVideo: async (query) => {
     return await axios({
       method: "GET",
-      url: `/scrap/youtube/search?query=${query}`,
+      url: `/scrap/youtube/search?q=${query}`,
       withCredentials: true,
     });
   },
