@@ -1,7 +1,6 @@
-import { Request, Response } from "express";
-import launchBrowser from "../functions/browser.js";
-import { newPage } from "../functions/browser.js";
-import ResponseObject from "interface/responseObject.js";
+import { toastError } from "../services/toast";
+import launchBrowser from "./browser";
+import { newPage } from "./browser";
 
 await launchBrowser();
 const [page, closePage] = await newPage();
@@ -9,7 +8,7 @@ if (!page) {
   await launchBrowser();
 }
 const goToYoutubeHomePage = async () => {
-  const url: string = "https://www.youtube.com/";
+  const url = "https://www.youtube.com/";
   try {
     if (page) {
       await page.goto(url, {
@@ -22,13 +21,10 @@ const goToYoutubeHomePage = async () => {
 };
 await goToYoutubeHomePage();
 export default {
-  youtubeHome: async (req: Request, res: Response) => {
+  youtubeHome: async () => {
     try {
       if (!page) {
-        return res.status(500).json(<ResponseObject>{
-          success: false,
-          msg: "Server Error, Please try again later",
-        });
+        return;
       }
       await page.reload();
       // scroll down one time
@@ -52,22 +48,12 @@ export default {
         });
       });
       if (videoId.length > 0) {
-        return res.status(200).json(<ResponseObject>{
-          success: true,
-          msg: "Successful",
-          data: videoId,
-        });
+        return { videoId };
       } else {
-        return res.status(404).json(<ResponseObject>{
-          success: false,
-          msg: "Can't be able to get Youtube data, Please try again later",
-        });
+        return null;
       }
     } catch (err) {
-      return res.status(500).json(<ResponseObject>{
-        success: false,
-        msg: "Server Error, Please try again later",
-      });
+      return toastError("Something went wrong please try again later");
     }
   },
 };

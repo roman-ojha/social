@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
-import OpenSideBarDrawerButton from "../react-components/OpenSideBarDrawerButton";
 import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
 import { setVideoPageData } from "../redux-actions";
@@ -24,7 +23,7 @@ const Video = () => {
   };
   useEffect(() => {
     if (videoPageData.length === 0) {
-      fetchVideo();
+      // fetchVideo();
     }
   }, []);
   return (
