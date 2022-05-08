@@ -9,13 +9,13 @@ const userSuggestionReducer = (state = initialState, action) => {
       };
     });
     return newList.sort((a, b) => {
-      if (a.type !== "bot" || b.type != "bot") {
+      if (a.type !== "bot" || b.type !== "bot") {
         return;
       } else {
         return Math.random() - 0.5;
       }
     });
-  } else if (action.type == "isFollowedSuggestedUser") {
+  } else if (action.type === "isFollowedSuggestedUser") {
     return state.map((user) =>
       user.userID === action.payload.userID
         ? { ...user, followed: action.payload.followed }

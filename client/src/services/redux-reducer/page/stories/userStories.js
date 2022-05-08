@@ -8,7 +8,7 @@ const userStoriesReducer = (state = initialState, action) => {
     return {
       ...state,
       data: action.payload.sort((a, b) => {
-        if (a.type !== "bot" || b.type != "bot") {
+        if (a.type !== "bot" || b.type !== "bot") {
           return;
         } else {
           return Math.random() - 0.5;
