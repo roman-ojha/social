@@ -56,7 +56,6 @@ export default {
       if (token) {
         res.cookie("AuthToken", token, {
           expires: new Date(Date.now() + 25892000000),
-          httpOnly: true,
         });
       }
       return res.status(200).json(<ResponseObject>{
@@ -108,7 +107,6 @@ export default {
           if (token) {
             res.cookie("AuthToken", token, {
               expires: new Date(Date.now() + 25892000000),
-              httpOnly: true,
             });
           }
           res

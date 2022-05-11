@@ -19,7 +19,6 @@ export default {
       token = await userLogin.generateAuthToken();
       res.cookie("AuthToken", token, {
         expires: new Date(Date.now() + 25892000000),
-        httpOnly: true,
       });
       // console.log(userLogin.userID);
       if (userLogin.userID === undefined) {
