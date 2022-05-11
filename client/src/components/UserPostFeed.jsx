@@ -152,7 +152,6 @@ const UserPostFeed = (props) => {
         postID: props.userFeedData.id,
         userID: props.userMainInformation.userID,
       });
-      console.log(await res.data);
       const data = await res.data;
       if (res.status === 200 && data.success) {
         dispatch(

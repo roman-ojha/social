@@ -15,7 +15,7 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import { isEmptyString } from "../functions/isEmptyString";
 
-const CommentBox = () => {
+const ReturnCommentContent = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
@@ -101,7 +101,6 @@ const CommentBox = () => {
       </>
     );
   };
-
   return (
     <>
       <div className="CommentBox_Background">
@@ -144,6 +143,11 @@ const CommentBox = () => {
       </div>
     </>
   );
+};
+
+const CommentBox = () => {
+  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  return <>{commentBoxStore.openCommentBox ? <ReturnCommentContent /> : ""}</>;
 };
 
 export default CommentBox;
