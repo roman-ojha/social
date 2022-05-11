@@ -223,6 +223,23 @@ const userDetailSchema = new mongoose.Schema<
       type: String,
     },
   },
+  notification: [
+    {
+      title: {
+        type: String,
+      },
+      picture: {
+        type: String,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      userID: {
+        type: String,
+      },
+    },
+  ],
   tokens: [
     {
       token: {

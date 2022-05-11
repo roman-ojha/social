@@ -98,4 +98,11 @@ export default interface UserDocument extends Document {
       token: string;
     }
   ];
+  notification: [
+    {
+      title: string;
+      picture: string;
+      userID: string;
+    }
+  ];
 }
