@@ -40,10 +40,9 @@ const GetUserID = (props) => {
       getUserDetail();
     }
   }, []);
-  // console.log(userDetail);
   const submitDetail = async (e) => {
-    dispatch(showLoadingSpinner(true));
     try {
+      dispatch(showLoadingSpinner(true));
       const profile = document.getElementById("image-input").files[0];
       const data = new FormData();
       if (props.userDetail === undefined) {
@@ -70,13 +69,13 @@ const GetUserID = (props) => {
         // console.log(resData);
       } else {
         // console.log(resData);
+        dispatch(showLoadingSpinner(false));
         if (props.userDetail === undefined) {
-          history.push("/");
+          history.push("/u");
         } else {
           history.push("/signin");
         }
       }
-      dispatch(showLoadingSpinner(false));
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.err);
@@ -86,6 +85,7 @@ const GetUserID = (props) => {
       dispatch(showLoadingSpinner(false));
     }
   };
+
   return (
     <>
       <LoadingSpinner />

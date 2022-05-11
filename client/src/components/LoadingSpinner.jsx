@@ -1,9 +1,8 @@
 import React from "react";
 import "../styles/components/loadingSpinner.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const LoadingSpinner = () => {
-  const dispatch = useDispatch();
   const showLoadingSpinnerState = useSelector(
     (state) => state.showLoadingSpinnerReducer
   );
