@@ -20,4 +20,6 @@ userRoute.post("/u/follow", authenticate, userController.followUser);
 
 userRoute.post("/u/unfollow", authenticate, userController.unFollowUser);
 
+userRoute.get("/u/notification/:userid", userController.getNotificationData);
+
 export default userRoute;

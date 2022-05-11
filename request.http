@@ -7,3 +7,7 @@ GET http://{{host}}/scrap/youtube/home
 
 ### Get Youtube search video
 GET http://{{host}}/scrap/youtube/search?q=roman
+
+
+### Get Notification Data of the user
+GET http://{{host}}/u/notification/RomanOjha98

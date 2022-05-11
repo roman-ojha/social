@@ -536,4 +536,33 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
+  getNotificationData: async (req: Request, res: Response) => {
+    try {
+      const userID = req.params.userid;
+      const getNotificationRes = await userDetail.findOne(
+        {
+          userID: userID,
+        },
+        {
+          notification: 1,
+          _id: 1,
+        }
+      );
+      if (!getNotificationRes) {
+        res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Some problem occur please try again later...",
+        });
+      }
+      res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        data: getNotificationRes,
+      });
+    } catch (err) {
+      return res
+        .status(500)
+        .json({ error: "Server Error!!, Please Try again letter" });
+    }
+  },
 };
