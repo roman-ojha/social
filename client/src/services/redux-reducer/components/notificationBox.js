@@ -1,8 +1,14 @@
-const initialState = false;
+const initialState = {
+  notificationData: [],
+  open: false,
+};
 
 const notificationBox = (state = initialState, action) => {
   if (action.type === "openNotificationBox") {
-    return action.bool;
+    return {
+      ...state,
+      open: action.bool,
+    };
   } else {
     return state;
   }

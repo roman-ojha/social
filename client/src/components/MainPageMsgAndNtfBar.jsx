@@ -5,11 +5,15 @@ import {
   mainPageMessageViewOnOff,
   openNotificationBox,
   openMoreProfileBox,
+  startProgressBar,
+  stopProgressBar,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { toastError } from "../services/toast";
+import Api from "../services/api/components/MainPageMsgAndNtfBar";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
@@ -25,6 +29,32 @@ const MainPageMsgAndNtfBar = () => {
     (state) => state.moreProfileBoxReducer
   );
   const notificationBoxState = useSelector((state) => state.notificationBox);
+
+  const getNotificationData = async () => {
+    dispatch(startProgressBar());
+    try {
+      const res = await Api.getNotificationData();
+      const data = await res.data;
+      if (res.status === 200 && data.success) {
+        // success
+        console.log(data);
+      } else {
+        // error
+        toastError(data.msg);
+      }
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
+    dispatch(stopProgressBar());
+    dispatch(openNotificationBox(true));
+    dispatch(mainPageMessageViewOnOff(false));
+    dispatch(openMoreProfileBox(false));
+  };
+
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
@@ -56,9 +86,16 @@ const MainPageMsgAndNtfBar = () => {
         <div
           className="MainPage_Message_Bar_Notification_Outline"
           onClick={() => {
-            dispatch(openNotificationBox(!notificationBoxState));
-            dispatch(mainPageMessageViewOnOff(false));
-            dispatch(openMoreProfileBox(false));
+            if (notificationBoxState.open) {
+              dispatch(openNotificationBox(false));
+              dispatch(mainPageMessageViewOnOff(false));
+              dispatch(openMoreProfileBox(false));
+            } else if (
+              notificationBoxState.open === false &&
+              notificationBoxState.notificationData.length === 0
+            ) {
+              getNotificationData();
+            }
           }}
         >
           <Icon

@@ -538,7 +538,7 @@ export default {
   },
   getNotificationData: async (req: Request, res: Response) => {
     try {
-      const userID = req.params.userid;
+      const userID = req.rootUser.userID;
       const getNotificationRes = await userDetail.findOne(
         {
           userID: userID,

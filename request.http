@@ -10,4 +10,4 @@ GET http://{{host}}/scrap/youtube/search?q=roman
 
 
 ### Get Notification Data of the user
-GET http://{{host}}/u/notification/RomanOjha98
+GET http://{{host}}/u/notification

@@ -185,7 +185,7 @@ const FollowedBy = () => {
         {followedBy.map((user, index) => {
           if (
             !mainPageMessageOnOffState &&
-            !notificationBoxState &&
+            !notificationBoxState.open &&
             !moreProfileBoxState
           ) {
             if (index < 2) {
@@ -193,7 +193,7 @@ const FollowedBy = () => {
             }
           } else if (
             mainPageMessageOnOffState ||
-            notificationBoxState ||
+            notificationBoxState.open ||
             moreProfileBoxState
           ) {
             if (index < 1) {
@@ -209,7 +209,7 @@ const FollowedBy = () => {
       <div
         className={
           mainPageMessageOnOffState ||
-          notificationBoxState ||
+          notificationBoxState.open ||
           moreProfileBoxState
             ? "MainPage_FollowedBy_Container_MinView"
             : "MainPage_FollowedBy_Container"

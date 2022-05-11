@@ -24,7 +24,7 @@ const UserSuggestion = () => {
           if (user.userID !== undefined) {
             if (
               !mainPageMessageOnOffState &&
-              !notificationBoxState &&
+              !notificationBoxState.open &&
               !moreProfileBoxState
             ) {
               if (countUser.current < 3) {
@@ -38,7 +38,7 @@ const UserSuggestion = () => {
               }
             } else if (
               mainPageMessageOnOffState ||
-              notificationBoxState ||
+              notificationBoxState.open ||
               moreProfileBoxState
             ) {
               if (countUser.current < 1) {
@@ -62,7 +62,7 @@ const UserSuggestion = () => {
       <div
         className={
           mainPageMessageOnOffState ||
-          notificationBoxState ||
+          notificationBoxState.open ||
           moreProfileBoxState
             ? "MainPage_UserSuggession_Container_MinView"
             : "MainPage_UserSuggession_Container"

@@ -13,7 +13,7 @@ const SponsoredBy = () => {
   const ReturnSponsoredBy = () => {
     if (
       !mainPageMessageOnOffState &&
-      !notificationBoxState &&
+      !notificationBoxState.open &&
       !moreProfileBoxState
     ) {
       return (
@@ -39,7 +39,7 @@ const SponsoredBy = () => {
       );
     } else if (
       mainPageMessageOnOffState ||
-      notificationBoxState ||
+      notificationBoxState.open ||
       moreProfileBoxState
     ) {
       return <></>;

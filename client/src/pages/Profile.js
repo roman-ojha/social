@@ -69,7 +69,7 @@ const Profile = () => {
       if (err.response.data.success === false) {
         toastError(err.response.data.err);
       } else {
-        toastError("Some Problem Occur, Please Try again Letter!!!");
+        toastError("Some Problem Occur, Please Try again later!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -108,7 +108,7 @@ const Profile = () => {
       if (err.response.data.success === false) {
         toastError(err.response.data.err);
       } else {
-        toastError("Some Problem Occur, Please Try again Letter!!!");
+        toastError("Some Problem Occur, Please Try again later!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -152,7 +152,7 @@ const Profile = () => {
       if (err.response.data.success === false) {
         toastError(err.response.data.err);
       } else {
-        toastError("Some Problem Occur, Please Try again Letter!!!");
+        toastError("Some Problem Occur, Please Try again later!!!");
       }
     }
   };
@@ -209,7 +209,7 @@ const Profile = () => {
         if (err.response.data.success === false) {
           toastError(err.response.data.err);
         } else {
-          toastError("Some Problem Occur, Please Try again Letter!!!");
+          toastError("Some Problem Occur, Please Try again later!!!");
         }
         history.push("/u");
       }
