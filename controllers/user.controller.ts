@@ -545,7 +545,7 @@ export default {
         },
         {
           notification: 1,
-          _id: 1,
+          _id: 0,
         }
       );
       if (!getNotificationRes) {

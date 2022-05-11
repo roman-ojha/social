@@ -7,6 +7,7 @@ import {
   openMoreProfileBox,
   startProgressBar,
   stopProgressBar,
+  setNotificationData,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
@@ -37,7 +38,7 @@ const MainPageMsgAndNtfBar = () => {
       const data = await res.data;
       if (res.status === 200 && data.success) {
         // success
-        console.log(data);
+        dispatch(setNotificationData(data.data.notification));
       } else {
         // error
         toastError(data.msg);
@@ -51,8 +52,6 @@ const MainPageMsgAndNtfBar = () => {
     }
     dispatch(stopProgressBar());
     dispatch(openNotificationBox(true));
-    dispatch(mainPageMessageViewOnOff(false));
-    dispatch(openMoreProfileBox(false));
   };
 
   return (
@@ -88,14 +87,16 @@ const MainPageMsgAndNtfBar = () => {
           onClick={() => {
             if (notificationBoxState.open) {
               dispatch(openNotificationBox(false));
-              dispatch(mainPageMessageViewOnOff(false));
-              dispatch(openMoreProfileBox(false));
             } else if (
               notificationBoxState.open === false &&
               notificationBoxState.notificationData.length === 0
             ) {
               getNotificationData();
+            } else {
+              dispatch(openNotificationBox(true));
             }
+            dispatch(mainPageMessageViewOnOff(false));
+            dispatch(openMoreProfileBox(false));
           }}
         >
           <Icon

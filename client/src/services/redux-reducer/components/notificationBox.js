@@ -9,6 +9,11 @@ const notificationBox = (state = initialState, action) => {
       ...state,
       open: action.bool,
     };
+  } else if (action.type === "setNotificationData") {
+    return {
+      ...state,
+      notificationData: action.payload,
+    };
   } else {
     return state;
   }

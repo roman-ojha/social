@@ -222,6 +222,13 @@ export const openNotificationBox = (bool) => {
   };
 };
 
+export const setNotificationData = (data) => {
+  return {
+    type: "setNotificationData",
+    payload: data,
+  };
+};
+
 export const openMoreProfileBox = (bool) => {
   return {
     type: "openMoreProfileBox",
