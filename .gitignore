@@ -2,8 +2,6 @@ node_modules
 .env.dev
 .env.prod
 /db/firebase_serviceAccountKey.json
-/db/build
-/db/Images
 docker-compose.dev.yml
 note.txt
 /dist
