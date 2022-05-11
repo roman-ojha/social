@@ -32,3 +32,63 @@
   color: var(--primary-color);
   font-style: italic;
 }
+
+.Show_Notification_Container {
+  height: 100%;
+  /* border: 1px solid blue; */
+  overflow-y: scroll;
+}
+
+.Show_Notification_Container::-webkit-scrollbar {
+  width: 5px;
+}
+.Show_Notification_Container::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.Show_Notification_Container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 15px;
+}
+.Show_Notification_Container:hover::-webkit-scrollbar-thumb {
+  background-color: #522572;
+}
+.Show_Notification_Container::-webkit-scrollbar-thumb:hover {
+  background-color: #6b4a81;
+}
+
+.Single_Notification_Container {
+  /* border: 1px solid red; */
+  margin: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #dedede;
+  border-radius: 5px;
+  transition-duration: 100ms;
+}
+
+.Single_Notification_Container:hover {
+  background-color: #c9c9c9;
+}
+
+.Notification_Box_Single_Nft_Pic_and_Title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.Notification_Box_Single_Nft_Pic_and_Title img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+}
+
+.Notification_Box_Single_Nft_Pic_and_Title p {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+  color: black;
+  width: 80%;
+  font-weight: 500;
+  font-style: normal;
+  /* border: 1px solid purple; */
+}
