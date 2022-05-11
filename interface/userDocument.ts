@@ -100,7 +100,7 @@ export default interface UserDocument extends Document {
   ];
   notification: [
     {
-      title: string;
+      topic: string;
       picture: string;
       userID: string;
     }

@@ -225,7 +225,7 @@ const userDetailSchema = new mongoose.Schema<
   },
   notification: [
     {
-      title: {
+      topic: {
         type: String,
       },
       picture: {
@@ -294,7 +294,7 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
     this.following.unshift(followedToUser);
     this.followingNo++;
     // saving following user detail into followed to user database
-    const res = await UserDetail.updateOne(
+    const followRes = await UserDetail.updateOne(
       {
         userID: followedToUser.userID,
       },
@@ -307,13 +307,18 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
             userID: this.userID,
             picture: this.picture,
           },
+          notification: {
+            topic: "follow",
+            picture: this.picture,
+            userID: this.userID,
+          },
         },
         $inc: {
           followersNo: 1,
         },
       }
     );
-    if (res) {
+    if (followRes) {
       await this.save();
       return true;
     } else {
