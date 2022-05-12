@@ -15,28 +15,30 @@ export default {
           userID: 1,
           name: 1,
           picture: 1,
+          tokens: 1,
         }
       );
-      let token;
-      token = await userLogin.generateAuthToken();
-      res.cookie("AuthToken", token, {
-        maxAge: 25892000000,
-        httpOnly: true,
-        domain: process.env.ORIGIN_HOSTNAME,
-        secure: true,
-        // signed: true,
-        sameSite: "none",
-      });
-
-      // NOTE: if we would hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
-      if (userLogin.userID === undefined) {
-        res.redirect(`${CLIENT_BASE_URL}/userid?uid=undefined`);
-      } else {
-        res.redirect(`${CLIENT_BASE_URL}/userid`);
+      if (userLogin) {
+        const token: string | null = await userLogin.generateAuthToken();
+        if (token) {
+          res.cookie("AuthToken", token, {
+            maxAge: 25892000000,
+            httpOnly: true,
+            domain: process.env.ORIGIN_HOSTNAME,
+            secure: true,
+            // signed: true,
+            sameSite: "none",
+          });
+        }
+        // NOTE: if we would hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
+        if (userLogin.userID === undefined) {
+          return res.redirect(`${CLIENT_BASE_URL}/userid?uid=undefined`);
+        } else {
+          return res.redirect(`${CLIENT_BASE_URL}/userid`);
+        }
       }
-    } catch (err) {
-      console.log(err);
-    }
+      return res.status(401).json("UnAuthorized");
+    } catch (err) {}
   },
   loginFail: (req, res) => {
     try {
