@@ -59,7 +59,7 @@ export default {
           // expires: new Date(Date.now() + 25892000000),
           maxAge: 25892000000,
           httpOnly: true,
-          domain: process.env.ORIGIN_HOSTNAME,
+          // domain: process.env.ORIGIN_HOSTNAME,
           secure: true,
           // signed: true,
           sameSite: "none",
@@ -118,10 +118,12 @@ export default {
             res.cookie("AuthToken", token, {
               maxAge: 25892000000,
               httpOnly: true,
-              domain: process.env.ORIGIN_HOSTNAME,
+              // domain: process.env.ORIGIN_HOSTNAME,
+              // domain: the domain that we pass here is the domain or
               secure: true,
               // signed: true,
               sameSite: "none",
+              // NOTE: 'sameSite: "none"' will help to set and access token for different domain
             });
           }
 

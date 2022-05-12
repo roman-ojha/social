@@ -22,7 +22,7 @@ export default {
       res.cookie("AuthToken", token, {
         maxAge: 25892000000,
         httpOnly: true,
-        domain: process.env.ORIGIN_HOSTNAME,
+        // domain: process.env.ORIGIN_HOSTNAME,
         secure: true,
         // signed: true,
         sameSite: "none",
@@ -35,7 +35,7 @@ export default {
         res.redirect(`${CLIENT_BASE_URL}/userid`);
       }
     } catch (err) {
-      // console.log(err);
+      console.log(err);
     }
   },
   loginFail: (req: Request, res: Response) => {
