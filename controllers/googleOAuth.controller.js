@@ -18,7 +18,10 @@ export default {
       let token;
       token = await userLogin.generateAuthToken();
       res.cookie("AuthToken", token, {
-        expires: new Date(Date.now() + 25892000000),
+        // expires: new Date(Date.now() + 25892000000),
+        maxAge: 25892000000,
+        httpOnly: true,
+        secure: req.secure || req.headers["x-forwarded-proto"] === "https",
       });
       // console.log(userLogin.userID);
       if (userLogin.userID === undefined) {

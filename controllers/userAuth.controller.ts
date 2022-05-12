@@ -55,7 +55,10 @@ export default {
       token = await saveUserRes.generateAuthToken();
       if (token) {
         res.cookie("AuthToken", token, {
-          expires: new Date(Date.now() + 25892000000),
+          // expires: new Date(Date.now() + 25892000000),
+          maxAge: 25892000000,
+          httpOnly: true,
+          secure: req.secure || req.headers["x-forwarded-proto"] === "https",
         });
       }
       return res.status(200).json(<ResponseObject>{
@@ -106,7 +109,12 @@ export default {
           let token: string | null = await userLogin.generateAuthToken();
           if (token) {
             res.cookie("AuthToken", token, {
-              expires: new Date(Date.now() + 25892000000),
+              maxAge: 25892000000,
+              // expires: new Date(Date.now() + 25892000000),
+              httpOnly: true,
+              // domain: ".vercel.app",
+              secure:
+                req.secure || req.headers["x-forwarded-proto"] === "https",
             });
           }
           res
