@@ -145,6 +145,7 @@ export default {
   logOut: (req: Request, res: Response) => {
     try {
       res.clearCookie("AuthToken", {
+        domain: "herokuapp.com",
         path: "/",
       });
       return res
