@@ -1,8 +1,9 @@
 import express from "express";
-import passport from "passport";
+// import passport from "passport";
 import session from "express-session";
 const router = express.Router();
 import("../middleware/google_OAuth.js");
+import { passport } from "../middleware/google_OAuth.js";
 import googleOAuthController from "../controllers/googleOAuth.controller.js";
 
 router.use(session({ secret: "cat", resave: true, saveUninitialized: true }));
@@ -16,9 +17,11 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "/auth/login/success",
+    // successRedirect: "/auth/login/success",
     failureRedirect: "/auth/login/failed",
-  })
+  }),
+  // Success url
+  googleOAuthController.loginSuccess
 );
 
 router.get("/auth/login/success", googleOAuthController.loginSuccess);

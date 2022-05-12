@@ -7,16 +7,16 @@ export default {
   loginSuccess: async (req, res) => {
     // here if user login form google after that we are finding the email of that on data base and generating token for that user and after that store that token in cookie
     // and after that we are redirecting to the homepage after that there we will check the does token get match or not if it get match then we will send the data from the user into the home page
-    const userLogin = await UserDetail.findOne(
-      { email: req.user.email },
-      {
-        email: 1,
-        userID: 1,
-        name: 1,
-        picture: 1,
-      }
-    );
     try {
+      const userLogin = await UserDetail.findOne(
+        { email: req.user.email },
+        {
+          email: 1,
+          userID: 1,
+          name: 1,
+          picture: 1,
+        }
+      );
       let token;
       token = await userLogin.generateAuthToken();
       res.cookie("AuthToken", token, {
@@ -39,8 +39,10 @@ export default {
     }
   },
   loginFail: (req, res) => {
-    res
-      .status(401)
-      .json({ error: "Something went wrong, try again letter..." });
+    try {
+      res
+        .status(401)
+        .json({ error: "Something went wrong, try again letter..." });
+    } catch (err) {}
   },
 };

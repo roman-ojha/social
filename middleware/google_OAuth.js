@@ -80,7 +80,10 @@ passport.deserializeUser(function (user, done) {
 });
 
 function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
+  try {
+    req.user ? next() : res.sendStatus(401);
+  } catch (err) {}
 }
 
 export default isLoggedIn;
+export { passport };
