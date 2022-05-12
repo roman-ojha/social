@@ -26,15 +26,23 @@ services:
       - .:/user/src/server
     environment:
       PORT: 8080
+      ORIGIN_HOSTNAME: localhost
+      NODE_ENV: development
       API_BASE_URL: http://localhost:8080
       CLIENT_BASE_URL: http://localhost:3000
       USERDATABASE: mongodb://mongo:27017/Social
       SECRET_KEY: SECxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxSEC
       GOOGLE_CLIENT_ID: googleclientid
       GOOGLE_CLIENT_SECRET: googleclientsecret
-      FIREBASE_STORAGEBUCKET: firebasestoragebucket
       YOUTUBE_API_URL: https://www.googleapis.com/youtube/v3
       YOUTUBE_BASE_API_KEY: AAxxxxxxxxxxxxxxxxxxxxxxBB
+      FIREBASE_STORAGEBUCKET: firebasestoragebucket
+      FIREBASE_PROJECT_ID: firebaseProjectID
+      FIREBASE_PRIVATE_KEY_ID: 62xxxxxxxxxxxxxxxxxxxxxxxxxxxx951
+      FIREBASE_PRIVATE_KEY: -----BEGIN PRIVATE KEY-----\nMIIEvwxxxxxxxxxxxxxxxxxxxxxxxxxx6Aw==\n-----END PRIVATE KEY-----\n
+      FIREBASE_CLIENT_EMAIL: firebaseClientEmail
+      FIREBASE_CLIENT_ID: 10xxxxxxxxxxxxxxxxxxxxxxxx2
+      FIREBASE_X509_CERT_URL: firebaseX509CertUrl
     depends_on:
       - mongo
   mongo:
