@@ -21,7 +21,7 @@ export default {
         // expires: new Date(Date.now() + 25892000000),
         maxAge: 25892000000,
         httpOnly: true,
-        domain: "herokuapp.com",
+        domain: "rsocial.vercel.app",
         secure: req.secure || req.headers["x-forwarded-proto"] === "https",
       });
       // console.log(userLogin.userID);
