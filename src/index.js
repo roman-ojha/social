@@ -13,11 +13,38 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
 const PORT = process.env.PORT;
-app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
+
+// For Production =======
+// import connectMongo from "connect-mongo";
+// const MongoStore = new connectMongo(session);
+import session from "express-session";
+import connectMemoryStore from "memorystore";
+const MemoryStore = new connectMemoryStore(session);
+
+// For production =========
+// app.set("truest proxy", 1);
+app.use(
+  session({
+    cookie: {
+      secure: true,
+      maxAge: 25892000000,
+    },
+    secret: process.env.SECRET_KEY,
+    resave: false,
+    saveUninitialized: true,
+    store: new MemoryStore({
+      checkPeriod: 86400000,
+    }),
+  })
+);
+
+// app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(cookieParser());
 // app.unsubscribe(express.json());
-app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
-app.use(bodyParser.json() as RequestHandler);
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Database connection
 import("../db/userDataConnection.js");
