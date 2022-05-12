@@ -5,6 +5,7 @@ on:
       - prod
 jobs:
   deploy:
+    name: deploy-server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout for server side deployment
