@@ -112,6 +112,7 @@ export default {
               maxAge: 25892000000,
               // expires: new Date(Date.now() + 25892000000),
               httpOnly: true,
+              sameSite: "lax",
               secure:
                 req.secure || req.headers["x-forwarded-proto"] === "https",
             });
