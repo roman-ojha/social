@@ -16,6 +16,7 @@ import {
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
+import { toastError } from "../services/toast";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -25,26 +26,36 @@ const Index = () => {
     try {
       const res = await Api.index();
       const userData = await res.data;
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
-      if (!userData.userProfileDetail.userID) {
-        history.push("/userid?uid=undefined");
+      console.log(userData);
+      if (res.status === 200 && userData.success) {
+        if (!userData.data.userProfileDetail.userID) {
+          history.push("/userid?uid=undefined");
+        } else {
+          dispatch(userProfileDetailAction(userData.data.userProfileDetail));
+          dispatch(
+            userProfilePostAction(userData.data.userProfileDetail.posts)
+          );
+          dispatch(followedUserPostDataAction(userData.data.followedUserPost));
+          dispatch(userSuggestionAction(userData.data.userSuggestion));
+          dispatch(followedByUserAction(userData.data.followedBy));
+          dispatch(setUserStories(userData.data.userStories));
+          dispatch(messageListAction(userData.data.userProfileDetail.messages));
+          setRenderMainPage(true);
+        }
+        socket.on("connect", () => {
+          console.log(`connected to id: ${socket.id}`);
+        });
       } else {
-        dispatch(userProfileDetailAction(userData.userProfileDetail));
-        dispatch(userProfilePostAction(userData.userProfileDetail.posts));
-        dispatch(followedUserPostDataAction(userData.followedUserPost));
-        dispatch(userSuggestionAction(userData.userSuggestion));
-        dispatch(followedByUserAction(userData.followedBy));
-        dispatch(setUserStories(userData.userStories));
-        dispatch(messageListAction(userData.userProfileDetail.messages));
-        setRenderMainPage(true);
+        // const error = new Error(res.error);
+        // throw error;
+        toastError(userData.msg);
       }
-      socket.on("connect", () => {
-        console.log(`connected to id: ${socket.id}`);
-      });
     } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
       history.push("/signin");
     }
   };

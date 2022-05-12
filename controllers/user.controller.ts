@@ -159,7 +159,11 @@ export default {
         followedBy,
         userStories,
       };
-      return res.status(200).json(resData);
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Welcome to Social",
+        data: resData,
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
