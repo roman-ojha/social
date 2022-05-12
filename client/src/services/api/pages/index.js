@@ -5,7 +5,7 @@ export default {
   index: async () => {
     return await axios({
       method: "GET",
-      url: "/",
+      url: "/index",
       headers: {
         // Accept: "application/json",
         "Content-Type": "application/json",
