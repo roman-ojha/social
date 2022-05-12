@@ -1,0 +1,17 @@
+name: Deploy Server
+on:
+  push:
+    branches:
+      - prod
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout for server side deployment
+        uses: actions/checkout@v2
+      - name: Deploy server side to heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "r-social"
+          heroku_email: "razzroman98@gmail.com"

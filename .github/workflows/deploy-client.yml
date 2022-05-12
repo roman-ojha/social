@@ -7,9 +7,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout for client side deployment
         uses: actions/checkout@v2
-      - name: Deploy to Vercel
+      - name: Deploy client side to vercel
         uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
