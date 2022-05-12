@@ -26,35 +26,31 @@ const MainPageSearchBar = (props) => {
         <div
           className="MainPage_SearchBar_User_Container"
           onClick={async () => {
-            if (props.userDetail.userID === userProfileDetailStore.userID) {
-              history.push(`/u/profile/${props.userDetail.userID}`);
-            } else {
-              try {
-                dispatch(startProgressBar());
-                const res = await axios({
-                  method: "GET",
-                  url: `/u/profile/${props.userDetail.userID}`,
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  withCredentials: true,
-                });
-                const userData = await res.data;
-                if (res.status !== 200 && !userData.success) {
-                  // error
-                } else {
-                  // success
-                  const userObj = {
-                    ...userData.searchedUser,
-                    isRootUserFollowed: userData.isRootUserFollowed,
-                  };
-                  dispatch(profilePageDataAction(userObj));
-                  dispatch(stopProgressBar());
-                  history.push(`/u/profile/${props.userDetail.userID}`);
-                }
-              } catch (err) {
+            try {
+              dispatch(startProgressBar());
+              const res = await axios({
+                method: "GET",
+                url: `/u/profile/${props.userDetail.userID}`,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                withCredentials: true,
+              });
+              const userData = await res.data;
+              if (res.status !== 200 && !userData.success) {
+                // error
+              } else {
+                // success
+                const userObj = {
+                  ...userData.searchedUser,
+                  isRootUserFollowed: userData.isRootUserFollowed,
+                };
                 dispatch(stopProgressBar());
+                dispatch(profilePageDataAction(userObj));
+                history.push(`/u/profile/${props.userDetail.userID}`);
               }
+            } catch (err) {
+              dispatch(stopProgressBar());
             }
           }}
         >
@@ -76,7 +72,7 @@ const MainPageSearchBar = (props) => {
     return (
       <>
         {props.userSearchResult.map((user, index) => {
-          if (user.userID) {
+          if (user.userID && user.userID !== userProfileDetailStore.userID) {
             return <SearchBarUser userDetail={user} key={index} />;
           }
         })}

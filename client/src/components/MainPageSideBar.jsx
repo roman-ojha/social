@@ -14,7 +14,8 @@ import {
   stopProgressBar,
   openSideBarDrawer,
 } from "../services/redux-actions";
-import { clearCookie } from "../functions/cookies";
+import Api from "../services/api/components/MainPageSideBar";
+import { toastSuccess, toastError } from "../services/toast";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -31,18 +32,23 @@ const MainPageSideBar = () => {
     try {
       dispatch(startProgressBar());
 
-      const res = await axios({
-        method: "GET",
-        url: "/u/logout",
-        withCredentials: true,
-      });
-      dispatch(stopProgressBar());
+      const res = await Api.logOut();
+      const data = await res.data;
       history.push("/signin", { replace: true });
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
+      if (res.status === 200 && data.success) {
+        toastSuccess(data.msg);
+      } else {
+        // const error = new Error(res.error);
+        // throw error;
+        toastError(data.msg);
       }
+      dispatch(stopProgressBar());
     } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
       history.push("/signin", { replace: true });
       dispatch(stopProgressBar());
     }
@@ -56,28 +62,27 @@ const MainPageSideBar = () => {
           onClick={async () => {
             try {
               dispatch(startProgressBar());
-              const res = await axios({
-                method: "GET",
-                url: `/u/profile/${props.friendDetail.userID}`,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                withCredentials: true,
-              });
+              const res = await Api.getFriendData(props.friendDetail.userID);
               const userData = await res.data;
-              if (res.status !== 200 && !userData.success) {
-                // error
-              } else {
+              if (res.status === 200 && userData.success) {
                 // success
                 const userObj = {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
                 };
                 dispatch(profilePageDataAction(userObj));
-                dispatch(stopProgressBar());
                 history.push(`/u/profile/${props.friendDetail.userID}`);
+              } else {
+                // error
+                toastError(userData.msg);
               }
+              dispatch(stopProgressBar());
             } catch (err) {
+              if (err.response.data.success === false) {
+                toastError(err.response.data.msg);
+              } else {
+                toastError("Some Problem Occur, Please Try again later!!!");
+              }
               dispatch(stopProgressBar());
             }
           }}
@@ -213,18 +218,16 @@ const MainPageSideBar = () => {
   const getUserSearchData = async (e) => {
     setSearchBarData(e.target.value);
     try {
-      const res = await axios({
-        method: "POST",
-        url: `/u/search`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({ name: e.target.value }),
-        withCredentials: true,
-      });
+      const res = await Api.getSearchedUserData(e.target.value);
       const resUser = await res.data;
       setUserSearchResult(resUser);
-    } catch (err) {}
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
   };
   return (
     <>

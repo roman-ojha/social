@@ -207,7 +207,7 @@ const Profile = () => {
         setFetchedAllData(true);
       } catch (err) {
         if (err.response.data.success === false) {
-          toastError(err.response.data.err);
+          toastError(err.response.data.msg);
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }

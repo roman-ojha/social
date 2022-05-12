@@ -73,9 +73,10 @@ export default {
         msg: "User register successfully",
       });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ success: false, err: "Server Error!,Failed registerd!!!" });
+      return res.status(500).json({
+        success: false,
+        err: "Server Error!!,Please try again later",
+      });
     }
   },
   signIn: async (req: Request, res: Response) => {
@@ -135,10 +136,9 @@ export default {
         }
       }
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     }
   },
@@ -153,9 +153,12 @@ export default {
       });
       return res
         .status(200)
-        .json(<ResponseObject>{ success: true, msg: "User LogOut" });
+        .json(<ResponseObject>{ success: true, msg: "You are Logged Out" });
     } catch (err) {
-      console.log(err);
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
 };

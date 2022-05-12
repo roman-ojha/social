@@ -26,7 +26,6 @@ const Index = () => {
     try {
       const res = await Api.index();
       const userData = await res.data;
-      console.log(userData);
       if (res.status === 200 && userData.success) {
         if (!userData.data.userProfileDetail.userID) {
           history.push("/userid?uid=undefined");

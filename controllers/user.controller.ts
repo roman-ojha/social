@@ -1,7 +1,7 @@
 import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
-import ResponseObject from "interface/responseObject.js";
+import ResponseObject from "../interface/responseObject.js";
 import User from "interface/userDocument.js";
 
 var botUser = [];
@@ -190,7 +190,7 @@ export default {
       if (!searchedUser) {
         return res
           .status(401)
-          .json({ success: false, err: "User doesn't exist" });
+          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       } else {
         const isRootUserFollowed = await userDetail.findOne(
           {
@@ -214,38 +214,47 @@ export default {
           }
         );
         if (!isRootUserFollowed) {
-          return res
-            .status(200)
-            .json({ success: true, searchedUser, isRootUserFollowed: false });
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Found User",
+            searchedUser,
+            isRootUserFollowed: false,
+          });
         } else {
-          return res
-            .status(200)
-            .json({ success: true, searchedUser, isRootUserFollowed: true });
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Found User",
+            searchedUser,
+            isRootUserFollowed: true,
+          });
         }
       }
     } catch (err) {
-      return res.status(500).json({
+      return res.status(500).json(<ResponseObject>{
         success: false,
-        err: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     }
   },
   search: async (req: Request, res: Response): Promise<object> => {
     try {
-      if (req.body.name.length === 0) {
+      if (req.body.userID.length === 0) {
         return res.status(201).json([]);
       }
-      const resUser = await userDetail.find(
-        {
-          name: { $regex: "^" + req.body.name, $options: "i" },
-        },
-        { name: 1, picture: 1, userID: 1, email: 1, _id: 0 }
-      );
+      const resUser = await userDetail
+        .find(
+          {
+            userID: { $regex: "^" + req.body.userID, $options: "i" },
+          },
+          { name: 1, picture: 1, userID: 1, email: 1, _id: 0 }
+        )
+        .limit(10);
       return res.status(201).json(resUser);
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
   followUser: async (req: Request, res: Response): Promise<object> => {
@@ -389,7 +398,7 @@ export default {
     } catch (err) {
       return res
         .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+        .json({ error: "Server Error!!, Please Try again later" });
     }
   },
   unFollowUser: async (req: Request, res: Response): Promise<object> => {
@@ -537,7 +546,7 @@ export default {
     } catch (err) {
       return res
         .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+        .json({ error: "Server Error!!, Please Try again later" });
     }
   },
   getNotificationData: async (req: Request, res: Response) => {
@@ -566,7 +575,7 @@ export default {
     } catch (err) {
       return res
         .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+        .json({ error: "Server Error!!, Please Try again later" });
     }
   },
 };
