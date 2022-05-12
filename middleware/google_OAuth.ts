@@ -4,8 +4,17 @@ import crypto from "crypto";
 import { NextFunction, Request, Response } from "express";
 import GoogleOauth2 from "passport-google-oauth2";
 const GoogleStrategy = GoogleOauth2.Strategy;
-const GOOGLE_CLIENT_ID: string = process.env.GOOGLE_CLIENT_ID as string;
-const GOOGLE_CLIENT_SECRET: string = process.env.GOOGLE_CLIENT_SECRET as string;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
+
+console.log(
+  "GOOGLE CLIENT ID =================================",
+  GOOGLE_CLIENT_ID
+);
+console.log(
+  "GOOGLE CLIENT SECRET =============================",
+  GOOGLE_CLIENT_SECRET
+);
 
 passport.use(
   new GoogleStrategy(
