@@ -147,6 +147,7 @@ export default {
       res.clearCookie("AuthToken", {
         domain: process.env.ORIGIN_HOSTNAME,
         path: "/",
+        sameSite: "none",
       });
       return res
         .status(200)
