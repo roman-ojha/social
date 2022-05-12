@@ -1,20 +1,10 @@
 import passport from "passport";
 import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
-import { NextFunction, Request, Response } from "express";
 import GoogleOauth2 from "passport-google-oauth2";
 const GoogleStrategy = GoogleOauth2.Strategy;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string;
-
-console.log(
-  "GOOGLE CLIENT ID =================================",
-  GOOGLE_CLIENT_ID
-);
-console.log(
-  "GOOGLE CLIENT SECRET =============================",
-  GOOGLE_CLIENT_SECRET
-);
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 passport.use(
   new GoogleStrategy(
@@ -24,13 +14,7 @@ passport.use(
       callbackURL: `${process.env.API_BASE_URL}/google/callback`,
       passReqToCallback: true,
     },
-    async function (
-      request: any,
-      accessToken: any,
-      refreshToken: any,
-      profile: any,
-      done: any
-    ) {
+    async function (request, accessToken, refreshToken, profile, done) {
       try {
         const userExist = await userDetail.findOne(
           { email: profile.email },
@@ -88,14 +72,14 @@ passport.use(
   )
 );
 
-passport.serializeUser(function (user: Express.User, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
-passport.deserializeUser(function (user: Express.User, done) {
+passport.deserializeUser(function (user, done) {
   done(null, user);
 });
 
-function isLoggedIn(req: Request, res: Response, next: NextFunction) {
+function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
 }
 
