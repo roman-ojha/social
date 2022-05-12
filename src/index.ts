@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import cookieParser from "cookie-parser";
+import indexRouter from "../routes/index.js";
 import postRoute from "../routes/post.js";
 import userRoute from "../routes/user.js";
 import userAuthRoute from "../routes/userAuth.js";
@@ -50,6 +51,7 @@ import("../db/userDataConnection.js");
 import("../db/userStorageConnection.js");
 
 // Connection router
+app.use(indexRouter);
 app.use(userRoute);
 app.use(userAuthRoute);
 app.use(messageRoute);

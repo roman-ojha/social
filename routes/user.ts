@@ -3,7 +3,7 @@ import authenticate from "../middleware/authenticate.js";
 import userController from "../controllers/user.controller.js";
 const userRoute = express.Router();
 
-userRoute.get("/", authenticate, userController.main);
+userRoute.get("/index", authenticate, userController.main);
 
 userRoute.get("/u", authenticate, userController.homeUser);
 
