@@ -29,10 +29,7 @@ const MainPageSideBar = () => {
   const [selectedIndex, setSelectedIndex] = useState();
   const userLogOut = async () => {
     try {
-      // dispatch(startProgressBar());
-      // for right now we will clear cookie on client side
-
-      // clearCookie("AuthToken");
+      dispatch(startProgressBar());
 
       const res = await axios({
         method: "GET",
@@ -46,7 +43,8 @@ const MainPageSideBar = () => {
         throw error;
       }
     } catch (err) {
-      // dispatch(stopProgressBar());
+      history.push("/signin", { replace: true });
+      dispatch(stopProgressBar());
     }
   };
 

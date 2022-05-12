@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
 import { RequestHandler, Request, Response, NextFunction } from "express";
 import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
+import ResponseObject from "../interface/responseObject";
 
 const authenticate: RequestHandler = async (
   req: Request,
@@ -42,7 +43,10 @@ const authenticate: RequestHandler = async (
     // req.userID = rootUser.id;
     next();
   } catch (err) {
-    return res.status(401).send("Unauthorized: No token provided");
+    return res.status(401).send(<ResponseObject>{
+      success: false,
+      msg: "UnAuthorized: No token provided, Please Login first",
+    });
     // console.log(err);
   }
 };

@@ -10,7 +10,6 @@ import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
-import { setCookie } from "../functions/cookies";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -70,6 +69,11 @@ const SignIn = () => {
     // window.open("<URL>", "<MODE>");
     // here this will open the google authentication
   };
+
+  const signInWithFacebook = () => {
+    toastInfo("Facebook auth is under development, Please use Google auth");
+  };
+
   return (
     <>
       <ProgressBar />
@@ -144,7 +148,10 @@ const SignIn = () => {
                 SignIn in With Google
               </p>
             </button>
-            <button className="SignIn_page_Facebook_Button">
+            <button
+              className="SignIn_page_Facebook_Button"
+              onClick={signInWithFacebook}
+            >
               <img
                 className="SignIn_page_Facebook_Button_Logo"
                 src={Sign_In_Facebook_Logo}

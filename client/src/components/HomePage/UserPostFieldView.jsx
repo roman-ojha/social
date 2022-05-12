@@ -7,11 +7,12 @@ import {
   showLoadingSpinner,
 } from "../../services/redux-actions";
 import { Picker } from "emoji-mart";
-import { instance as axios } from "../../services/axios";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Api from "../../services/api/pages/homeApi";
+import { toastError, toastSuccess } from "../../services/toast";
 
 const UserPostFieldView = () => {
   const history = useHistory();
@@ -111,19 +112,24 @@ const UserPostFieldView = () => {
         data.append("image", image);
         data.append("caption", userPostData);
         // we can be able to pass the other form of data like this
-        const res = await axios({
-          method: "POST",
-          url: "/u/post",
-          data: data,
-          withCredentials: true,
-        });
+        const res = await Api.post(data);
         const resData = await res.data;
-        if (res.status === 201) {
-          dispatch(userPostResponseData(resData));
+        console.log(resData);
+        if (res.status === 200 && resData.success) {
+          toastSuccess(resData.msg);
+          dispatch(userPostResponseData(resData.data));
+        } else {
+          // error
+          toastError(resData.msg);
         }
         dispatch(showLoadingSpinner(false));
         dispatch(setHomePagePostFieldViewValue("min"));
       } catch (err) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
         dispatch(showLoadingSpinner(false));
       }
     };

@@ -6,15 +6,19 @@ import crypto from "crypto";
 import compressFile from "../functions/compressFile.js";
 import varifyUser from "../functions/varifyUser.js";
 import storage from "../db/userStorageConnection.js";
+import ResponseObject from "../interface/responseObject";
 const bucket = storage.bucket();
 
 export default {
-  post: async (req, res) => {
+  post: async (req, res): Promise<object> => {
     try {
       const rootUser = await varifyUser(req.cookies.AuthToken);
       if (!req.body.caption && !req.file) {
         // if user doesn't fill the any filed
-        return res.status(401).json({ error: "Please fill the post properly" });
+        return res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Please fill the required field",
+        });
       } else if (req.body.caption && !req.file) {
         // if user only fill content field
         if (rootUser) {
@@ -43,9 +47,15 @@ export default {
             comments: postRes[0].comments,
             date: postRes[0].date,
           };
-          return res.status(201).json(resData);
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Post upload successfully",
+            data: resData,
+          });
         } else {
-          return res.status(401).json({ error: "Authetication error" });
+          return res
+            .status(401)
+            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
         }
       } else {
         const rootUser = await varifyUser(req.cookies.AuthToken);
@@ -122,15 +132,22 @@ export default {
             comments: postRes[0].comments,
             date: postRes[0].date,
           };
-          return res.status(201).json(resData);
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Post upload successfully",
+            data: resData,
+          });
         } else {
-          return res.status(401).json({ error: "Authetication error" });
+          return res
+            .status(401)
+            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
         }
       }
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
   getUserID: async (req, res) => {
@@ -270,7 +287,7 @@ export default {
     } catch (err) {
       return res.status(500).json({
         success: false,
-        err: "Server Error!!, Please Try again letter",
+        err: "Server Error!!, Please Try again later",
       });
     }
   },
@@ -360,17 +377,17 @@ export default {
         }
         return res.status(500).json({
           success: false,
-          msg: "Server Error!!, Please Try again letter",
+          msg: "Server Error!!, Please Try again later",
         });
       }
       return res.status(500).json({
         success: false,
-        msg: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     } catch (err) {
       return res.status(500).json({
         success: false,
-        msg: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     }
   },
