@@ -119,7 +119,7 @@ export default {
               maxAge: 25892000000,
               httpOnly: true,
               domain: process.env.ORIGIN_HOSTNAME,
-              // domain: the domain that we pass here is the domain or
+              // domain: the domain that we pass here is the domain where cookie get stored
               secure: true,
               // signed: true,
               sameSite: "none",

@@ -18,9 +18,9 @@ const getCookie = (cookieName) => {
 };
 
 const clearCookie = (cookieName) => {
-  document.cookie = `${cookieName}=; expires=${new Date(
-    Date.now() + 43214321
-  )}; domain=localhost; path=/`;
+  return (document.cookie = `AuthToken=; path=/; domain=localhost; expires=${new Date(
+    0
+  ).toUTCString()};`);
 };
 
 export { setCookie, getCookie, clearCookie };
