@@ -119,7 +119,7 @@ export default {
               maxAge: 25892000000,
               httpOnly: true,
               domain: process.env.ORIGIN_HOSTNAME,
-              // domain: the domain that we pass here is the domain where cookie get stored
+              // domain: the domain that we pass here is the domain where cookie get stored and domain is the domain of the server
               secure: true,
               // signed: true,
               sameSite: "none",
@@ -145,8 +145,10 @@ export default {
   logOut: (req: Request, res: Response) => {
     try {
       res.clearCookie("AuthToken", {
+        httpOnly: true,
         domain: process.env.ORIGIN_HOSTNAME,
         path: "/",
+        secure: true,
         sameSite: "none",
       });
       return res
