@@ -1,0 +1,14 @@
+name: Assign Issue Automatically
+on:
+  issues:
+    types: [opened]
+jobs:
+  auto-assign:
+    name: auto-assign-issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-assign issue
+        uses: pozil/auto-assign-issue@v1.4.0
+        with:
+          assignees: Roman-Ojha
+          numOfAssignee: 1
