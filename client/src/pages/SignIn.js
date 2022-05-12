@@ -51,6 +51,9 @@ const SignIn = () => {
           password: "",
         });
       } else {
+        document.cookie = `AuthToken=${data.token}; expire=${new Date(
+          Date.now() + 25892000000
+        )}; path=/`;
         history.push("/u");
       }
     } catch (err) {

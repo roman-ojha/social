@@ -17,13 +17,14 @@ export default {
     try {
       let token;
       token = await userLogin.generateAuthToken();
-      res.cookie("AuthToken", token, {
-        // expires: new Date(Date.now() + 25892000000),
-        maxAge: 25892000000,
-        httpOnly: true,
-        secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-      });
-      // console.log(userLogin.userID);
+      // res.cookie("AuthToken", token, {
+      //   // expires: new Date(Date.now() + 25892000000),
+      //   maxAge: 25892000000,
+      //   httpOnly: true,
+      //   secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+      // });
+
+      // NOTE: cause i have hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
       if (userLogin.userID === undefined) {
         res.redirect(`${CLIENT_BASE_URL}/userid?uid=undefined`);
       } else {
