@@ -1,5 +1,5 @@
 const setCookie = (cookieName, cookie, exDate) => {
-  document.cookie = `${cookieName}=${cookie}; expire=${exDate}; path=/`;
+  document.cookie = `${cookieName}=${cookie}; expires=${exDate}; path=/`;
 };
 
 const getCookie = (cookieName) => {
@@ -17,4 +17,10 @@ const getCookie = (cookieName) => {
   return "";
 };
 
-export { setCookie, getCookie };
+const clearCookie = (cookieName) => {
+  document.cookie = `${cookieName}=; expires=${new Date(
+    Date.now() + 43214321
+  )}; domain=localhost; path=/`;
+};
+
+export { setCookie, getCookie, clearCookie };

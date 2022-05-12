@@ -14,6 +14,7 @@ import {
   stopProgressBar,
   openSideBarDrawer,
 } from "../services/redux-actions";
+import { clearCookie } from "../functions/cookies";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -29,6 +30,9 @@ const MainPageSideBar = () => {
   const userLogOut = async () => {
     try {
       dispatch(startProgressBar());
+      // for right now we will clear cookie on client side
+
+      // clearCookie("AuthToken");
       const res = await axios({
         method: "GET",
         url: "/u/logout",
@@ -36,11 +40,12 @@ const MainPageSideBar = () => {
       });
       dispatch(stopProgressBar());
       history.push("/signin", { replace: true });
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
-      }
+      // if (!res.status === 200) {
+      //   const error = new Error(res.error);
+      //   throw error;
+      // }
     } catch (err) {
+      console.log(err);
       dispatch(stopProgressBar());
     }
   };
