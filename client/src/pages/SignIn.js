@@ -10,6 +10,7 @@ import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
+import { setCookie } from "../functions/cookies";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -51,9 +52,8 @@ const SignIn = () => {
           password: "",
         });
       } else {
-        document.cookie = `AuthToken=${data.token}; expire=${new Date(
-          Date.now() + 25892000000
-        )}; path=/`;
+        // For Cors domain
+        // setCookie("AuthToken", data.token, new Date(Date.now() + 25892000000));
         history.push("/u");
       }
     } catch (err) {

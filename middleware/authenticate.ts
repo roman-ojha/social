@@ -1,9 +1,13 @@
 import jwt from "jsonwebtoken";
 import userDetail from "../models/userDetail_model.js";
-import { RequestHandler } from "express";
+import { RequestHandler, Request, Response, NextFunction } from "express";
 import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
 
-const authenticate: RequestHandler = async (req, res, next) => {
+const authenticate: RequestHandler = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const token = req.cookies.AuthToken;
     const verifyToken = jwt.verify(

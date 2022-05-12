@@ -129,9 +129,6 @@ const SignUp = () => {
       const data = await res.data;
       dispatch(stopProgressBar());
       if (res.status === 200 && data.success) {
-        document.cookie = `AuthToken=${data.token}; expire=${new Date(
-          Date.now() + 25892000000
-        )}; path=/`;
         toastSuccess(data.msg);
         history.push("/userid?uid=undefined");
       } else {

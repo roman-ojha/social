@@ -1,6 +1,7 @@
 declare namespace NodeJS {
   interface ProcessEnv {
     PORT: string;
+    ORIGIN_HOSTNAME: string;
     NODE_ENV: string;
     API_BASE_URL: string;
     CLIENT_BASE_URL: string;

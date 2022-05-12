@@ -3,6 +3,7 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import ResponseObject from "interface/responseObject.js";
+import { __prod__ } from "../constants/env.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
@@ -53,23 +54,23 @@ export default {
       }
       let token: string | null;
       token = await saveUserRes.generateAuthToken();
-      // if (token) {
-      //   res.cookie("AuthToken", token, {
-      //     // expires: new Date(Date.now() + 25892000000),
-      //     maxAge: 25892000000,
-      //     httpOnly: true,
-      //     domain: "vercel.app",
-      //     // secure: req.secure || req.headers["x-forwarded-proto"] === "https",
-      //     secure: true,
-      //   });
-      // }
+      if (token) {
+        res.cookie("AuthToken", token, {
+          // expires: new Date(Date.now() + 25892000000),
+          maxAge: 25892000000,
+          httpOnly: true,
+          domain: process.env.ORIGIN_HOSTNAME,
+          secure: true,
+          // signed: true,
+          sameSite: "none",
+        });
+      }
 
       // NOTE: cause i have hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
       // Warning: But in my opinion this might not be the best way to authenticate user
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "User register successfully",
-        token: token,
       });
     } catch (err) {
       return res
@@ -113,25 +114,26 @@ export default {
           });
         } else {
           let token: string | null = await userLogin.generateAuthToken();
-          // if (token) {
-          //   res.cookie("AuthToken", token, {
-          //     maxAge: 25892000000,
-          //     // expires: new Date(Date.now() + 25892000000),
-          //     httpOnly: true,
-          //     domain: "vercel.app",
-          //     secure: true,
-          //   });
-          // }
+          if (token) {
+            res.cookie("AuthToken", token, {
+              maxAge: 25892000000,
+              httpOnly: true,
+              domain: process.env.ORIGIN_HOSTNAME,
+              secure: true,
+              // signed: true,
+              sameSite: "none",
+            });
+          }
 
-          // NOTE: cause i have hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
+          // NOTE: if we would host hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
           return res.status(200).json(<ResponseObject>{
             success: true,
             msg: "Login Successfully",
-            token: token,
           });
         }
       }
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!, Please Try again letter",

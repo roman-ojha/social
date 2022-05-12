@@ -1,4 +1,5 @@
 import { instance as axios } from "../../axios";
+import { getCookie } from "../../../functions/cookies";
 
 export default {
   index: async () => {
@@ -6,10 +7,10 @@ export default {
       method: "GET",
       url: "/",
       headers: {
-        Accept: "application/json",
+        // Accept: "application/json",
         "Content-Type": "application/json",
       },
-      credentials: "include",
+      // data: JSON.stringify({ token: getCookie("AuthToken") }),
       withCredentials: true,
     });
   },
