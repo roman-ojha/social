@@ -58,7 +58,9 @@ export default {
           // expires: new Date(Date.now() + 25892000000),
           maxAge: 25892000000,
           httpOnly: true,
-          secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+          domain: "vercel.app",
+          // secure: req.secure || req.headers["x-forwarded-proto"] === "https",
+          secure: true,
         });
       }
       return res.status(200).json(<ResponseObject>{
@@ -112,9 +114,8 @@ export default {
               maxAge: 25892000000,
               // expires: new Date(Date.now() + 25892000000),
               httpOnly: true,
-              sameSite: "lax",
-              secure:
-                req.secure || req.headers["x-forwarded-proto"] === "https",
+              domain: "vercel.app",
+              secure: true,
             });
           }
           res
