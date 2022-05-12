@@ -19,7 +19,7 @@ const PORT = process.env.PORT;
 // const MongoStore = new connectMongo(session);
 import session from "express-session";
 import connectMemoryStore from "memorystore";
-const MemoryStore = new connectMemoryStore(session);
+const MemoryStore = connectMemoryStore(session);
 
 // For production =========
 // app.set("truest proxy", 1);
