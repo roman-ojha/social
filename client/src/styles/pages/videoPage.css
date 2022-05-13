@@ -30,6 +30,11 @@
   /* border: 1px solid blue; */
 }
 
+.VideoPage_Icon_and_Title h1 {
+  font-family: var(--primary-font-family);
+  font-size: 1rem;
+}
+
 .VideoPage_Icon {
   font-size: 1.5rem;
 }
@@ -164,6 +169,10 @@
     height: 2.8rem;
     border-width: 7px;
   }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 330px;
+  }
 }
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
@@ -180,6 +189,10 @@
     height: 2.5rem;
     border-width: 7px;
   }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 320px;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -192,6 +205,10 @@
     width: 2.5rem;
     height: 2.5rem;
     border-width: 7px;
+  }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 350px;
   }
 }
 
@@ -216,6 +233,14 @@
     height: 2.3rem;
     border-width: 6.5px;
   }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 320px;
+  }
+  .VidePage_Youtube_Video_Title {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 480px) and (min-width: 320px) {
@@ -224,14 +249,28 @@
     left: 45px;
     top: 4rem;
   }
+  .VideoPage_Icon_and_Title {
+    gap: 5px;
+  }
+
+  .VideoPage_Icon_and_Title h1 {
+    font-size: 0.8rem;
+  }
+
+  .VideoPage_Icon {
+    font-size: 1.3rem;
+  }
   .VideoPage_Search_Form_Field {
     padding: 0.2rem 0.5rem;
     border-radius: 0.8rem;
     width: 45%;
   }
+  .VideoPage_Search_Icon {
+    font-size: 0.9rem;
+  }
   .VideoPage_Search_Input_Field {
     margin-left: 5px;
-    height: 30px;
+    height: 28px;
     font-size: 0.8rem;
   }
   .VideoPage_Search_Input_Field:read-only {
@@ -242,6 +281,16 @@
     height: 2.2rem;
     border-width: 6px;
   }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 250px;
+    border-radius: 5px;
+    margin-top: 0.7rem;
+  }
+  .VidePage_Youtube_Video_Title {
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 320px) and (min-width: 280px) {
@@ -250,14 +299,28 @@
     left: 40px;
     top: 3.5rem;
   }
+  .VideoPage_Icon_and_Title {
+    gap: 4px;
+  }
+
+  .VideoPage_Icon_and_Title h1 {
+    font-size: 0.7rem;
+  }
+
+  .VideoPage_Icon {
+    font-size: 1.2rem;
+  }
   .VideoPage_Search_Form_Field {
     padding: 0.2rem 0.5rem;
     border-radius: 0.5rem;
     width: 40%;
   }
+  .VideoPage_Search_Icon {
+    font-size: 0.8rem;
+  }
   .VideoPage_Search_Input_Field {
     margin-left: 5px;
-    height: 30px;
+    height: 23px;
     font-size: 0.7rem;
   }
   .VideoPage_Search_Input_Field:read-only {
@@ -268,19 +331,48 @@
     height: 2rem;
     border-width: 5px;
   }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 220px;
+    border-radius: 5px;
+    margin-top: 0.6rem;
+  }
+  .VidePage_Youtube_Video_Title {
+    margin-top: 0.6rem;
+    font-size: 0.6rem;
+  }
 }
 
 @media screen and (max-width: 280px) {
   .VideoPage {
     width: calc(100% - 40px);
     left: 40px;
-    top: 3rem;
-    height: calc(100vh - 4rem);
+    top: 3.2rem;
+    /* height: calc(100vh - 4rem); */
+  }
+  .VideoPage_Icon_and_Title {
+    gap: 4px;
+  }
+
+  .VideoPage_Icon_and_Title h1 {
+    font-size: 0.5rem;
+  }
+
+  .VideoPage_Icon {
+    font-size: 1rem;
+  }
+  .VideoPage_Search_Form_Field {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    width: 40%;
+  }
+  .VideoPage_Search_Icon {
+    font-size: 0.8rem;
   }
   .VideoPage_Search_Input_Field {
     margin-left: 5px;
-    height: 30px;
-    font-size: 0.6rem;
+    height: 20px;
+    font-size: 0.7rem;
   }
   .VideoPage_Search_Input_Field:read-only {
     font-size: 0.6rem;
@@ -289,5 +381,15 @@
     width: 1.5rem;
     height: 1.5rem;
     border-width: 3px;
+  }
+  .VideoPage_Youtube_Video,
+  .VideoPage_Youtube_Video_Image {
+    height: 180px;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+  }
+  .VidePage_Youtube_Video_Title {
+    margin-top: 0.5rem;
+    font-size: 0.5rem;
   }
 }
