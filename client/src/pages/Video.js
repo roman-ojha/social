@@ -19,8 +19,6 @@ const Video = () => {
       toastInfo(data.msg);
       if (res.status === 200 && data.success)
         dispatch(setVideoPageData(data.videos));
-      else if (res.status === 202)
-        toastInfo("Your request is in queue, please wait for a while");
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
@@ -34,9 +32,9 @@ const Video = () => {
     try {
       const res = await Api.getYoutubeApi();
       const data = await res.data;
-      console.log(data);
+      // console.log(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 
@@ -52,35 +50,37 @@ const Video = () => {
   }, []);
   return (
     <>
-      {videoPageData.length > 0 ? (
-        <div className="VideoPage">
-          <Helmet>
-            <title>Video</title>
-          </Helmet>
-          <header className="VideoPage_Header">
-            <SearchForm />
-            <span className="VideoPage_Icon_and_Title">
-              <Icon icon="logos:youtube-icon" className="VideoPage_Icon" />
-              <h1>Youtube</h1>
-            </span>
-          </header>
+      <div className="VideoPage">
+        <Helmet>
+          <title>Video</title>
+        </Helmet>
+        <header className="VideoPage_Header">
+          <SearchForm />
+          <span className="VideoPage_Icon_and_Title">
+            <Icon icon="logos:youtube-icon" className="VideoPage_Icon" />
+            <h1>Youtube</h1>
+          </span>
+        </header>
+        {videoPageData.length > 0 ? (
           <div className="VideoPage_Videos_Container">
             {videoPageData.map((video, index) => {
-              return (
-                <RenderVideo
-                  videoId={video.videoId}
-                  title={video.title}
-                  key={index}
-                />
-              );
+              if (video) {
+                return (
+                  <RenderVideo
+                    videoId={video.videoId}
+                    title={video.title}
+                    key={index}
+                  />
+                );
+              }
             })}
           </div>
-        </div>
-      ) : (
-        <div className="VideoPage_LoadingSpinner_Container">
-          <div className="VideoPage_LoadingSpinner"></div>
-        </div>
-      )}
+        ) : (
+          <div className="VideoPage_LoadingSpinner_Container">
+            <div className="VideoPage_LoadingSpinner"></div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

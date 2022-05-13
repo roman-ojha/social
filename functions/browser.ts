@@ -14,7 +14,7 @@ let browser: puppeteer.Browser;
 const launchBrowser = async () => {
   try {
     browser = await puppeteer.launch({
-      headless: __prod__ ? true : __dev__ ? false : true,
+      headless: __prod__ ? true : __dev__ ? true : true,
       devtools: false,
       ignoreHTTPSErrors: true,
       args,
