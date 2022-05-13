@@ -4,7 +4,7 @@ import "../styles/pages/videoPage.css";
 import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
 import { setVideoPageData } from "../services/redux-actions";
-import { toastError } from "../services/toast";
+import { toastError, toastInfo } from "../services/toast";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";
@@ -16,8 +16,11 @@ const Video = () => {
     try {
       const res = await Api.scrapeVideo();
       const data = await res.data;
+      toastInfo(data.msg);
       if (res.status === 200 && data.success)
         dispatch(setVideoPageData(data.videos));
+      else if (res.status === 202)
+        toastInfo("Your request is in queue, please wait for a while");
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
