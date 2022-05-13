@@ -13,6 +13,7 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.26.0",
+    "cheerio": "^1.0.0-rc.10",
     "email-validator": "^2.0.4",
     "emoji-mart": "^3.0.1",
     "env-cmd": "^10.1.0",
@@ -27,6 +28,7 @@
     "react-scripts": "^5.0.0",
     "react-toastify": "^8.2.0",
     "redux": "^4.1.1",
+    "request-promise": "^4.2.6",
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.1",
     "web-vitals": "^1.0.1"

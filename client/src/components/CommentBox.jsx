@@ -13,7 +13,7 @@ import { instance as axios } from "../services/axios";
 import { useState } from "react";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
-import { isEmptyString } from "../functions/isEmptyString";
+import { isEmptyString } from "../funcs/isEmptyString";
 
 const ReturnCommentContent = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);

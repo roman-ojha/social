@@ -9,7 +9,7 @@ import {
   stopProgressBar,
   startProgressBar,
 } from "../services/redux-actions";
-import { isEmptyString } from "../functions/isEmptyString";
+import { isEmptyString } from "../funcs/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../services/toast";
 import Api from "../services/api/components/userPostFeed";
 

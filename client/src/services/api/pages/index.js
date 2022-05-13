@@ -1,5 +1,4 @@
 import { instance as axios } from "../../axios";
-import { getCookie } from "../../../functions/cookies";
 
 export default {
   index: async () => {

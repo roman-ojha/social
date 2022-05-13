@@ -1,3 +1,4 @@
+import { __dev__, __prod__ } from "../constants/env.js";
 import puppeteer from "puppeteer";
 
 const args = [
@@ -13,7 +14,7 @@ let browser: puppeteer.Browser;
 const launchBrowser = async () => {
   try {
     browser = await puppeteer.launch({
-      headless: true,
+      headless: __prod__ ? true : __dev__ ? true : true,
       devtools: false,
       ignoreHTTPSErrors: true,
       args,
