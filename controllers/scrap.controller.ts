@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import launchBrowser from "../functions/browser.js";
 import { newPage, totalNumberOfTab } from "../functions/browser.js";
 import ResponseObject from "interface/responseObject.js";
-import PQueue from "p-queue";
 
 await launchBrowser();
 export default {
