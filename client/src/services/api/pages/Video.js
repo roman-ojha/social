@@ -1,17 +1,24 @@
 import { instance as axios } from "../../axios";
 
 export default {
-  getVideos: async () => {
+  scrapeVideo: async () => {
     return await axios({
       method: "GET",
       url: "/scrap/youtube/home",
       withCredentials: true,
     });
   },
-  searchVideo: async (query) => {
+  scrapVideoSearch: async (query) => {
     return await axios({
       method: "GET",
       url: `/scrap/youtube/search?q=${query}`,
+      withCredentials: true,
+    });
+  },
+  getYoutubeApi: async () => {
+    return await axios({
+      method: "GET",
+      url: "/youtube/videos",
       withCredentials: true,
     });
   },

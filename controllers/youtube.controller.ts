@@ -57,6 +57,7 @@ export default {
         .status(200)
         .json(<ResponseObject>{ success: true, msg: "", videos: requiredList });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error Please Try again later",

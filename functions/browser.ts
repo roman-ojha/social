@@ -14,7 +14,7 @@ let browser: puppeteer.Browser;
 const launchBrowser = async () => {
   try {
     browser = await puppeteer.launch({
-      headless: __prod__ ? true : __dev__ ? true : true,
+      headless: __prod__ ? true : __dev__ ? false : true,
       devtools: false,
       ignoreHTTPSErrors: true,
       args,
@@ -56,5 +56,9 @@ const newPage = async (): Promise<
   }
 };
 
+const totalNumberOfTab = async () => {
+  return (await browser.pages()).length;
+};
+
 export default launchBrowser;
-export { newPage, exitBrowser };
+export { newPage, exitBrowser, totalNumberOfTab };

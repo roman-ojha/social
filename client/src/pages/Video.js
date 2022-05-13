@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import Api from "../services/api/pages/Video";
@@ -12,9 +12,9 @@ import SearchForm from "../components/VideoPage/SearchForm";
 const Video = () => {
   const dispatch = useDispatch();
   const videoPageData = useSelector((state) => state.videoPageDataReducer);
-  const fetchVideo = async () => {
+  const scrapeVideo = async () => {
     try {
-      const res = await Api.getVideos();
+      const res = await Api.scrapeVideo();
       const data = await res.data;
       if (res.status === 200 && data.success)
         dispatch(setVideoPageData(data.videos));
@@ -26,10 +26,26 @@ const Video = () => {
       }
     }
   };
-  useEffect(() => {
-    if (videoPageData.length === 0) {
-      fetchVideo();
+
+  const getYoutubeApiVideo = async () => {
+    try {
+      const res = await Api.getYoutubeApi();
+      const data = await res.data;
+      console.log(data);
+    } catch (err) {
+      console.log(err);
     }
+  };
+
+  useEffect(() => {
+    // backend scraping
+    if (videoPageData.length === 0) {
+      scrapeVideo();
+    }
+    // backend youtube api
+    // getYoutubeApiVideo();
+    //
+    // Scrap.scrapeYoutubeHomePage();
   }, []);
   return (
     <>

@@ -13,7 +13,7 @@ import youtubeController from "../controllers/youtube.controller.js";
 
 // Without using 'googleapis' package
 
-// youtubeRoute.get("/youtube/videos", youtubeController.youtubeVideo);
+youtubeRoute.get("/youtube/videos", youtubeController.youtubeVideo);
 
 // NOTE: you can also use 'googleapis' to do the same task that we did in here
 

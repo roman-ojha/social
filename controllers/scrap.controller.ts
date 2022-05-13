@@ -1,36 +1,32 @@
 import { Request, Response } from "express";
 import launchBrowser from "../functions/browser.js";
-import { newPage } from "../functions/browser.js";
+import { newPage, totalNumberOfTab } from "../functions/browser.js";
 import ResponseObject from "interface/responseObject.js";
 
 await launchBrowser();
-const [homePage, closePage] = await newPage();
-if (!homePage) {
-  await launchBrowser();
-}
-const goToYoutubeHomePage = async () => {
-  const url: string = "https://www.youtube.com/";
-  try {
-    if (homePage) {
-      await homePage.goto(url, {
-        waitUntil: "networkidle0",
-      });
-    }
-  } catch (e) {
-    // await exitBrowser();
-  }
-};
-await goToYoutubeHomePage();
+
 export default {
   youtubeHome: async (req: Request, res: Response) => {
     try {
+      const totalTab = await totalNumberOfTab();
+      if (totalTab > 50) {
+        res.status(202).json(<ResponseObject>{
+          success: true,
+          msg: "Your request is in queue please wait for a while",
+        });
+      }
+      const [homePage, closePage] = await newPage();
       if (!homePage) {
         return res.status(500).json(<ResponseObject>{
           success: false,
           msg: "Server Error, Please try again later",
         });
       }
-      await homePage.reload();
+      const url: string = "https://www.youtube.com/";
+      await homePage.goto(url, {
+        waitUntil: "networkidle0",
+      });
+      // await homePage.reload();
       // scroll down one time
       await homePage.evaluate(() => {
         document.scrollingElement?.scrollBy(0, 4000);
@@ -55,6 +51,7 @@ export default {
           }
         });
       });
+      closePage();
       if (videos.length > 0) {
         return res.status(200).json(<ResponseObject>{
           success: true,

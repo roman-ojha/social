@@ -16,7 +16,7 @@ const SearchForm = () => {
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
-        const res = await Api.searchVideo(value);
+        const res = await Api.scrapVideoSearch(value);
         const data = await res.data;
         console.log(data);
         if (res.status === 200 && data.success)
