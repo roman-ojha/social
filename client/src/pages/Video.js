@@ -16,7 +16,6 @@ const Video = () => {
     try {
       const res = await Api.scrapeVideo();
       const data = await res.data;
-      toastInfo(data.msg);
       if (res.status === 200 && data.success)
         dispatch(setVideoPageData(data.videos));
     } catch (err) {
@@ -56,10 +55,14 @@ const Video = () => {
         </Helmet>
         <header className="VideoPage_Header">
           <SearchForm />
-          <span className="VideoPage_Icon_and_Title">
+          <a
+            href="https://www.youtube.com"
+            target="_blank"
+            className="VideoPage_Icon_and_Title"
+          >
             <Icon icon="logos:youtube-icon" className="VideoPage_Icon" />
             <h1>Youtube</h1>
-          </span>
+          </a>
         </header>
         {videoPageData.length > 0 ? (
           <div className="VideoPage_Videos_Container">

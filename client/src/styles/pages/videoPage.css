@@ -25,6 +25,8 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
+  color: black;
   /* border: 1px solid blue; */
 }
 
@@ -113,10 +115,8 @@
 }
 
 .VideoPage_LoadingSpinner_Container {
-  width: 50%;
+  width: 100%;
   position: relative;
-  left: 20%;
-  top: 5rem;
   z-index: 1;
   display: flex;
   justify-content: center;
@@ -128,7 +128,7 @@
 .VideoPage_LoadingSpinner {
   width: 3rem;
   height: 3rem;
-  border-width: 10px;
+  border-width: 8px;
   border-color: var(--primary-color-darker-5) #bc8be2 #bc8be2 #bc8be2;
   border-style: solid;
   border-radius: 50%;
@@ -143,6 +143,10 @@
   .VideoPage_Search_Input_Field {
     height: 30px;
   }
+  .VideoPage_LoadingSpinner {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 }
 
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
@@ -151,11 +155,14 @@
     left: 15%;
     top: 5rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 29% - 15%);
-    left: 15%;
-    top: 5rem;
-    height: calc(100vh - 5rem);
+  .VideoPage_Search_Input_Field {
+    height: 35px;
+  }
+
+  .VideoPage_LoadingSpinner {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-width: 7px;
   }
 }
 
@@ -165,11 +172,13 @@
     left: 100px;
     top: 5rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: 60%;
-    left: 100px;
-    top: 5rem;
-    height: calc(100vh - 5rem);
+  .VideoPage_Search_Input_Field {
+    height: 35px;
+  }
+  .VideoPage_LoadingSpinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 7px;
   }
 }
 
@@ -179,11 +188,10 @@
     left: 100px;
     top: 5rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 100px);
-    left: 100px;
-    top: 5rem;
-    height: calc(100vh - 5rem);
+  .VideoPage_LoadingSpinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-width: 7px;
   }
 }
 
@@ -191,10 +199,6 @@
   .VideoPage {
     left: 90px;
     width: calc(100% - 90px);
-  }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 90px);
-    left: 90px;
   }
 }
 
@@ -204,11 +208,13 @@
     left: 60px;
     top: 5rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 60px);
-    left: 60px;
-    top: 5rem;
-    height: calc(100vh - 5rem);
+  .VideoPage_Search_Input_Field {
+    height: 35px;
+  }
+  .VideoPage_LoadingSpinner {
+    width: 2.3rem;
+    height: 2.3rem;
+    border-width: 6.5px;
   }
 }
 
@@ -218,11 +224,23 @@
     left: 45px;
     top: 4rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 45px);
-    left: 45px;
-    top: 4rem;
-    height: calc(100vh - 4rem);
+  .VideoPage_Search_Form_Field {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.8rem;
+    width: 45%;
+  }
+  .VideoPage_Search_Input_Field {
+    margin-left: 5px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  .VideoPage_Search_Input_Field:read-only {
+    font-size: 0.8rem;
+  }
+  .VideoPage_LoadingSpinner {
+    width: 2.2rem;
+    height: 2.2rem;
+    border-width: 6px;
   }
 }
 
@@ -232,11 +250,23 @@
     left: 40px;
     top: 3.5rem;
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 40px);
-    left: 40px;
-    top: 3.5rem;
-    height: calc(100vh - 3.5rem);
+  .VideoPage_Search_Form_Field {
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.5rem;
+    width: 40%;
+  }
+  .VideoPage_Search_Input_Field {
+    margin-left: 5px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+  .VideoPage_Search_Input_Field:read-only {
+    font-size: 0.7rem;
+  }
+  .VideoPage_LoadingSpinner {
+    width: 2rem;
+    height: 2rem;
+    border-width: 5px;
   }
 }
 
@@ -247,10 +277,17 @@
     top: 3rem;
     height: calc(100vh - 4rem);
   }
-  .VideoPage_LoadingSpinner_Container {
-    width: calc(100% - 40px);
-    left: 60px;
-    top: 3rem;
-    height: calc(100vh - 3rem);
+  .VideoPage_Search_Input_Field {
+    margin-left: 5px;
+    height: 30px;
+    font-size: 0.6rem;
+  }
+  .VideoPage_Search_Input_Field:read-only {
+    font-size: 0.6rem;
+  }
+  .VideoPage_LoadingSpinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-width: 3px;
   }
 }
