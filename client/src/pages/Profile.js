@@ -11,7 +11,7 @@ import {
   stopProgressBar,
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
-import { useLocation, useHistory, useParams } from "react-router-dom";
+import { useLocation, useHistory, useParams, NavLink } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Icon } from "@iconify/react";
 import { Helmet } from "react-helmet";
@@ -216,10 +216,10 @@ const Profile = () => {
     } else {
       setFetchedAllData(true);
     }
+    if (location.pathname.endsWith(params.userID)) {
+      history.push(`/u/profile/${params.userID}/posts`);
+    }
   }, []);
-  useEffect(() => {
-    fillColorOnRoute();
-  });
 
   return (
     <>
@@ -317,36 +317,30 @@ const Profile = () => {
             </div>
           </div>
           <div className="ProfilePage_UserContent_Route_Container">
-            <div
+            <NavLink
               className="ProfilePage_UserContent_Feed_Route_Container ProfilePage_Route"
-              onClick={() => {
-                history.push(`/u/profile/${profilePageData.userID}`);
-              }}
+              to={`/u/profile/${profilePageData.userID}/posts`}
             >
               <Icon className="ProfilePage_UserContent_Icon" icon="gg:feed" />
-            </div>
-            <div
+            </NavLink>
+            <NavLink
               className="ProfilePage_UserContent_Picture_Route_Container ProfilePage_Route"
-              onClick={() => {
-                history.push(`/u/profile/${profilePageData.userID}/albums`);
-              }}
+              to={`/u/profile/${profilePageData.userID}/albums`}
             >
               <Icon
                 className="ProfilePage_UserContent_Icon"
                 icon="akar-icons:image"
               />
-            </div>
-            <div
+            </NavLink>
+            <NavLink
               className="ProfilePage_UserContent_Friends_Route_Container ProfilePage_Route"
-              onClick={() => {
-                history.push(`/u/profile/${profilePageData.userID}/friends`);
-              }}
+              to={`/u/profile/${profilePageData.userID}/friends`}
             >
               <Icon
                 className="ProfilePage_UserContent_Icon iconify"
                 icon="fa-solid:user-friends"
               />
-            </div>
+            </NavLink>
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GetUserID from "../pages/GetUserID";
 import Page404 from "../pages/Page404";
 import SignIn from "../pages/SignIn";
@@ -15,9 +15,11 @@ const MainRoot = () => {
 const RoutingMainPage = () => {
   const location = useLocation();
   const history = useHistory();
-  if (location.pathname === "/u") {
-    history.push("/u/home");
-  }
+  useEffect(() => {
+    if (location.pathname === "/u") {
+      history.push("/u/home");
+    }
+  }, []);
   return (
     <>
       <Switch>

@@ -198,7 +198,7 @@ const UserPostFeed = (props) => {
                   : postInformation.userPicture
               }
               onClick={() => {
-                history.push(`/u/profile/${postInformation.userID}`);
+                history.push(`/u/profile/${postInformation.userID}/posts`);
               }}
               alt="user"
             />
@@ -208,7 +208,7 @@ const UserPostFeed = (props) => {
               <p
                 className="HomePage_Feed_User_ID_Text"
                 onClick={() => {
-                  history.push(`/u/profile/${postInformation.userID}`);
+                  history.push(`/u/profile/${postInformation.userID}/posts`);
                 }}
               >
                 {postInformation.userID}
@@ -216,7 +216,7 @@ const UserPostFeed = (props) => {
               <p
                 className="HomePage_Feed_User_Name_Text"
                 onClick={() => {
-                  history.push(`/u/profile/${postInformation.userID}`);
+                  history.push(`/u/profile/${postInformation.userID}/posts`);
                 }}
               >
                 {postInformation.userName}
@@ -271,9 +271,22 @@ const UserPostFeed = (props) => {
                       ? postInformation.postCommentInfo.picture
                       : User_Profile_Icon
                   }
+                  onClick={() => {
+                    history.push(
+                      `/u/profile/${postInformation.postCommentInfo.userID}/posts`
+                    );
+                  }}
                 />
                 <div>
-                  <h3>{postInformation.postCommentInfo.userID}</h3>
+                  <h3
+                    onClick={() => {
+                      history.push(
+                        `/u/profile/${postInformation.postCommentInfo.userID}/posts`
+                      );
+                    }}
+                  >
+                    {postInformation.postCommentInfo.userID}
+                  </h3>
                   <p>{postInformation.postCommentInfo.comment}</p>
                 </div>
               </div>

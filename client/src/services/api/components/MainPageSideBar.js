@@ -8,16 +8,6 @@ export default {
       withCredentials: true,
     });
   },
-  getFriendData: async (userID) => {
-    return await axios({
-      method: "GET",
-      url: `/u/profile/${userID}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      withCredentials: true,
-    });
-  },
   getSearchedUserData: async (userID) => {
     return axios({
       method: "POST",

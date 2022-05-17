@@ -1,5 +1,6 @@
 const initialState = {
   userID: "",
+  post: [],
 };
 
 const profilePageDataReducer = (state = initialState, action) => {

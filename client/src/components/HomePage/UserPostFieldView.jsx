@@ -42,7 +42,7 @@ const UserPostFieldView = () => {
             }
             className="HomePage_MinField_UserPost_Field_Image"
             onClick={() => {
-              history.push(`/u/profile/${userProfileDetailStore.userID}`);
+              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
             alt="profile"
           />
@@ -149,7 +149,9 @@ const UserPostFieldView = () => {
                 }
                 className="HomePage_MaxField_UserPost_Field_Image"
                 onClick={() => {
-                  history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                  history.push(
+                    `/u/profile/${userProfileDetailStore.userID}/posts`
+                  );
                 }}
                 alt="profile"
               />

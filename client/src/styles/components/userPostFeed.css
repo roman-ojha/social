@@ -217,6 +217,7 @@
   border-radius: 50%;
   margin-right: 0.5rem;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .UserPostFeed_CommentBox_UserComment div {

@@ -114,7 +114,7 @@ const Stories = () => {
             .getElementById("carousel-stories-container")
             .contains(e.target)
         ) {
-          history.push("/u");
+          history.push("/u/home");
         }
       });
   });
@@ -124,7 +124,7 @@ const Stories = () => {
         <div id="carousel-stories-container">
           <div id="carousel-wrapper">
             <div id="menu">
-              <NavLink to="/u">
+              <NavLink to="/u/home">
                 <Icon icon="ep:close-bold" id="Carousel-Stories-Close-icon" />
               </NavLink>
               <div id="image"></div>

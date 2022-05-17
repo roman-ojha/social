@@ -9,8 +9,7 @@ const RoutingProfilePage = (props) => {
     <div>
       <Switch>
         <Route
-          exact
-          path="/u/profile/:userID"
+          path="/u/profile/:userID/posts"
           component={() => {
             return (
               <>

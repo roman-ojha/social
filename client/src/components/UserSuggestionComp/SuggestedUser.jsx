@@ -2,6 +2,7 @@ import React from "react";
 import { toastError, toastSuccess } from "../../services/toast";
 import { instance as axios } from "../../services/axios";
 import {
+  profilePageDataAction,
   startProgressBar,
   stopProgressBar,
   isFollowedSuggestedUser,
@@ -9,6 +10,7 @@ import {
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import GlobalApi from "../../services/api/global";
 
 const SuggestedUser = (props) => {
   const dispatch = useDispatch();
@@ -101,6 +103,34 @@ const SuggestedUser = (props) => {
     }
   };
 
+  const routeToProfile = async (userID) => {
+    try {
+      dispatch(startProgressBar());
+      const res = await GlobalApi.getFriendData(userID);
+      const userData = await res.data;
+      if (res.status === 200 && userData.success) {
+        // success
+        const userObj = {
+          ...userData.searchedUser,
+          isRootUserFollowed: userData.isRootUserFollowed,
+        };
+        dispatch(profilePageDataAction(userObj));
+        history.push(`/u/profile/${userID}/posts`);
+      } else {
+        // error
+        toastError(userData.msg);
+      }
+      dispatch(stopProgressBar());
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+      dispatch(stopProgressBar());
+    }
+  };
+
   return (
     <>
       <div className="MainPage_Suggested_User_Container">
@@ -113,7 +143,8 @@ const SuggestedUser = (props) => {
           }
           onClick={() => {
             if (props.userInformation.type !== "bot") {
-              history.push(`/u/profile/${props.userInformation.userID}`);
+              // history.push(`/u/profile/${props.userInformation.userID}/posts`);
+              routeToProfile(props.userInformation.userID);
             } else {
               toastError("Sorry!!, can't be able to open bot Profile");
             }
@@ -125,7 +156,10 @@ const SuggestedUser = (props) => {
             className="MainPage_Suggested_User_Name"
             onClick={() => {
               if (props.userInformation.type !== "bot") {
-                history.push(`/u/profile/${props.userInformation.userID}`);
+                // history.push(
+                //   `/u/profile/${props.userInformation.userID}/posts`
+                // );
+                routeToProfile(props.userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -137,7 +171,10 @@ const SuggestedUser = (props) => {
             className="MainPage_Suggested_User_Follower_Name"
             onClick={() => {
               if (props.userInformation.type !== "bot") {
-                history.push(`/u/profile/${props.userInformation.userID}`);
+                // history.push(
+                //   `/u/profile/${props.userInformation.userID}/posts`
+                // );
+                routeToProfile(props.userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }

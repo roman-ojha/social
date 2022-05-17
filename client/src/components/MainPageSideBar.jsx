@@ -5,7 +5,6 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MainPageSearchBar from "./MainPageSearchBar";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { instance as axios } from "../services/axios";
 import { Icon } from "@iconify/react";
 import "../styles/components/mainPageSideBar.css";
 import {
@@ -16,6 +15,7 @@ import {
 } from "../services/redux-actions";
 import Api from "../services/api/components/MainPageSideBar";
 import { toastSuccess, toastError } from "../services/toast";
+import GlobalApi from "../services/api/global";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -62,7 +62,9 @@ const MainPageSideBar = () => {
           onClick={async () => {
             try {
               dispatch(startProgressBar());
-              const res = await Api.getFriendData(props.friendDetail.userID);
+              const res = await GlobalApi.getFriendData(
+                props.friendDetail.userID
+              );
               const userData = await res.data;
               if (res.status === 200 && userData.success) {
                 // success
@@ -71,7 +73,7 @@ const MainPageSideBar = () => {
                   isRootUserFollowed: userData.isRootUserFollowed,
                 };
                 dispatch(profilePageDataAction(userObj));
-                history.push(`/u/profile/${props.friendDetail.userID}`);
+                history.push(`/u/profile/${props.friendDetail.userID}/posts`);
               } else {
                 // error
                 toastError(userData.msg);
@@ -93,7 +95,7 @@ const MainPageSideBar = () => {
                 ? User_Profile_Icon
                 : props.friendDetail.picture
             }
-            alt=""
+            alt={props.friendDetail.userID}
             className="MainPage_SideBar_Friend_Image"
           />
           <p className="MainPage_SideBar_Friend_Name">
@@ -366,7 +368,7 @@ const MainPageSideBar = () => {
                 <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
               </NavLink>
               <NavLink
-                to={`/u/profile/${userProfileDetailStore.userID}`}
+                to={`/u/profile/${userProfileDetailStore.userID}/posts`}
                 className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
@@ -398,14 +400,18 @@ const MainPageSideBar = () => {
                 }
                 className="MainPage_SideBar_User_Account_Img"
                 onClick={() => {
-                  history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                  history.push(
+                    `/u/profile/${userProfileDetailStore.userID}/posts`
+                  );
                 }}
                 alt="profile"
               />
               <h3
                 className="MainPage_SideBar_User_Account_Name"
                 onClick={() => {
-                  history.push(`/u/profile/${userProfileDetailStore.userID}`);
+                  history.push(
+                    `/u/profile/${userProfileDetailStore.userID}/posts`
+                  );
                 }}
               >
                 {userProfileDetailStore.userID === undefined

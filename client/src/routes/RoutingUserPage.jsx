@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "../pages/Home";
 import Video from "../pages/Video";
 import Message from "../pages/Message";
@@ -6,9 +6,20 @@ import Setting from "../pages/Setting";
 import Profile from "../pages/Profile";
 import Page404 from "../pages/Page404";
 import Stories from "../pages/Stories";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const RoutingUserPage = () => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+  const location = useLocation();
+  const history = useHistory();
+  useEffect(() => {
+    if (location.pathname === "/u/profile") {
+      history.push(`/u/profile/${userProfileDetailStore.userID}`);
+    }
+  }, []);
   return (
     <div>
       <Switch>
