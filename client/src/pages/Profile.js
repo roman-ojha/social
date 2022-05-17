@@ -216,7 +216,10 @@ const Profile = () => {
     } else {
       setFetchedAllData(true);
     }
-    if (location.pathname.endsWith(params.userID)) {
+    if (
+      location.pathname.endsWith(params.userID) ||
+      location.pathname.endsWith(`${params.userID}/`)
+    ) {
       history.push(`/u/profile/${params.userID}/posts`);
     }
   }, []);
@@ -282,7 +285,7 @@ const Profile = () => {
                 </p>
                 <p
                   onClick={() => {
-                    history.push(`/u/profile/${profilePageData.userID}`);
+                    history.push(`/u/profile/${profilePageData.userID}/posts`);
                   }}
                 >
                   {profilePageData.postNo} Post

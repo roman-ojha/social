@@ -1,14 +1,54 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import ProfileFriends from "../components/ProfileFriends";
 import ProfileAlbums from "../components/ProfileAlbums";
 import UserPostFeed from "../components/UserPostFeed";
+import { useLocation } from "react-router-dom";
 
 const RoutingProfilePage = (props) => {
+  const location = useLocation();
+  const colorSelectedUrl = () => {
+    // updating color of sidebar tab through useEffect
+    try {
+      if (location.pathname.includes("/u/profile")) {
+        const selectedLinkElement = document.getElementsByClassName(
+          "MainPage_SideBar_Link"
+        )[4];
+        selectedLinkElement.firstElementChild.style.backgroundColor =
+          "var(--primary-color-point-7)";
+        document.getElementsByClassName(
+          "MainPage_SideBar_Menu_Logo"
+        )[4].style.color = "var(--primary-color-point-7)";
+        selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+          "var(--primary-color-point-7)";
+      }
+    } catch (err) {}
+  };
+  useEffect(() => {
+    colorSelectedUrl();
+    return () => {
+      console.log("hello");
+      try {
+        if (location.pathname.includes("/u/profile")) {
+          const selectedLinkElement = document.getElementsByClassName(
+            "MainPage_SideBar_Link"
+          )[4];
+          selectedLinkElement.firstElementChild.style.backgroundColor =
+            "transparent";
+          document.getElementsByClassName(
+            "MainPage_SideBar_Menu_Logo"
+          )[4].style.color = "var(--lower-opacity-font-color)";
+          selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+            "var(--lower-opacity-font-color)";
+        }
+      } catch (err) {}
+    };
+  }, []);
   return (
     <div>
       <Switch>
         <Route
+          exact
           path="/u/profile/:userID/posts"
           component={() => {
             return (

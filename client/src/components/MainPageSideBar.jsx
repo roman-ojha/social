@@ -370,6 +370,13 @@ const MainPageSideBar = () => {
               <NavLink
                 to={`/u/profile/${userProfileDetailStore.userID}/posts`}
                 className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
+                onClick={() => {
+                  const userObj = {
+                    ...userProfileDetailStore,
+                    isRootUserFollowed: false,
+                  };
+                  dispatch(profilePageDataAction(userObj));
+                }}
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon

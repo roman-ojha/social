@@ -4,12 +4,14 @@ import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
 import { toastError, toastSuccess } from "../services/toast";
 import {
+  profilePageDataAction,
   isFollowedFollowedByUser,
   startProgressBar,
   stopProgressBar,
 } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
+import GlobalApi from "../services/api/global";
 
 const FollowedBy = () => {
   const history = useHistory();
@@ -110,6 +112,34 @@ const FollowedBy = () => {
       }
     };
 
+    const routeToProfile = async (userID) => {
+      try {
+        dispatch(startProgressBar());
+        const res = await GlobalApi.getFriendData(userID);
+        const userData = await res.data;
+        if (res.status === 200 && userData.success) {
+          // success
+          const userObj = {
+            ...userData.searchedUser,
+            isRootUserFollowed: userData.isRootUserFollowed,
+          };
+          dispatch(profilePageDataAction(userObj));
+          history.push(`/u/profile/${userID}/posts`);
+        } else {
+          // error
+          toastError(userData.msg);
+        }
+        dispatch(stopProgressBar());
+      } catch (err) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+        dispatch(stopProgressBar());
+      }
+    };
+
     return (
       <>
         <div className="MainPage_Followed_User_Container">
@@ -122,7 +152,8 @@ const FollowedBy = () => {
             }
             onClick={() => {
               if (props.userInformation.type !== "bot") {
-                history.push(`/u/profile/${props.userInformation.userID}`);
+                // history.push(`/u/profile/${props.userInformation.userID}`);
+                routeToProfile(props.userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -134,7 +165,8 @@ const FollowedBy = () => {
               className="MainPage_Followed_User_Name"
               onClick={() => {
                 if (props.userInformation.type !== "bot") {
-                  history.push(`/u/profile/${props.userInformation.userID}`);
+                  // history.push(`/u/profile/${props.userInformation.userID}`);
+                  routeToProfile(props.userInformation.userID);
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
@@ -146,7 +178,8 @@ const FollowedBy = () => {
               className="MainPage_Followed_User_Follower_Name"
               onClick={() => {
                 if (props.userInformation.type !== "bot") {
-                  history.push(`/u/profile/${props.userInformation.userID}`);
+                  // history.push(`/u/profile/${props.userInformation.userID}`);
+                  routeToProfile(props.userInformation.userID);
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
