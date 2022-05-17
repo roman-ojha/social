@@ -1,4 +1,5 @@
-const initialState = [];
+import constant from "../../../../constant/videoPage";
+const initialState = constant.homePageVideos;
 
 const videoPageDataReducer = (state = initialState, action) => {
   if (action.type === "setVideoPageData") {

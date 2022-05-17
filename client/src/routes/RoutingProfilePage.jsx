@@ -27,7 +27,6 @@ const RoutingProfilePage = (props) => {
   useEffect(() => {
     colorSelectedUrl();
     return () => {
-      console.log("hello");
       try {
         if (location.pathname.includes("/u/profile")) {
           const selectedLinkElement = document.getElementsByClassName(
