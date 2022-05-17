@@ -310,12 +310,12 @@ const MainPageSideBar = () => {
             <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
             <div className="MainPage_SideBar_Menu_NavLink_Container">
               <NavLink
-                to="/u"
+                to="/u/home"
                 className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon
-                  className="MainPage_SideBar_Menu_Home_Logo"
+                  className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
                   icon="ant-design:home-filled"
                   color={
                     selectedIndex === 0 ? "var(--primary-color-point-7)" : ""
@@ -329,7 +329,7 @@ const MainPageSideBar = () => {
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon
-                  className="MainPage_SideBar_Menu_Home_Logo"
+                  className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
                   icon="clarity:video-gallery-solid"
                   color={
                     selectedIndex === 1 ? "var(--primary-color-point-7)" : ""
@@ -343,7 +343,7 @@ const MainPageSideBar = () => {
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon
-                  className="MainPage_SideBar_Menu_Home_Logo"
+                  className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
                   icon="ant-design:message-filled"
                   color={
                     selectedIndex === 2 ? "var(--primary-color-point-7)" : ""
@@ -357,7 +357,7 @@ const MainPageSideBar = () => {
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon
-                  className="MainPage_SideBar_Menu_Home_Logo"
+                  className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
                   icon="ant-design:setting-filled"
                   color={
                     selectedIndex === 3 ? "var(--primary-color-point-7)" : ""
@@ -371,7 +371,7 @@ const MainPageSideBar = () => {
               >
                 <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
                 <Icon
-                  className="MainPage_SideBar_Menu_Home_Logo"
+                  className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
                   icon="gg:profile"
                   color={
                     selectedIndex === 4 ? "var(--primary-color-point-7)" : ""

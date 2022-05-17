@@ -5,14 +5,19 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import Index from "../pages/Index";
 import { Switch, Route } from "react-router-dom";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 
 const MainRoot = () => {
   const history = useHistory();
-  history.push("/u");
+  history.push("/u/home");
   return <></>;
 };
 const RoutingMainPage = () => {
+  const location = useLocation();
+  const history = useHistory();
+  if (location.pathname === "/u") {
+    history.push("/u/home");
+  }
   return (
     <>
       <Switch>

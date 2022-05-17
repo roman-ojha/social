@@ -93,8 +93,14 @@
     cursor: pointer;
   } */
 
-.MainPage_SideBar_Active_Link {
-  background-color: red;
+.MainPage_SideBar_Link.active .MainPage_SideBar_Menu_SelectBar_Colored {
+  background-color: var(--primary-color-point-7);
+}
+.MainPage_SideBar_Link.active .MainPage_SideBar_Menu_Logo {
+  color: var(--primary-color-point-7);
+}
+.MainPage_SideBar_Link.active h3 {
+  color: var(--primary-color-point-7);
 }
 
 .MainPage_SideBar_Menu_Home_Logo {

@@ -12,7 +12,7 @@ const RoutingUserPage = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/u" component={Home} />
+        <Route exact path="/u/home" component={Home} />
         <Route exact path="/u/video" component={Video} />
         <Route exact path="/u/message" component={Message} />
         <Route exact path="/u/setting" component={Setting} />
