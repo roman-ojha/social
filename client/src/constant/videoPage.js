@@ -60,6 +60,28 @@ export default {
       thumbnail:
         "https://i.ytimg.com/vi/ZmcBC9-wAXM/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCAMVzudTzBRJMpy1RfD9RVWi1OYA",
     },
+    // Nepali Songs
+    {
+      videoId: "sTbBZFoVk3U",
+      title:
+        "Dubo Phulyo || KABADDI KABADDI KABADDI - Movie Song || Dayahang Rai, Upasana Singh, Karma, Wilson",
+      thumbnail:
+        "https://i.ytimg.com/vi/sTbBZFoVk3U/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCWz3YzUbHEDyR9iP_jDyOnaPrfFg",
+    },
+    {
+      videoId: "wzH8bVWrxJg",
+      title:
+        "NACHA FIRIRI || Mahesh Kafle Ft. Melina Rai || Nischal Basnet || Swastima Khadka || Kristal Klaws",
+      thumbnail:
+        "https://i.ytimg.com/vi/wzH8bVWrxJg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBxzsYjafXvf8twZuBV6krPfB22ow",
+    },
+    {
+      videoId: "Pkj6YFJFI8U",
+      title:
+        "Malai Nasodha | Narayan Gopal | Hari Bhakta Katuwal | Nepali Song",
+      thumbnail:
+        "https://i.ytimg.com/vi/Pkj6YFJFI8U/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCKoW0t42jisb71np-rXQpaRqdn8g",
+    },
     // Technology
     {
       videoId: "cV5TjZCJkuA",
@@ -90,6 +112,27 @@ export default {
       title: "Tesla Model S PLAID Impressions: Re-Inventing the Wheel!",
       thumbnail:
         "https://i.ytimg.com/vi/DyKQ7qtTJag/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDA65r99jYgTgw56Iq8z-GNTYGZ4A",
+    },
+    {
+      videoId: "eQ_8F4nzyiw",
+      title: "Building a PC... using only Wish.com",
+      thumbnail:
+        "https://i.ytimg.com/vi/eQ_8F4nzyiw/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCycY-XSAS7rMWBkkYJ88g9tcDvng",
+    },
+    // South indian movies
+    {
+      videoId: "ULEQb_l-N08",
+      title:
+        "K.G.F Full Movie | Yash, Srinidhi Shetty, Ananth Nag, Ramachandra Raju, Achyuth Kumar, Malavika",
+      thumbnail:
+        "https://i.ytimg.com/vi/ULEQb_l-N08/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAOcXIvc_Pory6QdV-Yd1EUjHevEQ",
+    },
+    {
+      videoId: "zzhfvt5vZHI",
+      title:
+        "Dear Comrade (2020) New Released Hindi Dubbed Full Movie | Vijay Devarakonda, Rashmika, Shruti",
+      thumbnail:
+        "https://i.ytimg.com/vi/zzhfvt5vZHI/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAaGeagcNVD-sL1qRIe-bemYDiedg",
     },
   ],
 };
