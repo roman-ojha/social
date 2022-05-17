@@ -46,8 +46,7 @@ const Video = () => {
     // getYoutubeApiVideo();
     //
     // Scrap.scrapeYoutubeHomePage();
-
-    toastInfo("Video Page is in development");
+    // toastInfo("Video Page is in development");
   }, []);
   return (
     <>
@@ -66,7 +65,7 @@ const Video = () => {
             <h1>Youtube</h1>
           </a>
         </header>
-        {/* {videoPageData.length > 0 ? (
+        {videoPageData.length > 0 ? (
           <div className="VideoPage_Videos_Container">
             {videoPageData.map((video, index) => {
               if (video) {
@@ -74,6 +73,7 @@ const Video = () => {
                   <RenderVideo
                     videoId={video.videoId}
                     title={video.title}
+                    thumbnail={video.thumbnail}
                     key={index}
                   />
                 );
@@ -84,7 +84,7 @@ const Video = () => {
           <div className="VideoPage_LoadingSpinner_Container">
             <div className="VideoPage_LoadingSpinner"></div>
           </div>
-        )} */}
+        )}
       </div>
     </>
   );

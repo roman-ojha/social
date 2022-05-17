@@ -51,7 +51,7 @@ export default {
       title:
         "Naacho Naacho (Full Video) RRR - NTR, Ram Charan | M M Kreem | SS Rajamouli | Vishal Mishra & Rahul",
       thumbnail:
-        "https://i.ytimg.com/vi/sAzlWScHTc4/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDZpvBnlJxypvc1lEiWdGeQmU0afg",
+        "https://i.ytimg.com/vi/sAzlWScHTc4/hq720.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDZpvBnlJxypvc1lEiWdGeQmU0afg",
     },
     {
       videoId: "ZmcBC9-wAXM",
@@ -87,37 +87,37 @@ export default {
       videoId: "cV5TjZCJkuA",
       title: "This Smartphone Changes Everything...",
       thumbnail:
-        "https://i.ytimg.com/vi/cV5TjZCJkuA/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD5WjwsfI3Ydp4BdzdM_XTMW40E_w",
+        "https://i.ytimg.com/vi/cV5TjZCJkuA/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD5WjwsfI3Ydp4BdzdM_XTMW40E_w",
     },
     {
       videoId: "JJ5WP2BKigc",
       title: "Unboxing The Mind Bending Wallpaper TV...",
       thumbnail:
-        "https://i.ytimg.com/vi/JJ5WP2BKigc/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBSoFfDppYrtkrEPrbOBHGeflLmjQ",
+        "https://i.ytimg.com/vi/JJ5WP2BKigc/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBSoFfDppYrtkrEPrbOBHGeflLmjQ",
     },
     {
       videoId: "4XsfwD1ZwlU",
       title: "5 Majedaar Gadgets I bought Online !",
       thumbnail:
-        "https://i.ytimg.com/vi/4XsfwD1ZwlU/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAlILcDtJlSWV24LU-NZXrQ2vX88w",
+        "https://i.ytimg.com/vi/4XsfwD1ZwlU/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAlILcDtJlSWV24LU-NZXrQ2vX88w",
     },
     {
       videoId: "mr9kK0_7x08",
       title: "Tesla Factory Tour with Elon Musk!",
       thumbnail:
-        "https://i.ytimg.com/vi/mr9kK0_7x08/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBNQantjqYxttVwhZdkj2P_bMKI_A",
+        "https://i.ytimg.com/vi/mr9kK0_7x08/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBNQantjqYxttVwhZdkj2P_bMKI_A",
     },
     {
       videoId: "DyKQ7qtTJag",
       title: "Tesla Model S PLAID Impressions: Re-Inventing the Wheel!",
       thumbnail:
-        "https://i.ytimg.com/vi/DyKQ7qtTJag/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDA65r99jYgTgw56Iq8z-GNTYGZ4A",
+        "https://i.ytimg.com/vi/DyKQ7qtTJag/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDA65r99jYgTgw56Iq8z-GNTYGZ4A",
     },
     {
       videoId: "eQ_8F4nzyiw",
       title: "Building a PC... using only Wish.com",
       thumbnail:
-        "https://i.ytimg.com/vi/eQ_8F4nzyiw/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCycY-XSAS7rMWBkkYJ88g9tcDvng",
+        "https://i.ytimg.com/vi/eQ_8F4nzyiw/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCycY-XSAS7rMWBkkYJ88g9tcDvng",
     },
     // South indian movies
     {
@@ -125,7 +125,7 @@ export default {
       title:
         "K.G.F Full Movie | Yash, Srinidhi Shetty, Ananth Nag, Ramachandra Raju, Achyuth Kumar, Malavika",
       thumbnail:
-        "https://i.ytimg.com/vi/ULEQb_l-N08/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAOcXIvc_Pory6QdV-Yd1EUjHevEQ",
+        "https://i.ytimg.com/vi/ULEQb_l-N08/hq720.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAOcXIvc_Pory6QdV-Yd1EUjHevEQ",
     },
     {
       videoId: "zzhfvt5vZHI",

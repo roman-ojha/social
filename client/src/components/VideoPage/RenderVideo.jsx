@@ -15,7 +15,8 @@ const RenderVideo = (props) => {
           ></iframe>
         ) : (
           <img
-            src={`http://img.youtube.com/vi/${props.videoId}/hqdefault.jpg`}
+            // src={`http://img.youtube.com/vi/${props.videoId}/hqdefault.jpg`}
+            src={props.thumbnail}
             className="VideoPage_Youtube_Video_Image"
             alg={props.title}
             onClick={() => {
