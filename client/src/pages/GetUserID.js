@@ -20,7 +20,7 @@ const GetUserID = (props) => {
     // if user is login for the first time then the userID will be undefined
     if (uid !== "undefined") {
       // and if user had already login then we can push route into homepage
-      history.push("/u");
+      history.push("/u/home");
     }
     if (uid === "undefined") {
       // if UserID page will be open using google authnetication
@@ -71,7 +71,7 @@ const GetUserID = (props) => {
         // console.log(resData);
         dispatch(showLoadingSpinner(false));
         if (props.userDetail === undefined) {
-          history.push("/u");
+          history.push("/u/home");
         } else {
           history.push("/signin");
         }

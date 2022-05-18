@@ -45,7 +45,7 @@ const MoreProfileBox = () => {
       {moreProfileBoxState ? (
         <div className="More_Profile_Box_Container">
           <NavLink
-            to={`/u/profile/${userProfileDetailStore.userID}`}
+            to={`/u/profile/${userProfileDetailStore.userID}/posts`}
             className="More_Profile_Box_User_Info"
           >
             <img

@@ -122,7 +122,7 @@ const MainPageMsgAndNtfBar = () => {
               : userProfileDetailStore.picture
           }
           onClick={() => {
-            history.push(`/u/profile/${userProfileDetailStore.userID}`);
+            history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
           alt="profile"
         />

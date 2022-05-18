@@ -53,7 +53,7 @@ const SignIn = () => {
       } else {
         // For Cors domain
         // setCookie("AuthToken", data.token, new Date(Date.now() + 25892000000));
-        history.push("/u");
+        history.push("/u/home");
       }
     } catch (err) {
       if (err.response.data.success === false) {
