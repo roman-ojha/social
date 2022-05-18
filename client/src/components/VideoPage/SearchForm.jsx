@@ -5,21 +5,21 @@ import Api from "../../services/api/pages/Video";
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { setVideoPageData } from "../../services/redux-actions";
 import { useDispatch } from "react-redux";
+import { useRef } from "react";
 
 const SearchForm = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
+  const form = useRef(null);
 
-  const searchVideo = async (e) => {
+  const searchVideo = async () => {
     try {
-      e.preventDefault();
       dispatch(setVideoPageData([]));
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
-        console.log(await res.data);
         const data = await res.data;
         if (res.status === 200 && data.success) {
           dispatch(setVideoPageData(data.videos));
@@ -27,6 +27,7 @@ const SearchForm = () => {
           toastError(data.msg);
         }
       }
+      form.current.reset();
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
@@ -37,11 +38,22 @@ const SearchForm = () => {
   };
   return (
     <>
-      <form className="VideoPage_Search_Form_Field" onSubmit={searchVideo}>
+      <form
+        ref={form}
+        className="VideoPage_Search_Form_Field"
+        onSubmit={(e) => {
+          e.preventDefault();
+          searchVideo();
+          setValue("");
+        }}
+      >
         <Icon
           icon="bi:search"
           className="VideoPage_Search_Icon"
-          onClick={searchVideo}
+          onClick={() => {
+            searchVideo();
+            setValue("");
+          }}
         />
         <input
           className="VideoPage_Search_Input_Field"
