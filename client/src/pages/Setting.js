@@ -15,6 +15,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";
 import { toastError, toastInfo, toastSuccess } from "../services/toast";
+import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
+import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 
 const Setting = () => {
   const userProfileDetailStore = useSelector(
@@ -178,6 +180,8 @@ const Setting = () => {
         <Helmet>
           <title>Setting</title>
         </Helmet>
+        <OpenSideBarDrawerButton />
+        <OpenRightPartDrawerButton />
         <div className="Setting_Page_Change_Profile_Picture_Container">
           <h1>Change Profile Picture</h1>
           <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">

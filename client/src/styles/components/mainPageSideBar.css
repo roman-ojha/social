@@ -341,30 +341,6 @@
   width: 300px;
   transition: width 200ms, background-color 200ms;
 }
-.SideBar_Drawer_Open_Icons {
-  position: absolute;
-  left: 0px;
-}
-.SideBar_Drawer_Open_1st_Icon {
-  animation: blinking_Drawer_Open_1st_Icon;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 100ms;
-  animation-iteration-count: infinite;
-  width: 1.5rem;
-  height: 1.5rem;
-}
-.SideBar_Drawer_Open_2nd_Icon {
-  animation: blinking_Drawer_Open_2nd_Icon;
-  animation-duration: 2s;
-  animation-timing-function: ease-in-out;
-  animation-delay: 100ms;
-  animation-iteration-count: infinite;
-  position: absolute;
-  right: -10px;
-  width: 1.5rem;
-  height: 1.5rem;
-}
 
 @media screen and (max-width: 1366px) and (min-width: 1200px) {
   /* .MainPage_SideBar_Logo_Search_Container {

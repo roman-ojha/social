@@ -19,6 +19,7 @@ import CommentBox from "../components/CommentBox";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import { toastSuccess, toastError } from "../services/toast";
 import RoutingProfilePage from "../routes/RoutingProfilePage";
+import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 
 const Profile = () => {
   const history = useHistory();
@@ -233,6 +234,7 @@ const Profile = () => {
             <title>{params.userID}</title>
           </Helmet>
           <OpenSideBarDrawerButton />
+          <OpenRightPartDrawerButton />
           <div className="ProfilePage_UserInfo_Container">
             <div className="ProfilePage_UserInfo_Picture_Container">
               <img

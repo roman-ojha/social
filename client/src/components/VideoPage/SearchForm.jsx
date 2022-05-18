@@ -29,7 +29,6 @@ const SearchForm = () => {
               thumbnail: `http://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
             };
           });
-          console.log(newVideos);
           dispatch(setVideoPageData(newVideos));
         } else {
           toastError(data.msg);

@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";
+import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
+import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -54,6 +56,8 @@ const Video = () => {
         <Helmet>
           <title>Video</title>
         </Helmet>
+        <OpenSideBarDrawerButton />
+        <OpenRightPartDrawerButton />
         <header className="VideoPage_Header">
           <SearchForm />
           <a

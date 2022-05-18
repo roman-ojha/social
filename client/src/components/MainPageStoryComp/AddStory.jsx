@@ -17,8 +17,8 @@ const AddStory = () => {
         className="Current_User_Story_Container"
         onClick={() => {
           dispatch(setHomePagePostFieldViewValue("max"));
-          if (history.location.pathname !== "/u") {
-            history.push("/u");
+          if (history.location.pathname !== "/u/home") {
+            history.push("/u/home");
           }
         }}
       >
