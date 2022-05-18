@@ -22,7 +22,15 @@ const SearchForm = () => {
         const res = await Api.searchYoutubeVideo(value);
         const data = await res.data;
         if (res.status === 200 && data.success) {
-          dispatch(setVideoPageData(data.videos));
+          const newVideos = data.videos.map((video) => {
+            return {
+              ...video,
+              videoId: video.id,
+              thumbnail: `http://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
+            };
+          });
+          console.log(newVideos);
+          dispatch(setVideoPageData(newVideos));
         } else {
           toastError(data.msg);
         }
