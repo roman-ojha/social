@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
-import Api from "../services/api/pages/Video";
+// import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
-import { setVideoPageData } from "../services/redux-actions";
-import { toastError, toastInfo } from "../services/toast";
+// import { setVideoPageData } from "../services/redux-actions";
+// import { toastError } from "../services/toast";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";
@@ -12,30 +12,30 @@ import SearchForm from "../components/VideoPage/SearchForm";
 const Video = () => {
   const dispatch = useDispatch();
   const videoPageData = useSelector((state) => state.videoPageDataReducer);
-  const scrapeVideo = async () => {
-    try {
-      const res = await Api.scrapeVideo();
-      const data = await res.data;
-      if (res.status === 200 && data.success)
-        dispatch(setVideoPageData(data.videos));
-    } catch (err) {
-      if (err.response.data.success === false) {
-        toastError(err.response.data.msg);
-      } else {
-        toastError("Some Problem Occur, Please Try again Letter!!!");
-      }
-    }
-  };
+  // const scrapeVideo = async () => {
+  //   try {
+  //     const res = await Api.scrapeVideo();
+  //     const data = await res.data;
+  //     if (res.status === 200 && data.success)
+  //       dispatch(setVideoPageData(data.videos));
+  //   } catch (err) {
+  //     if (err.response.data.success === false) {
+  //       toastError(err.response.data.msg);
+  //     } else {
+  //       toastError("Some Problem Occur, Please Try again Letter!!!");
+  //     }
+  //   }
+  // };
 
-  const getYoutubeApiVideo = async () => {
-    try {
-      const res = await Api.getYoutubeApi();
-      const data = await res.data;
-      // console.log(data);
-    } catch (err) {
-      // console.log(err);
-    }
-  };
+  // const getYoutubeApiVideo = async () => {
+  //   try {
+  //     const res = await Api.getYoutubeApi();
+  //     const data = await res.data;
+  //     // console.log(data);
+  //   } catch (err) {
+  //     // console.log(err);
+  //   }
+  // };
 
   useEffect(() => {
     // backend scraping
