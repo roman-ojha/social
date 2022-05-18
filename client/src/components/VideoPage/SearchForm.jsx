@@ -20,9 +20,12 @@ const SearchForm = () => {
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
         console.log(await res.data);
-        // const data = await res.data;
-        // if (res.status === 200 && data.success)
-        //   dispatch(setVideoPageData(data.videos));
+        const data = await res.data;
+        if (res.status === 200 && data.success) {
+          dispatch(setVideoPageData(data.videos));
+        } else {
+          toastError(data.msg);
+        }
       }
     } catch (err) {
       if (err.response.data.success === false) {
