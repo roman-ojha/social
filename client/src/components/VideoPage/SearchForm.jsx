@@ -17,10 +17,12 @@ const SearchForm = () => {
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
-        const res = await Api.scrapVideoSearch(value);
-        const data = await res.data;
-        if (res.status === 200 && data.success)
-          dispatch(setVideoPageData(data.videos));
+        // const res = await Api.scrapVideoSearch(value);
+        const res = await Api.searchYoutubeVideo(value);
+        console.log(await res.data);
+        // const data = await res.data;
+        // if (res.status === 200 && data.success)
+        //   dispatch(setVideoPageData(data.videos));
       }
     } catch (err) {
       if (err.response.data.success === false) {

@@ -31,7 +31,8 @@
     "request-promise": "^4.2.6",
     "socket.io-client": "^4.4.1",
     "styled-components": "^5.3.1",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yt-search": "^2.10.3"
   },
   "scripts": {
     "start": "env-cmd -f .env.production react-scripts start",

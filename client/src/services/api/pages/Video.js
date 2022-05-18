@@ -22,4 +22,11 @@ export default {
       withCredentials: true,
     });
   },
+  searchYoutubeVideo: async (query) => {
+    return await axios({
+      method: "GET",
+      url: `/youtube/search?q=${query}`,
+      withCredentials: true,
+    });
+  },
 };
