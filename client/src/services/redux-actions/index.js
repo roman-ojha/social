@@ -105,6 +105,13 @@ export const setProfilePageFriends = (data) => {
   };
 };
 
+export const setFetchedFriendsOrFollowersOrFollowing = (bool) => {
+  return {
+    type: "setFetchedFriendsOrFollowersOrFollowing",
+    bool,
+  };
+};
+
 export const followedUserPostDataAction = (value) => {
   return {
     type: "followedUserPostData",

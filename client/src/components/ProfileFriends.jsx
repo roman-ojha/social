@@ -11,7 +11,10 @@ const ProfileFriends = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
-  const [userDetails, setUserDetails] = useState([]);
+  const [userDetails, setUserDetails] = useState({
+    fetchedData: false,
+    user: [],
+  });
   const loadingContainerSpinnerStyle = {
     width: "100%",
     height: "100%",
@@ -31,16 +34,56 @@ const ProfileFriends = () => {
 
   const getUserFriends = async () => {
     try {
-      const res = await UserApi.getRootUserFriends(profilePageData.id);
+      const res = await UserApi.getFriends(profilePageData.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
-        dispatch(
-          setProfilePageFriends({
-            fetchedFriendsOrFollowersOrFollowing: true,
-            friends: data.friends,
-          })
-        );
-        setUserDetails(data.friends);
+        dispatch(setProfilePageFriends(data.friends));
+        setUserDetails({
+          fetchedData: true,
+          user: data.friends,
+        });
+      } else {
+        toastError("Some Error Occur While Fetching Friends Data");
+      }
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur while fetching friends data");
+      }
+    }
+  };
+
+  const getUserFollowings = async () => {
+    try {
+      const res = await UserApi.getFollowings(profilePageData.id);
+      const data = await res.data;
+      if (res.status === 200 && data.success) {
+        setUserDetails({
+          fetchedData: true,
+          user: data.friends,
+        });
+      } else {
+        toastError("Some Error Occur While Fetching Friends Data");
+      }
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur while fetching friends data");
+      }
+    }
+  };
+
+  const getUserFollowers = async () => {
+    try {
+      const res = await UserApi.getFollowers(profilePageData.id);
+      const data = await res.data;
+      if (res.status === 200 && data.success) {
+        setUserDetails({
+          fetchedData: true,
+          user: data.friends,
+        });
       } else {
         toastError("Some Error Occur While Fetching Friends Data");
       }
@@ -54,14 +97,34 @@ const ProfileFriends = () => {
   };
 
   useEffect(() => {
-    getUserFriends();
-  }, []);
+    if (location.pathname.includes("/friends")) {
+      setUserDetails({
+        fetchedData: false,
+        user: [],
+      });
+      getUserFriends();
+    } else if (location.pathname.includes("/following")) {
+      setUserDetails({
+        fetchedData: false,
+        user: [],
+      });
+      getUserFollowings();
+    } else if (location.pathname.includes("/followers")) {
+      setUserDetails({
+        fetchedData: false,
+        user: [],
+      });
+      getUserFollowers();
+    }
+  }, [location.pathname]);
+
+  // console.log(userDetails.)
 
   return (
     <>
-      {profilePageData.fetchedFriendsOrFollowersOrFollowing ? (
+      {userDetails.fetchedData ? (
         <div className="ProfilePage_Friends_Container">
-          {userDetails.map((userDetail, index) => {
+          {userDetails.user.map((userDetail, index) => {
             return (
               <NavLink
                 to={`/u/profile/${userDetail.userID}/posts`}

@@ -147,7 +147,7 @@ const Friends = () => {
 
   const getRootUserFriends = async () => {
     try {
-      const res = await UserApi.getRootUserFriends(userProfileDetailStore.id);
+      const res = await UserApi.getFriends(userProfileDetailStore.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
         dispatch(
