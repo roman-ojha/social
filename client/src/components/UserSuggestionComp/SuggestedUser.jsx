@@ -24,6 +24,7 @@ const SuggestedUser = (props) => {
           userID: props.userInformation.userID,
           picture: props.userInformation.picture,
           name: props.userInformation.picture,
+          id: props.userInformation.id,
         };
         const response = await axios({
           method: "POST",
@@ -68,6 +69,7 @@ const SuggestedUser = (props) => {
           userID: props.userInformation.userID,
           picture: props.userInformation.picture,
           name: props.userInformation.name,
+          id: props.userInformation.id,
         };
         const response = await axios({
           method: "POST",

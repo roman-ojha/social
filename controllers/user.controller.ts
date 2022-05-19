@@ -2,7 +2,6 @@ import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
-import User from "interface/userDocument.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -93,6 +92,7 @@ export default {
             name: 1,
             userID: 1,
             email: 1,
+            id: 1,
           },
         },
         { $sample: { size: 5 } },
@@ -118,6 +118,7 @@ export default {
             picture: 1,
             name: 1,
             userID: 1,
+            id: 1,
           },
         },
         { $sample: { size: 5 } },
@@ -260,7 +261,7 @@ export default {
   followUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
-      const { email, userID } = req.body;
+      const { email, userID, id } = req.body;
       // these are the followed to user id and email
       if (!email && !userID) {
         return res
@@ -274,15 +275,15 @@ export default {
           userID: rootUser.userID,
           following: {
             $elemMatch: {
-              userID: userID,
+              id: id,
             },
           },
         },
         {
           name: 1,
           picture: 1,
-          userID: 1,
           email: 1,
+          id: 1,
         }
       );
       if (followUserExist) {
@@ -293,13 +294,14 @@ export default {
       }
       const followedToUser = await userDetail.findOne(
         {
-          userID: userID,
+          id: id,
         },
         {
           email: 1,
           name: 1,
           userID: 1,
           picture: 1,
+          id: 1,
         }
       );
       if (!followedToUser) {
@@ -316,7 +318,7 @@ export default {
       // now we just have to check does other user follow rootUser if then then save it as a friend
       const rootUserExistInFollowUser = await userDetail.findOne(
         {
-          userID: userID,
+          id: id,
           following: {
             $elemMatch: {
               userID: rootUser.userID,
@@ -334,10 +336,10 @@ export default {
         // if root userExist in followed user only at that time we are porforming this task
         const followUserExistInRootUser = await userDetail.findOne(
           {
-            userID: rootUser.userID,
+            id: rootUser.id,
             following: {
               $elemMatch: {
-                userID: userID,
+                id: id,
               },
             },
           },
@@ -346,6 +348,7 @@ export default {
             picture: 1,
             userID: 1,
             email: 1,
+            id: 1,
           }
         );
         if (followUserExistInRootUser) {
@@ -359,10 +362,11 @@ export default {
               // pushing the new followers into followed to user database
               $push: {
                 friends: {
-                  name: followedToUser.name,
-                  email: followedToUser.email,
-                  userID: followedToUser.userID,
-                  picture: followedToUser.picture,
+                  // name: followedToUser.name,
+                  // email: followedToUser.email,
+                  // userID: followedToUser.userID,
+                  // picture: followedToUser.picture,
+                  id: followedToUser.id,
                 },
               },
               $inc: {
@@ -379,10 +383,11 @@ export default {
               // pushing the new followers into followed to user database
               $push: {
                 friends: {
-                  name: rootUser.name,
-                  email: rootUser.email,
-                  userID: rootUser.userID,
-                  picture: rootUser.picture,
+                  // name: rootUser.name,
+                  // email: rootUser.email,
+                  // userID: rootUser.userID,
+                  // picture: rootUser.picture,
+                  id: rootUser.id,
                 },
               },
               $inc: {

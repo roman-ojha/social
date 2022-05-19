@@ -311,10 +311,11 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
         // pushing the new followers into followed to user database
         $push: {
           followers: {
-            name: this.name,
-            email: this.email,
-            userID: this.userID,
-            picture: this.picture,
+            // name: this.name,
+            // email: this.email,
+            // userID: this.userID,
+            // picture: this.picture,
+            id: this.id,
           },
           notification: {
             topic: "follow",
