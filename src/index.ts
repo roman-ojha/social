@@ -8,7 +8,7 @@ import messageRoute from "../routes/message.js";
 import settingRoute from "../routes/setting.js";
 import storageRouter from "../routes/storageRoute.js";
 import google_OAuth_route from "../routes/google_OAuth_route.js";
-// import youtubeRoute from "../routes/youtube.js";
+import youtubeRoute from "../routes/youtube.js";
 // import scrapRoute from "../routes/scrap.js";
 import cors from "cors";
 import bodyParser from "body-parser";
@@ -19,24 +19,24 @@ const PORT = process.env.PORT;
 // NOTE: because of 'warning' i have written this bellow code but this peace of code also did not solve the issue
 // import connectMongo from "connect-mongo";
 // const MongoStore = new connectMongo(session);
-import session from "express-session";
-import connectMemoryStore from "memorystore";
-const MemoryStore = connectMemoryStore(session);
+// import session from "express-session";
+// import connectMemoryStore from "memorystore";
+// const MemoryStore = connectMemoryStore(session);
 // app.set("truest proxy", 1);
-app.use(
-  session({
-    cookie: {
-      secure: true,
-      maxAge: 25892000000,
-    },
-    secret: process.env.SECRET_KEY as string,
-    resave: false,
-    saveUninitialized: true,
-    store: new MemoryStore({
-      checkPeriod: 86400000,
-    }),
-  })
-);
+// app.use(
+//   session({
+//     cookie: {
+//       secure: true,
+//       maxAge: 25892000000,
+//     },
+//     secret: process.env.SECRET_KEY as string,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new MemoryStore({
+//       checkPeriod: 86400000,
+//     }),
+//   })
+// );
 // ================================
 
 app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
@@ -58,7 +58,7 @@ app.use(messageRoute);
 app.use(settingRoute);
 app.use(postRoute);
 app.use(storageRouter);
-// app.use(youtubeRoute);
+app.use(youtubeRoute);
 // app.use(scrapRoute);
 import "../socket/io.js";
 
