@@ -1,4 +1,7 @@
-const initialState = [];
+const initialState = {
+  fetchedFriends: false,
+  friends: [],
+};
 
 const rootUserFriends = (state = initialState, action) => {
   if (action.type === "setRootUserFriends") {

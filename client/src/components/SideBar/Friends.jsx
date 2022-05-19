@@ -18,9 +18,6 @@ import { useEffect } from "react";
 const Friends = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
   const rootUserFriends = useSelector((state) => state.rootUserFriends);
   const MainPageFriend = (props) => {
     return (
@@ -81,7 +78,7 @@ const Friends = () => {
     return (
       <>
         <div className="MainPage_SideBar_Friends_Inner_Container">
-          {rootUserFriends.map((friendDetail) => {
+          {rootUserFriends.friends.map((friendDetail) => {
             return (
               <MainPageFriend
                 friendDetail={friendDetail}
@@ -150,7 +147,12 @@ const Friends = () => {
       const res = await UserApi.getRootUserFriends();
       const data = await res.data;
       if (res.status === 200 && data.success) {
-        dispatch(setRootUserFriends(data.friends));
+        dispatch(
+          setRootUserFriends({
+            fetchedFriends: true,
+            friends: data.friends,
+          })
+        );
       } else {
         toastError("Some Error Occur While Fetching Friends Data");
       }
@@ -171,7 +173,7 @@ const Friends = () => {
     <>
       <div className="MainPage_SideBar_Friends_Container">
         <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
-        {rootUserFriends.length !== 0 ? (
+        {rootUserFriends.fetchedFriends ? (
           <ShowFriends />
         ) : (
           <div style={loadingContainerSpinnerStyle}>

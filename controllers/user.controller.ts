@@ -186,9 +186,24 @@ export default {
   },
   getUserProfile: async (req: Request, res: Response): Promise<object> => {
     try {
+      console.log(req.params);
       const rootUser = req.rootUser;
       const userID = req.params.userid;
-      const searchedUser = await userDetail.findOne({ userID: userID });
+      const searchedUser = await userDetail.findOne(
+        { userID: userID },
+        {
+          posts: { $slice: -5 },
+          password: 0,
+          cpassword: 0,
+          birthday: 0,
+          gender: 0,
+          date: 0,
+          messages: 0,
+          tokens: 0,
+          email: 0,
+          notification: 0,
+        }
+      );
       if (!searchedUser) {
         return res
           .status(401)
@@ -196,23 +211,17 @@ export default {
       } else {
         const isRootUserFollowed = await userDetail.findOne(
           {
-            userID: rootUser.userID,
+            id: rootUser.id,
             following: {
               $elemMatch: {
-                userID: userID,
+                id: searchedUser.id,
               },
             },
           },
           {
-            posts: { $slice: -5 },
-            password: 0,
-            cpassword: 0,
-            birthday: 0,
-            gender: 0,
-            date: 0,
-            messages: 0,
-            tokens: 0,
-            email: 0,
+            id: 1,
+            _id: 0,
+            userID: 1,
           }
         );
         if (!isRootUserFollowed) {
