@@ -1,7 +1,6 @@
 import userDetail from "../models/userDetail_model.js";
 import jwt from "jsonwebtoken";
 import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
-import User from "interface/userDocument.js";
 
 export default async function varifyUser(token: string) {
   const verifyToken = jwt.verify(
