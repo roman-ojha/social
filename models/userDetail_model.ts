@@ -99,9 +99,9 @@ const userDetailSchema = new mongoose.Schema<
       id: {
         type: String,
       },
-      email: {
-        type: String,
-      },
+      // email: {
+      //   type: String,
+      // },
       // name: {
       //   type: String,
       // },
@@ -121,9 +121,9 @@ const userDetailSchema = new mongoose.Schema<
       id: {
         type: String,
       },
-      email: {
-        type: String,
-      },
+      // email: {
+      //   type: String,
+      // },
       // name: {
       //   type: String,
       // },
@@ -143,9 +143,9 @@ const userDetailSchema = new mongoose.Schema<
       id: {
         type: String,
       },
-      email: {
-        type: String,
-      },
+      // email: {
+      //   type: String,
+      // },
       // name: {
       //   type: String,
       // },

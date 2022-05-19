@@ -115,6 +115,7 @@ export default {
         {
           // getting only required field
           $project: {
+            email: 1,
             picture: 1,
             name: 1,
             userID: 1,
@@ -261,12 +262,12 @@ export default {
   followUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
-      const { email, userID, id } = req.body;
+      const { userID, id } = req.body;
       // these are the followed to user id and email
-      if (!email || !userID || !id) {
+      if (!userID || !id) {
         return res
-          .status(404)
-          .json({ success: false, msg: "unauthorized user" });
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
       }
       const followUserExist = await userDetail.findOne(
         {
@@ -287,9 +288,9 @@ export default {
         }
       );
       if (followUserExist) {
-        return res.status(200).json({
+        return res.status(400).json(<ResponseObject>{
           success: false,
-          message: "you had already followed this user",
+          msg: "you had already followed this user",
         });
       }
       const followedToUser = await userDetail.findOne(
@@ -306,12 +307,14 @@ export default {
       );
       if (!followedToUser) {
         return res
-          .status(400)
-          .json({ success: false, msg: "User doesn't exist" });
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
       const followRes = await rootUser.followUser(followedToUser);
       if (!followRes) {
-        return res.status(500).json({ success: false, msg: "Server error" });
+        return res
+          .status(500)
+          .json(<ResponseObject>{ success: false, msg: "Server error" });
       }
       // logic to store as a friend if both of them had followed
       // we had already check for rootUser that that does rootUser followed the other user
@@ -321,7 +324,7 @@ export default {
           id: id,
           following: {
             $elemMatch: {
-              userID: rootUser.userID,
+              id: rootUser.id,
             },
           },
         },
@@ -330,6 +333,7 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
+          id: 1,
         }
       );
       if (rootUserExistInFollowUser) {
@@ -356,7 +360,7 @@ export default {
           // storing as a friend to rootuser
           await userDetail.updateOne(
             {
-              userID: rootUser.userID,
+              id: rootUser.id,
             },
             {
               // pushing the new followers into followed to user database
@@ -377,7 +381,7 @@ export default {
           // storing as a friend to followedToUser
           await userDetail.updateOne(
             {
-              userID: followedToUser.userID,
+              id: followedToUser.id,
             },
             {
               // pushing the new followers into followed to user database
@@ -399,22 +403,23 @@ export default {
       }
       return res
         .status(200)
-        .json({ success: true, msg: "Follow successfully" });
+        .json(<ResponseObject>{ success: true, msg: "Follow successfully" });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again later" });
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
   unFollowUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
-      const { email, userID, id } = req.body;
+      const { userID, id } = req.body;
       // NOTE userID = user that rootUser is trying to search or query
-      if (!email || !userID || !id) {
+      if (!userID || !id) {
         return res
-          .status(404)
-          .json({ success: false, err: "unauthorized user" });
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
       }
       const unFollowUserExistOnRootUser = await userDetail.findOne(
         {
@@ -435,9 +440,9 @@ export default {
       );
 
       if (!unFollowUserExistOnRootUser) {
-        return res.status(404).json({
+        return res.status(400).json(<ResponseObject>{
           success: false,
-          err: "you hadn't followed this user yet",
+          msg: "you hadn't followed this user yet",
         });
       }
       const unFollowedToUserExist = await userDetail.findOne(
@@ -454,13 +459,13 @@ export default {
       );
       if (!unFollowedToUserExist) {
         return res
-          .status(404)
-          .json({ success: false, err: "User doesn't exist" });
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
       // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
       let unFollowRes = await userDetail.updateOne(
         {
-          id: id,
+          id: rootUser.id,
         },
         {
           $pull: { following: { id: id } },
@@ -470,9 +475,9 @@ export default {
         }
       );
       if (!unFollowRes) {
-        return res.status(500).json({
+        return res.status(500).json(<ResponseObject>{
           success: false,
-          err: "Server error!!, Please try again later",
+          msg: "Server error!!, Please try again later",
         });
       }
       unFollowRes = await userDetail.updateOne(
@@ -487,9 +492,9 @@ export default {
         }
       );
       if (!unFollowRes) {
-        return res.status(500).json({
+        return res.status(500).json(<ResponseObject>{
           success: false,
-          err: "Server error!!, Please Try again later",
+          msg: "Server error!!, Please Try again later",
         });
       }
       const friendExist = await userDetail.findOne(
@@ -510,9 +515,10 @@ export default {
         }
       );
       if (!friendExist) {
-        return res
-          .status(200)
-          .json({ success: true, msg: "UnFollowed User Successfully" });
+        return res.status(200).json(<ResponseObject>{
+          success: true,
+          msg: "UnFollowed User Successfully",
+        });
       }
       let unfriendRes = await userDetail.updateOne(
         {
@@ -526,7 +532,7 @@ export default {
         }
       );
       if (!unfriendRes) {
-        return res.status(500).json({
+        return res.status(500).json(<ResponseObject>{
           success: false,
           msg: "Server error!!, Please Try again later",
         });
@@ -543,18 +549,20 @@ export default {
         }
       );
       if (!unfriendRes) {
-        return res.status(500).json({
+        return res.status(500).json(<ResponseObject>{
           success: false,
           msg: "Server error!!, Please Try again later",
         });
       }
-      return res
-        .status(200)
-        .json({ success: true, msg: "UnFollowed User Successfully" });
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "UnFollowed User Successfully",
+      });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again later" });
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
   getNotificationData: async (req: Request, res: Response) => {

@@ -47,7 +47,7 @@ const MainPageSearchBar = (props) => {
                 };
                 dispatch(stopProgressBar());
                 dispatch(profilePageDataAction(userObj));
-                history.push(`/u/profile/${props.userDetail.userID}`);
+                history.push(`/u/profile/${props.userDetail.userID}/posts`);
               }
             } catch (err) {
               dispatch(stopProgressBar());

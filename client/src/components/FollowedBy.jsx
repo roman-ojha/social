@@ -29,10 +29,8 @@ const FollowedBy = () => {
         try {
           dispatch(startProgressBar());
           const followedTo = {
-            email: props.userInformation.email,
             userID: props.userInformation.userID,
-            picture: props.userInformation.picture,
-            name: props.userInformation.picture,
+            id: props.userInformation.id,
           };
           const response = await axios({
             method: "POST",
@@ -45,7 +43,7 @@ const FollowedBy = () => {
             withCredentials: true,
           });
           const data = await response.data;
-          if (response.status === 200 && data.success === true) {
+          if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
             dispatch(
               isFollowedFollowedByUser({
@@ -57,7 +55,7 @@ const FollowedBy = () => {
           }
         } catch (err) {
           if (err.response.data.success === false) {
-            toastError(err.response.data.err);
+            toastError(err.response.data.msg);
           } else {
             toastError("Some Problem Occur, Please Try again Letter!!!");
           }
@@ -73,10 +71,8 @@ const FollowedBy = () => {
         try {
           dispatch(startProgressBar());
           const unfollowedTo = {
-            email: props.userInformation.email,
             userID: props.userInformation.userID,
-            picture: props.userInformation.picture,
-            name: props.userInformation.name,
+            id: props.userInformation.id,
           };
           const response = await axios({
             method: "POST",
@@ -89,7 +85,7 @@ const FollowedBy = () => {
             withCredentials: true,
           });
           const data = await response.data;
-          if (response.status === 200 && data.success === true) {
+          if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
             dispatch(
               isFollowedFollowedByUser({
@@ -101,7 +97,7 @@ const FollowedBy = () => {
           }
         } catch (err) {
           if (err.response.data.success === false) {
-            toastError(err.response.data.err);
+            toastError(err.response.data.msg);
           } else {
             toastError("Some Problem Occur, Please Try again Letter!!!");
           }

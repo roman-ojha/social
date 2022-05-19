@@ -20,9 +20,7 @@ const SuggestedUser = (props) => {
       try {
         dispatch(startProgressBar());
         const followedTo = {
-          email: props.userInformation.email,
           userID: props.userInformation.userID,
-          name: props.userInformation.picture,
           id: props.userInformation.id,
         };
         const response = await axios({
@@ -36,7 +34,7 @@ const SuggestedUser = (props) => {
           withCredentials: true,
         });
         const data = await response.data;
-        if (response.status === 200 && data.success === true) {
+        if (response.status === 200 && data.success) {
           toastSuccess(data.msg);
           dispatch(
             isFollowedSuggestedUser({
@@ -48,7 +46,7 @@ const SuggestedUser = (props) => {
         }
       } catch (err) {
         if (err.response.data.success === false) {
-          toastError(err.response.data.err);
+          toastError(err.response.data.msg);
         } else {
           toastError("Some Problem Occur, Please Try again Letter!!!");
         }
@@ -64,9 +62,7 @@ const SuggestedUser = (props) => {
       try {
         dispatch(startProgressBar());
         const unfollowedTo = {
-          email: props.userInformation.email,
           userID: props.userInformation.userID,
-          name: props.userInformation.name,
           id: props.userInformation.id,
         };
         const response = await axios({
@@ -80,7 +76,7 @@ const SuggestedUser = (props) => {
           withCredentials: true,
         });
         const data = await response.data;
-        if (response.status === 200 && data.success === true) {
+        if (response.status === 200 && data.success) {
           toastSuccess(data.msg);
           dispatch(
             isFollowedSuggestedUser({
@@ -92,7 +88,7 @@ const SuggestedUser = (props) => {
         }
       } catch (err) {
         if (err.response.data.success === false) {
-          toastError(err.response.data.err);
+          toastError(err.response.data.msg);
         } else {
           toastError("Some Problem Occur, Please Try again Letter!!!");
         }

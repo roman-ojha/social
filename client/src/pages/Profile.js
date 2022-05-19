@@ -39,9 +39,7 @@ const Profile = () => {
     try {
       dispatch(startProgressBar());
       const followedTo = {
-        email: profilePageData.email,
         userID: profilePageData.userID,
-        name: profilePageData.name,
         id: profilePageData.id,
       };
       const response = await axios({
@@ -61,14 +59,14 @@ const Profile = () => {
       };
       if (data.success) {
       }
-      if (response.status === 200 && data.success === true) {
+      if (response.status === 200 && data.success) {
         toastSuccess(data.msg);
         dispatch(profilePageDataAction(userObj));
         dispatch(stopProgressBar());
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toastError(err.response.data.err);
+        toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
@@ -80,9 +78,7 @@ const Profile = () => {
     try {
       dispatch(startProgressBar());
       const unfollowedTo = {
-        email: profilePageData.email,
         userID: profilePageData.userID,
-        name: profilePageData.name,
         id: profilePageData.id,
       };
       const response = await axios({
@@ -100,14 +96,14 @@ const Profile = () => {
         ...profilePageData,
         isRootUserFollowed: false,
       };
-      if (response.status === 200 && data.success === true) {
+      if (response.status === 200 && data.success) {
         toastSuccess(data.msg);
         dispatch(profilePageDataAction(userObj));
         dispatch(stopProgressBar());
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toastError(err.response.data.err);
+        toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
