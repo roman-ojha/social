@@ -41,8 +41,8 @@ const Profile = () => {
       const followedTo = {
         email: profilePageData.email,
         userID: profilePageData.userID,
-        picture: profilePageData.picture,
         name: profilePageData.name,
+        id: profilePageData.id,
       };
       const response = await axios({
         method: "POST",
@@ -82,8 +82,8 @@ const Profile = () => {
       const unfollowedTo = {
         email: profilePageData.email,
         userID: profilePageData.userID,
-        picture: profilePageData.picture,
         name: profilePageData.name,
+        id: profilePageData.id,
       };
       const response = await axios({
         method: "POST",

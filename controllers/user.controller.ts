@@ -79,9 +79,9 @@ export default {
         {
           $match: {
             $and: [
-              { "friends.userID": { $not: { $eq: req.rootUser.userID } } },
-              { "followers.userID": { $not: { $eq: req.rootUser.userID } } },
-              { userID: { $not: { $eq: req.rootUser.userID } } },
+              { "friends.id": { $not: { $eq: req.rootUser.id } } },
+              { "followers.id": { $not: { $eq: req.rootUser.id } } },
+              { id: { $not: { $eq: req.rootUser.id } } },
             ],
           },
         },
@@ -107,8 +107,8 @@ export default {
         {
           $match: {
             $and: [
-              { "friends.userID": { $not: { $eq: req.rootUser.userID } } },
-              { "following.userID": req.rootUser.userID },
+              { "friends.id": { $not: { $eq: req.rootUser.id } } },
+              { "following.id": req.rootUser.id },
             ],
           },
         },
@@ -263,7 +263,7 @@ export default {
       const rootUser = req.rootUser;
       const { email, userID, id } = req.body;
       // these are the followed to user id and email
-      if (!email && !userID) {
+      if (!email || !userID || !id) {
         return res
           .status(404)
           .json({ success: false, msg: "unauthorized user" });
@@ -272,7 +272,7 @@ export default {
         {
           // here we are finding only the user which is followed by rootuser to user who is being followed
           // if it doesn't exist only after that we will going to go forther to save the data if it exist it means he had already follwed the user
-          userID: rootUser.userID,
+          id: rootUser.id,
           following: {
             $elemMatch: {
               id: id,
@@ -409,19 +409,19 @@ export default {
   unFollowUser: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser = req.rootUser;
-      const { email, userID } = req.body;
+      const { email, userID, id } = req.body;
       // NOTE userID = user that rootUser is trying to search or query
-      if (!email && !userID) {
+      if (!email || !userID || !id) {
         return res
           .status(404)
           .json({ success: false, err: "unauthorized user" });
       }
       const unFollowUserExistOnRootUser = await userDetail.findOne(
         {
-          userID: rootUser.userID,
+          id: rootUser.id,
           following: {
             $elemMatch: {
-              userID: userID,
+              id: id,
             },
           },
         },
@@ -430,6 +430,7 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
+          id: 1,
         }
       );
 
@@ -441,13 +442,14 @@ export default {
       }
       const unFollowedToUserExist = await userDetail.findOne(
         {
-          userID: userID,
+          id: id,
         },
         {
           email: 1,
           name: 1,
           userID: 1,
           picture: 1,
+          id: 1,
         }
       );
       if (!unFollowedToUserExist) {
@@ -458,10 +460,10 @@ export default {
       // const followRes = await rootUser.unFollowUser(unFollowedToUserExist);
       let unFollowRes = await userDetail.updateOne(
         {
-          userID: rootUser.userID,
+          id: id,
         },
         {
-          $pull: { following: { userID: userID } },
+          $pull: { following: { id: id } },
           $inc: {
             followingNo: -1,
           },
@@ -475,10 +477,10 @@ export default {
       }
       unFollowRes = await userDetail.updateOne(
         {
-          userID: userID,
+          id: id,
         },
         {
-          $pull: { followers: { userID: rootUser.userID } },
+          $pull: { followers: { id: rootUser.id } },
           $inc: {
             followersNo: -1,
           },
@@ -492,10 +494,10 @@ export default {
       }
       const friendExist = await userDetail.findOne(
         {
-          userID: rootUser.userID,
+          id: rootUser.id,
           friends: {
             $elemMatch: {
-              userID: userID,
+              id: id,
             },
           },
         },
@@ -504,6 +506,7 @@ export default {
           picture: 1,
           userID: 1,
           email: 1,
+          id: 1,
         }
       );
       if (!friendExist) {
@@ -513,10 +516,10 @@ export default {
       }
       let unfriendRes = await userDetail.updateOne(
         {
-          userID: rootUser.userID,
+          id: rootUser.id,
         },
         {
-          $pull: { friends: { userID: userID } },
+          $pull: { friends: { id: id } },
           $inc: {
             friendsNo: -1,
           },
@@ -530,10 +533,10 @@ export default {
       }
       unfriendRes = await userDetail.updateOne(
         {
-          userID: userID,
+          id: id,
         },
         {
-          $pull: { friends: { userID: rootUser.userID } },
+          $pull: { friends: { id: rootUser.id } },
           $inc: {
             friendsNo: -1,
           },

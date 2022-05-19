@@ -22,7 +22,6 @@ const SuggestedUser = (props) => {
         const followedTo = {
           email: props.userInformation.email,
           userID: props.userInformation.userID,
-          picture: props.userInformation.picture,
           name: props.userInformation.picture,
           id: props.userInformation.id,
         };
@@ -67,7 +66,6 @@ const SuggestedUser = (props) => {
         const unfollowedTo = {
           email: props.userInformation.email,
           userID: props.userInformation.userID,
-          picture: props.userInformation.picture,
           name: props.userInformation.name,
           id: props.userInformation.id,
         };

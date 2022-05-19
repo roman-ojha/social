@@ -91,7 +91,7 @@ const Friends = () => {
     <>
       <div className="MainPage_SideBar_Friends_Container">
         <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
-        <ShowFriends />
+        {/* <ShowFriends /> */}
       </div>
       <hr className="MainPage_SideBar_Horizontal_Line" />
     </>
