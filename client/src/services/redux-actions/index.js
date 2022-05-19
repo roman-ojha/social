@@ -98,6 +98,13 @@ export const profilePageDataAction = (value) => {
   };
 };
 
+export const setProfilePageFriends = (data) => {
+  return {
+    type: "setProfilePageFriends",
+    payload: data,
+  };
+};
+
 export const followedUserPostDataAction = (value) => {
   return {
     type: "followedUserPostData",

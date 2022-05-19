@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/profileFriends.css";
 import { NavLink, useLocation } from "react-router-dom";
-import constant from "../constant/constant";
-import { useMediaQuery } from "react-responsive";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
+import { setProfilePageFriends } from "../services/redux-actions";
 
 const ProfileFriends = () => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const [userDetails, setUserDetails] = useState([]);
@@ -34,13 +34,13 @@ const ProfileFriends = () => {
       const res = await UserApi.getRootUserFriends(profilePageData.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
-        // dispatch(
-        //   setRootUserFriends({
-        //     fetchedFriends: true,
-        //     friends: data.friends,
-        //   })
-        // );
-        console.log(data);
+        dispatch(
+          setProfilePageFriends({
+            fetchedFriendsOrFollowersOrFollowing: true,
+            friends: data.friends,
+          })
+        );
+        setUserDetails(data.friends);
       } else {
         toastError("Some Error Occur While Fetching Friends Data");
       }
@@ -54,51 +54,58 @@ const ProfileFriends = () => {
   };
 
   useEffect(() => {
-    if (location.pathname.includes("/friends")) {
-      setUserDetails(profilePageData.friends);
-    } else if (location.pathname.includes("/followers")) {
-      setUserDetails(profilePageData.followers);
-    } else if (location.pathname.includes("/followings")) {
-      setUserDetails(profilePageData.following);
-    } else {
-      setUserDetails(profilePageData.friends);
+    if (
+      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
+      location.pathname.includes("/friends")
+    ) {
+      getUserFriends();
+    } else if (
+      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
+      location.pathname.includes("/followings")
+    ) {
+      // getUserFriends();
+    } else if (
+      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
+      location.pathname.includes("/followers")
+    ) {
+      // getUserFriends();
     }
-    getUserFriends();
-  }, []);
+  });
 
   return (
     <>
-      {
-        // <div className="ProfilePage_Friends_Container">
-        //   {userDetails.map((userDetail, index) => {
-        //     return (
-        //       <NavLink
-        //         to={`/u/profile/${userDetail.userID}`}
-        //         className="ProfilePage_Friend_Outline"
-        //         key={index}
-        //         style={{ textDecoration: "none", color: "black" }}
-        //       >
-        //         <img
-        //           src={
-        //             userDetail.picture === undefined
-        //               ? User_Profile_Icon
-        //               : userDetail.picture
-        //           }
-        //           alt=""
-        //           className="ProfilePage_Friend_Image"
-        //         />
-        //         <p className="ProfilePage_Friend_Name">{userDetail.userID}</p>
-        //         <div className="ProfilePage_Friend_Active_Status">
-        //           <p>Active</p>
-        //         </div>
-        //       </NavLink>
-        //     );
-        //   })}
-        // </div>
+      {profilePageData.fetchedFriendsOrFollowersOrFollowing ? (
+        <div className="ProfilePage_Friends_Container">
+          {userDetails.map((userDetail, index) => {
+            return (
+              <NavLink
+                to={`/u/profile/${userDetail.userID}`}
+                className="ProfilePage_Friend_Outline"
+                key={index}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <img
+                  src={
+                    userDetail.picture === undefined
+                      ? User_Profile_Icon
+                      : userDetail.picture
+                  }
+                  alt=""
+                  className="ProfilePage_Friend_Image"
+                />
+                <p className="ProfilePage_Friend_Name">{userDetail.userID}</p>
+                <div className="ProfilePage_Friend_Active_Status">
+                  <p>Active</p>
+                </div>
+              </NavLink>
+            );
+          })}
+        </div>
+      ) : (
         <div style={loadingContainerSpinnerStyle}>
           <div style={loadingSpinnerStyle}></div>
         </div>
-      }
+      )}
     </>
   );
 };
