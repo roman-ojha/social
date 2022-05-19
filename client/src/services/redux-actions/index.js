@@ -42,10 +42,17 @@ export const homePageUserPostFieldDataAction = (data) => {
   };
 };
 
-export const userProfileDetailAction = (value) => {
+export const userProfileDetailAction = (data) => {
   return {
     type: "userProfileDetail",
-    payload: value,
+    payload: data,
+  };
+};
+
+export const setRootUserFriends = (data) => {
+  return {
+    type: "setRootUserFriends",
+    payload: data,
   };
 };
 

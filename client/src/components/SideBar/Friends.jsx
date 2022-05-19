@@ -7,6 +7,7 @@ import {
   profilePageDataAction,
   startProgressBar,
   stopProgressBar,
+  setRootUserFriends,
 } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
 import { useHistory } from "react-router-dom";
@@ -20,6 +21,7 @@ const Friends = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const rootUserFriends = useSelector((state) => state.rootUserFriends);
   const MainPageFriend = (props) => {
     return (
       <>
@@ -79,7 +81,7 @@ const Friends = () => {
     return (
       <>
         <div className="MainPage_SideBar_Friends_Inner_Container">
-          {userProfileDetailStore.friends.map((friendDetail) => {
+          {rootUserFriends.map((friendDetail) => {
             return (
               <MainPageFriend
                 friendDetail={friendDetail}
@@ -148,6 +150,7 @@ const Friends = () => {
       const res = await UserApi.getRootUserFriends();
       const data = await res.data;
       if (res.status === 200 && data.success) {
+        dispatch(setRootUserFriends(data.friends));
       } else {
         toastError("Some Error Occur While Fetching Friends Data");
       }
@@ -168,10 +171,13 @@ const Friends = () => {
     <>
       <div className="MainPage_SideBar_Friends_Container">
         <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
-        {/* <ShowFriends /> */}
-        <div style={loadingContainerSpinnerStyle}>
-          <div style={loadingSpinnerStyle}></div>
-        </div>
+        {rootUserFriends.length !== 0 ? (
+          <ShowFriends />
+        ) : (
+          <div style={loadingContainerSpinnerStyle}>
+            <div style={loadingSpinnerStyle}></div>
+          </div>
+        )}
       </div>
       <hr className="MainPage_SideBar_Horizontal_Line" />
     </>

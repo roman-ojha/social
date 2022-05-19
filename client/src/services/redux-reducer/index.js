@@ -22,6 +22,7 @@ import notificationBox from "./components/notificationBox";
 import moreProfileBoxReducer from "./components/moreProfile";
 import showLoadingSpinnerReducer from "./components/showLoadingSpinner";
 import videoPageDataReducer from "./page/video";
+import rootUserFriends from "./global/rootUserFriends";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -47,6 +48,7 @@ const rootReducers = combineReducers({
   moreProfileBoxReducer,
   showLoadingSpinnerReducer,
   videoPageDataReducer,
+  rootUserFriends,
 });
 
 export default rootReducers;
