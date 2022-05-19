@@ -32,6 +32,9 @@ const authenticate: RequestHandler = async (
         "messages.message": { $slice: -2 },
         // only getting 2 item from the array of message from single user
         tokens: 0,
+        friends: 0,
+        followers: 0,
+        following: 0,
       }
     );
     if (!rootUser) {
