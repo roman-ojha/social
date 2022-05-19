@@ -1,5 +1,5 @@
 import React from "react";
-import MainPageSideBar from "../MainPageSideBar";
+import MainPageSideBar from "../SideBar/MainPageSideBar";
 import MainPageStory from "../MainPageStoryComp/MainPageStory";
 import MainPageRightSideComp from "../MainPageRightSideComp";
 import CommentBox from "../CommentBox";

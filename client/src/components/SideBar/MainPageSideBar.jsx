@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import mainPage_Logo from "../assets/svg/mainPage_Logo.svg";
+import mainPage_Logo from "../../assets/svg/mainPage_Logo.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import MainPageSearchBar from "./MainPageSearchBar";
-import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
+import MainPageSearchBar from "../MainPageSearchBar";
+import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import "../styles/components/mainPageSideBar.css";
+import "../../styles/components/mainPageSideBar.css";
 import {
   profilePageDataAction,
   startProgressBar,
   stopProgressBar,
   openSideBarDrawer,
-} from "../services/redux-actions";
-import Api from "../services/api/components/MainPageSideBar";
-import { toastSuccess, toastError } from "../services/toast";
-import GlobalApi from "../services/api/global";
+} from "../../services/redux-actions";
+import Api from "../../services/api/components/MainPageSideBar";
+import { toastSuccess, toastError } from "../../services/toast";
+import GlobalApi from "../../services/api/global";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;

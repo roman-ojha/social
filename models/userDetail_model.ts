@@ -96,18 +96,21 @@ const userDetailSchema = new mongoose.Schema<
   },
   followers: [
     {
+      id: {
+        type: String,
+      },
       email: {
         type: String,
       },
-      name: {
-        type: String,
-      },
-      userID: {
-        type: String,
-      },
-      picture: {
-        type: String,
-      },
+      // name: {
+      //   type: String,
+      // },
+      // userID: {
+      //   type: String,
+      // },
+      // picture: {
+      //   type: String,
+      // },
     },
   ],
   followingNo: {
@@ -115,18 +118,21 @@ const userDetailSchema = new mongoose.Schema<
   },
   following: [
     {
+      id: {
+        type: String,
+      },
       email: {
         type: String,
       },
-      name: {
-        type: String,
-      },
-      userID: {
-        type: String,
-      },
-      picture: {
-        type: String,
-      },
+      // name: {
+      //   type: String,
+      // },
+      // userID: {
+      //   type: String,
+      // },
+      // picture: {
+      //   type: String,
+      // },
     },
   ],
   friendsNo: {
@@ -134,18 +140,21 @@ const userDetailSchema = new mongoose.Schema<
   },
   friends: [
     {
+      id: {
+        type: String,
+      },
       email: {
         type: String,
       },
-      name: {
-        type: String,
-      },
-      userID: {
-        type: String,
-      },
-      picture: {
-        type: String,
-      },
+      // name: {
+      //   type: String,
+      // },
+      // userID: {
+      //   type: String,
+      // },
+      // picture: {
+      //   type: String,
+      // },
     },
   ],
   postNo: {
