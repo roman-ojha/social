@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../../styles/components/mainPageSideBar.css";
 import {
-  profilePageDataAction,
   startProgressBar,
   stopProgressBar,
   openSideBarDrawer,
 } from "../../services/redux-actions";
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastSuccess, toastError } from "../../services/toast";
-import GlobalApi from "../../services/api/global";
 import LogoAndSearchBar from "./LogoAndSearchBar";
 import Menu from "./Menu";
+import Friends from "./Friends";
 
 const MainPageSideBar = () => {
   const history = useHistory();
@@ -48,78 +47,6 @@ const MainPageSideBar = () => {
       history.push("/signin", { replace: true });
       dispatch(stopProgressBar());
     }
-  };
-
-  const MainPageFriend = (props) => {
-    return (
-      <>
-        <div
-          className="MainPage_SideBar_Friend_Outline"
-          onClick={async () => {
-            try {
-              dispatch(startProgressBar());
-              const res = await GlobalApi.getFriendData(
-                props.friendDetail.userID
-              );
-              const userData = await res.data;
-              if (res.status === 200 && userData.success) {
-                // success
-                const userObj = {
-                  ...userData.searchedUser,
-                  isRootUserFollowed: userData.isRootUserFollowed,
-                };
-                dispatch(profilePageDataAction(userObj));
-                history.push(`/u/profile/${props.friendDetail.userID}/posts`);
-              } else {
-                // error
-                toastError(userData.msg);
-              }
-              dispatch(stopProgressBar());
-            } catch (err) {
-              if (err.response.data.success === false) {
-                toastError(err.response.data.msg);
-              } else {
-                toastError("Some Problem Occur, Please Try again later!!!");
-              }
-              dispatch(stopProgressBar());
-            }
-          }}
-        >
-          <img
-            src={
-              props.friendDetail.picture === undefined
-                ? User_Profile_Icon
-                : props.friendDetail.picture
-            }
-            alt={props.friendDetail.userID}
-            className="MainPage_SideBar_Friend_Image"
-          />
-          <p className="MainPage_SideBar_Friend_Name">
-            {props.friendDetail.userID}
-          </p>
-          <div className="MainPage_SideBar_Friend_Active_Status">
-            <p>Active</p>
-          </div>
-        </div>
-      </>
-    );
-  };
-  const ShowFriends = () => {
-    // Displaying current user friends
-    return (
-      <>
-        <div className="MainPage_SideBar_Friends_Inner_Container">
-          {userProfileDetailStore.friends.map((friendDetail) => {
-            return (
-              <MainPageFriend
-                friendDetail={friendDetail}
-                key={friendDetail._id}
-              />
-            );
-          })}
-        </div>
-      </>
-    );
   };
 
   useEffect(() => {
@@ -178,11 +105,7 @@ const MainPageSideBar = () => {
             setOnSearchBar={setOnSearchBar}
           />
           <Menu />
-          <div className="MainPage_SideBar_Friends_Container">
-            <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
-            <ShowFriends />
-          </div>
-          <hr className="MainPage_SideBar_Horizontal_Line" />
+          <Friends />
           <div className="MainPage_SideBar_User_Account_LogOut_Container">
             <h2 className="MainPage_SideBar_Account_Title">Account</h2>
             <div className="MainPage_SideBar_User_Account_Logout_Outline">
