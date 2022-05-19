@@ -612,12 +612,21 @@ export default {
           email: 1,
         }
       );
-      console.log(resFriends);
-      return res.send(<ResponseObject>{});
+      if (!resFriends) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Error Occur while fetching friends data",
+        });
+      }
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        friends: resFriends,
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again later",
+        msg: "Server Error!!, while fetching friends data",
       });
     }
   },
