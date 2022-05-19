@@ -264,21 +264,32 @@ userDetailSchema.methods.uploadPost = async function (
 userDetailSchema.methods.followUser = async function (followedToUser: any) {
   try {
     // saving following user detail into current user database
-    this.following.unshift(followedToUser);
-    this.followingNo++;
+    const addOnRootUser = await UserDetail.updateOne(
+      {
+        id: this.id,
+      },
+      {
+        // pushing the new followers into followed to user database
+        $push: {
+          following: {
+            id: followedToUser.id,
+          },
+        },
+        $inc: {
+          followersNo: 1,
+        },
+      }
+    );
+
     // saving following user detail into followed to user database
     const followRes = await UserDetail.updateOne(
       {
-        userID: followedToUser.userID,
+        id: followedToUser.id,
       },
       {
         // pushing the new followers into followed to user database
         $push: {
           followers: {
-            // name: this.name,
-            // email: this.email,
-            // userID: this.userID,
-            // picture: this.picture,
             id: this.id,
           },
           notification: {
@@ -292,13 +303,13 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
         },
       }
     );
-    if (followRes) {
-      await this.save();
+    if (followRes && addOnRootUser) {
       return true;
     } else {
       return false;
     }
   } catch (err) {
+    console.log(err);
     return false;
   }
 };

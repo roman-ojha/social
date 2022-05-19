@@ -146,10 +146,7 @@ const Friends = () => {
 
   const getRootUserFriends = async () => {
     try {
-      const res = await UserApi.getRootUserFriends({
-        userID: userProfileDetailStore.userID,
-        id: userProfileDetailStore,
-      });
+      const res = await UserApi.getRootUserFriends();
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);

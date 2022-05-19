@@ -310,7 +310,7 @@ export default {
           .status(401)
           .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
-      const followRes = await rootUser.followUser(followedToUser);
+      const followRes = await rootUser.followUser({ id: followedToUser.id });
       if (!followRes) {
         return res
           .status(500)
@@ -592,6 +592,33 @@ export default {
       return res
         .status(500)
         .json({ error: "Server Error!!, Please Try again later" });
+    }
+  },
+  getRootUserFriends: async (req: Request, res: Response): Promise<object> => {
+    try {
+      const rootUser = req.rootUser;
+      const resFriends: any[] = await userDetail.find(
+        {
+          friends: {
+            $elemMatch: {
+              id: rootUser.id,
+            },
+          },
+        },
+        {
+          userID: 1,
+          name: 1,
+          picture: 1,
+          email: 1,
+        }
+      );
+      console.log(resFriends);
+      return res.send(<ResponseObject>{});
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
     }
   },
 };

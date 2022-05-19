@@ -26,6 +26,6 @@ userRoute.get(
   userController.getNotificationData
 );
 
-// userRoute.get("/u/getFriends",authenticate,userController)
+userRoute.get("/u/getFriends", authenticate, userController.getRootUserFriends);
 
 export default userRoute;
