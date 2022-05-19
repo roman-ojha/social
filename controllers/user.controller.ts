@@ -186,7 +186,6 @@ export default {
   },
   getUserProfile: async (req: Request, res: Response): Promise<object> => {
     try {
-      console.log(req.params);
       const rootUser = req.rootUser;
       const userID = req.params.userid;
       const searchedUser = await userDetail.findOne(
@@ -202,6 +201,9 @@ export default {
           tokens: 0,
           email: 0,
           notification: 0,
+          followers: 0,
+          following: 0,
+          friends: 0,
         }
       );
       if (!searchedUser) {
@@ -603,14 +605,15 @@ export default {
         .json({ error: "Server Error!!, Please Try again later" });
     }
   },
-  getRootUserFriends: async (req: Request, res: Response): Promise<object> => {
+  getFriends: async (req: Request, res: Response): Promise<object> => {
     try {
-      const rootUser = req.rootUser;
+      const id = req.params.userID;
+      console.log(id);
       const resFriends: any[] = await userDetail.find(
         {
           friends: {
             $elemMatch: {
-              id: rootUser.id,
+              id: id,
             },
           },
         },

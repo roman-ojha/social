@@ -18,6 +18,9 @@ import { useEffect } from "react";
 const Friends = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const rootUserFriends = useSelector((state) => state.rootUserFriends);
   const MainPageFriend = (props) => {
     return (
@@ -144,7 +147,7 @@ const Friends = () => {
 
   const getRootUserFriends = async () => {
     try {
-      const res = await UserApi.getRootUserFriends();
+      const res = await UserApi.getRootUserFriends(userProfileDetailStore.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
         dispatch(
