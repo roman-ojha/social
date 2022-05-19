@@ -5,7 +5,11 @@ import "../styles/components/profileFriends.css";
 import { NavLink, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
-import { setProfilePageFriends } from "../services/redux-actions";
+import {
+  setProfilePageFriends,
+  setProfilePageFollowers,
+  setProfilePageFollowings,
+} from "../services/redux-actions";
 
 const ProfileFriends = () => {
   const dispatch = useDispatch();
@@ -59,6 +63,7 @@ const ProfileFriends = () => {
       const res = await UserApi.getFollowings(profilePageData.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
+        dispatch(setProfilePageFollowings(data.friends));
         setUserDetails({
           fetchedData: true,
           user: data.friends,
@@ -80,6 +85,7 @@ const ProfileFriends = () => {
       const res = await UserApi.getFollowers(profilePageData.id);
       const data = await res.data;
       if (res.status === 200 && data.success) {
+        dispatch(setProfilePageFollowers(data.friends));
         setUserDetails({
           fetchedData: true,
           user: data.friends,

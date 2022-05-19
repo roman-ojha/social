@@ -105,6 +105,20 @@ export const setProfilePageFriends = (data) => {
   };
 };
 
+export const setProfilePageFollowers = (data) => {
+  return {
+    type: "setProfilePageFollowers",
+    payload: data,
+  };
+};
+
+export const setProfilePageFollowings = (data) => {
+  return {
+    type: "setProfilePageFollowings",
+    payload: data,
+  };
+};
+
 export const setFetchedFriendsOrFollowersOrFollowing = (bool) => {
   return {
     type: "setFetchedFriendsOrFollowersOrFollowing",

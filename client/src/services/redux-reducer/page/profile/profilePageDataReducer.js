@@ -14,6 +14,16 @@ const profilePageDataReducer = (state = initialState, action) => {
       ...state,
       friends: action.payload,
     };
+  } else if (action.type === "setProfilePageFollowers") {
+    return {
+      ...state,
+      followers: action.payload,
+    };
+  } else if (action.type === "setProfilePageFollowings") {
+    return {
+      ...state,
+      followings: action.payload,
+    };
   } else {
     return state;
   }
