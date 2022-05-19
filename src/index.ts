@@ -40,7 +40,7 @@ const PORT = process.env.PORT;
 // ================================
 
 // app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
-app.use(cors());
+app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cookieParser());
 // app.unsubscribe(express.json());
 
