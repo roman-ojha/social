@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import mainPage_Logo from "../../assets/svg/mainPage_Logo.svg";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import MainPageSearchBar from "../MainPageSearchBar";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
@@ -16,6 +13,7 @@ import {
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastSuccess, toastError } from "../../services/toast";
 import GlobalApi from "../../services/api/global";
+import LogoAndSearchBar from "./LogoAndSearchBar";
 
 const MainPageSideBar = () => {
   let selectedLinkIndex;
@@ -28,6 +26,7 @@ const MainPageSideBar = () => {
   );
   const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
   const [selectedIndex, setSelectedIndex] = useState();
+  const [onSearchBar, setOnSearchBar] = useState(false);
   const userLogOut = async () => {
     try {
       dispatch(startProgressBar());
@@ -214,100 +213,14 @@ const MainPageSideBar = () => {
         .classList.add("Close_SideBar_Drawer");
     }
   }, [sideBarDrawerState]);
-  const [onSearchBar, setOnSearchBar] = useState(false);
-  const [searchBarData, setSearchBarData] = useState("");
-  const [userSearchResult, setUserSearchResult] = useState([]);
-  const getUserSearchData = async (e) => {
-    setSearchBarData(e.target.value);
-    try {
-      const res = await Api.getSearchedUserData(e.target.value);
-      const resUser = await res.data;
-      setUserSearchResult(resUser);
-    } catch (err) {
-      if (err.response.data.success === false) {
-        toastError(err.response.data.msg);
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
   return (
     <>
       <div className="SideBar_Drawer_Container Close_SideBar_Drawer">
         <div className="MainPage_SideBar_Container">
-          <div className="MainPage_SideBar_Logo_Search_Container">
-            <NavLink to="/u/home">
-              <img
-                className="MainPage_SideBar_Page_Logo"
-                id="MainPage_Logo"
-                src={mainPage_Logo}
-                alt="logo"
-              />
-            </NavLink>
-            <div className="MainPage_SideBar_Search_Outline">
-              <Icon
-                className="MainPage_SideBar_Search_Icon"
-                icon="bi:search"
-                onClick={() => {
-                  dispatch(openSideBarDrawer(true));
-                }}
-              />
-              <input
-                className="MainPage_SideBar_Search_Input_Field"
-                type="text"
-                placeholder="Search"
-                onClick={(e) => {
-                  document.getElementById("MainPage_Logo").style =
-                    "visibility:hidden;position:absolute";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Outline"
-                  ).style.width = "85%";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Back_Icon"
-                  ).style = "visibility: visible;position: static;";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Icon"
-                  ).style = "visibility:hidden;position:absolute;";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Input_Field"
-                  ).style = "width:80%";
-                  setOnSearchBar(true);
-                }}
-                value={searchBarData}
-                onChange={getUserSearchData}
-              />
-
-              <ArrowForwardIcon
-                className="MainPage_SideBar_Search_Back_Icon"
-                style={{ width: "1.5rem", height: "1.5rem" }}
-                onClick={() => {
-                  document.getElementById("MainPage_Logo").style =
-                    "visibility:visible;position:static";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Outline"
-                  ).style.width = "65%";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Back_Icon"
-                  ).style = "visibility: hidden;";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Icon"
-                  ).style = "visibility:visible;position:static;";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Input_Field"
-                  ).style = "width:65%";
-                  document.querySelector(
-                    ".MainPage_SideBar_Search_Input_Field"
-                  ).value = "";
-                  setOnSearchBar(false);
-                }}
-              />
-            </div>
-          </div>
-          {onSearchBar ? (
-            <MainPageSearchBar userSearchResult={userSearchResult} />
-          ) : (
-            ""
-          )}
+          <LogoAndSearchBar
+            onSearchBar={onSearchBar}
+            setOnSearchBar={setOnSearchBar}
+          />
           <div className="MainPage_SideBar_Menu_Container">
             <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
             <div className="MainPage_SideBar_Menu_NavLink_Container">

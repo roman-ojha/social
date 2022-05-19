@@ -1,14 +1,14 @@
 import React from "react";
-import User_profile_icon from "../assets/svg/User_profile_Icon_color_white.svg";
+import User_profile_icon from "../../assets/svg/User_profile_Icon_color_white.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   startProgressBar,
   stopProgressBar,
   profilePageDataAction,
-} from "../services/redux-actions";
-import { instance as axios } from "../services/axios";
-import "../styles/components/mainPageSearchBar.css";
+} from "../../services/redux-actions";
+import { instance as axios } from "../../services/axios";
+import "../../styles/components/mainPageSearchBar.css";
 
 const MainPageSearchBar = (props) => {
   const history = useHistory();

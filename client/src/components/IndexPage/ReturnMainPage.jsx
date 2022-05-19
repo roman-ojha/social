@@ -1,5 +1,5 @@
 import React from "react";
-import MainPageSideBar from "../SideBar/MainPageSideBar";
+import SideBar from "../SideBar/SideBar";
 import MainPageStory from "../MainPageStoryComp/MainPageStory";
 import MainPageRightSideComp from "../MainPageRightSideComp";
 import CommentBox from "../CommentBox";
@@ -11,7 +11,7 @@ const ReturnMainPage = () => {
     <>
       <ProgressBar />
       <CommentBox />
-      <MainPageSideBar />
+      <SideBar />
       <MainPageStory />
       <RoutingUserPage />
       <MainPageRightSideComp />
