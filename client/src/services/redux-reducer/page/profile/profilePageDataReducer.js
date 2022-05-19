@@ -2,6 +2,9 @@ const initialState = {
   userID: "",
   post: [],
   fetchedFriendsOrFollowersOrFollowing: false,
+  friends: [],
+  followings: [],
+  followers: [],
 };
 
 const profilePageDataReducer = (state = initialState, action) => {

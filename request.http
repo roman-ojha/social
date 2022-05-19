@@ -11,3 +11,9 @@ GET http://{{host}}/scrap/youtube/search?q=roman
 
 ### Get Notification Data of the user
 GET http://{{host}}/u/notification
+
+### Get Followers of User
+GET http://{{host}}/u/getFollowers/a82c8c5ec803d5556b56bb886b252166
+
+### Get Following of User
+GET http://{{host}}/u/getFollowings/a82c8c5ec803d5556b56bb886b252166

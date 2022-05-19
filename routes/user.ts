@@ -26,6 +26,9 @@ userRoute.get(
   userController.getNotificationData
 );
 
-userRoute.get("/u/getFriends/:userID", userController.getFriends);
+userRoute.get("/u/getFriends/:id", userController.getFriends);
 
+userRoute.get("/u/getFollowers/:id", userController.getFollowers);
+
+userRoute.get("/u/getFollowings/:id", userController.getFollowings);
 export default userRoute;

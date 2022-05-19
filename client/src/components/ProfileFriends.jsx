@@ -54,23 +54,8 @@ const ProfileFriends = () => {
   };
 
   useEffect(() => {
-    if (
-      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
-      location.pathname.includes("/friends")
-    ) {
-      getUserFriends();
-    } else if (
-      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
-      location.pathname.includes("/followings")
-    ) {
-      // getUserFriends();
-    } else if (
-      !profilePageData.fetchedFriendsOrFollowersOrFollowing &&
-      location.pathname.includes("/followers")
-    ) {
-      // getUserFriends();
-    }
-  });
+    getUserFriends();
+  }, []);
 
   return (
     <>
@@ -79,7 +64,7 @@ const ProfileFriends = () => {
           {userDetails.map((userDetail, index) => {
             return (
               <NavLink
-                to={`/u/profile/${userDetail.userID}`}
+                to={`/u/profile/${userDetail.userID}/posts`}
                 className="ProfilePage_Friend_Outline"
                 key={index}
                 style={{ textDecoration: "none", color: "black" }}

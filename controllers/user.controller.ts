@@ -607,8 +607,7 @@ export default {
   },
   getFriends: async (req: Request, res: Response): Promise<object> => {
     try {
-      const id = req.params.userID;
-      console.log(id);
+      const id = req.params.id;
       const resFriends: any[] = await userDetail.find(
         {
           friends: {
@@ -622,6 +621,81 @@ export default {
           name: 1,
           picture: 1,
           email: 1,
+          id: 1,
+        }
+      );
+      if (!resFriends) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Error Occur while fetching friends data",
+        });
+      }
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        friends: resFriends,
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, while fetching friends data",
+      });
+    }
+  },
+  getFollowers: async (req: Request, res: Response): Promise<object> => {
+    try {
+      const id = req.params.id;
+      const resFriends: any[] = await userDetail.find(
+        {
+          following: {
+            $elemMatch: {
+              id: id,
+            },
+          },
+        },
+        {
+          userID: 1,
+          name: 1,
+          picture: 1,
+          email: 1,
+          id: 1,
+        }
+      );
+      if (!resFriends) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Error Occur while fetching friends data",
+        });
+      }
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        friends: resFriends,
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, while fetching friends data",
+      });
+    }
+  },
+  getFollowings: async (req: Request, res: Response): Promise<object> => {
+    try {
+      const id = req.params.id;
+      const resFriends: any[] = await userDetail.find(
+        {
+          followers: {
+            $elemMatch: {
+              id: id,
+            },
+          },
+        },
+        {
+          userID: 1,
+          name: 1,
+          picture: 1,
+          email: 1,
+          id: 1,
         }
       );
       if (!resFriends) {
