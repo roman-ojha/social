@@ -201,14 +201,8 @@ const userDetailSchema = new mongoose.Schema<
       topic: {
         type: String,
       },
-      picture: {
-        type: String,
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-      userID: {
+      user: {
+        // user is the id of user
         type: String,
       },
     },
@@ -276,7 +270,7 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
           },
         },
         $inc: {
-          followersNo: 1,
+          followingNo: 1,
         },
       }
     );
@@ -294,8 +288,7 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
           },
           notification: {
             topic: "follow",
-            picture: this.picture,
-            userID: this.userID,
+            user: this.id,
           },
         },
         $inc: {
@@ -309,7 +302,7 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
       return false;
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return false;
   }
 };

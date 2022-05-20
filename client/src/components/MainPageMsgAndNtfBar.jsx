@@ -38,7 +38,7 @@ const MainPageMsgAndNtfBar = () => {
       const data = await res.data;
       if (res.status === 200 && data.success) {
         // success
-        dispatch(setNotificationData(data.data.notification));
+        dispatch(setNotificationData(data.data));
       } else {
         // error
         toastError(data.msg);

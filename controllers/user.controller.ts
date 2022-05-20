@@ -584,11 +584,48 @@ export default {
           userID: userID,
         },
         {
-          notification: 1,
+          notification: { $slice: -10 },
+          password: 0,
+          cpassword: 0,
+          email: 0,
+          id: 0,
+          name: 0,
+          birthday: 0,
+          stories: 0,
+          followersNo: 0,
+          followingNo: 0,
+          followers: 0,
+          followings: 0,
+          following: 0,
+          friendsNo: 0,
+          friends: 0,
+          postNo: 0,
+          posts: 0,
+          tokens: 0,
+          gender: 0,
+          date: 0,
+          messages: 0,
+          picture: 0,
+          userID: 0,
           _id: 0,
         }
       );
       if (!getNotificationRes) {
+        return res
+          .status(404)
+          .json(<ResponseObject>{ success: false, msg: "User not Found" });
+      }
+      const users = getNotificationRes.notification.map((el) => el.user);
+      const resUser = await userDetail.find(
+        { id: { $in: users } },
+        {
+          _id: 0,
+          userID: 1,
+          picture: 1,
+        }
+      );
+      // At least for right now i will not again add topic field in notification
+      if (!resUser) {
         res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Some problem occur please try again later...",
@@ -597,7 +634,7 @@ export default {
       res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successful",
-        data: getNotificationRes,
+        data: resUser,
       });
     } catch (err) {
       return res

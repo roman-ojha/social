@@ -27,19 +27,13 @@ export default interface UserDocument extends Document {
   followersNo: number;
   followers: [
     {
-      email: string;
-      name: string;
-      userID: string;
-      picture: string;
+      id: string;
     }
   ];
   followingNo: number;
   following: [
     {
-      email: string;
-      name: string;
-      userID: string;
-      picture: string;
+      id: string;
     }
   ];
   friendsNo: {
@@ -47,10 +41,7 @@ export default interface UserDocument extends Document {
   };
   friends: [
     {
-      email: string;
-      name: string;
-      userID: string;
-      picture: string;
+      id: string;
     }
   ];
   postNo: {
@@ -101,8 +92,7 @@ export default interface UserDocument extends Document {
   notification: [
     {
       topic: string;
-      picture: string;
-      userID: string;
+      user: string;
     }
   ];
 }
