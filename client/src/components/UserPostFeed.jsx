@@ -83,20 +83,21 @@ const UserPostFeed = (props) => {
       const res = await Api.like({
         postID: props.userFeedData.id,
         to: props.userMainInformation.userID,
+        likeNo: postInformation.likeNo,
       });
       const data = await res.data;
-      if (data.success === true && data.removed === false) {
+      if (data.success && res.status === 200 && !data.removed) {
         // Liked the post
         setPostInformation({
           ...postInformation,
-          likeNo: postInformation.likeNo + 1,
+          likeNo: data.likeNo,
           isLikedPost: true,
         });
-      } else if (data.success === true && data.removed === true) {
+      } else if (data.success && res.status === 200 && data.removed) {
         // Removed Like from the post Post
         setPostInformation({
           ...postInformation,
-          likeNo: postInformation.likeNo - 1,
+          likeNo: data.likeNo,
           isLikedPost: false,
         });
       }

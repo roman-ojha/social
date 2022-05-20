@@ -5,7 +5,7 @@ import ResponseObject from "interface/responseObject.js";
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
     try {
-      const { postID, to } = req.body;
+      const { postID, to, likeNo } = req.body;
       if (!postID || !to) {
         return res.status(422).json(<ResponseObject>{
           success: false,
@@ -24,7 +24,7 @@ export default {
       );
       if (!findUser) {
         return res
-          .status(400)
+          .status(404)
           .json(<ResponseObject>{ success: false, msg: "User Doesn't exist" });
       }
       const doesRootUserAlreadyLiked = await userDetail.findOne(
@@ -56,6 +56,7 @@ export default {
         }
       );
       if (doesRootUserAlreadyLiked) {
+        // Undo like
         const removeLikedPostRes = await userDetail.updateOne(
           {
             userID: to,
@@ -80,12 +81,14 @@ export default {
             msg: "server Error, Please try again letter!!!",
           });
         }
-        return res.json(<ResponseObject>{
+        return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Removed Like",
+          likeNo: likeNo - 1,
           removed: true,
         });
       }
+      // Like
       const likePostRes = await userDetail.updateOne(
         {
           userID: to,
@@ -110,9 +113,10 @@ export default {
           msg: "server Error, Please try again letter!!!",
         });
       }
-      return res.json(<ResponseObject>{
+      return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successfully Liked the post",
+        likeNo: likeNo + 1,
         removed: false,
       });
     } catch (err) {
