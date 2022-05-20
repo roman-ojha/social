@@ -93,7 +93,7 @@ const Message = () => {
               message: resData.message,
             })
           );
-          // setShowLoadingSpinner(false);
+          setShowLoadingSpinner(false);
           // if we are inside the user message then we have to join room through socket
           // NOTE: this is just for temporary purposes
           socket.emit("join-room", resData.roomID, (resMessage) => {
@@ -106,7 +106,7 @@ const Message = () => {
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }
-        // setShowLoadingSpinner(false);
+        setShowLoadingSpinner(false);
       }
     };
     return (

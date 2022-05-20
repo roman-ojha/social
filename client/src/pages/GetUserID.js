@@ -96,7 +96,7 @@ const GetUserID = (props) => {
         <div className="GetUserIDPage_Form_Container">
           <h1 className="GetUserIDPage_Form_Title">Almost There...</h1>
           <p className="GetUserIDPage_Form_Explained_Paragraph">
-            Please enter A name That Identify yourself in socail
+            Please enter a unique name That Identify yourself in socail
           </p>
           <input
             className="GetUserIDPage_Name_Form_Field"

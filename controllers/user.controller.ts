@@ -497,7 +497,12 @@ export default {
           id: id,
         },
         {
-          $pull: { followers: { id: rootUser.id } },
+          $pull: {
+            followers: { id: rootUser.id },
+            notification: {
+              user: rootUser.id,
+            },
+          },
           $inc: {
             followersNo: -1,
           },

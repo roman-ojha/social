@@ -184,7 +184,13 @@
   color: var(--medium-opacity-font-color);
   cursor: pointer;
   width: fit-content;
+  text-decoration: none;
 }
+
+.MainPage_Sponsored_Name:hover {
+  text-decoration: underline;
+}
+
 .MainPage_Sponsored_Info {
   font-family: var(--primary-font-family);
   font-size: 0.68rem;
