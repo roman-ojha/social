@@ -90,7 +90,7 @@ const MessageBox = () => {
             className="MainPage_MessageBox_UserMessage_Picutre"
           />
           <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
-            <h4>{props.messageInfo.messageTo}</h4>
+            <h4>{props.messageInfo.messageToUserId}</h4>
             <p>
               {
                 props.messageInfo.message[props.messageInfo.message.length - 1]
@@ -131,15 +131,9 @@ const MessageBox = () => {
           <div className="MainPage_MessageBox_Message_Container">
             {/* displaying all current user message */}
 
-            {messageList.map((messageInfo) => {
-              console.log(messageInfo);
+            {messageList.map((messageInfo, index) => {
               if (messageInfo.message.length !== 0) {
-                return (
-                  <UserMessage
-                    messageInfo={messageInfo}
-                    key={messageInfo._id}
-                  />
-                );
+                return <UserMessage messageInfo={messageInfo} key={index} />;
               }
             })}
           </div>

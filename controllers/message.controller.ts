@@ -251,11 +251,11 @@ export default {
             userID: num.userID,
           }));
           const newObj = {
-            messageToIds: obj.messageToId,
+            messageToId: obj.messageToId,
             roomID: obj.roomID,
             message: obj.message,
-            picture: newUser[0].picture,
-            userID: newUser[0].userID,
+            receiverPicture: newUser[0].picture,
+            messageToUserId: newUser[0].userID,
           };
           return newObj;
         });

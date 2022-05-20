@@ -60,18 +60,23 @@ const MainPageMsgAndNtfBar = () => {
       dispatch(startProgressBar());
       const resMessage = await Api.getUserMessages();
       const resMessageData = await resMessage.data;
-      console.log(resMessageData);
+      if (resMessage.status === 200 && resMessageData.success) {
+        dispatch(messageListAction(resMessageData.messages));
+        dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
+        dispatch(openNotificationBox(false));
+        dispatch(openMoreProfileBox(false));
+      } else {
+        toastError("Error While fetching Messages");
+      }
+      dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
+      dispatch(stopProgressBar());
     }
-    dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
-    dispatch(openNotificationBox(false));
-    dispatch(openMoreProfileBox(false));
-    dispatch(stopProgressBar());
   };
 
   return (
@@ -94,7 +99,17 @@ const MainPageMsgAndNtfBar = () => {
             <Icon
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
-              onClick={getUserMessages}
+              onClick={() => {
+                if (!mainPageMessageOnOffState) {
+                  getUserMessages();
+                } else {
+                  dispatch(
+                    mainPageMessageViewOnOff(!mainPageMessageOnOffState)
+                  );
+                  dispatch(openNotificationBox(false));
+                  dispatch(openMoreProfileBox(false));
+                }
+              }}
             />
           </div>
         )}
