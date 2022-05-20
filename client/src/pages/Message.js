@@ -6,7 +6,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import socket from "../services/socket";
 import {
-  mainPageMessageViewOnOff,
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
   appendOnMessage,
@@ -35,52 +34,79 @@ const Message = () => {
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const [userMessageField, setUserMessageField] = useState("");
 
+  // Styling Loading Spinner
+  const loadingContainerSpinnerStyle = {
+    width: "100%",
+    height: "100%",
+    // backgroundColor: "rgb(199 199 199 / 22%)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+  const loadingSpinnerStyle = {
+    border: "5px dotted #dddddd",
+    borderTop: "5px dotted var(--primary-color-darker-5)",
+    width: "1.5rem",
+    height: "1.5rem",
+    borderRadius: "50%",
+    animation: "loadingSpinner 1s linear infinite",
+  };
+
   const UserMessage = (props) => {
     const showInnerMessage = async () => {
-      // before getting new message we will reset the previous message stored into redux
-      dispatch(
-        currentUserMessageAction({
-          messageToId: props.messageInfo.messageToId,
-          messageToUserId: props.messageInfo.messageToUserId,
-          receiverPicture: props.messageInfo.receiverPicture,
-          message: [],
-        })
-      );
-      dispatch(mainPageMessageInnerViewOnOff(true));
-      setShowLoadingSpinner(true);
-      // console.log(props.messageInfo.messageTo);
-      const resMessage = await axios({
-        // sending receiver userID to get message data of that user
-        method: "POST",
-        url: "/u/getMessage",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify({
-          userID: props.messageInfo.messageToUserId,
-          id: props.messageInfo.messageToId,
-        }),
-        withCredentials: true,
-      });
-      if (resMessage.status !== 200) {
-        const error = await resMessage.data;
-      } else {
-        const resData = await resMessage.data;
-        // after getting message we will store that message into redux
+      try {
+        // before getting new message we will reset the previous message stored into redux
         dispatch(
           currentUserMessageAction({
             messageToId: props.messageInfo.messageToId,
             messageToUserId: props.messageInfo.messageToUserId,
             receiverPicture: props.messageInfo.receiverPicture,
-            message: resData.message,
+            message: [],
           })
         );
-        setShowLoadingSpinner(false);
-        // if we are inside the user message then we have to join room through socket
-        // NOTE: this is just for temporary purposes
-        socket.emit("join-room", resData.roomID, (resMessage) => {
-          console.log(resMessage);
+        dispatch(mainPageMessageInnerViewOnOff(true));
+        setShowLoadingSpinner(true);
+        // console.log(props.messageInfo.messageTo);
+        const resMessage = await axios({
+          // sending receiver userID to get message data of that user
+          method: "POST",
+          url: "/u/getMessage",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: JSON.stringify({
+            userID: props.messageInfo.messageToUserId,
+            id: props.messageInfo.messageToId,
+          }),
+          withCredentials: true,
         });
+        if (resMessage.status !== 200) {
+          const error = await resMessage.data;
+        } else {
+          const resData = await resMessage.data;
+          // after getting message we will store that message into redux
+          dispatch(
+            currentUserMessageAction({
+              messageToId: props.messageInfo.messageToId,
+              messageToUserId: props.messageInfo.messageToUserId,
+              receiverPicture: props.messageInfo.receiverPicture,
+              message: resData.message,
+            })
+          );
+          // setShowLoadingSpinner(false);
+          // if we are inside the user message then we have to join room through socket
+          // NOTE: this is just for temporary purposes
+          socket.emit("join-room", resData.roomID, (resMessage) => {
+            console.log(resMessage);
+          });
+        }
+      } catch (err) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+        // setShowLoadingSpinner(false);
       }
     };
     return (
@@ -138,11 +164,29 @@ const Message = () => {
             />
           </div>
           <div className="MainPage_MessageBox_Message_Container">
-            {messageList.map((messageInfo, index) => {
-              if (messageInfo.message.length !== 0) {
-                return <UserMessage messageInfo={messageInfo} key={index} />;
-              }
-            })}
+            {showLoadingSpinner ? (
+              <>
+                <div
+                  style={{
+                    width: "100%",
+                    height: "200px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <div style={loadingContainerSpinnerStyle}>
+                    <div style={loadingSpinnerStyle}></div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              messageList.map((messageInfo, index) => {
+                if (messageInfo.message.length !== 0) {
+                  return <UserMessage messageInfo={messageInfo} key={index} />;
+                }
+              })
+            )}
           </div>
         </div>
       </>
@@ -151,6 +195,7 @@ const Message = () => {
 
   const getUserMessages = async () => {
     try {
+      setShowLoadingSpinner(true);
       const resMessage = await messageApi.getUserMessages();
       const resMessageData = await resMessage.data;
       if (resMessage.status === 200 && resMessageData.success) {
@@ -158,12 +203,14 @@ const Message = () => {
       } else {
         toastError("Error While fetching Messages");
       }
+      setShowLoadingSpinner(false);
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
+      setShowLoadingSpinner(false);
     }
   };
 
@@ -228,23 +275,7 @@ const Message = () => {
         </>
       );
     };
-    // Styling Loading Spinner
-    const loadingContainerSpinnerStyle = {
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgb(199 199 199 / 22%)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    };
-    const loadingSpinnerStyle = {
-      border: "5px dotted #dddddd",
-      borderTop: "5px dotted var(--primary-color-darker-5)",
-      width: "1.5rem",
-      height: "1.5rem",
-      borderRadius: "50%",
-      animation: "loadingSpinner 1s linear infinite",
-    };
+
     const sendMessage = async () => {
       // sending message to user
       try {
