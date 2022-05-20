@@ -13,31 +13,35 @@ io.on("connect", (socket) => {
   socket.on("send-message", async (messageInfo, cb) => {
     // NOTE : I have to authenticate before saving the message
     const emittingMessageInfo = {
-      sender: messageInfo.sender,
+      senderId: messageInfo.senderId,
+      senderUserId: messageInfo.senderUserId,
       content: messageInfo.message,
       date: Date(),
+      // receiverId: messageInfo.receiverId,
+      // receiverUserID: messageInfo.receiverUserID,
+      // roomID: messageInfo.roomID,
     };
     try {
-      const sender = messageInfo.sender;
-      const receiver = messageInfo.receiver;
+      const senderId = messageInfo.senderId;
+      const receiverId = messageInfo.receiverId;
       // if message already created then we just have to save
       const resSaveReciverMsg = await userDetail.updateOne(
         // creating and saving message to sender
         {
-          userID: receiver,
+          id: receiverId,
         },
         {
           $push: {
             "messages.$[field].message": {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
-              sender: sender,
+              senderId: senderId,
               content: messageInfo.message,
               date: Date(),
             },
           },
         },
         {
-          arrayFilters: [{ "field.messageTo": messageInfo.sender }],
+          arrayFilters: [{ "field.messageToId": senderId }],
           // here we are filtering the messageBy
         }
       );
@@ -53,20 +57,20 @@ io.on("connect", (socket) => {
       const resSaveSenderMsg = await userDetail.updateOne(
         // creating and saving message to sender
         {
-          userID: sender,
+          id: senderId,
         },
         {
           $push: {
             "messages.$[field].message": {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
-              sender: sender,
+              senderId: senderId,
               content: messageInfo.message,
               date: Date(),
             },
           },
         },
         {
-          arrayFilters: [{ "field.messageTo": receiver }],
+          arrayFilters: [{ "field.messageToId": receiverId }],
           // here we are filtering the messageBy
         }
       );

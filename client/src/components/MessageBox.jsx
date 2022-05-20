@@ -257,7 +257,9 @@ const MessageBox = () => {
         }
         const resBody = {
           senderId: userProfileDetailStore.id,
-          receiver: props.InternalMessageInfo.messageTo,
+          senderUserId: userProfileDetailStore.userID,
+          receiverId: props.InternalMessageInfo.messageToId,
+          receiverUserID: props.InternalMessageInfo.messageToUserId,
           // messageTo is the userID of user where we are sending the message
           message: userMessageField,
           roomID: currentMessageStore.roomID,
@@ -362,7 +364,6 @@ const MessageBox = () => {
       </>
     );
   };
-  console.log(currentMessageStore);
   if (mainPageMessageOnOffState === true) {
     return (
       <>
