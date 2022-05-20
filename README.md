@@ -14,9 +14,9 @@
 | Technology   | Description         |
 | ------------ | ------------------- |
 | React        | Client Side         |
-| Node/Express | Server Side         |
-| MongoDB      | User DataBase       |
-| Firebase     | Image/File Database |
+| Node/Express | Backend API         |
+| MongoDB      | No-SQL Database     |
+| Firebase     | For Storing Images  |
 
 [<h1>Todo</h1>](TODO.md "Todo")
 
