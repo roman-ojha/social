@@ -29,7 +29,7 @@ export default {
           {
             followers: {
               $elemMatch: {
-                userID: req.rootUser.userID,
+                id: req.rootUser.id,
               },
             },
             posts: {
@@ -133,7 +133,7 @@ export default {
         {
           $match: {
             $and: [
-              { "followers.userID": req.rootUser.userID },
+              { "followers.id": req.rootUser.id },
               { stories: { $not: { $eq: null } } },
             ],
           },

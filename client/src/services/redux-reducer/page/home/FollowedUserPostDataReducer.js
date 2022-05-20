@@ -2,7 +2,7 @@ const initialState = [];
 
 const setFollowedUserPostDataReducer = (state = initialState, action) => {
   if (action.type === "followedUserPostData") {
-    return action.payload;
+    return action.payload.sort((a, b) => Math.random() - 0.5);
   } else if (action.type === "incrementPostCommentNumber") {
     // state;
     // .find((user) => user.userID === action.payload.to)
