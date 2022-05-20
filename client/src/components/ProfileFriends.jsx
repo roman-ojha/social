@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/profileFriends.css";
-import { NavLink, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
 import {
   setProfilePageFriends,
   setProfilePageFollowers,
   setProfilePageFollowings,
+  startProgressBar,
+  stopProgressBar,
+  profilePageDataAction,
 } from "../services/redux-actions";
+import GlobalApi from "../services/api/global";
 
 const ProfileFriends = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const history = useHistory();
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const [userDetails, setUserDetails] = useState({
     fetchedData: false,
@@ -124,19 +129,47 @@ const ProfileFriends = () => {
     }
   }, [location.pathname]);
 
-  // console.log(userDetails.)
-
   return (
     <>
       {userDetails.fetchedData ? (
         <div className="ProfilePage_Friends_Container">
           {userDetails.user.map((userDetail, index) => {
             return (
-              <NavLink
-                to={`/u/profile/${userDetail.userID}/posts`}
+              <div
                 className="ProfilePage_Friend_Outline"
                 key={index}
                 style={{ textDecoration: "none", color: "black" }}
+                onClick={async () => {
+                  try {
+                    dispatch(startProgressBar());
+                    const res = await GlobalApi.getFriendData(
+                      userDetail.userID
+                    );
+                    const userData = await res.data;
+                    if (res.status === 200 && userData.success) {
+                      // success
+                      const userObj = {
+                        ...userData.searchedUser,
+                        isRootUserFollowed: userData.isRootUserFollowed,
+                      };
+                      dispatch(profilePageDataAction(userObj));
+                      history.push(`/u/profile/${userDetail.userID}/posts`);
+                    } else {
+                      // error
+                      toastError(userData.msg);
+                    }
+                    dispatch(stopProgressBar());
+                  } catch (err) {
+                    if (err.response.data.success === false) {
+                      toastError(err.response.data.msg);
+                    } else {
+                      toastError(
+                        "Some Problem Occur, Please Try again later!!!"
+                      );
+                    }
+                    dispatch(stopProgressBar());
+                  }
+                }}
               >
                 <img
                   src={
@@ -151,7 +184,7 @@ const ProfileFriends = () => {
                 <div className="ProfilePage_Friend_Active_Status">
                   <p>Active</p>
                 </div>
-              </NavLink>
+              </div>
             );
           })}
         </div>
