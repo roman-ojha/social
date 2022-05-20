@@ -248,6 +248,7 @@ const MessageBox = () => {
       // dispatch(appendOnCurrentUserMessage(data));
       // channel.unbind(null, func);
     };
+    // console.log(props.InternalMessageInfo);
     const sendMessage = async () => {
       // sending message to user
       try {
@@ -255,7 +256,7 @@ const MessageBox = () => {
           return;
         }
         const resBody = {
-          sender: userProfileDetailStore.userID,
+          senderId: userProfileDetailStore.id,
           receiver: props.InternalMessageInfo.messageTo,
           // messageTo is the userID of user where we are sending the message
           message: userMessageField,
@@ -296,7 +297,7 @@ const MessageBox = () => {
               }
               alt="user"
             />
-            <h3>{props.InternalMessageInfo.messageTo}</h3>
+            <h3>{props.InternalMessageInfo.messageToUserId}</h3>
             <CloseIcon
               className="MessageBox_InnerMessage_Upper_Part_Close_Button"
               style={{ width: "1.2rem", height: "1.2rem" }}
@@ -361,6 +362,7 @@ const MessageBox = () => {
       </>
     );
   };
+  console.log(currentMessageStore);
   if (mainPageMessageOnOffState === true) {
     return (
       <>
@@ -368,7 +370,8 @@ const MessageBox = () => {
           {mainPageInnerMessageBoxOnOffState ? (
             <ReturnInnerUserMessageBox
               InternalMessageInfo={{
-                messageTo: currentMessageStore.messageTo,
+                messageToUserId: currentMessageStore.messageToUserId,
+                messageToId: currentMessageStore.messageToId,
                 picture: currentMessageStore.receiverPicture,
               }}
             />

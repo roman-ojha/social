@@ -92,6 +92,7 @@ export default {
     try {
       const rootUser = req.rootUser;
       const receiverUserID = req.body.userID;
+      const messageToId = req.body.id;
       if (!receiverUserID) {
         return res.status(404).json(<ResponseObject>{
           success: false,
@@ -101,7 +102,7 @@ export default {
       const receiverExist = await userDetail.findOne(
         {
           // searching that user to message if it exist
-          userID: receiverUserID,
+          id: messageToId,
         },
         {
           name: 1,
@@ -117,17 +118,17 @@ export default {
       const userMessage = await userDetail.findOne(
         {
           // getting rootUser message if the given condition match
-          userID: rootUser.userID,
+          id: rootUser.id,
           messages: {
             $elemMatch: {
-              messageTo: receiverUserID,
+              messageToId: messageToId,
             },
           },
         },
         {
           messages: {
             $elemMatch: {
-              messageTo: receiverUserID,
+              messageToId: messageToId,
             },
           },
         }
@@ -139,20 +140,19 @@ export default {
         const resSaveRootMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
-            userID: rootUser.userID,
+            id: rootUser.id,
           },
           {
             $push: {
               messages: {
-                messageTo: receiverUserID,
-                receiverPicture: receiverExist.picture,
+                messageToId: messageToId,
                 roomID: roomID,
                 message: [],
               },
             },
           }
         );
-        const resSaverReciverMsg = await userDetail.updateOne(
+        const resSaverReceiverMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
             userID: receiverUserID,
@@ -160,15 +160,14 @@ export default {
           {
             $push: {
               messages: {
-                messageTo: rootUser.userID,
-                receiverPicture: rootUser.picture,
+                messageToId: rootUser.id,
                 roomID: roomID,
                 message: [],
               },
             },
           }
         );
-        if (resSaverReciverMsg && resSaveRootMsg) {
+        if (resSaverReceiverMsg && resSaveRootMsg) {
           return res
             .status(200)
             .json(<ResponseObject>{ success: true, msg: "message created" });

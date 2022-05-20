@@ -1,6 +1,7 @@
 const initialMessage = {
-  messageTo: "",
-  picture: "",
+  messageToId: "",
+  messageToUserId: "",
+  receiverPicture: "",
   message: [],
 };
 

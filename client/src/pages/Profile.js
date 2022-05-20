@@ -111,14 +111,14 @@ const Profile = () => {
     }
   };
 
-  console.log(profilePageData);
   const showInnerMessage = async () => {
     // before getting new message we will reset the previous message stored into redux
     try {
       dispatch(mainPageMessageViewOnOff(true));
       dispatch(
         currentUserMessageAction({
-          messageTo: profilePageData.userID,
+          messageToId: profilePageData.id,
+          messageToUserId: profilePageData.userID,
           receiverPicture: profilePageData.picture,
           message: [],
         })
@@ -140,18 +140,26 @@ const Profile = () => {
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
-        const message = await resMessage.data;
+        const resData = await resMessage.data;
         // after getting message we will store that message into redux
-        dispatch(currentUserMessageAction(message));
+        dispatch(
+          currentUserMessageAction({
+            messageToId: resData.messageToId,
+            messageToUserId: profilePageData.userID,
+            receiverPicture: profilePageData.picture,
+            roomID: resData.roomID,
+            message: resData.message,
+          })
+        );
         // if we are inside the user message then we have to join room through socket
         // NOTE: this is just for temporary purposes
-        socket.emit("join-room", message.roomID, (resMessage) => {
+        socket.emit("join-room", resData.roomID, (resMessage) => {
           console.log(resMessage);
         });
       }
     } catch (err) {
       if (err.response.data.success === false) {
-        toastError(err.response.data.err);
+        toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
