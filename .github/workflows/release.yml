@@ -1,0 +1,42 @@
+name: Release Application
+on:
+  push:
+    branches:
+      - release
+    tags:
+      - "v*"
+jobs:
+  release:
+    name: release-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code for release
+        uses: actions/checkout@v2
+      - name: Create GitHub Release
+        # to create release but will not upload assets
+        id: create-new-release
+        # identifier
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        # to upload assets which will reference create release
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          # steps.<unique_identifier(id)_for_to_create_release_to_get_it's_output_upload_url>
+          asset_path: ./my-artifact.zip
+          asset_name: my-artifact.zip
+          asset_content_type: application/zip
