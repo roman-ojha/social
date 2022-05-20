@@ -6,4 +6,5 @@ export default {
     screen320: 320,
     screen280: 280,
   },
+  applicationName: "Social",
 };

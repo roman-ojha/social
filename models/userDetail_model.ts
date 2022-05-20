@@ -65,7 +65,8 @@ const userDetailSchema = new mongoose.Schema<
   },
   messages: [
     {
-      messageTo: {
+      messageToId: {
+        // messageTo == id of User
         type: String,
       },
       roomID: {
@@ -77,7 +78,8 @@ const userDetailSchema = new mongoose.Schema<
       },
       message: [
         {
-          sender: {
+          senderId: {
+            // Sender == id of User
             type: String,
           },
           content: {

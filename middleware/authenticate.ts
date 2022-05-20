@@ -35,6 +35,7 @@ const authenticate: RequestHandler = async (
         friends: 0,
         followers: 0,
         following: 0,
+        notification: 0,
       }
     );
     if (!rootUser) {

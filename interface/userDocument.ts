@@ -18,10 +18,10 @@ export default interface UserDocument extends Document {
   gender: string;
   messages: [
     {
-      messageTo: string;
+      messageToId: string;
       roomID: string;
       receiverPicture: string;
-      message: [sender: string, content: string, date: Date];
+      message: [{ senderId: string; content: string; date: Date }];
     }
   ];
   followersNo: number;

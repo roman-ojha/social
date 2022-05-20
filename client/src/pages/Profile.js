@@ -9,7 +9,6 @@ import {
   profilePageDataAction,
   startProgressBar,
   stopProgressBar,
-  setFetchedFriendsOrFollowersOrFollowing,
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import { useLocation, useHistory, useParams, NavLink } from "react-router-dom";
@@ -112,6 +111,7 @@ const Profile = () => {
     }
   };
 
+  console.log(profilePageData);
   const showInnerMessage = async () => {
     // before getting new message we will reset the previous message stored into redux
     try {
@@ -131,7 +131,10 @@ const Profile = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({ userID: profilePageData.userID }),
+        data: JSON.stringify({
+          userID: profilePageData.userID,
+          id: profilePageData.id,
+        }),
         withCredentials: true,
       });
       if (resMessage.status !== 200) {
