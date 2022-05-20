@@ -188,14 +188,14 @@ const MessageBox = () => {
             className="MessageBox_Inner_SingleMessage_Container"
             // styling the position of the message box according the user
             style={
-              props.MessageInfo.sender === userProfileDetailStore.userID
+              props.MessageInfo.senderId === userProfileDetailStore.id
                 ? {
                     left: "31%",
                   }
                 : {}
             }
           >
-            {props.MessageInfo.sender === userProfileDetailStore.userID ? (
+            {props.MessageInfo.senderId === userProfileDetailStore.id ? (
               ""
             ) : (
               <img src={props.picture ? props.picture : User_Profile_Icon} />
@@ -204,7 +204,7 @@ const MessageBox = () => {
               className="MessageBox_Inner_SingleMessage"
               // styling the position of the message box according the user
               style={
-                props.MessageInfo.sender === userProfileDetailStore.userID
+                props.MessageInfo.senderId === userProfileDetailStore.id
                   ? {
                       backgroundColor: "var(--primary-color-point-7)",
                     }
@@ -213,7 +213,7 @@ const MessageBox = () => {
             >
               <p
                 style={
-                  props.MessageInfo.sender === userProfileDetailStore.userID
+                  props.MessageInfo.senderId === userProfileDetailStore.id
                     ? {
                         color: "white",
                       }
@@ -277,7 +277,7 @@ const MessageBox = () => {
               appendMessageOnMessageListAction({
                 ...res.msgInfo,
                 _id: `${Math.random()}`,
-                receiver: resBody.receiver,
+                receiverId: resBody.receiverId,
               })
             );
           }

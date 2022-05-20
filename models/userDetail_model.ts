@@ -73,9 +73,6 @@ const userDetailSchema = new mongoose.Schema<
         type: String,
         require: true,
       },
-      receiverPicture: {
-        type: String,
-      },
       message: [
         {
           senderId: {

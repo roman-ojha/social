@@ -5,7 +5,7 @@ const messageListReducer = (state = initialState, action) => {
     return action.payload;
   } else if (action.type === "appendMessageOnMessageList") {
     return state.map((element) =>
-      element.messageTo === action.payload.receiver
+      element.messageToId === action.payload.receiverId
         ? {
             ...element,
             message: [...element.message, action.payload],
