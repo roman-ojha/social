@@ -15,6 +15,7 @@ import "../styles/components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";
 import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
+import messageApi from "../services/api/global/message";
 import Api from "../services/api/components/MainPageMsgAndNtfBar";
 
 const MainPageMsgAndNtfBar = () => {
@@ -58,7 +59,7 @@ const MainPageMsgAndNtfBar = () => {
   const getUserMessages = async () => {
     try {
       dispatch(startProgressBar());
-      const resMessage = await Api.getUserMessages();
+      const resMessage = await messageApi.getUserMessages();
       const resMessageData = await resMessage.data;
       if (resMessage.status === 200 && resMessageData.success) {
         dispatch(messageListAction(resMessageData.messages));

@@ -175,16 +175,16 @@ const MessageBox = () => {
     );
   };
   useEffect(() => {
-    socket.on("send-message-client", (res) => {
-      if (res.success !== false) {
-        dispatch(
-          appendOnMessage({
-            ...res.msgInfo,
-            _id: `${Math.random()}`,
-          })
-        );
-      }
-    });
+    // socket.on("send-message-client", (res) => {
+    //   if (res.success !== false) {
+    //     dispatch(
+    //       appendOnMessage({
+    //         ...res.msgInfo,
+    //         _id: `${Math.random()}`,
+    //       })
+    //     );
+    //   }
+    // });
   }, []);
   const ReturnInnerUserMessageBox = (props) => {
     const UserSingleMessageBox = (props) => {

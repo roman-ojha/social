@@ -11,11 +11,14 @@ import {
   mainPageMessageInnerViewOnOff,
   appendOnMessage,
   appendMessageOnMessageListAction,
+  messageListAction,
 } from "../services/redux-actions/index";
 import { instance as axios } from "../services/axios";
 import "../styles/components/messageBox.css";
 import "../styles/pages/MessagePage.css";
 import { Icon } from "@iconify/react";
+import { toastError } from "../services/toast";
+import messageApi from "../services/api/global/message";
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -145,18 +148,38 @@ const Message = () => {
       </>
     );
   };
-  useEffect(() => {
-    dispatch(mainPageMessageViewOnOff(false));
-    socket.on("send-message-client", (res) => {
-      if (res.success !== false) {
-        dispatch(
-          appendOnMessage({
-            ...res.msgInfo,
-            _id: `${Math.random()}`,
-          })
-        );
+
+  const getUserMessages = async () => {
+    try {
+      const resMessage = await messageApi.getUserMessages();
+      const resMessageData = await resMessage.data;
+      if (resMessage.status === 200 && resMessageData.success) {
+        dispatch(messageListAction(resMessageData.messages));
+      } else {
+        toastError("Error While fetching Messages");
       }
-    });
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
+  };
+
+  useEffect(() => {
+    // dispatch(mainPageMessageViewOnOff(false));
+    // socket.on("send-message-client", (res) => {
+    //   if (res.success !== false) {
+    //     dispatch(
+    //       appendOnMessage({
+    //         ...res.msgInfo,
+    //         _id: `${Math.random()}`,
+    //       })
+    //     );
+    //   }
+    // });
+    getUserMessages();
   }, []);
   const ReturnInnerUserMessageBox = (props) => {
     const UserSingleMessageBox = (props) => {

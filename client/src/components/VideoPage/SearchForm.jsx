@@ -14,10 +14,10 @@ const SearchForm = () => {
 
   const searchVideo = async () => {
     try {
-      dispatch(setVideoPageData([]));
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
+        dispatch(setVideoPageData([]));
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
         const data = await res.data;

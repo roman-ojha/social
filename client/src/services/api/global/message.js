@@ -1,10 +1,10 @@
 import { instance as axios } from "../../axios";
 
 export default {
-  getNotificationData: async () => {
+  getUserMessages: async () => {
     return await axios({
       method: "GET",
-      url: "/u/notification",
+      url: "/u/getRootUserMessages",
       withCredentials: true,
     });
   },
