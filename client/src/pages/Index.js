@@ -12,7 +12,6 @@ import {
   userSuggestionAction,
   followedByUserAction,
   setUserStories,
-  messageListAction,
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
@@ -38,7 +37,6 @@ const Index = () => {
           dispatch(userSuggestionAction(userData.data.userSuggestion));
           dispatch(followedByUserAction(userData.data.followedBy));
           dispatch(setUserStories(userData.data.userStories));
-          dispatch(messageListAction(userData.data.userProfileDetail.messages));
           setRenderMainPage(true);
         }
         socket.on("connect", () => {

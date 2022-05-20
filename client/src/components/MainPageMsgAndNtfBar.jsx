@@ -8,6 +8,7 @@ import {
   startProgressBar,
   stopProgressBar,
   setNotificationData,
+  messageListAction,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
@@ -54,6 +55,25 @@ const MainPageMsgAndNtfBar = () => {
     dispatch(openNotificationBox(true));
   };
 
+  const getUserMessages = async () => {
+    try {
+      dispatch(startProgressBar());
+      const resMessage = await Api.getUserMessages();
+      const resMessageData = await resMessage.data;
+      console.log(resMessageData);
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
+    dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
+    dispatch(openNotificationBox(false));
+    dispatch(openMoreProfileBox(false));
+    dispatch(stopProgressBar());
+  };
+
   return (
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
@@ -74,11 +94,7 @@ const MainPageMsgAndNtfBar = () => {
             <Icon
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
-              onClick={() => {
-                dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
-                dispatch(openNotificationBox(false));
-                dispatch(openMoreProfileBox(false));
-              }}
+              onClick={getUserMessages}
             />
           </div>
         )}

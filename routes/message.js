@@ -12,6 +12,12 @@ messageRoute.post(
 
 messageRoute.post("/u/getMessage", authenticate, messageController.getMessage);
 
+messageRoute.get(
+  "/u/getRootUserMessages",
+  authenticate,
+  messageController.getRootUserMessages
+);
+
 // This route had already implemented in socket/io.js
 messageRoute.post(
   "/u/sendMessage",

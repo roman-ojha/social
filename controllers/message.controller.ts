@@ -133,6 +133,7 @@ export default {
           },
         }
       );
+      console.log(userMessage);
       if (!userMessage) {
         // if message doesn't exist already then we have to create a new message which would contain the empty message
         const roomID = crypto.randomBytes(16).toString("hex");
@@ -178,6 +179,68 @@ export default {
         }
       }
       return res.status(200).json(userMessage.messages[0]);
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again letter",
+      });
+    }
+  },
+  getRootUserMessages: async (req: Request, res: Response) => {
+    try {
+      const rootUser = req.rootUser;
+      const resMessage = await userDetail.findOne(
+        {
+          userID: rootUser.userID,
+        },
+        {
+          messages: { $slice: -10 },
+          notification: 0,
+          password: 0,
+          cpassword: 0,
+          email: 0,
+          id: 0,
+          name: 0,
+          birthday: 0,
+          stories: 0,
+          followersNo: 0,
+          followingNo: 0,
+          followers: 0,
+          followings: 0,
+          following: 0,
+          friendsNo: 0,
+          friends: 0,
+          postNo: 0,
+          posts: 0,
+          tokens: 0,
+          gender: 0,
+          date: 0,
+          picture: 0,
+          userID: 0,
+          _id: 0,
+        }
+      );
+      if (!resMessage) {
+        return res
+          .status(404)
+          .json(<ResponseObject>{ success: false, msg: "User not Found" });
+      }
+      const messageToIds = resMessage.messages.map((el) => el.messageToId);
+      // only getting id all of all the messageToId to get userID and picture dynamically
+      const resUser = await userDetail.find(
+        { id: { $in: messageToIds } },
+        {
+          _id: 0,
+          userID: 1,
+          picture: 1,
+          id: 1,
+        }
+      );
+      console.log(resMessage);
+      console.log(resUser);
+      // const messageList=
+      // console.log(resMessage);
+      res.send("hello");
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,

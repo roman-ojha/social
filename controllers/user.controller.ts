@@ -206,6 +206,7 @@ export default {
           friends: 0,
         }
       );
+
       if (!searchedUser) {
         return res
           .status(401)

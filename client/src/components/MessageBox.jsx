@@ -36,11 +36,12 @@ const MessageBox = () => {
   const [userMessageField, setUserMessageField] = useState("");
 
   const UserMessage = (props) => {
+    // console.log(props.messageInfo);
     const showInnerMessage = async () => {
       // before getting new message we will reset the previous message stored into redux
       dispatch(
         currentUserMessageAction({
-          messageTo: props.messageInfo.messageTo,
+          messageToId: props.messageInfo.messageToId,
           receiverPicture: props.messageInfo.receiverPicture,
           message: [],
         })
@@ -131,6 +132,7 @@ const MessageBox = () => {
             {/* displaying all current user message */}
 
             {messageList.map((messageInfo) => {
+              console.log(messageInfo);
               if (messageInfo.message.length !== 0) {
                 return (
                   <UserMessage

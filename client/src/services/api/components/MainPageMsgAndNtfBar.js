@@ -4,7 +4,14 @@ export default {
   getNotificationData: async () => {
     return await axios({
       method: "GET",
-      url: `/u/notification`,
+      url: "/u/notification",
+      withCredentials: true,
+    });
+  },
+  getUserMessages: async () => {
+    return await axios({
+      method: "GET",
+      url: "/u/getRootUserMessages",
       withCredentials: true,
     });
   },
