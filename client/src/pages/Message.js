@@ -37,7 +37,8 @@ const Message = () => {
       // before getting new message we will reset the previous message stored into redux
       dispatch(
         currentUserMessageAction({
-          messageTo: props.messageInfo.messageTo,
+          messageToId: props.messageInfo.messageToId,
+          messageToUserId: props.messageInfo.messageToUserId,
           receiverPicture: props.messageInfo.receiverPicture,
           message: [],
         })
@@ -52,19 +53,29 @@ const Message = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+        data: JSON.stringify({
+          userID: props.messageInfo.messageToUserId,
+          id: props.messageInfo.messageToId,
+        }),
         withCredentials: true,
       });
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
-        const message = await resMessage.data;
+        const resData = await resMessage.data;
         // after getting message we will store that message into redux
-        dispatch(currentUserMessageAction(message));
+        dispatch(
+          currentUserMessageAction({
+            messageToId: props.messageInfo.messageToId,
+            messageToUserId: props.messageInfo.messageToUserId,
+            receiverPicture: props.messageInfo.receiverPicture,
+            message: resData.message,
+          })
+        );
         setShowLoadingSpinner(false);
         // if we are inside the user message then we have to join room through socket
         // NOTE: this is just for temporary purposes
-        socket.emit("join-room", message.roomID, (resMessage) => {
+        socket.emit("join-room", resData.roomID, (resMessage) => {
           console.log(resMessage);
         });
       }
@@ -85,7 +96,7 @@ const Message = () => {
             className="MainPage_MessageBox_UserMessage_Picutre"
           />
           <div className="MainPage_MessageBox_UserMessage_Name_Message_Container">
-            <h4>{props.messageInfo.messageTo}</h4>
+            <h4>{props.messageInfo.messageToUserId}</h4>
             <p>
               {
                 props.messageInfo.message[props.messageInfo.message.length - 1]
@@ -124,14 +135,9 @@ const Message = () => {
             />
           </div>
           <div className="MainPage_MessageBox_Message_Container">
-            {messageList.map((messageInfo) => {
+            {messageList.map((messageInfo, index) => {
               if (messageInfo.message.length !== 0) {
-                return (
-                  <UserMessage
-                    messageInfo={messageInfo}
-                    key={messageInfo._id}
-                  />
-                );
+                return <UserMessage messageInfo={messageInfo} key={index} />;
               }
             })}
           </div>
@@ -160,14 +166,14 @@ const Message = () => {
             className="MessageBox_Inner_SingleMessage_Container"
             // styling the position of the message box according the user
             style={
-              props.MessageInfo.sender === userProfileDetailStore.userID
+              props.MessageInfo.senderId === userProfileDetailStore.id
                 ? {
                     left: "31%",
                   }
                 : {}
             }
           >
-            {props.MessageInfo.sender === userProfileDetailStore.userID ? (
+            {props.MessageInfo.senderId === userProfileDetailStore.id ? (
               ""
             ) : (
               <img src={props.picture ? props.picture : User_Profile_Icon} />
@@ -176,7 +182,7 @@ const Message = () => {
               className="MessageBox_Inner_SingleMessage"
               // styling the position of the message box according the user
               style={
-                props.MessageInfo.sender === userProfileDetailStore.userID
+                props.MessageInfo.senderId === userProfileDetailStore.id
                   ? {
                       backgroundColor: "var(--primary-color-point-7)",
                     }
@@ -185,7 +191,7 @@ const Message = () => {
             >
               <p
                 style={
-                  props.MessageInfo.sender === userProfileDetailStore.userID
+                  props.MessageInfo.senderId === userProfileDetailStore.id
                     ? {
                         color: "white",
                       }
@@ -223,8 +229,10 @@ const Message = () => {
           return;
         }
         const resBody = {
-          sender: userProfileDetailStore.userID,
-          receiver: props.InternalMessageInfo.messageTo,
+          senderId: userProfileDetailStore.id,
+          senderUserId: userProfileDetailStore.userID,
+          receiverId: props.InternalMessageInfo.messageToId,
+          receiverUserID: props.InternalMessageInfo.messageToUserId,
           // messageTo is the userID of user where we are sending the message
           message: userMessageField,
           roomID: currentMessageStore.roomID,
@@ -242,7 +250,7 @@ const Message = () => {
               appendMessageOnMessageListAction({
                 ...res.msgInfo,
                 _id: `${Math.random()}`,
-                receiver: resBody.receiver,
+                receiverId: resBody.receiverId,
               })
             );
           }
@@ -264,7 +272,7 @@ const Message = () => {
               }
               alt="user"
             />
-            <h3>{props.InternalMessageInfo.messageTo}</h3>
+            <h3>{props.InternalMessageInfo.messageToUserId}</h3>
             <CloseIcon
               className="MessageBox_InnerMessage_Upper_Part_Close_Button"
               style={{ width: "1.2rem", height: "1.2rem" }}
@@ -281,12 +289,12 @@ const Message = () => {
                 </div>
               </>
             ) : (
-              currentMessageStore.message.map((message) => {
+              currentMessageStore.message.map((message, index) => {
                 return (
                   <UserSingleMessageBox
                     MessageInfo={message}
                     picture={currentMessageStore.receiverPicture}
-                    key={message._id}
+                    key={index}
                   />
                 );
               })
@@ -335,7 +343,8 @@ const Message = () => {
           {mainPageInnerMessageBoxOnOffState ? (
             <ReturnInnerUserMessageBox
               InternalMessageInfo={{
-                messageTo: currentMessageStore.messageTo,
+                messageToUserId: currentMessageStore.messageToUserId,
+                messageToId: currentMessageStore.messageToId,
                 picture: currentMessageStore.receiverPicture,
               }}
             />

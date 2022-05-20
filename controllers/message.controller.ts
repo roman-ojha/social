@@ -133,7 +133,6 @@ export default {
           },
         }
       );
-      console.log(userMessage);
       if (!userMessage) {
         // if message doesn't exist already then we have to create a new message which would contain the empty message
         const roomID = crypto.randomBytes(16).toString("hex");

@@ -83,14 +83,23 @@ const MainPageMsgAndNtfBar = () => {
     <>
       <div className="MainPage_Message_and_Notification_Bar_Container">
         {location.pathname === "/u/message" ? (
-          <NavLink to="/u" className="MainPage_Message_Bar_Message_Outline">
+          <NavLink
+            to="/u/home"
+            className="MainPage_Message_Bar_Message_Outline"
+          >
             <Icon
               className="MainPage_Message_and_Notification_Bar_Icon"
               icon="ant-design:message-filled"
               onClick={() => {
-                dispatch(mainPageMessageViewOnOff(!mainPageMessageOnOffState));
-                dispatch(openNotificationBox(false));
-                dispatch(openMoreProfileBox(false));
+                if (!mainPageMessageOnOffState) {
+                  getUserMessages();
+                } else {
+                  dispatch(
+                    mainPageMessageViewOnOff(!mainPageMessageOnOffState)
+                  );
+                  dispatch(openNotificationBox(false));
+                  dispatch(openMoreProfileBox(false));
+                }
               }}
             />
           </NavLink>

@@ -36,12 +36,12 @@ const MessageBox = () => {
   const [userMessageField, setUserMessageField] = useState("");
 
   const UserMessage = (props) => {
-    // console.log(props.messageInfo);
     const showInnerMessage = async () => {
       // before getting new message we will reset the previous message stored into redux
       dispatch(
         currentUserMessageAction({
           messageToId: props.messageInfo.messageToId,
+          messageToUserId: props.messageInfo.messageToUserId,
           receiverPicture: props.messageInfo.receiverPicture,
           message: [],
         })
@@ -56,20 +56,30 @@ const MessageBox = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        data: JSON.stringify({ userID: props.messageInfo.messageTo }),
+        data: JSON.stringify({
+          userID: props.messageInfo.messageToUserId,
+          id: props.messageInfo.messageToId,
+        }),
         withCredentials: true,
       });
       // console.log(await resMessage.data);
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
-        const message = await resMessage.data;
+        const resData = await resMessage.data;
         // after getting message we will store that message into redux
-        dispatch(currentUserMessageAction(message));
+        dispatch(
+          currentUserMessageAction({
+            messageToId: props.messageInfo.messageToId,
+            messageToUserId: props.messageInfo.messageToUserId,
+            receiverPicture: props.messageInfo.receiverPicture,
+            message: resData.message,
+          })
+        );
         setShowLoadingSpinner(false);
         // if we are inside the user message then we have to join room through socket
         // NOTE: this is just for temporary purposes
-        socket.emit("join-room", message.roomID, (resMessage) => {
+        socket.emit("join-room", resData.roomID, (resMessage) => {
           console.log(resMessage);
         });
       }
@@ -244,7 +254,6 @@ const MessageBox = () => {
       // dispatch(appendOnCurrentUserMessage(data));
       // channel.unbind(null, func);
     };
-    // console.log(props.InternalMessageInfo);
     const sendMessage = async () => {
       // sending message to user
       try {
@@ -312,12 +321,12 @@ const MessageBox = () => {
                 </div>
               </>
             ) : (
-              currentMessageStore.message.map((message) => {
+              currentMessageStore.message.map((message, index) => {
                 return (
                   <UserSingleMessageBox
                     MessageInfo={message}
                     picture={currentMessageStore.receiverPicture}
-                    key={message._id}
+                    key={index}
                   />
                 );
               })
