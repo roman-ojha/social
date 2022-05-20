@@ -189,7 +189,7 @@ export default {
   getRootUserMessages: async (req: Request, res: Response) => {
     try {
       const rootUser = req.rootUser;
-      const resMessage = await userDetail.findOne(
+      const resObj = await userDetail.findOne(
         {
           userID: rootUser.userID,
         },
@@ -220,14 +220,15 @@ export default {
           _id: 0,
         }
       );
-      if (!resMessage) {
+      if (!resObj) {
         return res
           .status(404)
           .json(<ResponseObject>{ success: false, msg: "User not Found" });
       }
-      const messageToIds = resMessage.messages.map((el) => el.messageToId);
+      const messageToIds = resObj.messages.map((el) => el.messageToId);
       // only getting id all of all the messageToId to get userID and picture dynamically
-      const resUser = await userDetail.find(
+      const messages = resObj.messages;
+      const resUser: any[] = await userDetail.find(
         { id: { $in: messageToIds } },
         {
           _id: 0,
@@ -236,11 +237,36 @@ export default {
           id: 1,
         }
       );
-      console.log(resMessage);
-      console.log(resUser);
-      // const messageList=
-      // console.log(resMessage);
-      res.send("hello");
+
+      // Merging Array
+      const mergeArrays = (arr1, arr2) => {
+        return arr1.map((obj) => {
+          const numbers = arr2.filter((nums) => nums.id === obj.messageToId);
+          if (!numbers.length) {
+            obj.phone = numbers;
+            return obj;
+          }
+          const newUser = numbers.map((num) => ({
+            picture: num.picture,
+            userID: num.userID,
+          }));
+          const newObj = {
+            messageToIds: obj.messageToId,
+            roomID: obj.roomID,
+            message: obj.message,
+            picture: newUser[0].picture,
+            userID: newUser[0].userID,
+          };
+          return newObj;
+        });
+      };
+
+      const finalMessages = mergeArrays(messages, resUser);
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successfull",
+        messages: finalMessages,
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
