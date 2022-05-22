@@ -20,6 +20,7 @@ export default {
           name: 1,
           email: 1,
           userID: 1,
+          id: 1,
         }
       );
       if (!findUser) {
@@ -36,7 +37,7 @@ export default {
               id: postID,
               "likes.by": {
                 $elemMatch: {
-                  userID: req.rootUser.userID,
+                  user: req.rootUser.id,
                 },
               },
             },
@@ -48,7 +49,7 @@ export default {
               id: postID,
               "likes.by": {
                 $elemMatch: {
-                  userID: req.rootUser.userID,
+                  user: req.rootUser.id,
                 },
               },
             },

@@ -78,6 +78,7 @@ const UserPostFeed = (props) => {
     let getMonth = userPostdate.getMonth();
     uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
   }
+
   const like = async () => {
     try {
       const res = await Api.like({

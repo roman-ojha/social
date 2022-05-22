@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import ProfileFriends from "../components/ProfileFriends";
 import ProfileAlbums from "../components/ProfileAlbums";
-import UserPostFeed from "../components/UserPostFeed";
 import { useLocation } from "react-router-dom";
+import UserPosts from "../components/ProfilePage/UserPosts";
 
 const RoutingProfilePage = (props) => {
   const location = useLocation();
@@ -46,23 +46,7 @@ const RoutingProfilePage = (props) => {
   return (
     <div>
       <Switch>
-        <Route
-          exact
-          path="/u/profile/:userID/posts"
-          component={() => {
-            return (
-              <>
-                {props.profilePageUserFeed.map((value, index) => (
-                  <UserPostFeed
-                    userMainInformation={props.profilePageMainInformation}
-                    userFeedData={value}
-                    key={index}
-                  />
-                ))}
-              </>
-            );
-          }}
-        />
+        <Route exact path="/u/profile/:userID/posts" component={UserPosts} />
         <Route
           exact
           path="/u/profile/:userID/albums"

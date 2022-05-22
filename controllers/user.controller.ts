@@ -44,6 +44,7 @@ export default {
             name: 1,
             picture: 1,
             email: 1,
+            id: 1,
           }
         );
         return getUserPost;

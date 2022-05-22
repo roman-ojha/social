@@ -357,16 +357,7 @@ const Profile = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            <RoutingProfilePage
-              profilePageMainInformation={{
-                // store searched user essintal information
-                name: profilePageData.name,
-                email: profilePageData.email,
-                picture: profilePageData.picture,
-                userID: profilePageData.userID,
-              }}
-              profilePageUserFeed={profilePageData.posts}
-            />
+            <RoutingProfilePage />
           </div>
         </div>
       ) : (

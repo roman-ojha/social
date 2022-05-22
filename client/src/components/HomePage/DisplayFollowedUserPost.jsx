@@ -25,6 +25,7 @@ const DisplayFollowedUserPost = () => {
             key={followedUserPostDataStore[j].posts[i].id}
             userMainInformation={followedUserPostDataStore[j]}
             userFeedData={followedUserPostDataStore[j].posts[i]}
+            user={followedUserPostDataStore[j].id} // required: user = id of the user who post this
           />
         );
       }

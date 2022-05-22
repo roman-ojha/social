@@ -154,7 +154,8 @@ const userDetailSchema = new mongoose.Schema<
         },
         by: [
           {
-            userID: {
+            user: {
+              // user = id of user how like the post
               type: String,
             },
           },
