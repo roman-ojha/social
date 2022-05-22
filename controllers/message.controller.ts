@@ -246,7 +246,7 @@ export default {
         return arr1.map((obj) => {
           const numbers = arr2.filter((nums) => nums.id === obj.messageToId);
           if (!numbers.length) {
-            obj.phone = numbers;
+            // obj.phone = numbers;
             return obj;
           }
           const newUser = numbers.map((num) => ({

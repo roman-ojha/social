@@ -16,9 +16,7 @@ export default {
       const rootUser = req.rootUser;
       let getUserPost;
       const currentDate = new Date();
-      const getUserPostFunction = async (
-        getPastDate: number
-      ): Promise<never[]> => {
+      const getUserPostFunction = async (getPastDate: number) => {
         // getPastDate will get those date from which we want to user post filed
         const dateCurrentDateEarly = new Date(currentDate);
         dateCurrentDateEarly.setDate(
@@ -96,9 +94,9 @@ export default {
             // console.log(posts[j].comments.by[posts[j].comments.by.length - 1]);
           }
         }
-        console.log(commentedUserId);
+        // console.log(commentedUserId);
 
-        const resAllCommentedUser = await userDetail.findOne(
+        const resAllCommentedUser = await userDetail.find(
           { id: { $in: commentedUserId } },
           {
             _id: 0,
@@ -107,10 +105,57 @@ export default {
             id: 1,
           }
         );
+        // console.log(resAllCommentedUser);
+        let finalPostData: object[] = [];
+        const mergeArrays = (arr1, arr2) => {
+          return arr1.map((obj) => {
+            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+            if (lastCommented) {
+              const numbers = arr2.filter(
+                (nums) => nums.id === lastCommented.user
+              );
+              if (!numbers.length) {
+                // obj.phone = numbers;
+                return obj;
+              }
+              const newUser = numbers.map((num) => ({
+                picture: num.picture,
+                userID: num.userID,
+              }));
+              const newObj = {
+                ...obj,
+                comment: {
+                  No: obj.No,
+                  by: [
+                    {
+                      user: lastCommented.user,
+                      comment: lastCommented.comment,
+                      picture: newUser[0].picture,
+                      userId: newUser[0].userID,
+                    },
+                  ],
+                },
+              };
+              return newObj;
+            }
+            return obj;
+          });
+        };
 
-        // const finalMessages = mergeArrays(messages, resUser);
+        for (let i = 0; i < getUserPost.length; i++) {
+          finalPostData.push({
+            posts: mergeArrays(getUserPost[i].posts, resAllCommentedUser),
+            // [<>,<last_5_posts>,<total_5_posts>]
+            picture: getUserPost[i].picture,
+            name: getUserPost[i].name,
+            userID: getUserPost[i].userID,
+            email: getUserPost[i].email,
+            id: getUserPost[i].id,
+          });
+        }
+        console.log(finalPostData);
 
-        return getUserPost;
+        return finalPostData;
       };
       getUserPost = await getUserPostFunction(5);
       if (getUserPost.length === 0) {
