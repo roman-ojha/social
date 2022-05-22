@@ -5,16 +5,16 @@ import ResponseObject from "interface/responseObject.js";
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
     try {
-      const { postID, to, likeNo } = req.body;
-      if (!postID || !to) {
+      const { postID, toUserId, toId, likeNo } = req.body;
+      if (!postID || !toUserId || !toId) {
         return res.status(422).json(<ResponseObject>{
           success: false,
-          msg: "Please Send PostID, by, To Filled",
+          msg: "Some this went wrong while getting essential data, please report it",
         });
       }
       const findUser = await userDetail.findOne(
         {
-          userID: to,
+          id: toId,
         },
         {
           name: 1,
@@ -31,7 +31,7 @@ export default {
       const doesRootUserAlreadyLiked = await userDetail.findOne(
         // here we are finding the post using postID and does rootuser already liked this post of not
         {
-          userID: to,
+          id: toId,
           posts: {
             $elemMatch: {
               id: postID,
@@ -60,12 +60,12 @@ export default {
         // Undo like
         const removeLikedPostRes = await userDetail.updateOne(
           {
-            userID: to,
+            id: toId,
           },
           {
             $pull: {
               "posts.$[field].likes.by": {
-                userID: req.rootUser.userID,
+                user: req.rootUser.id,
               },
             },
             $inc: {
@@ -92,12 +92,12 @@ export default {
       // Like
       const likePostRes = await userDetail.updateOne(
         {
-          userID: to,
+          id: toId,
         },
         {
           $push: {
             "posts.$[field].likes.by": {
-              userID: req.rootUser.userID,
+              user: req.rootUser.id,
             },
           },
           $inc: {

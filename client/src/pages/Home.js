@@ -48,7 +48,6 @@ const Home = () => {
                 userMainInformation={userProfileDetailStore}
                 // sending user feed information information
                 userFeedData={value}
-                user={userProfileDetailStore.id} // required: user = id of the user who post this
               />
             );
           })}
@@ -59,13 +58,11 @@ const Home = () => {
             let date5MinutesAgo = new Date(currentDate);
             date5MinutesAgo.setMinutes(date5MinutesAgo.getMinutes() - 5);
             if (date5MinutesAgo.getTime() < new Date(post.date).getTime()) {
-              console.log(post);
               return (
                 <UserPostFeed
                   key={post._id}
                   userMainInformation={userProfileDetailStore}
                   userFeedData={post}
-                  user={userProfileDetailStore.id} // required: user = id of the user who post this
                 />
               );
             } else {

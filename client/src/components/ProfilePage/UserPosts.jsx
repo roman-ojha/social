@@ -14,6 +14,7 @@ const UserPosts = () => {
             email: profilePageData.email,
             picture: profilePageData.picture,
             userID: profilePageData.userID,
+            id: profilePageData.id,
           }}
           userFeedData={value}
           key={index}

@@ -83,7 +83,8 @@ const UserPostFeed = (props) => {
     try {
       const res = await Api.like({
         postID: props.userFeedData.id,
-        to: props.userMainInformation.userID,
+        toUserId: props.userMainInformation.userID,
+        toId: props.userMainInformation.id,
         likeNo: postInformation.likeNo,
       });
       const data = await res.data;

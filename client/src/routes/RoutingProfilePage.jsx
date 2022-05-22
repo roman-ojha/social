@@ -5,7 +5,7 @@ import ProfileAlbums from "../components/ProfileAlbums";
 import { useLocation } from "react-router-dom";
 import UserPosts from "../components/ProfilePage/UserPosts";
 
-const RoutingProfilePage = (props) => {
+const RoutingProfilePage = () => {
   const location = useLocation();
   const colorSelectedUrl = () => {
     // updating color of sidebar tab through useEffect
