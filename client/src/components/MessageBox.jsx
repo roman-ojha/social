@@ -48,7 +48,6 @@ const MessageBox = () => {
       );
       dispatch(mainPageMessageInnerViewOnOff(true));
       setShowLoadingSpinner(true);
-      // console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",
@@ -62,7 +61,6 @@ const MessageBox = () => {
         }),
         withCredentials: true,
       });
-      // console.log(await resMessage.data);
       if (resMessage.status !== 200) {
         const error = await resMessage.data;
       } else {
@@ -287,9 +285,7 @@ const MessageBox = () => {
             );
           }
         });
-      } catch (err) {
-        // console.log(err);
-      }
+      } catch (err) {}
     };
 
     return (

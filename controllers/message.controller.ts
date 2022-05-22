@@ -88,7 +88,10 @@ export default {
         .json({ error: "Server Error!!, Please Try again letter" });
     }
   },
-  getMessage: async (req: Request, res: Response): Promise<object> => {
+  getSingleUserMessage: async (
+    req: Request,
+    res: Response
+  ): Promise<object> => {
     try {
       const rootUser = req.rootUser;
       const receiverUserID = req.body.userID;
@@ -193,7 +196,8 @@ export default {
           userID: rootUser.userID,
         },
         {
-          messages: { $slice: -10 },
+          // messages: { $slice: -10 },
+          "messages.message": { $slice: -2 },
           notification: 0,
           password: 0,
           cpassword: 0,

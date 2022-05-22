@@ -167,15 +167,19 @@ const userDetailSchema = new mongoose.Schema<
         },
         by: [
           {
-            userID: {
+            // userID: {
+            //   type: String,
+            // },
+            user: {
+              // user = id of the user who comment in post
               type: String,
             },
             comment: {
               type: String,
             },
-            picture: {
-              type: String,
-            },
+            // picture: {
+            //   type: String,
+            // },
           },
         ],
       },

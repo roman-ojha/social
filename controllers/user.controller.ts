@@ -40,6 +40,7 @@ export default {
           },
           {
             posts: { $slice: [0, 5] },
+            // "posts.comments.by": { $slice: -1 },
             userID: 1,
             name: 1,
             picture: 1,
@@ -47,6 +48,10 @@ export default {
             id: 1,
           }
         );
+
+        //
+
+        console.log(getUserPost[0]);
         return getUserPost;
       };
       getUserPost = await getUserPostFunction(5);

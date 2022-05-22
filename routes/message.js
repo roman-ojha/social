@@ -10,7 +10,11 @@ messageRoute.post(
   messageController.createMessage
 );
 
-messageRoute.post("/u/getMessage", authenticate, messageController.getMessage);
+messageRoute.post(
+  "/u/getMessage",
+  authenticate,
+  messageController.getSingleUserMessage
+);
 
 messageRoute.get(
   "/u/getRootUserMessages",
