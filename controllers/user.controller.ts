@@ -70,6 +70,7 @@ export default {
             // getting only required field
             $project: {
               posts: { $slice: ["$posts", -5, 5] },
+              // [<>,<last_5_posts>,<total_5_posts>]
               picture: 1,
               name: 1,
               userID: 1,
@@ -79,7 +80,36 @@ export default {
           },
           { $sample: { size: 10 } },
         ]);
-        // console.log(test);
+        // console.log(getUserPost);
+        // const getIdFromPost
+        let commentedUserId: string[] = [];
+        for (let i = 0; i < getUserPost.length; i++) {
+          const posts: object = getUserPost[i].posts;
+          // let userIdFromSameUserPostsComment: string[] = [];
+          for (let j = 0; j < getUserPost[i].posts.length; j++) {
+            const comment: { user: string } | undefined =
+              posts[j].comments.by[posts[j].comments.by.length - 1];
+            if (comment) {
+              commentedUserId.push(comment.user);
+            }
+            // userID[getUserPost[i].id] = userIdFromSameUserPostsComment;
+            // console.log(posts[j].comments.by[posts[j].comments.by.length - 1]);
+          }
+        }
+        console.log(commentedUserId);
+
+        const resAllCommentedUser = await userDetail.findOne(
+          { id: { $in: commentedUserId } },
+          {
+            _id: 0,
+            userID: 1,
+            picture: 1,
+            id: 1,
+          }
+        );
+
+        // const finalMessages = mergeArrays(messages, resUser);
+
         return getUserPost;
       };
       getUserPost = await getUserPostFunction(5);

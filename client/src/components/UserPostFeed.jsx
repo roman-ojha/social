@@ -120,7 +120,8 @@ const UserPostFeed = (props) => {
         const res = await Api.comment({
           comment: commentInputField,
           postID: props.userFeedData.id,
-          to: props.userMainInformation.userID,
+          toId: props.userMainInformation.id,
+          toUserId: props.userMainInformation.userID,
         });
         const data = await res.data;
         if (res.status !== 200 && data.success) {

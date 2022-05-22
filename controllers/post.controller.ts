@@ -129,14 +129,14 @@ export default {
   },
   comment: async (req: Request, res: Response): Promise<object> => {
     try {
-      const { comment, postID, to } = req.body;
+      const { comment, postID, toId, toUserId } = req.body;
       if (!comment) {
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Comment Field is Empty, Please fill the filed",
         });
       }
-      if (!postID || !to) {
+      if (!postID || !toId || !toUserId) {
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Client Error, Please Try again later",
@@ -144,7 +144,7 @@ export default {
       }
       const findUser = await userDetail.findOne(
         {
-          userID: to,
+          id: toId,
         },
         { name: 1, email: 1, userID: 1 }
       );
@@ -154,13 +154,12 @@ export default {
           .json(<ResponseObject>{ success: false, msg: "Unauthorized User" });
       }
       const commentOnUserPostRes = await userDetail.updateOne(
-        { userID: to },
+        { id: toId },
         {
           $push: {
             "posts.$[field].comments.by": {
-              userID: req.rootUser.userID,
+              user: req.rootUser.id,
               comment,
-              picture: req.rootUser.picture,
             },
           },
           $inc: {
