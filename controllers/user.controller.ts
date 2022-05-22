@@ -78,8 +78,8 @@ export default {
           },
           { $sample: { size: 10 } },
         ]);
-        // console.log(getUserPost);
-        // const getIdFromPost
+
+        // Getting Dynamic Data of the user who comment on the user post
         let commentedUserId: string[] = [];
         for (let i = 0; i < getUserPost.length; i++) {
           const posts: object = getUserPost[i].posts;
@@ -122,16 +122,17 @@ export default {
                 picture: num.picture,
                 userID: num.userID,
               }));
+              // console.log(newUser);
               const newObj = {
                 ...obj,
-                comment: {
+                comments: {
                   No: obj.No,
                   by: [
                     {
                       user: lastCommented.user,
                       comment: lastCommented.comment,
                       picture: newUser[0].picture,
-                      userId: newUser[0].userID,
+                      userID: newUser[0].userID,
                     },
                   ],
                 },
@@ -153,7 +154,7 @@ export default {
             id: getUserPost[i].id,
           });
         }
-        console.log(finalPostData);
+        // ========================================================
 
         return finalPostData;
       };
