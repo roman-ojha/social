@@ -13,7 +13,8 @@ export default {
     // writing logic to get all rootUser and rootUser follow user post
     // console.log(req.rootUser.friends);
     try {
-      let getUserPost: never[];
+      const rootUser = req.rootUser;
+      let getUserPost;
       const currentDate = new Date();
       const getUserPostFunction = async (
         getPastDate: number
@@ -23,35 +24,62 @@ export default {
         dateCurrentDateEarly.setDate(
           dateCurrentDateEarly.getDate() - getPastDate
         );
-        getUserPost = await userDetail.find(
-          // finding those user which i follow and get the posts of them
-          // and finding post which is {getPastDate} days early
+        let limitUser: any;
+        let skip: any;
+        if (rootUser.followingNo <= 10) {
+          limitUser = 10;
+          skip = 0;
+        }
+        // getUserPost = await userDetail
+        //   .find(
+        //     // finding those user which i follow and get the posts of them
+        //     // and finding post which is {getPastDate} days early
+        //     {
+        //       followers: {
+        //         $elemMatch: {
+        //           id: req.rootUser.id,
+        //         },
+        //       },
+        //       posts: {
+        //         $elemMatch: {
+        //           date: { $gt: dateCurrentDateEarly },
+        //         },
+        //       },
+        //     },
+        //     {
+        //       posts: { $slice: [0, 5] },
+        //       // "posts.comments.by": { $slice: -1 },
+        //       userID: 1,
+        //       name: 1,
+        //       picture: 1,
+        //       email: 1,
+        //       id: 1,
+        //     }
+        //   )
+        //   .limit(limitUser)
+        //   .skip(skip);
+        //
+        getUserPost = await userDetail.aggregate([
+          //getting the document that is not rootUser & and the user which is not friend of rootUser
           {
-            followers: {
-              $elemMatch: {
-                id: req.rootUser.id,
-              },
-            },
-            posts: {
-              $elemMatch: {
-                date: { $gt: dateCurrentDateEarly },
-              },
+            $match: {
+              "followers.id": rootUser.id,
             },
           },
           {
-            posts: { $slice: [0, 5] },
-            // "posts.comments.by": { $slice: -1 },
-            userID: 1,
-            name: 1,
-            picture: 1,
-            email: 1,
-            id: 1,
-          }
-        );
-
-        //
-
-        console.log(getUserPost[0]);
+            // getting only required field
+            $project: {
+              posts: { $slice: ["$posts", -5, 5] },
+              picture: 1,
+              name: 1,
+              userID: 1,
+              email: 1,
+              id: 1,
+            },
+          },
+          { $sample: { size: 10 } },
+        ]);
+        // console.log(test);
         return getUserPost;
       };
       getUserPost = await getUserPostFunction(5);
@@ -173,6 +201,7 @@ export default {
         data: resData,
       });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error, Please Try again letter",
