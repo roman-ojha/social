@@ -159,30 +159,30 @@ export default {
         return finalPostData;
       };
       getUserPost = await getUserPostFunction(5);
-      if (getUserPost.length === 0) {
-        // if there is not any post which is fivedays early
-        getUserPost = await getUserPostFunction(30);
-        if (getUserPost.length === 0) {
-          // if there is not any post which is 30 days early
-          getUserPost = await getUserPostFunction(90);
-          if (getUserPost.length === 0) {
-            // if there is not any post which is 90 days early
-            getUserPost = await getUserPostFunction(180);
-            if (getUserPost.length === 0) {
-              // if there is not any post which is 180 days early
-              getUserPost = await getUserPostFunction(365);
-              if (getUserPost.length === 0) {
-                // if there is not any post which is 365 days early
-                getUserPost = await getUserPostFunction(1825);
-              } else {
-                // if there is not any post which is 5 year early
-                getUserPost = await getUserPostFunction(36500);
-                // then post which is 100 years early
-              }
-            }
-          }
-        }
-      }
+      // if (getUserPost.length === 0) {
+      //   // if there is not any post which is fivedays early
+      //   getUserPost = await getUserPostFunction(30);
+      //   if (getUserPost.length === 0) {
+      //     // if there is not any post which is 30 days early
+      //     getUserPost = await getUserPostFunction(90);
+      //     if (getUserPost.length === 0) {
+      //       // if there is not any post which is 90 days early
+      //       getUserPost = await getUserPostFunction(180);
+      //       if (getUserPost.length === 0) {
+      //         // if there is not any post which is 180 days early
+      //         getUserPost = await getUserPostFunction(365);
+      //         if (getUserPost.length === 0) {
+      //           // if there is not any post which is 365 days early
+      //           getUserPost = await getUserPostFunction(1825);
+      //         } else {
+      //           // if there is not any post which is 5 year early
+      //           getUserPost = await getUserPostFunction(36500);
+      //           // then post which is 100 years early
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
       // getting/creating data for Suggestion for You and followed By block
       let userSuggestion: any[] = await userDetail.aggregate([
         //getting the document that is not rootUser & and the user which is not friend of rootUser
