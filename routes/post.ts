@@ -9,4 +9,6 @@ postRoute.post("/post/comment", authenticate, postController.comment);
 
 postRoute.post("/get/comment", postController.getComment);
 
+postRoute.get("/get/posts", postController.getUserPosts);
+
 export default postRoute;

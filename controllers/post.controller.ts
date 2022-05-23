@@ -1,6 +1,7 @@
 import userDetail from "../models/userDetail_model.js";
 import { Request, Response } from "express";
 import ResponseObject from "interface/responseObject.js";
+import ResPonseUserPost from "interface/resUserPost.js";
 
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
@@ -230,5 +231,95 @@ export default {
         msg: "Server Error!!!, please try again later",
       });
     }
+  },
+  getUserPosts: async (req: Request, res: Response) => {
+    try {
+      const rootUser = req.rootUser;
+      const resRootUser = await userDetail.findOne(
+        // finding those user which i follow and get the posts of them
+        // and finding post which is {getPastDate} days early
+        {
+          id: rootUser.id,
+          // posts: {
+          //   $elemMatch: {
+          //     date: { $gt: dateGivenDaysAgo },
+          //   },
+          // },
+        },
+        {
+          posts: { $slice: -20 },
+        }
+      );
+
+      if (!resRootUser) {
+        return;
+      }
+      let commentedUserId: string[] = [];
+      const posts: object = resRootUser.posts;
+      // let userIdFromSameUserPostsComment: string[] = [];
+      for (let i = 0; i < resRootUser.posts.length; i++) {
+        const comment: { user: string } | undefined =
+          posts[i].comments.by[posts[i].comments.by.length - 1];
+        if (comment) {
+          commentedUserId.push(comment.user);
+        }
+      }
+
+      const resAllCommentedUser = await userDetail.find(
+        { id: { $in: commentedUserId } },
+        {
+          _id: 0,
+          userID: 1,
+          picture: 1,
+          id: 1,
+        }
+      );
+
+      const mergeArrays = (arr1, arr2) => {
+        return arr1.map((obj) => {
+          const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+          if (lastCommented) {
+            const numbers = arr2.filter(
+              (nums) => nums.id === lastCommented.user
+            );
+            if (!numbers.length) {
+              // obj.phone = numbers;
+              return obj;
+            }
+            const newUser = numbers.map((num) => ({
+              picture: num.picture,
+              userID: num.userID,
+            }));
+            const newObj: ResPonseUserPost = {
+              // ...obj,
+              picture: {
+                url: obj.picture.url,
+              },
+              caption: obj.caption,
+              date: obj.date,
+              id: obj.id,
+              likes: obj.likes,
+              comments: {
+                No: obj.comments.No,
+                by: [
+                  {
+                    user: lastCommented.user,
+                    comment: lastCommented.comment,
+                    picture: newUser[0].picture,
+                    userID: newUser[0].userID,
+                  },
+                ],
+              },
+            };
+            return newObj;
+          }
+          return obj;
+        });
+      };
+
+      const userPosts = mergeArrays(resRootUser.posts, resAllCommentedUser);
+      console.log(userPosts);
+      return res.send("hello");
+    } catch (err) {}
   },
 };

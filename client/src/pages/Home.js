@@ -40,10 +40,10 @@ const Home = () => {
             <></>
           )}
           {/* Displaying current userPost filed */}
-          {userPostResponseDataState.map((value) => {
+          {userPostResponseDataState.map((value, index) => {
             return (
               <UserPostFeed
-                key={value.id}
+                key={index}
                 // sending user main information
                 userMainInformation={userProfileDetailStore}
                 // sending user feed information information
@@ -52,7 +52,7 @@ const Home = () => {
             );
           })}
           {/* Display only those user profile post which are post 5 min ago */}
-          {userProfilePostStore.map((post) => {
+          {userProfilePostStore.map((post, index) => {
             // if(post)
             let currentDate = new Date();
             let date5MinutesAgo = new Date(currentDate);
@@ -60,13 +60,13 @@ const Home = () => {
             if (date5MinutesAgo.getTime() < new Date(post.date).getTime()) {
               return (
                 <UserPostFeed
-                  key={post._id}
+                  key={index}
                   userMainInformation={userProfileDetailStore}
                   userFeedData={post}
                 />
               );
             } else {
-              return <div key={post._id}></div>;
+              return <div key={index}></div>;
             }
           })}
           {/* Displaying current user Followed User post field filed */}

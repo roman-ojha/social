@@ -248,10 +248,6 @@ const MessageBox = () => {
       borderRadius: "50%",
       animation: "loadingSpinner 1s linear infinite",
     };
-    const appendMessage = (data) => {
-      // dispatch(appendOnCurrentUserMessage(data));
-      // channel.unbind(null, func);
-    };
     const sendMessage = async () => {
       // sending message to user
       try {
@@ -311,11 +307,9 @@ const MessageBox = () => {
           </div>
           <div className="MessageBox_InnerMessage_Message_Container">
             {showLoadingSpinner ? (
-              <>
-                <div style={loadingContainerSpinnerStyle}>
-                  <div style={loadingSpinnerStyle}></div>
-                </div>
-              </>
+              <div style={loadingContainerSpinnerStyle}>
+                <div style={loadingSpinnerStyle}></div>
+              </div>
             ) : (
               currentMessageStore.message.map((message, index) => {
                 return (

@@ -196,7 +196,7 @@ const Profile = () => {
     if (params.userID === userProfileDetailStore.userID) {
       dispatch(profilePageDataAction(userProfileDetailStore));
       setFetchedAllData(true);
-    } else if (profilePageData.userID != params.userID) {
+    } else if (profilePageData.userID !== params.userID) {
       try {
         // fetching user Detail which current user had search
         const res = await axios({
@@ -220,7 +220,7 @@ const Profile = () => {
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }
-        history.push("/u");
+        history.push("/u/home");
       }
     } else {
       setFetchedAllData(true);
