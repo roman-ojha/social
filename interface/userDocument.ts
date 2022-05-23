@@ -36,17 +36,13 @@ export default interface UserDocument extends Document {
       id: string;
     }
   ];
-  friendsNo: {
-    type: number;
-  };
+  friendsNo: number;
   friends: [
     {
       id: string;
     }
   ];
-  postNo: {
-    type: number;
-  };
+  postNo: number;
   posts: [
     {
       id: string;
@@ -62,7 +58,7 @@ export default interface UserDocument extends Document {
         No: number;
         by: [
           {
-            userID: string;
+            user: string;
           }
         ];
       };
@@ -70,9 +66,8 @@ export default interface UserDocument extends Document {
         No: number;
         by: [
           {
-            userID: string;
+            user: string;
             comment: string;
-            picture: string;
           }
         ];
       };

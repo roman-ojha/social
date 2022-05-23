@@ -22,15 +22,17 @@ const authenticate: RequestHandler = async (
       },
       // filtering to get only data that is need when page load
       {
-        posts: { $slice: -5 },
+        posts: 0,
         // getting newly uploaded 5 post
         password: 0,
         cpassword: 0,
         birthday: 0,
         gender: 0,
         date: 0,
-        "messages.message": { $slice: -2 },
+        // "messages.message": { $slice: -2 },
         // only getting 2 item from the array of message from single user
+        messages: 0,
+        stories: 0,
         tokens: 0,
         friends: 0,
         followers: 0,

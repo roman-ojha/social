@@ -2,6 +2,7 @@ import userDetail from "../models/userDetail_model.js";
 import fs from "fs";
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
+import ResPonseUserPost from "../interface/resUserPost.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -16,34 +17,128 @@ export default {
       const rootUser = req.rootUser;
       const currentDate = new Date();
 
-      const getRootUserPostData = async () => {
-        const dateGivenDaysAgo = new Date(currentDate);
-        dateGivenDaysAgo.setHours(dateGivenDaysAgo.getHours() - 1);
+      const getRootUserData = async () => {
+        type RootUserResponseData = {
+          posts: [] | {};
+          userID: string | number;
+          name: string | number;
+          picture: string | number;
+          email: string | number;
+          id: string | number;
+          stories: {} | number;
+          followersNo: number;
+          followingNo: number;
+          postNo: number;
+        };
 
-        const res = await userDetail.findOne(
+        // const dateGivenDaysAgo = new Date(currentDate);
+        // dateGivenDaysAgo.setHours(dateGivenDaysAgo.getHours() - 1);
+
+        const resRootUser = await userDetail.findOne(
           // finding those user which i follow and get the posts of them
           // and finding post which is {getPastDate} days early
           {
             id: rootUser.id,
-            posts: {
-              $elemMatch: {
-                date: { $gt: dateGivenDaysAgo },
-              },
-            },
+            // posts: {
+            //   $elemMatch: {
+            //     date: { $gt: dateGivenDaysAgo },
+            //   },
+            // },
           },
-          {
+          <RootUserResponseData>{
             posts: { $slice: -3 },
             userID: 1,
             name: 1,
             picture: 1,
             email: 1,
             id: 1,
+            stories: 1,
+            followersNo: 1,
+            followingNo: 1,
+            postNo: 1,
           }
         );
-        console.log(res);
-      };
 
-      const rootUserPostData = await getRootUserPostData();
+        if (!resRootUser) {
+          return;
+        }
+        let commentedUserId: string[] = [];
+        const posts: object = resRootUser.posts;
+        // let userIdFromSameUserPostsComment: string[] = [];
+        for (let i = 0; i < resRootUser.posts.length; i++) {
+          const comment: { user: string } | undefined =
+            posts[i].comments.by[posts[i].comments.by.length - 1];
+          if (comment) {
+            commentedUserId.push(comment.user);
+          }
+        }
+
+        const resAllCommentedUser = await userDetail.find(
+          { id: { $in: commentedUserId } },
+          {
+            _id: 0,
+            userID: 1,
+            picture: 1,
+            id: 1,
+          }
+        );
+
+        const mergeArrays = (arr1, arr2) => {
+          return arr1.map((obj) => {
+            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+            if (lastCommented) {
+              const numbers = arr2.filter(
+                (nums) => nums.id === lastCommented.user
+              );
+              if (!numbers.length) {
+                // obj.phone = numbers;
+                return obj;
+              }
+              const newUser = numbers.map((num) => ({
+                picture: num.picture,
+                userID: num.userID,
+              }));
+              const newObj: ResPonseUserPost = {
+                // ...obj,
+                picture: {
+                  url: obj.picture.url,
+                },
+                caption: obj.caption,
+                date: obj.date,
+                id: obj.id,
+                likes: obj.likes,
+                comments: {
+                  No: obj.comments.No,
+                  by: [
+                    {
+                      user: lastCommented.user,
+                      comment: lastCommented.comment,
+                      picture: newUser[0].picture,
+                      userID: newUser[0].userID,
+                    },
+                  ],
+                },
+              };
+              return newObj;
+            }
+            return obj;
+          });
+        };
+        const finalRootUserData: RootUserResponseData = {
+          userID: resRootUser.userID,
+          name: resRootUser.name,
+          picture: resRootUser.picture,
+          email: resRootUser.email,
+          id: resRootUser.id,
+          stories: resRootUser.stories,
+          posts: mergeArrays(resRootUser.posts, resAllCommentedUser),
+          followersNo: resRootUser.followersNo,
+          followingNo: resRootUser.followingNo,
+          postNo: resRootUser.postNo,
+        };
+        return finalRootUserData;
+      };
+      const rootUserData = await getRootUserData();
 
       const getRootUserFollowingUserPostData = async (getPastDate: number) => {
         // getPastDate will get those date from which we want to user post filed
@@ -294,7 +389,7 @@ export default {
         userStories.push(botUser[i]);
       }
       const resData: any = {
-        userProfileDetail: req.rootUser,
+        userProfileDetail: rootUserData,
         followedUserPost: rootUserFollowingUserPostData,
         userSuggestion,
         followedBy,
