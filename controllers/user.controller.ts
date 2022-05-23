@@ -15,6 +15,36 @@ export default {
     try {
       const rootUser = req.rootUser;
       const currentDate = new Date();
+
+      const getRootUserPostData = async () => {
+        const dateGivenDaysAgo = new Date(currentDate);
+        dateGivenDaysAgo.setHours(dateGivenDaysAgo.getHours() - 1);
+
+        const res = await userDetail.findOne(
+          // finding those user which i follow and get the posts of them
+          // and finding post which is {getPastDate} days early
+          {
+            id: rootUser.id,
+            posts: {
+              $elemMatch: {
+                date: { $gt: dateGivenDaysAgo },
+              },
+            },
+          },
+          {
+            posts: { $slice: -3 },
+            userID: 1,
+            name: 1,
+            picture: 1,
+            email: 1,
+            id: 1,
+          }
+        );
+        console.log(res);
+      };
+
+      const rootUserPostData = await getRootUserPostData();
+
       const getRootUserFollowingUserPostData = async (getPastDate: number) => {
         // getPastDate will get those date from which we want to user post filed
         const dateCurrentDateEarly = new Date(currentDate);

@@ -247,16 +247,15 @@ userDetailSchema.methods.uploadPost = async function (
   userStoryDetail: object
 ) {
   try {
-    this.posts.unshift(postData);
+    this.posts.push(postData);
     if (userStoryDetail !== undefined) {
       this.stories = userStoryDetail;
     }
     this.postNo++;
     await this.save();
-    return this.posts;
+    return true;
   } catch (err) {
-    console.log(err);
-    return null;
+    return false;
   }
 };
 userDetailSchema.methods.followUser = async function (followedToUser: any) {

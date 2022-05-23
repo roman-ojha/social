@@ -34,23 +34,33 @@ export default {
               No: 0,
             },
           };
-          const postRes = await rootUser.uploadPost(userPostDetail, undefined);
-          const resData = {
-            id: postRes[0].id,
-            useremail: rootUser.email,
-            username: rootUser.name,
-            userID: rootUser.userID,
-            profilePicture: rootUser.picture,
-            caption: postRes[0].caption,
-            picture: "",
-            likes: postRes[0].likes,
-            comments: postRes[0].comments,
-            date: postRes[0].date,
-          };
-          return res.status(200).json(<ResponseObject>{
-            success: true,
-            msg: "Post upload successfully",
-            data: resData,
+          const postSuccessFull = await rootUser.uploadPost(
+            userPostDetail,
+            undefined
+          );
+          if (postSuccessFull) {
+            const resData = {
+              useremail: rootUser.email,
+              username: rootUser.name,
+              userID: rootUser.userID,
+              profilePicture: rootUser.picture,
+              picture: "",
+              // id: postRes[0].id,
+              // caption: postRes[0].caption,
+              // likes: postRes[0].likes,
+              // comments: postRes[0].comments,
+              ...userPostDetail,
+              date: new Date(),
+            };
+            return res.status(200).json(<ResponseObject>{
+              success: true,
+              msg: "Post upload successfully",
+              data: resData,
+            });
+          }
+          return res.status(500).json(<ResponseObject>{
+            success: false,
+            msg: "Server Error!!, Please Try again later",
           });
         } else {
           return res
@@ -116,27 +126,34 @@ export default {
               month: "long",
             })} ${today.getDate()}, ${today.getFullYear()}`,
           };
-          const postRes = await rootUser.uploadPost(
+          const postSuccessFull = await rootUser.uploadPost(
             userPostDetail,
             userStoryDetail
           );
-          const resData = {
-            id: postRes[0].id,
-            useremail: rootUser.email,
-            username: rootUser.name,
-            userID: rootUser.userID,
-            profilePicture: rootUser.picture,
-            caption: postRes[0].caption,
-            picture: postRes[0].picture,
-            likes: postRes[0].likes,
-            comments: postRes[0].comments,
-            date: postRes[0].date,
-          };
-          return res.status(200).json(<ResponseObject>{
-            success: true,
-            msg: "Post upload successfully",
-            data: resData,
-          });
+          if (postSuccessFull) {
+            const resData = {
+              useremail: rootUser.email,
+              username: rootUser.name,
+              userID: rootUser.userID,
+              profilePicture: rootUser.picture,
+              // id: postRes[0].id,
+              // caption: postRes[0].caption,
+              // picture: postRes[0].picture,
+              // likes: postRes[0].likes,
+              // comments: postRes[0].comments,
+              ...userPostDetail,
+              date: new Date(),
+            };
+            return res.status(200).json(<ResponseObject>{
+              success: true,
+              msg: "Post upload successfully",
+              data: resData,
+            });
+          }
+
+          return res
+            .status(401)
+            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
         } else {
           return res
             .status(401)
@@ -272,12 +289,9 @@ export default {
             })} ${today.getDate()}, ${today.getFullYear()}`,
           };
           // here we are posting user news Feed
-          const resPost = await rootUser.uploadPost(
-            userPostDetail,
-            userStoryDetail
-          );
+          await rootUser.uploadPost(userPostDetail, userStoryDetail);
           // now we will save picture as profile picture
-          const resData = await userDetail.updateOne(
+          await userDetail.updateOne(
             { email: email },
             { $set: { userID: userID, picture: picUrl } }
           );
@@ -356,7 +370,6 @@ export default {
           month: "long",
         })} ${today.getDate()}, ${today.getFullYear()}`,
       };
-      console.log(rootUser);
       const uploadPostRes = await rootUser.uploadPost(
         userPostDetail,
         userStoryDetail
