@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import profileApi from "../../services/api/pages/profileApi";
 import { toastError } from "../../services/toast";
+import {
+  setRootUserPostData,
+  profilePageDataAction,
+} from "../../services/redux-actions";
+import UserPostFeed from "../UserPostFeed";
 
 const UserPosts = () => {
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -34,8 +40,12 @@ const UserPosts = () => {
       const resPost = await profileApi.getUserPosts();
       const resPostData = await resPost.data;
       if (resPost.status === 200 && resPostData.success) {
-        //
-        console.log(resPostData);
+        dispatch(
+          setRootUserPostData({
+            fetchedPostData: true,
+            posts: resPostData.posts,
+          })
+        );
       } else {
         toastError("Some this went wrong please try again later");
       }
@@ -55,29 +65,40 @@ const UserPosts = () => {
         `/u/profile/${userProfileDetailStore.userID}/posts`
       )
     ) {
-      fetchUserPostData();
+      if (profilePageData.fetchedPostData === false) {
+        fetchUserPostData();
+        dispatch(profilePageDataAction(userProfileDetailStore));
+      } else {
+        dispatch(profilePageDataAction(userProfileDetailStore));
+      }
     }
-  }, [profilePageData]);
+  }, [profilePageData, userProfileDetailStore]);
 
   return (
     <>
-      {/* {profilePageData.posts.map((value, index) => (
-        <UserPostFeed
-          userMainInformation={{
-            // store searched user essintal information
-            name: profilePageData.name,
-            email: profilePageData.email,
-            picture: profilePageData.picture,
-            userID: profilePageData.userID,
-            id: profilePageData.id,
-          }}
-          userFeedData={value}
-          key={index}
-        />
-      ))} */}
-      <div style={loadingContainerSpinnerStyle}>
-        <div style={loadingSpinnerStyle}></div>
-      </div>
+      {profilePageData.fetchedPostData === true ||
+      profilePageData.fetchedPostData === undefined ? (
+        <>
+          {profilePageData.posts.map((value, index) => (
+            <UserPostFeed
+              userMainInformation={{
+                // store searched user essintal information
+                name: profilePageData.name,
+                email: profilePageData.email,
+                picture: profilePageData.picture,
+                userID: profilePageData.userID,
+                id: profilePageData.id,
+              }}
+              userFeedData={value}
+              key={index}
+            />
+          ))}
+        </>
+      ) : (
+        <div style={loadingContainerSpinnerStyle}>
+          <div style={loadingSpinnerStyle}></div>
+        </div>
+      )}
     </>
   );
 };

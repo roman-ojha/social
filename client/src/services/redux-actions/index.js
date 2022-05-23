@@ -49,6 +49,13 @@ export const userProfileDetailAction = (data) => {
   };
 };
 
+export const setRootUserPostData = (data) => {
+  return {
+    type: "setRootUserPostData",
+    payload: data,
+  };
+};
+
 export const setRootUserFriends = (data) => {
   return {
     type: "setRootUserFriends",

@@ -193,10 +193,7 @@ const Profile = () => {
   };
 
   useEffect(async () => {
-    if (params.userID === userProfileDetailStore.userID) {
-      dispatch(profilePageDataAction(userProfileDetailStore));
-      setFetchedAllData(true);
-    } else if (profilePageData.userID !== params.userID) {
+    if (profilePageData.userID !== params.userID) {
       try {
         // fetching user Detail which current user had search
         const res = await axios({
