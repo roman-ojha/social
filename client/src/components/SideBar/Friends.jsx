@@ -81,13 +81,8 @@ const Friends = () => {
     return (
       <>
         <div className="MainPage_SideBar_Friends_Inner_Container">
-          {rootUserFriends.friends.map((friendDetail) => {
-            return (
-              <MainPageFriend
-                friendDetail={friendDetail}
-                key={friendDetail._id}
-              />
-            );
+          {rootUserFriends.friends.map((friendDetail, index) => {
+            return <MainPageFriend friendDetail={friendDetail} key={index} />;
           })}
         </div>
       </>

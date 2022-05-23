@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import "../styles/components/profileAlbum.css";
 
 const ProfileAlbums = (props) => {
-  const profilePageData = useSelector((state) => state.profilePageDataReducer);
+  // const profilePageData = useSelector((state) => state.profilePageDataReducer);
   return (
     <div className="ProfilePage_Albums_Container">
-      {profilePageData.posts.map((post, index) => {
+      {props.profilePageData.posts.map((post, index) => {
         if (post.picture === undefined) {
           return "";
         }

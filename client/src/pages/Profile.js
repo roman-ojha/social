@@ -193,7 +193,10 @@ const Profile = () => {
   };
 
   useEffect(async () => {
-    if (profilePageData.userID !== params.userID) {
+    if (params.userID === userProfileDetailStore.userID) {
+      dispatch(profilePageDataAction(userProfileDetailStore));
+      setFetchedAllData(true);
+    } else if (profilePageData.userID != params.userID) {
       try {
         // fetching user Detail which current user had search
         const res = await axios({
@@ -217,7 +220,7 @@ const Profile = () => {
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }
-        history.push("/u/home");
+        history.push("/u");
       }
     } else {
       setFetchedAllData(true);
@@ -354,7 +357,7 @@ const Profile = () => {
           </div>
           <div className="ProfilePage_UserContent_Divider_Line"></div>
           <div className="ProfilePage_UserContent_Container">
-            <RoutingProfilePage />
+            <RoutingProfilePage profilePageData={profilePageData} />
           </div>
         </div>
       ) : (

@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { profilePageDataAction } from "../../services/redux-actions";
+import {
+  profilePageDataAction,
+  startProgressBar,
+  stopProgressBar,
+  setRootUserPostData,
+} from "../../services/redux-actions";
+import { toastError } from "../../services/toast";
+import GlobalApi from "../../services/api/global";
 
 const Menu = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   // coloring the selected url page side bar onload
   let selectedLinkIndex;
   const [selectedIndex, setSelectedIndex] = useState();
@@ -57,6 +65,36 @@ const Menu = () => {
         "var(--primary-color-point-7)";
     } catch (err) {}
   };
+
+  const routeToProfile = async (userID) => {
+    try {
+      dispatch(startProgressBar());
+      const res = await GlobalApi.getFriendData(userID);
+      const userData = await res.data;
+      if (res.status === 200 && userData.success) {
+        // success
+        const userObj = {
+          ...userData.searchedUser,
+          isRootUserFollowed: userData.isRootUserFollowed,
+        };
+        dispatch(profilePageDataAction(userObj));
+        dispatch(setRootUserPostData(userObj.posts));
+        history.push(`/u/profile/${userID}/posts`);
+      } else {
+        // error
+        toastError(userData.msg);
+      }
+      dispatch(stopProgressBar());
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+      dispatch(stopProgressBar());
+    }
+  };
+
   return (
     <>
       <div className="MainPage_SideBar_Menu_Container">

@@ -5,7 +5,7 @@ import ProfileAlbums from "../components/ProfileAlbums";
 import { useLocation } from "react-router-dom";
 import UserPosts from "../components/ProfilePage/UserPosts";
 
-const RoutingProfilePage = () => {
+const RoutingProfilePage = (props) => {
   const location = useLocation();
   const colorSelectedUrl = () => {
     // updating color of sidebar tab through useEffect
@@ -46,11 +46,27 @@ const RoutingProfilePage = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/u/profile/:userID/posts" component={UserPosts} />
+        <Route
+          exact
+          path="/u/profile/:userID/posts"
+          component={() => {
+            return (
+              <>
+                <UserPosts profilePageData={props.profilePageData} />
+              </>
+            );
+          }}
+        />
         <Route
           exact
           path="/u/profile/:userID/albums"
-          component={ProfileAlbums}
+          component={() => {
+            return (
+              <>
+                <ProfileAlbums profilePageData={props.profilePageData} />
+              </>
+            );
+          }}
         />
         <Route
           exact
