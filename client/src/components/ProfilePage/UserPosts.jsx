@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
-import UserPostFeed from "../UserPostFeed";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
+import profileApi from "../../services/api/pages/profileApi";
+import { toastError } from "../../services/toast";
 
 const UserPosts = () => {
   const location = useLocation();
+  const history = useHistory();
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -27,7 +29,25 @@ const UserPosts = () => {
     animation: "loadingSpinner 1s linear infinite",
   };
 
-  const fetchUserPostData = async () => {};
+  const fetchUserPostData = async () => {
+    try {
+      const resPost = await profileApi.getUserPosts();
+      const resPostData = await resPost.data;
+      if (resPost.status === 200 && resPostData.success) {
+        //
+        console.log(resPostData);
+      } else {
+        toastError("Some this went wrong please try again later");
+      }
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+      history.push("/u/home");
+    }
+  };
 
   useEffect(() => {
     if (
@@ -35,9 +55,7 @@ const UserPosts = () => {
         `/u/profile/${userProfileDetailStore.userID}/posts`
       )
     ) {
-      console.log("yes");
-    } else {
-      console.log("no");
+      fetchUserPostData();
     }
   }, [profilePageData]);
 

@@ -318,8 +318,16 @@ export default {
       };
 
       const userPosts = mergeArrays(resRootUser.posts, resAllCommentedUser);
-      console.log(userPosts);
-      return res.send("hello");
-    } catch (err) {}
+      return res.status(200).send(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        posts: userPosts,
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!!, please try again later",
+      });
+    }
   },
 };
