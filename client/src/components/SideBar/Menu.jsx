@@ -11,6 +11,7 @@ import {
 } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
 import GlobalApi from "../../services/api/global";
+import profileApi from "../../services/api/pages/profileApi";
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -66,32 +67,27 @@ const Menu = () => {
     } catch (err) {}
   };
 
-  const routeToProfile = async (userID) => {
+  const fetchUserPostData = async () => {
     try {
-      dispatch(startProgressBar());
-      const res = await GlobalApi.getFriendData(userID);
-      const userData = await res.data;
-      if (res.status === 200 && userData.success) {
-        // success
-        const userObj = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-        };
-        dispatch(profilePageDataAction(userObj));
-        dispatch(setRootUserPostData(userObj.posts));
-        history.push(`/u/profile/${userID}/posts`);
+      const resPost = await profileApi.getUserPosts();
+      const resPostData = await resPost.data;
+      if (resPost.status === 200 && resPostData.success) {
+        dispatch(
+          setRootUserPostData({
+            fetchedPostData: true,
+            posts: resPostData.posts,
+          })
+        );
       } else {
-        // error
-        toastError(userData.msg);
+        toastError("Some this went wrong please try again later");
       }
-      dispatch(stopProgressBar());
     } catch (err) {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      history.push("/u/home");
     }
   };
 

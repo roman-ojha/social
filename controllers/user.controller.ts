@@ -423,24 +423,32 @@ export default {
     try {
       const rootUser = req.rootUser;
       const userID = req.params.userid;
-      const searchedUser = await userDetail.findOne(
-        { userID: userID },
-        {
-          posts: { $slice: -5 },
-          password: 0,
-          cpassword: 0,
-          birthday: 0,
-          gender: 0,
-          date: 0,
-          messages: 0,
-          tokens: 0,
-          email: 0,
-          notification: 0,
-          followers: 0,
-          following: 0,
-          friends: 0,
-        }
-      );
+      type SearchedUserResponseData = {
+        posts: [] | {};
+        userID: string | number;
+        name: string | number;
+        picture: string | number;
+        email: string | number;
+        id: string | number;
+        stories: {} | number;
+        followersNo: number;
+        followingNo: number;
+        postNo: number;
+      };
+      const searchedUser = await userDetail.findOne({ userID: userID }, <
+        SearchedUserResponseData
+      >{
+        postNo: 1,
+        posts: { $slice: -20 },
+        name: 1,
+        userID: 1,
+        picture: 1,
+        email: 1,
+        id: 1,
+        stories: 1,
+        followersNo: 1,
+        followingNo: 1,
+      });
 
       if (!searchedUser) {
         return res
@@ -462,18 +470,93 @@ export default {
             userID: 1,
           }
         );
+
+        let commentedUserId: string[] = [];
+        const posts: object = searchedUser.posts;
+        // let userIdFromSameUserPostsComment: string[] = [];
+        for (let i = 0; i < searchedUser.posts.length; i++) {
+          const comment: { user: string } | undefined =
+            posts[i].comments.by[posts[i].comments.by.length - 1];
+          if (comment) {
+            commentedUserId.push(comment.user);
+          }
+        }
+
+        const resAllCommentedUser = await userDetail.find(
+          { id: { $in: commentedUserId } },
+          {
+            _id: 0,
+            userID: 1,
+            picture: 1,
+            id: 1,
+          }
+        );
+
+        const mergeArrays = (arr1, arr2) => {
+          return arr1.map((obj) => {
+            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+            if (lastCommented) {
+              const numbers = arr2.filter(
+                (nums) => nums.id === lastCommented.user
+              );
+              if (!numbers.length) {
+                // obj.phone = numbers;
+                return obj;
+              }
+              const newUser = numbers.map((num) => ({
+                picture: num.picture,
+                userID: num.userID,
+              }));
+              const newObj: ResPonseUserPost = {
+                // ...obj,
+                picture: {
+                  url: obj.picture.url,
+                },
+                caption: obj.caption,
+                date: obj.date,
+                id: obj.id,
+                likes: obj.likes,
+                comments: {
+                  No: obj.comments.No,
+                  by: [
+                    {
+                      user: lastCommented.user,
+                      comment: lastCommented.comment,
+                      picture: newUser[0].picture,
+                      userID: newUser[0].userID,
+                    },
+                  ],
+                },
+              };
+              return newObj;
+            }
+            return obj;
+          });
+        };
+        const finalSearchedUserData: SearchedUserResponseData = {
+          userID: searchedUser.userID,
+          name: searchedUser.name,
+          picture: searchedUser.picture,
+          email: searchedUser.email,
+          id: searchedUser.id,
+          stories: searchedUser.stories,
+          posts: mergeArrays(searchedUser.posts, resAllCommentedUser),
+          followersNo: searchedUser.followersNo,
+          followingNo: searchedUser.followingNo,
+          postNo: searchedUser.postNo,
+        };
         if (!isRootUserFollowed) {
           return res.status(200).json(<ResponseObject>{
             success: true,
             msg: "Found User",
-            searchedUser,
+            searchedUser: finalSearchedUserData,
             isRootUserFollowed: false,
           });
         } else {
           return res.status(200).json(<ResponseObject>{
             success: true,
             msg: "Found User",
-            searchedUser,
+            searchedUser: finalSearchedUserData,
             isRootUserFollowed: true,
           });
         }

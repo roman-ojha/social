@@ -252,7 +252,9 @@ export default {
       );
 
       if (!resRootUser) {
-        return;
+        return res
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
       let commentedUserId: string[] = [];
       const posts: object = resRootUser.posts;

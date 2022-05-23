@@ -1,9 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import "../styles/components/profileAlbum.css";
 
 const ProfileAlbums = (props) => {
-  // const profilePageData = useSelector((state) => state.profilePageDataReducer);
   return (
     <div className="ProfilePage_Albums_Container">
       {props.profilePageData.posts.map((post, index) => {
