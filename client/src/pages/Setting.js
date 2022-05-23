@@ -9,9 +9,10 @@ import {
   changeRootUserNameAction,
   startProgressBar,
   stopProgressBar,
+  showLoadingSpinner,
 } from "../services/redux-actions";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Api from "../services/api/pages/settingPageApi";
 import { toastError, toastInfo, toastSuccess } from "../services/toast";
@@ -32,7 +33,6 @@ const Setting = () => {
     imgUrl: "",
   });
   const [isImgUrl, setIsImgUrl] = useState(false);
-  const [userPostResponseLoading, setUserPostResponseLoading] = useState(false);
   const getInputFieldData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -114,7 +114,7 @@ const Setting = () => {
       const imageFile = document.getElementById("user-profile-input").files[0];
       const imageUrl = settingInputFieldData.imgUrl;
       if (!isImgUrl) {
-        setUserPostResponseLoading(true);
+        dispatch(showLoadingSpinner(true));
         const data = new FormData();
         data.append("image", imageFile);
         const res = await Api.changeImageFileProfilePicture(data);
@@ -125,9 +125,9 @@ const Setting = () => {
         } else {
           toastError(resData.msg);
         }
-        setUserPostResponseLoading(false);
+        dispatch(showLoadingSpinner(false));
       } else {
-        setUserPostResponseLoading(true);
+        dispatch(showLoadingSpinner(true));
         const res = await Api.changeImageUrlProfilePicture(imageUrl);
         const resData = await res.data;
         if (resData.success && res.status === 200) {
@@ -136,13 +136,12 @@ const Setting = () => {
         } else {
           toastError(resData.msg);
         }
-        setUserPostResponseLoading(false);
+        dispatch(showLoadingSpinner(false));
       }
       setSettingInputFieldData({ ...settingInputFieldData, imgUrl: "" });
     } catch (err) {
-      // console.log(err);
       toastError(err.response.data.msg);
-      setUserPostResponseLoading(false);
+      dispatch(showLoadingSpinner(false));
     }
   };
   useEffect(() => {
@@ -174,7 +173,7 @@ const Setting = () => {
   }, [settingInputFieldData.imgUrl]);
   return (
     <>
-      {userPostResponseLoading ? <LoadingSpinner /> : ""}
+      <LoadingSpinner />
       <div className="SettingPage_Container">
         <ToastContainer />
         <Helmet>

@@ -34,7 +34,6 @@ const Index = () => {
             userProfilePostAction(userData.data.userProfileDetail.posts)
           );
           dispatch(followedUserPostDataAction(userData.data.followedUserPost));
-          console.log(userData.data.followedUserPost);
           dispatch(userSuggestionAction(userData.data.userSuggestion));
           dispatch(followedByUserAction(userData.data.followedBy));
           dispatch(setUserStories(userData.data.userStories));

@@ -14,21 +14,14 @@ export default {
     // console.log(req.rootUser.friends);
     try {
       const rootUser = req.rootUser;
-      let getUserPost;
       const currentDate = new Date();
-      const getUserPostFunction = async (getPastDate: number) => {
+      const getRootUserFollowingUserPostData = async (getPastDate: number) => {
         // getPastDate will get those date from which we want to user post filed
         const dateCurrentDateEarly = new Date(currentDate);
         dateCurrentDateEarly.setDate(
           dateCurrentDateEarly.getDate() - getPastDate
         );
-        let limitUser: any;
-        let skip: any;
-        if (rootUser.followingNo <= 10) {
-          limitUser = 10;
-          skip = 0;
-        }
-        // getUserPost = await userDetail
+        // resRootUserFollowingUserPostData = await userDetail
         //   .find(
         //     // finding those user which i follow and get the posts of them
         //     // and finding post which is {getPastDate} days early
@@ -57,7 +50,7 @@ export default {
         //   .limit(limitUser)
         //   .skip(skip);
         //
-        getUserPost = await userDetail.aggregate([
+        const resRootUserFollowingUserPostData = await userDetail.aggregate([
           //getting the document that is not rootUser & and the user which is not friend of rootUser
           {
             $match: {
@@ -81,20 +74,23 @@ export default {
 
         // Getting Dynamic Data of the user who comment on the user post
         let commentedUserId: string[] = [];
-        for (let i = 0; i < getUserPost.length; i++) {
-          const posts: object = getUserPost[i].posts;
+        for (let i = 0; i < resRootUserFollowingUserPostData.length; i++) {
+          const posts: object = resRootUserFollowingUserPostData[i].posts;
           // let userIdFromSameUserPostsComment: string[] = [];
-          for (let j = 0; j < getUserPost[i].posts.length; j++) {
+          for (
+            let j = 0;
+            j < resRootUserFollowingUserPostData[i].posts.length;
+            j++
+          ) {
             const comment: { user: string } | undefined =
               posts[j].comments.by[posts[j].comments.by.length - 1];
             if (comment) {
               commentedUserId.push(comment.user);
             }
-            // userID[getUserPost[i].id] = userIdFromSameUserPostsComment;
+            // userID[resRootUserFollowingUserPostData[i].id] = userIdFromSameUserPostsComment;
             // console.log(posts[j].comments.by[posts[j].comments.by.length - 1]);
           }
         }
-        // console.log(commentedUserId);
 
         const resAllCommentedUser = await userDetail.find(
           { id: { $in: commentedUserId } },
@@ -105,7 +101,6 @@ export default {
             id: 1,
           }
         );
-        // console.log(resAllCommentedUser);
         let finalPostData: object[] = [];
         const mergeArrays = (arr1, arr2) => {
           return arr1.map((obj) => {
@@ -143,40 +138,44 @@ export default {
           });
         };
 
-        for (let i = 0; i < getUserPost.length; i++) {
+        for (let i = 0; i < resRootUserFollowingUserPostData.length; i++) {
           finalPostData.push({
-            posts: mergeArrays(getUserPost[i].posts, resAllCommentedUser),
+            posts: mergeArrays(
+              resRootUserFollowingUserPostData[i].posts,
+              resAllCommentedUser
+            ),
             // [<>,<last_5_posts>,<total_5_posts>]
-            picture: getUserPost[i].picture,
-            name: getUserPost[i].name,
-            userID: getUserPost[i].userID,
-            email: getUserPost[i].email,
-            id: getUserPost[i].id,
+            picture: resRootUserFollowingUserPostData[i].picture,
+            name: resRootUserFollowingUserPostData[i].name,
+            userID: resRootUserFollowingUserPostData[i].userID,
+            email: resRootUserFollowingUserPostData[i].email,
+            id: resRootUserFollowingUserPostData[i].id,
           });
         }
         // ========================================================
 
         return finalPostData;
       };
-      getUserPost = await getUserPostFunction(5);
-      // if (getUserPost.length === 0) {
+      const rootUserFollowingUserPostData =
+        await getRootUserFollowingUserPostData(5);
+      // if (rootUserFollowingUserPostData.length === 0) {
       //   // if there is not any post which is fivedays early
-      //   getUserPost = await getUserPostFunction(30);
-      //   if (getUserPost.length === 0) {
+      //   rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(30);
+      //   if (rootUserFollowingUserPostData.length === 0) {
       //     // if there is not any post which is 30 days early
-      //     getUserPost = await getUserPostFunction(90);
-      //     if (getUserPost.length === 0) {
+      //     rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(90);
+      //     if (rootUserFollowingUserPostData.length === 0) {
       //       // if there is not any post which is 90 days early
-      //       getUserPost = await getUserPostFunction(180);
-      //       if (getUserPost.length === 0) {
+      //       rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(180);
+      //       if (rootUserFollowingUserPostData.length === 0) {
       //         // if there is not any post which is 180 days early
-      //         getUserPost = await getUserPostFunction(365);
-      //         if (getUserPost.length === 0) {
+      //         rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(365);
+      //         if (rootUserFollowingUserPostData.length === 0) {
       //           // if there is not any post which is 365 days early
-      //           getUserPost = await getUserPostFunction(1825);
+      //           rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(1825);
       //         } else {
       //           // if there is not any post which is 5 year early
-      //           getUserPost = await getUserPostFunction(36500);
+      //           rootUserFollowingUserPostData = await getRootUserFollowingUserPostData(36500);
       //           // then post which is 100 years early
       //         }
       //       }
@@ -266,7 +265,7 @@ export default {
       }
       const resData: any = {
         userProfileDetail: req.rootUser,
-        followedUserPost: getUserPost,
+        followedUserPost: rootUserFollowingUserPostData,
         userSuggestion,
         followedBy,
         userStories,
