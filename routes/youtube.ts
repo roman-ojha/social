@@ -16,6 +16,8 @@ import youtubeController from "../controllers/youtube.controller.js";
 // youtubeRoute.get("/youtube/videos", youtubeController.youtubeVideo);
 youtubeRoute.get("/youtube/search", youtubeController.searchYoutubeVideo);
 
+youtubeRoute.get("/youtube/home", youtubeController.getYoutubeHomePageVideo);
+
 // NOTE: you can also use 'googleapis' to do the same task that we did in here
 
 export default youtubeRoute;

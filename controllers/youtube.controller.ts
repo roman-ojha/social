@@ -5,6 +5,7 @@ import ResponseObject from "interface/responseObject.js";
 import { Request, Response } from "express";
 import usetube from "usetube";
 // import yts from "yt-search";
+import youtubeData from "../constants/youtubeData.js";
 
 interface YoutubeResponseType {
   items: object[];
@@ -101,6 +102,20 @@ export default {
         success: true,
         msg: "Successful",
         videos: response.videos,
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server error, please try again later",
+      });
+    }
+  },
+  getYoutubeHomePageVideo: async (req: Request, res: Response) => {
+    try {
+      res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        videos: youtubeData.homePageVideos,
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{

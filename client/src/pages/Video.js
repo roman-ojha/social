@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
-// import Api from "../services/api/pages/Video";
 import { useDispatch, useSelector } from "react-redux";
-// import { setVideoPageData } from "../services/redux-actions";
-// import { toastError } from "../services/toast";
+import { setVideoPageData } from "../services/redux-actions";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
+import { toastError } from "../services/toast";
+import videoApi from "../services/api/pages/Video";
 
 const Video = () => {
   const dispatch = useDispatch();
@@ -39,7 +39,30 @@ const Video = () => {
   //   }
   // };
 
+  const getYoutubeHomePageVideo = async () => {
+    try {
+      const resVideos = await videoApi.getYoutubeHomePageVideos();
+      const resVideosData = await resVideos.data;
+      if (resVideos.status === 200 && resVideosData.success) {
+        dispatch(setVideoPageData(resVideosData.videos));
+      } else {
+        toastError("Some thing went wrong, please try again later!!!");
+      }
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
+  };
+
   useEffect(() => {
+    // get constant value for youtube home page
+    if (videoPageData.length === 0) {
+      getYoutubeHomePageVideo();
+    }
+
     // backend scraping
     // if (videoPageData.length === 0) {
     //   scrapeVideo();

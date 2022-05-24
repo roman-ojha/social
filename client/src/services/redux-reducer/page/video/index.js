@@ -4,7 +4,7 @@ const initialState = [];
 
 const videoPageDataReducer = (state = initialState, action) => {
   if (action.type === "setVideoPageData") {
-    return action.payload;
+    return action.payload.sort(() => Math.random() - 0.5);
   }
   return state;
 };

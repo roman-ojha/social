@@ -29,4 +29,11 @@ export default {
       withCredentials: true,
     });
   },
+  getYoutubeHomePageVideos: async () => {
+    return await axios({
+      method: "GET",
+      url: `/youtube/home`,
+      withCredentials: true,
+    });
+  },
 };
