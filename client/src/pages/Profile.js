@@ -22,35 +22,6 @@ const Profile = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-  const openCommentBoxStore = useSelector(
-    (state) => state.openCommentBoxReducer
-  );
-
-  const fillColorOnRoute = () => {
-    try {
-      let selectedRouteIndex;
-      // console.log(location.pathname);
-      if (location.pathname.includes("/albums")) {
-        // console.log("albums");
-        selectedRouteIndex = 1;
-      } else if (
-        location.pathname.includes("/friends") ||
-        location.pathname.includes("/followers") ||
-        location.pathname.includes("/followings")
-      ) {
-        selectedRouteIndex = 2;
-      } else {
-        selectedRouteIndex = 0;
-      }
-      document.getElementsByClassName("ProfilePage_Route")[
-        selectedRouteIndex
-      ].style.borderColor = "var(--primary-color-point-7)";
-
-      document.getElementsByClassName("ProfilePage_UserContent_Icon")[
-        selectedRouteIndex
-      ].style.color = "var(--primary-color-point-7)";
-    } catch (err) {}
-  };
 
   useEffect(async () => {
     if (params.userID === userProfileDetailStore.userID) {

@@ -1,71 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   profilePageDataAction,
-  startProgressBar,
-  stopProgressBar,
   setRootUserPostData,
 } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
-import GlobalApi from "../../services/api/global";
 import profileApi from "../../services/api/pages/profileApi";
 
 const Menu = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   // coloring the selected url page side bar onload
-  let selectedLinkIndex;
-  const [selectedIndex, setSelectedIndex] = useState();
   let location;
   location = useLocation();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
-
-  // coloring the selected url page side bar onload
-  const colorSelectedUrl = () => {
-    // updating color of sidebar tab through useEffect
-    try {
-      switch (location.pathname) {
-        case "/u":
-          selectedLinkIndex = 0;
-          setSelectedIndex(0);
-          break;
-        case "/u/video":
-          selectedLinkIndex = 1;
-          setSelectedIndex(1);
-          break;
-        case "/u/message":
-          selectedLinkIndex = 2;
-          setSelectedIndex(2);
-          break;
-        case "/u/setting":
-          selectedLinkIndex = 3;
-          setSelectedIndex(3);
-          break;
-        default:
-          break;
-      }
-      if (location.pathname.includes("/u/profile")) {
-        selectedLinkIndex = 4;
-        setSelectedIndex(4);
-      }
-      const selectedLinkElement = document.getElementsByClassName(
-        "MainPage_SideBar_Link"
-      )[selectedLinkIndex];
-      selectedLinkElement.firstElementChild.style.backgroundColor =
-        "var(--primary-color-point-7)";
-      selectedLinkElement.firstElementChild.nextElementSibling.setAttribute(
-        "color",
-        "var(--primary-color-point-7)"
-      );
-      selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-        "var(--primary-color-point-7)";
-    } catch (err) {}
-  };
 
   const fetchUserPostData = async () => {
     try {
@@ -104,7 +57,6 @@ const Menu = () => {
             <Icon
               className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
               icon="ant-design:home-filled"
-              color={selectedIndex === 0 ? "var(--primary-color-point-7)" : ""}
             />
             <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
           </NavLink>
@@ -116,7 +68,6 @@ const Menu = () => {
             <Icon
               className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
               icon="clarity:video-gallery-solid"
-              color={selectedIndex === 1 ? "var(--primary-color-point-7)" : ""}
             />
             <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
           </NavLink>
@@ -128,7 +79,6 @@ const Menu = () => {
             <Icon
               className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
               icon="ant-design:message-filled"
-              color={selectedIndex === 2 ? "var(--primary-color-point-7)" : ""}
             />
             <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
           </NavLink>
@@ -140,7 +90,6 @@ const Menu = () => {
             <Icon
               className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
               icon="ant-design:setting-filled"
-              color={selectedIndex === 3 ? "var(--primary-color-point-7)" : ""}
             />
             <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
           </NavLink>
@@ -159,7 +108,6 @@ const Menu = () => {
             <Icon
               className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
               icon="gg:profile"
-              color={selectedIndex === 4 ? "var(--primary-color-point-7)" : ""}
             />
             <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
           </NavLink>

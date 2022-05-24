@@ -13,8 +13,6 @@ const MainPageSideBar = () => {
   const [onSearchBar, setOnSearchBar] = useState(false);
 
   useEffect(() => {
-    // colorSelectedUrl();
-
     document
       .getElementsByClassName("SideBar_Drawer_Container")[0]
       .addEventListener("click", (e) => {
