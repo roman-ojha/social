@@ -8,7 +8,7 @@ import "../styles/others/emojiMarPacakge.css";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import DefaultSocialPost from "../components/DefaultSocialPost";
-import UserPostFieldView from "../components/HomePage/UserPostFieldView";
+import UserPostField from "../components/HomePage/UserPostField";
 import DisplayFollowedUserPost from "../components/HomePage/DisplayFollowedUserPost";
 
 const Home = () => {
@@ -31,7 +31,7 @@ const Home = () => {
         <OpenSideBarDrawerButton />
         <OpenRightPartDrawerButton />
         <div className="HomePage_User_Post_Field_Container">
-          <UserPostFieldView />
+          <UserPostField />
         </div>
         <div className="HomePage_Feed_Main_Container">
           {followedUserPostDataStore.length == 0 ? (

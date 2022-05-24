@@ -8,15 +8,14 @@ import {
 } from "../../services/redux-actions";
 import { Picker } from "emoji-mart";
 import { Icon } from "@iconify/react";
-import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Api from "../../services/api/pages/homeApi";
 import { toastError, toastSuccess } from "../../services/toast";
+import MinViewPostField from "./MinViewPostField";
 
-const UserPostFieldView = () => {
+const UserPostField = () => {
   const history = useHistory();
-  // storing user Profile Detail
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
@@ -27,39 +26,6 @@ const UserPostFieldView = () => {
   const viewValue = useSelector((state) => state.homePagePostFieldViewValue);
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
-  const MinViewUserPostField = () => {
-    return (
-      <>
-        <div className="HomePage_MinView_UserPost_Field_Container">
-          <Helmet>
-            <title>Social</title>
-          </Helmet>
-          <img
-            src={
-              userProfileDetailStore.picture === undefined
-                ? User_Profile_Icon
-                : userProfileDetailStore.picture
-            }
-            className="HomePage_MinField_UserPost_Field_Image"
-            onClick={() => {
-              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
-            }}
-            alt="profile"
-          />
-          <input
-            className="HomePage_MinView_UserPost_Input_Field"
-            type="text"
-            placeholder="Post Your Thought...."
-            value={homePageUserPostFieldData.content}
-            onChange={() => {}}
-            onClick={() => {
-              dispatch(setHomePagePostFieldViewValue("max"));
-            }}
-          />
-        </div>
-      </>
-    );
-  };
   const MaxViewUserPostField = () => {
     const [userPostData, setUserPostData] = useState(
       homePageUserPostFieldData.content
@@ -253,7 +219,7 @@ const UserPostFieldView = () => {
   if (viewValue === "min") {
     return (
       <>
-        <MinViewUserPostField />
+        <MinViewPostField />
       </>
     );
   } else if (viewValue === "max") {
@@ -265,4 +231,4 @@ const UserPostFieldView = () => {
   }
 };
 
-export default UserPostFieldView;
+export default UserPostField;
