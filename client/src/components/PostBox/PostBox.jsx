@@ -3,7 +3,6 @@ import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import "../../styles/components/postBox.css";
-import { useHistory } from "react-router-dom";
 import {
   commentBoxAction,
   stopProgressBar,
@@ -12,11 +11,12 @@ import {
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../../services/toast";
 import Api from "../../services/api/components/postBox";
+import PostImage from "./PostImage";
+import PostCaption from "./PostCaption";
+import PostInfo from "./PostInfo";
 
 const PostBox = (props) => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  let uploadedTime;
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -39,45 +39,6 @@ const PostBox = (props) => {
         Math.floor(Math.random() * props.userFeedData.comments.by.length)
       ],
   });
-  const userPostdate = new Date(props.userFeedData.date);
-  // const userPostUTCTime = userPostdate.toUTCString();
-  const currentDate = new Date();
-  // const currentUTCTime = currentDate.toUTCString();
-  const difference = (currentDate.getTime() - userPostdate.getTime()) / 1000;
-  const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  if (difference < 60) {
-    uploadedTime = `${parseInt(difference)}s`;
-  } else if (difference >= 60 && difference < 3600) {
-    uploadedTime = `${parseInt(difference / 60)}m`;
-  } else if (difference >= 3600 && difference < 86400) {
-    uploadedTime = `${parseInt(difference / 3600)}hr`;
-  } else if (difference >= 86400 && difference < 604800) {
-    uploadedTime = `${parseInt(difference / 86400)}d`;
-  } else if (difference >= 604800 && difference < 31536000) {
-    let getDate = userPostdate.getDate();
-    let getMonth = userPostdate.getMonth();
-    let getHour = userPostdate.getHours();
-    let getMinute = userPostdate.getMinutes();
-    uploadedTime = `${monthNames[getMonth]} ${getDate} at ${getHour}:${getMinute}`;
-  } else {
-    let getDate = userPostdate.getDate();
-    let getYear = userPostdate.getFullYear();
-    let getMonth = userPostdate.getMonth();
-    uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
-  }
 
   const like = async () => {
     try {
@@ -183,51 +144,15 @@ const PostBox = (props) => {
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
-        <div className="HomePage_Feed_Image_Container">
-          {postInformation.postPicture === undefined ? (
-            ""
-          ) : (
-            <img src={postInformation.postPicture} alt="post" />
-          )}
-        </div>
-        <div className="HomePage_Feed_User_Caption_Container">
-          <p>{postInformation.postCaption}</p>
-        </div>
+        <PostImage postPicture={postInformation.postPicture} />
+        <PostCaption postCaption={postInformation.postCaption} />
         <div className="HomePage_Feed_Info_Container">
-          <div className="HomePage_Feed_Info_User_Image">
-            <img
-              src={
-                postInformation.userPicture === undefined
-                  ? User_Profile_Icon
-                  : postInformation.userPicture
-              }
-              onClick={() => {
-                history.push(`/u/profile/${postInformation.userID}/posts`);
-              }}
-              alt="user"
-            />
-          </div>
-          <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
-            <div className="HomePage_Feed_User_Name_Info_Container">
-              <p
-                className="HomePage_Feed_User_ID_Text"
-                onClick={() => {
-                  history.push(`/u/profile/${postInformation.userID}/posts`);
-                }}
-              >
-                {postInformation.userID}
-              </p>
-              <p
-                className="HomePage_Feed_User_Name_Text"
-                onClick={() => {
-                  history.push(`/u/profile/${postInformation.userID}/posts`);
-                }}
-              >
-                {postInformation.userName}
-              </p>
-            </div>
-            <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>
-          </div>
+          <PostInfo
+            postUserID={postInformation.userID}
+            postUserName={postInformation.userName}
+            postUserPicture={postInformation.userPicture}
+            postDate={props.userFeedData.date}
+          />
           <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
             <div className="HomePage_Feed_Icon_Container" onClick={like}>
               {postInformation.isLikedPost ? (
