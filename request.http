@@ -1,5 +1,17 @@
+### User SignIn
+POST http://{{host}}/signin
+Content-Type: application/json
+
+{
+    "email": "{{signInEmail}}",
+    "password": "{{signInPassword}}"
+}
+
 ### Get Youtube Api Response
 GET http://{{host}}/youtube/search
+
+### Get Youtube home page videos
+GET http://{{host}}/youtube/home
 
 
 ### Get Youtube homepage videos
@@ -17,3 +29,54 @@ GET http://{{host}}/u/getFollowers/a82c8c5ec803d5556b56bb886b252166
 
 ### Get Following of User
 GET http://{{host}}/u/getFollowings/a82c8c5ec803d5556b56bb886b252166
+
+### Post Route =======================
+### Get User Posts data
+GET http://{{host}}/get/posts
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+### Get Post Comment
+POST http://{{host}}/get/comment
+Content-Type: application/json
+
+{
+    "postID":"",
+    "userID":"",
+    "id":""
+}
+
+
+# Setting Page Route ====================
+### Change Profile Picture using image url
+POST http://{{host}}/changeProfile/imgUrl
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+{
+    "imageUrl":""
+}
+
+### Change UserID of the user
+POST http://{{host}}/changeUserID
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+{
+    "newUserID": "RomanOjha"
+}
+
+### Change Display name of the user
+POST http://{{host}}/changeName
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+{
+    "newName":"Roman"
+}
+
+### Change Password of the user
+POST http://{{host}}/changePassword
+Cookie: {{AuthCookieName}}={{AuthCookieValue}}
+
+{
+    "oldPassword":"",
+    "newPassword":"",
+    "cNewPassword":"",
+}
