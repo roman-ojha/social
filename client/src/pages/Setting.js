@@ -54,6 +54,10 @@ const Setting = () => {
         toastError(resData.msg);
       }
       dispatch(stopProgressBar());
+      setSettingInputFieldData({
+        ...settingInputFieldData,
+        userID: "",
+      });
     } catch (err) {
       toastError(err.response.data.msg);
       dispatch(stopProgressBar());
@@ -72,6 +76,10 @@ const Setting = () => {
         toastError(resData.msg);
       }
       dispatch(stopProgressBar());
+      setSettingInputFieldData({
+        ...settingInputFieldData,
+        name: "",
+      });
     } catch (err) {
       toastError(err.response.data.msg);
       dispatch(stopProgressBar());
@@ -89,6 +97,12 @@ const Setting = () => {
         toastError(data.msg);
       }
       dispatch(stopProgressBar());
+      setSettingInputFieldData({
+        ...settingInputFieldData,
+        oldPassword: "",
+        newPassword: "",
+        cNewPassword: "",
+      });
     } catch (err) {
       toastError(err.response.data.msg);
       dispatch(stopProgressBar());
@@ -143,6 +157,10 @@ const Setting = () => {
       toastError(err.response.data.msg);
       dispatch(showLoadingSpinner(false));
     }
+    setSettingInputFieldData({
+      ...settingInputFieldData,
+      imgUrl: "",
+    });
   };
   useEffect(() => {
     // checking is url is image or not
