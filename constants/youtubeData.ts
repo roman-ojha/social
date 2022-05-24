@@ -1,4 +1,12 @@
-export default {
+type youtubeVideoDataType = {
+  homePageVideos: {
+    videoId: string;
+    title: string;
+    thumbnail: string;
+  }[];
+};
+
+const youtubeData: youtubeVideoDataType = {
   homePageVideos: [
     //   English Songs
     {
@@ -136,3 +144,5 @@ export default {
     },
   ],
 };
+
+export default youtubeData;
