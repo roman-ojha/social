@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Checkout code for release
         uses: actions/checkout@v2
+      # For right now no need to artifact
       # - name: Upload application artifact
       #   # upload the artifact first then download it
       #   uses: actions/upload-artifact@v3
