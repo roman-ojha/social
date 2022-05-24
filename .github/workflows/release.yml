@@ -16,13 +16,13 @@ jobs:
         with:
           name: static-site
           # name for our upload artifact
-      - name: Archive site content
-        # we would compress file to .zip file
+      - name: Archive Release
         uses: thedoctor0/zip-release@main
         with:
           type: "zip"
           filename: "release.zip"
           exclusions: "*.git* /*node_modules/* .editorconfig"
+        # we would compress file to .zip file
       - name: Generate Changelog
         id: generate-changelog
         uses: scottbrenner/generate-changelog-action@master
