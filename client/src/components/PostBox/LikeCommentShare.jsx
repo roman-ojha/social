@@ -6,14 +6,19 @@ import {
   stopProgressBar,
   startProgressBar,
 } from "../../services/redux-actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toastError } from "../../services/toast";
 
 const LikeCommentShare = (props) => {
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const dispatch = useDispatch();
-  const [postInformation, setPostInformation] = useState({
+  const [likeInfo, setLikeInfo] = useState({
     likeNo: props.userFeedData.likes.No,
-    commentNo: props.userFeedData.comments.No,
+    isLikedPost: props.userFeedData.likes.by.some(
+      (el) => el.user === userProfileDetailStore.id
+    ),
   });
 
   const like = async () => {
@@ -22,20 +27,20 @@ const LikeCommentShare = (props) => {
         postID: props.userFeedData.id,
         toUserId: props.userMainInformation.userID,
         toId: props.userMainInformation.id,
-        likeNo: postInformation.likeNo,
+        likeNo: likeInfo.likeNo,
       });
       const data = await res.data;
       if (data.success && res.status === 200 && !data.removed) {
         // Liked the post
-        setPostInformation({
-          ...postInformation,
+        setLikeInfo({
+          ...likeInfo,
           likeNo: data.likeNo,
           isLikedPost: true,
         });
       } else if (data.success && res.status === 200 && data.removed) {
         // Removed Like from the post Post
-        setPostInformation({
-          ...postInformation,
+        setLikeInfo({
+          ...likeInfo,
           likeNo: data.likeNo,
           isLikedPost: false,
         });
@@ -82,32 +87,34 @@ const LikeCommentShare = (props) => {
 
   return (
     <>
-      <div className="HomePage_Feed_Icon_Container" onClick={like}>
-        {postInformation.isLikedPost ? (
+      <div className="HomePage_Feed_Love_Comment_Share_Info_Container">
+        <div className="HomePage_Feed_Icon_Container" onClick={like}>
+          {likeInfo.isLikedPost ? (
+            <Icon
+              className="HomePage_Feed_Liked_Love_Icon"
+              icon="fluent:thumb-like-20-filled"
+            />
+          ) : (
+            <Icon
+              className="HomePage_Feed_UnLiked_Love_Icon"
+              icon="fluent:thumb-like-20-regular"
+            />
+          )}
+          <p>{likeInfo.likeNo}</p>
+        </div>
+        <div className="HomePage_Feed_Icon_Container">
           <Icon
-            className="HomePage_Feed_Liked_Love_Icon"
-            icon="fluent:thumb-like-20-filled"
+            className="HomePage_Feed__Comment_Icon"
+            icon="akar-icons:comment"
+            onClick={() => {
+              getComment();
+            }}
           />
-        ) : (
-          <Icon
-            className="HomePage_Feed_UnLiked_Love_Icon"
-            icon="fluent:thumb-like-20-regular"
-          />
-        )}
-        <p>{postInformation.likeNo}</p>
+          <p>{props.commentNo}</p>
+        </div>
+        <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
+        <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
       </div>
-      <div className="HomePage_Feed_Icon_Container">
-        <Icon
-          className="HomePage_Feed__Comment_Icon"
-          icon="akar-icons:comment"
-          onClick={() => {
-            getComment();
-          }}
-        />
-        <p>{postInformation.commentNo}</p>
-      </div>
-      <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
-      <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />
     </>
   );
 };
