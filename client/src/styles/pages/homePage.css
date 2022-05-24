@@ -191,6 +191,9 @@
   margin-bottom: 0.5rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 .MaxView_UserPost_Image {
   width: 80%;
