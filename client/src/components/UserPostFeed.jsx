@@ -275,20 +275,9 @@ const UserPostFeed = (props) => {
                       ? postInformation.postCommentInfo.picture
                       : User_Profile_Icon
                   }
-                  onClick={() => {
-                    history.push(
-                      `/u/profile/${postInformation.postCommentInfo.userID}/posts`
-                    );
-                  }}
                 />
                 <div>
-                  <h3
-                    onClick={() => {
-                      history.push(
-                        `/u/profile/${postInformation.postCommentInfo.userID}/posts`
-                      );
-                    }}
-                  >
+                  <h3 onClick={() => {}}>
                     {postInformation.postCommentInfo.userID}
                   </h3>
                   <p>{postInformation.postCommentInfo.comment}</p>

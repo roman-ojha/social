@@ -214,6 +214,7 @@ export default {
           msg: "Can't be able to complete action",
         });
       }
+
       if (commentRes?.posts[0].id !== postID) {
         return res.status(500).json(<ResponseObject>{
           success: false,
@@ -240,11 +241,6 @@ export default {
         // and finding post which is {getPastDate} days early
         {
           id: rootUser.id,
-          // posts: {
-          //   $elemMatch: {
-          //     date: { $gt: dateGivenDaysAgo },
-          //   },
-          // },
         },
         {
           posts: { $slice: -20 },

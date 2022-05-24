@@ -12,7 +12,6 @@ fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
 export default {
   main: async (req: Request, res: Response): Promise<object> => {
     // writing logic to get all rootUser and rootUser follow user post
-    // console.log(req.rootUser.friends);
     try {
       const rootUser = req.rootUser;
       const currentDate = new Date();
@@ -213,7 +212,6 @@ export default {
               commentedUserId.push(comment.user);
             }
             // userID[resRootUserFollowingUserPostData[i].id] = userIdFromSameUserPostsComment;
-            // console.log(posts[j].comments.by[posts[j].comments.by.length - 1]);
           }
         }
 
@@ -242,11 +240,10 @@ export default {
                 picture: num.picture,
                 userID: num.userID,
               }));
-              // console.log(newUser);
               const newObj = {
                 ...obj,
                 comments: {
-                  No: obj.No,
+                  No: obj.comments.No,
                   by: [
                     {
                       user: lastCommented.user,
@@ -401,7 +398,6 @@ export default {
         data: resData,
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error, Please Try again letter",
