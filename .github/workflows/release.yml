@@ -11,6 +11,18 @@ jobs:
     steps:
       - name: Checkout code for release
         uses: actions/checkout@v2
+      - name: Download site content
+      - uses: actions/download-artifact@v3
+        with:
+          name: static-site
+          # name for our upload artifact
+      - name: Archive site content
+        # we would compress file to .zip file
+        uses: thedoctor0/zip-release@main
+        with:
+          type: "zip"
+          filename: "release.zip"
+          exclusions: "*.git* /*node_modules/* .editorconfig"
       - name: Generate Changelog
         id: generate-changelog
         uses: scottbrenner/generate-changelog-action@master
@@ -39,6 +51,7 @@ jobs:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           # steps.<unique_identifier(id)_for_to_create_release_to_get_it's_output_upload_url>
           # "create-new-release" is identifier that we define on the top
-          asset_path: ./site.zip
+          asset_path: ./release.zip
+          # name of the zip file that we archived
           asset_name: ${{ secrets.APPLICATION_NAME }}-${{ github.ref }}.zip
           asset_content_type: application/zip
