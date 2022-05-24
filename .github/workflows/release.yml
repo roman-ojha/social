@@ -26,6 +26,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             ${{ steps.generate-changelog.outputs.changelog }}
+          # steps: referencing previous step
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -38,6 +39,6 @@ jobs:
           upload_url: ${{ steps.create-new-release.outputs.upload_url }}
           # steps.<unique_identifier(id)_for_to_create_release_to_get_it's_output_upload_url>
           # "create-new-release" is identifier that we define on the top
-          asset_path: ./${{ secrets.APPLICATION_NAME }}.zip
+          asset_path: ./site.zip
           asset_name: ${{ secrets.APPLICATION_NAME }}-${{ github.ref }}.zip
           asset_content_type: application/zip
