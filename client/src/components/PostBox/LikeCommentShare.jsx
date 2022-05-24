@@ -60,6 +60,7 @@ const LikeCommentShare = (props) => {
       const res = await Api.getComment({
         postID: props.userFeedData.id,
         userID: props.userMainInformation.userID,
+        id: props.userMainInformation.id,
       });
       const data = await res.data;
       if (res.status === 200 && data.success) {

@@ -188,16 +188,16 @@ export default {
   },
   getComment: async (req: Request, res: Response) => {
     try {
-      const { postID, userID } = req.body;
-      if (!postID || !userID) {
+      const { postID, userID, id } = req.body;
+      if (!postID || !userID || !id) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Haven't got postID & userID",
+          msg: "Haven't got postID & userID & id of user",
         });
       }
-      const commentRes = await userDetail.findOne(
+      const postRes = await userDetail.findOne(
         {
-          userID: userID,
+          id: id,
         },
         {
           _id: 0,
@@ -208,25 +208,71 @@ export default {
           },
         }
       );
-      if (!commentRes) {
+      if (!postRes) {
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Can't be able to complete action",
         });
       }
 
-      if (commentRes?.posts[0].id !== postID) {
+      if (postRes.posts[0].id !== postID) {
         return res.status(500).json(<ResponseObject>{
           success: false,
           msg: "Some problem occur, please report this issues on github repo",
         });
       }
+      const commentRes = postRes.posts[0].comments;
+
+      let commentedUserId: string[] = [];
+      for (let i = 0; i < commentRes.by.length; i++) {
+        const userInfo = commentRes.by[i];
+        if (userInfo) {
+          commentedUserId.push(userInfo.user);
+        }
+      }
+
+      const resAllCommentedUser = await userDetail.find(
+        { id: { $in: commentedUserId } },
+        {
+          _id: 0,
+          userID: 1,
+          picture: 1,
+          id: 1,
+        }
+      );
+
+      const mergeArrays = (arr1, arr2) => {
+        return arr1.map((obj) => {
+          const numbers = arr2.filter((nums) => nums.id === obj.user);
+          if (!numbers.length) {
+            return obj;
+          }
+          const newUser = numbers.map((num) => ({
+            picture: num.picture,
+            userID: num.userID,
+          }));
+          const newObj = {
+            id: obj.user,
+            comment: obj.comment,
+            picture: newUser[0].picture,
+            userID: newUser[0].userID,
+          };
+          return newObj;
+        });
+      };
+
+      const finalComments = {
+        No: commentRes.No,
+        by: mergeArrays(commentRes.by, resAllCommentedUser),
+      };
+
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successful",
-        comment: commentRes?.posts[0].comments,
+        comment: finalComments,
       });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!!, please try again later",
