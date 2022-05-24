@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import "../../styles/components/postBox.css";
 import PostImage from "./PostImage";
 import PostCaption from "./PostCaption";
 import PostInfo from "./PostInfo";
 import LikeCommentShare from "./LikeCommentShare";
 import CommentField from "./CommentField";
+import CommentedUser from "./CommentedUser";
 
 const PostBox = (props) => {
-  const [postInformation, setPostInformation] = useState({
+  const [postInformation] = useState({
     postPicture: props.userFeedData.picture
       ? props.userFeedData.picture.url
       : undefined,
@@ -45,27 +45,7 @@ const PostBox = (props) => {
           />
         </div>
         <div className="UserPostFeed_Comment_Box">
-          <div className="UserPostFeed_CommentBox_CommentList">
-            {commentInfo.postCommentInfo ? (
-              <div className="UserPostFeed_CommentBox_UserComment">
-                <img
-                  src={
-                    commentInfo.postCommentInfo.picture
-                      ? commentInfo.postCommentInfo.picture
-                      : User_Profile_Icon
-                  }
-                />
-                <div>
-                  <h3 onClick={() => {}}>
-                    {commentInfo.postCommentInfo.userID}
-                  </h3>
-                  <p>{commentInfo.postCommentInfo.comment}</p>
-                </div>
-              </div>
-            ) : (
-              <></>
-            )}
-          </div>
+          <CommentedUser commentInfo={commentInfo} />
           <CommentField
             userFeedData={props.userFeedData}
             userMainInformation={props.userMainInformation}

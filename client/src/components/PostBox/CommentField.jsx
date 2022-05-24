@@ -18,7 +18,7 @@ const CommentField = (props) => {
   );
   const [commentInputField, setCommentInputField] = useState("");
 
-  const comment = async (props) => {
+  const comment = async () => {
     try {
       dispatch(startProgressBar());
       if (isEmptyString(commentInputField)) {
