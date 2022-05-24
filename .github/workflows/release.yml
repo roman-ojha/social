@@ -11,11 +11,17 @@ jobs:
     steps:
       - name: Checkout code for release
         uses: actions/checkout@v2
-      - name: Download site content
+      - name: Upload application artifact
+        # upload the artifact first then download it
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ secrets.APPLICATION_NAME }}-artifact
+          path: out/
+      - name: Download application artifact
         uses: actions/download-artifact@v3
         with:
-          name: static-site
-          # name for our upload artifact
+          name: ${{ secrets.APPLICATION_NAME }}-artifact
+          # name : artifact name that we upload first
       - name: Archive Release
         uses: thedoctor0/zip-release@main
         with:
