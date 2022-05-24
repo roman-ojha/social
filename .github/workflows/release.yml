@@ -15,12 +15,13 @@ jobs:
         # upload the artifact first then download it
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ secrets.APPLICATION_NAME }}-artifact
-          path: out/
+          name: artifact-app
+          path: ./
+          # path : which path that you want to upload
       - name: Download application artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ secrets.APPLICATION_NAME }}-artifact
+          name: artifact-app
           # name : artifact name that we upload first
       - name: Archive Release
         uses: thedoctor0/zip-release@main
