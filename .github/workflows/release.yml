@@ -24,6 +24,17 @@ jobs:
       #   with:
       #     name: artifact-app
       # name : artifact name that we upload first
+      - name: Extract tag name
+        # this step will extract tag version from the tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
+      - name: Echo Tag name
+        run: echo ${{ steps.tag.outputs.result }}
+        ## version name: steps.<step_identifier>.outputs.result
       - name: Archive Release
         uses: thedoctor0/zip-release@main
         with:
@@ -61,5 +72,5 @@ jobs:
           # "create-new-release" is identifier that we define on the top
           asset_path: ./release.zip
           # name of the zip file that we archived
-          asset_name: ${{ secrets.APPLICATION_NAME }}-${{ github.ref }}.zip
+          asset_name: ${{ secrets.APPLICATION_NAME }}-${{ steps.tag.outputs.result }}.zip
           asset_content_type: application/zip
