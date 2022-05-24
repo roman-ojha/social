@@ -1,12 +1,12 @@
 import React from "react";
-import UserPostFeed from "../UserPostFeed";
+import PostBox from "../PostBox/PostBox";
 
 const UserPosts = (props) => {
   return (
     <>
       <>
         {props.profilePageData.posts.map((value, index) => (
-          <UserPostFeed
+          <PostBox
             userMainInformation={{
               // store searched user essintal information
               name: props.profilePageData.name,

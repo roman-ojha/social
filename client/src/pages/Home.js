@@ -2,7 +2,7 @@ import React from "react";
 import "emoji-mart/css/emoji-mart.css";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useSelector } from "react-redux";
-import UserPostFeed from "../components/UserPostFeed";
+import PostBox from "../components/PostBox/PostBox";
 import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
@@ -24,6 +24,7 @@ const Home = () => {
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
   );
+
   return (
     <>
       <LoadingSpinner />
@@ -42,7 +43,7 @@ const Home = () => {
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value, index) => {
             return (
-              <UserPostFeed
+              <PostBox
                 key={index}
                 // sending user main information
                 userMainInformation={userProfileDetailStore}
@@ -59,7 +60,7 @@ const Home = () => {
             date5MinutesAgo.setMinutes(date5MinutesAgo.getMinutes() - 5);
             if (date5MinutesAgo.getTime() < new Date(post.date).getTime()) {
               return (
-                <UserPostFeed
+                <PostBox
                   key={index}
                   userMainInformation={userProfileDetailStore}
                   userFeedData={post}

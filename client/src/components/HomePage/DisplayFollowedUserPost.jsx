@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import UserPostFeed from "../UserPostFeed";
+import PostBox from "../PostBox/PostBox";
 const DisplayFollowedUserPost = () => {
   const followedUserPostDataStore = useSelector(
     (state) => state.setFollowedUserPostDataReducer
@@ -21,7 +21,7 @@ const DisplayFollowedUserPost = () => {
           continue;
         }
         userPostFeedElement.push(
-          <UserPostFeed
+          <PostBox
             key={followedUserPostDataStore[j].posts[i].id}
             userMainInformation={followedUserPostDataStore[j]}
             userFeedData={followedUserPostDataStore[j].posts[i]}

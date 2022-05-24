@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
+import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import "../styles/components/userPostFeed.css";
+import "../../styles/components/postBox.css";
 import { useHistory } from "react-router-dom";
 import {
   commentBoxAction,
   stopProgressBar,
   startProgressBar,
-} from "../services/redux-actions";
-import { isEmptyString } from "../funcs/isEmptyString";
-import { toastWarn, toastError, toastSuccess } from "../services/toast";
-import Api from "../services/api/components/userPostFeed";
+} from "../../services/redux-actions";
+import { isEmptyString } from "../../funcs/isEmptyString";
+import { toastWarn, toastError, toastSuccess } from "../../services/toast";
+import Api from "../../services/api/components/postBox";
 
-const UserPostFeed = (props) => {
+const PostBox = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
   let uploadedTime;
@@ -322,4 +322,4 @@ const UserPostFeed = (props) => {
   );
 };
 
-export default UserPostFeed;
+export default PostBox;
