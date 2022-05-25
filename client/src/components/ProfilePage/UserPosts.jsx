@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PostBox from "../PostBox/PostBox";
+import { useSelector } from "react-redux";
 
 const UserPosts = (props) => {
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+
+  useEffect(() => {
+    if (
+      rootUserProfileDataState.getRootUserProfileData &&
+      !rootUserProfileDataState.fetchedRootUserProfileData &&
+      props.profilePageData.userID === userProfileDetailStore.userID
+    ) {
+      // console.log("need to fetch");
+    }
+  }, [rootUserProfileDataState]);
+
   return (
     <>
       <>

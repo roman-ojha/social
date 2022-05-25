@@ -21,6 +21,10 @@ const Menu = () => {
     (state) => state.setUserProfileDetailReducer
   );
 
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
+
   const fetchUserPostData = async () => {
     try {
       const resPost = await profileApi.getUserPosts();
@@ -103,9 +107,14 @@ const Menu = () => {
                 isRootUserFollowed: false,
               };
               dispatch(profilePageDataAction(userObj));
-              // dispatch(setRootUserProfileDataState({
-
-              // }))
+              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                dispatch(
+                  setRootUserProfileDataState({
+                    fetchedRootUserProfileData: false,
+                    getRootUserProfileData: true,
+                  })
+                );
+              }
             }}
           >
             <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>

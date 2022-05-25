@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instance as axios } from "../services/axios";
-import { profilePageDataAction } from "../services/redux-actions/index";
+import {
+  profilePageDataAction,
+  setRootUserProfileDataState,
+  setRootUserPostData,
+} from "../services/redux-actions/index";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Helmet } from "react-helmet";
@@ -22,12 +26,19 @@ const Profile = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
 
   useEffect(async () => {
-    if (params.userID === userProfileDetailStore.userID) {
-      dispatch(profilePageDataAction(userProfileDetailStore));
-      setFetchedAllData(true);
-    } else if (profilePageData.userID != params.userID) {
+    // if (params.userID === userProfileDetailStore.userID) {
+    //   dispatch(profilePageDataAction(userProfileDetailStore));
+    //   setFetchedAllData(true);
+    // }
+    if (
+      profilePageData.userID != params.userID &&
+      !rootUserProfileDataState.getRootUserProfileData
+    ) {
       try {
         // fetching user Detail which current user had search
         const res = await axios({
@@ -45,6 +56,20 @@ const Profile = () => {
         };
         dispatch(profilePageDataAction(userObj));
         setFetchedAllData(true);
+        if (params.userID === userProfileDetailStore.userID) {
+          dispatch(
+            setRootUserPostData({
+              fetchedPostData: true,
+              posts: userData.searchedUser.posts,
+            })
+          );
+          dispatch(
+            setRootUserProfileDataState({
+              fetchedRootUserProfileData: true,
+              getRootUserProfileData: false,
+            })
+          );
+        }
       } catch (err) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
