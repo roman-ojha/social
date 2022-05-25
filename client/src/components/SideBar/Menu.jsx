@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   profilePageDataAction,
   setRootUserPostData,
+  setRootUserProfileDataState,
 } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
 import profileApi from "../../services/api/pages/profileApi";
@@ -102,6 +103,9 @@ const Menu = () => {
                 isRootUserFollowed: false,
               };
               dispatch(profilePageDataAction(userObj));
+              // dispatch(setRootUserProfileDataState({
+
+              // }))
             }}
           >
             <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>

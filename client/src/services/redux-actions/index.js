@@ -77,6 +77,13 @@ export const changeRootUserUserIDAction = (data) => {
   };
 };
 
+export const setRootUserProfileDataState = (data) => {
+  return {
+    type: "setRootUserProfileDataState",
+    payload: data,
+  };
+};
+
 export const changeRootUserNameAction = (data) => {
   return {
     type: "changeRootUserName",

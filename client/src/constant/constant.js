@@ -6,6 +6,6 @@ export default {
     screen320: 320,
     screen280: 280,
   },
-  applicationName: "Roman",
+  applicationName: "Social",
   applicationGithubUrl: "https://github.com/Roman-Ojha/Social",
 };
