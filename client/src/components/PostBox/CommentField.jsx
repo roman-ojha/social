@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { useDispatch } from "react-redux";
 import {
   startProgressBar,
   stopProgressBar,
+  profilePageDataAction,
+  setRootUserProfileDataState,
 } from "../../services/redux-actions";
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../../services/toast";
 import Api from "../../services/api/components/postBox";
+import { useHistory } from "react-router-dom";
 
 const CommentField = (props) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
   const [commentInputField, setCommentInputField] = useState("");
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
 
   const comment = async () => {
     try {
@@ -44,6 +50,7 @@ const CommentField = (props) => {
             commentNo: props.commentInfo.commentNo + 1,
           });
           toastSuccess(data.msg);
+          history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
         }
       }
       dispatch(stopProgressBar());
@@ -67,7 +74,23 @@ const CommentField = (props) => {
               ? userProfileDetailStore.picture
               : User_Profile_Icon
           }
-          img="User"
+          img={userProfileDetailStore.userID}
+          onClick={() => {
+            const userObj = {
+              ...userProfileDetailStore,
+              isRootUserFollowed: false,
+            };
+            dispatch(profilePageDataAction(userObj));
+            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+              dispatch(
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                })
+              );
+            }
+            history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
+          }}
         />
         <form
           className="UserPostFeed_CommentBox_Form"

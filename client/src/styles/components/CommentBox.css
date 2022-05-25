@@ -104,6 +104,7 @@
   border-radius: 50%;
   margin-right: 0.5rem;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .CommentBox_UserComment div {
@@ -119,6 +120,11 @@
   max-width: 10rem;
   text-overflow: ellipsis;
   overflow: hidden;
+  cursor: pointer;
+}
+
+.CommentBox_UserComment div h3:hover {
+  text-decoration: underline;
 }
 
 .CommentBox_UserComment div p {

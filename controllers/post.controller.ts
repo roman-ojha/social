@@ -378,13 +378,11 @@ export default {
       };
 
       const userPosts = mergeArrays(resRootUser.posts, resAllCommentedUser);
-      setTimeout(() => {
-        return res.status(200).send(<ResponseObject>{
-          success: true,
-          msg: "Successful",
-          posts: userPosts,
-        });
-      }, 3000);
+      return res.status(200).send(<ResponseObject>{
+        success: true,
+        msg: "Successful",
+        posts: userPosts,
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
