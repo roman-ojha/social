@@ -76,7 +76,7 @@ const Profile = () => {
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }
-        history.push("/u");
+        history.push("/u/home");
       }
     } else {
       setFetchedAllData(true);
