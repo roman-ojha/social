@@ -10,6 +10,7 @@ import ProgressBar from "../components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
+import constant from "../constant/constant";
 
 let previousSelectGenderElement;
 const SignUp = () => {
@@ -153,7 +154,7 @@ const SignUp = () => {
         </Helmet>
         <div className="SignUp_Page_Left_Half">
           <div className="SignUp_Page_Title_Container">
-            <h1 className="SignUp_Page_Logo">Social</h1>
+            <h1 className="SignUp_Page_Logo">{constant.applicationName}</h1>
             <h3 className="SignUp_Page_Sign_Up_Logo">Sign Up</h3>
           </div>
           <img
