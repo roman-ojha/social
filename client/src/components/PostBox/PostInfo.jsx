@@ -1,7 +1,19 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
+import GlobalApi from "../../services/api/global";
+import { useDispatch, useSelector } from "react-redux";
+import { toastError } from "../../services/toast";
+import {
+  startProgressBar,
+  stopProgressBar,
+  profilePageDataAction,
+  setRootUserProfileDataState,
+} from "../../services/redux-actions";
+import { useHistory } from "react-router-dom";
 
 const PostInfo = (props) => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   let uploadedTime;
   const userPostdate = new Date(props.postDate);
   // const userPostUTCTime = userPostdate.toUTCString();
@@ -42,6 +54,46 @@ const PostInfo = (props) => {
     let getMonth = userPostdate.getMonth();
     uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
   }
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
+
+  const routeToProfile = async (userID) => {
+    try {
+      dispatch(startProgressBar());
+      const res = await GlobalApi.getFriendData(userID);
+      const userData = await res.data;
+      if (res.status === 200 && userData.success) {
+        // success
+        const userObj = {
+          ...userData.searchedUser,
+          isRootUserFollowed: userData.isRootUserFollowed,
+        };
+        dispatch(profilePageDataAction(userObj));
+        if (userID === userProfileDetailStore.userID) {
+          dispatch(
+            setRootUserProfileDataState({
+              fetchedRootUserProfileData: true,
+              getRootUserProfileData: false,
+            })
+          );
+        }
+        history.push(`/u/profile/${userID}/posts`);
+      } else {
+        // error
+        toastError(userData.msg);
+      }
+      dispatch(stopProgressBar());
+    } catch (err) {
+      if (err.response.data.success === false) {
+        toastError(err.response.data.msg);
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+      dispatch(stopProgressBar());
+    }
+  };
+
   return (
     <>
       <div className="HomePage_Feed_Info_User_Image">
@@ -52,12 +104,29 @@ const PostInfo = (props) => {
               : props.postUserPicture
           }
           alt="user"
+          onClick={() => {
+            routeToProfile(props.postUserID);
+          }}
         />
       </div>
       <div className="HomePage_Feed_User_Name_And_ID_Info_Container">
         <div className="HomePage_Feed_User_Name_Info_Container">
-          <p className="HomePage_Feed_User_ID_Text">{props.postUserID}</p>
-          <p className="HomePage_Feed_User_Name_Text">{props.postUserName}</p>
+          <p
+            className="HomePage_Feed_User_ID_Text"
+            onClick={() => {
+              routeToProfile(props.postUserID);
+            }}
+          >
+            {props.postUserID}
+          </p>
+          <p
+            className="HomePage_Feed_User_Name_Text"
+            onClick={() => {
+              routeToProfile(props.postUserID);
+            }}
+          >
+            {props.postUserName}
+          </p>
         </div>
         <p className="HomePage_Feed_User_Time_Text">{uploadedTime}</p>
       </div>

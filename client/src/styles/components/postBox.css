@@ -170,12 +170,18 @@
   object-fit: cover;
 }
 
-.UserPostFeed_CommentBox_Input_Field {
+.UserPostFeed_CommentBox_Form {
   width: 70%;
   height: 100%;
   border-radius: 10px;
-  border-width: 0px;
   background-color: var(--secondary-color-point-1-transparent-0);
+}
+
+.UserPostFeed_CommentBox_Input_Field {
+  width: 100%;
+  height: 100%;
+  border-width: 0px;
+  background-color: transparent;
   font-family: var(--primary-font-family);
 }
 

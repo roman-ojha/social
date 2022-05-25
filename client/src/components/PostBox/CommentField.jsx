@@ -69,15 +69,26 @@ const CommentField = (props) => {
           }
           img="User"
         />
-        <input
-          className="UserPostFeed_CommentBox_Input_Field"
-          placeholder="Give some thought on this post..."
-          type="text"
-          value={commentInputField}
-          onChange={(e) => {
-            setCommentInputField(e.target.value);
+        <form
+          className="UserPostFeed_CommentBox_Form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            comment();
           }}
-        />
+        >
+          <input
+            className="UserPostFeed_CommentBox_Input_Field"
+            placeholder="Give some thought on this post..."
+            type="text"
+            value={commentInputField}
+            onChange={(e) => {
+              setCommentInputField(e.target.value);
+            }}
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          />
+        </form>
         <Icon
           className="UserPostFeed_CommentBox_Input_Emoji"
           icon="fluent:emoji-24-regular"
