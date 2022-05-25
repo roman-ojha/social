@@ -3,6 +3,8 @@ import fs from "fs";
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
 import ResPonseUserPost from "../interface/resUserPost.js";
+import { UserDocumentPosts } from "../interface/userDocument.js";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -82,32 +84,37 @@ export default {
           }
         );
 
-        const mergeArrays = (arr1, arr2) => {
-          return arr1.map((obj) => {
-            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+        const mergeArrays = (
+          userPosts: UserDocumentPosts[],
+          commentedUser: (SchemaMethodInstance & {
+            _id: any;
+          })[]
+        ) => {
+          return userPosts.map((post) => {
+            const lastCommented = post.comments.by[post.comments.by.length - 1];
             if (lastCommented) {
-              const numbers = arr2.filter(
-                (nums) => nums.id === lastCommented.user
+              const filteredUser = commentedUser.filter(
+                (user) => user.id === lastCommented.user
               );
-              if (!numbers.length) {
-                // obj.phone = numbers;
-                return obj;
+              if (!filteredUser.length) {
+                // post.phone = filteredUser;
+                return post;
               }
-              const newUser = numbers.map((num) => ({
-                picture: num.picture,
-                userID: num.userID,
+              const newUser = filteredUser.map((user) => ({
+                picture: user.picture,
+                userID: user.userID,
               }));
               const newObj: ResPonseUserPost = {
-                // ...obj,
+                // ...post,
                 picture: {
-                  url: obj.picture.url,
+                  url: post.picture.url,
                 },
-                caption: obj.caption,
-                date: obj.date,
-                id: obj.id,
-                likes: obj.likes,
+                caption: post.caption,
+                date: post.date,
+                id: post.id,
+                likes: post.likes,
                 comments: {
-                  No: obj.comments.No,
+                  No: post.comments.No,
                   by: [
                     {
                       user: lastCommented.user,
@@ -120,7 +127,7 @@ export default {
               };
               return newObj;
             }
-            return obj;
+            return post;
           });
         };
         const finalRootUserData: RootUserResponseData = {
@@ -225,25 +232,30 @@ export default {
           }
         );
         let finalPostData: object[] = [];
-        const mergeArrays = (arr1, arr2) => {
-          return arr1.map((obj) => {
-            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+        const mergeArrays = (
+          userPosts: any[],
+          commentedUser: (SchemaMethodInstance & {
+            _id: any;
+          })[]
+        ) => {
+          return userPosts.map((post) => {
+            const lastCommented = post.comments.by[post.comments.by.length - 1];
             if (lastCommented) {
-              const numbers = arr2.filter(
-                (nums) => nums.id === lastCommented.user
+              const filteredUser = commentedUser.filter(
+                (user) => user.id === lastCommented.user
               );
-              if (!numbers.length) {
-                // obj.phone = numbers;
-                return obj;
+              if (!filteredUser.length) {
+                // post.phone = filteredUser;
+                return post;
               }
-              const newUser = numbers.map((num) => ({
-                picture: num.picture,
-                userID: num.userID,
+              const newUser = filteredUser.map((user) => ({
+                picture: user.picture,
+                userID: user.userID,
               }));
               const newObj = {
-                ...obj,
+                ...post,
                 comments: {
-                  No: obj.comments.No,
+                  No: post.comments.No,
                   by: [
                     {
                       user: lastCommented.user,
@@ -256,7 +268,7 @@ export default {
               };
               return newObj;
             }
-            return obj;
+            return post;
           });
         };
 
@@ -488,32 +500,37 @@ export default {
           }
         );
 
-        const mergeArrays = (arr1, arr2) => {
-          return arr1.map((obj) => {
-            const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+        const mergeArrays = (
+          userPosts: UserDocumentPosts[],
+          commentedUser: (SchemaMethodInstance & {
+            _id: any;
+          })[]
+        ) => {
+          return userPosts.map((post) => {
+            const lastCommented = post.comments.by[post.comments.by.length - 1];
             if (lastCommented) {
-              const numbers = arr2.filter(
-                (nums) => nums.id === lastCommented.user
+              const filteredUser = commentedUser.filter(
+                (user) => user.id === lastCommented.user
               );
-              if (!numbers.length) {
-                // obj.phone = numbers;
-                return obj;
+              if (!filteredUser.length) {
+                // post.phone = filteredUser;
+                return post;
               }
-              const newUser = numbers.map((num) => ({
-                picture: num.picture,
-                userID: num.userID,
+              const newUser = filteredUser.map((user) => ({
+                picture: user.picture,
+                userID: user.userID,
               }));
               const newObj: ResPonseUserPost = {
-                // ...obj,
+                // ...post,
                 picture: {
-                  url: obj.picture.url,
+                  url: post.picture.url,
                 },
-                caption: obj.caption,
-                date: obj.date,
-                id: obj.id,
-                likes: obj.likes,
+                caption: post.caption,
+                date: post.date,
+                id: post.id,
+                likes: post.likes,
                 comments: {
-                  No: obj.comments.No,
+                  No: post.comments.No,
                   by: [
                     {
                       user: lastCommented.user,
@@ -526,7 +543,7 @@ export default {
               };
               return newObj;
             }
-            return obj;
+            return post;
           });
         };
         const finalSearchedUserData: SearchedUserResponseData = {

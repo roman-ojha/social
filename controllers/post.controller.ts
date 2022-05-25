@@ -3,7 +3,10 @@ import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
 import ResPonseUserPost from "../interface/resUserPost.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
-import { UserDocumentPostsComments } from "interface/userDocument.js";
+import {
+  UserDocumentPosts,
+  UserDocumentPostsComments,
+} from "../interface/userDocument.js";
 
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
@@ -328,32 +331,36 @@ export default {
         }
       );
 
-      const mergeArrays = (arr1, arr2) => {
-        return arr1.map((obj) => {
-          const lastCommented = obj.comments.by[obj.comments.by.length - 1];
+      const mergeArrays = (
+        userPosts: UserDocumentPosts[],
+        commentedUser: (SchemaMethodInstance & {
+          _id: any;
+        })[]
+      ) => {
+        return userPosts.map((post) => {
+          const lastCommented = post.comments.by[post.comments.by.length - 1];
           if (lastCommented) {
-            const numbers = arr2.filter(
-              (nums) => nums.id === lastCommented.user
+            const numbers = commentedUser.filter(
+              (user) => user.id === lastCommented.user
             );
             if (!numbers.length) {
               // obj.phone = numbers;
-              return obj;
+              return post;
             }
             const newUser = numbers.map((num) => ({
               picture: num.picture,
               userID: num.userID,
             }));
             const newObj: ResPonseUserPost = {
-              // ...obj,
               picture: {
-                url: obj.picture.url,
+                url: post.picture.url,
               },
-              caption: obj.caption,
-              date: obj.date,
-              id: obj.id,
-              likes: obj.likes,
+              caption: post.caption,
+              date: post.date,
+              id: post.id,
+              likes: post.likes,
               comments: {
-                No: obj.comments.No,
+                No: post.comments.No,
                 by: [
                   {
                     user: lastCommented.user,
@@ -366,7 +373,7 @@ export default {
             };
             return newObj;
           }
-          return obj;
+          return post;
         });
       };
 
