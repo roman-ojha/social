@@ -4,7 +4,12 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-import { startProgressBar, stopProgressBar } from "../services/redux-actions";
+import {
+  profilePageDataAction,
+  setRootUserProfileDataState,
+  startProgressBar,
+  stopProgressBar,
+} from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
 import constant from "../constant/constant";
@@ -18,6 +23,10 @@ const MoreProfileBox = () => {
   const moreProfileBoxState = useSelector(
     (state) => state.moreProfileBoxReducer
   );
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
+
   const date = new Date();
   const userLogOut = async () => {
     try {
@@ -48,6 +57,21 @@ const MoreProfileBox = () => {
           <NavLink
             to={`/u/profile/${userProfileDetailStore.userID}/posts`}
             className="More_Profile_Box_User_Info"
+            onClick={() => {
+              const userObj = {
+                ...userProfileDetailStore,
+                isRootUserFollowed: false,
+              };
+              dispatch(profilePageDataAction(userObj));
+              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                dispatch(
+                  setRootUserProfileDataState({
+                    fetchedRootUserProfileData: false,
+                    getRootUserProfileData: true,
+                  })
+                );
+              }
+            }}
           >
             <img
               src={

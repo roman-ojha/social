@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  profilePageDataAction,
+  setRootUserProfileDataState,
   userPostResponseData,
   homePageUserPostFieldDataAction,
   showLoadingSpinner,
@@ -13,7 +15,7 @@ import { Icon } from "@iconify/react";
 import Api from "../../services/api/pages/homeApi";
 import { toastError, toastSuccess } from "../../services/toast";
 
-const MaxViewPostField = (props) => {
+const MaxViewPostField = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
     useState(false);
   const history = useHistory();
@@ -26,6 +28,9 @@ const MaxViewPostField = (props) => {
   );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
+  );
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
   );
 
   const EmojiMart = () => {
@@ -113,6 +118,19 @@ const MaxViewPostField = (props) => {
               }
               className="HomePage_MaxField_UserPost_Field_Image"
               onClick={() => {
+                const userObj = {
+                  ...userProfileDetailStore,
+                  isRootUserFollowed: false,
+                };
+                dispatch(profilePageDataAction(userObj));
+                if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                  dispatch(
+                    setRootUserProfileDataState({
+                      fetchedRootUserProfileData: false,
+                      getRootUserProfileData: true,
+                    })
+                  );
+                }
                 history.push(
                   `/u/profile/${userProfileDetailStore.userID}/posts`
                 );

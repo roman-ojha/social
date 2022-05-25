@@ -3,7 +3,11 @@ import { Helmet } from "react-helmet";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setHomePagePostFieldViewValue } from "../../services/redux-actions";
+import {
+  setHomePagePostFieldViewValue,
+  profilePageDataAction,
+  setRootUserProfileDataState,
+} from "../../services/redux-actions";
 import constant from "../../constant/constant";
 
 const MinViewPostField = () => {
@@ -15,6 +19,9 @@ const MinViewPostField = () => {
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
 
   return (
     <>
@@ -30,6 +37,19 @@ const MinViewPostField = () => {
           }
           className="HomePage_MinField_UserPost_Field_Image"
           onClick={() => {
+            const userObj = {
+              ...userProfileDetailStore,
+              isRootUserFollowed: false,
+            };
+            dispatch(profilePageDataAction(userObj));
+            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+              dispatch(
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                })
+              );
+            }
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
           alt="profile"

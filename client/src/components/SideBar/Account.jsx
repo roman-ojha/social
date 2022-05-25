@@ -8,6 +8,8 @@ import { toastSuccess, toastError } from "../../services/toast";
 import {
   startProgressBar,
   stopProgressBar,
+  profilePageDataAction,
+  setRootUserProfileDataState,
 } from "../../services/redux-actions";
 
 const Account = () => {
@@ -15,6 +17,10 @@ const Account = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
+
   const dispatch = useDispatch();
   const userLogOut = async () => {
     try {
@@ -54,6 +60,19 @@ const Account = () => {
             }
             className="MainPage_SideBar_User_Account_Img"
             onClick={() => {
+              const userObj = {
+                ...userProfileDetailStore,
+                isRootUserFollowed: false,
+              };
+              dispatch(profilePageDataAction(userObj));
+              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                dispatch(
+                  setRootUserProfileDataState({
+                    fetchedRootUserProfileData: false,
+                    getRootUserProfileData: true,
+                  })
+                );
+              }
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
             alt="profile"
@@ -61,6 +80,19 @@ const Account = () => {
           <h3
             className="MainPage_SideBar_User_Account_Name"
             onClick={() => {
+              const userObj = {
+                ...userProfileDetailStore,
+                isRootUserFollowed: false,
+              };
+              dispatch(profilePageDataAction(userObj));
+              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                dispatch(
+                  setRootUserProfileDataState({
+                    fetchedRootUserProfileData: false,
+                    getRootUserProfileData: true,
+                  })
+                );
+              }
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
           >

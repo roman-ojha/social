@@ -9,6 +9,8 @@ import {
   stopProgressBar,
   setNotificationData,
   messageListAction,
+  setRootUserProfileDataState,
+  profilePageDataAction,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
@@ -32,6 +34,9 @@ const MainPageMsgAndNtfBar = () => {
     (state) => state.moreProfileBoxReducer
   );
   const notificationBoxState = useSelector((state) => state.notificationBox);
+  const rootUserProfileDataState = useSelector(
+    (state) => state.rootUserProfileDataState
+  );
 
   const getNotificationData = async () => {
     dispatch(startProgressBar());
@@ -163,6 +168,19 @@ const MainPageMsgAndNtfBar = () => {
               : userProfileDetailStore.picture
           }
           onClick={() => {
+            const userObj = {
+              ...userProfileDetailStore,
+              isRootUserFollowed: false,
+            };
+            dispatch(profilePageDataAction(userObj));
+            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+              dispatch(
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                })
+              );
+            }
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
           alt="profile"
