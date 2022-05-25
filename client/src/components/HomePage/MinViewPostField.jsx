@@ -4,6 +4,7 @@ import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { setHomePagePostFieldViewValue } from "../../services/redux-actions";
+import constant from "../../constant/constant";
 
 const MinViewPostField = () => {
   const history = useHistory();
@@ -19,7 +20,7 @@ const MinViewPostField = () => {
     <>
       <div className="HomePage_MinView_UserPost_Field_Container">
         <Helmet>
-          <title>Social</title>
+          <title>{constant.applicationName}</title>
         </Helmet>
         <img
           src={

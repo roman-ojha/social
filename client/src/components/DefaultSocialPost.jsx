@@ -1,5 +1,6 @@
 import React from "react";
 import AppIcon from "../assets/icons/Social_Icon.ico";
+import constant from "../constant/constant";
 import "../styles/components/defaultSocialPost.css";
 
 const DefaultSocialPost = () => {
@@ -9,7 +10,7 @@ const DefaultSocialPost = () => {
         <div className="Default_Social_Post">
           <div className="Default_Social_Post_Image_View_Container">
             <img src={AppIcon} alt="social" />
-            <h1>Welcome to Social</h1>
+            <h1>Welcome to {constant.applicationName}</h1>
             <h2>The place where World start Connecting</h2>
           </div>
           <div className="Default_Social_Post_Info_Container">

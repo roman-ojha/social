@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
+import constant from "../constant/constant";
 
 const MoreProfileBox = () => {
   const history = useHistory();
@@ -81,16 +82,18 @@ const MoreProfileBox = () => {
           <div className="More_Profile_Box_App_Info">
             <p
               onClick={() => {
-                toastInfo(`Social ©️ ${date.getFullYear()}`);
+                toastInfo(
+                  `${constant.applicationName} ©️ ${date.getFullYear()}`
+                );
               }}
             >
-              Social &copy; {date.getFullYear()}
+              {constant.applicationName} &copy; {date.getFullYear()}
             </p>
             <Icon
               icon="akar-icons:github-fill"
               className="More_Profile_Box_Github_Icon"
               onClick={() => {
-                window.open("https://github.com/Roman-Ojha/Social", "_blank");
+                window.open(constant.applicationGithubUrl, "_blank");
               }}
             />
           </div>
