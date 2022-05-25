@@ -5,6 +5,7 @@ import "../styles/components/profileFriends.css";
 import { useHistory, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
+import { Helmet } from "react-helmet";
 import {
   setProfilePageFriends,
   setProfilePageFollowers,
@@ -131,6 +132,9 @@ const ProfileFriends = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{profilePageData.userID}/friends</title>
+      </Helmet>
       {userDetails.fetchedData ? (
         <div className="ProfilePage_Friends_Container">
           {userDetails.user.map((userDetail, index) => {

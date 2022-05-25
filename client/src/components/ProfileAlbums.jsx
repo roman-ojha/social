@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/components/profileAlbum.css";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 
 const ProfileAlbums = (props) => {
   const loadingContainerSpinnerStyle = {
@@ -30,6 +31,9 @@ const ProfileAlbums = (props) => {
 
   return (
     <>
+      <Helmet>
+        <title>{props.profilePageData.userID}/albums</title>
+      </Helmet>
       {props.profilePageData.userID === userProfileDetailStore.userID &&
       rootUserProfileDataState.fetchedRootUserProfileData === false ? (
         // if profile page is of rootUser and post data had not been fetched then we will run loading spinner

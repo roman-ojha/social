@@ -4,10 +4,14 @@ import { Icon } from "@iconify/react";
 import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Stories = () => {
   const history = useHistory();
   const userStoriesStore = useSelector((state) => state.userStoriesReducer);
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   useEffect(() => {
     const caption = [];
     const date = [];
@@ -120,6 +124,9 @@ const Stories = () => {
   });
   return (
     <>
+      <Helmet>
+        <title>{userProfileDetailStore.userID}/Stories</title>
+      </Helmet>
       <div id="Stories_Page_Container">
         <div id="carousel-stories-container">
           <div id="carousel-wrapper">

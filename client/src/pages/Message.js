@@ -5,6 +5,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import socket from "../services/socket";
+import { Helmet } from "react-helmet";
 import {
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
@@ -392,6 +393,9 @@ const Message = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Message</title>
+      </Helmet>
       <div className="MessagePage_Container">
         <div className="MainPage_MessageBox_Container">
           {mainPageInnerMessageBoxOnOffState ? (
