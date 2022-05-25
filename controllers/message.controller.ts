@@ -1,7 +1,11 @@
 import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
 import { Request, Response } from "express";
-import ResponseObject from "interface/responseObject.js";
+import ResponseObject from "../interface/responseObject.js";
+import UserDocument, {
+  UserDocumentMessages,
+} from "../interface/userDocument.js";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
 export default {
   createMessage: async (req: Request, res: Response): Promise<object> => {
@@ -231,7 +235,7 @@ export default {
       const messageToIds = resObj.messages.map((el) => el.messageToId);
       // only getting id all of all the messageToId to get userID and picture dynamically
       const messages = resObj.messages;
-      const resUser: any[] = await userDetail.find(
+      const resUser = await userDetail.find(
         { id: { $in: messageToIds } },
         {
           _id: 0,
@@ -242,14 +246,19 @@ export default {
       );
 
       // Merging Array
-      const mergeArrays = (arr1, arr2) => {
-        return arr1.map((obj) => {
-          const numbers = arr2.filter((nums) => nums.id === obj.messageToId);
-          if (!numbers.length) {
+      const mergeArrays = (
+        messages: UserDocumentMessages[],
+        resUser: (SchemaMethodInstance & {
+          _id: any;
+        })[]
+      ) => {
+        return messages.map((obj) => {
+          const user = resUser.filter((nums) => nums.id === obj.messageToId);
+          if (!user.length) {
             // obj.phone = numbers;
             return obj;
           }
-          const newUser = numbers.map((num) => ({
+          const newUser = user.map((num) => ({
             picture: num.picture,
             userID: num.userID,
           }));

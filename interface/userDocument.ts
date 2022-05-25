@@ -1,5 +1,42 @@
 import { Document } from "mongoose";
 
+export type UserDocumentMessages = {
+  messageToId: string;
+  roomID: string;
+  receiverPicture: string;
+  message: [{ senderId: string; content: string; date: Date }];
+};
+
+export type UserDocumentPostsComments = {
+  user: string;
+  comment: string;
+};
+
+export type UserDocumentPosts = {
+  id: string;
+  caption: string;
+  picture: {
+    name: string;
+    path: string;
+    url: string;
+    firebaseStorageDownloadToken: string;
+    bucket: string;
+  };
+  likes: {
+    No: number;
+    by: [
+      {
+        user: string;
+      }
+    ];
+  };
+  comments: {
+    No: number;
+    by: [UserDocumentPostsComments];
+  };
+  date: Date;
+};
+
 export default interface UserDocument extends Document {
   googleID: number;
   id: string;
@@ -16,14 +53,7 @@ export default interface UserDocument extends Document {
   };
   date: Date;
   gender: string;
-  messages: [
-    {
-      messageToId: string;
-      roomID: string;
-      receiverPicture: string;
-      message: [{ senderId: string; content: string; date: Date }];
-    }
-  ];
+  messages: [UserDocumentMessages];
   followersNo: number;
   followers: [
     {
@@ -43,37 +73,7 @@ export default interface UserDocument extends Document {
     }
   ];
   postNo: number;
-  posts: [
-    {
-      id: string;
-      caption: string;
-      picture: {
-        name: string;
-        path: string;
-        url: string;
-        firebaseStorageDownloadToken: string;
-        bucket: string;
-      };
-      likes: {
-        No: number;
-        by: [
-          {
-            user: string;
-          }
-        ];
-      };
-      comments: {
-        No: number;
-        by: [
-          {
-            user: string;
-            comment: string;
-          }
-        ];
-      };
-      date: Date;
-    }
-  ];
+  posts: [UserDocumentPosts];
   stories: {
     caption: string;
     picture: string;

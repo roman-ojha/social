@@ -1,7 +1,9 @@
 import userDetail from "../models/userDetail_model.js";
 import { Request, Response } from "express";
-import ResponseObject from "interface/responseObject.js";
-import ResPonseUserPost from "interface/resUserPost.js";
+import ResponseObject from "../interface/responseObject.js";
+import ResPonseUserPost from "../interface/resUserPost.js";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
+import { UserDocumentPostsComments } from "interface/userDocument.js";
 
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
@@ -241,23 +243,30 @@ export default {
         }
       );
 
-      const mergeArrays = (arr1, arr2) => {
-        return arr1.map((obj) => {
-          const numbers = arr2.filter((nums) => nums.id === obj.user);
-          if (!numbers.length) {
-            return obj;
+      const mergeArrays = (
+        comments: UserDocumentPostsComments[],
+        commentedUser: (SchemaMethodInstance & {
+          _id: any;
+        })[]
+      ) => {
+        return comments.map((comment) => {
+          const filteredUser = commentedUser.filter(
+            (nums) => nums.id === comment.user
+          );
+          if (!filteredUser.length) {
+            return comment;
           }
-          const newUser = numbers.map((num) => ({
+          const userInfo = filteredUser.map((num) => ({
             picture: num.picture,
             userID: num.userID,
           }));
-          const newObj = {
-            id: obj.user,
-            comment: obj.comment,
-            picture: newUser[0].picture,
-            userID: newUser[0].userID,
+          const newCommentedUserObj = {
+            id: comment.user,
+            comment: comment.comment,
+            picture: userInfo[0].picture,
+            userID: userInfo[0].userID,
           };
-          return newObj;
+          return newCommentedUserObj;
         });
       };
 
