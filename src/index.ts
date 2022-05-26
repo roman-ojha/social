@@ -13,6 +13,7 @@ import youtubeRoute from "../routes/youtube.js";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
+import AuthAdmin from "../funcs/AuthAdmin.js";
 const PORT = process.env.PORT;
 
 // warning: connect.session() MemoryStorage is not designed for a production environment as it will leak memory, and will not scale past a single process.
@@ -67,6 +68,7 @@ import "../socket/io.js";
 app.use(google_OAuth_route);
 
 // Admin SignIn
+AuthAdmin();
 
 // listening to a 'PORT'
 httpServer.listen(PORT, () => {

@@ -3,6 +3,8 @@ declare namespace NodeJS {
     PORT: string;
     ORIGIN_HOSTNAME: string;
     NODE_ENV: string;
+    ADMIN_LOGIN_EMAIL: string;
+    ADMIN_LOGIN_PASSWORD: string;
     API_BASE_URL: string;
     CLIENT_BASE_URL: string;
     USERDATABASE: string;

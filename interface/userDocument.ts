@@ -37,6 +37,12 @@ export type UserDocumentPosts = {
   date: Date;
 };
 
+export type UserDocumentBirthday = {
+  year: string;
+  month: string;
+  day: string;
+};
+
 export default interface UserDocument extends Document {
   googleID: number;
   id: string;
@@ -46,11 +52,7 @@ export default interface UserDocument extends Document {
   password: string;
   cpassword: string;
   userID: string;
-  birthday: {
-    year: string;
-    month: string;
-    day: string;
-  };
+  birthday: UserDocumentBirthday;
   date: Date;
   gender: string;
   messages: [UserDocumentMessages];
