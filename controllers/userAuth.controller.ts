@@ -6,7 +6,13 @@ import ResponseObject from "../interface/responseObject.js";
 import { __prod__ } from "../constants/env.js";
 import { signInAdmin } from "../funcs/AuthAdmin.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
-import { UserDocumentNotification } from "interface/userDocument.js";
+import {
+  UserDocumentFollower,
+  UserDocumentFollowing,
+  UserDocumentFriends,
+  UserDocumentMessages,
+  UserDocumentNotification,
+} from "../interface/userDocument.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
@@ -42,14 +48,15 @@ export default {
         password: adminPassword,
         cpassword: adminCpassword,
       });
-      const id = crypto.randomBytes(16).toString("hex");
-      let newUser: SchemaMethodInstance & {
-        _id: any;
-      };
+      const newUserId = crypto.randomBytes(16).toString("hex");
+      const messageRoomID = crypto.randomBytes(16).toString("hex");
       if (resAdmin.success && resAdmin.admin) {
+        console.log("admin exist");
         // if Admin Exist
-        newUser = new userDetail({
-          id,
+        const newUser: SchemaMethodInstance & {
+          _id: any;
+        } = new userDetail({
+          id: newUserId,
           name,
           email,
           password,
@@ -59,32 +66,130 @@ export default {
           postNo: 0,
           storiesNo: 0,
           followingNo: 1,
+          following: [
+            <UserDocumentFollowing>{
+              id: resAdmin.admin.id,
+            },
+          ],
           followersNo: 1,
+          followers: [
+            <UserDocumentFollower>{
+              id: resAdmin.admin.id,
+            },
+          ],
           friendsNo: 1,
-          // notification:1,
+          friends: [
+            <UserDocumentFriends>{
+              id: resAdmin.admin.id,
+            },
+          ],
           notification: [
             <UserDocumentNotification>{
               topic: "follow",
               user: resAdmin.admin.id,
             },
           ],
+          messages: [
+            <UserDocumentMessages>{
+              roomID: messageRoomID,
+              messageToId: resAdmin.admin.id,
+              message: [
+                {
+                  senderId: resAdmin.admin.id,
+                  content: `Hello ${name}`,
+                  date: new Date(),
+                },
+              ],
+            },
+          ],
         });
-      } else {
-        newUser = new userDetail({
-          id,
-          name,
-          email,
-          password,
-          cpassword,
-          birthday,
-          gender,
-          followersNo: 0,
-          followingNo: 0,
-          postNo: 0,
-          friendsNo: 0,
-          storiesNo: 0,
+        const saveUserWithAdmin = await newUser.save();
+        if (!saveUserWithAdmin) {
+          return res.status(500).json(<ResponseObject>{
+            success: false,
+            msg: "Server Error!,Failed registerd!!!",
+          });
+        }
+        const updateAdminDocument = await userDetail.updateOne(
+          {
+            id: resAdmin.admin.id,
+          },
+          {
+            // pushing the new followers into followed to user database
+            $push: {
+              followers: <UserDocumentFollower>{
+                id: newUserId,
+              },
+              following: <UserDocumentFollowing>{
+                id: newUserId,
+              },
+              friends: <UserDocumentFriends>{
+                id: newUserId,
+              },
+              messages: <UserDocumentMessages>{
+                roomID: messageRoomID,
+                messageToId: newUserId,
+                message: [
+                  {
+                    senderId: resAdmin.admin.id,
+                    content: `Hello ${name}`,
+                    date: new Date(),
+                  },
+                ],
+              },
+              notification: <UserDocumentNotification>{
+                topic: "follow",
+                user: newUserId,
+              },
+            },
+            $inc: {
+              followersNo: 1,
+              followingNo: 1,
+              friendsNo: 1,
+            },
+          }
+        );
+        if (!updateAdminDocument) {
+          return res.status(500).json(<ResponseObject>{
+            success: false,
+            msg: "Server Error!,Failed registerd!!!",
+          });
+        }
+        let token: string | null;
+        token = await saveUserWithAdmin.generateAuthToken();
+        if (token) {
+          res.cookie("AuthToken", token, {
+            // expires: new Date(Date.now() + 25892000000),
+            maxAge: 25892000000,
+            httpOnly: true,
+            domain: process.env.ORIGIN_HOSTNAME,
+            secure: true,
+            // signed: true,
+            sameSite: "none",
+          });
+        }
+        return res.status(200).json(<ResponseObject>{
+          success: true,
+          msg: "User register successfully",
         });
       }
+      console.log("admin doesn't exist");
+      const newUser: SchemaMethodInstance & {
+        _id: any;
+      } = new userDetail({
+        id: newUserId,
+        name,
+        email,
+        password,
+        cpassword,
+        birthday,
+        gender,
+        followersNo: 0,
+        followingNo: 0,
+        postNo: 0,
+        friendsNo: 0,
+        storiesNo: 0,
+      });
       const saveUserRes = await newUser.save();
       if (!saveUserRes) {
         return res.status(500).json(<ResponseObject>{

@@ -12,6 +12,7 @@ import {
   appendOnMessage,
   appendMessageOnMessageListAction,
   messageListAction,
+  mainPageMessageViewOnOff,
 } from "../services/redux-actions/index";
 import { instance as axios } from "../services/axios";
 import "../styles/components/messageBox.css";
@@ -216,7 +217,7 @@ const Message = () => {
   };
 
   useEffect(() => {
-    // dispatch(mainPageMessageViewOnOff(false));
+    dispatch(mainPageMessageViewOnOff(false));
     // socket.on("send-message-client", (res) => {
     //   if (res.success !== false) {
     //     dispatch(

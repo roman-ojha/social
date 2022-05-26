@@ -54,7 +54,6 @@ const signInAdmin = async (
   admin: AdminSignInArgument
 ): Promise<ResponseObjectWithAdmin> => {
   try {
-    console.log("process... Signing In Admin");
     if (!admin.email || !admin.password) {
       return <ResponseObjectWithAdmin>{
         success: false,

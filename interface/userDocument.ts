@@ -3,7 +3,6 @@ import { Document } from "mongoose";
 export type UserDocumentMessages = {
   messageToId: string;
   roomID: string;
-  receiverPicture: string;
   message: [{ senderId: string; content: string; date: Date }];
 };
 
@@ -48,6 +47,18 @@ export type UserDocumentNotification = {
   user: string;
 };
 
+export type UserDocumentFollowing = {
+  id: string;
+};
+
+export type UserDocumentFollower = {
+  id: string;
+};
+
+export type UserDocumentFriends = {
+  id: string;
+};
+
 export default interface UserDocument extends Document {
   googleID: number;
   id: string;
@@ -62,23 +73,11 @@ export default interface UserDocument extends Document {
   gender: string;
   messages: [UserDocumentMessages];
   followersNo: number;
-  followers: [
-    {
-      id: string;
-    }
-  ];
+  followers: [UserDocumentFollower];
   followingNo: number;
-  following: [
-    {
-      id: string;
-    }
-  ];
+  following: [UserDocumentFollowing];
   friendsNo: number;
-  friends: [
-    {
-      id: string;
-    }
-  ];
+  friends: [UserDocumentFriends];
   postNo: number;
   posts: [UserDocumentPosts];
   stories: {
