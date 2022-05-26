@@ -10,6 +10,7 @@ import {
 } from "../../services/redux-actions/index";
 import "../../styles/components/messageBox.css";
 import { Icon } from "@iconify/react";
+import SingleMessage from "./SingleMessage";
 
 const InnerMessageBox = (props) => {
   const dispatch = useDispatch();
@@ -20,53 +21,6 @@ const InnerMessageBox = (props) => {
     (state) => state.setCurrentUserMessageReducer
   );
   const [userMessageField, setUserMessageField] = useState("");
-
-  const UserSingleMessageBox = (props) => {
-    return (
-      <>
-        <div
-          className="MessageBox_Inner_SingleMessage_Container"
-          // styling the position of the message box according the user
-          style={
-            props.MessageInfo.senderId === userProfileDetailStore.id
-              ? {
-                  left: "31%",
-                }
-              : {}
-          }
-        >
-          {props.MessageInfo.senderId === userProfileDetailStore.id ? (
-            ""
-          ) : (
-            <img src={props.picture ? props.picture : User_Profile_Icon} />
-          )}
-          <div
-            className="MessageBox_Inner_SingleMessage"
-            // styling the position of the message box according the user
-            style={
-              props.MessageInfo.senderId === userProfileDetailStore.id
-                ? {
-                    backgroundColor: "var(--primary-color-point-7)",
-                  }
-                : {}
-            }
-          >
-            <p
-              style={
-                props.MessageInfo.senderId === userProfileDetailStore.id
-                  ? {
-                      color: "white",
-                    }
-                  : {}
-              }
-            >
-              {props.MessageInfo.content}
-            </p>
-          </div>
-        </div>
-      </>
-    );
-  };
 
   // Styling Loading Spinner
   const loadingContainerSpinnerStyle = {
@@ -163,7 +117,7 @@ const InnerMessageBox = (props) => {
           ) : (
             currentMessageStore.message.map((message, index) => {
               return (
-                <UserSingleMessageBox
+                <SingleMessage
                   MessageInfo={message}
                   picture={currentMessageStore.receiverPicture}
                   key={index}
