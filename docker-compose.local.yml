@@ -28,6 +28,8 @@ services:
       PORT: 8080
       ORIGIN_HOSTNAME: localhost
       NODE_ENV: development
+      ADMIN_LOGIN_EMAIL: <email_of_admin_to_login_in_application>
+      ADMIN_LOGIN_PASSWORD: <passowrd_of_admin_to_login_in_application>
       API_BASE_URL: http://localhost:8080
       CLIENT_BASE_URL: http://localhost:3000
       USERDATABASE: mongodb://mongo:27017/Social
