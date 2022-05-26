@@ -1,10 +1,12 @@
+import { UserDocumentBirthday } from "interface/userDocument";
+
 export default {
   adminName: "social",
   adminUserID: "social",
   adminGender: "male",
-  adminBirthday: {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate(),
+  adminBirthday: <UserDocumentBirthday>{
+    year: new Date().getFullYear().toString(),
+    month: (new Date().getMonth() + 1).toString(),
+    day: new Date().getDate().toString(),
   },
 };

@@ -5,10 +5,10 @@ import ResponseObject from "../interface/responseObject.js";
 import crypto from "crypto";
 const adminFailMsg = "Admin SignIn Failed";
 
-const checkAdminExistInDatabase = async () => {
+const checkAdminExistInDatabase = async (email: string | undefined) => {
   try {
     const isAdminExist = await UserDetail.findOne(
-      { userID: adminConstant.adminUserID },
+      { email: email },
       { userID: 1, name: 1, id: 1, email: 1 }
     );
     if (!isAdminExist) {
@@ -21,25 +21,44 @@ const checkAdminExistInDatabase = async () => {
   }
 };
 
-const signInAdmin = async () => {
+interface AdminSignInArgument {
+  email: string | undefined;
+  password: string | undefined;
+  cpassword: string | undefined;
+}
+
+const signInAdmin = async (
+  admin: AdminSignInArgument
+): Promise<ResponseObject> => {
   try {
+    console.log("process... Signing In Admin");
+    return <ResponseObject>{
+      success: true,
+      msg: "Admin SignIn Successfully",
+    };
   } catch (err) {
-    console.log(adminFailMsg);
+    return <ResponseObject>{
+      success: false,
+      msg: "Admin SignIn Failed",
+    };
   }
 };
 
 interface AdminRegistrationArgument {
   name: string;
   userID: string;
-  email: string;
-  password: string;
-  cpassword: string;
+  email: string | undefined;
+  password: string | undefined;
+  cpassword: string | undefined;
   gender: string;
   birthday: UserDocumentBirthday;
 }
 
-const registerAdmin = async (admin: AdminRegistrationArgument) => {
+const registerAdmin = async (
+  admin: AdminRegistrationArgument
+): Promise<ResponseObject> => {
   try {
+    console.log("Process... Registering Admin");
     if (
       !admin.name ||
       !admin.email ||
@@ -67,51 +86,77 @@ const registerAdmin = async (admin: AdminRegistrationArgument) => {
     if (emailExist) {
       return <ResponseObject>{ success: false, msg: "Email already Exist" };
     }
-    const id = crypto.randomBytes(16).toString("hex");
-    const creatingNewUserData = new UserDetail({
-      id,
-      userID: admin.userID,
-      name: admin.name,
-      email: admin.email,
-      password: admin.password,
-      cpassword: admin.cpassword,
-      birthday: admin.birthday,
-      gender: admin.gender,
-      followersNo: 0,
-      followingNo: 0,
-      postNo: 0,
-      friendsNo: 0,
-      storiesNo: 0,
-    });
-    const saveUserRes = await creatingNewUserData.save();
-    if (!saveUserRes) {
-      return <ResponseObject>{
-        success: false,
-        msg: "Server Error!,Failed registerd!!!",
-      };
-    }
+    // const id = crypto.randomBytes(16).toString("hex");
+    // const creatingNewUserData = new UserDetail({
+    //   id,
+    //   userID: admin.userID,
+    //   name: admin.name,
+    //   email: admin.email,
+    //   password: admin.password,
+    //   cpassword: admin.cpassword,
+    //   birthday: admin.birthday,
+    //   gender: admin.gender,
+    //   followersNo: 0,
+    //   followingNo: 0,
+    //   postNo: 0,
+    //   friendsNo: 0,
+    //   storiesNo: 0,
+    // });
+    // const saveUserRes = await creatingNewUserData.save();
+    // if (!saveUserRes) {
+    //   return <ResponseObject>{
+    //     success: false,
+    //     msg: "Server Error!,Failed registerd!!!",
+    //   };
+    // }
     return <ResponseObject>{
       success: true,
       msg: "Admin register successfully",
     };
   } catch (err) {
-    console.log(adminFailMsg);
+    return <ResponseObject>{
+      success: false,
+      msg: "Admin registration failed",
+    };
   }
 };
 
 const AuthAdmin = async () => {
   try {
-    const isAdminExist = await checkAdminExistInDatabase();
+    const name = adminConstant.adminName;
+    const email = process.env.ADMIN_LOGIN_EMAIL;
+    const userID = adminConstant.adminUserID;
+    const password = process.env.ADMIN_LOGIN_PASSWORD;
+    const cpassword = process.env.ADMIN_LOGIN_PASSWORD;
+    const gender = adminConstant.adminGender;
+    const birthday = adminConstant.adminBirthday;
+    const isAdminExist = await checkAdminExistInDatabase(email);
     if (!isAdminExist) {
-      const name = adminConstant.adminName;
-      const email = process.env.ADMIN_LOGIN_EMAIL;
-      const userID = adminConstant.adminUserID;
-      const password = process.env.ADMIN_LOGIN_PASSWORD;
-      const cpassword = process.env.ADMIN_LOGIN_PASSWORD;
-      const gender = adminConstant.adminGender;
-      const birthday = adminConstant.adminBirthday;
-      // await registerAdmin({});
+      const resRegistration: ResponseObject = await registerAdmin({
+        name,
+        email,
+        userID,
+        password,
+        cpassword,
+        gender,
+        birthday,
+      });
+      if (!resRegistration.success) {
+        console.log(resRegistration.msg);
+      }
+      console.log(resRegistration.msg);
+      const resSignIn = await signInAdmin({ email, password, cpassword });
+      if (!resSignIn.success) {
+        console.log(resSignIn.msg);
+      }
+      console.log(resSignIn.msg);
+      return;
     }
+    const resSignIn = await signInAdmin({ email, password, cpassword });
+    if (!resSignIn.success) {
+      console.log(resSignIn.msg);
+    }
+    console.log(resSignIn.msg);
   } catch (err) {
     console.log(adminFailMsg);
   }
