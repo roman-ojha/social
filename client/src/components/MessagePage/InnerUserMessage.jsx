@@ -2,21 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import socket from "../../services/socket";
-import {
-  mainPageMessageInnerViewOnOff,
-  appendOnMessage,
-  appendMessageOnMessageListAction,
-} from "../../services/redux-actions/index";
-import { Icon } from "@iconify/react";
+import { mainPageMessageInnerViewOnOff } from "../../services/redux-actions/index";
 import SingleMessage from "./SingleMessage";
+import SendMessageInputField from "./SendMessageInputField";
 
 const InnerUserMessage = (props) => {
   const dispatch = useDispatch();
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
-  const [userMessageField, setUserMessageField] = useState("");
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
   );
@@ -37,44 +28,6 @@ const InnerUserMessage = (props) => {
     height: "1.5rem",
     borderRadius: "50%",
     animation: "loadingSpinner 1s linear infinite",
-  };
-
-  const sendMessage = async () => {
-    // sending message to user
-    try {
-      if (userMessageField === "") {
-        return;
-      }
-      const resBody = {
-        senderId: userProfileDetailStore.id,
-        senderUserId: userProfileDetailStore.userID,
-        receiverId: props.InternalMessageInfo.messageToId,
-        receiverUserID: props.InternalMessageInfo.messageToUserId,
-        // messageTo is the userID of user where we are sending the message
-        message: userMessageField,
-        roomID: currentMessageStore.roomID,
-      };
-      setUserMessageField("");
-      socket.emit("send-message", resBody, (res) => {
-        if (res.success !== false) {
-          dispatch(
-            appendOnMessage({
-              ...res.msgInfo,
-              _id: `${Math.random()}`,
-            })
-          );
-          dispatch(
-            appendMessageOnMessageListAction({
-              ...res.msgInfo,
-              _id: `${Math.random()}`,
-              receiverId: resBody.receiverId,
-            })
-          );
-        }
-      });
-    } catch (err) {
-      // console.log(err);
-    }
   };
 
   useEffect(() => {
@@ -128,38 +81,11 @@ const InnerUserMessage = (props) => {
             })
           )}
         </div>
-        <div className="MessageBox_LowerPart_InputField_Container">
-          <div className="MessageBox_LowerPart_InputField_Inner_Container">
-            <Icon
-              className="MessageBox_LowerPart_InputField_Buttons"
-              icon="entypo:emoji-happy"
-            />
-            <input
-              type="text"
-              value={userMessageField}
-              autoFocus
-              onChange={(e) => {
-                setUserMessageField(e.target.value);
-                const eventOnPressEnter = (e) => {
-                  if (e.key === "Enter") {
-                    sendMessage();
-                  }
-                  window.removeEventListener("keydown", eventOnPressEnter);
-                };
-                window.addEventListener("keydown", eventOnPressEnter);
-              }}
-            />
-            <Icon
-              className="MessageBox_LowerPart_InputField_Buttons"
-              icon="akar-icons:image"
-            />
-            <Icon
-              icon="akar-icons:send"
-              className="MessageBox_LowerPart_InputField_Buttons"
-              onClick={sendMessage}
-            />
-          </div>
-        </div>
+
+        <SendMessageInputField
+          messageToUserId={props.InternalMessageInfo.messageToUserId}
+          messageToId={props.InternalMessageInfo.messageToId}
+        />
       </div>
     </>
   );

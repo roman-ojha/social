@@ -2,25 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import socket from "../../services/socket";
-import {
-  mainPageMessageInnerViewOnOff,
-  appendOnMessage,
-  appendMessageOnMessageListAction,
-} from "../../services/redux-actions/index";
+import { mainPageMessageInnerViewOnOff } from "../../services/redux-actions/index";
 import "../../styles/components/messageBox.css";
-import { Icon } from "@iconify/react";
 import SingleMessage from "./SingleMessage";
+import SendMessageInputField from "./SendMessageInputField";
 
 const InnerMessageBox = (props) => {
   const dispatch = useDispatch();
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
   const currentMessageStore = useSelector(
     (state) => state.setCurrentUserMessageReducer
   );
-  const [userMessageField, setUserMessageField] = useState("");
 
   // Styling Loading Spinner
   const loadingContainerSpinnerStyle = {
@@ -53,41 +44,6 @@ const InnerMessageBox = (props) => {
     // });
   }, []);
 
-  const sendMessage = async () => {
-    // sending message to user
-    try {
-      if (userMessageField === "") {
-        return;
-      }
-      const resBody = {
-        senderId: userProfileDetailStore.id,
-        senderUserId: userProfileDetailStore.userID,
-        receiverId: props.InternalMessageInfo.messageToId,
-        receiverUserID: props.InternalMessageInfo.messageToUserId,
-        // messageTo is the userID of user where we are sending the message
-        message: userMessageField,
-        roomID: currentMessageStore.roomID,
-      };
-      setUserMessageField("");
-      socket.emit("send-message", resBody, (res) => {
-        if (res.success !== false) {
-          dispatch(
-            appendOnMessage({
-              ...res.msgInfo,
-              _id: `${Math.random()}`,
-            })
-          );
-          dispatch(
-            appendMessageOnMessageListAction({
-              ...res.msgInfo,
-              _id: `${Math.random()}`,
-              receiverId: resBody.receiverId,
-            })
-          );
-        }
-      });
-    } catch (err) {}
-  };
   return (
     <>
       <div className="MessageBox_InnerMessage_Container">
@@ -126,39 +82,10 @@ const InnerMessageBox = (props) => {
             })
           )}
         </div>
-        <div className="MessageBox_LowerPart_InputField_Container">
-          <div className="MessageBox_LowerPart_InputField_Inner_Container">
-            <Icon
-              className="MessageBox_LowerPart_InputField_Buttons"
-              icon="entypo:emoji-happy"
-            />
-            <input
-              type="text"
-              value={userMessageField}
-              autoFocus
-              onChange={(e) => {
-                // dispatch(userMessageFieldAction(e.target.value));
-                setUserMessageField(e.target.value);
-                const eventOnPressEnter = (e) => {
-                  if (e.key === "Enter") {
-                    sendMessage();
-                  }
-                  window.removeEventListener("keydown", eventOnPressEnter);
-                };
-                window.addEventListener("keydown", eventOnPressEnter);
-              }}
-            />
-            <Icon
-              className="MessageBox_LowerPart_InputField_Buttons"
-              icon="akar-icons:image"
-            />
-            <Icon
-              icon="akar-icons:send"
-              className="MessageBox_LowerPart_InputField_Buttons"
-              onClick={sendMessage}
-            />
-          </div>
-        </div>
+        <SendMessageInputField
+          messageToUserId={props.InternalMessageInfo.messageToUserId}
+          messageToId={props.InternalMessageInfo.messageToId}
+        />
       </div>
     </>
   );
