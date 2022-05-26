@@ -4,6 +4,23 @@ import { UserDocumentBirthday } from "interface/userDocument.js";
 import ResponseObject from "../interface/responseObject.js";
 import crypto from "crypto";
 const adminFailMsg = "Admin SignIn Failed";
+import bcrypt from "bcryptjs";
+
+const checkUserIDExistInDatabase = async (userID: string | undefined) => {
+  try {
+    const isAdminExist = await UserDetail.findOne(
+      { userID: userID },
+      { userID: 1, name: 1, id: 1, email: 1 }
+    );
+    if (!isAdminExist) {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.log(adminFailMsg);
+    return false;
+  }
+};
 
 const checkAdminExistInDatabase = async (email: string | undefined) => {
   try {
@@ -32,6 +49,38 @@ const signInAdmin = async (
 ): Promise<ResponseObject> => {
   try {
     console.log("process... Signing In Admin");
+    if (!admin.email || !admin.password) {
+      return <ResponseObject>{
+        success: false,
+        msg: "Email and Password is not provided!!!",
+      };
+    }
+    const userLogin = await UserDetail.findOne(
+      { email: admin.email },
+      {
+        email: 1,
+        password: 1,
+        userID: 1,
+        name: 1,
+        id: 1,
+      }
+    );
+    if (!userLogin) {
+      return <ResponseObject>{
+        success: false,
+        msg: "Error Login! Admin does't exist",
+      };
+    }
+    const isPasswordMatch = await bcrypt.compare(
+      admin.password,
+      userLogin.password
+    );
+    if (!isPasswordMatch) {
+      return <ResponseObject>{
+        success: false,
+        msg: "Email and password doesn't match",
+      };
+    }
     return <ResponseObject>{
       success: true,
       msg: "Admin SignIn Successfully",
@@ -86,29 +135,36 @@ const registerAdmin = async (
     if (emailExist) {
       return <ResponseObject>{ success: false, msg: "Email already Exist" };
     }
-    // const id = crypto.randomBytes(16).toString("hex");
-    // const creatingNewUserData = new UserDetail({
-    //   id,
-    //   userID: admin.userID,
-    //   name: admin.name,
-    //   email: admin.email,
-    //   password: admin.password,
-    //   cpassword: admin.cpassword,
-    //   birthday: admin.birthday,
-    //   gender: admin.gender,
-    //   followersNo: 0,
-    //   followingNo: 0,
-    //   postNo: 0,
-    //   friendsNo: 0,
-    //   storiesNo: 0,
-    // });
-    // const saveUserRes = await creatingNewUserData.save();
-    // if (!saveUserRes) {
-    //   return <ResponseObject>{
-    //     success: false,
-    //     msg: "Server Error!,Failed registerd!!!",
-    //   };
-    // }
+    const isUserIDExist = await UserDetail.findOne(
+      { userID: admin.userID },
+      { name: 1, userID: 1, email: 1 }
+    );
+    if (isUserIDExist) {
+      return <ResponseObject>{ success: false, msg: "UserID already Exist" };
+    }
+    const id = crypto.randomBytes(16).toString("hex");
+    const creatingNewUserData = new UserDetail({
+      id,
+      userID: admin.userID,
+      name: admin.name,
+      email: admin.email,
+      password: admin.password,
+      cpassword: admin.cpassword,
+      birthday: admin.birthday,
+      gender: admin.gender,
+      followersNo: 0,
+      followingNo: 0,
+      postNo: 0,
+      friendsNo: 0,
+      storiesNo: 0,
+    });
+    const saveUserRes = await creatingNewUserData.save();
+    if (!saveUserRes) {
+      return <ResponseObject>{
+        success: false,
+        msg: "Server Error!,Failed registerd!!!",
+      };
+    }
     return <ResponseObject>{
       success: true,
       msg: "Admin register successfully",
@@ -130,8 +186,12 @@ const AuthAdmin = async () => {
     const cpassword = process.env.ADMIN_LOGIN_PASSWORD;
     const gender = adminConstant.adminGender;
     const birthday = adminConstant.adminBirthday;
-    const isAdminExist = await checkAdminExistInDatabase(email);
-    if (!isAdminExist) {
+    // const isAdminExist = await checkAdminExistInDatabase(email);
+    // SignIn Admin first:
+    const resSignIn = await signInAdmin({ email, password, cpassword });
+    if (!resSignIn.success) {
+      // if Admin doesn't exist then register
+      console.log(resSignIn.msg);
       const resRegistration: ResponseObject = await registerAdmin({
         name,
         email,
@@ -143,22 +203,16 @@ const AuthAdmin = async () => {
       });
       if (!resRegistration.success) {
         console.log(resRegistration.msg);
+        return;
       }
       console.log(resRegistration.msg);
-      const resSignIn = await signInAdmin({ email, password, cpassword });
-      if (!resSignIn.success) {
-        console.log(resSignIn.msg);
-      }
-      console.log(resSignIn.msg);
       return;
     }
-    const resSignIn = await signInAdmin({ email, password, cpassword });
-    if (!resSignIn.success) {
-      console.log(resSignIn.msg);
-    }
     console.log(resSignIn.msg);
+    return;
   } catch (err) {
     console.log(adminFailMsg);
+    return;
   }
 };
 

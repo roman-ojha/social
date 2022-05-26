@@ -67,10 +67,10 @@ import "../socket/io.js";
 // Google Oauth
 app.use(google_OAuth_route);
 
-// Admin SignIn
-AuthAdmin();
-
 // listening to a 'PORT'
 httpServer.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });
+
+// Admin SignIn
+AuthAdmin();
