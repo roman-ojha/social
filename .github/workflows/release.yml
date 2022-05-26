@@ -44,7 +44,9 @@ jobs:
           exclusions: "*.git* /*node_modules/* .editorconfig"
       - name: Generate Changelog
         id: generate-changelog
-        uses: scottbrenner/generate-changelog-action@master
+        uses: metcalfc/changelog-generator@v3.0.0
+        with:
+          myToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Create GitHub Release
         # to create release but will not upload assets
         id: create-new-release
