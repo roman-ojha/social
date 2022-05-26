@@ -20,6 +20,7 @@ import "../styles/pages/MessagePage.css";
 import { Icon } from "@iconify/react";
 import { toastError } from "../services/toast";
 import messageApi from "../services/api/global/message";
+import InnerUserMessage from "../components/MessagePage/InnerUserMessage";
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,6 @@ const Message = () => {
   );
   const messageList = useSelector((state) => state.messageListReducer);
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
-  const [userMessageField, setUserMessageField] = useState("");
 
   // Styling Loading Spinner
   const loadingContainerSpinnerStyle = {
@@ -64,6 +64,7 @@ const Message = () => {
             messageToUserId: props.messageInfo.messageToUserId,
             receiverPicture: props.messageInfo.receiverPicture,
             message: [],
+            fetchedInnerMessage: false,
           })
         );
         dispatch(mainPageMessageInnerViewOnOff(true));
@@ -93,6 +94,7 @@ const Message = () => {
               messageToUserId: props.messageInfo.messageToUserId,
               receiverPicture: props.messageInfo.receiverPicture,
               message: resData.message,
+              fetchedInnerMessage: true,
             })
           );
           setShowLoadingSpinner(false);
@@ -230,168 +232,6 @@ const Message = () => {
     // });
     getUserMessages();
   }, []);
-  const ReturnInnerUserMessageBox = (props) => {
-    const UserSingleMessageBox = (props) => {
-      return (
-        <>
-          <div
-            className="MessageBox_Inner_SingleMessage_Container"
-            // styling the position of the message box according the user
-            style={
-              props.MessageInfo.senderId === userProfileDetailStore.id
-                ? {
-                    left: "31%",
-                  }
-                : {}
-            }
-          >
-            {props.MessageInfo.senderId === userProfileDetailStore.id ? (
-              ""
-            ) : (
-              <img src={props.picture ? props.picture : User_Profile_Icon} />
-            )}
-            <div
-              className="MessageBox_Inner_SingleMessage"
-              // styling the position of the message box according the user
-              style={
-                props.MessageInfo.senderId === userProfileDetailStore.id
-                  ? {
-                      backgroundColor: "var(--primary-color-point-7)",
-                    }
-                  : {}
-              }
-            >
-              <p
-                style={
-                  props.MessageInfo.senderId === userProfileDetailStore.id
-                    ? {
-                        color: "white",
-                      }
-                    : {}
-                }
-              >
-                {props.MessageInfo.content}
-              </p>
-            </div>
-          </div>
-        </>
-      );
-    };
-
-    const sendMessage = async () => {
-      // sending message to user
-      try {
-        if (userMessageField === "") {
-          return;
-        }
-        const resBody = {
-          senderId: userProfileDetailStore.id,
-          senderUserId: userProfileDetailStore.userID,
-          receiverId: props.InternalMessageInfo.messageToId,
-          receiverUserID: props.InternalMessageInfo.messageToUserId,
-          // messageTo is the userID of user where we are sending the message
-          message: userMessageField,
-          roomID: currentMessageStore.roomID,
-        };
-        setUserMessageField("");
-        socket.emit("send-message", resBody, (res) => {
-          if (res.success !== false) {
-            dispatch(
-              appendOnMessage({
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-              })
-            );
-            dispatch(
-              appendMessageOnMessageListAction({
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-                receiverId: resBody.receiverId,
-              })
-            );
-          }
-        });
-      } catch (err) {
-        // console.log(err);
-      }
-    };
-
-    return (
-      <>
-        <div className="MessageBox_InnerMessage_Container">
-          <div className="MessageBox_InnerMessage_Upper_Part_Container">
-            <img
-              src={
-                props.InternalMessageInfo.picture
-                  ? props.InternalMessageInfo.picture
-                  : User_Profile_Icon
-              }
-              alt="user"
-            />
-            <h3>{props.InternalMessageInfo.messageToUserId}</h3>
-            <CloseIcon
-              className="MessageBox_InnerMessage_Upper_Part_Close_Button"
-              style={{ width: "1.2rem", height: "1.2rem" }}
-              onClick={() => {
-                dispatch(mainPageMessageInnerViewOnOff(false));
-              }}
-            />
-          </div>
-          <div className="MessageBox_InnerMessage_Message_Container">
-            {showLoadingSpinner ? (
-              <>
-                <div style={loadingContainerSpinnerStyle}>
-                  <div style={loadingSpinnerStyle}></div>
-                </div>
-              </>
-            ) : (
-              currentMessageStore.message.map((message, index) => {
-                return (
-                  <UserSingleMessageBox
-                    MessageInfo={message}
-                    picture={currentMessageStore.receiverPicture}
-                    key={index}
-                  />
-                );
-              })
-            )}
-          </div>
-          <div className="MessageBox_LowerPart_InputField_Container">
-            <div className="MessageBox_LowerPart_InputField_Inner_Container">
-              <Icon
-                className="MessageBox_LowerPart_InputField_Buttons"
-                icon="entypo:emoji-happy"
-              />
-              <input
-                type="text"
-                value={userMessageField}
-                autoFocus
-                onChange={(e) => {
-                  setUserMessageField(e.target.value);
-                  const eventOnPressEnter = (e) => {
-                    if (e.key === "Enter") {
-                      sendMessage();
-                    }
-                    window.removeEventListener("keydown", eventOnPressEnter);
-                  };
-                  window.addEventListener("keydown", eventOnPressEnter);
-                }}
-              />
-              <Icon
-                className="MessageBox_LowerPart_InputField_Buttons"
-                icon="akar-icons:image"
-              />
-              <Icon
-                icon="akar-icons:send"
-                className="MessageBox_LowerPart_InputField_Buttons"
-                onClick={sendMessage}
-              />
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  };
   return (
     <>
       <Helmet>
@@ -400,7 +240,7 @@ const Message = () => {
       <div className="MessagePage_Container">
         <div className="MainPage_MessageBox_Container">
           {mainPageInnerMessageBoxOnOffState ? (
-            <ReturnInnerUserMessageBox
+            <InnerUserMessage
               InternalMessageInfo={{
                 messageToUserId: currentMessageStore.messageToUserId,
                 messageToId: currentMessageStore.messageToId,
