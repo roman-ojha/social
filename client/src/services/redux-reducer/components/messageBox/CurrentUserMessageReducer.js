@@ -3,6 +3,7 @@ const initialMessage = {
   messageToUserId: "",
   receiverPicture: "",
   message: [],
+  fetchedInnerMessage: false,
 };
 
 // this action will Store the messge of rootUser message to other people and which is currently fetch

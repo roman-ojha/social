@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MessageBox from "./MessageBox";
+import MessageBox from "./MessageBox/MessageBox";
 import UserSuggestion from "./UserSuggestionComp/UserSuggestion";
 import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
