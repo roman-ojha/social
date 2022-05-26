@@ -13,6 +13,7 @@ import {
   startProgressBar,
   stopProgressBar,
   profilePageDataAction,
+  setRootUserProfileDataState,
 } from "../services/redux-actions";
 import GlobalApi from "../services/api/global";
 
@@ -25,6 +26,9 @@ const ProfileFriends = () => {
     fetchedData: false,
     user: [],
   });
+  const userProfileDetailStore = useSelector(
+    (state) => state.setUserProfileDetailReducer
+  );
   const loadingContainerSpinnerStyle = {
     width: "100%",
     height: "100%",
@@ -157,6 +161,14 @@ const ProfileFriends = () => {
                         isRootUserFollowed: userData.isRootUserFollowed,
                       };
                       dispatch(profilePageDataAction(userObj));
+                      if (userDetail.userID === userProfileDetailStore.userID) {
+                        dispatch(
+                          setRootUserProfileDataState({
+                            fetchedRootUserProfileData: true,
+                            getRootUserProfileData: false,
+                          })
+                        );
+                      }
                       history.push(`/u/profile/${userDetail.userID}/posts`);
                     } else {
                       // error

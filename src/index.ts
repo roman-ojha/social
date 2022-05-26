@@ -63,9 +63,10 @@ app.use(youtubeRoute);
 // app.use(scrapRoute);
 import "../socket/io.js";
 
-// using google authentication function
-
+// Google Oauth
 app.use(google_OAuth_route);
+
+// Admin SignIn
 
 // listening to a 'PORT'
 httpServer.listen(PORT, () => {
