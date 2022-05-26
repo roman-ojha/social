@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
@@ -76,6 +76,19 @@ const InnerUserMessage = (props) => {
       // console.log(err);
     }
   };
+
+  useEffect(() => {
+    // socket.on("send-message-client", (res) => {
+    //   if (res.success !== false) {
+    //     dispatch(
+    //       appendOnMessage({
+    //         ...res.msgInfo,
+    //         _id: `${Math.random()}`,
+    //       })
+    //     );
+    //   }
+    // });
+  }, []);
 
   return (
     <>
