@@ -43,6 +43,11 @@ export type UserDocumentBirthday = {
   day: string;
 };
 
+export type UserDocumentNotification = {
+  topic: string;
+  user: string;
+};
+
 export default interface UserDocument extends Document {
   googleID: number;
   id: string;
@@ -86,10 +91,5 @@ export default interface UserDocument extends Document {
       token: string;
     }
   ];
-  notification: [
-    {
-      topic: string;
-      user: string;
-    }
-  ];
+  notification: [UserDocumentNotification];
 }

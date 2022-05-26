@@ -2,8 +2,11 @@ import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
-import ResponseObject from "interface/responseObject.js";
+import ResponseObject from "../interface/responseObject.js";
 import { __prod__ } from "../constants/env.js";
+import { signInAdmin } from "../funcs/AuthAdmin.js";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
+import { UserDocumentNotification } from "interface/userDocument.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
@@ -30,22 +33,59 @@ export default {
           .status(409)
           .json(<ResponseObject>{ success: false, msg: "Email already Exist" });
       }
-      const id = crypto.randomBytes(16).toString("hex");
-      const creatingNewUserData = new userDetail({
-        id,
-        name,
-        email,
-        password,
-        cpassword,
-        birthday,
-        gender,
-        followersNo: 0,
-        followingNo: 0,
-        postNo: 0,
-        friendsNo: 0,
-        storiesNo: 0,
+      // Add Admin User as friend and add notification and send message form Admin User to every registered User
+      const adminEmail = process.env.ADMIN_LOGIN_EMAIL;
+      const adminPassword = process.env.ADMIN_LOGIN_PASSWORD;
+      const adminCpassword = process.env.ADMIN_LOGIN_PASSWORD;
+      const resAdmin = await signInAdmin({
+        email: adminEmail,
+        password: adminPassword,
+        cpassword: adminCpassword,
       });
-      const saveUserRes = await creatingNewUserData.save();
+      const id = crypto.randomBytes(16).toString("hex");
+      let newUser: SchemaMethodInstance & {
+        _id: any;
+      };
+      if (resAdmin.success && resAdmin.admin) {
+        // if Admin Exist
+        newUser = new userDetail({
+          id,
+          name,
+          email,
+          password,
+          cpassword,
+          birthday,
+          gender,
+          postNo: 0,
+          storiesNo: 0,
+          followingNo: 1,
+          followersNo: 1,
+          friendsNo: 1,
+          // notification:1,
+          notification: [
+            <UserDocumentNotification>{
+              topic: "follow",
+              user: resAdmin.admin.id,
+            },
+          ],
+        });
+      } else {
+        newUser = new userDetail({
+          id,
+          name,
+          email,
+          password,
+          cpassword,
+          birthday,
+          gender,
+          followersNo: 0,
+          followingNo: 0,
+          postNo: 0,
+          friendsNo: 0,
+          storiesNo: 0,
+        });
+      }
+      const saveUserRes = await newUser.save();
       if (!saveUserRes) {
         return res.status(500).json(<ResponseObject>{
           success: false,

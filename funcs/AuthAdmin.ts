@@ -3,8 +3,8 @@ import adminConstant from "../constants/admin.js";
 import { UserDocumentBirthday } from "interface/userDocument.js";
 import ResponseObject from "../interface/responseObject.js";
 import crypto from "crypto";
-const adminFailMsg = "Admin SignIn Failed";
 import bcrypt from "bcryptjs";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
 const checkUserIDExistInDatabase = async (userID: string | undefined) => {
   try {
@@ -17,7 +17,6 @@ const checkUserIDExistInDatabase = async (userID: string | undefined) => {
     }
     return true;
   } catch (err) {
-    console.log(adminFailMsg);
     return false;
   }
 };
@@ -33,7 +32,6 @@ const checkAdminExistInDatabase = async (email: string | undefined) => {
     }
     return true;
   } catch (err) {
-    console.log(adminFailMsg);
     return false;
   }
 };
@@ -44,18 +42,27 @@ interface AdminSignInArgument {
   cpassword: string | undefined;
 }
 
+interface ResponseObjectWithAdmin extends ResponseObject {
+  admin:
+    | (SchemaMethodInstance & {
+        _id: any;
+      })
+    | null;
+}
+
 const signInAdmin = async (
   admin: AdminSignInArgument
-): Promise<ResponseObject> => {
+): Promise<ResponseObjectWithAdmin> => {
   try {
     console.log("process... Signing In Admin");
     if (!admin.email || !admin.password) {
-      return <ResponseObject>{
+      return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Email and Password is not provided!!!",
+        admin: null,
       };
     }
-    const userLogin = await UserDetail.findOne(
+    const adminExist = await UserDetail.findOne(
       { email: admin.email },
       {
         email: 1,
@@ -65,30 +72,34 @@ const signInAdmin = async (
         id: 1,
       }
     );
-    if (!userLogin) {
-      return <ResponseObject>{
+    if (!adminExist) {
+      return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Error Login! Admin does't exist",
+        admin: null,
       };
     }
     const isPasswordMatch = await bcrypt.compare(
       admin.password,
-      userLogin.password
+      adminExist.password
     );
     if (!isPasswordMatch) {
-      return <ResponseObject>{
+      return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Email and password doesn't match",
+        admin: null,
       };
     }
-    return <ResponseObject>{
+    return <ResponseObjectWithAdmin>{
       success: true,
       msg: "Admin SignIn Successfully",
+      admin: adminExist,
     };
   } catch (err) {
-    return <ResponseObject>{
+    return <ResponseObjectWithAdmin>{
       success: false,
       msg: "Admin SignIn Failed",
+      admin: null,
     };
   }
 };
@@ -180,8 +191,8 @@ const registerAdmin = async (
 const AuthAdmin = async () => {
   try {
     const name = adminConstant.adminName;
-    const email = process.env.ADMIN_LOGIN_EMAIL;
     const userID = adminConstant.adminUserID;
+    const email = process.env.ADMIN_LOGIN_EMAIL;
     const password = process.env.ADMIN_LOGIN_PASSWORD;
     const cpassword = process.env.ADMIN_LOGIN_PASSWORD;
     const gender = adminConstant.adminGender;
@@ -211,9 +222,10 @@ const AuthAdmin = async () => {
     console.log(resSignIn.msg);
     return;
   } catch (err) {
-    console.log(adminFailMsg);
+    console.log("Auth Failed");
     return;
   }
 };
 
 export default AuthAdmin;
+export { signInAdmin };
