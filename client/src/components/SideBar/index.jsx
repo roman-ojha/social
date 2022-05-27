@@ -6,6 +6,7 @@ import LogoAndSearchBar from "./LogoAndSearchBar";
 import Menu from "./Menu";
 import Friends from "./Friends";
 import Account from "./Account";
+import OpenSideBarDrawerButton from "../OpenSideBarDrawerButton";
 
 const MainPageSideBar = () => {
   const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const MainPageSideBar = () => {
     <>
       <div className="SideBar_Drawer_Container Close_SideBar_Drawer">
         <div className="MainPage_SideBar_Container">
+          {/* <OpenSideBarDrawerButton /> */}
           <LogoAndSearchBar
             onSearchBar={onSearchBar}
             setOnSearchBar={setOnSearchBar}

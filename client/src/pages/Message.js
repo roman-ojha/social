@@ -6,6 +6,8 @@ import "../styles/pages/MessagePage.css";
 import InnerUserMessage from "../components/MessagePage/InnerUserMessage";
 import MessagesList from "../components/MessagePage/MessagesList";
 import { mainPageMessageViewOnOff } from "../services/redux-actions/index";
+import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
+import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 
 const Message = () => {
   const dispatch = useDispatch();
@@ -27,6 +29,8 @@ const Message = () => {
       </Helmet>
       <div className="MessagePage_Container">
         <div className="MainPage_MessageBox_Container">
+          <OpenSideBarDrawerButton />
+          {/* <OpenRightPartDrawerButton /> */}
           {mainPageInnerMessageBoxOnOffState ? (
             <InnerUserMessage
               InternalMessageInfo={{

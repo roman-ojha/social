@@ -1,6 +1,9 @@
 .SideBar_Drawer_Open_Icons {
-  position: absolute;
-  left: 0px;
+  position: fixed;
+  /* border: 1px solid red; */
+  left: 93px;
+  /* for max-width: 1024px  screen*/
+  transform: translateY(50vh);
 }
 .SideBar_Drawer_Open_1st_Icon {
   animation: blinking_Drawer_Open_1st_Icon;
@@ -21,4 +24,61 @@
   right: -10px;
   width: 1.5rem;
   height: 1.5rem;
+}
+
+@media screen and (max-width: 800px) {
+  .SideBar_Drawer_Open_Icons {
+    left: 84px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .SideBar_Drawer_Open_Icons {
+    left: 54px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .SideBar_Drawer_Open_Icons {
+    left: 38px;
+  }
+  .SideBar_Drawer_Open_1st_Icon {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .SideBar_Drawer_Open_2nd_Icon {
+    width: 1.3rem;
+    right: -6px;
+    height: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .SideBar_Drawer_Open_Icons {
+    left: 34px;
+  }
+  .SideBar_Drawer_Open_1st_Icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  .SideBar_Drawer_Open_2nd_Icon {
+    width: 1.2rem;
+    right: -5px;
+    height: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .SideBar_Drawer_Open_Icons {
+    left: 34px;
+  }
+  .SideBar_Drawer_Open_1st_Icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .SideBar_Drawer_Open_2nd_Icon {
+    width: 1rem;
+    right: -4px;
+    height: 1rem;
+  }
 }

@@ -30,7 +30,7 @@ const Home = () => {
       <LoadingSpinner />
       <div className="HomePage_Container">
         <OpenSideBarDrawerButton />
-        <OpenRightPartDrawerButton />
+        {/* <OpenRightPartDrawerButton /> */}
         <div className="HomePage_User_Post_Field_Container">
           <UserPostField />
         </div>

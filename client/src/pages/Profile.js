@@ -97,7 +97,7 @@ const Profile = () => {
             <title>{params.userID}</title>
           </Helmet>
           <OpenSideBarDrawerButton />
-          <OpenRightPartDrawerButton />
+          {/* <OpenRightPartDrawerButton /> */}
           <UserInfo />
           <PageRoute />
           <div className="ProfilePage_UserContent_Container">

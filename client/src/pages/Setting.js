@@ -197,9 +197,9 @@ const Setting = () => {
         <Helmet>
           <title>Setting</title>
         </Helmet>
-        <OpenSideBarDrawerButton />
-        <OpenRightPartDrawerButton />
         <div className="Setting_Page_Change_Profile_Picture_Container">
+          <OpenSideBarDrawerButton />
+          {/* <OpenRightPartDrawerButton /> */}
           <h1>Change Profile Picture</h1>
           <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">
             <label htmlFor="user-profile-input">
