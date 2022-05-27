@@ -10,14 +10,36 @@ const messageListReducer = (state = initialState, action) => {
       }
     });
   } else if (action.type === "appendMessageOnMessageList") {
-    return state.map((element) =>
-      element.messageToId === action.payload.id
-        ? {
-            ...element,
-            message: [...element.message, action.payload.msgInfo],
-          }
-        : element
-    );
+    let isExistOnList = false;
+    let appendedMessage = state.map((element) => {
+      if (element.messageToId === action.payload.id) {
+        isExistOnList = true;
+        return {
+          ...element,
+          message: [...element.message, action.payload.msgInfo],
+        };
+      } else {
+        return element;
+      }
+    });
+    if (isExistOnList === false) {
+      // if user is sending message for the first time
+      appendedMessage.unshift({
+        lastMessageOn: new Date(),
+        messageToId: action.payload.id,
+        messageToUserId: action.payload.messageToUserId,
+        receiverPicture: action.payload.receiverPicture,
+        message: [
+          {
+            senderId: action.payload.msgInfo.senderId,
+            senderUserId: action.payload.msgInfo.senderUserId,
+            content: action.payload.msgInfo.content,
+            date: action.payload.msgInfo.date,
+          },
+        ],
+      });
+    }
+    return appendedMessage;
   } else {
     return state;
   }

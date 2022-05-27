@@ -45,12 +45,13 @@ const SendMessageInputField = (props) => {
           );
           dispatch(
             appendMessageOnMessageListAction({
-              id: resBody.receiverId,
-              picture: props.receiverPicture,
               msgInfo: {
                 ...res.msgInfo,
                 _id: `${Math.random()}`,
               },
+              id: resBody.receiverId,
+              receiverPicture: props.receiverPicture,
+              messageToUserId: props.messageToUserId,
             })
           );
         }

@@ -53,7 +53,6 @@ const Index = () => {
           }
         );
         socket.on("send-message-client", (res) => {
-          console.log(res);
           if (res.success !== false) {
             dispatch(
               appendOnCurrentInnerUserMessage({
@@ -68,7 +67,8 @@ const Index = () => {
                   _id: `${Math.random()}`,
                 },
                 id: res.msgInfo.senderId,
-                picture: res.senderPicture,
+                receiverPicture: res.senderPicture,
+                messageToUserId: res.msgInfo.senderUserId,
               })
             );
           }

@@ -229,6 +229,13 @@ const ReturnCommentContent = () => {
               value={commentInputFieldData}
               onChange={(e) => {
                 setCommentInputFieldData(e.target.value);
+                const eventOnPressEnter = (e) => {
+                  if (e.key === "Enter") {
+                    comment();
+                  }
+                  window.removeEventListener("keydown", eventOnPressEnter);
+                };
+                window.addEventListener("keydown", eventOnPressEnter);
               }}
             />
             <Icon
