@@ -1,7 +1,10 @@
 const initialState = {
   openCommentBox: false,
   postID: "",
-  to: "",
+  toId: "",
+  toUserId: "",
+  commented: false,
+  newComment: "",
   comments: [],
 };
 

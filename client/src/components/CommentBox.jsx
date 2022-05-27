@@ -18,6 +18,7 @@ import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import { isEmptyString } from "../funcs/isEmptyString";
 import { useHistory } from "react-router-dom";
 import GlobalApi from "../services/api/global";
+import Api from "../services/api/components/postBox";
 
 const ReturnCommentContent = () => {
   const history = useHistory();
@@ -58,16 +59,13 @@ const ReturnCommentContent = () => {
       if (isEmptyString(commentInputFieldData)) {
         toastWarn("Please Fill the Comment Field Properly");
       } else {
-        const res = await axios({
-          url: "/post/comment",
-          method: "POST",
-          data: {
-            comment: commentInputFieldData,
-            postID: commentBoxStore.postID,
-            to: commentBoxStore.to,
-          },
-          withCredentials: true,
+        const res = await Api.comment({
+          comment: commentInputFieldData,
+          postID: commentBoxStore.postID,
+          toId: commentBoxStore.toId,
+          toUserId: commentBoxStore.toUserId,
         });
+
         const data = await res.data;
         if (res.status !== 200 && data.success) {
           toastError(data.msg);
@@ -79,7 +77,15 @@ const ReturnCommentContent = () => {
             })
           );
           dispatch(
-            commentBoxAction({ openCommentBox: false, postID: "", to: "" })
+            commentBoxAction({
+              openCommentBox: false,
+              postID: commentBoxStore.postID,
+              toId: commentBoxStore.toId,
+              toUserId: commentBoxStore.toUserId,
+              commented: true,
+              newComment: commentInputFieldData,
+              comments: [],
+            })
           );
           toastSuccess(data.msg);
         }
@@ -89,7 +95,7 @@ const ReturnCommentContent = () => {
       if (err.response.data.success === false) {
         toastError(err.response.data.msg);
       } else {
-        toastError("Some Problem Occur, Please Try again Letter!!!");
+        toastError("Some Problem Occur, Please Try again later!!!");
       }
       dispatch(stopProgressBar());
     }
@@ -203,7 +209,11 @@ const ReturnCommentContent = () => {
                   commentBoxAction({
                     openCommentBox: false,
                     postID: "",
-                    to: "",
+                    toId: "",
+                    toUserId: "",
+                    commented: false,
+                    newComment: "",
+                    comments: [],
                   })
                 );
                 history.push(
@@ -215,6 +225,7 @@ const ReturnCommentContent = () => {
               className="CommentBox_Input_Field"
               placeholder="Give some thought on this post..."
               type="text"
+              autoFocus
               value={commentInputFieldData}
               onChange={(e) => {
                 setCommentInputFieldData(e.target.value);

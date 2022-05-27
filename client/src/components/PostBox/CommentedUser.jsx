@@ -10,6 +10,8 @@ import {
   setRootUserProfileDataState,
 } from "../../services/redux-actions";
 import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const CommentedUser = (props) => {
   const dispatch = useDispatch();
@@ -17,6 +19,27 @@ const CommentedUser = (props) => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+
+  const [commentedUserInfo, setCommentedUserInfo] = useState(
+    props.commentInfo.postCommentInfo
+      ? {
+          postId: props.postId,
+          doesHaveComment: true,
+          picture: props.commentInfo.postCommentInfo.picture,
+          userID: props.commentInfo.postCommentInfo.userID,
+          comment: props.commentInfo.postCommentInfo.comment,
+        }
+      : {
+          postId: props.postId,
+          doesHaveComment: false,
+          picture: "",
+          userID: "",
+          comment: "",
+        }
+  );
+  // console.log(commentedUserInfo);
+
   const routeToProfile = async (userID) => {
     try {
       dispatch(startProgressBar());
@@ -53,31 +76,46 @@ const CommentedUser = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (
+      commentBoxStore.commented &&
+      commentBoxStore.postID === commentedUserInfo.postId
+    ) {
+      setCommentedUserInfo({
+        postId: props.postId,
+        doesHaveComment: true,
+        picture: userProfileDetailStore.picture,
+        userID: userProfileDetailStore.userID,
+        comment: commentBoxStore.newComment,
+      });
+    }
+  }, [commentBoxStore.commented]);
+
   return (
     <>
       <div className="UserPostFeed_CommentBox_CommentList">
-        {props.commentInfo.postCommentInfo ? (
+        {commentedUserInfo.doesHaveComment ? (
           <div className="UserPostFeed_CommentBox_UserComment">
             <img
               src={
-                props.commentInfo.postCommentInfo.picture
-                  ? props.commentInfo.postCommentInfo.picture
+                commentedUserInfo.picture
+                  ? commentedUserInfo.picture
                   : User_Profile_Icon
               }
-              alt={props.commentInfo.postCommentInfo.userID}
+              alt={commentedUserInfo.userID}
               onClick={() => {
-                routeToProfile(props.commentInfo.postCommentInfo.userID);
+                routeToProfile(commentedUserInfo.userID);
               }}
             />
             <div>
               <h3
                 onClick={() => {
-                  routeToProfile(props.commentInfo.postCommentInfo.userID);
+                  routeToProfile(commentedUserInfo.userID);
                 }}
               >
-                {props.commentInfo.postCommentInfo.userID}
+                {commentedUserInfo.userID}
               </h3>
-              <p>{props.commentInfo.postCommentInfo.comment}</p>
+              <p>{commentedUserInfo.comment}</p>
             </div>
           </div>
         ) : (

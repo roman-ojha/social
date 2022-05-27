@@ -68,7 +68,10 @@ const LikeCommentShare = (props) => {
           commentBoxAction({
             openCommentBox: true,
             postID: props.userFeedData.id,
-            to: props.userMainInformation.userID,
+            toId: props.userMainInformation.id,
+            toUserId: props.userMainInformation.userID,
+            commented: false,
+            newComment: "",
             comments: data.comment.by,
           })
         );
