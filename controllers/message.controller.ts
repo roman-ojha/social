@@ -263,6 +263,7 @@ export default {
             userID: num.userID,
           }));
           const newObj = {
+            lastMessageOn: obj.lastMessageOn,
             messageToId: obj.messageToId,
             roomID: obj.roomID,
             message: obj.message,

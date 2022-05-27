@@ -36,7 +36,7 @@ io.on("connect", (socket) => {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
               senderId: senderId,
               content: messageInfo.message,
-              date: Date(),
+              date: new Date(),
             },
           },
         },
@@ -65,8 +65,11 @@ io.on("connect", (socket) => {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
               senderId: senderId,
               content: messageInfo.message,
-              date: Date(),
+              date: new Date(),
             },
+          },
+          $set: {
+            "messages.$[field].lastMessageOn": new Date(),
           },
         },
         {

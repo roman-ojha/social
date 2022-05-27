@@ -50,6 +50,7 @@ export default {
       });
       const newUserId = crypto.randomBytes(16).toString("hex");
       const messageRoomID = crypto.randomBytes(16).toString("hex");
+      console.log(resAdmin);
       if (resAdmin.success && resAdmin.admin) {
         console.log("admin exist");
         // if Admin Exist
@@ -91,6 +92,7 @@ export default {
           ],
           messages: [
             <UserDocumentMessages>{
+              lastMessageOn: new Date(),
               roomID: messageRoomID,
               messageToId: resAdmin.admin.id,
               message: [
@@ -127,6 +129,7 @@ export default {
                 id: newUserId,
               },
               messages: <UserDocumentMessages>{
+                lastMessageOn: new Date(),
                 roomID: messageRoomID,
                 messageToId: newUserId,
                 message: [
@@ -218,6 +221,7 @@ export default {
         msg: "User register successfully",
       });
     } catch (err) {
+      console.log(err);
       return res.status(500).json({
         success: false,
         err: "Server Error!!,Please try again later",

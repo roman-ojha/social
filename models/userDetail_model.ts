@@ -19,40 +19,38 @@ const userDetailSchema = new mongoose.Schema<
   },
   name: {
     type: String,
-    require: true,
+    required: true,
   },
   userID: {
     type: String,
-    require: true,
   },
   email: {
     type: String,
-    require: true,
+    required: true,
   },
   picture: {
     type: String,
-    require: true,
   },
   password: {
     type: String,
-    require: true,
+    required: true,
   },
   cpassword: {
     type: String,
-    require: true,
+    required: true,
   },
   birthday: {
     year: {
       type: String,
-      require: true,
+      required: true,
     },
     month: {
       type: String,
-      require: true,
+      required: true,
     },
     day: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   date: {
@@ -65,13 +63,19 @@ const userDetailSchema = new mongoose.Schema<
   },
   messages: [
     {
+      lastMessageOn: {
+        type: Date,
+        default: Date.now,
+        required: true,
+      },
       messageToId: {
         // messageTo == id of User
         type: String,
+        required: true,
       },
       roomID: {
         type: String,
-        require: true,
+        required: true,
       },
       message: [
         {

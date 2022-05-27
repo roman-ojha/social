@@ -6,6 +6,7 @@ import {
   appendMessageOnMessageListAction,
 } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import { isEmptyString } from "../../funcs/isEmptyString";
 
 const SendMessageInputField = (props) => {
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ const SendMessageInputField = (props) => {
   );
 
   const sendMessage = async () => {
-    // sending message to user
     try {
-      if (userMessageField === "") {
+      if (isEmptyString(userMessageField)) {
+        setUserMessageField("");
         return;
       }
       const resBody = {

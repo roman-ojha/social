@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export type UserDocumentMessages = {
+  lastMessageOn: Date;
   messageToId: string;
   roomID: string;
   message: [{ senderId: string; content: string; date: Date }];
@@ -59,6 +60,12 @@ export type UserDocumentFriends = {
   id: string;
 };
 
+export type UserDocumentStories = {
+  caption: string;
+  picture: string;
+  date: string;
+};
+
 export default interface UserDocument extends Document {
   googleID: number;
   id: string;
@@ -80,11 +87,7 @@ export default interface UserDocument extends Document {
   friends: [UserDocumentFriends];
   postNo: number;
   posts: [UserDocumentPosts];
-  stories: {
-    caption: string;
-    picture: string;
-    date: string;
-  };
+  stories: UserDocumentStories;
   tokens: [
     {
       token: string;
