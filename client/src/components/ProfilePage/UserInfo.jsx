@@ -10,10 +10,11 @@ import {
   stopProgressBar,
   profilePageDataAction,
 } from "../../services/redux-actions";
-import socket from "../../services/socket";
 import { instance as axios } from "../../services/axios";
 import { toastError, toastSuccess } from "../../services/toast";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import constant from "../../constant/constant";
 
 const UserInfo = () => {
   const history = useHistory();
@@ -22,6 +23,9 @@ const UserInfo = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
 
   const followUser = async () => {
     // writing logic for followuser
@@ -103,7 +107,11 @@ const UserInfo = () => {
   const showInnerMessage = async () => {
     // before getting new message we will reset the previous message stored into redux
     try {
-      dispatch(mainPageMessageViewOnOff(true));
+      if (isMax850px) {
+        history.push("/u/message");
+      } else {
+        dispatch(mainPageMessageViewOnOff(true));
+      }
       dispatch(
         currentUserMessageAction({
           messageToId: profilePageData.id,
@@ -140,11 +148,6 @@ const UserInfo = () => {
             message: resData.message,
           })
         );
-        // if we are inside the user message then we have to join room through socket
-        // NOTE: this is just for temporary purposes
-        socket.emit("join-room", resData.roomID, (resMessage) => {
-          console.log(resMessage);
-        });
       }
     } catch (err) {
       if (err.response.data.success === false) {

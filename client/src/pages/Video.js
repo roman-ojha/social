@@ -81,7 +81,7 @@ const Video = () => {
         </Helmet>
         <header className="VideoPage_Header">
           <OpenSideBarDrawerButton />
-          {/* <OpenRightPartDrawerButton /> */}
+          <OpenRightPartDrawerButton />
           <SearchForm />
           <a
             href="https://www.youtube.com"

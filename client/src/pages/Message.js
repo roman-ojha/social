@@ -30,7 +30,7 @@ const Message = () => {
       <div className="MessagePage_Container">
         <div className="MainPage_MessageBox_Container">
           <OpenSideBarDrawerButton />
-          {/* <OpenRightPartDrawerButton /> */}
+          <OpenRightPartDrawerButton />
           {mainPageInnerMessageBoxOnOffState ? (
             <InnerUserMessage
               InternalMessageInfo={{

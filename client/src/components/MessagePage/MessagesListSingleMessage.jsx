@@ -6,14 +6,10 @@ import {
 } from "../../services/redux-actions/index";
 import { toastError } from "../../services/toast";
 import { instance as axios } from "../../services/axios";
-import socket from "../../services/socket";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const MessageListSingleMessage = (props) => {
   const dispatch = useDispatch();
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
   const showInnerMessage = async () => {
     try {
       // before getting new message we will reset the previous message stored into redux
@@ -55,11 +51,6 @@ const MessageListSingleMessage = (props) => {
             fetchedInnerMessage: true,
           })
         );
-        // if we are inside the user message then we have to join room through socket
-        // NOTE: this is just for temporary purposes
-        // socket.emit("join-room", resData.roomID, (resMessage) => {
-        //   console.log(resMessage);
-        // });
       }
     } catch (err) {
       if (err.response.data.success === false) {
