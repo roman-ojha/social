@@ -35,11 +35,11 @@ const Home = () => {
           <UserPostField />
         </div>
         <div className="HomePage_Feed_Main_Container">
-          {followedUserPostDataStore.length == 0 ? (
+          {/* {followedUserPostDataStore.length == 0 ? (
             <DefaultSocialPost />
           ) : (
             <></>
-          )}
+          )} */}
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value, index) => {
             return (

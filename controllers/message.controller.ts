@@ -2,9 +2,7 @@ import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
-import UserDocument, {
-  UserDocumentMessages,
-} from "../interface/userDocument.js";
+import { UserDocumentMessages } from "../interface/userDocument.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
 export default {
