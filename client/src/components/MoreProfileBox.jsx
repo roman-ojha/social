@@ -9,10 +9,12 @@ import {
   setRootUserProfileDataState,
   startProgressBar,
   stopProgressBar,
+  openRightPartDrawer,
 } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
 import constant from "../constant/constant";
+import { useMediaQuery } from "react-responsive";
 
 const MoreProfileBox = () => {
   const history = useHistory();
@@ -26,6 +28,9 @@ const MoreProfileBox = () => {
   const rootUserProfileDataState = useSelector(
     (state) => state.rootUserProfileDataState
   );
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
 
   const date = new Date();
   const userLogOut = async () => {
@@ -70,6 +75,9 @@ const MoreProfileBox = () => {
                     getRootUserProfileData: true,
                   })
                 );
+              }
+              if (isMax850px) {
+                dispatch(openRightPartDrawer(false));
               }
             }}
           >

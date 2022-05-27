@@ -11,6 +11,7 @@ import {
   messageListAction,
   setRootUserProfileDataState,
   profilePageDataAction,
+  openRightPartDrawer,
 } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
@@ -19,6 +20,8 @@ import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import messageApi from "../services/api/global/message";
 import Api from "../services/api/components/MainPageMsgAndNtfBar";
+import constant from "../constant/constant";
+import { useMediaQuery } from "react-responsive";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
@@ -37,6 +40,9 @@ const MainPageMsgAndNtfBar = () => {
   const rootUserProfileDataState = useSelector(
     (state) => state.rootUserProfileDataState
   );
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
 
   const getNotificationData = async () => {
     dispatch(startProgressBar());
@@ -180,6 +186,9 @@ const MainPageMsgAndNtfBar = () => {
                   getRootUserProfileData: true,
                 })
               );
+            }
+            if (isMax850px) {
+              dispatch(openRightPartDrawer(false));
             }
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}

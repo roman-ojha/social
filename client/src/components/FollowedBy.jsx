@@ -8,10 +8,13 @@ import {
   isFollowedFollowedByUser,
   startProgressBar,
   stopProgressBar,
+  openRightPartDrawer,
 } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import GlobalApi from "../services/api/global";
+import constant from "../constant/constant";
+import { useMediaQuery } from "react-responsive";
 
 const FollowedBy = () => {
   const history = useHistory();
@@ -23,6 +26,10 @@ const FollowedBy = () => {
   const moreProfileBoxState = useSelector(
     (state) => state.moreProfileBoxReducer
   );
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
+
   const FollowedUser = (props) => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
@@ -114,15 +121,16 @@ const FollowedBy = () => {
         const res = await GlobalApi.getFriendData(userID);
         const userData = await res.data;
         if (res.status === 200 && userData.success) {
-          // success
           const userObj = {
             ...userData.searchedUser,
             isRootUserFollowed: userData.isRootUserFollowed,
           };
           dispatch(profilePageDataAction(userObj));
+          if (isMax850px) {
+            dispatch(openRightPartDrawer(false));
+          }
           history.push(`/u/profile/${userID}/posts`);
         } else {
-          // error
           toastError(userData.msg);
         }
         dispatch(stopProgressBar());

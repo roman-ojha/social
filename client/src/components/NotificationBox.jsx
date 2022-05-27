@@ -6,15 +6,22 @@ import {
   startProgressBar,
   stopProgressBar,
   profilePageDataAction,
+  openRightPartDrawer,
 } from "../services/redux-actions";
 import GlobalApi from "../services/api/global";
 import { toastError } from "../services/toast";
 import { useHistory } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import constant from "../constant/constant";
 
 const NotificationBox = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const notificationBoxState = useSelector((state) => state.notificationBox);
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
+
   return (
     <>
       {notificationBoxState.open ? (
@@ -46,6 +53,9 @@ const NotificationBox = () => {
                               };
                               dispatch(profilePageDataAction(userObj));
                               history.push(`/u/profile/${data.userID}/posts`);
+                              if (isMax850px) {
+                                dispatch(openRightPartDrawer(false));
+                              }
                             } else {
                               // error
                               toastError(userData.msg);

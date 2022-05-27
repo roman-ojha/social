@@ -2,13 +2,22 @@ import React from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink } from "react-router-dom";
-import { mainPageMessageViewOnOff } from "../../services/redux-actions/index";
+import {
+  openRightPartDrawer,
+  mainPageMessageViewOnOff,
+} from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import MessagesListSingleMessage from "./MessagesListSingleMessage";
+import { useMediaQuery } from "react-responsive";
+import constant from "../../constant/constant";
 
 const MessagesList = () => {
   const dispatch = useDispatch();
   const messageList = useSelector((state) => state.messageListReducer);
+
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
 
   return (
     <>
@@ -53,19 +62,9 @@ const MessagesList = () => {
           to="/u/message"
           onClick={() => {
             dispatch(mainPageMessageViewOnOff(false));
-            let previouslySelectedElement;
-            try {
-              const selectedLinkElement = document.getElementsByClassName(
-                "MainPage_SideBar_Link"
-              )[2];
-              selectedLinkElement.firstElementChild.style.backgroundColor =
-                "var(--primary-color-point-7)";
-              selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-                "var(--primary-color-point-7)";
-              selectedLinkElement.firstElementChild.nextElementSibling.style.color =
-                "var(--primary-color-point-7)";
-              previouslySelectedElement = selectedLinkElement;
-            } catch (err) {}
+            if (isMax850px) {
+              dispatch(openRightPartDrawer(false));
+            }
           }}
         >
           See More Message

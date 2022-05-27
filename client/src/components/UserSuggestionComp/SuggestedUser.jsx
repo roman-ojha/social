@@ -6,15 +6,22 @@ import {
   startProgressBar,
   stopProgressBar,
   isFollowedSuggestedUser,
+  openRightPartDrawer,
 } from "../../services/redux-actions";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import GlobalApi from "../../services/api/global";
+import { useMediaQuery } from "react-responsive";
+import constant from "../../constant/constant";
 
 const SuggestedUser = (props) => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const isMax850px = useMediaQuery({
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+  });
+
   const followUser = async () => {
     if (props.userInformation.type !== "bot") {
       try {
@@ -111,6 +118,9 @@ const SuggestedUser = (props) => {
           isRootUserFollowed: userData.isRootUserFollowed,
         };
         dispatch(profilePageDataAction(userObj));
+        if (isMax850px) {
+          dispatch(openRightPartDrawer(false));
+        }
         history.push(`/u/profile/${userID}/posts`);
       } else {
         // error
