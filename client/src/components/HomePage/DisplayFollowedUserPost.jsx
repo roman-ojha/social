@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import admin from "../../constant/admin";
 import DefaultSocialPost from "../DefaultSocialPost";
 import PostBox from "../PostBox/PostBox";
 const DisplayFollowedUserPost = () => {
@@ -20,7 +21,12 @@ const DisplayFollowedUserPost = () => {
             />
           );
         });
-        if (postElement.length > 0) {
+        if (
+          postElement.length === 1 &&
+          postElement[0].props.userMainInformation.userID === admin.adminUserID
+        ) {
+          return [<DefaultSocialPost key={key} />, ...postElement];
+        } else if (postElement.length > 0) {
           return postElement;
         } else {
           return <DefaultSocialPost key={key} />;

@@ -195,7 +195,6 @@ const AuthAdmin = async () => {
     const password = process.env.ADMIN_LOGIN_PASSWORD;
     const cpassword = process.env.ADMIN_LOGIN_PASSWORD;
     const gender = adminConstant.adminGender;
-    const birthday = adminConstant.adminBirthday;
     // const isAdminExist = await checkAdminExistInDatabase(email);
     // SignIn Admin first:
     const resSignIn = await signInAdmin({ email, password, cpassword });
@@ -209,7 +208,11 @@ const AuthAdmin = async () => {
         password,
         cpassword,
         gender,
-        birthday,
+        birthday: {
+          year: new Date().getFullYear().toString(),
+          month: (new Date().getMonth() + 1).toString(),
+          day: new Date().getDate().toString(),
+        },
       });
       if (!resRegistration.success) {
         console.log(resRegistration.msg);

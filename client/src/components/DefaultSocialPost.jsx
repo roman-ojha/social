@@ -44,7 +44,7 @@ const DefaultSocialPost = () => {
               <li>You can see your's and other user profile</li>
               <li>
                 You can change profile picture, unique userID/username,
-                displayed name, password on Setting page
+                displayed name or password on Setting page
               </li>
               <li>You can watch and search videos from the video page</li>
             </ul>
