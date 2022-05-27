@@ -7,7 +7,6 @@ const DisplayFollowedUserPost = () => {
   const followedUserPostDataStore = useSelector(
     (state) => state.setFollowedUserPostDataReducer
   );
-  // Displaying Followed User Post
   return (
     <>
       {followedUserPostDataStore.map((user, key) => {
@@ -22,13 +21,14 @@ const DisplayFollowedUserPost = () => {
           );
         });
         if (
-          postElement.length === 1 &&
+          followedUserPostDataStore.length === 1 &&
           postElement[0].props.userMainInformation.userID === admin.adminUserID
         ) {
           return [<DefaultSocialPost key={key} />, ...postElement];
         } else if (postElement.length > 0) {
           return postElement;
         } else {
+          // console.log("third");
           return <DefaultSocialPost key={key} />;
         }
       })}

@@ -5,8 +5,8 @@
   border-width: 0px;
   background-color: var(--emoji-picker-background-color);
   position: absolute;
-  left: 116%;
-  top: -11px;
+  right: 0px;
+  top: 230px;
 }
 .emoji-mart-preview {
   position: absolute;
@@ -56,4 +56,28 @@
 }
 .emoji-mart-scroll:hover::-webkit-scrollbar-thumb {
   background-color: var(--secondary-color-point-1-transparent-0);
+}
+
+@media screen and (max-width: 850px) {
+  .emoji-mart,
+  .emoji-mart-light {
+    border-radius: 13px;
+    top: 230px;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .emoji-mart,
+  .emoji-mart-light {
+    border-radius: 11px;
+    top: 220px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .emoji-mart,
+  .emoji-mart-light {
+    border-radius: 13px;
+    top: 200px;
+  }
 }

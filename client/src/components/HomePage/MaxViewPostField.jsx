@@ -13,7 +13,7 @@ import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { Picker } from "emoji-mart";
 import { Icon } from "@iconify/react";
 import Api from "../../services/api/pages/homeApi";
-import { toastError, toastSuccess } from "../../services/toast";
+import { toastError, toastSuccess, toastInfo } from "../../services/toast";
 
 const MaxViewPostField = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
@@ -35,29 +35,35 @@ const MaxViewPostField = () => {
 
   const EmojiMart = () => {
     return (
-      <div>
-        <Picker
-          set="facebook"
-          onSelect={(emoji) => {
-            dispatch(
-              homePageUserPostFieldDataAction({
-                ...homePageUserPostFieldData,
-                content: homePageUserPostFieldData.content + emoji.native,
-              })
-            );
-          }}
-          title="Pick your emoji..."
-          emoji="point_up"
-          i18n={{
-            categories: { search: "Result", recent: "Recents" },
-            skintones: {
-              2: "Light Skin Tone",
-            },
-          }}
-          style={{ width: "300px" }}
-          color="white"
-        />
-      </div>
+      <>
+        {homePageUserPostEmojiView ? (
+          <div>
+            <Picker
+              set="facebook"
+              onSelect={(emoji) => {
+                dispatch(
+                  homePageUserPostFieldDataAction({
+                    ...homePageUserPostFieldData,
+                    content: homePageUserPostFieldData.content + emoji.native,
+                  })
+                );
+              }}
+              title="Pick your emoji..."
+              emoji="point_up"
+              i18n={{
+                categories: { search: "Result", recent: "Recents" },
+                skintones: {
+                  2: "Light Skin Tone",
+                },
+              }}
+              style={{ width: "300px" }}
+              color="white"
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </>
     );
   };
 
@@ -170,16 +176,14 @@ const MaxViewPostField = () => {
               accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
               name="image"
             />
-            <label htmlFor="video-input">
-              <Icon
-                className="HomePage_MaxView_UserPost_Field_Icon"
-                icon="ic:outline-video-library"
-              />
-            </label>
-            <input
-              id="video-input"
-              type="file"
-              style={{ visibility: "hidden" }}
+            <Icon
+              className="HomePage_MaxView_UserPost_Field_Icon"
+              icon="ic:outline-video-library"
+              onClick={() => {
+                toastInfo(
+                  "Video upload is not supported right now, please upload images"
+                );
+              }}
             />
             <Icon
               className="HomePage_MaxView_UserPost_Field_Emoji_Icon"
@@ -196,7 +200,6 @@ const MaxViewPostField = () => {
                   : setHomePageUserPostEmojiView(true);
               }}
             />
-            {homePageUserPostEmojiView ? <EmojiMart /> : ""}
           </div>
         </div>
         <div className="MaxView_UserPost_Image_Container">
@@ -229,6 +232,7 @@ const MaxViewPostField = () => {
           </button>
         </div>
       </form>
+      <EmojiMart />
     </>
   );
 };
