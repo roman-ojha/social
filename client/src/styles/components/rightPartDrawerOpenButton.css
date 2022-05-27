@@ -23,8 +23,11 @@
 }
 
 .RightPart_Drawer_Open_Icons {
-  position: absolute;
-  right: 10px;
+  position: fixed;
+  right: 0px;
+  /* border: 1px solid red; */
+  transform: translateY(50vh);
+  margin-right: -5px;
 }
 .RightPart_Drawer_Open_2nd_Icon {
   transform: rotate(180deg);
@@ -41,14 +44,15 @@
   height: 1.5rem;
 }
 
-@media screen and (max-width: 480px) and (min-width: 320px) {
+@media screen and (max-width: 480px) {
   .RightPart_Drawer_Open_Icons {
-    right: 0px;
-    top: -3px;
+    transform: translateY(40vh);
+    margin-right: -4px;
   }
   .RightPart_Drawer_Open_2nd_Icon {
     width: 1.3rem;
     height: 1.3rem;
+    right: 6px;
   }
   .RightPart_Drawer_Open_1st_Icon {
     width: 1.3rem;
@@ -58,16 +62,31 @@
 
 @media screen and (max-width: 320px) {
   .RightPart_Drawer_Open_Icons {
-    right: 0px;
-    top: -1px;
+    transform: translateY(50vh);
+    margin-right: -4px;
   }
   .RightPart_Drawer_Open_2nd_Icon {
-    width: 1.1rem;
-    height: 1.1rem;
-    right: 10px;
+    width: 1.2rem;
+    height: 1.2rem;
+    right: 5px;
   }
   .RightPart_Drawer_Open_1st_Icon {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .RightPart_Drawer_Open_Icons {
+    margin-right: -4px;
+  }
+  .RightPart_Drawer_Open_2nd_Icon {
+    width: 1rem;
+    height: 1rem;
+    right: 4px;
+  }
+  .RightPart_Drawer_Open_1st_Icon {
+    width: 1rem;
+    height: 1rem;
   }
 }
