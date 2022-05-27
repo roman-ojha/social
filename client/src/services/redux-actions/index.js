@@ -155,9 +155,9 @@ export const currentUserMessageAction = (message) => {
   };
 };
 
-export const appendOnMessage = (message) => {
+export const appendOnCurrentInnerUserMessage = (message) => {
   return {
-    type: "appendOnMessage",
+    type: "appendOnCurrentInnerUserMessage",
     payload: message,
   };
 };

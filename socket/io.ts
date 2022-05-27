@@ -17,9 +17,6 @@ io.on("connect", (socket) => {
       senderUserId: messageInfo.senderUserId,
       content: messageInfo.message,
       date: Date(),
-      // receiverId: messageInfo.receiverId,
-      // receiverUserID: messageInfo.receiverUserID,
-      // roomID: messageInfo.roomID,
     };
     try {
       const senderId = messageInfo.senderId;
@@ -78,11 +75,15 @@ io.on("connect", (socket) => {
         }
       );
       // after saving to data base we will send msg through socket
-      socket.to(messageInfo.roomID).emit("send-message-client", {
+      socket.to(messageInfo.receiverId).emit("send-message-client", {
+        success: true,
+        msgInfo: emittingMessageInfo,
+        senderPicture: messageInfo.senderPicture,
+      });
+      cb({
         success: true,
         msgInfo: emittingMessageInfo,
       });
-      cb({ success: true, msgInfo: emittingMessageInfo });
     } catch (err) {}
   });
   socket.on("join-room", (roomID, cb) => {

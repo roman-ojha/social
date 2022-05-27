@@ -85,6 +85,7 @@ const InnerMessageBox = (props) => {
         <SendMessageInputField
           messageToUserId={props.InternalMessageInfo.messageToUserId}
           messageToId={props.InternalMessageInfo.messageToId}
+          receiverPicture={props.InternalMessageInfo.picture}
         />
       </div>
     </>

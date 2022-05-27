@@ -4,7 +4,6 @@ const messageListReducer = (state = initialState, action) => {
   if (action.type === "messageList") {
     return action.payload.sort((a, b) => {
       if (new Date(a.lastMessageOn) < new Date(b.lastMessageOn)) {
-        console.log("yes");
         return 1;
       } else {
         return -1;
@@ -12,10 +11,10 @@ const messageListReducer = (state = initialState, action) => {
     });
   } else if (action.type === "appendMessageOnMessageList") {
     return state.map((element) =>
-      element.messageToId === action.payload.receiverId
+      element.messageToId === action.payload.id
         ? {
             ...element,
-            message: [...element.message, action.payload],
+            message: [...element.message, action.payload.msgInfo],
           }
         : element
     );

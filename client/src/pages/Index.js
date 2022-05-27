@@ -12,6 +12,8 @@ import {
   userSuggestionAction,
   followedByUserAction,
   setUserStories,
+  appendOnCurrentInnerUserMessage,
+  appendMessageOnMessageListAction,
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
@@ -41,6 +43,35 @@ const Index = () => {
         }
         socket.on("connect", () => {
           console.log(`connected to id: ${socket.id}`);
+        });
+
+        socket.emit(
+          "join-room",
+          userData.data.userProfileDetail.id,
+          (resMessage) => {
+            console.log(resMessage);
+          }
+        );
+        socket.on("send-message-client", (res) => {
+          console.log(res);
+          if (res.success !== false) {
+            dispatch(
+              appendOnCurrentInnerUserMessage({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+              })
+            );
+            dispatch(
+              appendMessageOnMessageListAction({
+                msgInfo: {
+                  ...res.msgInfo,
+                  _id: `${Math.random()}`,
+                },
+                id: res.msgInfo.senderId,
+                picture: res.senderPicture,
+              })
+            );
+          }
         });
       } else {
         // const error = new Error(res.error);

@@ -57,9 +57,9 @@ const MessageListSingleMessage = (props) => {
         );
         // if we are inside the user message then we have to join room through socket
         // NOTE: this is just for temporary purposes
-        socket.emit("join-room", resData.roomID, (resMessage) => {
-          console.log(resMessage);
-        });
+        // socket.emit("join-room", resData.roomID, (resMessage) => {
+        //   console.log(resMessage);
+        // });
       }
     } catch (err) {
       if (err.response.data.success === false) {

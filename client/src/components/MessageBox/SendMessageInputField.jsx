@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import socket from "../../services/socket";
 import {
-  appendOnMessage,
+  appendOnCurrentInnerUserMessage,
   appendMessageOnMessageListAction,
 } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,6 +27,7 @@ const SendMessageInputField = (props) => {
       const resBody = {
         senderId: userProfileDetailStore.id,
         senderUserId: userProfileDetailStore.userID,
+        senderPicture: userProfileDetailStore.picture,
         receiverId: props.messageToId,
         receiverUserID: props.messageToUserId,
         // messageTo is the userID of user where we are sending the message
@@ -37,16 +38,19 @@ const SendMessageInputField = (props) => {
       socket.emit("send-message", resBody, (res) => {
         if (res.success !== false) {
           dispatch(
-            appendOnMessage({
+            appendOnCurrentInnerUserMessage({
               ...res.msgInfo,
               _id: `${Math.random()}`,
             })
           );
           dispatch(
             appendMessageOnMessageListAction({
-              ...res.msgInfo,
-              _id: `${Math.random()}`,
-              receiverId: resBody.receiverId,
+              id: resBody.receiverId,
+              picture: props.receiverPicture,
+              msgInfo: {
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+              },
             })
           );
         }

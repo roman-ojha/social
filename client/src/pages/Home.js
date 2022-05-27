@@ -7,7 +7,6 @@ import "../styles/pages/homePage.css";
 import "../styles/others/emojiMarPacakge.css";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
-import DefaultSocialPost from "../components/DefaultSocialPost";
 import UserPostField from "../components/HomePage/UserPostField";
 import DisplayFollowedUserPost from "../components/HomePage/DisplayFollowedUserPost";
 
@@ -17,9 +16,6 @@ const Home = () => {
   );
   const userPostResponseDataState = useSelector(
     (state) => state.setUserPostResponseData
-  );
-  const followedUserPostDataStore = useSelector(
-    (state) => state.setFollowedUserPostDataReducer
   );
   const userProfilePostStore = useSelector(
     (state) => state.setUserProfilePostReducer
@@ -35,11 +31,6 @@ const Home = () => {
           <UserPostField />
         </div>
         <div className="HomePage_Feed_Main_Container">
-          {/* {followedUserPostDataStore.length == 0 ? (
-            <DefaultSocialPost />
-          ) : (
-            <></>
-          )} */}
           {/* Displaying current userPost filed */}
           {userPostResponseDataState.map((value, index) => {
             return (
@@ -54,7 +45,6 @@ const Home = () => {
           })}
           {/* Display only those user profile post which are post 5 min ago */}
           {userProfilePostStore.map((post, index) => {
-            // if(post)
             let currentDate = new Date();
             let date5MinutesAgo = new Date(currentDate);
             date5MinutesAgo.setMinutes(date5MinutesAgo.getMinutes() - 5);
