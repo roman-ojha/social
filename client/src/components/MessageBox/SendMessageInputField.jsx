@@ -71,16 +71,13 @@ const SendMessageInputField = (props) => {
             type="text"
             value={userMessageField}
             autoFocus
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
             onChange={(e) => {
-              // dispatch(userMessageFieldAction(e.target.value));
               setUserMessageField(e.target.value);
-              const eventOnPressEnter = (e) => {
-                if (e.key === "Enter") {
-                  sendMessage();
-                }
-                window.removeEventListener("keydown", eventOnPressEnter);
-              };
-              window.addEventListener("keydown", eventOnPressEnter);
             }}
           />
           <Icon

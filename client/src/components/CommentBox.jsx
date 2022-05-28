@@ -227,15 +227,13 @@ const ReturnCommentContent = () => {
               type="text"
               autoFocus
               value={commentInputFieldData}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  comment();
+                }
+              }}
               onChange={(e) => {
                 setCommentInputFieldData(e.target.value);
-                const eventOnPressEnter = (e) => {
-                  if (e.key === "Enter") {
-                    comment();
-                  }
-                  window.removeEventListener("keydown", eventOnPressEnter);
-                };
-                window.addEventListener("keydown", eventOnPressEnter);
               }}
             />
             <Icon

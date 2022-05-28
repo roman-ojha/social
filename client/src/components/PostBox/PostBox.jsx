@@ -25,6 +25,7 @@ const PostBox = (props) => {
         Math.floor(Math.random() * props.userFeedData.comments.by.length)
       ],
   });
+
   return (
     <>
       <div className="HomePage_Feed_Content_Container">
@@ -47,6 +48,7 @@ const PostBox = (props) => {
           <CommentedUser
             commentInfo={commentInfo}
             postId={props.userFeedData.id}
+            setCommentInfo={setCommentInfo}
           />
           <CommentField
             userFeedData={props.userFeedData}

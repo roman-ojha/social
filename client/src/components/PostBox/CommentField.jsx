@@ -37,9 +37,7 @@ const CommentField = (props) => {
           toUserId: props.userMainInformation.userID,
         });
         const data = await res.data;
-        if (res.status !== 200 && data.success) {
-          toastError(data.msg);
-        } else {
+        if (res.status === 200 && data.success) {
           props.setCommentInfo({
             ...props.commentInfo,
             postCommentInfo: {
@@ -50,7 +48,9 @@ const CommentField = (props) => {
             commentNo: props.commentInfo.commentNo + 1,
           });
           toastSuccess(data.msg);
-          history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
+          setCommentInputField("");
+        } else {
+          toastError(data.msg);
         }
       }
       dispatch(stopProgressBar());
@@ -92,26 +92,20 @@ const CommentField = (props) => {
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
         />
-        <form
-          className="UserPostFeed_CommentBox_Form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            comment();
+        <input
+          className="UserPostFeed_CommentBox_Input_Field"
+          placeholder="Give some thought on this post..."
+          type="text"
+          value={commentInputField}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              comment();
+            }
           }}
-        >
-          <input
-            className="UserPostFeed_CommentBox_Input_Field"
-            placeholder="Give some thought on this post..."
-            type="text"
-            value={commentInputField}
-            onChange={(e) => {
-              setCommentInputField(e.target.value);
-            }}
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          />
-        </form>
+          onChange={(e) => {
+            setCommentInputField(e.target.value);
+          }}
+        />
         <Icon
           className="UserPostFeed_CommentBox_Input_Emoji"
           icon="fluent:emoji-24-regular"

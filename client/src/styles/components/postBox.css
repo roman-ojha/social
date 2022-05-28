@@ -170,19 +170,13 @@
   object-fit: cover;
 }
 
-.UserPostFeed_CommentBox_Form {
+.UserPostFeed_CommentBox_Input_Field {
   width: 70%;
   height: 100%;
+  border-width: 0px;
+  font-family: var(--primary-font-family);
   border-radius: 10px;
   background-color: var(--secondary-color-point-1-transparent-0);
-}
-
-.UserPostFeed_CommentBox_Input_Field {
-  width: 100%;
-  height: 100%;
-  border-width: 0px;
-  background-color: transparent;
-  font-family: var(--primary-font-family);
 }
 
 .UserPostFeed_CommentBox_Input_Field:read-write {
@@ -352,14 +346,14 @@
   }
 
   .UserPostFeed_CommentBox_Input_Field {
-    width: 65%;
-    border-radius: 5px;
+    width: 55%;
+    border-radius: 4px;
   }
 
   .UserPostFeed_CommentBox_Input_Field:read-write {
     padding-left: 8px;
     padding-right: 8px;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .UserPostFeed_CommentBox_Input_Emoji {
