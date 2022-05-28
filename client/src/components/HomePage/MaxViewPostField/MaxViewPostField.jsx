@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,24 +10,19 @@ import {
   setHomePagePostFieldViewValue,
 } from "../../../services/redux-actions";
 import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
-import { Picker } from "emoji-mart";
 import { Icon } from "@iconify/react";
 import Api from "../../../services/api/pages/homeApi";
-import { toastError, toastSuccess, toastInfo } from "../../../services/toast";
+import { toastError, toastSuccess } from "../../../services/toast";
 import FilePicker from "./FilePicker";
 import EmojiMart from "./EmojiMart";
+import InputField from "./InputField";
 
 const MaxViewPostField = () => {
-  const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
-    useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
-  // const [userPostData, setUserPostData] = useState(
-  //   homePageUserPostFieldData.content
-  // );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -51,6 +46,13 @@ const MaxViewPostField = () => {
       if (res.status === 200 && resData.success) {
         toastSuccess(resData.msg);
         dispatch(userPostResponseData(resData.data));
+        dispatch(
+          homePageUserPostFieldDataAction({
+            ...homePageUserPostFieldData,
+            content: "",
+            image: {},
+          })
+        );
       } else {
         // error
         toastError(resData.msg);
@@ -103,21 +105,7 @@ const MaxViewPostField = () => {
               alt="profile"
             />
           </div>
-
-          <textarea
-            className="HomePage_MaxView_UserPost_Input_Field"
-            placeholder="Post Your Thought...."
-            autoFocus
-            value={homePageUserPostFieldData.content}
-            onChange={(e) => {
-              dispatch(
-                homePageUserPostFieldDataAction({
-                  ...homePageUserPostFieldData,
-                  content: e.target.value,
-                })
-              );
-            }}
-          ></textarea>
+          <InputField />
           <FilePicker />
         </div>
         <div className="MaxView_UserPost_Image_Container">

@@ -1,15 +1,11 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   homePageUserPostFieldDataAction,
   displayUserPostFieldEmojiPicker,
 } from "../../../services/redux-actions";
-import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
-import { Picker } from "emoji-mart";
 import { Icon } from "@iconify/react";
-import Api from "../../../services/api/pages/homeApi";
-import { toastError, toastSuccess, toastInfo } from "../../../services/toast";
+import { toastInfo } from "../../../services/toast";
 
 const FilePicker = () => {
   const dispatch = useDispatch();
