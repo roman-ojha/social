@@ -67,3 +67,123 @@
   font-size: 0.9rem;
   margin-bottom: 0.3rem;
 }
+
+@media screen and (max-width: 768px) and (min-width: 480px) {
+  .Default_Social_Post {
+    padding: 9px;
+    border-radius: 8px;
+  }
+  .Default_Social_Post_Image_View_Container {
+    padding: 1.5rem 0px;
+    border-radius: 8px;
+  }
+
+  .Default_Social_Post_Image_View_Container img {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h1 {
+    font-size: 1.4rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h2 {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    width: 60%;
+  }
+
+  .Default_Social_Post_Info_Container {
+    margin: 0.4rem 0.4rem 0rem 0.4rem;
+    border-radius: 4px;
+    padding: 0.4rem;
+  }
+
+  .Default_Social_Post_Info_Container li {
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Default_Social_Post_Container {
+    margin-top: 0.8rem;
+    border-radius: 7px;
+  }
+  .Default_Social_Post {
+    padding: 8px;
+    border-radius: 7px;
+  }
+  .Default_Social_Post_Image_View_Container {
+    padding: 1.4rem 0px;
+    border-radius: 7px;
+    gap: 15px;
+  }
+
+  .Default_Social_Post_Image_View_Container img {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h1 {
+    font-size: 1.2rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h2 {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    width: 90%;
+  }
+
+  .Default_Social_Post_Info_Container {
+    margin: 0.3rem 0.3rem 0rem 0.3rem;
+    border-radius: 4px;
+    padding: 0.35rem;
+  }
+
+  .Default_Social_Post_Info_Container li {
+    font-size: 0.7rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .Default_Social_Post_Container {
+    margin-top: 0.7rem;
+  }
+  .Default_Social_Post {
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .Default_Social_Post_Image_View_Container {
+    padding: 1.2rem 0px;
+    border-radius: 5px;
+    gap: 10px;
+  }
+
+  .Default_Social_Post_Image_View_Container img {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h1 {
+    font-size: 0.8rem;
+  }
+
+  .Default_Social_Post_Image_View_Container h2 {
+    font-size: 0.5rem;
+    letter-spacing: 1.3px;
+    width: 95%;
+  }
+
+  .Default_Social_Post_Info_Container {
+    margin: 0.3rem 0.3rem 0rem 0.3rem;
+    border-radius: 3px;
+    padding: 0.3rem;
+  }
+
+  .Default_Social_Post_Info_Container li {
+    font-size: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+}

@@ -6,7 +6,6 @@
   background-color: var(--emoji-picker-background-color);
   position: absolute;
   right: 0px;
-  top: 230px;
 }
 .emoji-mart-preview {
   position: absolute;
@@ -62,7 +61,6 @@
   .emoji-mart,
   .emoji-mart-light {
     border-radius: 13px;
-    top: 230px;
   }
 }
 
@@ -70,7 +68,6 @@
   .emoji-mart,
   .emoji-mart-light {
     border-radius: 11px;
-    top: 220px;
   }
 }
 
@@ -78,6 +75,5 @@
   .emoji-mart,
   .emoji-mart-light {
     border-radius: 13px;
-    top: 200px;
   }
 }

@@ -1,7 +1,6 @@
 /* Designing Profile Page------------------------------------ */
 .ProfilePage_Container {
   width: 50%;
-  /* border: 1px solid red; */
   position: relative;
   left: 20%;
   top: 5rem;
@@ -9,9 +8,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 1rem;
 }
 .ProfilePage_UserInfo_Container {
-  /* border: 1px solid blue; */
   margin-top: 10px;
   border-radius: 10px;
   width: 95%;
@@ -20,10 +19,8 @@
   align-items: center;
   padding-top: 1%;
   background-color: var(--primary-color-darker-1);
-  /* background-color: black; */
 }
 .ProfilePage_UserInfo_Picture_Container {
-  /* border: 1px solid black; */
   padding: 0% 2.5% 0% 2.5%;
 }
 .ProfilePage_UserInfo_Picture_Container img {
@@ -39,7 +36,6 @@
 }
 .ProfilePage_UserInfo_UserName_Msg_Container {
   display: flex;
-  /* border: 1px solid chocolate; */
   height: 35%;
 }
 .ProfilePage_UserInfo_UserName_Container h1 {
@@ -84,7 +80,6 @@
   width: 1.3rem;
 }
 .ProfilePage_UserInfo_User_follow_Detail_Container {
-  /* border: 1px solid green; */
   height: 60%;
   display: flex;
   flex-direction: column;
@@ -104,7 +99,6 @@
 }
 
 .ProfilePage_UserInfo_Follow_and_More_Button_Container {
-  /* border: 1px solid palevioletred; */
   width: 25%;
   height: 100%;
   display: flex;
@@ -113,7 +107,6 @@
   align-items: center;
 }
 .ProfilePage_UserInfo_More_Icon_Container {
-  /* border: 1px solid brown; */
   margin-top: 2%;
   width: 100%;
   display: flex;
@@ -195,18 +188,10 @@
   bottom: 4px;
 }
 .ProfilePage_UserContent_Container {
-  /* border: 1px solid red; */
   margin-top: -2%;
   width: 80%;
 }
 
-/* @media screen and (max-width: 1366px) and (min-width: 1000px) {
-  .ProfilePage_Container {
-    width: 55%;
-    left: 15%;
-    top: 115px;
-  }
-} */
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
   .ProfilePage_Container {
     /* border: 1px solid red; */
