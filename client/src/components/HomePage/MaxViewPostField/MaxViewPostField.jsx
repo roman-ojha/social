@@ -8,12 +8,14 @@ import {
   homePageUserPostFieldDataAction,
   showLoadingSpinner,
   setHomePagePostFieldViewValue,
-} from "../../services/redux-actions";
-import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
+} from "../../../services/redux-actions";
+import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
 import { Picker } from "emoji-mart";
 import { Icon } from "@iconify/react";
-import Api from "../../services/api/pages/homeApi";
-import { toastError, toastSuccess, toastInfo } from "../../services/toast";
+import Api from "../../../services/api/pages/homeApi";
+import { toastError, toastSuccess, toastInfo } from "../../../services/toast";
+import FilePicker from "./FilePicker";
+import EmojiMart from "./EmojiMart";
 
 const MaxViewPostField = () => {
   const [homePageUserPostEmojiView, setHomePageUserPostEmojiView] =
@@ -32,49 +34,6 @@ const MaxViewPostField = () => {
   const rootUserProfileDataState = useSelector(
     (state) => state.rootUserProfileDataState
   );
-
-  const EmojiMart = () => {
-    return (
-      <>
-        {homePageUserPostEmojiView ? (
-          <div>
-            <Picker
-              set="facebook"
-              onSelect={(emoji) => {
-                dispatch(
-                  homePageUserPostFieldDataAction({
-                    ...homePageUserPostFieldData,
-                    content: homePageUserPostFieldData.content + emoji.native,
-                  })
-                );
-              }}
-              title="Pick your emoji..."
-              emoji="point_up"
-              i18n={{
-                categories: { search: "Result", recent: "Recents" },
-                skintones: {
-                  2: "Light Skin Tone",
-                },
-              }}
-              style={{ width: "300px" }}
-              color="white"
-            />
-          </div>
-        ) : (
-          ""
-        )}
-      </>
-    );
-  };
-
-  const getUserPostFiledImage = (event) => {
-    try {
-      var image = document.getElementsByClassName("MaxView_UserPost_Image")[0];
-      image.style.display = "inline";
-      image.style.position = "static";
-      image.src = URL.createObjectURL(event.target.files[0]);
-    } catch (err) {}
-  };
 
   // uploading post to database
   const uploadUserPost = async (e) => {
@@ -160,47 +119,7 @@ const MaxViewPostField = () => {
               setHomePageUserPostEmojiView(false);
             }}
           ></textarea>
-
-          <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
-            <label htmlFor="image-input">
-              <Icon
-                className="HomePage_MaxView_UserPost_Field_Icon"
-                icon="ic:outline-photo-library"
-              />
-            </label>
-            <input
-              id="image-input"
-              type="file"
-              style={{ visibility: "hidden" }}
-              onChange={getUserPostFiledImage}
-              accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
-              name="image"
-            />
-            <Icon
-              className="HomePage_MaxView_UserPost_Field_Icon"
-              icon="ic:outline-video-library"
-              onClick={() => {
-                toastInfo(
-                  "Video upload is not supported right now, please upload images"
-                );
-              }}
-            />
-            <Icon
-              className="HomePage_MaxView_UserPost_Field_Emoji_Icon"
-              icon="entypo:emoji-happy"
-              onClick={() => {
-                dispatch(
-                  homePageUserPostFieldDataAction({
-                    ...homePageUserPostFieldData,
-                    content: userPostData,
-                  })
-                );
-                homePageUserPostEmojiView
-                  ? setHomePageUserPostEmojiView(false)
-                  : setHomePageUserPostEmojiView(true);
-              }}
-            />
-          </div>
+          <FilePicker />
         </div>
         <div className="MaxView_UserPost_Image_Container">
           <img
