@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  profilePageDataAction,
-  setRootUserProfileDataState,
-  userPostResponseData,
   homePageUserPostFieldDataAction,
-  showLoadingSpinner,
-  setHomePagePostFieldViewValue,
+  displayUserPostFieldEmojiPicker,
 } from "../../../services/redux-actions";
 import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
 import { Picker } from "emoji-mart";
@@ -17,6 +13,11 @@ import { toastError, toastSuccess, toastInfo } from "../../../services/toast";
 
 const FilePicker = () => {
   const dispatch = useDispatch();
+  const displayEmojiPicker = useSelector((state) => state.displayEmojiPicker);
+  const homePageUserPostFieldData = useSelector((state) => {
+    return state.homePageUserPostFieldDataReducer;
+  });
+
   const getUserPostFiledImage = (event) => {
     try {
       var image = document.getElementsByClassName("MaxView_UserPost_Image")[0];
@@ -25,6 +26,7 @@ const FilePicker = () => {
       image.src = URL.createObjectURL(event.target.files[0]);
     } catch (err) {}
   };
+
   return (
     <>
       <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
@@ -58,12 +60,10 @@ const FilePicker = () => {
             dispatch(
               homePageUserPostFieldDataAction({
                 ...homePageUserPostFieldData,
-                content: userPostData,
+                content: homePageUserPostFieldData.content,
               })
             );
-            homePageUserPostEmojiView
-              ? setHomePageUserPostEmojiView(false)
-              : setHomePageUserPostEmojiView(true);
+            dispatch(displayUserPostFieldEmojiPicker(!displayEmojiPicker));
           }}
         />
       </div>

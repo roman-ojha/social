@@ -264,6 +264,13 @@ export const setHomePagePostFieldViewValue = (data) => {
   };
 };
 
+export const displayUserPostFieldEmojiPicker = (bool) => {
+  return {
+    type: "displayUserPostFieldEmojiPicker",
+    bool,
+  };
+};
+
 export const openNotificationBox = (bool) => {
   return {
     type: "openNotificationBox",

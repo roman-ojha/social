@@ -17,9 +17,14 @@ import { toastError, toastSuccess, toastInfo } from "../../../services/toast";
 
 const EmojiMart = () => {
   const dispatch = useDispatch();
+  const displayEmojiPicker = useSelector((state) => state.displayEmojiPicker);
+  const homePageUserPostFieldData = useSelector((state) => {
+    return state.homePageUserPostFieldDataReducer;
+  });
+
   return (
     <>
-      {homePageUserPostEmojiView ? (
+      {displayEmojiPicker ? (
         <div>
           <Picker
             set="facebook"

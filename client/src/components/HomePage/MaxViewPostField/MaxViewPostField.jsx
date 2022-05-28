@@ -25,9 +25,9 @@ const MaxViewPostField = () => {
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
-  const [userPostData, setUserPostData] = useState(
-    homePageUserPostFieldData.content
-  );
+  // const [userPostData, setUserPostData] = useState(
+  //   homePageUserPostFieldData.content
+  // );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -43,7 +43,7 @@ const MaxViewPostField = () => {
       var image = document.getElementById("image-input").files[0];
       let data = new FormData();
       data.append("image", image);
-      data.append("caption", userPostData);
+      data.append("caption", homePageUserPostFieldData.content);
       // we can be able to pass the other form of data like this
       const res = await Api.post(data);
       const resData = await res.data;
@@ -108,15 +108,14 @@ const MaxViewPostField = () => {
             className="HomePage_MaxView_UserPost_Input_Field"
             placeholder="Post Your Thought...."
             autoFocus
-            // type="text"
-            value={
-              homePageUserPostEmojiView
-                ? homePageUserPostFieldData.content
-                : userPostData
-            }
+            value={homePageUserPostFieldData.content}
             onChange={(e) => {
-              setUserPostData(e.target.value);
-              setHomePageUserPostEmojiView(false);
+              dispatch(
+                homePageUserPostFieldDataAction({
+                  ...homePageUserPostFieldData,
+                  content: e.target.value,
+                })
+              );
             }}
           ></textarea>
           <FilePicker />
@@ -137,7 +136,7 @@ const MaxViewPostField = () => {
               dispatch(
                 homePageUserPostFieldDataAction({
                   ...homePageUserPostFieldData,
-                  content: userPostData,
+                  content: homePageUserPostFieldData.content,
                 })
               );
               dispatch(setHomePagePostFieldViewValue("min"));

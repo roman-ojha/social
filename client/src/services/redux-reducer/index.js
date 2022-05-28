@@ -24,6 +24,7 @@ import showLoadingSpinnerReducer from "./components/showLoadingSpinner";
 import videoPageDataReducer from "./page/video";
 import rootUserFriends from "./global/rootUserFriends";
 import rootUserProfileDataState from "./page/profile/rootUserProfileDataState";
+import displayEmojiPicker from "./page/home/displayEmojiPicker";
 
 const rootReducers = combineReducers({
   changeMainPageMessageView,
@@ -51,6 +52,7 @@ const rootReducers = combineReducers({
   videoPageDataReducer,
   rootUserFriends,
   rootUserProfileDataState,
+  displayEmojiPicker,
 });
 
 export default rootReducers;
