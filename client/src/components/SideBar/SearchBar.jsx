@@ -9,6 +9,7 @@ import {
 } from "../../services/redux-actions";
 import { instance as axios } from "../../services/axios";
 import "../../styles/components/mainPageSearchBar.css";
+import { toastError } from "../../services/toast";
 
 const MainPageSearchBar = (props) => {
   const history = useHistory();
@@ -50,6 +51,13 @@ const MainPageSearchBar = (props) => {
                 history.push(`/u/profile/${props.userDetail.userID}/posts`);
               }
             } catch (err) {
+              if (err.response) {
+                if (err.response.data.success === false) {
+                  toastError(err.response.data.msg);
+                }
+              } else {
+                toastError("Some Problem Occur, Please Try again later!!!");
+              }
               dispatch(stopProgressBar());
             }
           }}

@@ -27,12 +27,13 @@ const DisplayFollowedUserPost = () => {
               />
             );
           });
-          if (
-            followedUserPostDataStore.length === 1 &&
-            postElement[0].props.userMainInformation.userID ===
+          if (followedUserPostDataStore.length === 1 && postElement[0]) {
+            if (
+              postElement[0].props.userMainInformation.userID ===
               admin.adminUserID
-          ) {
-            return [<DefaultSocialPost key={key} />, ...postElement];
+            ) {
+              return [<DefaultSocialPost key={key} />, ...postElement];
+            }
           } else if (postElement.length > 0) {
             return postElement;
           } else {

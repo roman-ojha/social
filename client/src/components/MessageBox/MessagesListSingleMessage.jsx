@@ -1,54 +1,58 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import socket from "../../services/socket";
 import {
   currentUserMessageAction,
   mainPageMessageInnerViewOnOff,
 } from "../../services/redux-actions/index";
 import { useDispatch } from "react-redux";
 import { instance as axios } from "../../services/axios";
+import { toastError } from "../../services/toast";
 
 const MessagesListSingleMessage = (props) => {
   const dispatch = useDispatch();
   const showInnerMessage = async () => {
-    // before getting new message we will reset the previous message stored into redux
-    dispatch(
-      currentUserMessageAction({
-        messageToId: props.messageInfo.messageToId,
-        messageToUserId: props.messageInfo.messageToUserId,
-        receiverPicture: props.messageInfo.receiverPicture,
-        message: [],
-        fetchedInnerMessage: false,
-      })
-    );
-    dispatch(mainPageMessageInnerViewOnOff(true));
-    const resMessage = await axios({
-      // sending receiver userID to get message data of that user
-      method: "POST",
-      url: "/u/getMessage",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: JSON.stringify({
-        userID: props.messageInfo.messageToUserId,
-        id: props.messageInfo.messageToId,
-      }),
-      withCredentials: true,
-    });
-    if (resMessage.status !== 200) {
-      const error = await resMessage.data;
-    } else {
-      const resData = await resMessage.data;
-      // after getting message we will store that message into redux
+    try {
+      // before getting new message we will reset the previous message stored into redux
       dispatch(
         currentUserMessageAction({
           messageToId: props.messageInfo.messageToId,
           messageToUserId: props.messageInfo.messageToUserId,
           receiverPicture: props.messageInfo.receiverPicture,
-          message: resData.message,
-          fetchedInnerMessage: true,
+          message: [],
+          fetchedInnerMessage: false,
         })
       );
+      dispatch(mainPageMessageInnerViewOnOff(true));
+      const resMessage = await axios({
+        // sending receiver userID to get message data of that user
+        method: "POST",
+        url: "/u/getMessage",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify({
+          userID: props.messageInfo.messageToUserId,
+          id: props.messageInfo.messageToId,
+        }),
+        withCredentials: true,
+      });
+      if (resMessage.status !== 200) {
+        const error = await resMessage.data;
+      } else {
+        const resData = await resMessage.data;
+        // after getting message we will store that message into redux
+        dispatch(
+          currentUserMessageAction({
+            messageToId: props.messageInfo.messageToId,
+            messageToUserId: props.messageInfo.messageToUserId,
+            receiverPicture: props.messageInfo.receiverPicture,
+            message: resData.message,
+            fetchedInnerMessage: true,
+          })
+        );
+      }
+    } catch (err) {
+      toastError("Some Problem Occur, Please Try again later!!!");
     }
   };
 

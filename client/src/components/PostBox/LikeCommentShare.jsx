@@ -46,8 +46,10 @@ const LikeCommentShare = (props) => {
         });
       }
     } catch (err) {
-      if (err.response.data.success === false) {
-        toastError(err.response.data.msg);
+      if (err.response) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        }
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
@@ -80,8 +82,10 @@ const LikeCommentShare = (props) => {
       }
       dispatch(stopProgressBar());
     } catch (err) {
-      if (err.response.data.success === false) {
-        toastError(err.response.data.msg);
+      if (err.response) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        }
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }

@@ -77,8 +77,10 @@ const GetUserID = (props) => {
         }
       }
     } catch (err) {
-      if (err.response.data.success === false) {
-        toastError(err.response.data.err);
+      if (err.response) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.err);
+        }
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }

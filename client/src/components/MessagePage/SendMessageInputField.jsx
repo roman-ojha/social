@@ -7,6 +7,7 @@ import {
 } from "../../services/redux-actions/index";
 import { Icon } from "@iconify/react";
 import { isEmptyString } from "../../funcs/isEmptyString";
+import { toastError } from "../../services/toast";
 
 const SendMessageInputField = (props) => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const SendMessageInputField = (props) => {
         }
       });
     } catch (err) {
-      // console.log(err);
+      toastError("Some Problem Occur, Please Try again later!!!");
     }
   };
 
