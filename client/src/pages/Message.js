@@ -27,7 +27,7 @@ const Message = () => {
       <Helmet>
         <title>Message</title>
       </Helmet>
-      <div className="MessagePage_Container">
+      <main className="MessagePage_Container">
         <div className="MainPage_MessageBox_Container">
           <OpenSideBarDrawerButton />
           <OpenRightPartDrawerButton />
@@ -43,7 +43,7 @@ const Message = () => {
             <MessagesList />
           )}
         </div>
-      </div>
+      </main>
     </>
   );
 };

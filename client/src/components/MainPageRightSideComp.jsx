@@ -66,7 +66,7 @@ const MainPageRightSideComp = () => {
   return (
     <>
       <div className="RightPart_Drawer_Container Close_RightPart_Drawer">
-        <div className="MainPage_Rignt_Side_Component_Container ">
+        <aside className="MainPage_Rignt_Side_Component_Container ">
           <MainPageMsgAndNtfBar />
           <NotificationBox />
           <MoreProfileBox />
@@ -74,7 +74,7 @@ const MainPageRightSideComp = () => {
           <UserSuggestion />
           <FollowedBy />
           <SponsoredBy />
-        </div>
+        </aside>
       </div>
     </>
   );

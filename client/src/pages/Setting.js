@@ -192,7 +192,7 @@ const Setting = () => {
   return (
     <>
       <LoadingSpinner />
-      <div className="SettingPage_Container">
+      <main className="SettingPage_Container">
         <ToastContainer />
         <Helmet>
           <title>Setting</title>
@@ -310,7 +310,7 @@ const Setting = () => {
           </p>
           <button onClick={deleteUser}>Delete Profile</button>
         </div>
-      </div>
+      </main>
     </>
   );
 };

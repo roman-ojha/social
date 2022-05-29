@@ -61,7 +61,7 @@ const MainPageSideBar = () => {
   return (
     <>
       <div className="SideBar_Drawer_Container Close_SideBar_Drawer">
-        <div className="MainPage_SideBar_Container">
+        <aside className="MainPage_SideBar_Container">
           {/* <OpenSideBarDrawerButton /> */}
           <LogoAndSearchBar
             onSearchBar={onSearchBar}
@@ -70,7 +70,7 @@ const MainPageSideBar = () => {
           <Menu />
           <Friends />
           <Account />
-        </div>
+        </aside>
       </div>
     </>
   );

@@ -243,7 +243,7 @@ const FollowedBy = () => {
   };
   return (
     <>
-      <div
+      <section
         className={
           mainPageMessageOnOffState ||
           notificationBoxState.open ||
@@ -256,7 +256,7 @@ const FollowedBy = () => {
         <div className="MainPage_FollowedBy_Inner_Container">
           <ReturnFollowedBy />
         </div>
-      </div>
+      </section>
     </>
   );
 };

@@ -14,7 +14,7 @@ const MainPageStory = () => {
   });
   return (
     <>
-      <div className="MainPage_User_Stories_Container">
+      <section className="MainPage_User_Stories_Container">
         <AddStory />
         {/* showing friends story */}
 
@@ -39,7 +39,7 @@ const MainPageStory = () => {
             );
           }
         })}
-      </div>
+      </section>
     </>
   );
 };

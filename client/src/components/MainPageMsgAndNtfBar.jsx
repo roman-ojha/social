@@ -93,7 +93,7 @@ const MainPageMsgAndNtfBar = () => {
 
   return (
     <>
-      <div className="MainPage_Message_and_Notification_Bar_Container">
+      <section className="MainPage_Message_and_Notification_Bar_Container">
         {location.pathname === "/u/message" ? (
           <NavLink
             to="/u/home"
@@ -194,7 +194,7 @@ const MainPageMsgAndNtfBar = () => {
           }}
           alt="profile"
         />
-      </div>
+      </section>
     </>
   );
 };

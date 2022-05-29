@@ -75,7 +75,7 @@ const Video = () => {
   }, []);
   return (
     <>
-      <div className="VideoPage">
+      <main className="VideoPage">
         <Helmet>
           <title>Video</title>
         </Helmet>
@@ -112,7 +112,7 @@ const Video = () => {
             <div className="VideoPage_LoadingSpinner"></div>
           </div>
         )}
-      </div>
+      </main>
     </>
   );
 };

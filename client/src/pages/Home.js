@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <>
       <LoadingSpinner />
-      <div className="HomePage_Container">
+      <main className="HomePage_Container">
         <OpenSideBarDrawerButton />
         <OpenRightPartDrawerButton />
         <div className="HomePage_User_Post_Field_Container">
@@ -63,7 +63,7 @@ const Home = () => {
           {/* Displaying current user Followed User post field filed */}
           <DisplayFollowedUserPost />
         </div>
-      </div>
+      </main>
     </>
   );
 };

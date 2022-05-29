@@ -89,7 +89,7 @@ const GetUserID = (props) => {
   return (
     <>
       <LoadingSpinner />
-      <div className="GetUserIDPage_Container">
+      <main className="GetUserIDPage_Container">
         <Helmet>
           <title>userID/undefine</title>
         </Helmet>
@@ -140,7 +140,7 @@ const GetUserID = (props) => {
             Submit
           </button>
         </div>
-      </div>
+      </main>
     </>
   );
 };

@@ -59,7 +59,7 @@ const UserSuggestion = () => {
 
   return (
     <>
-      <div
+      <section
         className={
           mainPageMessageOnOffState ||
           notificationBoxState.open ||
@@ -73,7 +73,7 @@ const UserSuggestion = () => {
         <div className="MainPage_UserSuggession_Inner_Container">
           <ReturnSuggestedUser />
         </div>
-      </div>
+      </section>
     </>
   );
 };

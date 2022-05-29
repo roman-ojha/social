@@ -28,7 +28,7 @@ const PostBox = (props) => {
 
   return (
     <>
-      <div className="HomePage_Feed_Content_Container">
+      <article className="HomePage_Feed_Content_Container">
         <PostImage postPicture={postInformation.postPicture} />
         <PostCaption postCaption={postInformation.postCaption} />
         <div className="HomePage_Feed_Info_Container">
@@ -57,7 +57,7 @@ const PostBox = (props) => {
             setCommentInfo={setCommentInfo}
           />
         </div>
-      </div>
+      </article>
     </>
   );
 };

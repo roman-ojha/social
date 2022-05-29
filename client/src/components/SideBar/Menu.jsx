@@ -51,7 +51,7 @@ const Menu = () => {
 
   return (
     <>
-      <div className="MainPage_SideBar_Menu_Container">
+      <nav className="MainPage_SideBar_Menu_Container">
         <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
         <div className="MainPage_SideBar_Menu_NavLink_Container">
           <NavLink
@@ -126,7 +126,7 @@ const Menu = () => {
           </NavLink>
         </div>
         <hr className="MainPage_SideBar_Horizontal_Line" />
-      </div>
+      </nav>
     </>
   );
 };

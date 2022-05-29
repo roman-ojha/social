@@ -6,7 +6,7 @@ const Page404 = () => {
   const history = useHistory();
   return (
     <>
-      <div className="page404">
+      <main className="page404">
         <div className="page404_Title_Button_Container">
           <div className="page404_Title">
             <h1>404</h1>
@@ -20,7 +20,7 @@ const Page404 = () => {
           </button>
         </div>
         {/* <img src={Img404} alt="404" /> */}
-      </div>
+      </main>
     </>
   );
 };

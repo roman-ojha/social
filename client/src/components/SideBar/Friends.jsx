@@ -169,7 +169,7 @@ const Friends = () => {
 
   return (
     <>
-      <div className="MainPage_SideBar_Friends_Container">
+      <section className="MainPage_SideBar_Friends_Container">
         <h2 className="MainPage_SideBar_Friends_Title">Friends</h2>
         {rootUserFriends.fetchedFriends ? (
           <ShowFriends />
@@ -178,7 +178,7 @@ const Friends = () => {
             <div style={loadingSpinnerStyle}></div>
           </div>
         )}
-      </div>
+      </section>
       <hr className="MainPage_SideBar_Horizontal_Line" />
     </>
   );

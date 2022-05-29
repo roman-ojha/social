@@ -7,7 +7,7 @@ const PageRoute = () => {
   const profilePageData = useSelector((state) => state.profilePageDataReducer);
   return (
     <>
-      <div className="ProfilePage_UserContent_Route_Container">
+      <nav className="ProfilePage_UserContent_Route_Container">
         <NavLink
           className="ProfilePage_UserContent_Feed_Route_Container ProfilePage_Route"
           to={`/u/profile/${profilePageData.userID}/posts`}
@@ -32,7 +32,7 @@ const PageRoute = () => {
             icon="fa-solid:user-friends"
           />
         </NavLink>
-      </div>
+      </nav>
       <div className="ProfilePage_UserContent_Divider_Line"></div>
     </>
   );

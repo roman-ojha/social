@@ -92,7 +92,7 @@ const Profile = () => {
   return (
     <>
       {fetchedAllData ? (
-        <div className="ProfilePage_Container">
+        <main className="ProfilePage_Container">
           <Helmet>
             <title>{params.userID}</title>
           </Helmet>
@@ -103,7 +103,7 @@ const Profile = () => {
           <div className="ProfilePage_UserContent_Container">
             <RoutingProfilePage profilePageData={profilePageData} />
           </div>
-        </div>
+        </main>
       ) : (
         <></>
       )}
