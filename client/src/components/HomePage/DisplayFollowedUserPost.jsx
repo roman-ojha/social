@@ -9,33 +9,37 @@ const DisplayFollowedUserPost = () => {
   );
   return (
     <>
-      {followedUserPostDataStore.map((user, key) => {
-        const userCreateRandomPost = {
-          ...user,
-          posts: user.posts.sort((a, b) => Math.random() - 0.5),
-        };
-        const postElement = userCreateRandomPost.posts.map((post) => {
-          return (
-            <PostBox
-              key={post.id}
-              userMainInformation={user}
-              userFeedData={post}
-              user={user.id} // required: user = id of the user who post this
-            />
-          );
-        });
-        if (
-          followedUserPostDataStore.length === 1 &&
-          postElement[0].props.userMainInformation.userID === admin.adminUserID
-        ) {
-          return [<DefaultSocialPost key={key} />, ...postElement];
-        } else if (postElement.length > 0) {
-          return postElement;
-        } else {
-          // console.log("third");
-          return <DefaultSocialPost key={key} />;
-        }
-      })}
+      {followedUserPostDataStore.length === 0 ? (
+        <DefaultSocialPost />
+      ) : (
+        followedUserPostDataStore.map((user, key) => {
+          const userCreateRandomPost = {
+            ...user,
+            posts: user.posts.sort((a, b) => Math.random() - 0.5),
+          };
+          const postElement = userCreateRandomPost.posts.map((post) => {
+            return (
+              <PostBox
+                key={post.id}
+                userMainInformation={user}
+                userFeedData={post}
+                user={user.id} // required: user = id of the user who post this
+              />
+            );
+          });
+          if (
+            followedUserPostDataStore.length === 1 &&
+            postElement[0].props.userMainInformation.userID ===
+              admin.adminUserID
+          ) {
+            return [<DefaultSocialPost key={key} />, ...postElement];
+          } else if (postElement.length > 0) {
+            return postElement;
+          } else {
+            return <DefaultSocialPost key={key} />;
+          }
+        })
+      )}
     </>
   );
 };
