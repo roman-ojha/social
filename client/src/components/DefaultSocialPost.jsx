@@ -24,9 +24,6 @@ const DefaultSocialPost = () => {
                   {/* for small screen */}
                   You can Follow user through suggested user or followed by user
                   by clicking the right side blinking array button
-                  <ul>
-                    <li>fds</li>
-                  </ul>
                 </li>
               ) : (
                 <li>

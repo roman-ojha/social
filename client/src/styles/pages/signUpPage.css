@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   width: 50%;
-  height: 100%;
+  height: 85%;
 }
 .SignUp_Page_Title_Container {
   width: 100%;
@@ -261,6 +261,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 15%;
   }
   .SignUp_Page_Title_Container {
     width: 180px;
