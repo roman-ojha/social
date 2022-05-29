@@ -28,6 +28,9 @@
 ### Profile Page:
 [<img src="assets/UI/Profile_Page.png" alt="Profile_Page"></img>](assets/UI/Profile_Page.png)
 
+### Message Page:
+[<img src="assets/UI/Message_Page.png" alt="Profile_Page"></img>](assets/UI/Message_Page.png)
+
 ### Stories Page:
 [<img src="assets/UI/Story_Page.png" alt="Story_Page"></img>](assets/UI/Story_Page.png)
 
