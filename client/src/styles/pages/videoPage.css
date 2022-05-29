@@ -1,7 +1,6 @@
 .VideoPage {
   width: 50%;
   position: relative;
-  /* border: 1px solid red; */
   left: 20%;
   top: 5rem;
   z-index: 1;
@@ -9,11 +8,10 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  /* height: calc(100vh - 18vh); */
+  padding-bottom: 1rem;
 }
 
 .VideoPage_Header {
-  /* border: 1px solid blue; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +25,6 @@
   gap: 10px;
   text-decoration: none;
   color: black;
-  /* border: 1px solid blue; */
 }
 
 .VideoPage_Icon_and_Title h1 {
@@ -114,7 +111,6 @@
   font-family: var(--primary-font-family);
   font-size: 0.9rem;
   font-style: italic;
-  /* border: 1px solid red; */
   width: 85%;
   cursor: pointer;
 }

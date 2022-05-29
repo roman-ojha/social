@@ -19,16 +19,18 @@
 | Firebase     | For Storing Images |
 
 ## Features:
-* You can Follow/UnFollow user
-* You can Post your thought
-* You can comment on posts
-* You can like the post
+* You can Follow/UnFollow user.
+  *  NOTE: If bot the user follow each other then they will become friends
+  * You would get the notification if someone follows you  
 * You can chat to other users in real time
+* You can Post your thought
+  * You would see those user post that you had followed on you home feed
+* You can like the posts
+* You can comment on posts
 * You can see other user stories that you had followed on
 * You can see your's and other users profiles
+* You can watch and search youtube videos
 * You can change profile picture, unique userID/username, displayed name or password
-* You can watch and search videos from video page
-* You would get the notification if someone follows you
 
 [<h1>Todo</h1>](TODO.md "Todo")
 

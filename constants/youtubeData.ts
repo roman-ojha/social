@@ -46,6 +46,20 @@ const youtubeData: youtubeVideoDataType = {
       thumbnail:
         "https://i.ytimg.com/vi/jzD_yyEcp0M/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLARVwMZv1KSTDKTW8SVeN4OsPlAaA",
     },
+    {
+      videoId: "3AtDnEC4zak",
+      title:
+        "Charlie Puth - We Don't Talk Anymore (feat. Selena Gomez) [Official Video]",
+      thumbnail:
+        "https://i.ytimg.com/vi/CwfoyVa980U/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBU6tEBo4mZqcIZp0T7YGS28bOfVg",
+    },
+    {
+      videoId: "RgKAFK5djSk",
+      title:
+        "Wiz Khalifa - See You Again ft. Charlie Puth [Official Video] Furious 7 Soundtrack",
+      thumbnail:
+        "https://i.ytimg.com/vi/RgKAFK5djSk/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBMPlXl3IpHob6Ita3vNOfHhC_gdg",
+    },
     // Hindi Songs
     {
       videoId: "VOLKJJvfAbg",
@@ -67,6 +81,13 @@ const youtubeData: youtubeVideoDataType = {
         "Qaafirana | Kedarnath | Sushant Rajput | Sara Ali Khan | Arijit Singh & Nikhita | Amit Trivedi",
       thumbnail:
         "https://i.ytimg.com/vi/ZmcBC9-wAXM/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCAMVzudTzBRJMpy1RfD9RVWi1OYA",
+    },
+    {
+      videoId: "kw4tT7SCmaY",
+      title:
+        "Coke Studio Season 9| Afreen Afreen| Rahat Fateh Ali Khan & Momina Mustehsan",
+      thumbnail:
+        "https://i.ytimg.com/vi/kw4tT7SCmaY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBFoMuURvQp0dh2CYxhiffSAKrm5g",
     },
     // Nepali Songs
     {
@@ -141,6 +162,21 @@ const youtubeData: youtubeVideoDataType = {
         "Dear Comrade (2020) New Released Hindi Dubbed Full Movie | Vijay Devarakonda, Rashmika, Shruti",
       thumbnail:
         "https://i.ytimg.com/vi/zzhfvt5vZHI/hqdefault.jpg?sqp=-oaymwEcCPYBEIoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAaGeagcNVD-sL1qRIe-bemYDiedg",
+    },
+    // hollywood Movie clips
+    {
+      videoId: "udKE1ksKWDE",
+      title:
+        "The Avengers - 'I'm Always Angry' - Hulk SMASH Scene - Movie CLIP HD",
+      thumbnail:
+        "https://i.ytimg.com/vi/udKE1ksKWDE/hqdefault.jpg?sqp=-oaymwEcCOADEI4CSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLA3oQiSzd1xe81jdyu-vaIYp6KAUw",
+    },
+    {
+      videoId: "cfVY9wLKltA",
+      title:
+        "Team Iron Man vs Team Cap - Airport Battle Scene - Captain America: Civil War - Movie CLIP HD",
+      thumbnail:
+        "https://i.ytimg.com/vi/cfVY9wLKltA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAv18EzQuTdzEqVX69Zh0Z2jij4hw",
     },
   ],
 };
