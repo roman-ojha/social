@@ -1,6 +1,6 @@
 {
   "name": "social_media_application",
-  "version": "0.1.5",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.4.1",
