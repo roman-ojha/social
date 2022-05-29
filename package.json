@@ -1,6 +1,6 @@
 {
   "name": "social_media_application",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "index.js",
   "type": "module",
@@ -80,12 +80,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RomanOjha-git/Social.git"
+    "url": "git+https://github.com/Roman-Ojha/Social.git"
   },
   "author": "Roman Ojha",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RomanOjha-git/Social/issues"
+    "url": "https://github.com/Roman-Ojha/Social/issues"
   },
-  "homepage": "https://github.com/RomanOjha-git/Social#readme"
+  "homepage": "https://github.com/Roman-Ojha/Social#readme"
 }
