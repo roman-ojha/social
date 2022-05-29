@@ -50,7 +50,6 @@ export default {
       });
       const newUserId = crypto.randomBytes(16).toString("hex");
       const messageRoomID = crypto.randomBytes(16).toString("hex");
-      console.log(resAdmin);
       if (resAdmin.success && resAdmin.admin) {
         console.log("admin exist");
         // if Admin Exist

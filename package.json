@@ -79,12 +79,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RomanOjha-git/ReactJs-Social-Media-Application.git"
+    "url": "git+https://github.com/RomanOjha-git/Social.git"
   },
   "author": "Roman Ojha",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/RomanOjha-git/ReactJs-Social-Media-Application/issues"
+    "url": "https://github.com/RomanOjha-git/Social/issues"
   },
-  "homepage": "https://github.com/RomanOjha-git/ReactJs-Social-Media-Application#readme"
+  "homepage": "https://github.com/RomanOjha-git/Social#readme"
 }

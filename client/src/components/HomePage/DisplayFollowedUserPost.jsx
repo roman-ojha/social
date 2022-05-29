@@ -10,7 +10,11 @@ const DisplayFollowedUserPost = () => {
   return (
     <>
       {followedUserPostDataStore.map((user, key) => {
-        const postElement = user.posts.map((post) => {
+        const userCreateRandomPost = {
+          ...user,
+          posts: user.posts.sort((a, b) => Math.random() - 0.5),
+        };
+        const postElement = userCreateRandomPost.posts.map((post) => {
           return (
             <PostBox
               key={post.id}

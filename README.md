@@ -11,12 +11,12 @@
 </div>
 
 ## Technology Used:
-| Technology   | Description         |
-| ------------ | ------------------- |
-| React        | Client Side         |
-| Node/Express | Backend API         |
-| MongoDB      | No-SQL Database     |
-| Firebase     | For Storing Images  |
+| Technology   | Description        |
+| ------------ | ------------------ |
+| React        | Client Side        |
+| Node/Express | Backend API        |
+| MongoDB      | No-SQL Database    |
+| Firebase     | For Storing Images |
 
 [<h1>Todo</h1>](TODO.md "Todo")
 
@@ -44,6 +44,6 @@
 ### Mobile View:
 
 [<img src="assets/UI/Home_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](assets/UI/Home_Page_Mobile_View.png)
-[<img src="assets/UI/Story_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](assets/UI/Story_Page_Mobile_View.png)
+[<img src="assets/UI/ProfilePage_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](assets/UI/ProfilePage_Mobile_View.png)
 
 <br/>

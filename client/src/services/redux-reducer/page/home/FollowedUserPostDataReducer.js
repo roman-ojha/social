@@ -4,10 +4,6 @@ const setFollowedUserPostDataReducer = (state = initialState, action) => {
   if (action.type === "followedUserPostData") {
     return action.payload.sort((a, b) => Math.random() - 0.5);
   } else if (action.type === "incrementPostCommentNumber") {
-    // state;
-    // .find((user) => user.userID === action.payload.to)
-    // .posts.find((post) => post.id === action.payload.postID).comments.No++;
-    // here we are incrementing comment number by finding the specific post
     return state.map((user) =>
       user.userID === action.payload.to
         ? {
