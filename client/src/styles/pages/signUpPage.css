@@ -11,7 +11,7 @@
   justify-content: space-between;
   align-items: center;
   width: 50%;
-  height: 85%;
+  height: 100%;
 }
 .SignUp_Page_Title_Container {
   width: 100%;
@@ -225,7 +225,7 @@
   .SignUp_Page_Left_Half {
     margin: 7% 0% 5% 4%;
     width: 35%;
-    height: 29rem;
+    height: 95%;
   }
   .SignUp_Page_Logo {
     font-size: 1.8rem;
@@ -319,11 +319,13 @@
   }
   .SignUp_Page_SignUp_Container {
     height: 550px;
+    box-shadow: 0px 0px 8px rgb(182, 182, 182);
   }
   .SignUp_Page_Input_Field_Container input {
     width: 70%;
     height: 2.4rem;
     border-radius: 5px;
+    border-width: 1px;
   }
   .SignUp_Page_SignUp_Form input:read-write {
     font-size: 0.8rem;
@@ -390,7 +392,7 @@
   }
   .SignUp_Page_SignUp_Container {
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgb(182, 182, 182);
+    box-shadow: 0px 0px 8px rgb(182, 182, 182);
     margin: 0% 0% 0% 0%;
     width: 85%;
     height: 100%;
@@ -399,7 +401,7 @@
     width: 72%;
     height: 2.2rem;
     border-radius: 4px;
-    border-width: 1.5px;
+    border-width: 1px;
   }
   .SignUp_Page_SignUp_Form input:read-write {
     padding-left: 10px;
