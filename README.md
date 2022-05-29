@@ -18,6 +18,18 @@
 | MongoDB      | No-SQL Database    |
 | Firebase     | For Storing Images |
 
+## Features:
+* You can Follow/UnFollow user
+* You can Post your thought
+* You can comment on posts
+* You can like the post
+* You can chat to other users in real time
+* You can see other user stories that you had followed on
+* You can see your's and other users profiles
+* You can change profile picture, unique userID/username, displayed name or password
+* You can watch and search videos from video page
+* You would get the notification if someone follows you
+
 [<h1>Todo</h1>](TODO.md "Todo")
 
 [<h1>Run Locally</h1>](RUN_LOCALLY.md "Run Locally")
