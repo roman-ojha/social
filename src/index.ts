@@ -40,13 +40,17 @@ const PORT = process.env.PORT;
 // );
 // ================================
 
-// app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
-app.use(cors({ credentials: true, origin: process.env.CLIENT_BASE_URL }));
 app.use(cookieParser());
 // app.unsubscribe(express.json());
 
 app.use(bodyParser.urlencoded({ extended: false }) as RequestHandler);
 app.use(bodyParser.json() as RequestHandler);
+app.use(
+  cors({
+    origin: process.env.CLIENT_BASE_URL,
+    credentials: true,
+  })
+);
 
 // Database connection
 import("../db/userDataConnection.js");
