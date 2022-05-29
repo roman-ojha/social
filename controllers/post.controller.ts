@@ -85,7 +85,7 @@ export default {
         if (!removeLikedPostRes) {
           return res.status(500).json(<ResponseObject>{
             success: false,
-            msg: "server Error, Please try again letter!!!",
+            msg: "server Error, Please try again later!!!",
           });
         }
         return res.status(200).json(<ResponseObject>{
@@ -117,7 +117,7 @@ export default {
       if (!likePostRes) {
         return res.status(500).json(<ResponseObject>{
           success: false,
-          msg: "server Error, Please try again letter!!!",
+          msg: "server Error, Please try again later!!!",
         });
       }
       return res.status(200).json(<ResponseObject>{
@@ -129,7 +129,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     }
   },
@@ -187,7 +187,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error, Please try again Letter...",
+        msg: "Server Error, Please try again later...",
       });
     }
   },

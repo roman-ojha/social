@@ -412,7 +412,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error, Please Try again letter",
+        msg: "Server Error, Please Try again later",
       });
     }
   },
@@ -423,7 +423,7 @@ export default {
     } catch (err) {
       return res.status(500).json({
         success: false,
-        error: "Server Error!!, Please Try again letter",
+        error: "Server Error!!, Please Try again later",
       });
     }
   },

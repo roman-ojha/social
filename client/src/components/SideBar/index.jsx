@@ -6,7 +6,6 @@ import LogoAndSearchBar from "./LogoAndSearchBar";
 import Menu from "./Menu";
 import Friends from "./Friends";
 import Account from "./Account";
-import OpenSideBarDrawerButton from "../OpenSideBarDrawerButton";
 
 const MainPageSideBar = () => {
   const dispatch = useDispatch();

@@ -30,19 +30,20 @@ const authenticate: RequestHandler = async (
       }
     );
     if (!rootUser) {
-      throw new Error("User not found");
+      return res.status(401).send(<ResponseObject>{
+        success: false,
+        msg: "User not found, sorry not a valid token",
+      });
     }
     req.token = token;
     req.rootUser = rootUser;
     req.userID = <any>rootUser._id;
-    // req.userID = rootUser.id;
     next();
   } catch (err) {
     return res.status(401).send(<ResponseObject>{
       success: false,
-      msg: "UnAuthorized: No token provided, Please Login first",
+      msg: "UnAuthorized: no token provided, please login first",
     });
-    // console.log(err);
   }
 };
 

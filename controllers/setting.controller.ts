@@ -59,7 +59,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     }
   },
@@ -104,12 +104,12 @@ export default {
       }
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     }
   },
@@ -137,12 +137,12 @@ export default {
       }
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again letter!!!",
+        msg: "server Error, Please try again later!!!",
       });
     }
   },

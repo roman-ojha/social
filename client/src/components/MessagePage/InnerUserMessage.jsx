@@ -30,19 +30,6 @@ const InnerUserMessage = (props) => {
     animation: "loadingSpinner 1s linear infinite",
   };
 
-  useEffect(() => {
-    // socket.on("send-message-client", (res) => {
-    //   if (res.success !== false) {
-    //     dispatch(
-    //       appendOnMessage({
-    //         ...res.msgInfo,
-    //         _id: `${Math.random()}`,
-    //       })
-    //     );
-    //   }
-    // });
-  }, []);
-
   return (
     <>
       <div className="MessageBox_InnerMessage_Container">

@@ -87,7 +87,7 @@ export default {
     } catch (err) {
       return res
         .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+        .json({ error: "Server Error!!, Please Try again later" });
     }
   },
   getSingleUserMessage: async (
@@ -186,7 +186,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     }
   },
@@ -281,7 +281,7 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again letter",
+        msg: "Server Error!!, Please Try again later",
       });
     }
   },
@@ -355,7 +355,7 @@ export default {
     } catch (err) {
       return res
         .status(500)
-        .json({ error: "Server Error!!, Please Try again letter" });
+        .json({ error: "Server Error!!, Please Try again later" });
     }
   },
 };
