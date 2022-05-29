@@ -21,7 +21,7 @@
 
 ## Features:
 * You can Follow/UnFollow user.
-  *  NOTE: If bot the user follow each other then they will become friends
+  *  NOTE: If both the user follow each other then they will become friends
   * You would get the notification if someone follows you  
 * You can chat to other users in real time
 * You can Post your thought

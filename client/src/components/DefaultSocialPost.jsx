@@ -24,6 +24,9 @@ const DefaultSocialPost = () => {
                   {/* for small screen */}
                   You can Follow user through suggested user or followed by user
                   by clicking the right side blinking array button
+                  <ul>
+                    <li>fds</li>
+                  </ul>
                 </li>
               ) : (
                 <li>
@@ -36,17 +39,23 @@ const DefaultSocialPost = () => {
                 want to follow
               </li>
               <li>
-                You can Post you thought, comment you thought on post or like
-                the post
+                NOTE: if both the user follow each other then they will become
+                friends and you would get the notification if someone follows
+                you
               </li>
-              <li>You can chat to other users</li>
+              <li>You can chat to other users in real time</li>
+              <li>You can Post you thought</li>
+              <li>You can comment on posts</li>
+              <li>You can like the posts</li>
               <li>You can see other user stories that you had followed on</li>
-              <li>You can see your's and other user profile</li>
+              <li>You can see your's and other users profile</li>
+              <li>
+                You can watch and search youtube videos from the video page
+              </li>
               <li>
                 You can change profile picture, unique userID/username,
                 displayed name or password on Setting page
               </li>
-              <li>You can watch and search videos from the video page</li>
             </ul>
           </div>
         </div>
