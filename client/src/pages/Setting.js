@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
 import { useDispatch } from "react-redux";
-import {
-  changeRootUserNameAction,
-  startProgressBar,
-  stopProgressBar,
-} from "../services/redux-actions";
+import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +12,7 @@ import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import ChangeProfilePicture from "../components/SettingPage/ChangeProfilePicture";
 import ChangeUserID from "../components/SettingPage/ChangeUserID";
+import ChangeDisplayName from "../components/SettingPage/ChangeDisplayName";
 
 const Setting = () => {
   const dispatch = useDispatch();
@@ -35,34 +32,7 @@ const Setting = () => {
       [name]: value,
     });
   };
-  const changeName = async (e) => {
-    try {
-      e.preventDefault();
-      dispatch(startProgressBar());
-      const res = await Api.changeName(settingInputFieldData);
-      const resData = await res.data;
-      if (resData.success && res.status === 200) {
-        toastSuccess(resData.msg);
-        dispatch(changeRootUserNameAction(resData.name));
-      } else {
-        toastError(resData.msg);
-      }
-      dispatch(stopProgressBar());
-      setSettingInputFieldData({
-        ...settingInputFieldData,
-        name: "",
-      });
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      dispatch(stopProgressBar());
-    }
-  };
+
   const changePassword = async (e) => {
     try {
       e.preventDefault();
@@ -109,20 +79,7 @@ const Setting = () => {
         <OpenRightPartDrawerButton />
         <ChangeProfilePicture />
         <ChangeUserID />
-        <div className="Setting_Container_With_Input_Field">
-          <h1>Change display name</h1>
-          <form>
-            <input
-              type="text"
-              placeholder="Display Name"
-              name="name"
-              value={settingInputFieldData.name}
-              onChange={getInputFieldData}
-            />
-            <button onClick={changeName}>Change</button>
-          </form>
-          <p>Not require to be unique</p>
-        </div>
+        <ChangeDisplayName />
         <div className="Setting_Container_With_Input_Field">
           <h1>Change Password</h1>
           <input

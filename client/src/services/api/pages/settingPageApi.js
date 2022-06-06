@@ -1,12 +1,11 @@
 import { instance as axios } from "../../axios";
 
 export default {
-  changeUserID: async (settingInputFieldData) => {
-    console.log(settingInputFieldData);
+  changeUserID: async (newUserID) => {
     return await axios({
       method: "POST",
       url: "/changeUserID",
-      data: { newUserID: settingInputFieldData },
+      data: { newUserID: newUserID },
       withCredentials: true,
     });
   },
@@ -22,11 +21,11 @@ export default {
       withCredentials: true,
     });
   },
-  changeName: async (settingInputFieldData) => {
+  changeName: async (newName) => {
     return await axios({
       method: "POST",
       url: "/changeName",
-      data: { newName: settingInputFieldData.name },
+      data: { newName: newName },
       withCredentials: true,
     });
   },
