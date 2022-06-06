@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Icon } from "@iconify/react";
+import { useDispatch } from "react-redux";
 import {
-  changeUserProfilePictureAction,
   changeRootUserUserIDAction,
   changeRootUserNameAction,
   startProgressBar,
   stopProgressBar,
-  showLoadingSpinner,
 } from "../services/redux-actions";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { ToastContainer } from "react-toastify";
@@ -18,11 +15,9 @@ import Api from "../services/api/pages/settingPageApi";
 import { toastError, toastInfo, toastSuccess } from "../services/toast";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
+import ChangeProfilePicture from "../components/SettingPage/ChangeProfilePicture";
 
 const Setting = () => {
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
-  );
   const dispatch = useDispatch();
   const [settingInputFieldData, setSettingInputFieldData] = useState({
     userID: "",
@@ -32,7 +27,6 @@ const Setting = () => {
     cNewPassword: "",
     imgUrl: "",
   });
-  const [isImgUrl, setIsImgUrl] = useState(false);
   const getInputFieldData = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -130,89 +124,7 @@ const Setting = () => {
     e.preventDefault();
     toastInfo("Sorry!! this feature is not available right now");
   };
-  const getNewProfilePicture = (e) => {
-    try {
-      e.preventDefault();
-      const image = document.getElementById("user-profile-input").files[0];
-      const imageElement = document.getElementsByClassName(
-        "Setting_Page_Change_Profile_Image"
-      )[0];
-      imageElement.setAttribute("src", URL.createObjectURL(image));
-    } catch (e) {}
-  };
-  const changeProfilePicture = async (e) => {
-    try {
-      e.preventDefault();
-      const imageFile = document.getElementById("user-profile-input").files[0];
-      const imageUrl = settingInputFieldData.imgUrl;
-      if (!isImgUrl) {
-        dispatch(showLoadingSpinner(true));
-        const data = new FormData();
-        data.append("image", imageFile);
-        const res = await Api.changeImageFileProfilePicture(data);
-        const resData = await res.data;
-        if (resData.success && res.status === 200) {
-          toastSuccess(resData.msg);
-          dispatch(changeUserProfilePictureAction(resData.picture));
-        } else {
-          toastError(resData.msg);
-        }
-        dispatch(showLoadingSpinner(false));
-      } else {
-        dispatch(showLoadingSpinner(true));
-        const res = await Api.changeImageUrlProfilePicture(imageUrl);
-        const resData = await res.data;
-        if (resData.success && res.status === 200) {
-          toastSuccess(resData.msg);
-          dispatch(changeUserProfilePictureAction(imageUrl));
-        } else {
-          toastError(resData.msg);
-        }
-        dispatch(showLoadingSpinner(false));
-      }
-      setSettingInputFieldData({ ...settingInputFieldData, imgUrl: "" });
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      dispatch(showLoadingSpinner(false));
-    }
-    setSettingInputFieldData({
-      ...settingInputFieldData,
-      imgUrl: "",
-    });
-  };
-  useEffect(() => {
-    // checking is url is image or not
-    const imageElement = document.getElementsByClassName(
-      "Setting_Page_Change_Profile_Image"
-    )[0];
-    const img = new Image();
-    img.src = settingInputFieldData.imgUrl;
-    img.onload = () => {
-      // if url is image
-      imageElement.setAttribute("src", settingInputFieldData.imgUrl);
-      setIsImgUrl(true);
-    };
-    img.onerror = () => {
-      // if url is not image
-      if (document.getElementById("user-profile-input").files[0]) {
-        imageElement.setAttribute(
-          "src",
-          URL.createObjectURL(
-            document.getElementById("user-profile-input").files[0]
-          )
-        );
-      } else {
-        imageElement.setAttribute("src", userProfileDetailStore.picture);
-      }
-      setIsImgUrl(false);
-    };
-  }, [settingInputFieldData.imgUrl]);
+
   return (
     <>
       <LoadingSpinner />
@@ -221,56 +133,9 @@ const Setting = () => {
         <Helmet>
           <title>Setting</title>
         </Helmet>
-        <div className="Setting_Page_Change_Profile_Picture_Container">
-          <OpenSideBarDrawerButton />
-          <OpenRightPartDrawerButton />
-          <h1>Change Profile Picture</h1>
-          <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">
-            <label htmlFor="user-profile-input">
-              <img
-                src={userProfileDetailStore.picture}
-                className="Setting_Page_Change_Profile_Image"
-                alt={userProfileDetailStore.userID}
-              />
-              <div className="Setting_Page_Change_Profile_Image_Info">
-                <Icon
-                  icon="entypo:upload"
-                  className="Setting_Page_Change_Profile_Image_Upload_Icon"
-                />
-                <p>upload</p>
-              </div>
-            </label>
-            <input
-              id="user-profile-input"
-              type="file"
-              accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
-              onChange={getNewProfilePicture}
-              style={{
-                display: "none",
-                position: "absolute",
-              }}
-            />
-            <div className="Setting_Page_Change_Profile_Input_and_Button_Container">
-              <input
-                type="text"
-                placeholder="image url"
-                className="Setting_Page_Change_Profile_Url_Image_Input_Field"
-                name="imgUrl"
-                value={settingInputFieldData.imgUrl}
-                onChange={getInputFieldData}
-              />
-              <button onClick={changeProfilePicture}>
-                Change Profile Picture
-              </button>
-            </div>
-          </div>
-          <div className="Setting_Page_Change_Profile_Picture_Container_Bottom_Part">
-            <p>
-              NOTE : Consider using image url rather then uploading files
-              because cloud database have limited Storage
-            </p>
-          </div>
-        </div>
+        <OpenSideBarDrawerButton />
+        <OpenRightPartDrawerButton />
+        <ChangeProfilePicture />
         <div className="Setting_Container_With_Input_Field">
           <h1>Change UserID</h1>
           <form>

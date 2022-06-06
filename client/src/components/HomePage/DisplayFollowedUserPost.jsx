@@ -28,11 +28,14 @@ const DisplayFollowedUserPost = () => {
             );
           });
           if (followedUserPostDataStore.length === 1 && postElement[0]) {
+            // we have to check postElement[0] to solve the error
             if (
               postElement[0].props.userMainInformation.userID ===
               admin.adminUserID
             ) {
               return [<DefaultSocialPost key={key} />, ...postElement];
+            } else {
+              return postElement;
             }
           } else if (postElement.length > 0) {
             return postElement;
