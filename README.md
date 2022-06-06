@@ -7,7 +7,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Roman-Ojha/Social-Application?color=%234980cc&label=Size&logo=GitHub&style=for-the-badge)
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/Roman-Ojha/Social-Application?color=%2300c2b8&logo=V&style=for-the-badge)
 # 🤝Social-Media Application🤝
-# https://rsocial.vercel.app
 
 </div>
 
