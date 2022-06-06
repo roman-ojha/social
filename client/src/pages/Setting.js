@@ -13,55 +13,11 @@ import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import ChangeProfilePicture from "../components/SettingPage/ChangeProfilePicture";
 import ChangeUserID from "../components/SettingPage/ChangeUserID";
 import ChangeDisplayName from "../components/SettingPage/ChangeDisplayName";
+import ChangePassword from "../components/SettingPage/ChangePassword";
 
 const Setting = () => {
   const dispatch = useDispatch();
-  const [settingInputFieldData, setSettingInputFieldData] = useState({
-    userID: "",
-    name: "",
-    oldPassword: "",
-    newPassword: "",
-    cNewPassword: "",
-    imgUrl: "",
-  });
-  const getInputFieldData = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setSettingInputFieldData({
-      ...settingInputFieldData,
-      [name]: value,
-    });
-  };
 
-  const changePassword = async (e) => {
-    try {
-      e.preventDefault();
-      dispatch(startProgressBar());
-      const res = await Api.changePassword(settingInputFieldData);
-      const data = await res.data;
-      if (res.status === 200 && data.success) {
-        toastSuccess(data.msg);
-      } else {
-        toastError(data.msg);
-      }
-      dispatch(stopProgressBar());
-      setSettingInputFieldData({
-        ...settingInputFieldData,
-        oldPassword: "",
-        newPassword: "",
-        cNewPassword: "",
-      });
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      dispatch(stopProgressBar());
-    }
-  };
   const deleteUser = (e) => {
     e.preventDefault();
     toastInfo("Sorry!! this feature is not available right now");
@@ -80,34 +36,7 @@ const Setting = () => {
         <ChangeProfilePicture />
         <ChangeUserID />
         <ChangeDisplayName />
-        <div className="Setting_Container_With_Input_Field">
-          <h1>Change Password</h1>
-          <input
-            type="password"
-            placeholder="Old password"
-            name="oldPassword"
-            value={settingInputFieldData.oldPassword}
-            onChange={getInputFieldData}
-          />
-          <input
-            type="password"
-            placeholder="New password"
-            name="newPassword"
-            value={settingInputFieldData.newPassword}
-            onChange={getInputFieldData}
-          />
-          <form>
-            <input
-              type="password"
-              placeholder="Conform password"
-              name="cNewPassword"
-              value={settingInputFieldData.cNewPassword}
-              onChange={getInputFieldData}
-            />
-            <button onClick={changePassword}>Change</button>
-          </form>
-          <p>Don't Forgot Your Password</p>
-        </div>
+        <ChangePassword />
         <div className="Setting_Page_Delete_User_Profile_Container">
           <h1>Delete User Profile</h1>
           <p>

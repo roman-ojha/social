@@ -9,14 +9,14 @@ export default {
       withCredentials: true,
     });
   },
-  changePassword: async (settingInputFieldData) => {
+  changePassword: async (inputFieldData) => {
     return await axios({
       method: "POST",
       url: "/changePassword",
       data: {
-        oldPassword: settingInputFieldData.oldPassword,
-        newPassword: settingInputFieldData.newPassword,
-        cNewPassword: settingInputFieldData.cNewPassword,
+        oldPassword: inputFieldData.oldPassword,
+        newPassword: inputFieldData.newPassword,
+        cNewPassword: inputFieldData.cNewPassword,
       },
       withCredentials: true,
     });
