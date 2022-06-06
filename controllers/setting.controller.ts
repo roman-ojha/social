@@ -66,6 +66,7 @@ export default {
   changeUserID: async (req: Request, res: Response): Promise<object> => {
     try {
       const newUserID = req.body.newUserID;
+      console.log(req.body);
       const oldUserID = req.rootUser.userID;
       if (!newUserID) {
         return res.status(400).json(<ResponseObject>{

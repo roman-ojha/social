@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet";
 import "../styles/pages/settingPage.css";
 import { useDispatch } from "react-redux";
 import {
-  changeRootUserUserIDAction,
   changeRootUserNameAction,
   startProgressBar,
   stopProgressBar,
@@ -16,6 +15,7 @@ import { toastError, toastInfo, toastSuccess } from "../services/toast";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import ChangeProfilePicture from "../components/SettingPage/ChangeProfilePicture";
+import ChangeUserID from "../components/SettingPage/ChangeUserID";
 
 const Setting = () => {
   const dispatch = useDispatch();
@@ -34,34 +34,6 @@ const Setting = () => {
       ...settingInputFieldData,
       [name]: value,
     });
-  };
-  const changeUserID = async (e) => {
-    try {
-      e.preventDefault();
-      dispatch(startProgressBar());
-      const res = await Api.changeUserID(settingInputFieldData);
-      const resData = await res.data;
-      if (resData.success) {
-        toastSuccess(resData.msg);
-        dispatch(changeRootUserUserIDAction(resData.userID));
-      } else {
-        toastError(resData.msg);
-      }
-      dispatch(stopProgressBar());
-      setSettingInputFieldData({
-        ...settingInputFieldData,
-        userID: "",
-      });
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      dispatch(stopProgressBar());
-    }
   };
   const changeName = async (e) => {
     try {
@@ -136,20 +108,7 @@ const Setting = () => {
         <OpenSideBarDrawerButton />
         <OpenRightPartDrawerButton />
         <ChangeProfilePicture />
-        <div className="Setting_Container_With_Input_Field">
-          <h1>Change UserID</h1>
-          <form>
-            <input
-              type="text"
-              placeholder="UserID"
-              name="userID"
-              value={settingInputFieldData.userID}
-              onChange={getInputFieldData}
-            />
-            <button onClick={changeUserID}>Change</button>
-          </form>
-          <p>You can only be able to set unique ID for your profile</p>
-        </div>
+        <ChangeUserID />
         <div className="Setting_Container_With_Input_Field">
           <h1>Change display name</h1>
           <form>

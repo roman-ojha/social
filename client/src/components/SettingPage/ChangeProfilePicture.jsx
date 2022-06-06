@@ -10,7 +10,7 @@ import settingPageApi from "../../services/api/pages/settingPageApi";
 
 const ChangeProfilePicture = () => {
   const dispatch = useDispatch();
-  const [imgUrl, setImgUrl] = useState();
+  const [imgUrl, setImgUrl] = useState("");
   const [isImgUrl, setIsImgUrl] = useState(false);
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer

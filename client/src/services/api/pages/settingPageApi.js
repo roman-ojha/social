@@ -2,10 +2,11 @@ import { instance as axios } from "../../axios";
 
 export default {
   changeUserID: async (settingInputFieldData) => {
+    console.log(settingInputFieldData);
     return await axios({
       method: "POST",
       url: "/changeUserID",
-      data: { newUserID: settingInputFieldData.userID },
+      data: { newUserID: settingInputFieldData },
       withCredentials: true,
     });
   },
