@@ -57,7 +57,7 @@ const ChangePassword = () => {
   return (
     <>
       <div className="Setting_Container_With_Input_Field">
-        <h1>Change Password</h1>
+        <label htmlFor="setting-page-change-password">Change Password</label>
         <input
           type="password"
           placeholder="Old password"
@@ -74,6 +74,7 @@ const ChangePassword = () => {
         />
         <form>
           <input
+            id="setting-page-change-password"
             type="password"
             placeholder="Conform password"
             name="cNewPassword"

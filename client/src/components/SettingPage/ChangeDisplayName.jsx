@@ -41,9 +41,12 @@ const ChangeDisplayName = () => {
   return (
     <>
       <div className="Setting_Container_With_Input_Field">
-        <h1>Change display name</h1>
+        <label htmlFor="setting-page-change-display-name">
+          Change display name
+        </label>
         <form>
           <input
+            id="setting-page-change-display-name"
             type="text"
             placeholder="Display Name"
             name="name"

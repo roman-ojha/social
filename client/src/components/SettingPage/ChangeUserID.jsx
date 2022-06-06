@@ -42,9 +42,10 @@ const ChangeUserID = () => {
   return (
     <>
       <div className="Setting_Container_With_Input_Field">
-        <h1>Change UserID</h1>
+        <label htmlFor="setting-page-change-userID">Change UserID</label>
         <form>
           <input
+            id="setting-page-change-userID"
             type="text"
             placeholder="UserID"
             name="userID"

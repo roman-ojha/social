@@ -17,7 +17,7 @@
   margin-top: 10px;
   border-radius: 10px;
 }
-.Setting_Page_Change_Profile_Picture_Container h1 {
+.Setting_Page_Change_Profile_Picture_Container label {
   font-size: 0.9rem;
   font-family: var(--primary-font-family);
   margin: 10px 0px 0px 10px;
@@ -118,7 +118,7 @@
   align-items: flex-start;
   /* box-shadow: 0px 0px 10px rgb(204, 204, 204); */
 }
-.Setting_Container_With_Input_Field h1,
+.Setting_Container_With_Input_Field label,
 .Setting_Page_Delete_User_Profile_Container h1,
 .Setting_Page_Change_Profile_Picture_Container_Top_Part label h1 {
   font-family: var(--primary-font-family);

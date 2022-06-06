@@ -102,7 +102,9 @@ const ChangeProfilePicture = () => {
   return (
     <>
       <div className="Setting_Page_Change_Profile_Picture_Container">
-        <h1>Change Profile Picture</h1>
+        <label htmlFor="setting-page-change-profile-picture">
+          Change Profile Picture
+        </label>
         <div className="Setting_Page_Change_Profile_Picture_Container_Top_Part">
           <label htmlFor="user-profile-input">
             <img
@@ -130,6 +132,7 @@ const ChangeProfilePicture = () => {
           />
           <div className="Setting_Page_Change_Profile_Input_and_Button_Container">
             <input
+              id="setting-page-change-profile-picture"
               type="text"
               placeholder="image url"
               className="Setting_Page_Change_Profile_Url_Image_Input_Field"
