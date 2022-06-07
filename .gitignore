@@ -2,7 +2,6 @@ node_modules
 .env.development
 .env.production
 /db/firebase_serviceAccountKey.json
-docker-compose.dev.yml
 note.txt
 /dist
 /.vscode/settings.json

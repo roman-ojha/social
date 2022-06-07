@@ -15,6 +15,6 @@
 5. Run `yarn start` to run the client Site
 
 ## Using Docker:
-1. change `docker-compose.local.yml` name with `docker-compose.dev.yml`
-2. get all the required environment variable
-3. Run `yarn docker:dev` to dockerize application
+1. Create `.env.development` file in Project Directory
+2. Get all the environment variables which are include in `.env.example`
+4. Run `yarn docker:dev` to dockerize application

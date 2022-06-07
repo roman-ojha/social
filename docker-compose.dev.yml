@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  client:
+    container_name: social-client-dev
+    image: social-client-dev
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/user/src/client
+    environment:
+      REACT_APP_API_BASE_URL: http://localhost:8080
+    depends_on:
+      - server
+  server:
+    container_name: social-server-dev
+    image: social-server-dev
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/user/src/server
+    env_file:
+      - .env.development
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo:/data/db
+    ports:
+      - "2717:27017"
+volumes:
+  mongo: {}
