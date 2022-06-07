@@ -39,7 +39,7 @@ const GetUserID = (props) => {
       };
       getUserDetail();
     }
-  }, []);
+  }, [history, uid]);
   const submitDetail = async (e) => {
     try {
       dispatch(showLoadingSpinner(true));
@@ -64,7 +64,6 @@ const GetUserID = (props) => {
         data: data,
         withCredentials: true,
       });
-      const resData = await res.data;
       if (res.status !== 200) {
         // console.log(resData);
       } else {
