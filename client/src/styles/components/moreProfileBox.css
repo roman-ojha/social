@@ -17,7 +17,7 @@
 .More_Profile_Box_Help,
 .More_Profile_Box_logout {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   text-decoration: none;
   background-color: #dedede;

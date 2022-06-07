@@ -110,7 +110,7 @@
   margin-top: 2%;
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   cursor: pointer;
 }
 .ProfilePage_UserInfo_More_Icon {

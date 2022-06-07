@@ -98,7 +98,7 @@
   height: max-content;
   max-height: calc(100% - 4rem);
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
   margin-top: 1%;
   overflow-y: scroll;
@@ -110,7 +110,7 @@
   border-radius: 0.5rem;
   height: 2.3rem;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   background-color: #9066b150;
   cursor: pointer;
   padding: 0.5% 0%;

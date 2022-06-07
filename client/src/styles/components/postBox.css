@@ -144,7 +144,7 @@
 .UserPostFeed_Comment_Box {
   width: 95%;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   margin-bottom: 10px;
