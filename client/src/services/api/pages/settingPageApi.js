@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const settingPageApi = {
   changeUserID: async (newUserID) => {
     return await axios({
       method: "POST",
@@ -48,3 +48,5 @@ export default {
     });
   },
 };
+
+export default settingPageApi;

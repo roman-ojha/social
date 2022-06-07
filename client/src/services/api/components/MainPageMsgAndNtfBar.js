@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const mainPageMsgAndNtfBar = {
   getNotificationData: async () => {
     return await axios({
       method: "GET",
@@ -9,3 +9,5 @@ export default {
     });
   },
 };
+
+export default mainPageMsgAndNtfBar;

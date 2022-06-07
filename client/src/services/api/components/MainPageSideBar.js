@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const mainPageSideBar = {
   logOut: async () => {
     return await axios({
       method: "GET",
@@ -20,3 +20,5 @@ export default {
     });
   },
 };
+
+export default mainPageSideBar;

@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const userApi = {
   getFriends: async (id) => {
     return await axios({
       method: "GET",
@@ -32,3 +32,5 @@ export default {
     });
   },
 };
+
+export default userApi;

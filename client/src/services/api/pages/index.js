@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const index = {
   index: async () => {
     return await axios({
       method: "GET",
@@ -14,3 +14,5 @@ export default {
     });
   },
 };
+
+export default index;

@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const postBox = {
   like: async (data) => {
     return await axios({
       method: "POST",
@@ -26,3 +26,5 @@ export default {
     });
   },
 };
+
+export default postBox;

@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const index = {
   getFriendData: async (userID) => {
     return await axios({
       method: "GET",
@@ -12,3 +12,5 @@ export default {
     });
   },
 };
+
+export default index;

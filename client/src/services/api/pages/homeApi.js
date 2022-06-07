@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const homeApi = {
   post: async (data) => {
     return await axios({
       method: "POST",
@@ -10,3 +10,5 @@ export default {
     });
   },
 };
+
+export default homeApi;

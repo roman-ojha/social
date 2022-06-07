@@ -1,6 +1,6 @@
 import { instance as axios } from "../../axios";
 
-export default {
+const videoApi = {
   scrapeVideo: async () => {
     return await axios({
       method: "GET",
@@ -37,3 +37,5 @@ export default {
     });
   },
 };
+
+export default videoApi;
