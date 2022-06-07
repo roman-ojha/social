@@ -23,77 +23,79 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const getUserData = async (dispatch, history, setRenderMainPage) => {
-    try {
-      const res = await Api.index();
-      const userData = await res.data;
-      if (res.status === 200 && userData.success) {
-        if (!userData.data.userProfileDetail.userID) {
-          history.push("/userid?uid=undefined");
-        } else {
-          dispatch(userProfileDetailAction(userData.data.userProfileDetail));
-          dispatch(
-            userProfilePostAction(userData.data.userProfileDetail.posts)
-          );
-          dispatch(followedUserPostDataAction(userData.data.followedUserPost));
-          dispatch(userSuggestionAction(userData.data.userSuggestion));
-          dispatch(followedByUserAction(userData.data.followedBy));
-          dispatch(setUserStories(userData.data.userStories));
-          setRenderMainPage(true);
-        }
-        socket.on("connect", () => {
-          console.log(`connected to id: ${socket.id}`);
-        });
-
-        socket.emit(
-          "join-room",
-          userData.data.userProfileDetail.id,
-          (resMessage) => {
-            console.log(resMessage);
-          }
-        );
-        socket.on("send-message-client", (res) => {
-          if (res.success !== false) {
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const res = await Api.index();
+        const userData = await res.data;
+        if (res.status === 200 && userData.success) {
+          if (!userData.data.userProfileDetail.userID) {
+            history.push("/userid?uid=undefined");
+          } else {
+            dispatch(userProfileDetailAction(userData.data.userProfileDetail));
             dispatch(
-              appendOnCurrentInnerUserMessage({
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-              })
+              userProfilePostAction(userData.data.userProfileDetail.posts)
             );
             dispatch(
-              appendMessageOnMessageListAction({
-                msgInfo: {
+              followedUserPostDataAction(userData.data.followedUserPost)
+            );
+            dispatch(userSuggestionAction(userData.data.userSuggestion));
+            dispatch(followedByUserAction(userData.data.followedBy));
+            dispatch(setUserStories(userData.data.userStories));
+            setRenderMainPage(true);
+          }
+          socket.on("connect", () => {
+            console.log(`connected to id: ${socket.id}`);
+          });
+
+          socket.emit(
+            "join-room",
+            userData.data.userProfileDetail.id,
+            (resMessage) => {
+              console.log(resMessage);
+            }
+          );
+          socket.on("send-message-client", (res) => {
+            if (res.success !== false) {
+              dispatch(
+                appendOnCurrentInnerUserMessage({
                   ...res.msgInfo,
                   _id: `${Math.random()}`,
-                },
-                id: res.msgInfo.senderId,
-                receiverPicture: res.senderPicture,
-                messageToUserId: res.msgInfo.senderUserId,
-              })
-            );
-          }
-        });
-      } else {
-        // const error = new Error(res.error);
-        // throw error;
-        toastError(userData.msg);
-      }
-    } catch (err) {
-      // toastError("Some Problem Occur, Please Try again later!!!");
-      history.push("/signin");
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
+                })
+              );
+              dispatch(
+                appendMessageOnMessageListAction({
+                  msgInfo: {
+                    ...res.msgInfo,
+                    _id: `${Math.random()}`,
+                  },
+                  id: res.msgInfo.senderId,
+                  receiverPicture: res.senderPicture,
+                  messageToUserId: res.msgInfo.senderUserId,
+                })
+              );
+            }
+          });
+        } else {
+          // const error = new Error(res.error);
+          // throw error;
+          toastError(userData.msg);
         }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
+      } catch (err) {
+        // toastError("Some Problem Occur, Please Try again later!!!");
+        history.push("/signin");
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
       }
-    }
-  };
-  useEffect(() => {
+    };
     // fetching all user data and current user following user Post data
-    getUserData(dispatch, history, setRenderMainPage);
-  }, []);
+    getUserData();
+  }, [dispatch, history]);
 
   return (
     <>
