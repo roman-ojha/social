@@ -233,6 +233,8 @@ const FollowedBy = () => {
           ) {
             if (index < 2) {
               return <FollowedUser key={index} userInformation={user} />;
+            } else {
+              return "";
             }
           } else if (
             mainPageMessageOnOffState ||
@@ -241,7 +243,11 @@ const FollowedBy = () => {
           ) {
             if (index < 1) {
               return <FollowedUser key={index} userInformation={user} />;
+            } else {
+              return "";
             }
+          } else {
+            return "";
           }
         })}
       </>

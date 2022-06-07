@@ -19,7 +19,7 @@ const RoutingMainPage = () => {
     if (location.pathname === "/u") {
       history.push("/u/home");
     }
-  }, []);
+  }, [history, location.pathname]);
   return (
     <>
       <Switch>

@@ -81,6 +81,7 @@ const CommentedUser = (props) => {
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentBoxStore.commented]);
 
   return (

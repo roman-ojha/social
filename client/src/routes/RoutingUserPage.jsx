@@ -19,7 +19,7 @@ const RoutingUserPage = () => {
     if (location.pathname === "/u/profile") {
       history.push(`/u/profile/${userProfileDetailStore.userID}`);
     }
-  }, []);
+  }, [history, location.pathname, userProfileDetailStore.userID]);
   return (
     <div>
       <Switch>

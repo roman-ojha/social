@@ -35,6 +35,7 @@ const SponsoredBy = () => {
                   href="https://www.google.com/"
                   className="MainPage_Sponsored_Name"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Google
                 </a>

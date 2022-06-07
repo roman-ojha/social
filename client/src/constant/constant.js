@@ -1,4 +1,4 @@
-export default {
+const constant = {
   mediaQueryRes: {
     screen1024: 1024,
     screen850: 850,
@@ -10,3 +10,5 @@ export default {
   applicationName: "Social",
   applicationGithubUrl: "https://github.com/Roman-Ojha/Social",
 };
+
+export default constant;

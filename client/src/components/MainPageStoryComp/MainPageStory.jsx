@@ -27,6 +27,8 @@ const MainPageStory = () => {
                   index={index}
                 />
               );
+            } else {
+              return "";
             }
           } else if (index <= 6) {
             return (
@@ -36,6 +38,8 @@ const MainPageStory = () => {
                 index={index}
               />
             );
+          } else {
+            return "";
           }
         })}
       </section>

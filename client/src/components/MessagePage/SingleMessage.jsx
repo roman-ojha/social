@@ -22,7 +22,7 @@ const SingleMessage = (props) => {
         {props.MessageInfo.senderId === userProfileDetailStore.id ? (
           ""
         ) : (
-          <img src={props.picture ? props.picture : User_Profile_Icon} />
+          <img src={props.picture ? props.picture : User_Profile_Icon} alt="" />
         )}
         <div
           className="MessageBox_Inner_SingleMessage"

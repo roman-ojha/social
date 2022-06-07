@@ -142,34 +142,33 @@ const Friends = () => {
     animation: "loadingSpinner 1s linear infinite",
   };
 
-  const getRootUserFriends = async () => {
-    try {
-      const res = await UserApi.getFriends(userProfileDetailStore.id);
-      const data = await res.data;
-      if (res.status === 200 && data.success) {
-        dispatch(
-          setRootUserFriends({
-            fetchedFriends: true,
-            friends: data.friends,
-          })
-        );
-      } else {
-        toastError("Some Error Occur While Fetching Friends Data");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
   useEffect(() => {
+    const getRootUserFriends = async () => {
+      try {
+        const res = await UserApi.getFriends(userProfileDetailStore.id);
+        const data = await res.data;
+        if (res.status === 200 && data.success) {
+          dispatch(
+            setRootUserFriends({
+              fetchedFriends: true,
+              friends: data.friends,
+            })
+          );
+        } else {
+          toastError("Some Error Occur While Fetching Friends Data");
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
     getRootUserFriends();
-  }, []);
+  }, [dispatch, userProfileDetailStore.id]);
 
   return (
     <>

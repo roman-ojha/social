@@ -46,79 +46,78 @@ const ProfileFriends = () => {
     animation: "loadingSpinner 1s linear infinite",
   };
 
-  const getUserFriends = async () => {
-    try {
-      const res = await UserApi.getFriends(profilePageData.id);
-      const data = await res.data;
-      if (res.status === 200 && data.success) {
-        dispatch(setProfilePageFriends(data.friends));
-        setUserDetails({
-          fetchedData: true,
-          user: data.friends,
-        });
-      } else {
-        toastError("Some Error Occur While Fetching Friends Data");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
-  const getUserFollowings = async () => {
-    try {
-      const res = await UserApi.getFollowings(profilePageData.id);
-      const data = await res.data;
-      if (res.status === 200 && data.success) {
-        dispatch(setProfilePageFollowings(data.friends));
-        setUserDetails({
-          fetchedData: true,
-          user: data.friends,
-        });
-      } else {
-        toastError("Some Error Occur While Fetching Friends Data");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
-  const getUserFollowers = async () => {
-    try {
-      const res = await UserApi.getFollowers(profilePageData.id);
-      const data = await res.data;
-      if (res.status === 200 && data.success) {
-        dispatch(setProfilePageFollowers(data.friends));
-        setUserDetails({
-          fetchedData: true,
-          user: data.friends,
-        });
-      } else {
-        toastError("Some Error Occur While Fetching Friends Data");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
   useEffect(() => {
+    const getUserFriends = async () => {
+      try {
+        const res = await UserApi.getFriends(profilePageData.id);
+        const data = await res.data;
+        if (res.status === 200 && data.success) {
+          dispatch(setProfilePageFriends(data.friends));
+          setUserDetails({
+            fetchedData: true,
+            user: data.friends,
+          });
+        } else {
+          toastError("Some Error Occur While Fetching Friends Data");
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
+
+    const getUserFollowings = async () => {
+      try {
+        const res = await UserApi.getFollowings(profilePageData.id);
+        const data = await res.data;
+        if (res.status === 200 && data.success) {
+          dispatch(setProfilePageFollowings(data.friends));
+          setUserDetails({
+            fetchedData: true,
+            user: data.friends,
+          });
+        } else {
+          toastError("Some Error Occur While Fetching Friends Data");
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
+
+    const getUserFollowers = async () => {
+      try {
+        const res = await UserApi.getFollowers(profilePageData.id);
+        const data = await res.data;
+        if (res.status === 200 && data.success) {
+          dispatch(setProfilePageFollowers(data.friends));
+          setUserDetails({
+            fetchedData: true,
+            user: data.friends,
+          });
+        } else {
+          toastError("Some Error Occur While Fetching Friends Data");
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
     if (location.pathname.includes("/friends")) {
       setUserDetails({
         fetchedData: false,
@@ -138,7 +137,7 @@ const ProfileFriends = () => {
       });
       getUserFollowers();
     }
-  }, [location.pathname]);
+  }, [dispatch, location.pathname, profilePageData.id]);
 
   return (
     <>

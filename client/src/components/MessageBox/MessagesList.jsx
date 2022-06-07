@@ -53,6 +53,8 @@ const MessagesList = () => {
                   key={index}
                 />
               );
+            } else {
+              return "";
             }
           })}
         </div>

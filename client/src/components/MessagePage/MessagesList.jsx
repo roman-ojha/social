@@ -12,32 +12,31 @@ const MessagesList = () => {
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const messageList = useSelector((state) => state.messageListReducer);
 
-  const getUserMessages = async () => {
-    try {
-      setShowLoadingSpinner(true);
-      const resMessage = await messageApi.getUserMessages();
-      const resMessageData = await resMessage.data;
-      if (resMessage.status === 200 && resMessageData.success) {
-        dispatch(messageListAction(resMessageData.messages));
-      } else {
-        toastError("Error While fetching Messages");
-      }
-      setShowLoadingSpinner(false);
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      setShowLoadingSpinner(false);
-    }
-  };
-
   useEffect(() => {
+    const getUserMessages = async () => {
+      try {
+        setShowLoadingSpinner(true);
+        const resMessage = await messageApi.getUserMessages();
+        const resMessageData = await resMessage.data;
+        if (resMessage.status === 200 && resMessageData.success) {
+          dispatch(messageListAction(resMessageData.messages));
+        } else {
+          toastError("Error While fetching Messages");
+        }
+        setShowLoadingSpinner(false);
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+        setShowLoadingSpinner(false);
+      }
+    };
     getUserMessages();
-  }, []);
+  }, [dispatch]);
 
   // Styling Loading Spinner
   const loadingContainerSpinnerStyle = {
@@ -105,6 +104,8 @@ const MessagesList = () => {
                     key={index}
                   />
                 );
+              } else {
+                return "";
               }
             })
           )}

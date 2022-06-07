@@ -38,7 +38,7 @@ const MainPageSideBar = () => {
           setOnSearchBar(false);
         }
       });
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (sideBarDrawerState) {
@@ -61,7 +61,6 @@ const MainPageSideBar = () => {
     <>
       <div className="SideBar_Drawer_Container Close_SideBar_Drawer">
         <aside className="MainPage_SideBar_Container">
-          {/* <OpenSideBarDrawerButton /> */}
           <LogoAndSearchBar
             onSearchBar={onSearchBar}
             setOnSearchBar={setOnSearchBar}

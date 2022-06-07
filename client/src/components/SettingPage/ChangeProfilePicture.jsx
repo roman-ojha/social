@@ -97,7 +97,7 @@ const ChangeProfilePicture = () => {
       }
       setIsImgUrl(false);
     };
-  }, [imgUrl]);
+  }, [imgUrl, userProfileDetailStore.picture]);
 
   return (
     <>

@@ -35,6 +35,8 @@ const UserSuggestion = () => {
                     userInformation={user}
                   />
                 );
+              } else {
+                return "";
               }
             } else if (
               mainPageMessageOnOffState ||
@@ -49,8 +51,14 @@ const UserSuggestion = () => {
                     userInformation={user}
                   />
                 );
+              } else {
+                return "";
               }
+            } else {
+              return "";
             }
+          } else {
+            return "";
           }
         })}
       </>

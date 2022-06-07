@@ -75,6 +75,7 @@ const NotificationBox = () => {
                       >
                         <img
                           src={data.picture ? data.picture : User_Profile_Icon}
+                          alt=""
                         />
                         <p>{data.userID + " Started following you"}</p>
                       </div>

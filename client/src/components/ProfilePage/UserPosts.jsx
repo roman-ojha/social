@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import PostBox from "../PostBox/PostBox";
 import { useSelector, useDispatch } from "react-redux";
 import profileApi from "../../services/api/pages/profileApi";
@@ -17,36 +17,35 @@ const UserPosts = (props) => {
     (state) => state.setUserProfileDetailReducer
   );
 
-  const getRootUserProfilePostData = async () => {
-    try {
-      const resPost = await profileApi.getUserPosts();
-      const resPostData = resPost.data;
-      if (resPost.status === 200 && resPostData.success) {
-        dispatch(
-          setRootUserPostData({
-            fetchedPostData: true,
-            posts: resPostData.posts,
-          })
-        );
-        dispatch(
-          setRootUserProfileDataState({
-            fetchedRootUserProfileData: true,
-            getRootUserProfileData: false,
-          })
-        );
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
   useEffect(() => {
+    const getRootUserProfilePostData = async () => {
+      try {
+        const resPost = await profileApi.getUserPosts();
+        const resPostData = resPost.data;
+        if (resPost.status === 200 && resPostData.success) {
+          dispatch(
+            setRootUserPostData({
+              fetchedPostData: true,
+              posts: resPostData.posts,
+            })
+          );
+          dispatch(
+            setRootUserProfileDataState({
+              fetchedRootUserProfileData: true,
+              getRootUserProfileData: false,
+            })
+          );
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
     if (
       rootUserProfileDataState.getRootUserProfileData &&
       !rootUserProfileDataState.fetchedRootUserProfileData &&
@@ -54,7 +53,12 @@ const UserPosts = (props) => {
     ) {
       getRootUserProfilePostData();
     }
-  }, [rootUserProfileDataState]);
+  }, [
+    dispatch,
+    props.profilePageData.userID,
+    rootUserProfileDataState,
+    userProfileDetailStore.userID,
+  ]);
 
   const loadingContainerSpinnerStyle = {
     width: "100%",

@@ -93,6 +93,7 @@ const CommentField = (props) => {
             }
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
+          alt=""
         />
         <input
           className="UserPostFeed_CommentBox_Input_Field"

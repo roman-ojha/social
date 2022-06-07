@@ -7,24 +7,25 @@ import UserPosts from "../components/ProfilePage/UserPosts";
 
 const RoutingProfilePage = (props) => {
   const location = useLocation();
-  const colorSelectedUrl = () => {
-    // updating color of sidebar tab through useEffect
-    try {
-      if (location.pathname.includes("/u/profile")) {
-        const selectedLinkElement = document.getElementsByClassName(
-          "MainPage_SideBar_Link"
-        )[4];
-        selectedLinkElement.firstElementChild.style.backgroundColor =
-          "var(--primary-color-point-7)";
-        document.getElementsByClassName(
-          "MainPage_SideBar_Menu_Logo"
-        )[4].style.color = "var(--primary-color-point-7)";
-        selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-          "var(--primary-color-point-7)";
-      }
-    } catch (err) {}
-  };
+
   useEffect(() => {
+    const colorSelectedUrl = () => {
+      // updating color of sidebar tab through useEffect
+      try {
+        if (location.pathname.includes("/u/profile")) {
+          const selectedLinkElement = document.getElementsByClassName(
+            "MainPage_SideBar_Link"
+          )[4];
+          selectedLinkElement.firstElementChild.style.backgroundColor =
+            "var(--primary-color-point-7)";
+          document.getElementsByClassName(
+            "MainPage_SideBar_Menu_Logo"
+          )[4].style.color = "var(--primary-color-point-7)";
+          selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
+            "var(--primary-color-point-7)";
+        }
+      } catch (err) {}
+    };
     colorSelectedUrl();
     return () => {
       try {
@@ -42,7 +43,7 @@ const RoutingProfilePage = (props) => {
         }
       } catch (err) {}
     };
-  }, []);
+  }, [location.pathname]);
   return (
     <div>
       <Switch>

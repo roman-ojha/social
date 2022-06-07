@@ -82,6 +82,8 @@ const MainPageSearchBar = (props) => {
         {props.userSearchResult.map((user, index) => {
           if (user.userID && user.userID !== userProfileDetailStore.userID) {
             return <SearchBarUser userDetail={user} key={index} />;
+          } else {
+            return "";
           }
         })}
       </>

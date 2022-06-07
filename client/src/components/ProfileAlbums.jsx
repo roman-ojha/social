@@ -51,6 +51,7 @@ const ProfileAlbums = (props) => {
                   <a
                     href={post.picture === undefined ? "" : post.picture.url}
                     target="_blank"
+                    rel="noreferrer"
                   >
                     <img
                       src={post.picture === undefined ? "" : post.picture.url}
@@ -60,6 +61,8 @@ const ProfileAlbums = (props) => {
                   </a>
                 </div>
               );
+            } else {
+              return "";
             }
           })}
         </div>

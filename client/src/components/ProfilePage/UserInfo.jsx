@@ -139,7 +139,7 @@ const UserInfo = () => {
         withCredentials: true,
       });
       if (resMessage.status !== 200) {
-        const error = await resMessage.data;
+        // const error = await resMessage.data;
       } else {
         const resData = await resMessage.data;
         // after getting message we will store that message into redux

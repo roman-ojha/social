@@ -1,22 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import { useLocation, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   profilePageDataAction,
-  setRootUserPostData,
   setRootUserProfileDataState,
 } from "../../services/redux-actions";
-import { toastError } from "../../services/toast";
-import profileApi from "../../services/api/pages/profileApi";
 
 const Menu = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
-  // coloring the selected url page side bar onload
-  let location;
-  location = useLocation();
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
@@ -24,32 +16,6 @@ const Menu = () => {
   const rootUserProfileDataState = useSelector(
     (state) => state.rootUserProfileDataState
   );
-
-  const fetchUserPostData = async () => {
-    try {
-      const resPost = await profileApi.getUserPosts();
-      const resPostData = await resPost.data;
-      if (resPost.status === 200 && resPostData.success) {
-        dispatch(
-          setRootUserPostData({
-            fetchedPostData: true,
-            posts: resPostData.posts,
-          })
-        );
-      } else {
-        toastError("Some this went wrong please try again later");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      history.push("/u/home");
-    }
-  };
 
   return (
     <>

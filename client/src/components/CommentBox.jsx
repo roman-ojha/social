@@ -50,7 +50,7 @@ const ReturnCommentContent = () => {
           );
         }
       });
-  }, []);
+  }, [dispatch]);
 
   const comment = async () => {
     try {
@@ -223,6 +223,7 @@ const ReturnCommentContent = () => {
                   `/u/profile/${userProfileDetailStore.userID}/posts`
                 );
               }}
+              alt=""
             />
             <input
               className="CommentBox_Input_Field"

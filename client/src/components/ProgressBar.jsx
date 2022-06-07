@@ -62,7 +62,12 @@ const ProgressBar = () => {
         };
       }
     }
-  }, [progressBarState.showProgressBar, progressBarState.isCompleted]);
+  }, [
+    progressBarState.showProgressBar,
+    progressBarState.isCompleted,
+    progressBarState,
+    dispatch,
+  ]);
 
   return (
     <>

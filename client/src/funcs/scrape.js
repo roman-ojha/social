@@ -1,6 +1,6 @@
 // import rp from "request-promise";
 
-export default {
+const scrape = {
   scrapeYoutubeHomePage: () => {
     // // rp("https://youtube.com").then((html) => {
     // //   console.log(html);
@@ -19,7 +19,9 @@ export default {
     request.setRequestHeader("origin", "x-requested-wit");
     request.send(null);
     request.onreadystatechange = function () {
-      if (request.readyState == 4) console.log(request.responseText);
+      if (request.readyState === 4) console.log(request.responseText);
     };
   },
 };
+
+export default scrape;
