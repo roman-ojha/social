@@ -39,27 +39,26 @@ const Video = () => {
   //   }
   // };
 
-  const getYoutubeHomePageVideo = async () => {
-    try {
-      const resVideos = await videoApi.getYoutubeHomePageVideos();
-      const resVideosData = await resVideos.data;
-      if (resVideos.status === 200 && resVideosData.success) {
-        dispatch(setVideoPageData(resVideosData.videos));
-      } else {
-        toastError("Some thing went wrong, please try again later!!!");
-      }
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-    }
-  };
-
   useEffect(() => {
+    const getYoutubeHomePageVideo = async () => {
+      try {
+        const resVideos = await videoApi.getYoutubeHomePageVideos();
+        const resVideosData = await resVideos.data;
+        if (resVideos.status === 200 && resVideosData.success) {
+          dispatch(setVideoPageData(resVideosData.videos));
+        } else {
+          toastError("Some thing went wrong, please try again later!!!");
+        }
+      } catch (err) {
+        if (err.response) {
+          if (err.response.data.success === false) {
+            toastError(err.response.data.msg);
+          }
+        } else {
+          toastError("Some Problem Occur, Please Try again later!!!");
+        }
+      }
+    };
     // get constant value for youtube home page
     if (videoPageData.length === 0) {
       getYoutubeHomePageVideo();
@@ -74,7 +73,7 @@ const Video = () => {
     //
     // Scrap.scrapeYoutubeHomePage();
     // toastInfo("Video Page is in development");
-  }, []);
+  }, [dispatch, videoPageData.length]);
   return (
     <>
       <main className="VideoPage">
@@ -89,6 +88,7 @@ const Video = () => {
             href="https://www.youtube.com"
             target="_blank"
             className="VideoPage_Icon_and_Title"
+            rel="noreferrer"
           >
             <Icon icon="logos:youtube-icon" className="VideoPage_Icon" />
             <h1>Youtube</h1>
@@ -107,6 +107,7 @@ const Video = () => {
                   />
                 );
               }
+              return <></>;
             })}
           </div>
         ) : (

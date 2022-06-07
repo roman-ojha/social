@@ -33,7 +33,7 @@ const Stories = () => {
     const color_options = [];
     const image_options = [];
     const background_option = [];
-    userStoriesStore.data.map((data, index) => {
+    userStoriesStore.data.forEach((data, index) => {
       if (data.stories.caption.length > 150) {
         caption[index] = data.stories.caption.slice(0, 55);
       } else {

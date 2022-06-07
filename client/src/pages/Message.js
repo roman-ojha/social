@@ -20,7 +20,7 @@ const Message = () => {
 
   useEffect(() => {
     dispatch(mainPageMessageViewOnOff(false));
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

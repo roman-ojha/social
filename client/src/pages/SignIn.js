@@ -42,7 +42,6 @@ const SignIn = () => {
         data: JSON.stringify(signInDetail),
         withCredentials: true,
       });
-      const data = await res.data;
       dispatch(stopProgressBar());
       // console.log(res.status);
       if (res.status !== 200) {

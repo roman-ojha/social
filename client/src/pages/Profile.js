@@ -30,66 +30,73 @@ const Profile = () => {
     (state) => state.rootUserProfileDataState
   );
 
-  useEffect(async () => {
-    // if (params.userID === userProfileDetailStore.userID) {
-    //   dispatch(profilePageDataAction(userProfileDetailStore));
-    //   setFetchedAllData(true);
-    // }
-    if (
-      profilePageData.userID != params.userID &&
-      !rootUserProfileDataState.getRootUserProfileData
-    ) {
-      try {
-        // fetching user Detail which current user had search
-        const res = await axios({
-          method: "GET",
-          url: `/u/profile/${params.userID}`,
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        });
-        const userData = await res.data;
-        const userObj = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-        };
-        dispatch(profilePageDataAction(userObj));
-        setFetchedAllData(true);
-        if (params.userID === userProfileDetailStore.userID) {
-          dispatch(
-            setRootUserPostData({
-              fetchedPostData: true,
-              posts: userData.searchedUser.posts,
-            })
-          );
-          dispatch(
-            setRootUserProfileDataState({
-              fetchedRootUserProfileData: true,
-              getRootUserProfileData: false,
-            })
-          );
-        }
-      } catch (err) {
-        if (err.response) {
-          if (err.response.data.success === false) {
-            toastError(err.response.data.msg);
+  useEffect(() => {
+    const initializeProfilePage = async () => {
+      if (
+        profilePageData.userID !== params.userID &&
+        !rootUserProfileDataState.getRootUserProfileData
+      ) {
+        try {
+          // fetching user Detail which current user had search
+          const res = await axios({
+            method: "GET",
+            url: `/u/profile/${params.userID}`,
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          });
+          const userData = await res.data;
+          const userObj = {
+            ...userData.searchedUser,
+            isRootUserFollowed: userData.isRootUserFollowed,
+          };
+          dispatch(profilePageDataAction(userObj));
+          setFetchedAllData(true);
+          if (params.userID === userProfileDetailStore.userID) {
+            dispatch(
+              setRootUserPostData({
+                fetchedPostData: true,
+                posts: userData.searchedUser.posts,
+              })
+            );
+            dispatch(
+              setRootUserProfileDataState({
+                fetchedRootUserProfileData: true,
+                getRootUserProfileData: false,
+              })
+            );
           }
-        } else {
-          toastError("Some Problem Occur, Please Try again later!!!");
+        } catch (err) {
+          if (err.response) {
+            if (err.response.data.success === false) {
+              toastError(err.response.data.msg);
+            }
+          } else {
+            toastError("Some Problem Occur, Please Try again later!!!");
+          }
+          history.push("/u/home");
         }
-        history.push("/u/home");
+      } else {
+        setFetchedAllData(true);
       }
-    } else {
-      setFetchedAllData(true);
-    }
-    if (
-      location.pathname.endsWith(params.userID) ||
-      location.pathname.endsWith(`${params.userID}/`)
-    ) {
-      history.push(`/u/profile/${params.userID}/posts`);
-    }
-  }, []);
+      if (
+        location.pathname.endsWith(params.userID) ||
+        location.pathname.endsWith(`${params.userID}/`)
+      ) {
+        history.push(`/u/profile/${params.userID}/posts`);
+      }
+    };
+    initializeProfilePage();
+  }, [
+    dispatch,
+    history,
+    location.pathname,
+    params.userID,
+    profilePageData.userID,
+    rootUserProfileDataState.getRootUserProfileData,
+    userProfileDetailStore.userID,
+  ]);
 
   return (
     <>
