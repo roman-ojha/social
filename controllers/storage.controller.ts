@@ -4,161 +4,148 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import compressFile from "../funcs/compressFile.js";
-import varifyUser from "../funcs/varifyUser.js";
 import storage from "../db/userStorageConnection.js";
 import ResponseObject from "../interface/responseObject";
+import { Request, Response } from "express";
 const bucket = storage.bucket();
 
 export default {
-  post: async (req, res): Promise<object> => {
+  post: async (req: Request, res: Response): Promise<object> => {
     try {
-      const rootUser = await varifyUser(req.cookies.AuthToken);
-      if (!req.body.caption && !req.file) {
+      const rootUser = req.rootUser;
+      // console.log(rootUser);
+      const { caption, file } = req.body;
+      // console.log(caption,file);
+      if (!caption && !file) {
         // if user doesn't fill the any filed
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Please fill the required field",
         });
-      } else if (req.body.caption && !req.file) {
+      } else if (caption && !file) {
         // if user only fill content field
-        if (rootUser) {
-          const caption = req.body.caption;
-          const postID = crypto.randomBytes(16).toString("hex");
-          const userPostDetail = {
-            id: postID,
-            caption: caption,
-            likes: {
-              No: 0,
-            },
-            comments: {
-              No: 0,
-            },
+        // const caption = req.body.caption;
+        const postID = crypto.randomBytes(16).toString("hex");
+        const userPostDetail = {
+          id: postID,
+          caption: caption,
+          likes: {
+            No: 0,
+          },
+          comments: {
+            No: 0,
+          },
+        };
+        const postSuccessFull = await rootUser.uploadPost(
+          userPostDetail,
+          undefined
+        );
+        if (postSuccessFull) {
+          const resData = {
+            useremail: rootUser.email,
+            username: rootUser.name,
+            userID: rootUser.userID,
+            profilePicture: rootUser.picture,
+            picture: "",
+            // id: postRes[0].id,
+            // caption: postRes[0].caption,
+            // likes: postRes[0].likes,
+            // comments: postRes[0].comments,
+            ...userPostDetail,
+            date: new Date(),
           };
-          const postSuccessFull = await rootUser.uploadPost(
-            userPostDetail,
-            undefined
-          );
-          if (postSuccessFull) {
-            const resData = {
-              useremail: rootUser.email,
-              username: rootUser.name,
-              userID: rootUser.userID,
-              profilePicture: rootUser.picture,
-              picture: "",
-              // id: postRes[0].id,
-              // caption: postRes[0].caption,
-              // likes: postRes[0].likes,
-              // comments: postRes[0].comments,
-              ...userPostDetail,
-              date: new Date(),
-            };
-            return res.status(200).json(<ResponseObject>{
-              success: true,
-              msg: "Post upload successfully",
-              data: resData,
-            });
-          }
-          return res.status(500).json(<ResponseObject>{
-            success: false,
-            msg: "Server Error!!, Please Try again later",
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Post upload successfully",
+            data: resData,
           });
-        } else {
-          return res
-            .status(401)
-            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
         }
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Server Error!!, Please Try again later",
+        });
       } else {
-        const rootUser = await varifyUser(req.cookies.AuthToken);
-        if (rootUser) {
-          // uploading image to firebase Storage
-          await compressFile(req.file.path);
-          // deleting uncompressed file after compressed
-          fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
-          const metadata = {
-            metadata: {
-              firebaseStorageDownloadTokens: uuid(),
-            },
-            cacheControl: "public, max-age=31536000",
+        // uploading image to firebase Storage
+        await compressFile(file.path);
+        // deleting uncompressed file after compressed
+        fs.unlink(`./db/Images/${file.filename}`, (err) => {});
+        const metadata = {
+          metadata: {
+            firebaseStorageDownloadTokens: uuid(),
+          },
+          cacheControl: "public, max-age=31536000",
+        };
+        const uploadRes = await bucket.upload(`./db/build/${file.filename}`, {
+          destination: `images/${rootUser.email}/${file.filename}`,
+          gzip: true,
+          metadata: metadata,
+        });
+        // here we are again deleting the compressed file after upload to firebase
+        fs.unlink(`./db/build/${file.filename}`, (err) => {});
+        // console.log(uploadRes);
+        const caption = req.body.caption;
+        const picName = file.filename;
+        const picPath = `images/${rootUser.email}/${file.filename}`;
+        const picToken =
+          uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
+        const picBucket = process.env.FIREBASE_STORAGEBUCKET;
+        const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
+          picPath
+        )}?alt=media&token=${picToken}`;
+        const postID = crypto.randomBytes(16).toString("hex");
+        const today = new Date();
+        const userPostDetail = {
+          id: postID,
+          caption: caption,
+          picture: {
+            name: picName,
+            path: picPath,
+            url: picUrl,
+            firebaseStorageDownloadToken: picToken,
+            bucket: picBucket,
+          },
+          likes: {
+            No: 0,
+          },
+          comments: {
+            No: 0,
+          },
+        };
+        const userStoryDetail = {
+          caption: caption,
+          picture: picUrl,
+          date: `${today.toLocaleString("default", {
+            month: "long",
+          })} ${today.getDate()}, ${today.getFullYear()}`,
+        };
+        const postSuccessFull = await rootUser.uploadPost(
+          userPostDetail,
+          userStoryDetail
+        );
+        if (postSuccessFull) {
+          const resData = {
+            useremail: rootUser.email,
+            username: rootUser.name,
+            userID: rootUser.userID,
+            profilePicture: rootUser.picture,
+            // id: postRes[0].id,
+            // caption: postRes[0].caption,
+            // picture: postRes[0].picture,
+            // likes: postRes[0].likes,
+            // comments: postRes[0].comments,
+            ...userPostDetail,
+            date: new Date(),
           };
-          const uploadRes = await bucket.upload(
-            `./db/build/${req.file.filename}`,
-            {
-              destination: `images/${rootUser.email}/${req.file.filename}`,
-              gzip: true,
-              metadata: metadata,
-            }
-          );
-          // here we are again deleting the compressed file after upload to firebase
-          fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
-          // console.log(uploadRes);
-          const caption = req.body.caption;
-          const picName = req.file.filename;
-          const picPath = `images/${rootUser.email}/${req.file.filename}`;
-          const picToken =
-            uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
-          const picBucket = process.env.FIREBASE_STORAGEBUCKET;
-          const picUrl = `https://firebasestorage.googleapis.com/v0/b/${picBucket}/o/${encodeURIComponent(
-            picPath
-          )}?alt=media&token=${picToken}`;
-          const postID = crypto.randomBytes(16).toString("hex");
-          const today = new Date();
-          const userPostDetail = {
-            id: postID,
-            caption: caption,
-            picture: {
-              name: picName,
-              path: picPath,
-              url: picUrl,
-              firebaseStorageDownloadToken: picToken,
-              bucket: picBucket,
-            },
-            likes: {
-              No: 0,
-            },
-            comments: {
-              No: 0,
-            },
-          };
-          const userStoryDetail = {
-            caption: caption,
-            picture: picUrl,
-            date: `${today.toLocaleString("default", {
-              month: "long",
-            })} ${today.getDate()}, ${today.getFullYear()}`,
-          };
-          const postSuccessFull = await rootUser.uploadPost(
-            userPostDetail,
-            userStoryDetail
-          );
-          if (postSuccessFull) {
-            const resData = {
-              useremail: rootUser.email,
-              username: rootUser.name,
-              userID: rootUser.userID,
-              profilePicture: rootUser.picture,
-              // id: postRes[0].id,
-              // caption: postRes[0].caption,
-              // picture: postRes[0].picture,
-              // likes: postRes[0].likes,
-              // comments: postRes[0].comments,
-              ...userPostDetail,
-              date: new Date(),
-            };
-            return res.status(200).json(<ResponseObject>{
-              success: true,
-              msg: "Post upload successfully",
-              data: resData,
-            });
-          }
-
-          return res
-            .status(401)
-            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
-        } else {
-          return res
-            .status(401)
-            .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Post upload successfully",
+            data: resData,
+          });
         }
+
+        return res
+          .status(401)
+          .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
       }
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
@@ -305,8 +292,9 @@ export default {
       });
     }
   },
-  changeProfileUsingImgFile: async (req, res) => {
+  changeProfileUsingImgFile: async (req: Request, res: Response) => {
     try {
+      const rootUser = req.rootUser;
       const file = req.file;
       if (file === undefined) {
         return res.status(400).json({
@@ -314,30 +302,23 @@ export default {
           msg: "File/ImgUrl Doesn't exist, Please Send us File/ImgUrl",
         });
       }
-      const rootUser = await varifyUser(req.cookies.AuthToken);
-      if (!rootUser) {
-        return res.status(401).json({
-          success: false,
-          msg: "UnAuthorized user",
-        });
-      }
-      await compressFile(req.file.path);
-      fs.unlink(`./db/Images/${req.file.filename}`, (err) => {});
+      await compressFile(file.path);
+      fs.unlink(`./db/Images/${file.filename}`, (err) => {});
       const metadata = {
         metadata: {
           firebaseStorageDownloadTokens: uuid(),
         },
         cacheControl: "public, max-age=31536000",
       };
-      const uploadRes = await bucket.upload(`./db/build/${req.file.filename}`, {
-        destination: `images/${rootUser.email}/${req.file.filename}`,
+      const uploadRes = await bucket.upload(`./db/build/${file.filename}`, {
+        destination: `images/${rootUser.email}/${file.filename}`,
         gzip: true,
         metadata: metadata,
       });
-      fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
+      fs.unlink(`./db/build/${file.filename}`, (err) => {});
       const caption = `${rootUser.userID} Update The Profile Picture`;
-      const picName = req.file.filename;
-      const picPath = `images/${rootUser.email}/${req.file.filename}`;
+      const picName = file.filename;
+      const picPath = `images/${rootUser.email}/${file.filename}`;
       const picToken =
         uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
       const picBucket = process.env.FIREBASE_STORAGEBUCKET;

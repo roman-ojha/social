@@ -16,6 +16,7 @@
 | React        | Client Side        |
 | Node/Express | Backend API        |
 | MongoDB      | No-SQL Database    |
+| Redis        | Caching            |
 | Firebase     | For Storing Images |
 
 ## Features:
@@ -62,5 +63,3 @@
 
 [<img src="assets/UI/Home_Page_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](assets/UI/Home_Page_Mobile_View.png)
 [<img src="assets/UI/ProfilePage_Mobile_View.png" width="49.5%" alt="Mobile_View"></img>](assets/UI/ProfilePage_Mobile_View.png)
-
-<br/>

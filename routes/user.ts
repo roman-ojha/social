@@ -1,15 +1,10 @@
 import express from "express";
-import authenticate from "../middleware/auth/authenticate.js";
+// import authenticate from "../middleware/auth/authenticate.js";
+import authenticate from "../middleware/auth/authUsingRedis.js";
 import userController from "../controllers/user.controller.js";
-import authenticateWitRedis from "../middleware/auth/authUsingRedis.js";
 const userRoute = express.Router();
 
-userRoute.get(
-  "/index",
-  authenticateWitRedis,
-  // authenticate,
-  userController.main
-);
+userRoute.get("/index", authenticate, userController.main);
 
 userRoute.get("/u", authenticate, userController.homeUser);
 

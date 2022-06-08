@@ -110,7 +110,10 @@ const authenticate: RequestHandler = async (
         });
       }
       req.token = token;
-      req.rootUser = parsedUserDetail;
+      req.rootUser = {
+        ...parsedUserDetail,
+        tokens: [],
+      };
       req.userID = parsedUserDetail.userID;
       next();
     } else {
