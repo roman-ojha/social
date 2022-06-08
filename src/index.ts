@@ -14,6 +14,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
 import AuthAdmin from "../funcs/AuthAdmin.js";
+import { connectRedis } from "../middleware/auth/authUsingRedis.js";
 const PORT = process.env.PORT;
 
 // warning: connect.session() MemoryStorage is not designed for a production environment as it will leak memory, and will not scale past a single process.
@@ -55,6 +56,7 @@ app.use(bodyParser.json() as RequestHandler);
 // Database connection
 import("../db/userDataConnection.js");
 import("../db/userStorageConnection.js");
+await connectRedis();
 
 // Connection router
 app.use(indexRouter);

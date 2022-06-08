@@ -17,7 +17,7 @@ const authenticate: RequestHandler = async (
     ) as ExtendJWTPayload;
     const rootUser = await userDetail.findOne(
       {
-        _id: verifyToken._id,
+        id: verifyToken.id,
         "tokens.token": token,
       },
       // filtering to get only data that is need when page load

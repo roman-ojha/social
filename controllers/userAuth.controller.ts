@@ -13,6 +13,7 @@ import {
   UserDocumentMessages,
   UserDocumentNotification,
 } from "../interface/userDocument.js";
+import { redisClient } from "../middleware/auth/authUsingRedis.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
@@ -244,6 +245,7 @@ export default {
           userID: 1,
           name: 1,
           tokens: 1,
+          id: 1,
         }
       );
       if (!userLogin) {
@@ -275,6 +277,18 @@ export default {
               // NOTE: 'sameSite: "none"' will help to set and access token for different domain
             });
           }
+
+          // Storing User Data in redis
+          // await redisClient.lPush("userDetail", JSON.stringify(userLogin));
+
+          redisClient
+            .lRange("userDetail", 0, 1)
+            .then((data) => {
+              // console.log(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
 
           // NOTE: if we would host hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
           return res.status(200).json(<ResponseObject>{

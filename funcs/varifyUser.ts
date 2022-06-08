@@ -9,7 +9,7 @@ export default async function varifyUser(token: string) {
   ) as ExtendJWTPayload;
   const rootUser = await userDetail.findOne(
     {
-      _id: verifyToken._id,
+      id: verifyToken.id,
       "tokens.token": token,
     },
     {

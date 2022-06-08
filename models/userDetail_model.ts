@@ -237,7 +237,7 @@ userDetailSchema.methods.generateAuthToken = async function (): Promise<
   string | null
 > {
   try {
-    let token: string = jwt.sign({ _id: this._id }, process.env.SECRET_KEY!);
+    let token: string = jwt.sign({ id: this.id }, process.env.SECRET_KEY!);
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
