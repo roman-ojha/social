@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import userDetail from "../../models/userDetail_model.js";
 import { RequestHandler, Request, Response, NextFunction } from "express";
-import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
+import ExtendJWTPayload from "../../types/jsonwebtoken/extend-jwt-payload.js";
 import ResponseObject from "../../interface/responseObject";
 
 const authenticate: RequestHandler = async (
@@ -37,7 +37,7 @@ const authenticate: RequestHandler = async (
     }
     req.token = token;
     req.rootUser = rootUser;
-    req.userID = <any>rootUser._id;
+    req.userID = rootUser.userID;
     next();
   } catch (err) {
     return res.status(401).send(<ResponseObject>{
