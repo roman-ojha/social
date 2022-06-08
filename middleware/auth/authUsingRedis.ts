@@ -16,7 +16,7 @@ const redisClient = redis.createClient({
 const connectRedis = async (): Promise<boolean> => {
   try {
     await redisClient.connect();
-    console.log("Redis Connection Successful");
+    console.log("Redis Connected Successfully");
     isRedisConnected = true;
     return true;
   } catch (err) {
@@ -25,6 +25,14 @@ const connectRedis = async (): Promise<boolean> => {
     return false;
   }
 };
+
+redisClient.on("error", function (err) {
+  // if redis disconnected or throw error
+  if (isRedisConnected === true) {
+    isRedisConnected = false;
+    console.log(isRedisConnected);
+  }
+});
 
 const authenticate: RequestHandler = async (
   req: Request,
@@ -109,9 +117,38 @@ const authenticate: RequestHandler = async (
       req.userID = parsedUserDetail.userID;
       next();
     } else {
-      // redis is not connected
+      // redis is not connected then we have to authenticate using mongodb
+      const rootUser = await UserDetail.findOne(
+        {
+          id: verifyToken.id,
+          "tokens.token": token,
+        },
+        // filtering to get only data that is need when page load
+        {
+          userID: 1,
+          name: 1,
+          id: 1,
+          email: 1,
+          _id: 0,
+        }
+      );
+      if (!rootUser) {
+        return res.status(401).send(<ResponseObject>{
+          success: false,
+          msg: "User not found, sorry not a valid token",
+        });
+      }
+      req.token = token;
+      req.rootUser = rootUser;
+      req.userID = rootUser.userID;
+      next();
     }
-  } catch (err) {}
+  } catch (err) {
+    return res.status(500).json(<ResponseObject>{
+      success: false,
+      msg: "Server Error!!, Please Try again later",
+    });
+  }
 };
 
 export default authenticate;
