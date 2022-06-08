@@ -1,0 +1,63 @@
+version: "3"
+
+services:
+  client:
+    container_name: social-client-dev
+    image: social-client-dev
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/user/src/client
+    environment:
+      REACT_APP_API_BASE_URL: http://localhost:8080
+    depends_on:
+      - server
+  server:
+    container_name: social-server-dev
+    image: social-server-dev
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/user/src/server
+    # environment:
+    #   PORT: 8080
+    #   ORIGIN_HOSTNAME: localhost
+    #   NODE_ENV: development
+    #   ADMIN_LOGIN_EMAIL: <email_of_admin_to_login_in_application>
+    #   ADMIN_LOGIN_PASSWORD: <passowrd_of_admin_to_login_in_application>
+    #   API_BASE_URL: http://localhost:8080
+    #   CLIENT_BASE_URL: http://localhost:3000
+    #   USERDATABASE: mongodb://mongo:27017/Social
+    #   SECRET_KEY: SECxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxSEC
+    #   GOOGLE_CLIENT_ID: googleclientid
+    #   GOOGLE_CLIENT_SECRET: googleclientsecret
+    #   YOUTUBE_API_URL: https://www.googleapis.com/youtube/v3
+    #   YOUTUBE_BASE_API_KEY: AAxxxxxxxxxxxxxxxxxxxxxxBB
+    #   FIREBASE_STORAGEBUCKET: firebasestoragebucket
+    #   FIREBASE_PROJECT_ID: firebaseProjectID
+    #   FIREBASE_PRIVATE_KEY_ID: 62xxxxxxxxxxxxxxxxxxxxxxxxxxxx951
+    #   FIREBASE_PRIVATE_KEY: -----BEGIN PRIVATE KEY-----\nMIIEvwxxxxxxxxxxxxxxxxxxxxxxxxxx6Aw==\n-----END PRIVATE KEY-----\n
+    #   FIREBASE_CLIENT_EMAIL: firebaseClientEmail
+    #   FIREBASE_CLIENT_ID: 10xxxxxxxxxxxxxxxxxxxxxxxx2
+    #   FIREBASE_X509_CERT_URL: firebaseX509CertUrl
+    env_file:
+      - .env.production
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo:/data/db
+    ports:
+      - "2717:27017"
+volumes:
+  mongo: {}

@@ -8,6 +8,9 @@ declare namespace NodeJS {
     API_BASE_URL: string;
     CLIENT_BASE_URL: string;
     USERDATABASE: string;
+    REDIS_PORT: string;
+    REDIS_HOST: string;
+    REDIS_PASSWORD: string;
     SECRET_KEY: string;
     GOOGLE_CLIENT_ID: string;
     GOOGLE_CLIENT_SECRET: string;

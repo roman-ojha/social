@@ -7,10 +7,13 @@ import ResponseObject from "../../interface/responseObject.js";
 import RedisUserDetail from "../../interface/redisUserDetail.js";
 
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const REDIS_HOST = process.env.REDIS_HOST || "localhost";
+const REDIS_PASSWORD = process.env.REDIS_PASSWORD;
 let isRedisConnected: boolean = false;
 
 const redisClient = redis.createClient({
-  socket: { port: REDIS_PORT as number, host: "localhost" },
+  socket: { port: REDIS_PORT as number, host: REDIS_HOST },
+  password: REDIS_PASSWORD,
 });
 
 const connectRedis = () => {
