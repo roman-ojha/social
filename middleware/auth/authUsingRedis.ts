@@ -13,24 +13,21 @@ const redisClient = redis.createClient({
   socket: { port: REDIS_PORT as number, host: "localhost" },
 });
 
-const connectRedis = async (): Promise<boolean> => {
-  try {
-    await redisClient.connect();
-    console.log("Redis Connected Successfully");
-    isRedisConnected = true;
-    return true;
-  } catch (err) {
-    console.log("Err: Can't be able to connect with redis");
-    isRedisConnected = false;
-    return false;
-  }
+const connectRedis = () => {
+  redisClient
+    .connect()
+    .then(() => {
+      console.log("Redis Connected Successfully");
+      isRedisConnected = true;
+    })
+    .catch(() => {
+      console.log("Some error occur while connecting to redis");
+    });
 };
 
-redisClient.on("error", function (err) {
-  // if redis disconnected or throw error
+redisClient.on("error", async (err) => {
   if (isRedisConnected === true) {
     isRedisConnected = false;
-    console.log(isRedisConnected);
   }
 });
 
@@ -152,4 +149,4 @@ const authenticate: RequestHandler = async (
 };
 
 export default authenticate;
-export { redisClient, connectRedis };
+export { redisClient, connectRedis, isRedisConnected };

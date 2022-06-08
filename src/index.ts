@@ -59,7 +59,9 @@ app.use(bodyParser.json() as RequestHandler);
 // Database connection
 import("../db/userDataConnection.js");
 import("../db/userStorageConnection.js");
-await connectRedis();
+(async () => {
+  await connectRedis();
+})();
 
 // Connection router
 app.use(indexRouter);
