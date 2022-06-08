@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import userDetail from "../models/userDetail_model.js";
+import userDetail from "../../models/userDetail_model.js";
 import { RequestHandler, Request, Response, NextFunction } from "express";
 import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
-import ResponseObject from "../interface/responseObject";
+import ResponseObject from "../../interface/responseObject";
 
 const authenticate: RequestHandler = async (
   req: Request,

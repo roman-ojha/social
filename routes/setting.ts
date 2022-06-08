@@ -1,5 +1,5 @@
 import express from "express";
-import authenticate from "../middleware/authenticate.js";
+import authenticate from "../middleware/auth/authenticate.js";
 import settingController from "../controllers/setting.controller.js";
 const settingRoute = express.Router();
 
