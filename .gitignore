@@ -5,3 +5,4 @@ node_modules
 note.txt
 /dist
 /.vscode/settings.json
+*.rdb
