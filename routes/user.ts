@@ -7,7 +7,7 @@ const userRoute = express.Router();
 userRoute.get(
   "/index",
   authenticateWitRedis,
-  authenticate,
+  // authenticate,
   userController.main
 );
 
