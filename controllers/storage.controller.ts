@@ -14,15 +14,16 @@ export default {
     try {
       const rootUser = req.rootUser;
       // console.log(rootUser);
-      const { caption, file } = req.body;
-      // console.log(caption,file);
+      const caption: string | undefined = req.body.caption;
+      const file = req.file;
+      // console.log();
       if (!caption && !file) {
         // if user doesn't fill the any filed
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Please fill the required field",
         });
-      } else if (caption && !file) {
+      } else if (!file) {
         // if user only fill content field
         // const caption = req.body.caption;
         const postID = crypto.randomBytes(16).toString("hex");
@@ -99,9 +100,11 @@ export default {
           },
           likes: {
             No: 0,
+            by: [],
           },
           comments: {
             No: 0,
+            by: [],
           },
         };
         const userStoryDetail = {

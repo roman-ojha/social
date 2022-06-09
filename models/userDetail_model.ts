@@ -252,13 +252,6 @@ userDetailSchema.methods.uploadPost = async function (
   userStoryDetail: object
 ) {
   try {
-    // this.posts.push(postData);
-    // if (userStoryDetail !== undefined) {
-    //   this.stories = userStoryDetail;
-    // }
-    // this.postNo++;
-    // await this.save();
-    console.log(postData);
     let resPost: UpdateResult;
     if (userStoryDetail !== undefined) {
       resPost = await UserDetail.updateOne(
@@ -279,7 +272,6 @@ userDetailSchema.methods.uploadPost = async function (
         }
       );
     } else {
-      console.log("Without Stories");
       resPost = await UserDetail.updateOne(
         {
           id: this.id,

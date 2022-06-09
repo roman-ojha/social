@@ -6,8 +6,7 @@ import authenticate from "../middleware/auth/authUsingRedis.js";
 
 router.post(
   "/u/post",
-  authenticate,
-  upload.single("image"),
+  [authenticate, upload.single("image")],
   storageController.post
 );
 

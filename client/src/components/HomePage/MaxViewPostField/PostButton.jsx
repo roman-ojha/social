@@ -28,7 +28,6 @@ const PostButton = () => {
       // we can be able to pass the other form of data like this
       const res = await Api.post(data);
       const resData = await res.data;
-      console.log(resData);
       if (res.status === 200 && resData.success) {
         toastSuccess(resData.msg);
         dispatch(userPostResponseData({ ...resData.data, date: new Date() }));

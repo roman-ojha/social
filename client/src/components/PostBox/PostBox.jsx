@@ -27,8 +27,6 @@ const PostBox = (props) => {
       : [],
   });
 
-  console.log(props);
-
   return (
     <>
       <article className="HomePage_Feed_Content_Container">
