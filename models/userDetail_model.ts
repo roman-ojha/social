@@ -4,6 +4,12 @@ import jwt from "jsonwebtoken";
 import SchemaMethodInstance from "interface/userSchemaMethods.js";
 import ModelMethodInstance from "interface/userModelMethods.js";
 import { UpdateResult } from "mongodb";
+import userMessages from "./userMessages.js";
+import userPosts from "./userPosts.js";
+import userStories from "./userStories.js";
+import userNotifications from "./userNotifications.js";
+import userTokens from "./userTokens.js";
+import userBirthday from "./userBirthday.js";
 
 const userDetailSchema = new mongoose.Schema<
   SchemaMethodInstance,
@@ -40,20 +46,7 @@ const userDetailSchema = new mongoose.Schema<
     type: String,
     required: true,
   },
-  birthday: {
-    year: {
-      type: String,
-      required: true,
-    },
-    month: {
-      type: String,
-      required: true,
-    },
-    day: {
-      type: String,
-      required: true,
-    },
-  },
+  birthday: userBirthday,
   date: {
     type: Date,
     default: Date.now,
@@ -62,39 +55,7 @@ const userDetailSchema = new mongoose.Schema<
     type: String,
     require: true,
   },
-  messages: [
-    {
-      lastMessageOn: {
-        type: Date,
-        default: Date.now,
-        required: true,
-      },
-      messageToId: {
-        // messageTo == id of User
-        type: String,
-        required: true,
-      },
-      roomID: {
-        type: String,
-        required: true,
-      },
-      message: [
-        {
-          senderId: {
-            // Sender == id of User
-            type: String,
-          },
-          content: {
-            type: String,
-          },
-          date: {
-            type: Date,
-            default: Date.now,
-          },
-        },
-      ],
-    },
-  ],
+  messages: [userMessages],
   followersNo: {
     type: Number,
   },
@@ -128,102 +89,10 @@ const userDetailSchema = new mongoose.Schema<
   postNo: {
     type: Number,
   },
-  posts: [
-    {
-      id: {
-        type: String,
-      },
-      caption: {
-        type: String,
-      },
-      picture: {
-        name: {
-          type: String,
-        },
-        path: {
-          type: String,
-        },
-        url: {
-          type: String,
-        },
-        firebaseStorageDownloadToken: {
-          type: String,
-        },
-        bucket: {
-          type: String,
-        },
-      },
-      likes: {
-        No: {
-          type: Number,
-        },
-        by: [
-          {
-            user: {
-              // user = id of user how like the post
-              type: String,
-            },
-          },
-        ],
-      },
-      comments: {
-        No: {
-          type: Number,
-        },
-        by: [
-          {
-            // userID: {
-            //   type: String,
-            // },
-            user: {
-              // user = id of the user who comment in post
-              type: String,
-            },
-            comment: {
-              type: String,
-            },
-            // picture: {
-            //   type: String,
-            // },
-          },
-        ],
-      },
-      date: {
-        type: Date,
-        default: Date.now,
-      },
-    },
-  ],
-  stories: {
-    caption: {
-      type: String,
-    },
-    picture: {
-      type: String,
-    },
-    date: {
-      type: String,
-    },
-  },
-  notification: [
-    {
-      topic: {
-        type: String,
-      },
-      user: {
-        // user is the id of user
-        type: String,
-      },
-    },
-  ],
-  tokens: [
-    {
-      token: {
-        type: String,
-        require: true,
-      },
-    },
-  ],
+  posts: [userPosts],
+  stories: userStories,
+  notification: [userNotifications],
+  tokens: [userTokens],
 });
 
 userDetailSchema.pre("save", async function (next) {
