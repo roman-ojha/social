@@ -335,9 +335,11 @@ export default {
         },
         likes: {
           No: 0,
+          by: [],
         },
         comments: {
           No: 0,
+          by: [],
         },
       };
       const userStoryDetail = {

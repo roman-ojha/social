@@ -12,15 +12,13 @@ router.post(
 
 router.post(
   "/u/userId",
-  authenticate,
-  upload.single("profile"),
+  [authenticate, upload.single("profile")],
   storageController.getUserID
 );
 
 router.post(
   "/changeProfile/imgFile",
-  authenticate,
-  upload.single("image"),
+  [authenticate, upload.single("image")],
   storageController.changeProfileUsingImgFile
 );
 

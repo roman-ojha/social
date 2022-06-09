@@ -6,6 +6,7 @@ import { toastError } from "../../services/toast";
 import {
   setRootUserProfileDataState,
   setRootUserPostData,
+  profilePageDataAction,
 } from "../../services/redux-actions";
 
 const UserPosts = (props) => {
@@ -35,6 +36,12 @@ const UserPosts = (props) => {
               getRootUserProfileData: false,
             })
           );
+          const userObj = {
+            ...userProfileDetailStore,
+            isRootUserFollowed: false,
+            posts: resPostData.posts,
+          };
+          dispatch(profilePageDataAction(userObj));
         }
       } catch (err) {
         if (err.response) {
@@ -57,6 +64,7 @@ const UserPosts = (props) => {
     dispatch,
     props.profilePageData.userID,
     rootUserProfileDataState,
+    userProfileDetailStore,
     userProfileDetailStore.userID,
   ]);
 

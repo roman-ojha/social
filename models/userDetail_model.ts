@@ -260,7 +260,8 @@ userDetailSchema.methods.uploadPost = async function (
         },
         {
           $push: {
-            posts: postData,
+            // posts: postData,
+            posts: { $each: [postData], $position: 0 },
           },
           $inc: {
             postNo: 1,
