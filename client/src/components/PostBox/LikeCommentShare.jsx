@@ -16,9 +16,11 @@ const LikeCommentShare = (props) => {
   const dispatch = useDispatch();
   const [likeInfo, setLikeInfo] = useState({
     likeNo: props.userFeedData.likes.No,
-    isLikedPost: props.userFeedData.likes.by.some(
-      (el) => el.user === userProfileDetailStore.id
-    ),
+    isLikedPost: props.userFeedData.likes.by
+      ? props.userFeedData.likes.by.some(
+          (el) => el.user === userProfileDetailStore.id
+        )
+      : [],
   });
 
   const like = async () => {

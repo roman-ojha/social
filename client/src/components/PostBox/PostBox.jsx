@@ -20,11 +20,14 @@ const PostBox = (props) => {
 
   const [commentInfo, setCommentInfo] = useState({
     commentNo: props.userFeedData.comments.No,
-    postCommentInfo:
-      props.userFeedData.comments.by[
-        Math.floor(Math.random() * props.userFeedData.comments.by.length)
-      ],
+    postCommentInfo: props.userFeedData.comments.by
+      ? props.userFeedData.comments.by[
+          Math.floor(Math.random() * props.userFeedData.comments.by.length)
+        ]
+      : [],
   });
+
+  console.log(props);
 
   return (
     <>

@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import SchemaMethodInstance from "interface/userSchemaMethods.js";
 import ModelMethodInstance from "interface/userModelMethods.js";
+import { UpdateResult } from "mongodb";
 
 const userDetailSchema = new mongoose.Schema<
   SchemaMethodInstance,
@@ -251,13 +252,53 @@ userDetailSchema.methods.uploadPost = async function (
   userStoryDetail: object
 ) {
   try {
-    this.posts.push(postData);
+    // this.posts.push(postData);
+    // if (userStoryDetail !== undefined) {
+    //   this.stories = userStoryDetail;
+    // }
+    // this.postNo++;
+    // await this.save();
+    console.log(postData);
+    let resPost: UpdateResult;
     if (userStoryDetail !== undefined) {
-      this.stories = userStoryDetail;
+      resPost = await UserDetail.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $push: {
+            posts: postData,
+          },
+          $inc: {
+            postNo: 1,
+          },
+
+          $set: {
+            stories: userStoryDetail,
+          },
+        }
+      );
+    } else {
+      console.log("Without Stories");
+      resPost = await UserDetail.updateOne(
+        {
+          id: this.id,
+        },
+        {
+          $push: {
+            posts: postData,
+          },
+          $inc: {
+            postNo: 1,
+          },
+        }
+      );
     }
-    this.postNo++;
-    await this.save();
-    return true;
+    if (resPost) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (err) {
     return false;
   }

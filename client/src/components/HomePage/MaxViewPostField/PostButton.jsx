@@ -31,7 +31,7 @@ const PostButton = () => {
       console.log(resData);
       if (res.status === 200 && resData.success) {
         toastSuccess(resData.msg);
-        dispatch(userPostResponseData(resData.data));
+        dispatch(userPostResponseData({ ...resData.data, date: new Date() }));
         dispatch(
           homePageUserPostFieldDataAction({
             ...homePageUserPostFieldData,

@@ -1,4 +1,5 @@
 import { Document } from "mongoose";
+import { Interface } from "readline";
 
 export type UserDocumentMessages = {
   lastMessageOn: Date;
@@ -36,6 +37,28 @@ export type UserDocumentPosts = {
   };
   date: Date;
 };
+
+export interface RootUserNewPosts {
+  id: string;
+  caption: string;
+  picture:
+    | {
+        name: string;
+        path: string;
+        url: string;
+        firebaseStorageDownloadToken: string;
+        bucket: string;
+      }
+    | undefined;
+  likes: {
+    No: number;
+    by: [];
+  };
+  comments: {
+    No: number;
+    by: [];
+  };
+}
 
 export type UserDocumentBirthday = {
   year: string;

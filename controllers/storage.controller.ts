@@ -31,9 +31,11 @@ export default {
           caption: caption,
           likes: {
             No: 0,
+            by: [],
           },
           comments: {
             No: 0,
+            by: [],
           },
         };
         const postSuccessFull = await rootUser.uploadPost(
@@ -42,17 +44,8 @@ export default {
         );
         if (postSuccessFull) {
           const resData = {
-            useremail: rootUser.email,
-            username: rootUser.name,
-            userID: rootUser.userID,
-            profilePicture: rootUser.picture,
-            picture: "",
-            // id: postRes[0].id,
-            // caption: postRes[0].caption,
-            // likes: postRes[0].likes,
-            // comments: postRes[0].comments,
             ...userPostDetail,
-            date: new Date(),
+            picture: undefined,
           };
           return res.status(200).json(<ResponseObject>{
             success: true,
@@ -123,23 +116,23 @@ export default {
           userStoryDetail
         );
         if (postSuccessFull) {
-          const resData = {
-            useremail: rootUser.email,
-            username: rootUser.name,
-            userID: rootUser.userID,
-            profilePicture: rootUser.picture,
-            // id: postRes[0].id,
-            // caption: postRes[0].caption,
-            // picture: postRes[0].picture,
-            // likes: postRes[0].likes,
-            // comments: postRes[0].comments,
-            ...userPostDetail,
-            date: new Date(),
-          };
+          // const resData = {
+          //   useremail: rootUser.email,
+          //   username: rootUser.name,
+          //   userID: rootUser.userID,
+          //   profilePicture: rootUser.picture,
+          //   // id: postRes[0].id,
+          //   // caption: postRes[0].caption,
+          //   // picture: postRes[0].picture,
+          //   // likes: postRes[0].likes,
+          //   // comments: postRes[0].comments,
+          //   ...userPostDetail,
+          //   date: new Date(),
+          // };
           return res.status(200).json(<ResponseObject>{
             success: true,
             msg: "Post upload successfully",
-            data: resData,
+            data: userPostDetail,
           });
         }
 
