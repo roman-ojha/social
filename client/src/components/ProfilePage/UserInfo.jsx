@@ -141,15 +141,16 @@ const UserInfo = () => {
       if (resMessage.status !== 200) {
         // const error = await resMessage.data;
       } else {
-        const resData = await resMessage.data;
+        const resData = await resMessage.data.data;
         // after getting message we will store that message into redux
         dispatch(
           currentUserMessageAction({
             messageToId: resData.messageToId,
             messageToUserId: profilePageData.userID,
             receiverPicture: profilePageData.picture,
-            roomID: resData.roomID,
+            // roomID: resData.roomID,
             message: resData.message,
+            fetchedInnerMessage: true,
           })
         );
       }

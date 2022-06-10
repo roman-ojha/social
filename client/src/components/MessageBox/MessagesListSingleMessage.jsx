@@ -39,7 +39,7 @@ const MessagesListSingleMessage = (props) => {
       if (resMessage.status !== 200) {
         // const error = await resMessage.data;
       } else {
-        const resData = await resMessage.data;
+        const resData = await resMessage.data.data;
         // after getting message we will store that message into redux
         dispatch(
           currentUserMessageAction({

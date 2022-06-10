@@ -9,10 +9,10 @@ const userMessages = {
     type: String,
     required: true,
   },
-  roomID: {
-    type: String,
-    required: true,
-  },
+  // roomID: {
+  //   type: String,
+  //   required: true,
+  // },
   message: [
     {
       senderId: {

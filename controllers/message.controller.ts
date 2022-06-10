@@ -140,7 +140,7 @@ export default {
       );
       if (!userMessage) {
         // if message doesn't exist already then we have to create a new message which would contain the empty message
-        const roomID = crypto.randomBytes(16).toString("hex");
+        // const roomID = crypto.randomBytes(16).toString("hex");
         // generating new room id for those spacific user room to join on socket
         const resSaveRootMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
@@ -151,7 +151,7 @@ export default {
             $push: {
               messages: {
                 messageToId: messageToId,
-                roomID: roomID,
+                // roomID: roomID,
                 message: [],
               },
             },
@@ -166,23 +166,33 @@ export default {
             $push: {
               messages: {
                 messageToId: rootUser.id,
-                roomID: roomID,
+                // roomID: roomID,
                 message: [],
               },
             },
           }
         );
         if (resSaverReceiverMsg && resSaveRootMsg) {
-          return res
-            .status(200)
-            .json(<ResponseObject>{ success: true, msg: "message created" });
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "message created",
+            data: {
+              messageToId: messageToId,
+              message: [],
+              lastMessageOn: new Date(),
+            },
+          });
         } else {
           return res
             .status(500)
             .json(<ResponseObject>{ success: false, msg: "server error" });
         }
       }
-      return res.status(200).json(userMessage.messages[0]);
+      return res.status(200).json({
+        success: true,
+        msg: "Successful",
+        data: userMessage.messages[0],
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
