@@ -13,7 +13,8 @@
     "docker-compose-up:dev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
     "docker:dev": "yarn docker-compose-down & yarn docker-compose-up:dev",
     "docker:logServer": "docker-compose -f ./docker-compose.dev.yml logs server",
-    "version": "auto-changelog -p"
+    "version": "auto-changelog -p",
+    "lint": "eslint ./"
   },
   "engines": {
     "node": "14.x",
@@ -74,7 +75,15 @@
     "@types/passport-google-oauth2": "^0.1.5",
     "@types/request": "^2.48.8",
     "@types/sharp": "^0.30.2",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
     "auto-changelog": "^2.4.0",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "generate-changelog": "^1.8.0",
     "nodemon": "^2.0.16",
     "release-please": "^13.17.0",

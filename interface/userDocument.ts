@@ -1,5 +1,4 @@
 import { Document } from "mongoose";
-import { Interface } from "readline";
 
 export type UserDocumentMessages = {
   lastMessageOn: Date;
