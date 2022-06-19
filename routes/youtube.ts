@@ -1,10 +1,12 @@
+/* eslint-disable import/no-unresolved */
 import express from "express";
-const youtubeRoute = express.Router();
 import youtubeController from "../controllers/youtube.controller.js";
+
+const youtubeRoute = express.Router();
 
 // http://www.googleapis.com/youtube/v3/search?key=apiKey&type=video&part=snippet&q=foo
 
-//'search' part could be video, playlist, channel
+// 'search' part could be video, playlist, channel
 // 'type': what we want in this case we want to access video
 // 'part': here we can give the title and description of the video, channel
 // 'q' : query

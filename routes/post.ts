@@ -1,7 +1,9 @@
+/* eslint-disable import/no-unresolved */
 import express from "express";
 // import authenticate from "../middleware/auth/authenticate.js";
 import authenticate from "../middleware/auth/authUsingRedis.js";
 import postController from "../controllers/post.controller.js";
+
 const postRoute = express.Router();
 
 postRoute.post("/post/like", authenticate, postController.like);
