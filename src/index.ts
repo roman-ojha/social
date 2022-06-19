@@ -1,5 +1,9 @@
+/* eslint-disable import/extensions */
+/* eslint-disable import/no-unresolved */
 import { RequestHandler } from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import bodyParser from "body-parser";
 import indexRouter from "../routes/index.js";
 import postRoute from "../routes/post.js";
 import userRoute from "../routes/user.js";
@@ -7,18 +11,15 @@ import userAuthRoute from "../routes/userAuth.js";
 import messageRoute from "../routes/message.js";
 import settingRoute from "../routes/setting.js";
 import storageRouter from "../routes/storageRoute.js";
+// eslint-disable-next-line camelcase
 import google_OAuth_route from "../routes/google_OAuth_route.js";
 import youtubeRoute from "../routes/youtube.js";
 // import scrapRoute from "../routes/scrap.js";
-import cors from "cors";
-import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
 import AuthAdmin from "../funcs/AuthAdmin.js";
-import {
-  connectRedis,
-  redisClient,
-} from "../middleware/auth/authUsingRedis.js";
-const PORT = process.env.PORT;
+import { connectRedis } from "../middleware/auth/authUsingRedis.js";
+
+const { PORT } = process.env;
 
 // warning: connect.session() MemoryStorage is not designed for a production environment as it will leak memory, and will not scale past a single process.
 // NOTE: because of 'warning' i have written this bellow code but this peace of code also did not solve the issue
@@ -47,7 +48,7 @@ const PORT = process.env.PORT;
 app.use(
   cors({
     origin: process.env.CLIENT_BASE_URL,
-    credentials: true,
+    credentials: true
   })
 );
 app.use(cookieParser());
@@ -73,13 +74,14 @@ app.use(postRoute);
 app.use(storageRouter);
 app.use(youtubeRoute);
 // app.use(scrapRoute);
-import "../socket/io.js";
+// import "../socket/io.js";
 
 // Google Oauth
 app.use(google_OAuth_route);
 
 // listening to a 'PORT'
 httpServer.listen(PORT, () => {
+  // eslint-disable-next-line no-console
   console.log(`Running on ${PORT}`);
 });
 

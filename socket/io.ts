@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { createServer } from "http";
 import express, { Express } from "express";
 import { Server } from "socket.io";
@@ -6,7 +7,7 @@ import userDetail from "../models/userDetail_model.js";
 const app: Express = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-  cors: { credentials: true, origin: process.env.CLIENT_BASE_URL },
+  cors: { credentials: true, origin: process.env.CLIENT_BASE_URL }
 });
 
 io.on("connect", (socket) => {
@@ -16,29 +17,29 @@ io.on("connect", (socket) => {
       senderId: messageInfo.senderId,
       senderUserId: messageInfo.senderUserId,
       content: messageInfo.message,
-      date: Date(),
+      date: Date()
     };
     try {
-      const senderId = messageInfo.senderId;
-      const receiverId = messageInfo.receiverId;
+      const { senderId } = messageInfo;
+      const { receiverId } = messageInfo;
       // if message already created then we just have to save
       const resSaveReciverMsg = await userDetail.updateOne(
         // creating and saving message to sender
         {
-          id: receiverId,
+          id: receiverId
         },
         {
           $push: {
             "messages.$[field].message": {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
-              senderId: senderId,
+              senderId,
               content: messageInfo.message,
-              date: new Date(),
-            },
-          },
+              date: new Date()
+            }
+          }
         },
         {
-          arrayFilters: [{ "field.messageToId": senderId }],
+          arrayFilters: [{ "field.messageToId": senderId }]
           // here we are filtering the messageBy
         }
       );
@@ -47,30 +48,30 @@ io.on("connect", (socket) => {
         // NOTE: i am doing this process to reduce the query for database so that the number of query became small and will be fast
         cb({
           success: false,
-          msg: "User doesn't exist or Message doesn't created",
+          msg: "User doesn't exist or Message doesn't created"
         });
       }
       // if reciver exist and will update the message there then we can update the message for sender as well
-      const resSaveSenderMsg = await userDetail.updateOne(
+      await userDetail.updateOne(
         // creating and saving message to sender
         {
-          id: senderId,
+          id: senderId
         },
         {
           $push: {
             "messages.$[field].message": {
               // pushing message inside the message array which match the condition of "messageBy"==='sender'
-              senderId: senderId,
+              senderId,
               content: messageInfo.message,
-              date: new Date(),
-            },
+              date: new Date()
+            }
           },
           $set: {
-            "messages.$[field].lastMessageOn": new Date(),
-          },
+            "messages.$[field].lastMessageOn": new Date()
+          }
         },
         {
-          arrayFilters: [{ "field.messageToId": receiverId }],
+          arrayFilters: [{ "field.messageToId": receiverId }]
           // here we are filtering the messageBy
         }
       );
@@ -78,13 +79,18 @@ io.on("connect", (socket) => {
       socket.to(messageInfo.receiverId).emit("send-message-client", {
         success: true,
         msgInfo: emittingMessageInfo,
-        senderPicture: messageInfo.senderPicture,
+        senderPicture: messageInfo.senderPicture
       });
       cb({
         success: true,
-        msgInfo: emittingMessageInfo,
+        msgInfo: emittingMessageInfo
       });
-    } catch (err) {}
+    } catch (err) {
+      cb({
+        success: false,
+        msg: "Server Error, please try again later"
+      });
+    }
   });
   socket.on("join-room", (roomID, cb) => {
     socket.join(roomID);
