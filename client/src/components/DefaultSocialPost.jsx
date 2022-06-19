@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 
 const DefaultSocialPost = () => {
   const isMax850px = useMediaQuery({
-    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
+    query: `(max-width:${constant.mediaQueryRes.screen850}px)`
   });
   return (
     <>

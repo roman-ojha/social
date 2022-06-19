@@ -1,14 +1,43 @@
-import userDetail from "../models/userDetail_model.js";
-import crypto from "crypto";
+/* eslint-disable import/no-unresolved */
 import { Request, Response } from "express";
+import userDetail from "../models/userDetail_model.js";
 import ResponseObject from "../interface/responseObject.js";
 import { UserDocumentMessages } from "../interface/userDocument.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
+// Merging Array
+function mergeRootUserMessageArray(
+  msg: UserDocumentMessages[],
+  responseUser: (SchemaMethodInstance & {
+    _id: any;
+  })[]
+) {
+  return msg.map((obj) => {
+    const user = responseUser.filter((nums) => nums.id === obj.messageToId);
+    if (!user.length) {
+      // obj.phone = numbers;
+      return obj;
+    }
+    const newUser = user.map((num) => ({
+      picture: num.picture,
+      userID: num.userID
+    }));
+    const newObj = {
+      lastMessageOn: obj.lastMessageOn,
+      messageToId: obj.messageToId,
+      roomID: obj.roomID,
+      message: obj.message,
+      receiverPicture: newUser[0].picture,
+      messageToUserId: newUser[0].userID
+    };
+    return newObj;
+  });
+}
+
 export default {
   createMessage: async (req: Request, res: Response): Promise<object> => {
     try {
-      const rootUser = req.rootUser;
+      const { rootUser } = req;
       const receiverUser = req.body.receiver;
       if (!req.body.receiver) {
         return res.status(401).json({ error: "receiver Doesn't exist" });
@@ -16,12 +45,12 @@ export default {
       const receiverExist = await userDetail.findOne(
         {
           // searching that user to message if it exist
-          userID: receiverUser,
+          userID: receiverUser
         },
         {
           email: 1,
           userID: 1,
-          name: 1,
+          name: 1
         }
       );
       if (!receiverExist) {
@@ -32,14 +61,14 @@ export default {
           userID: rootUser.userID,
           messages: {
             $elemMatch: {
-              messageTo: receiverUser,
-            },
-          },
+              messageTo: receiverUser
+            }
+          }
         },
         {
           email: 1,
           userID: 1,
-          name: 1,
+          name: 1
         }
       );
       if (!messageExist) {
@@ -47,43 +76,39 @@ export default {
         const resSaveRootMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
-            userID: rootUser.userID,
+            userID: rootUser.userID
           },
           {
             $push: {
               messages: {
                 messageTo: receiverUser,
                 receiverPicture: receiverExist.picture,
-                message: [],
-              },
-            },
+                message: []
+              }
+            }
           }
         );
         const resSaverReciverMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
-            userID: receiverUser,
+            userID: receiverUser
           },
           {
             $push: {
               messages: {
                 messageTo: rootUser.userID,
                 receiverPicture: rootUser.picture,
-                message: [],
-              },
-            },
+                message: []
+              }
+            }
           }
         );
         if (resSaverReciverMsg && resSaveRootMsg) {
           return res.status(200).json({ message: "message created" });
-        } else {
-          return res.status(500).json({ error: "server error" });
         }
-      } else {
-        return res
-          .status(200)
-          .json({ message: "Message already been created" });
+        return res.status(500).json({ error: "server error" });
       }
+      return res.status(200).json({ message: "Message already been created" });
     } catch (err) {
       return res
         .status(500)
@@ -95,24 +120,24 @@ export default {
     res: Response
   ): Promise<object> => {
     try {
-      const rootUser = req.rootUser;
+      const { rootUser } = req;
       const receiverUserID = req.body.userID;
       const messageToId = req.body.id;
       if (!receiverUserID) {
         return res.status(404).json(<ResponseObject>{
           success: false,
-          msg: "Receiver user doesn't exist",
+          msg: "Receiver user doesn't exist"
         });
       }
       const receiverExist = await userDetail.findOne(
         {
           // searching that user to message if it exist
-          id: messageToId,
+          id: messageToId
         },
         {
           name: 1,
           userID: 1,
-          email: 1,
+          email: 1
         }
       );
       if (!receiverExist) {
@@ -126,16 +151,16 @@ export default {
           id: rootUser.id,
           messages: {
             $elemMatch: {
-              messageToId: messageToId,
-            },
-          },
+              messageToId
+            }
+          }
         },
         {
           messages: {
             $elemMatch: {
-              messageToId: messageToId,
-            },
-          },
+              messageToId
+            }
+          }
         }
       );
       if (!userMessage) {
@@ -145,31 +170,31 @@ export default {
         const resSaveRootMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
-            id: rootUser.id,
+            id: rootUser.id
           },
           {
             $push: {
               messages: {
-                messageToId: messageToId,
+                messageToId,
                 // roomID: roomID,
-                message: [],
-              },
-            },
+                message: []
+              }
+            }
           }
         );
         const resSaverReceiverMsg = await userDetail.updateOne(
           // creating and saving message to rootUser
           {
-            userID: receiverUserID,
+            userID: receiverUserID
           },
           {
             $push: {
               messages: {
                 messageToId: rootUser.id,
                 // roomID: roomID,
-                message: [],
-              },
-            },
+                message: []
+              }
+            }
           }
         );
         if (resSaverReceiverMsg && resSaveRootMsg) {
@@ -177,35 +202,34 @@ export default {
             success: true,
             msg: "message created",
             data: {
-              messageToId: messageToId,
+              messageToId,
               message: [],
-              lastMessageOn: new Date(),
-            },
+              lastMessageOn: new Date()
+            }
           });
-        } else {
-          return res
-            .status(500)
-            .json(<ResponseObject>{ success: false, msg: "server error" });
         }
+        return res
+          .status(500)
+          .json(<ResponseObject>{ success: false, msg: "server error" });
       }
       return res.status(200).json({
         success: true,
         msg: "Successful",
-        data: userMessage.messages[0],
+        data: userMessage.messages[0]
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again later",
+        msg: "Server Error!!, Please Try again later"
       });
     }
   },
   getRootUserMessages: async (req: Request, res: Response) => {
     try {
-      const rootUser = req.rootUser;
+      const { rootUser } = req;
       const resObj = await userDetail.findOne(
         {
-          userID: rootUser.userID,
+          userID: rootUser.userID
         },
         {
           // messages: { $slice: -10 },
@@ -232,7 +256,7 @@ export default {
           date: 0,
           picture: 0,
           userID: 0,
-          _id: 0,
+          _id: 0
         }
       );
       if (!resObj) {
@@ -242,63 +266,34 @@ export default {
       }
       const messageToIds = resObj.messages.map((el) => el.messageToId);
       // only getting id all of all the messageToId to get userID and picture dynamically
-      const messages = resObj.messages;
+      const { messages } = resObj;
       const resUser = await userDetail.find(
         { id: { $in: messageToIds } },
         {
           _id: 0,
           userID: 1,
           picture: 1,
-          id: 1,
+          id: 1
         }
       );
 
-      // Merging Array
-      const mergeArrays = (
-        messages: UserDocumentMessages[],
-        resUser: (SchemaMethodInstance & {
-          _id: any;
-        })[]
-      ) => {
-        return messages.map((obj) => {
-          const user = resUser.filter((nums) => nums.id === obj.messageToId);
-          if (!user.length) {
-            // obj.phone = numbers;
-            return obj;
-          }
-          const newUser = user.map((num) => ({
-            picture: num.picture,
-            userID: num.userID,
-          }));
-          const newObj = {
-            lastMessageOn: obj.lastMessageOn,
-            messageToId: obj.messageToId,
-            roomID: obj.roomID,
-            message: obj.message,
-            receiverPicture: newUser[0].picture,
-            messageToUserId: newUser[0].userID,
-          };
-          return newObj;
-        });
-      };
-
-      const finalMessages = mergeArrays(messages, resUser);
+      const finalMessages = mergeRootUserMessageArray(messages, resUser);
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successfull",
-        messages: finalMessages,
+        messages: finalMessages
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again later",
+        msg: "Server Error!!, Please Try again later"
       });
     }
   },
   sendMessage: async (req: Request, res: Response): Promise<object> => {
     // we are including pusher package to make message realtime
     try {
-      const rootUser = req.rootUser;
+      const { rootUser } = req;
       const receiverUser = req.body.messageTo;
       if (!req.body.messageTo) {
         return res
@@ -309,7 +304,7 @@ export default {
       const resSaveReciverMsg = await userDetail.updateOne(
         // creating and saving message to rootUser
         {
-          userID: receiverUser,
+          userID: receiverUser
         },
         {
           $push: {
@@ -317,12 +312,12 @@ export default {
               // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
               sender: rootUser.userID,
               content: req.body.message,
-              date: Date(),
-            },
-          },
+              date: Date()
+            }
+          }
         },
         {
-          arrayFilters: [{ "field.messageTo": rootUser.userID }],
+          arrayFilters: [{ "field.messageTo": rootUser.userID }]
           // here we are filtering the messageBy
         }
       );
@@ -334,10 +329,10 @@ export default {
           .json({ error: "User doesn't exist or Message doesn't created" });
       }
       // if reciver exist and will update the message there then we can update the message for rootuser as well
-      const resSaveSenderMsg = await userDetail.updateOne(
+      await userDetail.updateOne(
         // creating and saving message to rootUser
         {
-          userID: rootUser.userID,
+          userID: rootUser.userID
         },
         {
           $push: {
@@ -345,12 +340,12 @@ export default {
               // pushing message inside the message array which match the condition of "messageBy"==='rootUser.userID'
               sender: rootUser.userID,
               content: req.body.message,
-              date: Date(),
-            },
-          },
+              date: Date()
+            }
+          }
         },
         {
-          arrayFilters: [{ "field.messageTo": receiverUser }],
+          arrayFilters: [{ "field.messageTo": receiverUser }]
           // here we are filtering the messageBy
         }
       );
@@ -367,5 +362,5 @@ export default {
         .status(500)
         .json({ error: "Server Error!!, Please Try again later" });
     }
-  },
+  }
 };

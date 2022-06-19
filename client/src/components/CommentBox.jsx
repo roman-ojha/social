@@ -9,7 +9,7 @@ import {
   startProgressBar,
   stopProgressBar,
   setRootUserProfileDataState,
-  profilePageDataAction,
+  profilePageDataAction
 } from "../services/redux-actions";
 import { useState } from "react";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
@@ -45,7 +45,7 @@ const ReturnCommentContent = () => {
             commentBoxAction({
               openCommentBox: false,
               postID: "",
-              to: "",
+              to: ""
             })
           );
         }
@@ -62,7 +62,7 @@ const ReturnCommentContent = () => {
           comment: commentInputFieldData,
           postID: commentBoxStore.postID,
           toId: commentBoxStore.toId,
-          toUserId: commentBoxStore.toUserId,
+          toUserId: commentBoxStore.toUserId
         });
 
         const data = await res.data;
@@ -72,7 +72,7 @@ const ReturnCommentContent = () => {
           dispatch(
             incrementPostCommentNumber({
               postID: commentBoxStore.postID,
-              to: commentBoxStore.to,
+              to: commentBoxStore.to
             })
           );
           dispatch(
@@ -83,7 +83,7 @@ const ReturnCommentContent = () => {
               toUserId: commentBoxStore.toUserId,
               commented: true,
               newComment: commentInputFieldData,
-              comments: [],
+              comments: []
             })
           );
           toastSuccess(data.msg);
@@ -112,14 +112,14 @@ const ReturnCommentContent = () => {
           // success
           const userObj = {
             ...userData.searchedUser,
-            isRootUserFollowed: userData.isRootUserFollowed,
+            isRootUserFollowed: userData.isRootUserFollowed
           };
           dispatch(profilePageDataAction(userObj));
           if (userID === userProfileDetailStore.userID) {
             dispatch(
               setRootUserProfileDataState({
                 fetchedRootUserProfileData: true,
-                getRootUserProfileData: false,
+                getRootUserProfileData: false
               })
             );
           }
@@ -155,7 +155,7 @@ const ReturnCommentContent = () => {
                 commentBoxAction({
                   openCommentBox: false,
                   postID: "",
-                  to: "",
+                  to: ""
                 })
               );
             }}
@@ -168,7 +168,7 @@ const ReturnCommentContent = () => {
                   commentBoxAction({
                     openCommentBox: false,
                     postID: "",
-                    to: "",
+                    to: ""
                   })
                 );
               }}
@@ -197,14 +197,14 @@ const ReturnCommentContent = () => {
               onClick={() => {
                 const userObj = {
                   ...userProfileDetailStore,
-                  isRootUserFollowed: false,
+                  isRootUserFollowed: false
                 };
                 dispatch(profilePageDataAction(userObj));
                 if (!rootUserProfileDataState.fetchedRootUserProfileData) {
                   dispatch(
                     setRootUserProfileDataState({
                       fetchedRootUserProfileData: false,
-                      getRootUserProfileData: true,
+                      getRootUserProfileData: true
                     })
                   );
                 }
@@ -216,7 +216,7 @@ const ReturnCommentContent = () => {
                     toUserId: "",
                     commented: false,
                     newComment: "",
-                    comments: [],
+                    comments: []
                   })
                 );
                 history.push(
