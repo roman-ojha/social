@@ -1,12 +1,80 @@
-import userDetail from "../models/userDetail_model.js";
+/* eslint-disable object-curly-newline */
+/* eslint-disable import/no-unresolved */
 import { Request, Response } from "express";
+import userDetail from "../models/userDetail_model.js";
 import ResponseObject from "../interface/responseObject.js";
 import ResPonseUserPost from "../interface/resUserPost.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
-import {
-  UserDocumentPosts,
-  UserDocumentPostsComments,
-} from "../interface/userDocument.js";
+import { UserDocumentPosts, UserDocumentPostsComments } from "../interface/userDocument.js";
+
+function mergeGetCommentArray(
+  comments: UserDocumentPostsComments[],
+  commentedUser: (SchemaMethodInstance & {
+    _id: any;
+  })[]
+) {
+  return comments.map((comment) => {
+    const filteredUser = commentedUser.filter((nums) => nums.id === comment.user);
+    if (!filteredUser.length) {
+      return comment;
+    }
+    const userInfo = filteredUser.map((num) => ({
+      picture: num.picture,
+      userID: num.userID
+    }));
+    const newCommentedUserObj = {
+      id: comment.user,
+      comment: comment.comment,
+      picture: userInfo[0].picture,
+      userID: userInfo[0].userID
+    };
+    return newCommentedUserObj;
+  });
+}
+
+function mergeGetUserPostArray(
+  userPosts: UserDocumentPosts[],
+  commentedUser: (SchemaMethodInstance & {
+    _id: any;
+  })[]
+) {
+  return userPosts.map((post) => {
+    const lastCommented = post.comments.by[post.comments.by.length - 1];
+    if (lastCommented) {
+      const numbers = commentedUser.filter((user) => user.id === lastCommented.user);
+      if (!numbers.length) {
+        // obj.phone = numbers;
+        return post;
+      }
+      const newUser = numbers.map((num) => ({
+        picture: num.picture,
+        userID: num.userID
+      }));
+      const newObj: ResPonseUserPost = {
+        picture: {
+          url: post.picture.url
+        },
+        caption: post.caption,
+        date: post.date,
+        id: post.id,
+        likes: post.likes,
+        comments: {
+          No: post.comments.No,
+          by: [
+            {
+              user: lastCommented.user,
+              comment: lastCommented.comment,
+              picture: newUser[0].picture,
+              userID: newUser[0].userID
+            }
+          ]
+        }
+      };
+      return newObj;
+    }
+    return post;
+  });
+}
 
 export default {
   like: async (req: Request, res: Response): Promise<object> => {
@@ -15,24 +83,22 @@ export default {
       if (!postID || !toUserId || !toId) {
         return res.status(422).json(<ResponseObject>{
           success: false,
-          msg: "Some this went wrong while getting essential data, please report it",
+          msg: "Some this went wrong while getting essential data, please report it"
         });
       }
       const findUser = await userDetail.findOne(
         {
-          id: toId,
+          id: toId
         },
         {
           name: 1,
           email: 1,
           userID: 1,
-          id: 1,
+          id: 1
         }
       );
       if (!findUser) {
-        return res
-          .status(404)
-          .json(<ResponseObject>{ success: false, msg: "User Doesn't exist" });
+        return res.status(404).json(<ResponseObject>{ success: false, msg: "User Doesn't exist" });
       }
       const doesRootUserAlreadyLiked = await userDetail.findOne(
         // here we are finding the post using postID and does rootuser already liked this post of not
@@ -43,11 +109,11 @@ export default {
               id: postID,
               "likes.by": {
                 $elemMatch: {
-                  user: req.rootUser.id,
-                },
-              },
-            },
-          },
+                  user: req.rootUser.id
+                }
+              }
+            }
+          }
         },
         {
           posts: {
@@ -55,81 +121,81 @@ export default {
               id: postID,
               "likes.by": {
                 $elemMatch: {
-                  user: req.rootUser.id,
-                },
-              },
-            },
-          },
+                  user: req.rootUser.id
+                }
+              }
+            }
+          }
         }
       );
       if (doesRootUserAlreadyLiked) {
         // Undo like
         const removeLikedPostRes = await userDetail.updateOne(
           {
-            id: toId,
+            id: toId
           },
           {
             $pull: {
               "posts.$[field].likes.by": {
-                user: req.rootUser.id,
-              },
+                user: req.rootUser.id
+              }
             },
             $inc: {
-              "posts.$[field].likes.No": -1,
-            },
+              "posts.$[field].likes.No": -1
+            }
           },
           {
-            arrayFilters: [{ "field.id": postID }],
+            arrayFilters: [{ "field.id": postID }]
           }
         );
         if (!removeLikedPostRes) {
           return res.status(500).json(<ResponseObject>{
             success: false,
-            msg: "server Error, Please try again later!!!",
+            msg: "server Error, Please try again later!!!"
           });
         }
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "Removed Like",
           likeNo: likeNo - 1,
-          removed: true,
+          removed: true
         });
       }
       // Like
       const likePostRes = await userDetail.updateOne(
         {
-          id: toId,
+          id: toId
         },
         {
           $push: {
             "posts.$[field].likes.by": {
-              user: req.rootUser.id,
-            },
+              user: req.rootUser.id
+            }
           },
           $inc: {
-            "posts.$[field].likes.No": 1,
-          },
+            "posts.$[field].likes.No": 1
+          }
         },
         {
-          arrayFilters: [{ "field.id": postID }],
+          arrayFilters: [{ "field.id": postID }]
         }
       );
       if (!likePostRes) {
         return res.status(500).json(<ResponseObject>{
           success: false,
-          msg: "server Error, Please try again later!!!",
+          msg: "server Error, Please try again later!!!"
         });
       }
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successfully Liked the post",
         likeNo: likeNo + 1,
-        removed: false,
+        removed: false
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "server Error, Please try again later!!!",
+        msg: "server Error, Please try again later!!!"
       });
     }
   },
@@ -139,25 +205,23 @@ export default {
       if (!comment) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Comment Field is Empty, Please fill the filed",
+          msg: "Comment Field is Empty, Please fill the filed"
         });
       }
       if (!postID || !toId || !toUserId) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Client Error, Please Try again later",
+          msg: "Client Error, Please Try again later"
         });
       }
       const findUser = await userDetail.findOne(
         {
-          id: toId,
+          id: toId
         },
         { name: 1, email: 1, userID: 1 }
       );
       if (!findUser) {
-        return res
-          .status(401)
-          .json(<ResponseObject>{ success: false, msg: "Unauthorized User" });
+        return res.status(401).json(<ResponseObject>{ success: false, msg: "Unauthorized User" });
       }
       const commentOnUserPostRes = await userDetail.updateOne(
         { id: toId },
@@ -165,29 +229,25 @@ export default {
           $push: {
             "posts.$[field].comments.by": {
               user: req.rootUser.id,
-              comment,
-            },
+              comment
+            }
           },
           $inc: {
-            "posts.$[field].comments.No": 1,
-          },
+            "posts.$[field].comments.No": 1
+          }
         },
         {
-          arrayFilters: [{ "field.id": postID }],
+          arrayFilters: [{ "field.id": postID }]
         }
       );
       if (!commentOnUserPostRes) {
-        return res
-          .status(500)
-          .json(<ResponseObject>{ success: false, msg: "Server Error" });
+        return res.status(500).json(<ResponseObject>{ success: false, msg: "Server Error" });
       }
-      return res
-        .status(200)
-        .json(<ResponseObject>{ success: true, msg: "Commented Successfully" });
+      return res.status(200).json(<ResponseObject>{ success: true, msg: "Commented Successfully" });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error, Please try again later...",
+        msg: "Server Error, Please try again later..."
       });
     }
   },
@@ -197,39 +257,39 @@ export default {
       if (!postID || !userID || !id) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Haven't got postID & userID & id of user",
+          msg: "Haven't got postID & userID & id of user"
         });
       }
       const postRes = await userDetail.findOne(
         {
-          id: id,
+          id
         },
         {
           _id: 0,
           posts: {
             $elemMatch: {
-              id: postID,
-            },
-          },
+              id: postID
+            }
+          }
         }
       );
       if (!postRes) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Can't be able to complete action",
+          msg: "Can't be able to complete action"
         });
       }
 
       if (postRes.posts[0].id !== postID) {
         return res.status(500).json(<ResponseObject>{
           success: false,
-          msg: "Some problem occur, please report this issues on github repo",
+          msg: "Some problem occur, please report this issues on github repo"
         });
       }
       const commentRes = postRes.posts[0].comments;
 
-      let commentedUserId: string[] = [];
-      for (let i = 0; i < commentRes.by.length; i++) {
+      const commentedUserId: string[] = [];
+      for (let i = 0; i < commentRes.by.length; i += 1) {
         const userInfo = commentRes.by[i];
         if (userInfo) {
           commentedUserId.push(userInfo.user);
@@ -242,80 +302,50 @@ export default {
           _id: 0,
           userID: 1,
           picture: 1,
-          id: 1,
+          id: 1
         }
       );
 
-      const mergeArrays = (
-        comments: UserDocumentPostsComments[],
-        commentedUser: (SchemaMethodInstance & {
-          _id: any;
-        })[]
-      ) => {
-        return comments.map((comment) => {
-          const filteredUser = commentedUser.filter(
-            (nums) => nums.id === comment.user
-          );
-          if (!filteredUser.length) {
-            return comment;
-          }
-          const userInfo = filteredUser.map((num) => ({
-            picture: num.picture,
-            userID: num.userID,
-          }));
-          const newCommentedUserObj = {
-            id: comment.user,
-            comment: comment.comment,
-            picture: userInfo[0].picture,
-            userID: userInfo[0].userID,
-          };
-          return newCommentedUserObj;
-        });
-      };
-
       const finalComments = {
         No: commentRes.No,
-        by: mergeArrays(commentRes.by, resAllCommentedUser),
+        by: mergeGetCommentArray(commentRes.by, resAllCommentedUser)
       };
 
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successful",
-        comment: finalComments,
+        comment: finalComments
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!!, please try again later",
+        msg: "Server Error!!!, please try again later"
       });
     }
   },
   getUserPosts: async (req: Request, res: Response) => {
     try {
-      const rootUser = req.rootUser;
+      const { rootUser } = req;
       const resRootUser = await userDetail.findOne(
         // finding those user which i follow and get the posts of them
         // and finding post which is {getPastDate} days early
         {
-          id: rootUser.id,
+          id: rootUser.id
         },
         {
-          posts: { $slice: -20 },
+          posts: { $slice: -20 }
         }
       );
 
       if (!resRootUser) {
-        return res
-          .status(401)
-          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
+        return res.status(401).json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
-      let commentedUserId: string[] = [];
-      const posts: object = resRootUser.posts;
+      const commentedUserId: string[] = [];
+      const { posts } = resRootUser;
       // let userIdFromSameUserPostsComment: string[] = [];
-      for (let i = 0; i < resRootUser.posts.length; i++) {
-        const comment: { user: string } | undefined =
-          posts[i].comments.by[posts[i].comments.by.length - 1];
+      for (let i = 0; i < resRootUser.posts.length; i += 1) {
+        const comment: { user: string } | undefined = posts[i].comments.by[posts[i].comments.by.length - 1];
         if (comment) {
           commentedUserId.push(comment.user);
         }
@@ -327,67 +357,21 @@ export default {
           _id: 0,
           userID: 1,
           picture: 1,
-          id: 1,
+          id: 1
         }
       );
 
-      const mergeArrays = (
-        userPosts: UserDocumentPosts[],
-        commentedUser: (SchemaMethodInstance & {
-          _id: any;
-        })[]
-      ) => {
-        return userPosts.map((post) => {
-          const lastCommented = post.comments.by[post.comments.by.length - 1];
-          if (lastCommented) {
-            const numbers = commentedUser.filter(
-              (user) => user.id === lastCommented.user
-            );
-            if (!numbers.length) {
-              // obj.phone = numbers;
-              return post;
-            }
-            const newUser = numbers.map((num) => ({
-              picture: num.picture,
-              userID: num.userID,
-            }));
-            const newObj: ResPonseUserPost = {
-              picture: {
-                url: post.picture.url,
-              },
-              caption: post.caption,
-              date: post.date,
-              id: post.id,
-              likes: post.likes,
-              comments: {
-                No: post.comments.No,
-                by: [
-                  {
-                    user: lastCommented.user,
-                    comment: lastCommented.comment,
-                    picture: newUser[0].picture,
-                    userID: newUser[0].userID,
-                  },
-                ],
-              },
-            };
-            return newObj;
-          }
-          return post;
-        });
-      };
-
-      const userPosts = mergeArrays(resRootUser.posts, resAllCommentedUser);
+      const userPosts = mergeGetUserPostArray(resRootUser.posts, resAllCommentedUser);
       return res.status(200).send(<ResponseObject>{
         success: true,
         msg: "Successful",
-        posts: userPosts,
+        posts: userPosts
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!!, please try again later",
+        msg: "Server Error!!!, please try again later"
       });
     }
-  },
+  }
 };
