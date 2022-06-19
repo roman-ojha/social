@@ -1,43 +1,43 @@
 const userPosts = {
   id: {
-    type: String,
+    type: String
   },
   caption: {
-    type: String,
+    type: String
   },
   picture: {
     name: {
-      type: String,
+      type: String
     },
     path: {
-      type: String,
+      type: String
     },
     url: {
-      type: String,
+      type: String
     },
     firebaseStorageDownloadToken: {
-      type: String,
+      type: String
     },
     bucket: {
-      type: String,
-    },
+      type: String
+    }
   },
   likes: {
     No: {
-      type: Number,
+      type: Number
     },
     by: [
       {
         user: {
           // user = id of user how like the post
-          type: String,
-        },
-      },
-    ],
+          type: String
+        }
+      }
+    ]
   },
   comments: {
     No: {
-      type: Number,
+      type: Number
     },
     by: [
       {
@@ -46,20 +46,20 @@ const userPosts = {
         // },
         user: {
           // user = id of the user who comment in post
-          type: String,
+          type: String
         },
         comment: {
-          type: String,
-        },
+          type: String
+        }
         // picture: {
         //   type: String,
         // },
-      },
-    ],
+      }
+    ]
   },
   date: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 };
 export default userPosts;

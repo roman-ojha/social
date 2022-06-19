@@ -1,14 +1,14 @@
 export default {
   year: {
     type: String,
-    required: true,
+    required: true
   },
   month: {
     type: String,
-    required: true,
+    required: true
   },
   day: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 };

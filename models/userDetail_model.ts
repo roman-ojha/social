@@ -1,9 +1,11 @@
+/* eslint-disable func-names */
+/* eslint-disable import/no-unresolved */
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import SchemaMethodInstance from "interface/userSchemaMethods.js";
-import ModelMethodInstance from "interface/userModelMethods.js";
 import { UpdateResult } from "mongodb";
+import SchemaMethodInstance from "../interface/userSchemaMethods.js";
+import ModelMethodInstance from "../interface/userModelMethods.js";
 import userMessages from "./userMessages.js";
 import userPosts from "./userPosts.js";
 import userStories from "./userStories.js";
@@ -11,89 +13,86 @@ import userNotifications from "./userNotifications.js";
 import userTokens from "./userTokens.js";
 import userBirthday from "./userBirthday.js";
 
-const userDetailSchema = new mongoose.Schema<
-  SchemaMethodInstance,
-  ModelMethodInstance,
-  {},
-  {}
->({
+const userDetailSchema = new mongoose.Schema<SchemaMethodInstance, ModelMethodInstance, {}, {}>({
   googleID: {
-    type: Number,
+    type: Number
   },
   id: {
     type: String,
-    required: true,
+    required: true
   },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   userID: {
-    type: String,
+    type: String
   },
   email: {
     type: String,
-    required: true,
+    required: true
   },
   picture: {
-    type: String,
+    type: String
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   cpassword: {
     type: String,
-    required: true,
+    required: true
   },
   birthday: userBirthday,
   date: {
     type: Date,
-    default: Date.now,
+    default: Date.now
   },
   gender: {
     type: String,
-    require: true,
+    require: true
   },
   messages: [userMessages],
   followersNo: {
-    type: Number,
+    type: Number
   },
   followers: [
     {
       id: {
-        type: String,
-      },
-    },
+        type: String
+      }
+    }
   ],
   followingNo: {
-    type: Number,
+    type: Number
   },
   following: [
     {
       id: {
-        type: String,
-      },
-    },
+        type: String
+      }
+    }
   ],
   friendsNo: {
-    type: Number,
+    type: Number
   },
   friends: [
     {
       id: {
-        type: String,
-      },
-    },
+        type: String
+      }
+    }
   ],
   postNo: {
-    type: Number,
+    type: Number
   },
   posts: [userPosts],
   stories: userStories,
   notification: [userNotifications],
-  tokens: [userTokens],
+  tokens: [userTokens]
 });
+
+const UserDetail = mongoose.model<SchemaMethodInstance>("USERDETAIL", userDetailSchema);
 
 userDetailSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
@@ -103,12 +102,10 @@ userDetailSchema.pre("save", async function (next) {
   next();
 });
 
-userDetailSchema.methods.generateAuthToken = async function (): Promise<
-  string | null
-> {
+userDetailSchema.methods.generateAuthToken = async function (): Promise<string | null> {
   try {
-    let token: string = jwt.sign({ id: this.id }, process.env.SECRET_KEY!);
-    this.tokens = this.tokens.concat({ token: token });
+    const token: string = jwt.sign({ id: this.id }, process.env.SECRET_KEY!);
+    this.tokens = this.tokens.concat({ token });
     await this.save();
     return token;
   } catch (err) {
@@ -116,51 +113,47 @@ userDetailSchema.methods.generateAuthToken = async function (): Promise<
   }
 };
 
-userDetailSchema.methods.uploadPost = async function (
-  postData: object,
-  userStoryDetail: object
-) {
+userDetailSchema.methods.uploadPost = async function (postData: object, userStoryDetail: object) {
   try {
     let resPost: UpdateResult;
     if (userStoryDetail !== undefined) {
       resPost = await UserDetail.updateOne(
         {
-          id: this.id,
+          id: this.id
         },
         {
           $push: {
             // posts: postData,
-            posts: { $each: [postData], $position: 0 },
+            posts: { $each: [postData], $position: 0 }
           },
           $inc: {
-            postNo: 1,
+            postNo: 1
           },
 
           $set: {
-            stories: userStoryDetail,
-          },
+            stories: userStoryDetail
+          }
         }
       );
     } else {
       resPost = await UserDetail.updateOne(
         {
-          id: this.id,
+          id: this.id
         },
         {
           $push: {
-            posts: postData,
+            posts: postData
           },
           $inc: {
-            postNo: 1,
-          },
+            postNo: 1
+          }
         }
       );
     }
     if (resPost) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   } catch (err) {
     return false;
   }
@@ -170,47 +163,46 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
     // saving following user detail into current user database
     const addOnRootUser = await UserDetail.updateOne(
       {
-        id: this.id,
+        id: this.id
       },
       {
         // pushing the new followers into followed to user database
         $push: {
           following: {
-            id: followedToUser.id,
-          },
+            id: followedToUser.id
+          }
         },
         $inc: {
-          followingNo: 1,
-        },
+          followingNo: 1
+        }
       }
     );
 
     // saving following user detail into followed to user database
     const followRes = await UserDetail.updateOne(
       {
-        id: followedToUser.id,
+        id: followedToUser.id
       },
       {
         // pushing the new followers into followed to user database
         $push: {
           followers: {
-            id: this.id,
+            id: this.id
           },
           notification: {
             topic: "follow",
-            user: this.id,
-          },
+            user: this.id
+          }
         },
         $inc: {
-          followersNo: 1,
-        },
+          followersNo: 1
+        }
       }
     );
     if (followRes && addOnRootUser) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   } catch (err) {
     // console.log(err);
     return false;
@@ -219,14 +211,12 @@ userDetailSchema.methods.followUser = async function (followedToUser: any) {
 
 userDetailSchema.methods.saveMessage = async function (message) {
   try {
+    // eslint-disable-next-line no-console
     console.log(message);
     // searching for a use which is getting the message
-  } catch (err) {}
+  } catch (err) {
+    //
+  }
 };
-
-const UserDetail = mongoose.model<SchemaMethodInstance>(
-  "USERDETAIL",
-  userDetailSchema
-);
 
 export default UserDetail;

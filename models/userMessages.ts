@@ -2,12 +2,12 @@ const userMessages = {
   lastMessageOn: {
     type: Date,
     default: Date.now,
-    required: true,
+    required: true
   },
   messageToId: {
     // messageTo == id of User
     type: String,
-    required: true,
+    required: true
   },
   // roomID: {
   //   type: String,
@@ -17,16 +17,16 @@ const userMessages = {
     {
       senderId: {
         // Sender == id of User
-        type: String,
+        type: String
       },
       content: {
-        type: String,
+        type: String
       },
       date: {
         type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+        default: Date.now
+      }
+    }
+  ]
 };
 export default userMessages;

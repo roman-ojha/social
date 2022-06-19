@@ -1,6 +1,6 @@
 export default {
   token: {
     type: String,
-    require: true,
-  },
+    require: true
+  }
 };
