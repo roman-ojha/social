@@ -12,7 +12,7 @@ const YoutubeQueryTopic: {
     // Songs
     "nepali songs",
     "english songs",
-    "hindi song",
+    "hindi song"
   ],
   mediumPriorityVideoQuery: [
     // Song
@@ -33,7 +33,7 @@ const YoutubeQueryTopic: {
     "Marques Brownlee",
     "Unbox Therapy",
     "FactTechz",
-    "Bright Side",
+    "Bright Side"
   ],
   lowPriorityVideoQuery: [
     // Song
@@ -43,8 +43,8 @@ const YoutubeQueryTopic: {
     "english cover songs",
     "arijit sings",
     "atif aslam",
-    "t series full video song",
-  ],
+    "t series full video song"
+  ]
 };
 
 export default YoutubeQueryTopic;
