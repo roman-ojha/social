@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+
 // Here we are using firebase storage for storing images and files
 // in this is not a client SDK so we have to use admin SDK to use firebase in nodejs
 import admin from "firebase-admin";
@@ -10,8 +12,8 @@ import serviceAccount from "../constants/firebase_services_account.js";
 const storageBucket = process.env.FIREBASE_STORAGEBUCKET;
 const firebaseConfig = {
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: storageBucket,
+  storageBucket
 };
 admin.initializeApp(firebaseConfig);
-var defaultStorage = admin.storage();
+const defaultStorage = admin.storage();
 export default defaultStorage;

@@ -1,16 +1,15 @@
-import userDetail from "../models/userDetail_model.js";
+/* eslint-disable import/no-unresolved */
 import jwt from "jsonwebtoken";
-import ExtendJWTPayload from "types/jsonwebtoken/extend-jwt-payload.js";
+import userDetail from "../models/userDetail_model.js";
+// eslint-disable-next-line import/extensions
+import ExtendJWTPayload from "../types/jsonwebtoken/extend-jwt-payload.js";
 
 export default async function varifyUser(token: string) {
-  const verifyToken = jwt.verify(
-    token,
-    process.env.SECRET_KEY!
-  ) as ExtendJWTPayload;
+  const verifyToken = jwt.verify(token, process.env.SECRET_KEY!) as ExtendJWTPayload;
   const rootUser = await userDetail.findOne(
     {
       id: verifyToken.id,
-      "tokens.token": token,
+      "tokens.token": token
     },
     {
       name: 1,
@@ -18,7 +17,7 @@ export default async function varifyUser(token: string) {
       email: 1,
       posts: 1,
       stories: 1,
-      postNo: 1,
+      postNo: 1
     }
   );
   if (!rootUser) {
