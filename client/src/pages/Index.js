@@ -11,18 +11,24 @@ import {
   followedUserPostDataAction,
   userSuggestionAction,
   followedByUserAction,
-  setUserStories,
+  // setUserStories,
   appendOnCurrentInnerUserMessage,
   appendMessageOnMessageListAction,
 } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
 import { toastError } from "../services/toast";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../services/redux";
 
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
+  const { setUserStories, setRootUserProfileDetail } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -32,7 +38,7 @@ const Index = () => {
           if (!userData.data.userProfileDetail.userID) {
             history.push("/userid?uid=undefined");
           } else {
-            dispatch(userProfileDetailAction(userData.data.userProfileDetail));
+            setRootUserProfileDetail(userData.data.userProfileDetail);
             dispatch(
               userProfilePostAction(userData.data.userProfileDetail.posts)
             );
@@ -41,7 +47,7 @@ const Index = () => {
             );
             dispatch(userSuggestionAction(userData.data.userSuggestion));
             dispatch(followedByUserAction(userData.data.followedBy));
-            dispatch(setUserStories(userData.data.userStories));
+            setUserStories(userData.data.userStories);
             setRenderMainPage(true);
           }
           socket.on("connect", () => {

@@ -103,7 +103,7 @@ const initialState: RootUserProfileDetailState = {
 };
 // this store the detail of Root User
 
-const rootUserProfileDetailReducer = (
+const setUserProfileDetailReducer = (
   state: RootUserProfileDetailState = initialState,
   action: RootUserProfileDetailAction
 ) => {
@@ -139,4 +139,4 @@ const rootUserProfileDetailReducer = (
   }
 };
 
-export default rootUserProfileDetailReducer;
+export default setUserProfileDetailReducer;

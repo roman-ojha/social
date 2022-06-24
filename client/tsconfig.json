@@ -26,6 +26,6 @@
   "ts-node": {
     "esm": true
   },
-  "exclude": ["node_modules", "dist"],
-  "include": ["./src/*", "./", "./types"]
+  "exclude": ["node_modules", "dist", "build"],
+  "include": ["./src/*", "./", "./src/types"]
 }

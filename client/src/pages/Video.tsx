@@ -11,8 +11,7 @@ import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import { toastError } from "../services/toast";
 import videoApi from "../services/api/pages/Video";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../services/redux";
-import { RootState } from "../services/redux";
+import { RootState, actionCreators } from "../services/redux";
 import ResponseObject from "src/interface/responseObject";
 import { VideoPageState } from "src/services/redux/pages/video/types";
 

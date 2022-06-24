@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 // Javascript
-import setUserProfileDetailReducer from "./global/UserProfileDetailReducer";
+// import setUserProfileDetailReducer from "./global/UserProfileDetailReducer";
 import changeMainPageMessageView from "./components/messageBox/mainPageMessageOnOff";
 import setUserPostResponseData from "./page/home/UserPostResponseData";
 import homePageUserPostFieldDataReducer from "./page/home/homePageUserPostFieldData";
@@ -15,7 +15,7 @@ import followedByUserReducer from "./components/followedByUserReducer";
 import messageListReducer from "./components/messageBox/messageListReducer";
 import commentBoxReducer from "./components/commentBox";
 import progressBarReducer from "./components/progressBar";
-import userStoriesReducer from "./page/stories/userStories";
+// import userStoriesReducer from "./page/stories/userStories";
 import sideBarDrawerReducer from "./components/sideBarDrawer";
 import rightPartDrawerReducer from "./components/rightPartDrawer";
 import homePagePostFieldViewValue from "./page/home/homePagePostFieldViewValue";
@@ -30,10 +30,12 @@ import displayEmojiPicker from "./page/home/displayEmojiPicker";
 // import userProfileDetailReducer from "./global/rootUserProfileDetail/reducer";
 // import rootUserFriends from "./global/rootUserFriends/reducer";
 import videoPageDataReducer from "../redux/pages/video/reducer";
+import userStoriesReducer from "../redux/pages/stories/reducer";
+import setUserProfileDetailReducer from "../redux/global/rootUserProfileDetail/reducer";
 
 const rootReducers = combineReducers({
   // Javascript
-  setUserProfileDetailReducer,
+  // setUserProfileDetailReducer,
   rootUserFriends,
   changeMainPageMessageView,
   setUserPostResponseData,
@@ -49,7 +51,7 @@ const rootReducers = combineReducers({
   messageListReducer,
   commentBoxReducer,
   progressBarReducer,
-  userStoriesReducer,
+  // userStoriesReducer,
   sideBarDrawerReducer,
   rightPartDrawerReducer,
   homePagePostFieldViewValue,
@@ -60,9 +62,10 @@ const rootReducers = combineReducers({
   rootUserProfileDataState,
   displayEmojiPicker,
   // Typescript
-  // userProfileDetailReducer,
   // rootUserFriends,
+  setUserProfileDetailReducer,
   videoPageDataReducer,
+  userStoriesReducer,
 });
 
 export default rootReducers;

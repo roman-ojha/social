@@ -1,18 +1,21 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { storyIndex } from "../../services/redux-actions";
+// import { storyIndex } from "../../services/redux-actions";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { RootState, actionCreators } from "../../services/redux";
 
 const FriendStory = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const { setStoryIndex } = bindActionCreators(actionCreators, dispatch);
   return (
     <>
       <div className="Friends_Story_Container">
         <div
           onClick={() => {
-            dispatch(storyIndex(props.index));
+            setStoryIndex(props.index);
             history.push("/u/stories");
           }}
           className="Friends_Story_Picutre_Container"
@@ -30,7 +33,7 @@ const FriendStory = (props) => {
         <div
           className="Friend_Story_Name"
           onClick={() => {
-            dispatch(storyIndex(props.index));
+            setStoryIndex(props.index);
             history.push("/u/stories");
           }}
         >

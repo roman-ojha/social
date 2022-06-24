@@ -5,16 +5,19 @@ import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { RootState } from "../services/redux";
 
 const Stories = () => {
   const history = useHistory();
-  const userStoriesStore = useSelector((state) => state.userStoriesReducer);
+  const userStoriesStore = useSelector(
+    (state: RootState) => state.userStoriesReducer
+  );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: RootState) => state.setUserProfileDetailReducer
   );
   useEffect(() => {
-    const caption = [];
-    const date = [];
+    const caption: string[] = [];
+    const date: string[] = [];
     const color = [
       // [<Normal>,<darkish>]
       ["#eb67a0", "#361926dc"],
@@ -30,9 +33,9 @@ const Stories = () => {
       ["#FFCB53", "#615028e5"],
     ];
 
-    const color_options = [];
-    const image_options = [];
-    const background_option = [];
+    const color_options: string[] = [];
+    const image_options: string[] = [];
+    const background_option: string[] = [];
     userStoriesStore.data.forEach((data, index) => {
       if (data.stories.caption.length > 150) {
         caption[index] = data.stories.caption.slice(0, 55);
@@ -56,67 +59,67 @@ const Stories = () => {
     );
 
     var i = userStoriesStore.storyIndex;
-    currentOptionText1.innerText = caption[i];
-    currentOptionText2.innerText = date[i];
-    currentOptionImage.style.backgroundImage = "url(" + image_options[i] + ")";
-    mainMenu.style.background = color_options[i];
-    storiesPageContainer.style.background = background_option[i];
+    currentOptionText1!.innerText = caption[i];
+    currentOptionText2!.innerText = date[i];
+    currentOptionImage!.style.backgroundImage = "url(" + image_options[i] + ")";
+    mainMenu!.style.background = color_options[i];
+    storiesPageContainer!.style.background = background_option[i];
 
-    optionNext.onclick = () => {
+    optionNext!.onclick = () => {
       i = i + 1;
       i = i % caption.length;
-      currentOptionText1.dataset.nextText = caption[i];
+      currentOptionText1!.dataset.nextText = caption[i];
 
-      currentOptionText2.dataset.nextText = date[i];
+      currentOptionText2!.dataset.nextText = date[i];
 
-      mainMenu.style.background = color_options[i];
-      storiesPageContainer.style.background = background_option[i];
-      mainMenu.style.filter = ``;
-      carousel.classList.add("anim-next");
+      mainMenu!.style.background = color_options[i];
+      storiesPageContainer!.style.background = background_option[i];
+      mainMenu!.style.filter = ``;
+      carousel!.classList.add("anim-next");
 
       setTimeout(() => {
-        currentOptionImage.style.backgroundImage =
+        currentOptionImage!.style.backgroundImage =
           "url(" + image_options[i] + ")";
       }, 455);
 
       setTimeout(() => {
-        currentOptionText1.innerText = caption[i];
-        currentOptionText2.innerText = date[i];
-        carousel.classList.remove("anim-next");
+        currentOptionText1!.innerText = caption[i];
+        currentOptionText2!.innerText = date[i];
+        carousel!.classList.remove("anim-next");
       }, 650);
     };
 
-    optionPrevious.onclick = function () {
+    optionPrevious!.onclick = function () {
       if (i === 0) {
         i = caption.length;
       }
       i = i - 1;
-      currentOptionText1.dataset.previousText = caption[i];
+      currentOptionText1!.dataset.previousText = caption[i];
 
-      currentOptionText2.dataset.previousText = date[i];
+      currentOptionText2!.dataset.previousText = date[i];
 
-      mainMenu.style.background = color_options[i];
-      storiesPageContainer.style.background = background_option[i];
-      carousel.classList.add("anim-previous");
+      mainMenu!.style.background = color_options[i];
+      storiesPageContainer!.style.background = background_option[i];
+      carousel!.classList.add("anim-previous");
 
       setTimeout(() => {
-        currentOptionImage.style.backgroundImage =
+        currentOptionImage!.style.backgroundImage =
           "url(" + image_options[i] + ")";
       }, 455);
 
       setTimeout(() => {
-        currentOptionText1.innerText = caption[i];
-        currentOptionText2.innerText = date[i];
-        carousel.classList.remove("anim-previous");
+        currentOptionText1!.innerText = caption[i];
+        currentOptionText2!.innerText = date[i];
+        carousel!.classList.remove("anim-previous");
       }, 650);
     };
     document
-      .getElementById("Stories_Page_Container")
-      .addEventListener("click", (e) => {
+      .getElementById("Stories_Page_Container")!
+      .addEventListener("click", (e: MouseEvent) => {
         if (
           !document
-            .getElementById("carousel-stories-container")
-            .contains(e.target)
+            .getElementById("carousel-stories-container")!
+            .contains(e.target as Node)
         ) {
           history.push("/u/home");
         }

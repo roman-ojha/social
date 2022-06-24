@@ -229,19 +229,19 @@ export const changeLikeNo = (data) => {
   };
 };
 
-export const setUserStories = (data) => {
-  return {
-    type: "setUserStories",
-    payload: data,
-  };
-};
+// export const setUserStories = (data) => {
+//   return {
+//     type: "setUserStories",
+//     payload: data,
+//   };
+// };
 
-export const storyIndex = (data) => {
-  return {
-    type: "storyIndex",
-    payload: data,
-  };
-};
+// export const storyIndex = (data) => {
+//   return {
+//     type: "storyIndex",
+//     payload: data,
+//   };
+// };
 
 export const openSideBarDrawer = (data) => {
   return {
