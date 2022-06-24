@@ -1,10 +1,9 @@
 import {
   RootUserProfileDetailState,
   RootUserProfileDetailActionTypes,
+  RootUserProfileDetailAction,
 } from "./types";
-import { RootUserProfileDetailAction } from "./types";
-
-const initialState = {
+const initialState: RootUserProfileDetailState = {
   fetchedPostData: false,
 };
 // this store the detail of Root User
