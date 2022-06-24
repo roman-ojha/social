@@ -6,6 +6,10 @@ import SignUp from "../pages/SignUp";
 import Index from "../pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
+// import { bindActionCreators } from "redux";
+// import {actionCreators} from '../services/redux';
+// import {RootState} from '../services/redux/reducer';
+// import { useDispatch, useSelector } from "react-redux";
 
 const MainRoot = () => {
   const history = useHistory();
@@ -13,6 +17,9 @@ const MainRoot = () => {
   return <></>;
 };
 const RoutingMainPage = () => {
+  // const state=useSelector((state:RootState)=>state.rootUserProfileDetailReducer);
+  // const dispatch=useDispatch();
+  // const {setRootUserProfileDetail} =bindActionCreators(actionCreators,dispatch);
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
