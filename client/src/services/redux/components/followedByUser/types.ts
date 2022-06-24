@@ -1,6 +1,7 @@
 export interface FollowedByState {
-  userID: "";
-  followed: "";
+  userID: string;
+  followed: string;
+  type: string;
 }
 
 export enum FollowedByActionTypes {
@@ -14,7 +15,7 @@ export interface SetFollowedByAction {
 
 export interface IsFollowedFollowedByUserAction {
   type: FollowedByActionTypes.SET_IS_FOLLOWED_FOLLOWED_BY_USER;
-  payload: any;
+  payload: FollowedByState;
 }
 
 export type FollowedByAction =

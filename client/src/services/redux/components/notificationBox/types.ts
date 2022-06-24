@@ -9,12 +9,12 @@ export enum NotificationBoxActionTypes {
 }
 export interface OpenNotificationBox {
   type: NotificationBoxActionTypes.OPEN_NOTIFICATION_BOX;
-  payload: any;
+  payload: NotificationBoxState["open"];
 }
 
 export interface SetNotificationData {
   type: NotificationBoxActionTypes.SET_NOTIFICATION_DATA;
-  payload: any;
+  payload: NotificationBoxState["notificationData"];
 }
 
 export type NotificationBoxAction = OpenNotificationBox | SetNotificationData;

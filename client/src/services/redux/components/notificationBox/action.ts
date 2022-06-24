@@ -1,5 +1,4 @@
 import {
-  //   NotificationBoxState,
   NotificationBoxActionTypes,
   NotificationBoxAction,
   NotificationBoxState,

@@ -13,7 +13,7 @@ export enum CommentBoxActionTypes {
 }
 export interface SetCommentBoxAction {
   type: CommentBoxActionTypes.SET_COMMENT_BOX_DATA;
-  payload: any;
+  payload: CommentBoxState;
 }
 
 export type CommentBoxAction = SetCommentBoxAction;
