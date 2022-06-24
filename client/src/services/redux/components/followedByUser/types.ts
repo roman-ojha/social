@@ -1,5 +1,3 @@
-import { UserDocumentFollower } from "../../../../interface/userDocument";
-
 export interface FollowedByState {
   userID: "";
   followed: "";
