@@ -1,4 +1,6 @@
-export interface RootUserProfileDetailState {
+import UserDocument from "../../../../interface/userDocument";
+
+export interface RootUserProfileDetailState extends UserDocument {
   fetchedPostData: boolean;
 }
 

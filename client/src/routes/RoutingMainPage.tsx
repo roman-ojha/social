@@ -7,8 +7,7 @@ import Index from "../pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
 // import { bindActionCreators } from "redux";
-// import {actionCreators} from '../services/redux';
-// import {RootState} from '../services/redux/reducer';
+// import {actionCreators,RootState} from '../services/redux';
 // import { useDispatch, useSelector } from "react-redux";
 
 const MainRoot = () => {

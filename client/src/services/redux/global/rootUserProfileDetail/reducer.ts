@@ -5,6 +5,101 @@ import {
 } from "./types";
 const initialState: RootUserProfileDetailState = {
   fetchedPostData: false,
+  birthday: {
+    day: "",
+    month: "",
+    year: "",
+  },
+  cpassword: "",
+  password: "",
+  date: new Date(),
+  email: "",
+  followers: [
+    {
+      id: "",
+    },
+  ],
+  followersNo: 0,
+  following: [
+    {
+      id: "",
+    },
+  ],
+  followingNo: 0,
+  friends: [
+    {
+      id: "",
+    },
+  ],
+  friendsNo: 0,
+  gender: "",
+  googleID: 0,
+  id: "",
+  messages: [
+    {
+      lastMessageOn: new Date(),
+      message: [
+        {
+          content: "",
+          date: new Date(),
+          senderId: "",
+        },
+      ],
+      messageToId: "",
+      roomID: "",
+    },
+  ],
+  name: "",
+  notification: [
+    {
+      topic: "",
+      user: "",
+    },
+  ],
+  picture: "",
+  postNo: 0,
+  posts: [
+    {
+      caption: "",
+      comments: {
+        by: [
+          {
+            comment: "",
+            user: "",
+          },
+        ],
+        No: 0,
+      },
+      date: new Date(),
+      id: "",
+      likes: {
+        by: [
+          {
+            user: "",
+          },
+        ],
+        No: 0,
+      },
+      picture: {
+        bucket: "",
+        firebaseStorageDownloadToken: "",
+        name: "",
+        path: "",
+        url: "",
+      },
+    },
+  ],
+  stories: {
+    caption: "",
+    date: "",
+    picture: "",
+  },
+  tokens: [
+    {
+      token: "",
+    },
+  ],
+  userID: "",
 };
 // this store the detail of Root User
 

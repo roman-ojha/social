@@ -1,7 +1,11 @@
-import { RootUserFriendsAction, RootUserFriendsActionTypes } from "./types";
+import {
+  RootUserFriendsAction,
+  RootUserFriendsActionTypes,
+  RootUserFriendsState,
+} from "./types";
 import { Dispatch } from "react";
 
-export const setRootUserFriends = (friends: any) => {
+export const setRootUserFriends = (friends: RootUserFriendsState) => {
   return (dispatch: Dispatch<RootUserFriendsAction>) => {
     dispatch({
       type: RootUserFriendsActionTypes.SET_ROOT_USER_FRIENDS,
