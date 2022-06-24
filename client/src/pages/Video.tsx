@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setVideoPageData } from "../services/redux-actions";
+// import { setVideoPageData } from "../services/redux-actions";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";
@@ -10,10 +10,18 @@ import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import { toastError } from "../services/toast";
 import videoApi from "../services/api/pages/Video";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../services/redux";
+import { RootState } from "../services/redux";
+import ResponseObject from "src/interface/responseObject";
+import { VideoPageState } from "src/services/redux/pages/video/types";
 
 const Video = () => {
   const dispatch = useDispatch();
-  const videoPageData = useSelector((state) => state.videoPageDataReducer);
+  const videoPageData = useSelector(
+    (state: RootState) => state.videoPageDataReducer
+  );
+  const { setVideoPageData } = bindActionCreators(actionCreators, dispatch);
   // const scrapeVideo = async () => {
   //   try {
   //     const res = await Api.scrapeVideo();
@@ -42,10 +50,14 @@ const Video = () => {
   useEffect(() => {
     const getYoutubeHomePageVideo = async () => {
       try {
+        interface Response extends ResponseObject {
+          videos: VideoPageState[];
+        }
         const resVideos = await videoApi.getYoutubeHomePageVideos();
-        const resVideosData = await resVideos.data;
+        const resVideosData: Response = await resVideos.data;
         if (resVideos.status === 200 && resVideosData.success) {
-          dispatch(setVideoPageData(resVideosData.videos));
+          // dispatch(setVideoPageData(resVideosData.videos));
+          setVideoPageData(resVideosData.videos);
         } else {
           toastError("Some thing went wrong, please try again later!!!");
         }

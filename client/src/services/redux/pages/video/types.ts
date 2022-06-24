@@ -1,7 +1,9 @@
-export interface VideoPageState {
-  videoId: string;
-  title: string;
-  thumbnail: string;
+import { YoutubeVideos } from "../../../../interface/youtubeVideos";
+
+export interface VideoPageState extends YoutubeVideos {
+  // videoId: string;
+  // title: string;
+  // thumbnail: string;
 }
 
 export enum VideoPageActionTypes {
