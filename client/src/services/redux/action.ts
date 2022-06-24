@@ -5,3 +5,6 @@ export * from "./components/notificationBox/action";
 export * from "./components/followedByUser/action";
 export * from "./pages/video/action";
 export * from "./pages/stories/action";
+export * from "./pages/profile/profilePageData/action";
+export * from "./pages/profile/rootUserProfileData/action";
+export * from "./pages/profile/userProfilePost/action";

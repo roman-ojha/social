@@ -6,6 +6,9 @@ import followedByUserReducer from "./components/followedByUser/reducer";
 import notificationBoxReducer from "./components/notificationBox/reducer";
 import videoPageDataReducer from "./pages/video/reducer";
 import userStoriesReducer from "./pages/stories/reducer";
+import profilePageDataReducer from "./pages/profile/profilePageData/reducer";
+import rootUserProfileDataState from "./pages/profile/rootUserProfileData/reducer";
+import setUserProfilePostReducer from "./pages/profile/userProfilePost/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -15,6 +18,9 @@ const reducer = combineReducers({
   videoPageDataReducer,
   userStoriesReducer,
   followedByUserReducer,
+  profilePageDataReducer,
+  rootUserProfileDataState,
+  setUserProfilePostReducer,
 });
 
 export default reducer;

@@ -1,5 +1,3 @@
-import { YoutubeVideos } from "../../../../interface/youtubeVideos";
-
 export interface StoriesPageState {
   storyIndex: number;
   data: [];
