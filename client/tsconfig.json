@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "rootDir": ".",
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["*", "src/*"]
+    },
+    "jsx": "react",
+    "typeRoots": ["./types", "./node_modules/@types"],
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "removeComments": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "skipLibCheck": true
+  },
+  "ts-node": {
+    "esm": true
+  },
+  "exclude": ["node_modules", "dist"],
+  "include": ["./src/*", "./", "./types"]
+}
