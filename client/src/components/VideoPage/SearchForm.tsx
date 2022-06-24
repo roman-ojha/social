@@ -3,21 +3,25 @@ import { Icon } from "@iconify/react";
 import { toastError, toastWarn } from "../../services/toast";
 import Api from "../../services/api/pages/Video";
 import { isEmptyString } from "../../funcs/isEmptyString";
-import { setVideoPageData } from "../../services/redux-actions";
+// import { setVideoPageData } from "../../services/redux-actions";
 import { useDispatch } from "react-redux";
 import { useRef } from "react";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../services/redux";
 
 const SearchForm = () => {
   const dispatch = useDispatch();
   const [value, setValue] = useState("");
-  const form = useRef(null);
+  const form = useRef<any>();
+  const { setVideoPageData } = bindActionCreators(actionCreators, dispatch);
 
   const searchVideo = async () => {
     try {
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
-        dispatch(setVideoPageData([]));
+        // dispatch(setVideoPageData([]));
+        setVideoPageData([]);
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
         const data = await res.data;
@@ -29,12 +33,13 @@ const SearchForm = () => {
               thumbnail: `http://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
             };
           });
-          dispatch(setVideoPageData(newVideos));
+          // dispatch(setVideoPageData(newVideos));
+          setVideoPageData(newVideos);
         } else {
           toastError(data.msg);
         }
       }
-      form.current.reset();
+      form.current!.reset();
     } catch (err) {
       if (err.response) {
         if (err.response.data.success === false) {
