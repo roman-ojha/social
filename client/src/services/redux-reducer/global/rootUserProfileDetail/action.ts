@@ -1,33 +1,50 @@
-import { RootUserProfileDetailActionTypes } from "./types";
+import {
+  RootUserProfileDetailActionTypes,
+  RootUserProfileDetailAction,
+} from "./types";
+import { Dispatch } from "redux";
 
-export interface SetRootUserProfileDetailAction {
-  type: RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL;
-  payload: any;
-}
+export const setRootUserProfileDetail = (detail: any) => {
+  return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
+    dispatch({
+      type: RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL,
+      payload: detail,
+    });
+  };
+};
 
-export interface ChangeRootUserProfilePicture {
-  type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_PROFILE_PICTURE;
-  payload: any;
-}
+export const changeRootUserProfilePicture = (detail: any) => {
+  return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
+    dispatch({
+      type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_PROFILE_PICTURE,
+      payload: detail,
+    });
+  };
+};
 
-export interface ChangeRootUserUserID {
-  type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_USER_ID;
-  payload: any;
-}
+export const changeRootUserUserID = (detail: any) => {
+  return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
+    dispatch({
+      type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_USER_ID,
+      payload: detail,
+    });
+  };
+};
 
-export interface ChangeRootUserName {
-  type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USERNAME;
-  payload: any;
-}
+export const changeRootUserName = (detail: any) => {
+  return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
+    dispatch({
+      type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USERNAME,
+      payload: detail,
+    });
+  };
+};
 
-export interface setRootUserPostData {
-  type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_POST_DATA;
-  payload: any;
-}
-
-export type RootUserProfileDetailAction =
-  | SetRootUserProfileDetailAction
-  | ChangeRootUserProfilePicture
-  | ChangeRootUserUserID
-  | ChangeRootUserName
-  | setRootUserPostData;
+export const setRootUserPostData = (detail: any) => {
+  return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
+    dispatch({
+      type: RootUserProfileDetailActionTypes.SET_ROOT_USER_POST_DATA,
+      payload: detail,
+    });
+  };
+};

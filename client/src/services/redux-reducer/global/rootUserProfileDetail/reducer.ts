@@ -2,7 +2,7 @@ import {
   RootUserProfileDetailState,
   RootUserProfileDetailActionTypes,
 } from "./types";
-import { RootUserProfileDetailAction } from "./action";
+import { RootUserProfileDetailAction } from "./types";
 
 const initialState = {
   fetchedPostData: false,
@@ -34,7 +34,7 @@ const rootUserProfileDetailReducer = (
         ...state,
         name: action.payload,
       };
-    case RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_POST_DATA:
+    case RootUserProfileDetailActionTypes.SET_ROOT_USER_POST_DATA:
       return {
         ...state,
         fetchedPostData: action.payload.fetchedPostData,
