@@ -9,6 +9,11 @@ import userStoriesReducer from "./pages/stories/reducer";
 import profilePageDataReducer from "./pages/profile/profilePageData/reducer";
 import rootUserProfileDataState from "./pages/profile/rootUserProfileData/reducer";
 import setUserProfilePostReducer from "./pages/profile/userProfilePost/reducer";
+import displayEmojiPicker from "./pages/home/emojiPicker/reducer";
+import setFollowedUserPostDataReducer from "./pages/home/followedUserPostData/reducer";
+import homePagePostFieldViewValue from "./pages/home/homePagePostFieldViewValue/reducer";
+import homePageUserPostFieldDataReducer from "./pages/home/homePageUserPostFieldData/reducer";
+import setUserPostResponseData from "./pages/home/userPostResponseData/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -21,6 +26,11 @@ const reducer = combineReducers({
   profilePageDataReducer,
   rootUserProfileDataState,
   setUserProfilePostReducer,
+  displayEmojiPicker,
+  setFollowedUserPostDataReducer,
+  homePagePostFieldViewValue,
+  homePageUserPostFieldDataReducer,
+  setUserPostResponseData,
 });
 
 export default reducer;

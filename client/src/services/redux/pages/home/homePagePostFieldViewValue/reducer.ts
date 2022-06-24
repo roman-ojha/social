@@ -17,4 +17,5 @@ const homePagePostFieldViewValue = (
       return state;
   }
 };
+
 export default homePagePostFieldViewValue;
