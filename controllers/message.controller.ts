@@ -110,15 +110,10 @@ export default {
       }
       return res.status(200).json({ message: "Message already been created" });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again later" });
+      return res.status(500).json({ error: "Server Error!!, Please Try again later" });
     }
   },
-  getSingleUserMessage: async (
-    req: Request,
-    res: Response
-  ): Promise<object> => {
+  getSingleUserMessage: async (req: Request, res: Response): Promise<object> => {
     try {
       const { rootUser } = req;
       const receiverUserID = req.body.userID;
@@ -141,9 +136,7 @@ export default {
         }
       );
       if (!receiverExist) {
-        return res
-          .status(404)
-          .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
+        return res.status(404).json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
       const userMessage = await userDetail.findOne(
         {
@@ -208,9 +201,7 @@ export default {
             }
           });
         }
-        return res
-          .status(500)
-          .json(<ResponseObject>{ success: false, msg: "server error" });
+        return res.status(500).json(<ResponseObject>{ success: false, msg: "server error" });
       }
       return res.status(200).json({
         success: true,
@@ -260,9 +251,7 @@ export default {
         }
       );
       if (!resObj) {
-        return res
-          .status(404)
-          .json(<ResponseObject>{ success: false, msg: "User not Found" });
+        return res.status(404).json(<ResponseObject>{ success: false, msg: "User not Found" });
       }
       const messageToIds = resObj.messages.map((el) => el.messageToId);
       // only getting id all of all the messageToId to get userID and picture dynamically
@@ -296,9 +285,7 @@ export default {
       const { rootUser } = req;
       const receiverUser = req.body.messageTo;
       if (!req.body.messageTo) {
-        return res
-          .status(401)
-          .json({ error: "please fill reciver userID properly" });
+        return res.status(401).json({ error: "please fill reciver userID properly" });
       }
       // if message already created then we just have to save
       const resSaveReciverMsg = await userDetail.updateOne(
@@ -324,9 +311,7 @@ export default {
       if (!resSaveReciverMsg.matchedCount) {
         // this will run if update doesn't happen in database it might be because of user doesn't exist
         // NOTE: i am doing this process to reduce the query for database so that the number of query became small and will be fast
-        return res
-          .status(400)
-          .json({ error: "User doesn't exist or Message doesn't created" });
+        return res.status(400).json({ error: "User doesn't exist or Message doesn't created" });
       }
       // if reciver exist and will update the message there then we can update the message for rootuser as well
       await userDetail.updateOne(
@@ -358,9 +343,7 @@ export default {
       // });
       return res.status(200).json({ message: "message send" });
     } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again later" });
+      return res.status(500).json({ error: "Server Error!!, Please Try again later" });
     }
   }
 };

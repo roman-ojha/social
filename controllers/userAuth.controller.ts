@@ -1,48 +1,37 @@
-import userDetail from "../models/userDetail_model.js";
+/* eslint-disable import/no-unresolved */
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
+import UserDetail from "../models/userDetail_model.js";
 import ResponseObject from "../interface/responseObject.js";
-import { __prod__ } from "../constants/env.js";
+// import { __prod__ } from "../constants/env.js";
 import { signInAdmin } from "../funcs/AuthAdmin.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
-import {
-  UserDocumentFollower,
-  UserDocumentFollowing,
-  UserDocumentFriends,
-  UserDocumentMessages,
-  UserDocumentNotification,
-} from "../interface/userDocument.js";
-import {
-  redisClient,
-  isRedisConnected,
-} from "../middleware/auth/authUsingRedis.js";
+// eslint-disable-next-line object-curly-newline
+import { UserDocumentFollower, UserDocumentFollowing, UserDocumentFriends, UserDocumentMessages, UserDocumentNotification } from "../interface/userDocument.js";
+import { redisClient, isRedisConnected } from "../middleware/auth/authUsingRedis.js";
 import RedisUserDetail from "../interface/redisUserDetail.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
     try {
+      // eslint-disable-next-line object-curly-newline
       const { name, email, password, cpassword, birthday, gender } = req.body;
       if (!name || !email || !password || !cpassword || !birthday || !gender) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Please Fill all Required Field!!!",
+          msg: "Please Fill all Required Field!!!"
         });
       }
       if (password !== cpassword) {
         return res.status(401).json(<ResponseObject>{
           success: false,
-          msg: "Password doesn't match",
+          msg: "Password doesn't match"
         });
       }
-      const emailExist = await userDetail.findOne(
-        { email: email },
-        { name: 1, userID: 1, email: 1 }
-      );
+      const emailExist = await UserDetail.findOne({ email }, { name: 1, userID: 1, email: 1 });
       if (emailExist) {
-        return res
-          .status(409)
-          .json(<ResponseObject>{ success: false, msg: "Email already Exist" });
+        return res.status(409).json(<ResponseObject>{ success: false, msg: "Email already Exist" });
       }
       // Add Admin User as friend and add notification and send message form Admin User to every registered User
       const adminEmail = process.env.ADMIN_LOGIN_EMAIL;
@@ -51,7 +40,7 @@ export default {
       const resAdmin = await signInAdmin({
         email: adminEmail,
         password: adminPassword,
-        cpassword: adminCpassword,
+        cpassword: adminCpassword
       });
       const newUserId = crypto.randomBytes(16).toString("hex");
       const messageRoomID = crypto.randomBytes(16).toString("hex");
@@ -59,7 +48,7 @@ export default {
         // if Admin Exist
         const newUser: SchemaMethodInstance & {
           _id: any;
-        } = new userDetail({
+        } = new UserDetail({
           id: newUserId,
           name,
           email,
@@ -72,26 +61,26 @@ export default {
           followingNo: 1,
           following: [
             <UserDocumentFollowing>{
-              id: resAdmin.admin.id,
-            },
+              id: resAdmin.admin.id
+            }
           ],
           followersNo: 1,
           followers: [
             <UserDocumentFollower>{
-              id: resAdmin.admin.id,
-            },
+              id: resAdmin.admin.id
+            }
           ],
           friendsNo: 1,
           friends: [
             <UserDocumentFriends>{
-              id: resAdmin.admin.id,
-            },
+              id: resAdmin.admin.id
+            }
           ],
           notification: [
             <UserDocumentNotification>{
               topic: "follow",
-              user: resAdmin.admin.id,
-            },
+              user: resAdmin.admin.id
+            }
           ],
           messages: [
             <UserDocumentMessages>{
@@ -102,34 +91,34 @@ export default {
                 {
                   senderId: resAdmin.admin.id,
                   content: `Hello ${name}`,
-                  date: new Date(),
-                },
-              ],
-            },
-          ],
+                  date: new Date()
+                }
+              ]
+            }
+          ]
         });
         const saveUserWithAdmin = await newUser.save();
         if (!saveUserWithAdmin) {
           return res.status(500).json(<ResponseObject>{
             success: false,
-            msg: "Server Error!,Failed registerd!!!",
+            msg: "Server Error!,Failed registerd!!!"
           });
         }
-        const updateAdminDocument = await userDetail.updateOne(
+        const updateAdminDocument = await UserDetail.updateOne(
           {
-            id: resAdmin.admin.id,
+            id: resAdmin.admin.id
           },
           {
             // pushing the new followers into followed to user database
             $push: {
               followers: <UserDocumentFollower>{
-                id: newUserId,
+                id: newUserId
               },
               following: <UserDocumentFollowing>{
-                id: newUserId,
+                id: newUserId
               },
               friends: <UserDocumentFriends>{
-                id: newUserId,
+                id: newUserId
               },
               messages: <UserDocumentMessages>{
                 lastMessageOn: new Date(),
@@ -139,30 +128,29 @@ export default {
                   {
                     senderId: resAdmin.admin.id,
                     content: `Hello ${name}`,
-                    date: new Date(),
-                  },
-                ],
+                    date: new Date()
+                  }
+                ]
               },
               notification: <UserDocumentNotification>{
                 topic: "follow",
-                user: newUserId,
-              },
+                user: newUserId
+              }
             },
             $inc: {
               followersNo: 1,
               followingNo: 1,
-              friendsNo: 1,
-            },
+              friendsNo: 1
+            }
           }
         );
         if (!updateAdminDocument) {
           return res.status(500).json(<ResponseObject>{
             success: false,
-            msg: "Server Error!,Failed registerd!!!",
+            msg: "Server Error!,Failed registerd!!!"
           });
         }
-        let token: string | null;
-        token = await saveUserWithAdmin.generateAuthToken();
+        const token: string | null = await saveUserWithAdmin.generateAuthToken();
         if (token) {
           res.cookie("AuthToken", token, {
             // expires: new Date(Date.now() + 25892000000),
@@ -171,18 +159,19 @@ export default {
             domain: process.env.ORIGIN_HOSTNAME,
             secure: true,
             // signed: true,
-            sameSite: "none",
+            sameSite: "none"
           });
         }
         return res.status(200).json(<ResponseObject>{
           success: true,
-          msg: "User register successfully",
+          msg: "User register successfully"
         });
       }
+      // eslint-disable-next-line no-console
       console.log("admin doesn't exist");
       const newUser: SchemaMethodInstance & {
         _id: any;
-      } = new userDetail({
+      } = new UserDetail({
         id: newUserId,
         name,
         email,
@@ -194,17 +183,16 @@ export default {
         followingNo: 0,
         postNo: 0,
         friendsNo: 0,
-        storiesNo: 0,
+        storiesNo: 0
       });
       const saveUserRes = await newUser.save();
       if (!saveUserRes) {
         return res.status(500).json(<ResponseObject>{
           success: false,
-          msg: "Server Error!,Failed registerd!!!",
+          msg: "Server Error!,Failed registerd!!!"
         });
       }
-      let token: string | null;
-      token = await saveUserRes.generateAuthToken();
+      const token: string | null = await saveUserRes.generateAuthToken();
       if (token) {
         res.cookie("AuthToken", token, {
           // expires: new Date(Date.now() + 25892000000),
@@ -213,7 +201,7 @@ export default {
           domain: process.env.ORIGIN_HOSTNAME,
           secure: true,
           // signed: true,
-          sameSite: "none",
+          sameSite: "none"
         });
       }
 
@@ -221,13 +209,13 @@ export default {
       // Warning: But in my opinion this might not be the best way to authenticate user
       return res.status(200).json(<ResponseObject>{
         success: true,
-        msg: "User register successfully",
+        msg: "User register successfully"
       });
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       return res.status(500).json({
         success: false,
-        err: "Server Error!!,Please try again later",
+        err: "Server Error!!,Please try again later"
       });
     }
   },
@@ -237,78 +225,73 @@ export default {
       if (!email || !password) {
         return res.status(400).json(<ResponseObject>{
           success: false,
-          msg: "Please filled the form properly!!!",
+          msg: "Please filled the form properly!!!"
         });
       }
-      const userLogin = await userDetail.findOne(
-        { email: email },
+      const userLogin = await UserDetail.findOne(
+        { email },
         {
           email: 1,
           password: 1,
           userID: 1,
           name: 1,
           tokens: { $slice: -5 },
-          id: 1,
+          id: 1
         }
       );
       if (!userLogin) {
         return res.status(404).json(<ResponseObject>{
           success: false,
-          msg: "Error Login! User does't exist",
+          msg: "Error Login! User does't exist"
         });
-      } else {
-        const isPasswordMatch = await bcrypt.compare(
-          password,
-          userLogin.password
-        );
-        if (!isPasswordMatch) {
-          res.status(403).json(<ResponseObject>{
-            success: false,
-            msg: "Email and password doesn't match",
-          });
-        } else {
-          let token: string | null = await userLogin.generateAuthToken();
-          if (token) {
-            res.cookie("AuthToken", token, {
-              maxAge: 25892000000,
-              httpOnly: true,
-              domain: process.env.ORIGIN_HOSTNAME,
-              // domain: the domain that we pass here is the domain where cookie get stored and domain is the domain of the server
-              secure: true,
-              // signed: true,
-              sameSite: "none",
-              // NOTE: 'sameSite: "none"' will help to set and access token for different domain
-            });
-          }
-
-          // Storing User Data in redis
-          if (isRedisConnected) {
-            const redisUserDetail: RedisUserDetail = {
-              id: userLogin.id,
-              email: userLogin.email,
-              name: userLogin.name,
-              tokens: userLogin.tokens,
-              userID: userLogin.userID,
-            };
-            await redisClient.setEx(
-              userLogin.id,
-              864000,
-              // for 10 days
-              JSON.stringify(redisUserDetail)
-            );
-          }
-
-          // NOTE: if we would host hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
-          return res.status(200).json(<ResponseObject>{
-            success: true,
-            msg: "Login Successfully",
-          });
-        }
       }
+      const isPasswordMatch = await bcrypt.compare(password, userLogin.password);
+      if (!isPasswordMatch) {
+        return res.status(403).json(<ResponseObject>{
+          success: false,
+          msg: "Email and password doesn't match"
+        });
+      }
+      const token: string | null = await userLogin.generateAuthToken();
+      if (token) {
+        res.cookie("AuthToken", token, {
+          maxAge: 25892000000,
+          httpOnly: true,
+          domain: process.env.ORIGIN_HOSTNAME,
+          // domain: the domain that we pass here is the domain where cookie get stored and domain is the domain of the server
+          secure: true,
+          // signed: true,
+          sameSite: "none"
+          // NOTE: 'sameSite: "none"' will help to set and access token for different domain
+        });
+      }
+
+      // Storing User Data in redis
+      if (isRedisConnected) {
+        const redisUserDetail: RedisUserDetail = {
+          id: userLogin.id,
+          email: userLogin.email,
+          name: userLogin.name,
+          tokens: userLogin.tokens,
+          userID: userLogin.userID
+        };
+        await redisClient.setEx(
+          userLogin.id,
+          864000,
+          // for 10 days
+          JSON.stringify(redisUserDetail)
+        );
+      }
+
+      // NOTE: if we would host hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
+      return res.status(200).json(<ResponseObject>{
+        success: true,
+        msg: "Login Successfully"
+      });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again later",
+        msg: "Server Error!!, Please Try again later"
       });
     }
   },
@@ -319,16 +302,14 @@ export default {
         domain: process.env.ORIGIN_HOSTNAME,
         path: "/",
         secure: true,
-        sameSite: "none",
+        sameSite: "none"
       });
-      return res
-        .status(200)
-        .json(<ResponseObject>{ success: true, msg: "You are Logged Out" });
+      return res.status(200).json(<ResponseObject>{ success: true, msg: "You are Logged Out" });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error!!, Please Try again later",
+        msg: "Server Error!!, Please Try again later"
       });
     }
-  },
+  }
 };
