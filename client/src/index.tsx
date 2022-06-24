@@ -12,9 +12,7 @@ import tsStore from "./services/redux/store";
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <Provider store={tsStore}>
-        <App />
-      </Provider>
+      <App />
     </Provider>
   </BrowserRouter>,
 

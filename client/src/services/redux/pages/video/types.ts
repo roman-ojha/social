@@ -1,10 +1,6 @@
 import { YoutubeVideos } from "../../../../interface/youtubeVideos";
 
-export interface VideoPageState extends YoutubeVideos {
-  // videoId: string;
-  // title: string;
-  // thumbnail: string;
-}
+export interface VideoPageState extends YoutubeVideos {}
 
 export enum VideoPageActionTypes {
   SET_VIDEO_PAGE_DATA = "setVideoPageData",

@@ -299,9 +299,9 @@ export const showLoadingSpinner = (bool) => {
   };
 };
 
-export const setVideoPageData = (data) => {
-  return {
-    type: "setVideoPageData",
-    payload: data,
-  };
-};
+// export const setVideoPageData = (data) => {
+//   return {
+//     type: "setVideoPageData",
+//     payload: data,
+//   };
+// };

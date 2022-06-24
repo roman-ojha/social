@@ -22,13 +22,14 @@ import homePagePostFieldViewValue from "./page/home/homePagePostFieldViewValue";
 import notificationBox from "./components/notificationBox";
 import moreProfileBoxReducer from "./components/moreProfile";
 import showLoadingSpinnerReducer from "./components/showLoadingSpinner";
-import videoPageDataReducer from "./page/video";
+// import videoPageDataReducer from "./page/video";
 import rootUserFriends from "./global/rootUserFriends";
 import rootUserProfileDataState from "./page/profile/rootUserProfileDataState";
 import displayEmojiPicker from "./page/home/displayEmojiPicker";
 // Typescript
 // import userProfileDetailReducer from "./global/rootUserProfileDetail/reducer";
 // import rootUserFriends from "./global/rootUserFriends/reducer";
+import videoPageDataReducer from "../redux/pages/video/reducer";
 
 const rootReducers = combineReducers({
   // Javascript
@@ -55,12 +56,13 @@ const rootReducers = combineReducers({
   notificationBox,
   moreProfileBoxReducer,
   showLoadingSpinnerReducer,
-  videoPageDataReducer,
+  // videoPageDataReducer,
   rootUserProfileDataState,
   displayEmojiPicker,
   // Typescript
   // userProfileDetailReducer,
   // rootUserFriends,
+  videoPageDataReducer,
 });
 
 export default rootReducers;

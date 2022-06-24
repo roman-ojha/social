@@ -13,7 +13,7 @@ const FriendStory = (props) => {
         <div
           onClick={() => {
             dispatch(storyIndex(props.index));
-            history.push("/u/story");
+            history.push("/u/stories");
           }}
           className="Friends_Story_Picutre_Container"
         >
@@ -31,7 +31,7 @@ const FriendStory = (props) => {
           className="Friend_Story_Name"
           onClick={() => {
             dispatch(storyIndex(props.index));
-            history.push("/u/story");
+            history.push("/u/stories");
           }}
         >
           {props.storiesInformation.name.split(" ")[0]}
