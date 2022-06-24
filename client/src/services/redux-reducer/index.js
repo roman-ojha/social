@@ -27,11 +27,13 @@ import rootUserFriends from "./global/rootUserFriends";
 import rootUserProfileDataState from "./page/profile/rootUserProfileDataState";
 import displayEmojiPicker from "./page/home/displayEmojiPicker";
 // Typescript
-import userProfileDetailReducer from "./global/rootUserProfileDetail/reducer";
+// import userProfileDetailReducer from "./global/rootUserProfileDetail/reducer";
+// import rootUserFriends from "./global/rootUserFriends/reducer";
 
 const rootReducers = combineReducers({
   // Javascript
   setUserProfileDetailReducer,
+  rootUserFriends,
   changeMainPageMessageView,
   setUserPostResponseData,
   homePageUserPostFieldDataReducer,
@@ -54,11 +56,11 @@ const rootReducers = combineReducers({
   moreProfileBoxReducer,
   showLoadingSpinnerReducer,
   videoPageDataReducer,
-  rootUserFriends,
   rootUserProfileDataState,
   displayEmojiPicker,
   // Typescript
-  userProfileDetailReducer,
+  // userProfileDetailReducer,
+  // rootUserFriends,
 });
 
 export default rootReducers;
