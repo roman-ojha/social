@@ -1,14 +1,14 @@
 import {
+  UserPostResponseAction,
+  UserPostResponseDataState,
   UserProfilePostActionTypes,
-  UserProfilePostState,
-  UserProfilePostAction,
 } from "./types";
 import { Dispatch } from "react";
 
-export const userProfilePost = (data: UserProfilePostState) => {
-  return (dispatch: Dispatch<UserProfilePostAction>) => {
+export const userPostResponseData = (data: UserPostResponseDataState) => {
+  return (dispatch: Dispatch<UserPostResponseAction>) => {
     dispatch({
-      type: UserProfilePostActionTypes.SET_USER_PROFILE_POST,
+      type: UserProfilePostActionTypes.USER_POST_RESPONSE_DATA,
       payload: data,
     });
   };

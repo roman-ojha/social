@@ -1,18 +1,27 @@
-const initialState = {
+import {
+  HomePageUserPostFieldAction,
+  HomePageUserPostFieldActionTypes,
+  HomePageUserPostFieldState,
+} from "./types";
+
+const initialState: HomePageUserPostFieldState = {
   content: "",
   image: {},
 };
 
-const homePageUserPostFieldDataReducer = (state = initialState, action) => {
-  if (action.type === "homePageUserPostFieldData") {
-    // console.log(action.payload);
-    const { content, image } = action.payload;
-    return {
-      content,
-      image,
-    };
-  } else {
-    return state;
+const homePageUserPostFieldDataReducer = (
+  state: HomePageUserPostFieldState = initialState,
+  action: HomePageUserPostFieldAction
+) => {
+  switch (action.type) {
+    case HomePageUserPostFieldActionTypes.HOME_PAGE_USER_POST_FIELD_DATA:
+      const { content, image } = action.payload;
+      return {
+        content,
+        image,
+      };
+    default:
+      return state;
   }
 };
 

@@ -1,12 +1,15 @@
-export interface UserProfilePostState {}
-
-export enum UserProfilePostActionTypes {
-  SET_USER_PROFILE_POST = "userProfilePost",
+export interface HomePageUserPostFieldState {
+  content: string;
+  image: object;
 }
 
-export interface SetUserProfilePostAction {
-  type: UserProfilePostActionTypes.SET_USER_PROFILE_POST;
-  payload: UserProfilePostState;
+export enum HomePageUserPostFieldActionTypes {
+  HOME_PAGE_USER_POST_FIELD_DATA = "homePageUserPostFieldData",
 }
 
-export type UserProfilePostAction = SetUserProfilePostAction;
+export interface HomePageUserPostFieldDataAction {
+  type: HomePageUserPostFieldActionTypes.HOME_PAGE_USER_POST_FIELD_DATA;
+  payload: HomePageUserPostFieldState;
+}
+
+export type HomePageUserPostFieldAction = HomePageUserPostFieldDataAction;

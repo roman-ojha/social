@@ -1,4 +1,10 @@
-const initialState = [
+import {
+  UserPostResponseAction,
+  UserPostResponseDataState,
+  UserProfilePostActionTypes,
+} from "./types";
+
+const initialState: UserPostResponseDataState = [
   // {
   //   id: "",
   //   useremail: "",
@@ -11,10 +17,16 @@ const initialState = [
   //   date: "",
   // },
 ];
-const setUserPostResponseData = (state = initialState, action) => {
-  if (action.type === "UserPostResponseData") {
-    return [action.payload, ...state];
-  } else {
-    return state;
+const setUserPostResponseData = (
+  state: UserPostResponseDataState = initialState,
+  action: UserPostResponseAction
+) => {
+  switch (action.type) {
+    case UserProfilePostActionTypes.USER_POST_RESPONSE_DATA:
+      return [action.payload, ...state];
+    default:
+      return state;
   }
 };
+
+export default setUserPostResponseData;

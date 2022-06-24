@@ -1,12 +1,12 @@
-export interface UserProfilePostState {}
+export type UserPostResponseDataState = [];
 
 export enum UserProfilePostActionTypes {
-  SET_USER_PROFILE_POST = "userProfilePost",
+  USER_POST_RESPONSE_DATA = "UserPostResponseData",
 }
 
-export interface SetUserProfilePostAction {
-  type: UserProfilePostActionTypes.SET_USER_PROFILE_POST;
-  payload: UserProfilePostState;
+export interface SetUserPostResponseDataAction {
+  type: UserProfilePostActionTypes.USER_POST_RESPONSE_DATA;
+  payload: UserPostResponseDataState;
 }
 
-export type UserProfilePostAction = SetUserProfilePostAction;
+export type UserPostResponseAction = SetUserPostResponseDataAction;

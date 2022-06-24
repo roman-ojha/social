@@ -1,14 +1,16 @@
 import {
-  UserProfilePostActionTypes,
-  UserProfilePostState,
-  UserProfilePostAction,
+  HomePageUserPostFieldAction,
+  HomePageUserPostFieldActionTypes,
+  HomePageUserPostFieldState,
 } from "./types";
 import { Dispatch } from "react";
 
-export const userProfilePost = (data: UserProfilePostState) => {
-  return (dispatch: Dispatch<UserProfilePostAction>) => {
+export const homePageUserPostFieldDataAction = (
+  data: HomePageUserPostFieldState
+) => {
+  return (dispatch: Dispatch<HomePageUserPostFieldAction>) => {
     dispatch({
-      type: UserProfilePostActionTypes.SET_USER_PROFILE_POST,
+      type: HomePageUserPostFieldActionTypes.HOME_PAGE_USER_POST_FIELD_DATA,
       payload: data,
     });
   };
