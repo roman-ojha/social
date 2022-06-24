@@ -28,7 +28,7 @@ const RoutingUserPage = () => {
         <Route exact path="/u/message" component={Message} />
         <Route exact path="/u/setting" component={Setting} />
         <Route path="/u/profile/:userID" component={Profile} />
-        <Route exact page="/u/stories" component={Stories} />
+        <Route exact path="/u/stories" component={Stories} />
         <Route
           path="*"
           component={() => {

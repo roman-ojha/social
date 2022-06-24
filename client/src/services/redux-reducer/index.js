@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
+// Javascript
+import setUserProfileDetailReducer from "./global/UserProfileDetailReducer";
 import changeMainPageMessageView from "./components/messageBox/mainPageMessageOnOff";
 import setUserPostResponseData from "./page/home/UserPostResponseData";
 import homePageUserPostFieldDataReducer from "./page/home/homePageUserPostFieldData";
-import setUserProfileDetailReducer from "./global/UserProfileDetailReducer";
 import setUserProfilePostReducer from "./page/profile/UserProfilePostReducer";
 import profilePageDataReducer from "./page/profile/profilePageDataReducer";
 import setFollowedUserPostDataReducer from "./page/home/FollowedUserPostDataReducer";
@@ -25,12 +26,15 @@ import videoPageDataReducer from "./page/video";
 import rootUserFriends from "./global/rootUserFriends";
 import rootUserProfileDataState from "./page/profile/rootUserProfileDataState";
 import displayEmojiPicker from "./page/home/displayEmojiPicker";
+// Typescript
+import userProfileDetailReducer from "./global/rootUserProfileDetail/reducer";
 
 const rootReducers = combineReducers({
+  // Javascript
+  setUserProfileDetailReducer,
   changeMainPageMessageView,
   setUserPostResponseData,
   homePageUserPostFieldDataReducer,
-  setUserProfileDetailReducer,
   setUserProfilePostReducer,
   profilePageDataReducer,
   setFollowedUserPostDataReducer,
@@ -53,6 +57,8 @@ const rootReducers = combineReducers({
   rootUserFriends,
   rootUserProfileDataState,
   displayEmojiPicker,
+  // Typescript
+  userProfileDetailReducer,
 });
 
 export default rootReducers;

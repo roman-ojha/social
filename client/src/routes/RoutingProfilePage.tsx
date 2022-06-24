@@ -15,14 +15,19 @@ const RoutingProfilePage = (props) => {
         if (location.pathname.includes("/u/profile")) {
           const selectedLinkElement = document.getElementsByClassName(
             "MainPage_SideBar_Link"
-          )[4];
-          selectedLinkElement.firstElementChild.style.backgroundColor =
-            "var(--primary-color-point-7)";
-          document.getElementsByClassName(
-            "MainPage_SideBar_Menu_Logo"
-          )[4].style.color = "var(--primary-color-point-7)";
-          selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-            "var(--primary-color-point-7)";
+          )[4] as HTMLElement;
+          (
+            selectedLinkElement.firstElementChild! as HTMLElement
+          ).style.backgroundColor = "var(--primary-color-point-7)";
+          (
+            document.getElementsByClassName(
+              "MainPage_SideBar_Menu_Logo"
+            )[4] as HTMLElement
+          ).style.color = "var(--primary-color-point-7)";
+          (
+            selectedLinkElement.firstElementChild!.nextElementSibling!
+              .nextElementSibling! as HTMLElement
+          ).style.color = "var(--primary-color-point-7)";
         }
       } catch (err) {}
     };
@@ -33,13 +38,18 @@ const RoutingProfilePage = (props) => {
           const selectedLinkElement = document.getElementsByClassName(
             "MainPage_SideBar_Link"
           )[4];
-          selectedLinkElement.firstElementChild.style.backgroundColor =
-            "transparent";
-          document.getElementsByClassName(
-            "MainPage_SideBar_Menu_Logo"
-          )[4].style.color = "var(--lower-opacity-font-color)";
-          selectedLinkElement.firstElementChild.nextElementSibling.nextElementSibling.style.color =
-            "var(--lower-opacity-font-color)";
+          (
+            selectedLinkElement.firstElementChild! as HTMLElement
+          ).style.backgroundColor = "transparent";
+          (
+            document.getElementsByClassName(
+              "MainPage_SideBar_Menu_Logo"
+            )[4] as HTMLElement
+          ).style.color = "var(--lower-opacity-font-color)";
+          (
+            selectedLinkElement.firstElementChild!.nextElementSibling!
+              .nextElementSibling! as HTMLElement
+          ).style.color = "var(--lower-opacity-font-color)";
         }
       } catch (err) {}
     };
