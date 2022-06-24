@@ -10,7 +10,7 @@ import {
   userProfilePostAction,
   followedUserPostDataAction,
   userSuggestionAction,
-  followedByUserAction,
+  // followedByUserAction,
   // setUserStories,
   appendOnCurrentInnerUserMessage,
   appendMessageOnMessageListAction,
@@ -25,10 +25,8 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const { setUserStories, setRootUserProfileDetail } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setUserStories, setRootUserProfileDetail, setFollowedByUser } =
+    bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -46,7 +44,7 @@ const Index = () => {
               followedUserPostDataAction(userData.data.followedUserPost)
             );
             dispatch(userSuggestionAction(userData.data.userSuggestion));
-            dispatch(followedByUserAction(userData.data.followedBy));
+            setFollowedByUser(userData.data.followedBy);
             setUserStories(userData.data.userStories);
             setRenderMainPage(true);
           }

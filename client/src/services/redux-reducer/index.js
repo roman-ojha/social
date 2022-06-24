@@ -11,7 +11,7 @@ import setCurrentUserMessageReducer from "./components/messageBox/CurrentUserMes
 import mainPageInnerMessageBoxOnOff from "./components/messageBox/mainPageInnerMessageBoxOnOff";
 import setUserMessageFieldReducer from "./userMessageFieldReducer";
 import userSuggestionReducer from "./components/userSuggestionReducer";
-import followedByUserReducer from "./components/followedByUserReducer";
+// import followedByUserReducer from "./components/followedByUserReducer";
 import messageListReducer from "./components/messageBox/messageListReducer";
 import commentBoxReducer from "./components/commentBox";
 import progressBarReducer from "./components/progressBar";
@@ -32,6 +32,7 @@ import displayEmojiPicker from "./page/home/displayEmojiPicker";
 import videoPageDataReducer from "../redux/pages/video/reducer";
 import userStoriesReducer from "../redux/pages/stories/reducer";
 import setUserProfileDetailReducer from "../redux/global/rootUserProfileDetail/reducer";
+import followedByUserReducer from "../redux/components/followedByUser/reducer";
 
 const rootReducers = combineReducers({
   // Javascript
@@ -47,7 +48,7 @@ const rootReducers = combineReducers({
   mainPageInnerMessageBoxOnOff,
   setUserMessageFieldReducer,
   userSuggestionReducer,
-  followedByUserReducer,
+  // followedByUserReducer,
   messageListReducer,
   commentBoxReducer,
   progressBarReducer,
@@ -66,6 +67,7 @@ const rootReducers = combineReducers({
   setUserProfileDetailReducer,
   videoPageDataReducer,
   userStoriesReducer,
+  followedByUserReducer,
 });
 
 export default rootReducers;

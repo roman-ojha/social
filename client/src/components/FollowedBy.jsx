@@ -15,6 +15,7 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import GlobalApi from "../services/api/global";
 import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
+import { RootState, actionCreators } from "../services/redux";
 
 const FollowedBy = () => {
   const history = useHistory();
