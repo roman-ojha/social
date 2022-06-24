@@ -1,10 +1,13 @@
 import {
   RootUserProfileDetailActionTypes,
   RootUserProfileDetailAction,
+  RootUserProfileDetailState,
 } from "./types";
 import { Dispatch } from "redux";
 
-export const setRootUserProfileDetail = (detail: any) => {
+export const setRootUserProfileDetail = (
+  detail: RootUserProfileDetailState
+) => {
   return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
     dispatch({
       type: RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL,

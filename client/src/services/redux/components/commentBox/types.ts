@@ -11,9 +11,9 @@ export interface CommentBoxState {
 export enum CommentBoxActionTypes {
   SET_COMMENT_BOX_DATA = "setCommentBoxData",
 }
-export interface CommentBoxAction {
+export interface SetCommentBoxAction {
   type: CommentBoxActionTypes.SET_COMMENT_BOX_DATA;
   payload: any;
 }
 
-export type RootUserFriendsAction = CommentBoxAction;
+export type CommentBoxAction = SetCommentBoxAction;

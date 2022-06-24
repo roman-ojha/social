@@ -7,7 +7,7 @@ import Index from "../pages/Index";
 import { Switch, Route } from "react-router-dom";
 import { useHistory, useLocation } from "react-router";
 // import { bindActionCreators } from "redux";
-// import {actionCreators,RootState} from '../services/redux';
+// import { actionCreators, RootState } from "../services/redux";
 // import { useDispatch, useSelector } from "react-redux";
 
 const MainRoot = () => {
@@ -16,9 +16,15 @@ const MainRoot = () => {
   return <></>;
 };
 const RoutingMainPage = () => {
-  // const state=useSelector((state:RootState)=>state.rootUserProfileDetailReducer);
-  // const dispatch=useDispatch();
-  // const {setRootUserProfileDetail} =bindActionCreators(actionCreators,dispatch);
+  // const state = useSelector(
+  //   (state: RootState) => state.rootUserProfileDetailReducer
+  // );
+  // const dispatch = useDispatch();
+  // const { setRootUserProfileDetail } = bindActionCreators(
+  //   actionCreators,
+  //   dispatch
+  // );
+  // setRootUserProfileDetail({})
   const location = useLocation();
   const history = useHistory();
   useEffect(() => {
