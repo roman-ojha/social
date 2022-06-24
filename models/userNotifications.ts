@@ -1,9 +1,9 @@
 export default {
   topic: {
-    type: String
+    type: String,
   },
   user: {
     // user is the id of user
-    type: String
-  }
+    type: String,
+  },
 };

@@ -13,12 +13,11 @@
     "docker-compose-up:dev": "docker-compose -f ./docker-compose.dev.yml up -d --build server",
     "docker:dev": "yarn docker-compose-down & yarn docker-compose-up:dev",
     "docker:logServer": "docker-compose -f ./docker-compose.dev.yml logs server",
-    "version": "auto-changelog -p",
-    "lint": "eslint ./"
+    "version": "auto-changelog -p"
   },
   "engines": {
     "node": "16.x",
-    "npm": "8.x",
+    "npm": "6.x",
     "yarn": "1.x"
   },
   "dependencies": {
@@ -46,7 +45,6 @@
     "jsonwebtoken": "^8.5.1",
     "memorystore": "^1.6.7",
     "method-override": "^3.0.0",
-    "mongodb": "^4.7.0",
     "mongoose": "^6.0.6",
     "multer": "^1.4.3",
     "multer-gridfs-storage": "^5.0.1",
@@ -76,16 +74,7 @@
     "@types/passport-google-oauth2": "^0.1.5",
     "@types/request": "^2.48.8",
     "@types/sharp": "^0.30.2",
-    "@typescript-eslint/eslint-plugin": "^5.27.1",
-    "@typescript-eslint/parser": "^5.27.1",
     "auto-changelog": "^2.4.0",
-    "eslint": "^7.32.0 || ^8.2.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-import-resolver-typescript": "^2.7.1",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "generate-changelog": "^1.8.0",
     "nodemon": "^2.0.16",
     "release-please": "^13.17.0",

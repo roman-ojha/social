@@ -1,16 +1,15 @@
-/* eslint-disable import/no-unresolved */
-import { Request, Response } from "express";
-import usetube from "usetube";
 // import youtubeAPI from "../services/api/youtubeAPI.js";
-import ResponseObject from "../interface/responseObject.js";
+import ResponseObject from "interface/responseObject.js";
 // import { AxiosResponse } from "axios";
 // import YoutubeQueryTopic from "../constants/youtube_Query_Topic.js";
+import { Request, Response } from "express";
+import usetube from "usetube";
 // import yts from "yt-search";
 import youtubeData from "../constants/youtubeData.js";
 
-// interface YoutubeResponseType {
-//   items: object[];
-// }
+interface YoutubeResponseType {
+  items: object[];
+}
 export default {
   // youtubeVideo: async (req: Request, res: Response): Promise<object> => {
   //   let requiredList: object[] = [];
@@ -95,32 +94,34 @@ export default {
       const { q } = req.query;
       const response = await usetube.searchVideo(q);
       if (!response) {
-        return res.status(404).json(<ResponseObject>{ success: false, msg: "Not Found" });
+        return res
+          .status(404)
+          .json(<ResponseObject>{ success: false, msg: "Not Found" });
       }
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successful",
-        videos: response.videos
+        videos: response.videos,
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server error, please try again later"
+        msg: "Server error, please try again later",
       });
     }
   },
   getYoutubeHomePageVideo: async (req: Request, res: Response) => {
     try {
-      return res.status(200).json(<ResponseObject>{
+      res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successful",
-        videos: youtubeData.homePageVideos
+        videos: youtubeData.homePageVideos,
       });
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server error, please try again later"
+        msg: "Server error, please try again later",
       });
     }
-  }
+  },
 };

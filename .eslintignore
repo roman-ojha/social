@@ -1,4 +1,15 @@
 /node_modules
 /dist
-/client/node_modules
-/client/build
+/src
+/types
+/socket
+/services
+/routes
+/models
+/middleware
+/interface
+/funcs
+/db
+/controllers
+/constants
+/client

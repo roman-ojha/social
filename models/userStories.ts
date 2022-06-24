@@ -1,11 +1,11 @@
 export default {
   caption: {
-    type: String
+    type: String,
   },
   picture: {
-    type: String
+    type: String,
   },
   date: {
-    type: String
-  }
+    type: String,
+  },
 };

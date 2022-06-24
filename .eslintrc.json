@@ -15,23 +15,13 @@
       "jsx": true
     },
     "ecmaVersion": "latest",
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+    "sourceType": "module"
   },
   "plugins": ["react", "@typescript-eslint"],
   "ignorePatterns": ["dist/", "node_modules/"],
   "rules": {
     // "semi": ["error", "always"],
     "linebreak-style": 0,
-    "quotes": ["error", "double"],
-    "comma-dangle": ["error", "never"],
-    "max-len": "off"
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
+    "quotes": ["error", "double"]
   }
 }

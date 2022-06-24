@@ -1,18 +1,17 @@
-/* eslint-disable no-console */
-/* eslint-disable object-curly-newline */
-/* eslint-disable import/no-unresolved */
-import crypto from "crypto";
-import bcrypt from "bcryptjs";
 import UserDetail from "../models/userDetail_model.js";
 import adminConstant from "../constants/admin.js";
-import { UserDocumentBirthday } from "../interface/userDocument.js";
+import { UserDocumentBirthday } from "interface/userDocument.js";
 import ResponseObject from "../interface/responseObject.js";
+import crypto from "crypto";
+import bcrypt from "bcryptjs";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
-// eslint-disable-next-line no-unused-vars
 const checkUserIDExistInDatabase = async (userID: string | undefined) => {
   try {
-    const isAdminExist = await UserDetail.findOne({ userID }, { userID: 1, name: 1, id: 1, email: 1 });
+    const isAdminExist = await UserDetail.findOne(
+      { userID: userID },
+      { userID: 1, name: 1, id: 1, email: 1 }
+    );
     if (!isAdminExist) {
       return false;
     }
@@ -22,10 +21,12 @@ const checkUserIDExistInDatabase = async (userID: string | undefined) => {
   }
 };
 
-// eslint-disable-next-line no-unused-vars
 const checkAdminExistInDatabase = async (email: string | undefined) => {
   try {
-    const isAdminExist = await UserDetail.findOne({ email }, { userID: 1, name: 1, id: 1, email: 1 });
+    const isAdminExist = await UserDetail.findOne(
+      { email: email },
+      { userID: 1, name: 1, id: 1, email: 1 }
+    );
     if (!isAdminExist) {
       return false;
     }
@@ -49,13 +50,15 @@ interface ResponseObjectWithAdmin extends ResponseObject {
     | null;
 }
 
-const signInAdmin = async (admin: AdminSignInArgument): Promise<ResponseObjectWithAdmin> => {
+const signInAdmin = async (
+  admin: AdminSignInArgument
+): Promise<ResponseObjectWithAdmin> => {
   try {
     if (!admin.email || !admin.password) {
       return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Email and Password is not provided!!!",
-        admin: null
+        admin: null,
       };
     }
     const adminExist = await UserDetail.findOne(
@@ -65,34 +68,37 @@ const signInAdmin = async (admin: AdminSignInArgument): Promise<ResponseObjectWi
         password: 1,
         userID: 1,
         name: 1,
-        id: 1
+        id: 1,
       }
     );
     if (!adminExist) {
       return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Error Login! Admin does't exist",
-        admin: null
+        admin: null,
       };
     }
-    const isPasswordMatch = await bcrypt.compare(admin.password, adminExist.password);
+    const isPasswordMatch = await bcrypt.compare(
+      admin.password,
+      adminExist.password
+    );
     if (!isPasswordMatch) {
       return <ResponseObjectWithAdmin>{
         success: false,
         msg: "Email and password doesn't match",
-        admin: null
+        admin: null,
       };
     }
     return <ResponseObjectWithAdmin>{
       success: true,
       msg: "Admin SignIn Successfully",
-      admin: adminExist
+      admin: adminExist,
     };
   } catch (err) {
     return <ResponseObjectWithAdmin>{
       success: false,
       msg: "Admin SignIn Failed",
-      admin: null
+      admin: null,
     };
   }
 };
@@ -107,26 +113,42 @@ interface AdminRegistrationArgument {
   birthday: UserDocumentBirthday;
 }
 
-const registerAdmin = async (admin: AdminRegistrationArgument): Promise<ResponseObject> => {
+const registerAdmin = async (
+  admin: AdminRegistrationArgument
+): Promise<ResponseObject> => {
   try {
     console.log("Process... Registering Admin");
-    if (!admin.name || !admin.email || !admin.password || !admin.cpassword || !admin.birthday || !admin.gender || !admin.userID) {
+    if (
+      !admin.name ||
+      !admin.email ||
+      !admin.password ||
+      !admin.cpassword ||
+      !admin.birthday ||
+      !admin.gender ||
+      !admin.userID
+    ) {
       return <ResponseObject>{
         success: false,
-        msg: "Not being able to get all required field!!!"
+        msg: "Not being able to get all required field!!!",
       };
     }
     if (admin.password !== admin.cpassword) {
       return <ResponseObject>{
         success: false,
-        msg: "Password doesn't match"
+        msg: "Password doesn't match",
       };
     }
-    const emailExist = await UserDetail.findOne({ email: admin.email }, { name: 1, userID: 1, email: 1 });
+    const emailExist = await UserDetail.findOne(
+      { email: admin.email },
+      { name: 1, userID: 1, email: 1 }
+    );
     if (emailExist) {
       return <ResponseObject>{ success: false, msg: "Email already Exist" };
     }
-    const isUserIDExist = await UserDetail.findOne({ userID: admin.userID }, { name: 1, userID: 1, email: 1 });
+    const isUserIDExist = await UserDetail.findOne(
+      { userID: admin.userID },
+      { name: 1, userID: 1, email: 1 }
+    );
     if (isUserIDExist) {
       return <ResponseObject>{ success: false, msg: "UserID already Exist" };
     }
@@ -144,23 +166,23 @@ const registerAdmin = async (admin: AdminRegistrationArgument): Promise<Response
       followingNo: 0,
       postNo: 0,
       friendsNo: 0,
-      storiesNo: 0
+      storiesNo: 0,
     });
     const saveUserRes = await creatingNewUserData.save();
     if (!saveUserRes) {
       return <ResponseObject>{
         success: false,
-        msg: "Server Error!,Failed registerd!!!"
+        msg: "Server Error!,Failed registerd!!!",
       };
     }
     return <ResponseObject>{
       success: true,
-      msg: "Admin register successfully"
+      msg: "Admin register successfully",
     };
   } catch (err) {
     return <ResponseObject>{
       success: false,
-      msg: "Admin registration failed"
+      msg: "Admin registration failed",
     };
   }
 };
@@ -189,8 +211,8 @@ const AuthAdmin = async () => {
         birthday: {
           year: new Date().getFullYear().toString(),
           month: (new Date().getMonth() + 1).toString(),
-          day: new Date().getDate().toString()
-        }
+          day: new Date().getDate().toString(),
+        },
       });
       if (!resRegistration.success) {
         console.log(resRegistration.msg);
@@ -203,7 +225,6 @@ const AuthAdmin = async () => {
     return;
   } catch (err) {
     console.log("Auth Failed");
-    // eslint-disable-next-line no-useless-return
     return;
   }
 };

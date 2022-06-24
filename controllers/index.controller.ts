@@ -1,4 +1,3 @@
-/* eslint-disable import/no-unresolved */
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
 
@@ -9,8 +8,8 @@ export default {
     } catch (err) {
       return res.status(500).json(<ResponseObject>{
         success: false,
-        msg: "Server Error, please try again later"
+        msg: "Server Error, please try again later",
       });
     }
-  }
+  },
 };
