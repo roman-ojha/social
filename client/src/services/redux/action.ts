@@ -13,3 +13,4 @@ export * from "./pages/home/followedUserPostData/action";
 export * from "./pages/home/homePagePostFieldViewValue/action";
 export * from "./pages/home/homePageUserPostFieldData/action";
 export * from "./pages/home/userPostResponseData/action";
+export * from "./components/progressBar/action";

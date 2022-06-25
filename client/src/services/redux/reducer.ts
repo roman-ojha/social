@@ -14,6 +14,7 @@ import setFollowedUserPostDataReducer from "./pages/home/followedUserPostData/re
 import homePagePostFieldViewValue from "./pages/home/homePagePostFieldViewValue/reducer";
 import homePageUserPostFieldDataReducer from "./pages/home/homePageUserPostFieldData/reducer";
 import setUserPostResponseData from "./pages/home/userPostResponseData/reducer";
+import progressBarReducer from "./components/progressBar/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   homePagePostFieldViewValue,
   homePageUserPostFieldDataReducer,
   setUserPostResponseData,
+  progressBarReducer,
 });
 
 export default reducer;
