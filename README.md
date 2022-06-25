@@ -19,7 +19,7 @@
 | Redis        | Caching            |
 | Firebase     | For Storing Images |
 
-## Features:
+## Main Feature:
 * You can Follow/UnFollow user.
   *  NOTE: If both the user follow each other then they will become friends
   * You would get the notification if someone follows you  
@@ -29,7 +29,7 @@
 * You can like the posts
 * You can comment on posts
 * You can see other user stories that you had followed on
-* You can see your's and other users profiles
+* You can see your's and other users profile
 * You can watch and search youtube videos
 * You can change profile picture, unique userID/username, displayed name or password
 
