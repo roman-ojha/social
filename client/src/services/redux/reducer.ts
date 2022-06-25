@@ -21,6 +21,9 @@ import sideBarDrawerReducer from "./components/sideBarDrawer/reducer";
 import userSuggestionReducer from "./components/userSuggestion/reducer";
 import moreProfileBoxReducer from "./components/moreProfile/reducer";
 import messageListReducer from "./components/messageBox/messageList/reducer";
+import changeMainPageMessageView from "./components/messageBox/mainPageMessageOnOff/reducer";
+import mainPageInnerMessageBoxOnOff from "./components/messageBox/mainPageInnerMessageBoxOnOff/reducer";
+import setCurrentUserMessageReducer from "./components/messageBox/currentUserMessage/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -45,6 +48,9 @@ const reducer = combineReducers({
   userSuggestionReducer,
   moreProfileBoxReducer,
   messageListReducer,
+  changeMainPageMessageView,
+  mainPageInnerMessageBoxOnOff,
+  setCurrentUserMessageReducer,
 });
 
 export default reducer;

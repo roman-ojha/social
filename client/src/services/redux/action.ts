@@ -20,3 +20,6 @@ export * from "./components/sideBarDrawer/action";
 export * from "./components/userSuggestion/action";
 export * from "./components/moreProfile/action";
 export * from "./components/messageBox/messageList/action";
+export * from "./components/messageBox/mainPageMessageOnOff/action";
+export * from "./components/messageBox/mainPageInnerMessageBoxOnOff/action";
+export * from "./components/messageBox/currentUserMessage/action";
