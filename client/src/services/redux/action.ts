@@ -16,3 +16,4 @@ export * from "./pages/home/userPostResponseData/action";
 export * from "./components/progressBar/action";
 export * from "./components/rightPartDrawer/action";
 export * from "./components/showLoadingSpinner/action";
+export * from "./components/sideBarDrawer/action";
