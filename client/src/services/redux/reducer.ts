@@ -16,6 +16,7 @@ import homePageUserPostFieldDataReducer from "./pages/home/homePageUserPostField
 import setUserPostResponseData from "./pages/home/userPostResponseData/reducer";
 import progressBarReducer from "./components/progressBar/reducer";
 import rightPartDrawerReducer from "./components/rightPartDrawer/reducer";
+import showLoadingSpinnerReducer from "./components/showLoadingSpinner/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -35,6 +36,7 @@ const reducer = combineReducers({
   setUserPostResponseData,
   progressBarReducer,
   rightPartDrawerReducer,
+  showLoadingSpinnerReducer,
 });
 
 export default reducer;

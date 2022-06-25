@@ -5,7 +5,7 @@ export enum RightPartDrawerActionTypes {
 }
 export interface OpenRightParDrawer {
   type: RightPartDrawerActionTypes.OPEN_RIGHT_PART_DRAWER;
-  payload: any;
+  payload: RightPartDrawerState;
 }
 
 export type RightPartDrawerAction = OpenRightParDrawer;
