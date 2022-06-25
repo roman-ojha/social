@@ -18,6 +18,7 @@ import progressBarReducer from "./components/progressBar/reducer";
 import rightPartDrawerReducer from "./components/rightPartDrawer/reducer";
 import showLoadingSpinnerReducer from "./components/showLoadingSpinner/reducer";
 import sideBarDrawerReducer from "./components/sideBarDrawer/reducer";
+import userSuggestionReducer from "./components/userSuggestion/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -39,6 +40,7 @@ const reducer = combineReducers({
   rightPartDrawerReducer,
   showLoadingSpinnerReducer,
   sideBarDrawerReducer,
+  userSuggestionReducer,
 });
 
 export default reducer;
