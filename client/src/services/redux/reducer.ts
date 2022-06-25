@@ -19,6 +19,7 @@ import rightPartDrawerReducer from "./components/rightPartDrawer/reducer";
 import showLoadingSpinnerReducer from "./components/showLoadingSpinner/reducer";
 import sideBarDrawerReducer from "./components/sideBarDrawer/reducer";
 import userSuggestionReducer from "./components/userSuggestion/reducer";
+import moreProfileBoxReducer from "./components/moreProfile/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -41,6 +42,7 @@ const reducer = combineReducers({
   showLoadingSpinnerReducer,
   sideBarDrawerReducer,
   userSuggestionReducer,
+  moreProfileBoxReducer,
 });
 
 export default reducer;
