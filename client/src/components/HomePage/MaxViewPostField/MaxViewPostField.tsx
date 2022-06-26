@@ -1,25 +1,29 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  profilePageDataAction,
-  setRootUserProfileDataState,
-} from "../../../services/redux-actions";
+// import {
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+// } from "../../../services/redux-actions";
 import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
 import FilePicker from "./FilePicker";
 import EmojiMart from "./EmojiMart";
 import InputField from "./InputField";
 import PostButton from "./PostButton";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../../services/redux";
 
 const MaxViewPostField = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
+  const { profilePageDataAction, setRootUserProfileDataState } =
+    bindActionCreators(actionCreators, dispatch);
 
   return (
     <>
@@ -41,14 +45,12 @@ const MaxViewPostField = () => {
                   ...userProfileDetailStore,
                   isRootUserFollowed: false,
                 };
-                dispatch(profilePageDataAction(userObj));
+                profilePageDataAction(userObj);
                 if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                  dispatch(
-                    setRootUserProfileDataState({
-                      fetchedRootUserProfileData: false,
-                      getRootUserProfileData: true,
-                    })
-                  );
+                  setRootUserProfileDataState({
+                    fetchedRootUserProfileData: false,
+                    getRootUserProfileData: true,
+                  });
                 }
                 history.push(
                   `/u/profile/${userProfileDetailStore.userID}/posts`

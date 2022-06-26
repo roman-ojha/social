@@ -3,25 +3,36 @@ import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import GlobalApi from "../../services/api/global";
 import UserApi from "../../services/api/global/user";
-import {
-  profilePageDataAction,
-  startProgressBar,
-  stopProgressBar,
-  setRootUserFriends,
-} from "../../services/redux-actions";
+// import {
+//   profilePageDataAction,
+//   startProgressBar,
+//   stopProgressBar,
+//   setRootUserFriends,
+// } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
 import { useHistory } from "react-router-dom";
 import constant from "../../constant/constant";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../services/redux";
 
 const Friends = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
-  const rootUserFriends = useSelector((state) => state.rootUserFriends);
+  const rootUserFriends = useSelector(
+    (state: AppState) => state.rootUserFriends
+  );
+  const {
+    startProgressBar,
+    stopProgressBar,
+    setRootUserFriends,
+    profilePageDataAction,
+  } = bindActionCreators(actionCreators, dispatch);
+
   const MainPageFriend = (props) => {
     return (
       <>
@@ -29,7 +40,7 @@ const Friends = () => {
           className="MainPage_SideBar_Friend_Outline"
           onClick={async () => {
             try {
-              dispatch(startProgressBar());
+              startProgressBar();
               const res = await GlobalApi.getFriendData(
                 props.friendDetail.userID
               );
@@ -40,13 +51,13 @@ const Friends = () => {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
                 };
-                dispatch(profilePageDataAction(userObj));
+                profilePageDataAction(userObj);
                 history.push(`/u/profile/${props.friendDetail.userID}/posts`);
               } else {
                 // error
                 toastError(userData.msg);
               }
-              dispatch(stopProgressBar());
+              stopProgressBar();
             } catch (err) {
               if (err.response) {
                 if (err.response.data.success === false) {
@@ -55,7 +66,7 @@ const Friends = () => {
               } else {
                 toastError("Some Problem Occur, Please Try again later!!!");
               }
-              dispatch(stopProgressBar());
+              stopProgressBar();
             }
           }}
         >
@@ -148,12 +159,10 @@ const Friends = () => {
         const res = await UserApi.getFriends(userProfileDetailStore.id);
         const data = await res.data;
         if (res.status === 200 && data.success) {
-          dispatch(
-            setRootUserFriends({
-              fetchedFriends: true,
-              friends: data.friends,
-            })
-          );
+          setRootUserFriends({
+            fetchedFriends: true,
+            friends: data.friends,
+          });
         } else {
           toastError("Some Error Occur While Fetching Friends Data");
         }

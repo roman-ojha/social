@@ -1,26 +1,34 @@
-import React from "react";
+import React, { ChangeEvent, MouseEventHandler } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  userPostResponseData,
-  homePageUserPostFieldDataAction,
-  showLoadingSpinner,
-  setHomePagePostFieldViewValue,
-} from "../../../services/redux-actions";
+// import {
+//   userPostResponseData,
+//   homePageUserPostFieldDataAction,
+//   showLoadingSpinner,
+//   setHomePagePostFieldViewValue,
+// } from "../../../services/redux-actions";
 import { Icon } from "@iconify/react";
 import Api from "../../../services/api/pages/homeApi";
 import { toastError, toastSuccess } from "../../../services/toast";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../../services/redux";
 
 const PostButton = () => {
   const dispatch = useDispatch();
   const homePageUserPostFieldData = useSelector((state) => {
     return state.homePageUserPostFieldDataReducer;
   });
+  const {
+    userPostResponseData,
+    homePageUserPostFieldDataAction,
+    showLoadingSpinner,
+    setHomePagePostFieldViewValue,
+  } = bindActionCreators(actionCreators, dispatch);
 
   // uploading post to database
   const uploadUserPost = async (e) => {
     try {
       e.preventDefault();
-      dispatch(showLoadingSpinner(true));
+      showLoadingSpinner(true);
       var image = document.getElementById("image-input").files[0];
       let data = new FormData();
       data.append("image", image);
@@ -30,20 +38,18 @@ const PostButton = () => {
       const resData = await res.data;
       if (res.status === 200 && resData.success) {
         toastSuccess(resData.msg);
-        dispatch(userPostResponseData({ ...resData.data, date: new Date() }));
-        dispatch(
-          homePageUserPostFieldDataAction({
-            ...homePageUserPostFieldData,
-            content: "",
-            image: {},
-          })
-        );
+        userPostResponseData({ ...resData.data, date: new Date() });
+        homePageUserPostFieldDataAction({
+          ...homePageUserPostFieldData,
+          content: "",
+          image: {},
+        });
       } else {
         // error
         toastError(resData.msg);
       }
-      dispatch(showLoadingSpinner(false));
-      dispatch(setHomePagePostFieldViewValue("min"));
+      showLoadingSpinner(false);
+      setHomePagePostFieldViewValue("min");
     } catch (err) {
       if (err.response) {
         if (err.response.data.success === false) {
@@ -52,7 +58,7 @@ const PostButton = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(showLoadingSpinner(false));
+      showLoadingSpinner(false);
     }
   };
 
@@ -63,13 +69,11 @@ const PostButton = () => {
           className="HomePage_MaxView_UserPost_Field_Back_Icon"
           icon="eva:arrow-back-fill"
           onClick={() => {
-            dispatch(
-              homePageUserPostFieldDataAction({
-                ...homePageUserPostFieldData,
-                content: homePageUserPostFieldData.content,
-              })
-            );
-            dispatch(setHomePagePostFieldViewValue("min"));
+            homePageUserPostFieldDataAction({
+              ...homePageUserPostFieldData,
+              content: homePageUserPostFieldData.content,
+            });
+            setHomePagePostFieldViewValue("min");
           }}
         />
         <button

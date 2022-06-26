@@ -1,5 +1,5 @@
 export interface NotificationBoxState {
-  notificationData: [];
+  notificationData: { userID: string; picture: string }[];
   open: boolean;
 }
 

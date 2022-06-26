@@ -3,17 +3,23 @@ import { Helmet } from "react-helmet";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import {
-  setHomePagePostFieldViewValue,
-  profilePageDataAction,
-  setRootUserProfileDataState,
-} from "../../services/redux-actions";
+// import {
+//   setHomePagePostFieldViewValue,
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+// } from "../../services/redux-actions";
 import constant from "../../constant/constant";
-import { AppState } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../services/redux";
 
 const MinViewPostField = () => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const {
+    profilePageDataAction,
+    setRootUserProfileDataState,
+    setHomePagePostFieldViewValue,
+  } = bindActionCreators(actionCreators, dispatch);
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
@@ -42,14 +48,12 @@ const MinViewPostField = () => {
               ...userProfileDetailStore,
               isRootUserFollowed: false,
             };
-            dispatch(profilePageDataAction(userObj));
+            profilePageDataAction(userObj);
             if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-              dispatch(
-                setRootUserProfileDataState({
-                  fetchedRootUserProfileData: false,
-                  getRootUserProfileData: true,
-                })
-              );
+              setRootUserProfileDataState({
+                fetchedRootUserProfileData: false,
+                getRootUserProfileData: true,
+              });
             }
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
@@ -62,7 +66,7 @@ const MinViewPostField = () => {
           value={homePageUserPostFieldData.content}
           onChange={() => {}}
           onClick={() => {
-            dispatch(setHomePagePostFieldViewValue("max"));
+            setHomePagePostFieldViewValue("max");
           }}
         />
       </div>

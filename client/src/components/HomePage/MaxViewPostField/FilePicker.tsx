@@ -1,22 +1,30 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  homePageUserPostFieldDataAction,
-  displayUserPostFieldEmojiPicker,
-} from "../../../services/redux-actions";
+// import {
+//   homePageUserPostFieldDataAction,
+//   displayUserPostFieldEmojiPicker,
+// } from "../../../services/redux-actions";
 import { Icon } from "@iconify/react";
 import { toastInfo } from "../../../services/toast";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../../services/redux";
 
 const FilePicker = () => {
   const dispatch = useDispatch();
-  const displayEmojiPicker = useSelector((state) => state.displayEmojiPicker);
-  const homePageUserPostFieldData = useSelector((state) => {
+  const displayEmojiPicker = useSelector(
+    (state: AppState) => state.displayEmojiPicker
+  );
+  const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
   });
+  const { homePageUserPostFieldDataAction, displayUserPostFieldEmojiPicker } =
+    bindActionCreators(actionCreators, dispatch);
 
   const getUserPostFiledImage = (event) => {
     try {
-      var image = document.getElementsByClassName("MaxView_UserPost_Image")[0];
+      var image = document.getElementsByClassName(
+        "MaxView_UserPost_Image"
+      )[0] as HTMLImageElement;
       image.style.display = "inline";
       image.style.position = "static";
       image.src = URL.createObjectURL(event.target.files[0]);
@@ -53,13 +61,11 @@ const FilePicker = () => {
           className="HomePage_MaxView_UserPost_Field_Emoji_Icon"
           icon="entypo:emoji-happy"
           onClick={() => {
-            dispatch(
-              homePageUserPostFieldDataAction({
-                ...homePageUserPostFieldData,
-                content: homePageUserPostFieldData.content,
-              })
-            );
-            dispatch(displayUserPostFieldEmojiPicker(!displayEmojiPicker));
+            homePageUserPostFieldDataAction({
+              ...homePageUserPostFieldData,
+              content: homePageUserPostFieldData.content,
+            });
+            displayUserPostFieldEmojiPicker(!displayEmojiPicker);
           }}
         />
       </div>

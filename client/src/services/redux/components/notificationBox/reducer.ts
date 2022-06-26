@@ -9,7 +9,7 @@ const initialState: NotificationBoxState = {
   open: false,
 };
 
-const notificationBoxReducer = (
+const notificationBox = (
   state: NotificationBoxState = initialState,
   action: NotificationBoxAction
 ): NotificationBoxState => {
@@ -29,4 +29,4 @@ const notificationBoxReducer = (
   }
 };
 
-export default notificationBoxReducer;
+export default notificationBox;
