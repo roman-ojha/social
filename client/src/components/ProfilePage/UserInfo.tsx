@@ -2,35 +2,48 @@ import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
-import {
-  mainPageMessageViewOnOff,
-  mainPageMessageInnerViewOnOff,
-  currentUserMessageAction,
-  startProgressBar,
-  stopProgressBar,
-  profilePageDataAction,
-} from "../../services/redux-actions";
+// import {
+//   mainPageMessageViewOnOff,
+//   mainPageMessageInnerViewOnOff,
+//   currentUserMessageAction,
+//   startProgressBar,
+//   stopProgressBar,
+//   profilePageDataAction,
+// } from "../../services/redux-actions";
 import { instance as axios } from "../../services/axios";
 import { toastError, toastSuccess } from "../../services/toast";
 import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import constant from "../../constant/constant";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../services/redux";
+import { AxiosError } from "axios";
 
-const UserInfo = () => {
+const UserInfo = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const profilePageData = useSelector((state) => state.profilePageDataReducer);
+  const profilePageData = useSelector(
+    (state: AppState) => state.profilePageDataReducer
+  );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+  const {
+    mainPageMessageViewOnOff,
+    mainPageMessageInnerViewOnOff,
+    currentUserMessageAction,
+    startProgressBar,
+    stopProgressBar,
+    profilePageDataAction,
+  } = bindActionCreators(actionCreators, dispatch);
 
-  const followUser = async () => {
+  const followUser = async (): Promise<void> => {
     // writing logic for followuser
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const followedTo = {
         userID: profilePageData.userID,
         id: profilePageData.id,
@@ -54,10 +67,11 @@ const UserInfo = () => {
       }
       if (response.status === 200 && data.success) {
         toastSuccess(data.msg);
-        dispatch(profilePageDataAction(userObj));
-        dispatch(stopProgressBar());
+        profilePageDataAction(userObj);
+        stopProgressBar();
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -65,13 +79,13 @@ const UserInfo = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
-  const unFollowUser = async () => {
+  const unFollowUser = async (): Promise<void> => {
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const unfollowedTo = {
         userID: profilePageData.userID,
         id: profilePageData.id,
@@ -93,10 +107,11 @@ const UserInfo = () => {
       };
       if (response.status === 200 && data.success) {
         toastSuccess(data.msg);
-        dispatch(profilePageDataAction(userObj));
-        dispatch(stopProgressBar());
+        profilePageDataAction(userObj);
+        stopProgressBar();
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -104,27 +119,25 @@ const UserInfo = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
-  const showInnerMessage = async () => {
+  const showInnerMessage = async (): Promise<void> => {
     // before getting new message we will reset the previous message stored into redux
     try {
       if (isMax850px) {
         history.push("/u/message");
       } else {
-        dispatch(mainPageMessageViewOnOff(true));
+        mainPageMessageViewOnOff(true);
       }
-      dispatch(
-        currentUserMessageAction({
-          messageToId: profilePageData.id,
-          messageToUserId: profilePageData.userID,
-          receiverPicture: profilePageData.picture,
-          message: [],
-        })
-      );
-      dispatch(mainPageMessageInnerViewOnOff(true));
+      currentUserMessageAction({
+        messageToId: profilePageData.id,
+        messageToUserId: profilePageData.userID,
+        receiverPicture: profilePageData.picture,
+        message: [],
+      });
+      mainPageMessageInnerViewOnOff(true);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",
@@ -143,18 +156,17 @@ const UserInfo = () => {
       } else {
         const resData = await resMessage.data.data;
         // after getting message we will store that message into redux
-        dispatch(
-          currentUserMessageAction({
-            messageToId: resData.messageToId,
-            messageToUserId: profilePageData.userID,
-            receiverPicture: profilePageData.picture,
-            // roomID: resData.roomID,
-            message: resData.message,
-            fetchedInnerMessage: true,
-          })
-        );
+        currentUserMessageAction({
+          messageToId: resData.messageToId,
+          messageToUserId: profilePageData.userID,
+          receiverPicture: profilePageData.picture,
+          // roomID: resData.roomID,
+          message: resData.message,
+          fetchedInnerMessage: true,
+        });
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);

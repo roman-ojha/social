@@ -2,9 +2,12 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { AppState } from "../../services/redux";
 
-const PageRoute = () => {
-  const profilePageData = useSelector((state) => state.profilePageDataReducer);
+const PageRoute = (): JSX.Element => {
+  const profilePageData = useSelector(
+    (state: AppState) => state.profilePageDataReducer
+  );
   return (
     <>
       <nav className="ProfilePage_UserContent_Route_Container">
