@@ -1,6 +1,10 @@
 export interface ProfilePageDataState {
+  name: string;
+  email: string;
+  picture: string;
+  id: string;
   userID: string;
-  post: [];
+  posts: { picture: { url: string } }[];
   friends: [];
   followings: [];
   followers: [];

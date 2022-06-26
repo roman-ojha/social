@@ -5,8 +5,12 @@ import {
 } from "./types";
 
 const initialState: ProfilePageDataState = {
+  name: "",
+  email: "",
+  picture: "",
+  id: "",
   userID: "",
-  post: [],
+  posts: [],
   friends: [],
   followings: [],
   followers: [],

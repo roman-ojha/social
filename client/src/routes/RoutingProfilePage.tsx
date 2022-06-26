@@ -4,8 +4,15 @@ import ProfileFriends from "../components/ProfileFriends";
 import ProfileAlbums from "../components/ProfileAlbums";
 import { useLocation } from "react-router-dom";
 import UserPosts from "../components/ProfilePage/UserPosts";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
-const RoutingProfilePage = (props) => {
+interface RoutingProfilePageProps {
+  profilePageData: ProfilePageDataState;
+}
+
+const RoutingProfilePage: React.FC<RoutingProfilePageProps> = ({
+  profilePageData,
+}): JSX.Element => {
   const location = useLocation();
 
   useEffect(() => {
@@ -63,7 +70,7 @@ const RoutingProfilePage = (props) => {
           component={() => {
             return (
               <>
-                <UserPosts profilePageData={props.profilePageData} />
+                <UserPosts profilePageData={profilePageData} />
               </>
             );
           }}
@@ -74,7 +81,7 @@ const RoutingProfilePage = (props) => {
           component={() => {
             return (
               <>
-                <ProfileAlbums profilePageData={props.profilePageData} />
+                <ProfileAlbums profilePageData={profilePageData} />
               </>
             );
           }}

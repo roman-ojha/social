@@ -2,8 +2,16 @@ import React from "react";
 import "../styles/components/profileAlbum.css";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
+import { AppState } from "../services/redux";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
-const ProfileAlbums = (props) => {
+interface ProfileAlbumsProps {
+  profilePageData: ProfilePageDataState;
+}
+
+const ProfileAlbums: React.FC<ProfileAlbumsProps> = ({
+  profilePageData,
+}): JSX.Element => {
   const loadingContainerSpinnerStyle = {
     width: "100%",
     height: "100%",
@@ -23,18 +31,18 @@ const ProfileAlbums = (props) => {
   };
 
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
 
   return (
     <>
       <Helmet>
-        <title>{props.profilePageData.userID}/albums</title>
+        <title>{profilePageData.userID}/albums</title>
       </Helmet>
-      {props.profilePageData.userID === userProfileDetailStore.userID &&
+      {profilePageData.userID === userProfileDetailStore.userID &&
       rootUserProfileDataState.fetchedRootUserProfileData === false ? (
         // if profile page is of rootUser and post data had not been fetched then we will run loading spinner
         <>
@@ -44,7 +52,7 @@ const ProfileAlbums = (props) => {
         </>
       ) : (
         <div className="ProfilePage_Albums_Container">
-          {props.profilePageData.posts.map((post, index) => {
+          {profilePageData.posts.map((post, index) => {
             if (post.picture.url) {
               return (
                 <div className="ProfilePage_Album_Container" key={index}>

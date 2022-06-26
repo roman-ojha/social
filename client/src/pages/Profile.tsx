@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instance as axios } from "../services/axios";
-import {
-  profilePageDataAction,
-  setRootUserProfileDataState,
-  setRootUserPostData,
-} from "../services/redux-actions/index";
+// import {
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+//   setRootUserPostData,
+// } from "../services/redux-actions/index";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Helmet } from "react-helmet";
@@ -15,20 +15,30 @@ import RoutingProfilePage from "../routes/RoutingProfilePage";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import UserInfo from "../components/ProfilePage/UserInfo";
 import PageRoute from "../components/ProfilePage/PageRoute";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../services/redux";
+import { AxiosError } from "axios";
 
-const Profile = () => {
+const Profile = (): JSX.Element => {
   const history = useHistory();
-  const params = useParams();
+  const params: { userID: string } = useParams();
   const location = useLocation();
   const dispatch = useDispatch();
-  const [fetchedAllData, setFetchedAllData] = useState(false);
-  const profilePageData = useSelector((state) => state.profilePageDataReducer);
+  const [fetchedAllData, setFetchedAllData] = useState<boolean>(false);
+  const profilePageData = useSelector(
+    (state: AppState) => state.profilePageDataReducer
+  );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
+  const {
+    profilePageDataAction,
+    setRootUserProfileDataState,
+    setRootUserPostData,
+  } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     const initializeProfilePage = async () => {
@@ -51,23 +61,21 @@ const Profile = () => {
             ...userData.searchedUser,
             isRootUserFollowed: userData.isRootUserFollowed,
           };
-          dispatch(profilePageDataAction(userObj));
+          profilePageDataAction(userObj);
           setFetchedAllData(true);
           if (params.userID === userProfileDetailStore.userID) {
-            dispatch(
-              setRootUserPostData({
-                fetchedPostData: true,
-                posts: userData.searchedUser.posts,
-              })
-            );
-            dispatch(
-              setRootUserProfileDataState({
-                fetchedRootUserProfileData: true,
-                getRootUserProfileData: false,
-              })
-            );
+            setRootUserPostData({
+              fetchedPostData: true,
+              posts: userData.searchedUser.posts,
+            });
+
+            setRootUserProfileDataState({
+              fetchedRootUserProfileData: true,
+              getRootUserProfileData: false,
+            });
           }
-        } catch (err) {
+        } catch (error) {
+          const err = error as AxiosError;
           if (err.response) {
             if (err.response.data.success === false) {
               toastError(err.response.data.msg);

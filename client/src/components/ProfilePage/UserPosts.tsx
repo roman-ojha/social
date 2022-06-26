@@ -3,20 +3,35 @@ import PostBox from "../PostBox/PostBox";
 import { useSelector, useDispatch } from "react-redux";
 import profileApi from "../../services/api/pages/profileApi";
 import { toastError } from "../../services/toast";
-import {
-  setRootUserProfileDataState,
-  setRootUserPostData,
-  profilePageDataAction,
-} from "../../services/redux-actions";
+// import {
+//   setRootUserProfileDataState,
+//   setRootUserPostData,
+//   profilePageDataAction,
+// } from "../../services/redux-actions";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../services/redux";
+import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
-const UserPosts = (props) => {
+interface UserPostsProps {
+  profilePageData: ProfilePageDataState;
+}
+
+const UserPosts: React.FC<UserPostsProps> = ({
+  profilePageData,
+}): JSX.Element => {
   const dispatch = useDispatch();
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
+  const {
+    setRootUserProfileDataState,
+    setRootUserPostData,
+    profilePageDataAction,
+  } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     const getRootUserProfilePostData = async () => {
@@ -24,26 +39,23 @@ const UserPosts = (props) => {
         const resPost = await profileApi.getUserPosts();
         const resPostData = resPost.data;
         if (resPost.status === 200 && resPostData.success) {
-          dispatch(
-            setRootUserPostData({
-              fetchedPostData: true,
-              posts: resPostData.posts,
-            })
-          );
-          dispatch(
-            setRootUserProfileDataState({
-              fetchedRootUserProfileData: true,
-              getRootUserProfileData: false,
-            })
-          );
+          setRootUserPostData({
+            fetchedPostData: true,
+            posts: resPostData.posts,
+          });
+          setRootUserProfileDataState({
+            fetchedRootUserProfileData: true,
+            getRootUserProfileData: false,
+          });
           const userObj = {
             ...userProfileDetailStore,
             isRootUserFollowed: false,
             posts: resPostData.posts,
           };
-          dispatch(profilePageDataAction(userObj));
+          profilePageDataAction(userObj);
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -56,13 +68,13 @@ const UserPosts = (props) => {
     if (
       rootUserProfileDataState.getRootUserProfileData &&
       !rootUserProfileDataState.fetchedRootUserProfileData &&
-      props.profilePageData.userID === userProfileDetailStore.userID
+      profilePageData.userID === userProfileDetailStore.userID
     ) {
       getRootUserProfilePostData();
     }
   }, [
     dispatch,
-    props.profilePageData.userID,
+    profilePageData.userID,
     rootUserProfileDataState,
     userProfileDetailStore,
     userProfileDetailStore.userID,
@@ -89,7 +101,7 @@ const UserPosts = (props) => {
   return (
     <>
       <>
-        {props.profilePageData.userID === userProfileDetailStore.userID &&
+        {profilePageData.userID === userProfileDetailStore.userID &&
         rootUserProfileDataState.fetchedRootUserProfileData === false ? (
           // if profile page is of rootUser and post data had not been fetched then we will run loading spinner
           <>
@@ -98,15 +110,15 @@ const UserPosts = (props) => {
             </div>
           </>
         ) : (
-          props.profilePageData.posts.map((value, index) => (
+          profilePageData.posts.map((value, index) => (
             <PostBox
               userMainInformation={{
                 // store searched user essintal information
-                name: props.profilePageData.name,
-                email: props.profilePageData.email,
-                picture: props.profilePageData.picture,
-                userID: props.profilePageData.userID,
-                id: props.profilePageData.id,
+                name: profilePageData.name,
+                email: profilePageData.email,
+                picture: profilePageData.picture,
+                userID: profilePageData.userID,
+                id: profilePageData.id,
               }}
               userFeedData={value}
               key={index}
