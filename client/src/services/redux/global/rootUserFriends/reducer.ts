@@ -9,7 +9,7 @@ const initialState: RootUserFriendsState = {
   friends: [],
 };
 
-const rootUserFriendsReducer = (
+const rootUserFriends = (
   state: RootUserFriendsState = initialState,
   action: RootUserFriendsAction
 ) => {
@@ -24,4 +24,4 @@ const rootUserFriendsReducer = (
   }
 };
 
-export default rootUserFriendsReducer;
+export default rootUserFriends;

@@ -5,8 +5,8 @@ export interface FollowedByState {
 }
 
 export enum FollowedByActionTypes {
-  SET_FOLLOWED_BY_USER = "setFollowedByUser",
-  SET_IS_FOLLOWED_FOLLOWED_BY_USER = "setIsFollowedFollowedByUser",
+  SET_FOLLOWED_BY_USER = "followedByUser",
+  SET_IS_FOLLOWED_FOLLOWED_BY_USER = "isFollowedFollowedByUser",
 }
 export interface SetFollowedByAction {
   type: FollowedByActionTypes.SET_FOLLOWED_BY_USER;

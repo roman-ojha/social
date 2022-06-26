@@ -25,7 +25,7 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const { setUserStories, userProfileDetailAction, setFollowedByUser } =
+  const { setUserStories, userProfileDetailAction, followedByUserAction } =
     bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
     const getUserData = async () => {
@@ -44,7 +44,7 @@ const Index = () => {
               followedUserPostDataAction(userData.data.followedUserPost)
             );
             dispatch(userSuggestionAction(userData.data.userSuggestion));
-            setFollowedByUser(userData.data.followedBy);
+            followedByUserAction(userData.data.followedBy);
             setUserStories(userData.data.userStories);
             setRenderMainPage(true);
           }

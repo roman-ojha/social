@@ -19,7 +19,7 @@ const commentBoxReducer = (
   action: CommentBoxAction
 ) => {
   switch (action.type) {
-    case CommentBoxActionTypes.SET_COMMENT_BOX_DATA:
+    case CommentBoxActionTypes.COMMENT_BOX:
       return action.payload;
     default:
       return state;

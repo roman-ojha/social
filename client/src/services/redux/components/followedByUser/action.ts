@@ -5,7 +5,7 @@ import {
 } from "./types";
 import { Dispatch } from "react";
 
-export const setFollowedByUser = (data: FollowedByState[]) => {
+export const followedByUserAction = (data: FollowedByState[]) => {
   return (dispatch: Dispatch<FollowedByAction>) => {
     dispatch({
       type: FollowedByActionTypes.SET_FOLLOWED_BY_USER,
@@ -14,7 +14,7 @@ export const setFollowedByUser = (data: FollowedByState[]) => {
   };
 };
 
-export const setIsFollowedFollowedByUser = (data: FollowedByState) => {
+export const isFollowedFollowedByUser = (data: FollowedByState) => {
   return (dispatch: Dispatch<FollowedByAction>) => {
     dispatch({
       type: FollowedByActionTypes.SET_IS_FOLLOWED_FOLLOWED_BY_USER,
