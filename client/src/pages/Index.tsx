@@ -5,16 +5,16 @@ import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import LoadingScreen from "../components/IndexPage/LoadingScreen";
 import ReturnMainPage from "../components/IndexPage/ReturnMainPage";
-import {
-  // userProfileDetailAction,
-  userProfilePostAction,
-  followedUserPostDataAction,
-  userSuggestionAction,
-  // followedByUserAction,
-  // setUserStories,
-  appendOnCurrentInnerUserMessage,
-  appendMessageOnMessageListAction,
-} from "../services/redux-actions/index";
+// import
+// {userProfileDetailAction,
+// userProfilePostAction,
+// followedUserPostDataAction,
+// userSuggestionAction,
+// followedByUserAction,
+// setUserStories,
+// appendOnCurrentInnerUserMessage,
+// appendMessageOnMessageListAction,
+// } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
 import { toastError } from "../services/toast";
@@ -25,8 +25,16 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const { setUserStories, userProfileDetailAction, followedByUserAction } =
-    bindActionCreators(actionCreators, dispatch);
+  const {
+    setUserStories,
+    userProfileDetailAction,
+    followedByUserAction,
+    userProfilePostAction,
+    followedUserPostDataAction,
+    userSuggestionAction,
+    appendOnCurrentInnerUserMessage,
+    appendMessageOnMessageListAction,
+  } = bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
     const getUserData = async () => {
       try {
@@ -37,13 +45,9 @@ const Index = () => {
             history.push("/userid?uid=undefined");
           } else {
             userProfileDetailAction(userData.data.userProfileDetail);
-            dispatch(
-              userProfilePostAction(userData.data.userProfileDetail.posts)
-            );
-            dispatch(
-              followedUserPostDataAction(userData.data.followedUserPost)
-            );
-            dispatch(userSuggestionAction(userData.data.userSuggestion));
+            userProfilePostAction(userData.data.userProfileDetail.posts);
+            followedUserPostDataAction(userData.data.followedUserPost);
+            userSuggestionAction(userData.data.userSuggestion);
             followedByUserAction(userData.data.followedBy);
             setUserStories(userData.data.userStories);
             setRenderMainPage(true);
@@ -61,23 +65,19 @@ const Index = () => {
           );
           socket.on("send-message-client", (res) => {
             if (res.success !== false) {
-              dispatch(
-                appendOnCurrentInnerUserMessage({
+              appendOnCurrentInnerUserMessage({
+                ...res.msgInfo,
+                _id: `${Math.random()}`,
+              });
+              appendMessageOnMessageListAction({
+                msgInfo: {
                   ...res.msgInfo,
                   _id: `${Math.random()}`,
-                })
-              );
-              dispatch(
-                appendMessageOnMessageListAction({
-                  msgInfo: {
-                    ...res.msgInfo,
-                    _id: `${Math.random()}`,
-                  },
-                  id: res.msgInfo.senderId,
-                  receiverPicture: res.senderPicture,
-                  messageToUserId: res.msgInfo.senderUserId,
-                })
-              );
+                },
+                id: res.msgInfo.senderId,
+                receiverPicture: res.senderPicture,
+                messageToUserId: res.msgInfo.senderUserId,
+              });
             }
           });
         } else {

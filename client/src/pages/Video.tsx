@@ -11,14 +11,14 @@ import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import { toastError } from "../services/toast";
 import videoApi from "../services/api/pages/Video";
 import { bindActionCreators } from "redux";
-import { RootState, actionCreators } from "../services/redux";
+import { AppState, actionCreators } from "../services/redux";
 import ResponseObject from "src/interface/responseObject";
 import { VideoPageState } from "src/services/redux/pages/video/types";
 
 const Video = () => {
   const dispatch = useDispatch();
   const videoPageData = useSelector(
-    (state: RootState) => state.videoPageDataReducer
+    (state: AppState) => state.videoPageDataReducer
   );
   const { setVideoPageData } = bindActionCreators(actionCreators, dispatch);
   // const scrapeVideo = async () => {

@@ -4,7 +4,7 @@ import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { RootState, actionCreators } from "../../services/redux";
+import { AppState, actionCreators } from "../../services/redux";
 
 const FriendStory = (props) => {
   const history = useHistory();

@@ -4,11 +4,11 @@ import "../../styles/components/mainPageStory.css";
 import { useMediaQuery } from "react-responsive";
 import AddStory from "./AddStory";
 import FriendStory from "./FriendStory";
-import { RootState } from "../../services/redux";
+import { AppState } from "../../services/redux";
 
 const MainPageStory = () => {
   const userStoriesStore = useSelector(
-    (state: RootState) => state.userStoriesReducer
+    (state: AppState) => state.userStoriesReducer
   );
   const isMobile = useMediaQuery({
     query: "(max-width: 480px)",

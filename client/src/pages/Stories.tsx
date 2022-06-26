@@ -5,15 +5,15 @@ import "../styles/pages/StoriesPage.css";
 import { useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { RootState } from "../services/redux";
+import { AppState } from "../services/redux";
 
 const Stories = () => {
   const history = useHistory();
   const userStoriesStore = useSelector(
-    (state: RootState) => state.userStoriesReducer
+    (state: AppState) => state.userStoriesReducer
   );
   const userProfileDetailStore = useSelector(
-    (state: RootState) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   useEffect(() => {
     const caption: string[] = [];

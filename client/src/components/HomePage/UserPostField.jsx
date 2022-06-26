@@ -18,6 +18,8 @@ const UserPostField = () => {
         <MaxViewPostField />
       </>
     );
+  } else {
+    <></>;
   }
 };
 
