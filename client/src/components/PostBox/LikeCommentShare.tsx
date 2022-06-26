@@ -1,34 +1,50 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import Api from "../../services/api/components/postBox";
-import {
-  commentBoxAction,
-  stopProgressBar,
-  startProgressBar,
-} from "../../services/redux-actions";
+// import {
+//   commentBoxAction,
+//   stopProgressBar,
+//   startProgressBar,
+// } from "../../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { toastError } from "../../services/toast";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../../../src/services/redux";
+import { PostBoxProps } from "./PostBox";
+import { AxiosError } from "axios";
 
-const LikeCommentShare = (props) => {
+interface LikeCommentShareProps {
+  userFeedData: PostBoxProps["userFeedData"];
+  userMainInformation: PostBoxProps["userMainInformation"];
+  commentNo: number;
+}
+
+const LikeCommentShare: React.FC<LikeCommentShareProps> = ({
+  commentNo,
+  userFeedData,
+  userMainInformation,
+}): JSX.Element => {
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const dispatch = useDispatch();
   const [likeInfo, setLikeInfo] = useState({
-    likeNo: props.userFeedData.likes.No,
-    isLikedPost: props.userFeedData.likes.by
-      ? props.userFeedData.likes.by.some(
+    likeNo: userFeedData.likes.No,
+    isLikedPost: userFeedData.likes.by
+      ? userFeedData.likes.by.some(
           (el) => el.user === userProfileDetailStore.id
         )
       : [],
   });
+  const { commentBoxAction, stopProgressBar, startProgressBar } =
+    bindActionCreators(actionCreators, dispatch);
 
-  const like = async () => {
+  const like = async (): Promise<void> => {
     try {
       const res = await Api.like({
-        postID: props.userFeedData.id,
-        toUserId: props.userMainInformation.userID,
-        toId: props.userMainInformation.id,
+        postID: userFeedData.id,
+        toUserId: userMainInformation.userID,
+        toId: userMainInformation.id,
         likeNo: likeInfo.likeNo,
       });
       const data = await res.data;
@@ -47,7 +63,8 @@ const LikeCommentShare = (props) => {
           isLikedPost: false,
         });
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -58,32 +75,31 @@ const LikeCommentShare = (props) => {
     }
   };
 
-  const getComment = async () => {
+  const getComment = async (): Promise<void> => {
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await Api.getComment({
-        postID: props.userFeedData.id,
-        userID: props.userMainInformation.userID,
-        id: props.userMainInformation.id,
+        postID: userFeedData.id,
+        userID: userMainInformation.userID,
+        id: userMainInformation.id,
       });
       const data = await res.data;
       if (res.status === 200 && data.success) {
-        dispatch(
-          commentBoxAction({
-            openCommentBox: true,
-            postID: props.userFeedData.id,
-            toId: props.userMainInformation.id,
-            toUserId: props.userMainInformation.userID,
-            commented: false,
-            newComment: "",
-            comments: data.comment.by,
-          })
-        );
+        commentBoxAction({
+          openCommentBox: true,
+          postID: userFeedData.id,
+          toId: userMainInformation.id,
+          toUserId: userMainInformation.userID,
+          commented: false,
+          newComment: "",
+          comments: data.comment.by,
+        });
       } else {
         toastError(data.msg);
       }
-      dispatch(stopProgressBar());
-    } catch (err) {
+      stopProgressBar();
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -91,7 +107,7 @@ const LikeCommentShare = (props) => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
@@ -120,7 +136,7 @@ const LikeCommentShare = (props) => {
               getComment();
             }}
           />
-          <p>{props.commentNo}</p>
+          <p>{commentNo}</p>
         </div>
         <Icon className="HomePage_Feed_Share_Icon" icon="bx:share" />
         <Icon className="HomePage_Feed_More_Info_Icon" icon="ep:more" />

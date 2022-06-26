@@ -5,7 +5,7 @@ import {
 } from "./types";
 import { Dispatch } from "react";
 
-export const setCommentBoxData = (data: CommentBoxState) => {
+export const commentBoxAction = (data: CommentBoxState) => {
   return (dispatch: Dispatch<CommentBoxAction>) => {
     dispatch({
       type: CommentBoxActionTypes.COMMENT_BOX,

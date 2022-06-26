@@ -8,7 +8,7 @@ import CommentField from "./CommentField";
 import CommentedUser from "./CommentedUser";
 import UserPostType from "../../interface/userPost";
 
-interface PostBoxProps {
+export interface PostBoxProps {
   userMainInformation: {
     name: string;
     email: string;
@@ -19,11 +19,19 @@ interface PostBoxProps {
   userFeedData: UserPostType;
 }
 
+export interface PostInformationInterface {
+  postPicture: string | undefined;
+  postCaption: string;
+  userPicture: string;
+  userID: string;
+  userName: string;
+}
+
 const PostBox: React.FC<PostBoxProps> = ({
   userMainInformation,
   userFeedData,
-}) => {
-  const [postInformation] = useState({
+}): JSX.Element => {
+  const [postInformation] = useState<PostInformationInterface>({
     postPicture: userFeedData.picture ? userFeedData.picture.url : undefined,
     postCaption: userFeedData.caption,
     userPicture: userMainInformation.picture,

@@ -7,4 +7,8 @@ export default interface UserPostType {
   };
   date: Date;
   id: string;
+  likes: {
+    No: number;
+    by: { user: string }[];
+  };
 }
