@@ -1,6 +1,7 @@
+import React from "react";
 import { toast } from "react-toastify";
 
-export function toastError(error) {
+export function toastError(error: string): React.ReactText {
   return toast.error(error, {
     position: "bottom-right",
     autoClose: 3000,
@@ -13,7 +14,7 @@ export function toastError(error) {
   });
 }
 
-export function toastSuccess(message) {
+export function toastSuccess(message: string): React.ReactText {
   return toast.success(message, {
     position: "bottom-right",
     autoClose: 3000,
@@ -26,7 +27,7 @@ export function toastSuccess(message) {
   });
 }
 
-export function toastInfo(info) {
+export function toastInfo(info: string): React.ReactText {
   return toast.info(info, {
     position: "bottom-right",
     autoClose: 3000,
@@ -39,7 +40,7 @@ export function toastInfo(info) {
   });
 }
 
-export function toastWarn(warn) {
+export function toastWarn(warn: string): React.ReactText {
   return toast.warn(warn, {
     position: "bottom-right",
     autoClose: 3000,

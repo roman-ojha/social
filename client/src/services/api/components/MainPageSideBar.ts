@@ -8,7 +8,7 @@ const mainPageSideBar = {
       withCredentials: true,
     });
   },
-  getSearchedUserData: async (userID) => {
+  getSearchedUserData: async (userID: string) => {
     return axios({
       method: "POST",
       url: `/u/search`,

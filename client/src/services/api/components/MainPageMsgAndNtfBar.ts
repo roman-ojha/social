@@ -1,3 +1,4 @@
+import { AxiosPromise } from "axios";
 import { instance as axios } from "../../axios";
 
 const mainPageMsgAndNtfBar = {
