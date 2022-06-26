@@ -24,6 +24,7 @@ import messageListReducer from "./components/messageBox/messageList/reducer";
 import changeMainPageMessageView from "./components/messageBox/mainPageMessageOnOff/reducer";
 import mainPageInnerMessageBoxOnOff from "./components/messageBox/mainPageInnerMessageBoxOnOff/reducer";
 import setCurrentUserMessageReducer from "./components/messageBox/currentUserMessage/reducer";
+import setUserMessageFieldReducer from "./components/messageBox/userMessageField/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -51,6 +52,7 @@ const reducer = combineReducers({
   changeMainPageMessageView,
   mainPageInnerMessageBoxOnOff,
   setCurrentUserMessageReducer,
+  setUserMessageFieldReducer,
 });
 
 export default reducer;
