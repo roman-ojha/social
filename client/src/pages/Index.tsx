@@ -24,7 +24,7 @@ import { actionCreators } from "../services/redux";
 const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [renderMainPage, setRenderMainPage] = useState(false);
+  const [renderMainPage, setRenderMainPage] = useState<boolean>(false);
   const {
     setUserStories,
     userProfileDetailAction,

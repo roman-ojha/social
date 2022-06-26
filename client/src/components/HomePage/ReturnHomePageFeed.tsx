@@ -2,16 +2,17 @@ import React from "react";
 import DisplayFollowedUserPost from "./DisplayFollowedUserPost";
 import PostBox from "../PostBox/PostBox";
 import { useSelector } from "react-redux";
+import { AppState } from "../../services/redux";
 
 const ReturnHomePageFeed = () => {
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const userPostResponseDataState = useSelector(
-    (state) => state.setUserPostResponseData
+    (state: AppState) => state.setUserPostResponseData
   );
   const userProfilePostStore = useSelector(
-    (state) => state.setUserProfilePostReducer
+    (state: AppState) => state.setUserProfilePostReducer
   );
   return (
     <>

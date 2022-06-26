@@ -4,10 +4,10 @@ import {
   UserProfilePostState,
 } from "./types";
 
-const initialState: UserProfilePostState = [];
+const initialState: UserProfilePostState[] = [];
 // this store the user Post data
 const setUserProfilePostReducer = (
-  state: UserProfilePostState = initialState,
+  state: UserProfilePostState[] = initialState,
   action: UserProfilePostAction
 ) => {
   switch (action.type) {

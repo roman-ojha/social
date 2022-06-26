@@ -1,4 +1,4 @@
-export type UserPostResponseDataState = [];
+export interface UserPostResponseDataState {}
 
 export enum UserProfilePostActionTypes {
   USER_POST_RESPONSE_DATA = "UserPostResponseData",

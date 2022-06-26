@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import admin from "../../constant/admin";
 import DefaultSocialPost from "../DefaultSocialPost";
 import PostBox from "../PostBox/PostBox";
+import { AppState } from "../../services/redux";
+
 const DisplayFollowedUserPost = () => {
   const followedUserPostDataStore = useSelector(
-    (state) => state.setFollowedUserPostDataReducer
+    (state: AppState) => state.setFollowedUserPostDataReducer
   );
   return (
     <>

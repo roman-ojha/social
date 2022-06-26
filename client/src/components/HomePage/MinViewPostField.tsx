@@ -9,18 +9,19 @@ import {
   setRootUserProfileDataState,
 } from "../../services/redux-actions";
 import constant from "../../constant/constant";
+import { AppState } from "../../services/redux";
 
 const MinViewPostField = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
-  const homePageUserPostFieldData = useSelector((state) => {
+  const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
   });
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
 
   return (

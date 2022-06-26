@@ -4,7 +4,7 @@ import {
   UserProfilePostActionTypes,
 } from "./types";
 
-const initialState: UserPostResponseDataState = [
+const initialState: UserPostResponseDataState[] = [
   // {
   //   id: "",
   //   useremail: "",
@@ -18,7 +18,7 @@ const initialState: UserPostResponseDataState = [
   // },
 ];
 const setUserPostResponseData = (
-  state: UserPostResponseDataState = initialState,
+  state: UserPostResponseDataState[] = initialState,
   action: UserPostResponseAction
 ) => {
   switch (action.type) {
