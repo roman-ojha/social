@@ -1,6 +1,6 @@
-export interface UserProfilePostState {
-  date: Date;
-}
+import UserPostType from "../../../../../interface/userPost";
+
+export interface UserProfilePostState extends UserPostType {}
 
 export enum UserProfilePostActionTypes {
   SET_USER_PROFILE_POST = "userProfilePost",

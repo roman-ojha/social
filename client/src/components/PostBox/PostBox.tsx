@@ -6,23 +6,36 @@ import PostInfo from "./PostInfo";
 import LikeCommentShare from "./LikeCommentShare";
 import CommentField from "./CommentField";
 import CommentedUser from "./CommentedUser";
+import UserPostType from "../../interface/userPost";
 
-const PostBox = (props) => {
+interface PostBoxProps {
+  userMainInformation: {
+    name: string;
+    email: string;
+    picture: string;
+    userID: string;
+    id: string;
+  };
+  userFeedData: UserPostType;
+}
+
+const PostBox: React.FC<PostBoxProps> = ({
+  userMainInformation,
+  userFeedData,
+}) => {
   const [postInformation] = useState({
-    postPicture: props.userFeedData.picture
-      ? props.userFeedData.picture.url
-      : undefined,
-    postCaption: props.userFeedData.caption,
-    userPicture: props.userMainInformation.picture,
-    userID: props.userMainInformation.userID,
-    userName: props.userMainInformation.name,
+    postPicture: userFeedData.picture ? userFeedData.picture.url : undefined,
+    postCaption: userFeedData.caption,
+    userPicture: userMainInformation.picture,
+    userID: userMainInformation.userID,
+    userName: userMainInformation.name,
   });
 
   const [commentInfo, setCommentInfo] = useState({
-    commentNo: props.userFeedData.comments.No,
-    postCommentInfo: props.userFeedData.comments.by
-      ? props.userFeedData.comments.by[
-          Math.floor(Math.random() * props.userFeedData.comments.by.length)
+    commentNo: userFeedData.comments.No,
+    postCommentInfo: userFeedData.comments.by
+      ? userFeedData.comments.by[
+          Math.floor(Math.random() * userFeedData.comments.by.length)
         ]
       : [],
   });
@@ -37,23 +50,23 @@ const PostBox = (props) => {
             postUserID={postInformation.userID}
             postUserName={postInformation.userName}
             postUserPicture={postInformation.userPicture}
-            postDate={props.userFeedData.date}
+            postDate={userFeedData.date}
           />
           <LikeCommentShare
-            userFeedData={props.userFeedData}
-            userMainInformation={props.userMainInformation}
+            userFeedData={userFeedData}
+            userMainInformation={userMainInformation}
             commentNo={commentInfo.commentNo}
           />
         </div>
         <div className="UserPostFeed_Comment_Box">
           <CommentedUser
             commentInfo={commentInfo}
-            postId={props.userFeedData.id}
+            postId={userFeedData.id}
             setCommentInfo={setCommentInfo}
           />
           <CommentField
-            userFeedData={props.userFeedData}
-            userMainInformation={props.userMainInformation}
+            userFeedData={userFeedData}
+            userMainInformation={userMainInformation}
             commentInfo={commentInfo}
             setCommentInfo={setCommentInfo}
           />

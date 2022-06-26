@@ -25,7 +25,7 @@ const DisplayFollowedUserPost = () => {
                 key={post.id}
                 userMainInformation={user}
                 userFeedData={post}
-                user={user.id} // required: user = id of the user who post this
+                // user={user.id} // required: user = id of the user who post this
               />
             );
           });

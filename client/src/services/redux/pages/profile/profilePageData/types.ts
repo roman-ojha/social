@@ -1,10 +1,12 @@
+import UserPostType from "../../../../../interface/userPost";
+
 export interface ProfilePageDataState {
   name: string;
   email: string;
   picture: string;
   id: string;
   userID: string;
-  posts: { picture: { url: string } }[];
+  posts: UserPostType[];
   friends: [];
   followings: [];
   followers: [];

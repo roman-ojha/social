@@ -1,4 +1,6 @@
-export interface UserPostResponseDataState {}
+import UserPostType from "../../../../../interface/userPost";
+
+export interface UserPostResponseDataState extends UserPostType {}
 
 export enum UserProfilePostActionTypes {
   USER_POST_RESPONSE_DATA = "UserPostResponseData",
