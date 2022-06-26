@@ -3,13 +3,16 @@ import { useMediaQuery } from "react-responsive";
 import { Icon } from "@iconify/react";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/components/rightPartDrawerOpenButton.css";
-import { openRightPartDrawer } from "../services/redux-actions";
+// import { openRightPartDrawer } from "../services/redux-actions";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../services/redux";
 
 const OpenRightPartDrawerButton = () => {
   const dispatch = useDispatch();
   const rightPartDrawerState = useSelector(
-    (state) => state.rightPartDrawerReducer
+    (state: AppState) => state.rightPartDrawerReducer
   );
+  const { openRightPartDrawer } = bindActionCreators(actionCreators, dispatch);
   return (
     <>
       {useMediaQuery({
@@ -18,7 +21,7 @@ const OpenRightPartDrawerButton = () => {
         <div
           className="RightPart_Drawer_Open_Icons"
           onClick={() => {
-            dispatch(openRightPartDrawer(true));
+            openRightPartDrawer(true);
           }}
         >
           <Icon

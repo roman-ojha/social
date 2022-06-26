@@ -1,14 +1,19 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
-import { openSideBarDrawer } from "../services/redux-actions";
+// import { openSideBarDrawer } from "../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import constant from "../constant/constant";
 import "../styles/components/sideBarDrawerButton.css";
+import { bindActionCreators } from "redux";
+import { AppState, actionCreators } from "../services/redux";
 
 const OpenSideBarDrawerButton = () => {
   const dispatch = useDispatch();
-  const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
+  const sideBarDrawerState = useSelector(
+    (state: AppState) => state.sideBarDrawerReducer
+  );
+  const { openSideBarDrawer } = bindActionCreators(actionCreators, dispatch);
   return (
     <>
       {useMediaQuery({
@@ -17,8 +22,8 @@ const OpenSideBarDrawerButton = () => {
         <div
           className="SideBar_Drawer_Open_Icons"
           onClick={() => {
-            dispatch(openSideBarDrawer(true));
-            console.log("hello");
+            openSideBarDrawer(true);
+            // console.log("hello");
           }}
         >
           <Icon
