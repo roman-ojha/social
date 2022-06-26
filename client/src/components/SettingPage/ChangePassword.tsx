@@ -1,22 +1,33 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import {
-  startProgressBar,
-  stopProgressBar,
-} from "../../services/redux-actions";
+// import {
+//   startProgressBar,
+//   stopProgressBar,
+// } from "../../services/redux-actions";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { useState } from "react";
 import { toastError, toastSuccess } from "../../services/toast";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../services/redux";
+import { AxiosError } from "axios";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
-  const [inputFieldData, setInputFieldData] = useState({
+  const [inputFieldData, setInputFieldData] = useState<{
+    oldPassword: string;
+    newPassword: string;
+    cNewPassword: string;
+  }>({
     oldPassword: "",
     newPassword: "",
     cNewPassword: "",
   });
+  const { startProgressBar, stopProgressBar } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
-  const getInputFieldData = (e) => {
+  const getInputFieldData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
     const value = e.target.value;
     setInputFieldData({
@@ -25,10 +36,10 @@ const ChangePassword = () => {
     });
   };
 
-  const changePassword = async (e) => {
+  const changePasswordFunc = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await settingPageApi.changePassword(inputFieldData);
       const data = await res.data;
       if (res.status === 200 && data.success) {
@@ -36,13 +47,14 @@ const ChangePassword = () => {
       } else {
         toastError(data.msg);
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
       setInputFieldData({
         oldPassword: "",
         newPassword: "",
         cNewPassword: "",
       });
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -50,7 +62,7 @@ const ChangePassword = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
@@ -81,7 +93,7 @@ const ChangePassword = () => {
             value={inputFieldData.cNewPassword}
             onChange={getInputFieldData}
           />
-          <button onClick={changePassword}>Change</button>
+          <button onClick={changePasswordFunc}>Change</button>
         </form>
         <p>Don't Forgot Your Password</p>
       </div>

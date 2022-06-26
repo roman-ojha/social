@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess } from "../../services/toast";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  changeUserProfilePictureAction,
-  showLoadingSpinner,
-} from "../../services/redux-actions";
+// import {
+//   changeUserProfilePictureAction,
+//   showLoadingSpinner,
+// } from "../../services/redux-actions";
 import settingPageApi from "../../services/api/pages/settingPageApi";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../../services/redux";
 
 const ChangeProfilePicture = () => {
   const dispatch = useDispatch();
@@ -15,6 +17,8 @@ const ChangeProfilePicture = () => {
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
   );
+  const { changeUserProfilePictureAction, showLoadingSpinner } =
+    bindActionCreators(actionCreators, dispatch);
 
   const changeProfilePicture = async (e) => {
     try {
@@ -22,29 +26,29 @@ const ChangeProfilePicture = () => {
       const imageFile = document.getElementById("user-profile-input").files[0];
       const imageUrl = imgUrl;
       if (!isImgUrl) {
-        dispatch(showLoadingSpinner(true));
+        showLoadingSpinner(true);
         const data = new FormData();
         data.append("image", imageFile);
         const res = await settingPageApi.changeImageFileProfilePicture(data);
         const resData = await res.data;
         if (resData.success && res.status === 200) {
           toastSuccess(resData.msg);
-          dispatch(changeUserProfilePictureAction(resData.picture));
+          changeUserProfilePictureAction(resData.picture);
         } else {
           toastError(resData.msg);
         }
-        dispatch(showLoadingSpinner(false));
+        showLoadingSpinner(false);
       } else {
-        dispatch(showLoadingSpinner(true));
+        showLoadingSpinner(true);
         const res = await settingPageApi.changeImageUrlProfilePicture(imageUrl);
         const resData = await res.data;
         if (resData.success && res.status === 200) {
           toastSuccess(resData.msg);
-          dispatch(changeUserProfilePictureAction(imageUrl));
+          changeUserProfilePictureAction(imageUrl);
         } else {
           toastError(resData.msg);
         }
-        dispatch(showLoadingSpinner(false));
+        showLoadingSpinner(false);
       }
       setImgUrl("");
     } catch (err) {
@@ -55,7 +59,7 @@ const ChangeProfilePicture = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(showLoadingSpinner(false));
+      showLoadingSpinner(false);
     }
     setImgUrl("");
   };

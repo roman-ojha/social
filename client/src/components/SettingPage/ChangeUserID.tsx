@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { useDispatch } from "react-redux";
-import {
-  changeRootUserUserIDAction,
-  startProgressBar,
-  stopProgressBar,
-} from "../../services/redux-actions";
+// import {
+//   changeRootUserUserIDAction,
+//   startProgressBar,
+//   stopProgressBar,
+// } from "../../services/redux-actions";
 import { toastError, toastSuccess } from "../../services/toast";
+import { AxiosError } from "axios";
+import { actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
 const ChangeUserID = () => {
   const dispatch = useDispatch();
-  const [newUserID, setNewUserID] = useState("");
+  const [newUserID, setNewUserID] = useState<string>("");
+  const { startProgressBar, stopProgressBar, changeRootUserUserIDAction } =
+    bindActionCreators(actionCreators, dispatch);
 
-  const changeUserID = async (e) => {
+  const changeUserIDFunc = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
-      dispatch(startProgressBar());
+      startProgressBar();
       //   console.log(newUserID);
       const res = await settingPageApi.changeUserID(newUserID);
       const resData = await res.data;
       if (resData.success) {
         toastSuccess(resData.msg);
-        dispatch(changeRootUserUserIDAction(resData.userID));
+        changeRootUserUserIDAction(resData.userID);
       } else {
         toastError(resData.msg);
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
       setNewUserID("");
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -35,7 +41,7 @@ const ChangeUserID = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
@@ -54,7 +60,7 @@ const ChangeUserID = () => {
               setNewUserID(e.target.value);
             }}
           />
-          <button onClick={changeUserID}>Change</button>
+          <button onClick={changeUserIDFunc}>Change</button>
         </form>
         <p>You can only be able to set unique ID for your profile</p>
       </div>

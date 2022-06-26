@@ -2,7 +2,7 @@ import React from "react";
 import { toastInfo } from "../../services/toast";
 
 const DeleteProfile = () => {
-  const deleteUser = (e) => {
+  const deleteUser = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     toastInfo("Sorry!! this feature is not available right now");
   };

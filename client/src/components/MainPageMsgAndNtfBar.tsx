@@ -24,6 +24,7 @@ import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
+import { AxiosError } from "axios";
 
 const MainPageMsgAndNtfBar = () => {
   const history = useHistory();
@@ -72,7 +73,8 @@ const MainPageMsgAndNtfBar = () => {
         // error
         toastError(data.msg);
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -99,7 +101,8 @@ const MainPageMsgAndNtfBar = () => {
         toastError("Error While fetching Messages");
       }
       stopProgressBar();
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);

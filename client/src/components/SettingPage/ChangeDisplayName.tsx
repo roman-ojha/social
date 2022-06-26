@@ -1,32 +1,38 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  changeRootUserNameAction,
-  startProgressBar,
-  stopProgressBar,
-} from "../../services/redux-actions";
+// import {
+//   changeRootUserNameAction,
+//   startProgressBar,
+//   stopProgressBar,
+// } from "../../services/redux-actions";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { toastError, toastSuccess } from "../../services/toast";
+import { AxiosError } from "axios";
+import { actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
 const ChangeDisplayName = () => {
   const dispatch = useDispatch();
-  const [newName, setNewName] = useState("");
+  const [newName, setNewName] = useState<string>("");
+  const { changeRootUserNameAction, startProgressBar, stopProgressBar } =
+    bindActionCreators(actionCreators, dispatch);
 
-  const changeName = async (e) => {
+  const changeName = async (e: React.MouseEvent<HTMLButtonElement>) => {
     try {
       e.preventDefault();
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await settingPageApi.changeName(newName);
       const resData = await res.data;
       if (resData.success && res.status === 200) {
         toastSuccess(resData.msg);
-        dispatch(changeRootUserNameAction(resData.name));
+        changeRootUserNameAction(resData.name);
       } else {
         toastError(resData.msg);
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
       setNewName("");
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -34,7 +40,7 @@ const ChangeDisplayName = () => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 
