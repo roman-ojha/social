@@ -12,7 +12,7 @@ import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import constant from "../constant/constant";
 
-let previousSelectGenderElement;
+let previousSelectGenderElement: HTMLDivElement;
 const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -64,44 +64,51 @@ const SignUp = () => {
   };
 
   // Login of selecting gender
-  const selectGender = (event) => {
-    let element = event.target;
+  const selectGender = (event: React.MouseEvent<HTMLDivElement>) => {
+    let element = event.target as HTMLDivElement;
     if (
-      event.target.className === "SignUp_Page_Male_CheckBox_Container" ||
-      event.target.className === "SignUp_Page_Female_CheckBox_Container" ||
-      event.target.className === "SignUp_Page_Others_CheckBox_Container"
+      element.className === "SignUp_Page_Male_CheckBox_Container" ||
+      element.className === "SignUp_Page_Female_CheckBox_Container" ||
+      element.className === "SignUp_Page_Others_CheckBox_Container"
     ) {
-      if (element.firstElementChild.nextElementSibling.checked === false) {
-        element.firstElementChild.nextElementSibling.checked = true;
+      if (
+        (element.firstElementChild!.nextElementSibling as HTMLInputElement)
+          .checked === false
+      ) {
+        (
+          element.firstElementChild!.nextElementSibling as HTMLInputElement
+        ).checked = true;
       } else {
-        element.firstElementChild.nextElementSibling.checked = false;
+        (
+          element.firstElementChild!.nextElementSibling as HTMLInputElement
+        ).checked = false;
       }
-      element = element.firstElementChild.nextElementSibling;
+      element = element.firstElementChild!.nextElementSibling as HTMLDivElement;
     } else if (
-      event.target.className === "SignUp_Page_Male_CheckBox_Title" ||
-      event.target.className === "SignUp_Page_Female_CheckBox_Title" ||
-      event.target.className === "SignUp_Page_Others_CheckBox_Title"
+      element.className === "SignUp_Page_Male_CheckBox_Title" ||
+      element.className === "SignUp_Page_Female_CheckBox_Title" ||
+      element.className === "SignUp_Page_Others_CheckBox_Title"
     ) {
-      if (element.nextElementSibling.checked === false) {
-        element.nextElementSibling.checked = true;
+      if ((element.nextElementSibling as HTMLInputElement).checked === false) {
+        (element.nextElementSibling as HTMLInputElement).checked = true;
       } else {
-        element.nextElementSibling.checked = false;
+        (element.nextElementSibling as HTMLInputElement).checked = false;
       }
-      element = element.nextElementSibling;
+      element = element.nextElementSibling as HTMLDivElement;
     }
     if (previousSelectGenderElement !== element) {
       if (previousSelectGenderElement !== undefined) {
-        previousSelectGenderElement.checked = false;
+        (previousSelectGenderElement as HTMLInputElement).checked = false;
       }
     }
     previousSelectGenderElement = element;
     setuserData({
       ...userData,
-      gender: element.value,
+      gender: (element as HTMLInputElement).value,
     });
   };
 
-  const registerData = async (e) => {
+  const registerData = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
     if (!name || !email || !password || !cpassword || !birthday || !gender) {
