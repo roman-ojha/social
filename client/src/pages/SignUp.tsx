@@ -17,7 +17,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   let today = new Date();
-  let birthdayYear = [];
+  let birthdayYear: number[] = [];
   for (let i = today.getFullYear() - 100; i <= today.getFullYear(); i++) {
     birthdayYear.push(i);
   }
@@ -27,7 +27,7 @@ const SignUp = () => {
     22, 23, 24, 25, 26, 27, 28, 29, 30,
   ];
   // getting user Input data
-  let name, value;
+  let name: string, value: string;
 
   const [userData, setuserData] = useState({
     name: "",
@@ -42,7 +42,9 @@ const SignUp = () => {
     gender: "",
   });
 
-  const getUserData = (event) => {
+  const getUserData = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     name = event.target.name;
     value = event.target.value;
     if (name === "year" || name === "month" || name === "day") {
@@ -102,7 +104,7 @@ const SignUp = () => {
   const registerData = async (e) => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
-    if ((!name || !email || !password || !cpassword, !birthday, !gender)) {
+    if (!name || !email || !password || !cpassword || !birthday || !gender) {
       toastError("Please Fill all Required Field!!!");
       return;
     } else if (!validator.validate(email)) {
@@ -247,26 +249,29 @@ const SignUp = () => {
                   <div
                     className="SignUp_Page_Male_CheckBox_Container"
                     onClick={selectGender}
-                    value="male"
+                    // value="male"
                   >
-                    <p className="SignUp_Page_Male_CheckBox_Title" value="male">
+                    <p
+                      className="SignUp_Page_Male_CheckBox_Title"
+                      // value="male"
+                    >
                       Male
                     </p>
                     <input
                       className="SignUp_Page_Male_CheckBox"
                       type="checkbox"
                       name="male"
-                      value="male"
+                      // value="male"
                     />
                   </div>
                   <div
                     className="SignUp_Page_Female_CheckBox_Container"
                     onClick={selectGender}
-                    value="female"
+                    // value="female"
                   >
                     <p
                       className="SignUp_Page_Female_CheckBox_Title"
-                      value="female"
+                      // value="female"
                     >
                       Female
                     </p>
@@ -280,11 +285,11 @@ const SignUp = () => {
                   <div
                     className="SignUp_Page_Others_CheckBox_Container"
                     onClick={selectGender}
-                    value="other"
+                    // value="other"
                   >
                     <p
                       className="SignUp_Page_Others_CheckBox_Title"
-                      value="other"
+                      // value="other"
                     >
                       Other
                     </p>

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
 import constant from "../constant/constant";
+import { AxiosError } from "axios";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,8 @@ const SignIn = () => {
     email: "",
     password: "",
   });
-  let name, value;
-  const getSignInDetail = (e) => {
+  let name: string, value: string;
+  const getSignInDetail = (e: React.ChangeEvent<HTMLInputElement>) => {
     name = e.target.name;
     value = e.target.value;
     setSignInDetail({
@@ -28,7 +29,7 @@ const SignIn = () => {
     });
   };
   const history = useHistory();
-  const signingIn = async (e) => {
+  const signingIn = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
     try {
@@ -55,7 +56,8 @@ const SignIn = () => {
         // setCookie("AuthToken", data.token, new Date(Date.now() + 25892000000));
         history.push("/u/home");
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
