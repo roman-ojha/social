@@ -14,7 +14,7 @@ export const setUserStories = (data: any) => {
   };
 };
 
-export const setStoryIndex = (data: StoriesPageState["storyIndex"]) => {
+export const storyIndex = (data: StoriesPageState["storyIndex"]) => {
   return (dispatch: Dispatch<StoriesPageAction>) => {
     dispatch({
       type: StoriesPageActionTypes.SET_STORY_INDEX,

@@ -9,13 +9,13 @@ import { RootState, actionCreators } from "../../services/redux";
 const FriendStory = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { setStoryIndex } = bindActionCreators(actionCreators, dispatch);
+  const { storyIndex } = bindActionCreators(actionCreators, dispatch);
   return (
     <>
       <div className="Friends_Story_Container">
         <div
           onClick={() => {
-            setStoryIndex(props.index);
+            storyIndex(props.index);
             history.push("/u/stories");
           }}
           className="Friends_Story_Picutre_Container"
@@ -33,7 +33,7 @@ const FriendStory = (props) => {
         <div
           className="Friend_Story_Name"
           onClick={() => {
-            setStoryIndex(props.index);
+            storyIndex(props.index);
             history.push("/u/stories");
           }}
         >

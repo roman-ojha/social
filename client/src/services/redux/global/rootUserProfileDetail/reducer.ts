@@ -108,12 +108,12 @@ const setUserProfileDetailReducer = (
   action: RootUserProfileDetailAction
 ) => {
   switch (action.type) {
-    case RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL:
+    case RootUserProfileDetailActionTypes.USER_PROFILE_DETAIL:
       return {
         ...state,
         ...action.payload,
       };
-    case RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_PROFILE_PICTURE:
+    case RootUserProfileDetailActionTypes.CHANGE_USER_PROFILE_PICTURE:
       return {
         ...state,
         picture: action.payload,

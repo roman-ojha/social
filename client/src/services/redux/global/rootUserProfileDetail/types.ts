@@ -5,19 +5,19 @@ export interface RootUserProfileDetailState extends UserDocument {
 }
 
 export enum RootUserProfileDetailActionTypes {
-  SET_ROOT_USER_PROFILE_DETAIL = "setRootUserProfileDetail",
-  CHANGE_ROOT_USER_PROFILE_PICTURE = "changeRootUserProfilePicture",
+  USER_PROFILE_DETAIL = "userProfileDetail",
+  CHANGE_USER_PROFILE_PICTURE = "changeUserProfilePicture",
   CHANGE_ROOT_USER_USER_ID = "changeRootUserUserID",
   CHANGE_ROOT_USERNAME = "changeRootUserName",
   SET_ROOT_USER_POST_DATA = "setRootUserPostData",
 }
 export interface SetRootUserProfileDetailAction {
-  type: RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL;
+  type: RootUserProfileDetailActionTypes.USER_PROFILE_DETAIL;
   payload: any;
 }
 
 export interface ChangeRootUserProfilePicture {
-  type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_PROFILE_PICTURE;
+  type: RootUserProfileDetailActionTypes.CHANGE_USER_PROFILE_PICTURE;
   payload: any;
 }
 

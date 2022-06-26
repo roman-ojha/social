@@ -6,7 +6,7 @@ import "../styles/pages/page404.css";
 import LoadingScreen from "../components/IndexPage/LoadingScreen";
 import ReturnMainPage from "../components/IndexPage/ReturnMainPage";
 import {
-  userProfileDetailAction,
+  // userProfileDetailAction,
   userProfilePostAction,
   followedUserPostDataAction,
   userSuggestionAction,
@@ -25,7 +25,7 @@ const Index = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState(false);
-  const { setUserStories, setRootUserProfileDetail, setFollowedByUser } =
+  const { setUserStories, userProfileDetailAction, setFollowedByUser } =
     bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
     const getUserData = async () => {
@@ -36,7 +36,7 @@ const Index = () => {
           if (!userData.data.userProfileDetail.userID) {
             history.push("/userid?uid=undefined");
           } else {
-            setRootUserProfileDetail(userData.data.userProfileDetail);
+            userProfileDetailAction(userData.data.userProfileDetail);
             dispatch(
               userProfilePostAction(userData.data.userProfileDetail.posts)
             );

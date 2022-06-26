@@ -5,27 +5,25 @@ import {
 } from "./types";
 import { Dispatch } from "redux";
 
-export const setRootUserProfileDetail = (
-  detail: RootUserProfileDetailState
-) => {
+export const userProfileDetailAction = (detail: RootUserProfileDetailState) => {
   return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
     dispatch({
-      type: RootUserProfileDetailActionTypes.SET_ROOT_USER_PROFILE_DETAIL,
+      type: RootUserProfileDetailActionTypes.USER_PROFILE_DETAIL,
       payload: detail,
     });
   };
 };
 
-export const changeRootUserProfilePicture = (detail: any) => {
+export const changeUserProfilePictureAction = (detail: any) => {
   return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
     dispatch({
-      type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_PROFILE_PICTURE,
+      type: RootUserProfileDetailActionTypes.CHANGE_USER_PROFILE_PICTURE,
       payload: detail,
     });
   };
 };
 
-export const changeRootUserUserID = (detail: any) => {
+export const changeRootUserUserIDAction = (detail: any) => {
   return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
     dispatch({
       type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USER_USER_ID,
@@ -34,7 +32,7 @@ export const changeRootUserUserID = (detail: any) => {
   };
 };
 
-export const changeRootUserName = (detail: any) => {
+export const changeRootUserNameAction = (detail: any) => {
   return (dispatch: Dispatch<RootUserProfileDetailAction>) => {
     dispatch({
       type: RootUserProfileDetailActionTypes.CHANGE_ROOT_USERNAME,

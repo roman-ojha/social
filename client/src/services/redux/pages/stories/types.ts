@@ -5,7 +5,7 @@ export interface StoriesPageState {
 
 export enum StoriesPageActionTypes {
   SET_USER_STORIES = "setUserStories",
-  SET_STORY_INDEX = "setStoryIndex",
+  SET_STORY_INDEX = "storyIndex",
 }
 export interface SetUserStoriesAction {
   type: StoriesPageActionTypes.SET_USER_STORIES;
