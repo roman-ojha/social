@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/components/mainPageSideBar.css";
-import { openSideBarDrawer } from "../../services/redux-actions";
+// import { openSideBarDrawer } from "../../services/redux-actions";
 import LogoAndSearchBar from "./LogoAndSearchBar";
 import Menu from "./Menu";
 import Friends from "./Friends";
 import Account from "./Account";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
 const MainPageSideBar = () => {
   const dispatch = useDispatch();
   const sideBarDrawerState = useSelector((state) => state.sideBarDrawerReducer);
   const [onSearchBar, setOnSearchBar] = useState(false);
+  const { openSideBarDrawer } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     document
@@ -21,7 +24,7 @@ const MainPageSideBar = () => {
             .getElementsByClassName("MainPage_SideBar_Container")[0]
             .contains(e.target)
         ) {
-          dispatch(openSideBarDrawer(false));
+          openSideBarDrawer(false);
           document.getElementById("MainPage_Logo").style =
             "visibility:visible;position:static";
           document.querySelector(

@@ -42,7 +42,7 @@ const CommentedUser: React.FC<CommentedUserProps> = ({
     commentBoxAction,
   } = bindActionCreators(actionCreators, dispatch);
 
-  const routeToProfile = async (userID) => {
+  const routeToProfile = async (userID: string): Promise<void> => {
     try {
       startProgressBar();
       const res = await GlobalApi.getFriendData(userID);

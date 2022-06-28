@@ -45,7 +45,7 @@ const CommentField: React.FC<CommentFieldProps> = ({
     setRootUserProfileDataState,
   } = bindActionCreators(actionCreators, dispatch);
 
-  const comment = async () => {
+  const comment = async (): Promise<void> => {
     try {
       startProgressBar();
       if (isEmptyString(commentInputField)) {

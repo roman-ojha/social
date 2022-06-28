@@ -2,20 +2,23 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  profilePageDataAction,
-  setRootUserProfileDataState,
-} from "../../services/redux-actions";
+// import {
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+// } from "../../services/redux-actions";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
-const Menu = () => {
+const Menu = (): JSX.Element => {
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
-
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
+  const { profilePageDataAction, setRootUserProfileDataState } =
+    bindActionCreators(actionCreators, dispatch);
 
   return (
     <>
@@ -74,14 +77,12 @@ const Menu = () => {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
               };
-              dispatch(profilePageDataAction(userObj));
+              profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                dispatch(
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  })
-                );
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                });
               }
             }}
           >

@@ -2,14 +2,16 @@ import React from "react";
 import User_profile_icon from "../../assets/svg/User_profile_Icon_color_white.svg";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startProgressBar,
-  stopProgressBar,
-  profilePageDataAction,
-} from "../../services/redux-actions";
+// import {
+//   startProgressBar,
+//   stopProgressBar,
+//   profilePageDataAction,
+// } from "../../services/redux-actions";
 import { instance as axios } from "../../services/axios";
 import "../../styles/components/mainPageSearchBar.css";
 import { toastError } from "../../services/toast";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
 const MainPageSearchBar = (props) => {
   const history = useHistory();
@@ -17,8 +19,10 @@ const MainPageSearchBar = (props) => {
   let noResultFound = true;
   // Storing Searched userData into redux
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
+  const { startProgressBar, stopProgressBar, profilePageDataAction } =
+    bindActionCreators(actionCreators, dispatch);
 
   const SearchBarUser = (props) => {
     // console.log(props.userDetail);
@@ -28,7 +32,7 @@ const MainPageSearchBar = (props) => {
           className="MainPage_SearchBar_User_Container"
           onClick={async () => {
             try {
-              dispatch(startProgressBar());
+              startProgressBar();
               const res = await axios({
                 method: "GET",
                 url: `/u/profile/${props.userDetail.userID}`,
@@ -46,8 +50,8 @@ const MainPageSearchBar = (props) => {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
                 };
-                dispatch(stopProgressBar());
-                dispatch(profilePageDataAction(userObj));
+                stopProgressBar();
+                profilePageDataAction(userObj);
                 history.push(`/u/profile/${props.userDetail.userID}/posts`);
               }
             } catch (err) {
@@ -58,7 +62,7 @@ const MainPageSearchBar = (props) => {
               } else {
                 toastError("Some Problem Occur, Please Try again later!!!");
               }
-              dispatch(stopProgressBar());
+              stopProgressBar();
             }
           }}
         >
