@@ -4,17 +4,20 @@ import UserSuggestion from "./UserSuggestionComp/UserSuggestion";
 import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
-import { openRightPartDrawer } from "../services/redux-actions";
+// import { openRightPartDrawer } from "../services/redux-actions";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/components/mainPageRightSideComp.css";
 import NotificationBox from "./NotificationBox";
 import MoreProfileBox from "./MoreProfileBox";
+import { actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
 
 const MainPageRightSideComp = () => {
   const dispatch = useDispatch();
   const rightPartDrawerState = useSelector(
     (state) => state.rightPartDrawerReducer
   );
+  const { openRightPartDrawer } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     document
@@ -27,7 +30,7 @@ const MainPageRightSideComp = () => {
             )[0]
             .contains(e.target)
         ) {
-          dispatch(openRightPartDrawer(false));
+          openRightPartDrawer(false);
           document.getElementById("MainPage_Logo").style =
             "visibility:visible;position:static";
           document.querySelector(

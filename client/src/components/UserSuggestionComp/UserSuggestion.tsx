@@ -3,21 +3,28 @@ import { useSelector } from "react-redux";
 import "../../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { useEffect } from "react";
 import SuggestedUser from "./SuggestedUser";
+import { AppState } from "../../services/redux";
 
-const UserSuggestion = () => {
+const UserSuggestion = (): JSX.Element => {
   const mainPageMessageOnOffState = useSelector(
-    (state) => state.changeMainPageMessageView
+    (state: AppState) => state.changeMainPageMessageView
   );
-  const notificationBoxState = useSelector((state) => state.notificationBox);
+  const notificationBoxState = useSelector(
+    (state: AppState) => state.notificationBox
+  );
   const moreProfileBoxState = useSelector(
-    (state) => state.moreProfileBoxReducer
+    (state: AppState) => state.moreProfileBoxReducer
   );
-  const ReturnSuggestedUser = () => {
+  const ReturnSuggestedUser = (): JSX.Element => {
     const countUser = useRef(0);
-    const userSuggestion = useSelector((state) => state.userSuggestionReducer);
+    const userSuggestion = useSelector(
+      (state: AppState) => state.userSuggestionReducer
+    );
+
     useEffect(() => {
       countUser.current = 0;
     }, [userSuggestion]);
+
     return (
       <>
         {userSuggestion.map((user, index) => {
