@@ -27,6 +27,11 @@ export interface PostInformationInterface {
   userName: string;
 }
 
+export interface CommentInfoState {
+  commentNo: number;
+  postCommentInfo: {};
+}
+
 const PostBox: React.FC<PostBoxProps> = ({
   userMainInformation,
   userFeedData,
@@ -39,7 +44,7 @@ const PostBox: React.FC<PostBoxProps> = ({
     userName: userMainInformation.name,
   });
 
-  const [commentInfo, setCommentInfo] = useState({
+  const [commentInfo, setCommentInfo] = useState<CommentInfoState>({
     commentNo: userFeedData.comments.No,
     postCommentInfo: userFeedData.comments.by
       ? userFeedData.comments.by[
