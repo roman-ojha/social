@@ -5,26 +5,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastSuccess, toastError } from "../../services/toast";
-import {
-  startProgressBar,
-  stopProgressBar,
-  profilePageDataAction,
-  setRootUserProfileDataState,
-} from "../../services/redux-actions";
+// import {
+//   startProgressBar,
+//   stopProgressBar,
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+// } from "../../services/redux-actions";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
-const Account = () => {
+const Account = (): JSX.Element => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
+  const {
+    startProgressBar,
+    stopProgressBar,
+    profilePageDataAction,
+    setRootUserProfileDataState,
+  } = bindActionCreators(actionCreators, dispatch);
 
-  const dispatch = useDispatch();
-  const userLogOut = async () => {
+  const userLogOut = async (): Promise<void> => {
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
 
       const res = await Api.logOut();
       const data = await res.data;
@@ -36,7 +44,7 @@ const Account = () => {
         // throw error;
         toastError(data.msg);
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     } catch (err) {
       if (err.response) {
         if (err.response.data.success === false) {
@@ -46,7 +54,7 @@ const Account = () => {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
       history.push("/signin", { replace: true });
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
   return (
@@ -66,14 +74,12 @@ const Account = () => {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
               };
-              dispatch(profilePageDataAction(userObj));
+              profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                dispatch(
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  })
-                );
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                });
               }
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
@@ -86,14 +92,12 @@ const Account = () => {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
               };
-              dispatch(profilePageDataAction(userObj));
+              profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                dispatch(
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  })
-                );
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                });
               }
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
