@@ -15,6 +15,7 @@ import { useHistory } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
+import { AxiosError } from "axios";
 
 interface CommentFieldProps {
   userFeedData: PostBoxProps["userFeedData"];
@@ -75,7 +76,8 @@ const CommentField: React.FC<CommentFieldProps> = ({
         }
       }
       stopProgressBar();
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
