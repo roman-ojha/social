@@ -6,7 +6,7 @@ import CommentBox from "../CommentBox";
 import ProgressBar from "../ProgressBar";
 import RoutingUserPage from "../../routes/RoutingUserPage";
 
-const ReturnMainPage = () => {
+const ReturnMainPage = (): JSX.Element => {
   return (
     <>
       <ProgressBar />

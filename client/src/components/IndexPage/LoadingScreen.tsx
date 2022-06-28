@@ -2,7 +2,7 @@ import React from "react";
 import AppIcon from "../../assets/icons/Social_Icon.ico";
 import constant from "../../constant/constant";
 
-const LoadingScreen = () => {
+const LoadingScreen = (): JSX.Element => {
   return (
     <>
       <div className="LoadingScreen_Page_Container">
