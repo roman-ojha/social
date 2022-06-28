@@ -1,9 +1,15 @@
+export interface UserPostCommentsType {
+  picture: string;
+  userID: string;
+  comment: string;
+}
+
 export default interface UserPostType {
   picture: { url: string };
   caption: string;
   comments: {
     No: number;
-    by: {}[];
+    by: UserPostCommentsType[];
   };
   date: Date;
   id: string;

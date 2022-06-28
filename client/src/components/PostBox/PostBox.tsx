@@ -6,7 +6,7 @@ import PostInfo from "./PostInfo";
 import LikeCommentShare from "./LikeCommentShare";
 import CommentField from "./CommentField";
 import CommentedUser from "./CommentedUser";
-import UserPostType from "../../interface/userPost";
+import UserPostType, { UserPostCommentsType } from "../../interface/userPost";
 
 export interface PostBoxProps {
   userMainInformation: {
@@ -29,7 +29,7 @@ export interface PostInformationInterface {
 
 export interface CommentInfoState {
   commentNo: number;
-  postCommentInfo: {};
+  postCommentInfo: UserPostCommentsType;
 }
 
 const PostBox: React.FC<PostBoxProps> = ({
@@ -50,7 +50,11 @@ const PostBox: React.FC<PostBoxProps> = ({
       ? userFeedData.comments.by[
           Math.floor(Math.random() * userFeedData.comments.by.length)
         ]
-      : [],
+      : {
+          picture: "",
+          userID: "",
+          comment: "",
+        },
   });
 
   return (
