@@ -3,16 +3,18 @@ import { useSelector } from "react-redux";
 import "../../styles/components/messageBox.css";
 import InnerMessageBox from "./InnerUserMessageBox";
 import MessagesList from "./MessagesList";
+import { AppState } from "../../services/redux";
+import { CurrentUserMessageState } from "../../services/redux/components/messageBox/currentUserMessage/types";
 
-const MessageBox = () => {
+const MessageBox = (): JSX.Element => {
   const mainPageMessageOnOffState = useSelector(
-    (state) => state.changeMainPageMessageView
+    (state: AppState) => state.changeMainPageMessageView
   );
-  const currentMessageStore = useSelector(
-    (state) => state.setCurrentUserMessageReducer
+  const currentMessageStore: CurrentUserMessageState = useSelector(
+    (state: AppState) => state.setCurrentUserMessageReducer
   );
   const mainPageInnerMessageBoxOnOffState = useSelector(
-    (state) => state.mainPageInnerMessageBoxOnOff
+    (state: AppState) => state.mainPageInnerMessageBoxOnOff
   );
 
   if (mainPageMessageOnOffState === true) {

@@ -2,15 +2,32 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { mainPageMessageInnerViewOnOff } from "../../services/redux-actions/index";
+// import { mainPageMessageInnerViewOnOff } from "../../services/redux-actions/index";
 import "../../styles/components/messageBox.css";
 import SingleMessage from "./SingleMessage";
 import SendMessageInputField from "./SendMessageInputField";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { CurrentUserMessageState } from "../../services/redux/components/messageBox/currentUserMessage/types";
 
-const InnerMessageBox = (props) => {
+interface InnerMessageBoxProps {
+  InternalMessageInfo: {
+    messageToUserId: CurrentUserMessageState["messageToUserId"];
+    messageToId: CurrentUserMessageState["messageToId"];
+    picture: CurrentUserMessageState["receiverPicture"];
+  };
+}
+
+const InnerMessageBox: React.FC<InnerMessageBoxProps> = ({
+  InternalMessageInfo,
+}): JSX.Element => {
   const dispatch = useDispatch();
   const currentMessageStore = useSelector(
-    (state) => state.setCurrentUserMessageReducer
+    (state: AppState) => state.setCurrentUserMessageReducer
+  );
+  const { mainPageMessageInnerViewOnOff } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
 
   // Styling Loading Spinner
@@ -37,18 +54,18 @@ const InnerMessageBox = (props) => {
         <div className="MessageBox_InnerMessage_Upper_Part_Container">
           <img
             src={
-              props.InternalMessageInfo.picture
-                ? props.InternalMessageInfo.picture
+              InternalMessageInfo.picture
+                ? InternalMessageInfo.picture
                 : User_Profile_Icon
             }
             alt="user"
           />
-          <h3>{props.InternalMessageInfo.messageToUserId}</h3>
+          <h3>{InternalMessageInfo.messageToUserId}</h3>
           <CloseIcon
             className="MessageBox_InnerMessage_Upper_Part_Close_Button"
             style={{ width: "1.2rem", height: "1.2rem" }}
             onClick={() => {
-              dispatch(mainPageMessageInnerViewOnOff(false));
+              mainPageMessageInnerViewOnOff(false);
             }}
           />
         </div>
@@ -70,9 +87,9 @@ const InnerMessageBox = (props) => {
           )}
         </div>
         <SendMessageInputField
-          messageToUserId={props.InternalMessageInfo.messageToUserId}
-          messageToId={props.InternalMessageInfo.messageToId}
-          receiverPicture={props.InternalMessageInfo.picture}
+          messageToUserId={InternalMessageInfo.messageToUserId}
+          messageToId={InternalMessageInfo.messageToId}
+          receiverPicture={InternalMessageInfo.picture}
         />
       </div>
     </>
