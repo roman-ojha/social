@@ -13,7 +13,11 @@ import { actionCreators } from "../services/redux";
 import UserDocument from "../interface/userDocument";
 import { AxiosError } from "axios";
 
-const GetUserID = (props): JSX.Element => {
+interface GetUserIDProps {
+  userDetail: UserDocument;
+}
+
+const GetUserID: React.FC<GetUserIDProps> = (props): JSX.Element => {
   const dispatch = useDispatch();
   const [userDetail, setUserDetail] = useState<{
     email: UserDocument["email"];

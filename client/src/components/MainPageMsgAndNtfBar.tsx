@@ -48,6 +48,7 @@ const MainPageMsgAndNtfBar = () => {
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+
   const {
     mainPageMessageViewOnOff,
     openNotificationBox,

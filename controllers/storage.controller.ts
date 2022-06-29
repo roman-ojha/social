@@ -207,11 +207,17 @@ export default {
             });
           }
         }
-        console.log(file);
         if (!req.file) {
+          console.log("not picture");
           const resData = await userDetail.updateOne(
             { email: email },
-            { $set: { userID: userID } }
+            {
+              $set: {
+                userID: userID,
+                picture:
+                  "https://firebasestorage.googleapis.com/v0/b/social-application-326411.appspot.com/o/default%2FUser_profile_Icon.png?alt=media&token=cb51f25a-39d3-4614-a652-06086dbcb27a",
+              },
+            }
           );
           return res
             .status(200)
