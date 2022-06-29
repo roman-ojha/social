@@ -4,55 +4,77 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  profilePageDataAction,
-  setRootUserProfileDataState,
-  startProgressBar,
-  stopProgressBar,
-  openRightPartDrawer,
-} from "../services/redux-actions";
+// import {
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+//   startProgressBar,
+//   stopProgressBar,
+//   openRightPartDrawer,
+// } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
 import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
+import { AppState, actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
+import { toastError, toastSuccess } from "../services/toast";
+import { AxiosError } from "axios";
 
-const MoreProfileBox = () => {
+const MoreProfileBox = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const moreProfileBoxState = useSelector(
-    (state) => state.moreProfileBoxReducer
+    (state: AppState) => state.moreProfileBoxReducer
   );
   const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
+    (state: AppState) => state.rootUserProfileDataState
   );
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+  const {
+    profilePageDataAction,
+    setRootUserProfileDataState,
+    startProgressBar,
+    stopProgressBar,
+    openRightPartDrawer,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const date = new Date();
-  const userLogOut = async () => {
+  const userLogOut = async (): Promise<void> => {
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await axios({
         method: "GET",
         url: "/u/logout",
-        header: {
+        headers: {
           Accpet: "application/josn",
           "Content-Type": "application/json",
         },
         withCredentials: true,
       });
-      dispatch(stopProgressBar());
+      stopProgressBar();
       history.push("/signin", { replace: true });
-      if (!res.status === 200) {
-        const error = new Error(res.error);
-        throw error;
+      if (res.status !== 200) {
+        // const error = new Error(res.error);
+        // throw error;
+        toastError("Some Problem Occur, Please Try again later!!!");
+      } else {
+        toastSuccess("You are logged out");
       }
-    } catch (err) {
-      dispatch(stopProgressBar());
+    } catch (error) {
+      const err = error as AxiosError;
+      stopProgressBar();
+      if (err.response) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        }
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
     }
   };
   return (
@@ -67,17 +89,15 @@ const MoreProfileBox = () => {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
               };
-              dispatch(profilePageDataAction(userObj));
+              profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                dispatch(
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  })
-                );
+                setRootUserProfileDataState({
+                  fetchedRootUserProfileData: false,
+                  getRootUserProfileData: true,
+                });
               }
               if (isMax850px) {
-                dispatch(openRightPartDrawer(false));
+                openRightPartDrawer(false);
               }
             }}
           >
