@@ -2,18 +2,26 @@ import React from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink } from "react-router-dom";
-import {
-  openRightPartDrawer,
-  mainPageMessageViewOnOff,
-} from "../../services/redux-actions/index";
+// import {
+//   openRightPartDrawer,
+//   mainPageMessageViewOnOff,
+// } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import MessagesListSingleMessage from "./MessagesListSingleMessage";
 import { useMediaQuery } from "react-responsive";
 import constant from "../../constant/constant";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
-const MessagesList = () => {
+const MessagesList = (): JSX.Element => {
   const dispatch = useDispatch();
-  const messageList = useSelector((state) => state.messageListReducer);
+  const messageList = useSelector(
+    (state: AppState) => state.messageListReducer
+  );
+  const { openRightPartDrawer, mainPageMessageViewOnOff } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
@@ -63,9 +71,9 @@ const MessagesList = () => {
         <NavLink
           to="/u/message"
           onClick={() => {
-            dispatch(mainPageMessageViewOnOff(false));
+            mainPageMessageViewOnOff(false);
             if (isMax850px) {
-              dispatch(openRightPartDrawer(false));
+              openRightPartDrawer(false);
             }
           }}
         >
