@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import socket from "../../services/socket";
-import {
-  appendOnCurrentInnerUserMessage,
-  appendMessageOnMessageListAction,
-} from "../../services/redux-actions/index";
+// import {
+//   appendOnCurrentInnerUserMessage,
+//   appendMessageOnMessageListAction,
+// } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmptyString } from "../../funcs/isEmptyString";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
+import { toastError } from "../../services/toast";
 
-const SendMessageInputField = (props) => {
+const SendMessageInputField = (props): JSX.Element => {
   const dispatch = useDispatch();
-  const [userMessageField, setUserMessageField] = useState("");
+  const [userMessageField, setUserMessageField] = useState<string>("");
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const currentMessageStore = useSelector(
-    (state) => state.setCurrentUserMessageReducer
+    (state: AppState) => state.setCurrentUserMessageReducer
   );
+  const { appendOnCurrentInnerUserMessage, appendMessageOnMessageListAction } =
+    bindActionCreators(actionCreators, dispatch);
 
-  const sendMessage = async () => {
+  const sendMessage = async (): Promise<void> => {
     try {
       if (isEmptyString(userMessageField)) {
         setUserMessageField("");
@@ -37,26 +43,31 @@ const SendMessageInputField = (props) => {
       setUserMessageField("");
       socket.emit("send-message", resBody, (res) => {
         if (res.success !== false) {
-          dispatch(
-            appendOnCurrentInnerUserMessage({
+          appendOnCurrentInnerUserMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          });
+          appendMessageOnMessageListAction({
+            msgInfo: {
               ...res.msgInfo,
               _id: `${Math.random()}`,
-            })
-          );
-          dispatch(
-            appendMessageOnMessageListAction({
-              msgInfo: {
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-              },
-              id: resBody.receiverId,
-              receiverPicture: props.receiverPicture,
-              messageToUserId: props.messageToUserId,
-            })
-          );
+            },
+            id: resBody.receiverId,
+            receiverPicture: props.receiverPicture,
+            messageToUserId: props.messageToUserId,
+          });
         }
       });
-    } catch (err) {}
+    } catch (error) {
+      const err = error as AxiosError;
+      if (err.response) {
+        if (err.response.data.success === false) {
+          toastError(err.response.data.msg);
+        }
+      } else {
+        toastError("Some Problem Occur, Please Try again later!!!");
+      }
+    }
   };
 
   return (
