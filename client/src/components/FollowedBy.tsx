@@ -3,39 +3,49 @@ import { useSelector, useDispatch } from "react-redux";
 import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { useHistory } from "react-router-dom";
 import { toastError, toastSuccess } from "../services/toast";
-import {
-  profilePageDataAction,
-  isFollowedFollowedByUser,
-  startProgressBar,
-  stopProgressBar,
-  openRightPartDrawer,
-} from "../services/redux-actions";
+// import {
+//   profilePageDataAction,
+//   isFollowedFollowedByUser,
+//   startProgressBar,
+//   stopProgressBar,
+//   openRightPartDrawer,
+// } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import GlobalApi from "../services/api/global";
 import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
-import { RootState, actionCreators } from "../services/redux";
+import { AppState, actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
 
 const FollowedBy = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
-    (state) => state.changeMainPageMessageView
+    (state: AppState) => state.changeMainPageMessageView
   );
-  const notificationBoxState = useSelector((state) => state.notificationBox);
+  const notificationBoxState = useSelector(
+    (state: AppState) => state.notificationBox
+  );
   const moreProfileBoxState = useSelector(
-    (state) => state.moreProfileBoxReducer
+    (state: AppState) => state.moreProfileBoxReducer
   );
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+  const {
+    profilePageDataAction,
+    isFollowedFollowedByUser,
+    startProgressBar,
+    stopProgressBar,
+    openRightPartDrawer,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const FollowedUser = (props) => {
     const followUser = async () => {
       if (props.userInformation.type !== "bot") {
         try {
-          dispatch(startProgressBar());
+          startProgressBar();
           const followedTo = {
             userID: props.userInformation.userID,
             id: props.userInformation.id,
@@ -53,13 +63,12 @@ const FollowedBy = () => {
           const data = await response.data;
           if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
-            dispatch(
-              isFollowedFollowedByUser({
-                userID: props.userInformation.userID,
-                followed: true,
-              })
-            );
-            dispatch(stopProgressBar());
+            isFollowedFollowedByUser({
+              userID: props.userInformation.userID,
+              followed: true,
+              type: "",
+            });
+            stopProgressBar();
           }
         } catch (err) {
           if (err.response) {
@@ -69,7 +78,7 @@ const FollowedBy = () => {
           } else {
             toastError("Some Problem Occur, Please Try again later!!!");
           }
-          dispatch(stopProgressBar());
+          stopProgressBar();
         }
       } else {
         toastError("Sorry!!, can't be able to Follow bot");
@@ -79,7 +88,7 @@ const FollowedBy = () => {
     const unFollowUser = async () => {
       if (props.userInformation.type !== "bot") {
         try {
-          dispatch(startProgressBar());
+          startProgressBar();
           const unfollowedTo = {
             userID: props.userInformation.userID,
             id: props.userInformation.id,
@@ -97,13 +106,12 @@ const FollowedBy = () => {
           const data = await response.data;
           if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
-            dispatch(
-              isFollowedFollowedByUser({
-                userID: props.userInformation.userID,
-                followed: false,
-              })
-            );
-            dispatch(stopProgressBar());
+            isFollowedFollowedByUser({
+              userID: props.userInformation.userID,
+              followed: false,
+              type: "",
+            });
+            stopProgressBar();
           }
         } catch (err) {
           if (err.response) {
@@ -113,7 +121,7 @@ const FollowedBy = () => {
           } else {
             toastError("Some Problem Occur, Please Try again later!!!");
           }
-          dispatch(stopProgressBar());
+          stopProgressBar();
         }
       } else {
         toastError("Sorry!!, can't be able to Follow bot");
@@ -122,7 +130,7 @@ const FollowedBy = () => {
 
     const routeToProfile = async (userID) => {
       try {
-        dispatch(startProgressBar());
+        startProgressBar();
         const res = await GlobalApi.getFriendData(userID);
         const userData = await res.data;
         if (res.status === 200 && userData.success) {
@@ -130,15 +138,15 @@ const FollowedBy = () => {
             ...userData.searchedUser,
             isRootUserFollowed: userData.isRootUserFollowed,
           };
-          dispatch(profilePageDataAction(userObj));
+          profilePageDataAction(userObj);
           if (isMax850px) {
-            dispatch(openRightPartDrawer(false));
+            openRightPartDrawer(false);
           }
           history.push(`/u/profile/${userID}/posts`);
         } else {
           toastError(userData.msg);
         }
-        dispatch(stopProgressBar());
+        stopProgressBar();
       } catch (err) {
         if (err.response) {
           if (err.response.data.success === false) {
@@ -147,7 +155,7 @@ const FollowedBy = () => {
         } else {
           toastError("Some Problem Occur, Please Try again later!!!");
         }
-        dispatch(stopProgressBar());
+        stopProgressBar();
       }
     };
 
@@ -223,7 +231,9 @@ const FollowedBy = () => {
     );
   };
   const ReturnFollowedBy = () => {
-    const followedBy = useSelector((state) => state.followedByUserReducer);
+    const followedBy = useSelector(
+      (state: AppState) => state.followedByUserReducer
+    );
     return (
       <>
         {followedBy.map((user, index) => {

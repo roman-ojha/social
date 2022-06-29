@@ -1,6 +1,6 @@
 export interface FollowedByState {
   userID: string;
-  followed: string;
+  followed: boolean;
   type: string;
 }
 
