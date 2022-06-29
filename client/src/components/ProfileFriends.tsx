@@ -6,29 +6,48 @@ import { useHistory, useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
 import { Helmet } from "react-helmet";
-import {
-  setProfilePageFriends,
-  setProfilePageFollowers,
-  setProfilePageFollowings,
-  startProgressBar,
-  stopProgressBar,
-  profilePageDataAction,
-  setRootUserProfileDataState,
-} from "../services/redux-actions";
+// import {
+//   setProfilePageFriends,
+//   setProfilePageFollowers,
+//   setProfilePageFollowings,
+//   startProgressBar,
+//   stopProgressBar,
+//   profilePageDataAction,
+//   setRootUserProfileDataState,
+// } from "../services/redux-actions";
 import GlobalApi from "../services/api/global";
+import { AppState, actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
+import UserDocument from "../interface/userDocument";
+import { AxiosError } from "axios";
 
-const ProfileFriends = () => {
+const ProfileFriends = (): JSX.Element => {
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const profilePageData = useSelector((state) => state.profilePageDataReducer);
-  const [userDetails, setUserDetails] = useState({
+  const [userDetails, setUserDetails] = useState<{
+    fetchedData: boolean;
+    user: UserDocument[];
+  }>({
     fetchedData: false,
     user: [],
   });
-  const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+  const profilePageData = useSelector(
+    (state: AppState) => state.profilePageDataReducer
   );
+  const userProfileDetailStore = useSelector(
+    (state: AppState) => state.setUserProfileDetailReducer
+  );
+  const {
+    setProfilePageFriends,
+    setProfilePageFollowers,
+    setProfilePageFollowings,
+    startProgressBar,
+    stopProgressBar,
+    profilePageDataAction,
+    setRootUserProfileDataState,
+  } = bindActionCreators(actionCreators, dispatch);
+
   const loadingContainerSpinnerStyle = {
     width: "100%",
     height: "100%",
@@ -47,12 +66,12 @@ const ProfileFriends = () => {
   };
 
   useEffect(() => {
-    const getUserFriends = async () => {
+    const getUserFriends = async (): Promise<void> => {
       try {
         const res = await UserApi.getFriends(profilePageData.id);
         const data = await res.data;
         if (res.status === 200 && data.success) {
-          dispatch(setProfilePageFriends(data.friends));
+          setProfilePageFriends(data.friends);
           setUserDetails({
             fetchedData: true,
             user: data.friends,
@@ -60,7 +79,8 @@ const ProfileFriends = () => {
         } else {
           toastError("Some Error Occur While Fetching Friends Data");
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -71,12 +91,12 @@ const ProfileFriends = () => {
       }
     };
 
-    const getUserFollowings = async () => {
+    const getUserFollowings = async (): Promise<void> => {
       try {
         const res = await UserApi.getFollowings(profilePageData.id);
         const data = await res.data;
         if (res.status === 200 && data.success) {
-          dispatch(setProfilePageFollowings(data.friends));
+          setProfilePageFollowings(data.friends);
           setUserDetails({
             fetchedData: true,
             user: data.friends,
@@ -84,7 +104,8 @@ const ProfileFriends = () => {
         } else {
           toastError("Some Error Occur While Fetching Friends Data");
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -95,12 +116,12 @@ const ProfileFriends = () => {
       }
     };
 
-    const getUserFollowers = async () => {
+    const getUserFollowers = async (): Promise<void> => {
       try {
         const res = await UserApi.getFollowers(profilePageData.id);
         const data = await res.data;
         if (res.status === 200 && data.success) {
-          dispatch(setProfilePageFollowers(data.friends));
+          setProfilePageFollowers(data.friends);
           setUserDetails({
             fetchedData: true,
             user: data.friends,
@@ -108,7 +129,8 @@ const ProfileFriends = () => {
         } else {
           toastError("Some Error Occur While Fetching Friends Data");
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -154,7 +176,7 @@ const ProfileFriends = () => {
                 style={{ textDecoration: "none", color: "black" }}
                 onClick={async () => {
                   try {
-                    dispatch(startProgressBar());
+                    startProgressBar();
                     const res = await GlobalApi.getFriendData(
                       userDetail.userID
                     );
@@ -165,21 +187,19 @@ const ProfileFriends = () => {
                         ...userData.searchedUser,
                         isRootUserFollowed: userData.isRootUserFollowed,
                       };
-                      dispatch(profilePageDataAction(userObj));
+                      profilePageDataAction(userObj);
                       if (userDetail.userID === userProfileDetailStore.userID) {
-                        dispatch(
-                          setRootUserProfileDataState({
-                            fetchedRootUserProfileData: true,
-                            getRootUserProfileData: false,
-                          })
-                        );
+                        setRootUserProfileDataState({
+                          fetchedRootUserProfileData: true,
+                          getRootUserProfileData: false,
+                        });
                       }
                       history.push(`/u/profile/${userDetail.userID}/posts`);
                     } else {
                       // error
                       toastError(userData.msg);
                     }
-                    dispatch(stopProgressBar());
+                    stopProgressBar();
                   } catch (err) {
                     if (err.response.data.success === false) {
                       toastError(err.response.data.msg);
@@ -188,7 +208,7 @@ const ProfileFriends = () => {
                         "Some Problem Occur, Please Try again later!!!"
                       );
                     }
-                    dispatch(stopProgressBar());
+                    stopProgressBar();
                   }
                 }}
               >
