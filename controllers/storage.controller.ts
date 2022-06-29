@@ -7,6 +7,7 @@ import compressFile from "../funcs/compressFile.js";
 import storage from "../db/userStorageConnection.js";
 import ResponseObject from "../interface/responseObject";
 import { Request, Response } from "express";
+import { file } from "googleapis/build/src/apis/file/index.js";
 const bucket = storage.bucket();
 
 export default {
@@ -206,6 +207,7 @@ export default {
             });
           }
         }
+        console.log(file);
         if (!req.file) {
           const resData = await userDetail.updateOne(
             { email: email },

@@ -5,17 +5,27 @@ import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
 import { toastError } from "../services/toast";
-import { showLoadingSpinner } from "../services/redux-actions";
+// import { showLoadingSpinner } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../services/redux";
+import UserDocument from "../interface/userDocument";
+import { AxiosError } from "axios";
 
-const GetUserID = (props) => {
+const GetUserID = (props): JSX.Element => {
   const dispatch = useDispatch();
-  const [userDetail, setUserDetail] = useState();
+  const [userDetail, setUserDetail] = useState<{
+    email: UserDocument["email"];
+  }>({
+    email: "",
+  });
   const history = useHistory();
   const [userID, setUserID] = useState("");
   const url = new URL(window.location.href);
   const uid = url.searchParams.get("uid");
+  const { showLoadingSpinner } = bindActionCreators(actionCreators, dispatch);
+
   useEffect(() => {
     // if user is login for the first time then the userID will be undefined
     if (uid !== "undefined") {
@@ -40,10 +50,18 @@ const GetUserID = (props) => {
       getUserDetail();
     }
   }, [history, uid]);
-  const submitDetail = async (e) => {
+  const submitDetail = async (): Promise<void> => {
     try {
-      dispatch(showLoadingSpinner(true));
-      const profile = document.getElementById("image-input").files[0];
+      showLoadingSpinner(true);
+      const profilePictureList = (
+        document.getElementById("image-input")! as HTMLInputElement
+      ).files;
+      let profilePicture: File | null;
+      if (!profilePictureList) {
+        profilePicture = null;
+      } else {
+        profilePicture = profilePictureList[0];
+      }
       const data = new FormData();
       if (props.userDetail === undefined) {
         // if UserID page will be open using google authnetication
@@ -57,7 +75,7 @@ const GetUserID = (props) => {
         data.append("auth", "social");
       }
       data.append("userID", userID);
-      data.append("profile", profile);
+      data.append("profile", profilePicture as Blob);
       const res = await axios({
         method: "POST",
         url: "/u/userId",
@@ -68,14 +86,15 @@ const GetUserID = (props) => {
         // console.log(resData);
       } else {
         // console.log(resData);
-        dispatch(showLoadingSpinner(false));
+        showLoadingSpinner(false);
         if (props.userDetail === undefined) {
           history.push("/u/home");
         } else {
           history.push("/signin");
         }
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.err);
@@ -83,7 +102,7 @@ const GetUserID = (props) => {
       } else {
         toastError("Some Problem Occur, Please Try again Letter!!!");
       }
-      dispatch(showLoadingSpinner(false));
+      showLoadingSpinner(false);
     }
   };
 
@@ -117,8 +136,13 @@ const GetUserID = (props) => {
             style={{ visibility: "hidden", position: "absolute" }}
             onChange={(e) => {
               try {
-                document.querySelector(".GetUserIDPage_Form_Profile").src =
-                  URL.createObjectURL(e.target.files[0]);
+                if (e.target.files !== null) {
+                  (
+                    document.querySelector(
+                      ".GetUserIDPage_Form_Profile"
+                    )! as HTMLInputElement
+                  ).src = URL.createObjectURL(e.target.files[0]);
+                }
               } catch (err) {}
             }}
             accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
