@@ -17,8 +17,9 @@ import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
-const FollowedBy = () => {
+const FollowedBy = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
@@ -33,6 +34,7 @@ const FollowedBy = () => {
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+
   const {
     profilePageDataAction,
     isFollowedFollowedByUser,
@@ -41,14 +43,20 @@ const FollowedBy = () => {
     openRightPartDrawer,
   } = bindActionCreators(actionCreators, dispatch);
 
-  const FollowedUser = (props) => {
-    const followUser = async () => {
-      if (props.userInformation.type !== "bot") {
+  interface FollowedUserProps {
+    userInformation: any;
+  }
+
+  const FollowedUser: React.FC<FollowedUserProps> = ({
+    userInformation,
+  }): JSX.Element => {
+    const followUser = async (): Promise<void> => {
+      if (userInformation.type !== "bot") {
         try {
           startProgressBar();
           const followedTo = {
-            userID: props.userInformation.userID,
-            id: props.userInformation.id,
+            userID: userInformation.userID,
+            id: userInformation.id,
           };
           const response = await axios({
             method: "POST",
@@ -64,13 +72,14 @@ const FollowedBy = () => {
           if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
             isFollowedFollowedByUser({
-              userID: props.userInformation.userID,
+              userID: userInformation.userID,
               followed: true,
               type: "",
             });
             stopProgressBar();
           }
-        } catch (err) {
+        } catch (error) {
+          const err = error as AxiosError;
           if (err.response) {
             if (err.response.data.success === false) {
               toastError(err.response.data.msg);
@@ -85,13 +94,13 @@ const FollowedBy = () => {
       }
     };
 
-    const unFollowUser = async () => {
-      if (props.userInformation.type !== "bot") {
+    const unFollowUser = async (): Promise<void> => {
+      if (userInformation.type !== "bot") {
         try {
           startProgressBar();
           const unfollowedTo = {
-            userID: props.userInformation.userID,
-            id: props.userInformation.id,
+            userID: userInformation.userID,
+            id: userInformation.id,
           };
           const response = await axios({
             method: "POST",
@@ -107,13 +116,14 @@ const FollowedBy = () => {
           if (response.status === 200 && data.success) {
             toastSuccess(data.msg);
             isFollowedFollowedByUser({
-              userID: props.userInformation.userID,
+              userID: userInformation.userID,
               followed: false,
               type: "",
             });
             stopProgressBar();
           }
-        } catch (err) {
+        } catch (error) {
+          const err = error as AxiosError;
           if (err.response) {
             if (err.response.data.success === false) {
               toastError(err.response.data.msg);
@@ -128,7 +138,7 @@ const FollowedBy = () => {
       }
     };
 
-    const routeToProfile = async (userID) => {
+    const routeToProfile = async (userID: string): Promise<void> => {
       try {
         startProgressBar();
         const res = await GlobalApi.getFriendData(userID);
@@ -147,7 +157,8 @@ const FollowedBy = () => {
           toastError(userData.msg);
         }
         stopProgressBar();
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -165,14 +176,14 @@ const FollowedBy = () => {
           <img
             className="MainPage_Followed_User_Image"
             src={
-              props.userInformation.picture
-                ? props.userInformation.picture
+              userInformation.picture
+                ? userInformation.picture
                 : User_Profile_Icon
             }
             onClick={() => {
-              if (props.userInformation.type !== "bot") {
+              if (userInformation.type !== "bot") {
                 // history.push(`/u/profile/${props.userInformation.userID}`);
-                routeToProfile(props.userInformation.userID);
+                routeToProfile(userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -183,22 +194,22 @@ const FollowedBy = () => {
             <p
               className="MainPage_Followed_User_Name"
               onClick={() => {
-                if (props.userInformation.type !== "bot") {
+                if (userInformation.type !== "bot") {
                   // history.push(`/u/profile/${props.userInformation.userID}`);
-                  routeToProfile(props.userInformation.userID);
+                  routeToProfile(userInformation.userID);
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
               }}
             >
-              {props.userInformation.name}
+              {userInformation.name}
             </p>
             <p
               className="MainPage_Followed_User_Follower_Name"
               onClick={() => {
-                if (props.userInformation.type !== "bot") {
+                if (userInformation.type !== "bot") {
                   // history.push(`/u/profile/${props.userInformation.userID}`);
-                  routeToProfile(props.userInformation.userID);
+                  routeToProfile(userInformation.userID);
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
@@ -206,11 +217,11 @@ const FollowedBy = () => {
             >
               {/* Followed By John */}
               {/* NOTE We need to implement Follow by <user> feature but for right now we will who userID here */}
-              {props.userInformation.userID}
+              {userInformation.userID}
             </p>
           </div>
           <div className="MainPage_Followed_User_Follow_Button">
-            {props.userInformation.followed ? (
+            {userInformation.followed ? (
               <p
                 className="MainPage_Followed_User_Follow_Button_Text"
                 onClick={unFollowUser}
@@ -230,7 +241,7 @@ const FollowedBy = () => {
       </>
     );
   };
-  const ReturnFollowedBy = () => {
+  const ReturnFollowedBy = (): JSX.Element => {
     const followedBy = useSelector(
       (state: AppState) => state.followedByUserReducer
     );
