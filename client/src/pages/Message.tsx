@@ -5,21 +5,27 @@ import "../styles/components/messageBox.css";
 import "../styles/pages/MessagePage.css";
 import InnerUserMessage from "../components/MessagePage/InnerUserMessage";
 import MessagesList from "../components/MessagePage/MessagesList";
-import { mainPageMessageViewOnOff } from "../services/redux-actions/index";
+// import { mainPageMessageViewOnOff } from "../services/redux-actions/index";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
+import { AppState, actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
 
-const Message = () => {
+const Message = (): JSX.Element => {
   const dispatch = useDispatch();
   const currentMessageStore = useSelector(
-    (state) => state.setCurrentUserMessageReducer
+    (state: AppState) => state.setCurrentUserMessageReducer
   );
   const mainPageInnerMessageBoxOnOffState = useSelector(
-    (state) => state.mainPageInnerMessageBoxOnOff
+    (state: AppState) => state.mainPageInnerMessageBoxOnOff
+  );
+  const { mainPageMessageViewOnOff } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
 
   useEffect(() => {
-    dispatch(mainPageMessageViewOnOff(false));
+    mainPageMessageViewOnOff(false);
   }, [dispatch]);
 
   return (
