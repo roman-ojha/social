@@ -1,30 +1,29 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { hideProgressBar } from "../services/redux-actions";
+// import { hideProgressBar } from "../services/redux-actions";
+import { AppState, actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
 
-const ProgressBar = () => {
+const ProgressBar = (): JSX.Element => {
   const updateIntervalIn = 100;
-  const ProgressBarStyle = {
-    width: "0%",
-    height: "3px",
-    position: "fixed",
-    backgroundColor: "var(--primary-color)",
-    top: "0px",
-    zIndex: "10",
-    transitionDuration: `1s`,
-  };
-  const progressBarState = useSelector((state) => state.progressBarReducer);
   const dispatch = useDispatch();
+  const progressBarState = useSelector(
+    (state: AppState) => state.progressBarReducer
+  );
+  const { hideProgressBar } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     if (progressBarState.showProgressBar) {
-      const progressBar = document.getElementsByClassName("ProgressBar")[0];
-      if (
-        progressBarState.isCompleted === true &&
-        progressBarState.showProgressBar === false
-      ) {
-        dispatch(progressBarState(hideProgressBar()));
-      }
+      const progressBar = document.getElementsByClassName(
+        "ProgressBar"
+      )[0] as HTMLDivElement;
+      // if (
+      //   progressBarState.isCompleted === true &&
+      //   progressBarState.showProgressBar === false
+      // ) {
+      //   console.log("hello");
+      //   // hideProgressBar();
+      // }
       if (!progressBarState.isCompleted) {
         let previousWidth = 15;
         let incrementInterval = 30;
@@ -51,11 +50,13 @@ const ProgressBar = () => {
       }
 
       if (progressBarState.isCompleted) {
-        const progressBar = document.getElementsByClassName("ProgressBar")[0];
+        const progressBar = document.getElementsByClassName(
+          "ProgressBar"
+        )[0] as HTMLDivElement;
         progressBar.style.width = "100%";
         progressBar.style.transitionDuration = "500ms";
         const progressCompleteTimeOut = setTimeout(() => {
-          dispatch(hideProgressBar());
+          hideProgressBar();
         }, 500);
         return () => {
           clearTimeout(progressCompleteTimeOut);
@@ -72,7 +73,18 @@ const ProgressBar = () => {
   return (
     <>
       {progressBarState.showProgressBar ? (
-        <div className="ProgressBar" style={ProgressBarStyle}></div>
+        <div
+          className="ProgressBar"
+          style={{
+            width: "0%",
+            height: "3px",
+            position: "fixed",
+            backgroundColor: "var(--primary-color)",
+            top: "0px",
+            zIndex: "10",
+            transitionDuration: `1s`,
+          }}
+        ></div>
       ) : (
         <></>
       )}
