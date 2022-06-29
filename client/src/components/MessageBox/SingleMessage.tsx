@@ -1,12 +1,12 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
+import { AppState } from "../../services/redux";
 
-const SingleMessage = (props) => {
+const SingleMessage = (props): JSX.Element => {
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
-  console.log(props.MessageInfo);
   return (
     <>
       <div
