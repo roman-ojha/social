@@ -1,10 +1,11 @@
 import React from "react";
 import "../styles/components/loadingSpinner.css";
 import { useSelector } from "react-redux";
+import { AppState } from "../services/redux";
 
 const LoadingSpinner = () => {
   const showLoadingSpinnerState = useSelector(
-    (state) => state.showLoadingSpinnerReducer
+    (state: AppState) => state.showLoadingSpinnerReducer
   );
   return (
     <>
