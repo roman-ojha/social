@@ -1,24 +1,30 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import socket from "../../services/socket";
-import {
-  appendOnCurrentInnerUserMessage,
-  appendMessageOnMessageListAction,
-} from "../../services/redux-actions/index";
+// import {
+//   appendOnCurrentInnerUserMessage,
+//   appendMessageOnMessageListAction,
+// } from "../../services/redux-actions/index";
 import { Icon } from "@iconify/react";
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { toastError } from "../../services/toast";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
-const SendMessageInputField = (props) => {
+const SendMessageInputField = (props): JSX.Element => {
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const [userMessageField, setUserMessageField] = useState("");
   const currentMessageStore = useSelector(
-    (state) => state.setCurrentUserMessageReducer
+    (state: AppState) => state.setCurrentUserMessageReducer
   );
-  const sendMessage = async () => {
+  const { appendOnCurrentInnerUserMessage, appendMessageOnMessageListAction } =
+    bindActionCreators(actionCreators, dispatch);
+
+  const sendMessage = async (): Promise<void> => {
     // sending message to user
     try {
       if (isEmptyString(userMessageField)) {
@@ -38,26 +44,23 @@ const SendMessageInputField = (props) => {
       setUserMessageField("");
       socket.emit("send-message", resBody, (res) => {
         if (res.success !== false) {
-          dispatch(
-            appendOnCurrentInnerUserMessage({
+          appendOnCurrentInnerUserMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          });
+          appendMessageOnMessageListAction({
+            msgInfo: {
               ...res.msgInfo,
               _id: `${Math.random()}`,
-            })
-          );
-          dispatch(
-            appendMessageOnMessageListAction({
-              msgInfo: {
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-              },
-              id: resBody.receiverId,
-              receiverPicture: props.receiverPicture,
-              messageToUserId: props.messageToUserId,
-            })
-          );
+            },
+            id: resBody.receiverId,
+            receiverPicture: props.receiverPicture,
+            messageToUserId: props.messageToUserId,
+          });
         }
       });
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
