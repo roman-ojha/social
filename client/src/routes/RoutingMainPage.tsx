@@ -10,12 +10,12 @@ import { useHistory, useLocation } from "react-router";
 // import { actionCreators, RootState } from "../services/redux";
 // import { useDispatch, useSelector } from "react-redux";
 
-const MainRoot = () => {
+const MainRoot = (): JSX.Element => {
   const history = useHistory();
   history.push("/u/home");
   return <></>;
 };
-const RoutingMainPage = () => {
+const RoutingMainPage = (): JSX.Element => {
   // const state = useSelector(
   //   (state: RootState) => state.rootUserProfileDetailReducer
   // );
@@ -27,11 +27,13 @@ const RoutingMainPage = () => {
   // setRootUserProfileDetail({})
   const location = useLocation();
   const history = useHistory();
+
   useEffect(() => {
     if (location.pathname === "/u") {
       history.push("/u/home");
     }
   }, [history, location.pathname]);
+
   return (
     <>
       <Switch>

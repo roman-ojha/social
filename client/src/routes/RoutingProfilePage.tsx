@@ -16,7 +16,7 @@ const RoutingProfilePage: React.FC<RoutingProfilePageProps> = ({
   const location = useLocation();
 
   useEffect(() => {
-    const colorSelectedUrl = () => {
+    const colorSelectedUrl = (): void => {
       // updating color of sidebar tab through useEffect
       try {
         if (location.pathname.includes("/u/profile")) {

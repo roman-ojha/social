@@ -26,7 +26,7 @@ const Video = (): JSX.Element => {
   //     const res = await Api.scrapeVideo();
   //     const data = await res.data;
   //     if (res.status === 200 && data.success)
-  //       dispatch(setVideoPageData(data.videos));
+  //       setVideoPageData(data.videos);
   //   } catch (err) {
   //     if (err.response.data.success === false) {
   //       toastError(err.response.data.msg);
@@ -47,7 +47,7 @@ const Video = (): JSX.Element => {
   // };
 
   useEffect(() => {
-    const getYoutubeHomePageVideo = async () => {
+    const getYoutubeHomePageVideo = async (): Promise<void> => {
       try {
         interface Response extends ResponseObject {
           videos: VideoPageState[];
@@ -55,7 +55,6 @@ const Video = (): JSX.Element => {
         const resVideos = await videoApi.getYoutubeHomePageVideos();
         const resVideosData: Response = await resVideos.data;
         if (resVideos.status === 200 && resVideosData.success) {
-          // dispatch(setVideoPageData(resVideosData.videos));
           setVideoPageData(resVideosData.videos);
         } else {
           toastError("Some thing went wrong, please try again later!!!");
