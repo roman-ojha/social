@@ -208,7 +208,6 @@ export default {
           }
         }
         if (!req.file) {
-          console.log("not picture");
           const resData = await userDetail.updateOne(
             { email: email },
             {
