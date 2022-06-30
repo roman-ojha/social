@@ -8,8 +8,9 @@ import MessageListSingleMessage from "./MessagesListSingleMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
-const MessagesList = () => {
+const MessagesList = (): JSX.Element => {
   const dispatch = useDispatch();
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
   const messageList = useSelector(
@@ -29,7 +30,8 @@ const MessagesList = () => {
           toastError("Error While fetching Messages");
         }
         setShowLoadingSpinner(false);
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);

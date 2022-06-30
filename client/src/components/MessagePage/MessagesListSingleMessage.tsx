@@ -1,28 +1,32 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import {
-  currentUserMessageAction,
-  mainPageMessageInnerViewOnOff,
-} from "../../services/redux-actions/index";
+// import {
+//   currentUserMessageAction,
+//   mainPageMessageInnerViewOnOff,
+// } from "../../services/redux-actions/index";
 import { toastError } from "../../services/toast";
 import { instance as axios } from "../../services/axios";
 import { useDispatch } from "react-redux";
+import { actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
-const MessageListSingleMessage = (props) => {
+const MessageListSingleMessage = (props): JSX.Element => {
   const dispatch = useDispatch();
-  const showInnerMessage = async () => {
+  const { currentUserMessageAction, mainPageMessageInnerViewOnOff } =
+    bindActionCreators(actionCreators, dispatch);
+
+  const showInnerMessage = async (): Promise<void> => {
     try {
       // before getting new message we will reset the previous message stored into redux
-      dispatch(
-        currentUserMessageAction({
-          messageToId: props.messageInfo.messageToId,
-          messageToUserId: props.messageInfo.messageToUserId,
-          receiverPicture: props.messageInfo.receiverPicture,
-          message: [],
-          fetchedInnerMessage: false,
-        })
-      );
-      dispatch(mainPageMessageInnerViewOnOff(true));
+      currentUserMessageAction({
+        messageToId: props.messageInfo.messageToId,
+        messageToUserId: props.messageInfo.messageToUserId,
+        receiverPicture: props.messageInfo.receiverPicture,
+        message: [],
+        fetchedInnerMessage: false,
+      });
+      mainPageMessageInnerViewOnOff(true);
       // console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
@@ -42,17 +46,16 @@ const MessageListSingleMessage = (props) => {
       } else {
         const resData = await resMessage.data.data;
         // after getting message we will store that message into redux
-        dispatch(
-          currentUserMessageAction({
-            messageToId: props.messageInfo.messageToId,
-            messageToUserId: props.messageInfo.messageToUserId,
-            receiverPicture: props.messageInfo.receiverPicture,
-            message: resData.message,
-            fetchedInnerMessage: true,
-          })
-        );
+        currentUserMessageAction({
+          messageToId: props.messageInfo.messageToId,
+          messageToUserId: props.messageInfo.messageToUserId,
+          receiverPicture: props.messageInfo.receiverPicture,
+          message: resData.message,
+          fetchedInnerMessage: true,
+        });
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
