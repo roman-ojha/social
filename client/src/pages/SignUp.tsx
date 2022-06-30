@@ -4,17 +4,25 @@ import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
 import { Helmet } from "react-helmet";
-import { startProgressBar, stopProgressBar } from "../services/redux-actions";
+// import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import constant from "../constant/constant";
+import { actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
 let previousSelectGenderElement: HTMLDivElement;
 const SignUp = (): JSX.Element => {
   const dispatch = useDispatch();
+  const { startProgressBar, stopProgressBar } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
   const history = useHistory();
   let today = new Date();
   let birthdayYear: number[] = [];
@@ -44,7 +52,7 @@ const SignUp = (): JSX.Element => {
 
   const getUserData = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+  ): void => {
     name = event.target.name;
     value = event.target.value;
     if (name === "year" || name === "month" || name === "day") {
@@ -64,7 +72,7 @@ const SignUp = (): JSX.Element => {
   };
 
   // Login of selecting gender
-  const selectGender = (event: React.MouseEvent<HTMLDivElement>) => {
+  const selectGender = (event: React.MouseEvent<HTMLDivElement>): void => {
     let element = event.target as HTMLDivElement;
     if (
       element.className === "SignUp_Page_Male_CheckBox_Container" ||
@@ -108,7 +116,9 @@ const SignUp = (): JSX.Element => {
     });
   };
 
-  const registerData = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const registerData = async (
+    e: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> => {
     e.preventDefault();
     const { name, email, password, cpassword, birthday, gender } = userData;
     if (!name || !email || !password || !cpassword || !birthday || !gender) {
@@ -119,7 +129,7 @@ const SignUp = (): JSX.Element => {
       return;
     }
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await axios({
         method: "POST",
         headers: {
@@ -137,14 +147,15 @@ const SignUp = (): JSX.Element => {
         withCredentials: true,
       });
       const data = await res.data;
-      dispatch(stopProgressBar());
+      stopProgressBar();
       if (res.status === 200 && data.success) {
         toastSuccess(data.msg);
         history.push("/userid?uid=undefined");
       } else {
         toastError(data.msg);
       }
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -152,7 +163,7 @@ const SignUp = (): JSX.Element => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
 

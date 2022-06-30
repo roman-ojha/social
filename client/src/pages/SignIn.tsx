@@ -6,15 +6,22 @@ import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
 import { Helmet } from "react-helmet";
-import { startProgressBar, stopProgressBar } from "../services/redux-actions";
+// import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
 import constant from "../constant/constant";
 import { AxiosError } from "axios";
+import { actionCreators } from "../services/redux";
+import { bindActionCreators } from "redux";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
+  const { startProgressBar, stopProgressBar } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
+
   const [signInDetail, setSignInDetail] = useState({
     email: "",
     password: "",
@@ -33,7 +40,7 @@ const SignIn = (): JSX.Element => {
     e.preventDefault();
 
     try {
-      dispatch(startProgressBar());
+      startProgressBar();
       const res = await axios({
         method: "POST",
         url: "/signin",
@@ -43,7 +50,7 @@ const SignIn = (): JSX.Element => {
         data: JSON.stringify(signInDetail),
         withCredentials: true,
       });
-      dispatch(stopProgressBar());
+      stopProgressBar();
       // console.log(res.status);
       if (res.status !== 200) {
         // console.log(data);
@@ -65,7 +72,7 @@ const SignIn = (): JSX.Element => {
       } else {
         toastError("Some Problem Occur, Please Try again later!!!");
       }
-      dispatch(stopProgressBar());
+      stopProgressBar();
     }
   };
   const signInWithGoogle = async () => {
