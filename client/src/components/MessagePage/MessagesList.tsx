@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
-import { messageListAction } from "../../services/redux-actions/index";
+// import { messageListAction } from "../../services/redux-actions/index";
 import { toastError } from "../../services/toast";
 import messageApi from "../../services/api/global/message";
 import MessageListSingleMessage from "./MessagesListSingleMessage";
 import { useDispatch, useSelector } from "react-redux";
+import { AppState, actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
 
 const MessagesList = () => {
   const dispatch = useDispatch();
   const [showLoadingSpinner, setShowLoadingSpinner] = useState(false);
-  const messageList = useSelector((state) => state.messageListReducer);
+  const messageList = useSelector(
+    (state: AppState) => state.messageListReducer
+  );
+  const { messageListAction } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
-    const getUserMessages = async () => {
+    const getUserMessages = async (): Promise<void> => {
       try {
         setShowLoadingSpinner(true);
         const resMessage = await messageApi.getUserMessages();
         const resMessageData = await resMessage.data;
         if (resMessage.status === 200 && resMessageData.success) {
-          dispatch(messageListAction(resMessageData.messages));
+          messageListAction(resMessageData.messages);
         } else {
           toastError("Error While fetching Messages");
         }
