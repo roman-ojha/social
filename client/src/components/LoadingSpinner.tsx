@@ -7,6 +7,7 @@ const LoadingSpinner = () => {
   const showLoadingSpinnerState = useSelector(
     (state: AppState) => state.showLoadingSpinnerReducer
   );
+
   return (
     <>
       {showLoadingSpinnerState ? (

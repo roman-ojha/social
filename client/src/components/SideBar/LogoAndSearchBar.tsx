@@ -7,7 +7,10 @@ import { Icon } from "@iconify/react";
 import { useDispatch } from "react-redux";
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastError } from "../../services/toast";
-import { openSideBarDrawer } from "../../services/redux-actions";
+// import { openSideBarDrawer } from "../../services/redux-actions";
+import { actionCreators } from "../../services/redux";
+import { bindActionCreators } from "redux";
+import { AxiosError } from "axios";
 
 interface LogoAndSearchBarProps {
   onSearchBar: boolean;
@@ -19,6 +22,7 @@ const LogoAndSearchBar: React.FC<LogoAndSearchBarProps> = ({
   setOnSearchBar,
 }): JSX.Element => {
   const dispatch = useDispatch();
+  const { openSideBarDrawer } = bindActionCreators(actionCreators, dispatch);
   const [userSearchResult, setUserSearchResult] = useState<[]>([]);
   const [searchBarData, setSearchBarData] = useState<string>("");
   const getUserSearchData = async (
@@ -29,7 +33,8 @@ const LogoAndSearchBar: React.FC<LogoAndSearchBarProps> = ({
       const res = await Api.getSearchedUserData(e.target.value);
       const resUser = await res.data;
       setUserSearchResult(resUser);
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -55,7 +60,7 @@ const LogoAndSearchBar: React.FC<LogoAndSearchBarProps> = ({
             className="MainPage_SideBar_Search_Icon"
             icon="bi:search"
             onClick={() => {
-              dispatch(openSideBarDrawer(true));
+              openSideBarDrawer(true);
             }}
           />
           <input

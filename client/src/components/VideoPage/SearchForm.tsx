@@ -20,7 +20,6 @@ const SearchForm = () => {
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
-        // dispatch(setVideoPageData([]));
         setVideoPageData([]);
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
@@ -33,7 +32,6 @@ const SearchForm = () => {
               thumbnail: `http://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
             };
           });
-          // dispatch(setVideoPageData(newVideos));
           setVideoPageData(newVideos);
         } else {
           toastError(data.msg);

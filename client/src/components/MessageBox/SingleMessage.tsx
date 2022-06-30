@@ -7,6 +7,7 @@ const SingleMessage = (props): JSX.Element => {
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
+
   return (
     <>
       <div

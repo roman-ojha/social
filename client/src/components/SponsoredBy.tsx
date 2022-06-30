@@ -14,6 +14,7 @@ const SponsoredBy = (): JSX.Element => {
   const moreProfileBoxState = useSelector(
     (state: AppState) => state.moreProfileBoxReducer
   );
+
   if (
     !mainPageMessageOnOffState &&
     !notificationBoxState.open &&

@@ -8,6 +8,7 @@ const PageRoute = (): JSX.Element => {
   const profilePageData = useSelector(
     (state: AppState) => state.profilePageDataReducer
   );
+
   return (
     <>
       <nav className="ProfilePage_UserContent_Route_Container">

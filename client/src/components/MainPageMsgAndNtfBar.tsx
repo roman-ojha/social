@@ -26,7 +26,7 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import { AxiosError } from "axios";
 
-const MainPageMsgAndNtfBar = () => {
+const MainPageMsgAndNtfBar = (): JSX.Element => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();

@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import GlobalApi from "../services/api/global";
 import Api from "../services/api/components/postBox";
 import { bindActionCreators } from "redux";
-import { AppState, actionCreators } from "../services/redux";
+import { actionCreators } from "../services/redux";
 
 const ReturnCommentContent = () => {
   const history = useHistory();

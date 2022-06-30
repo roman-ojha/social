@@ -29,7 +29,6 @@ const ProfileAlbums: React.FC<ProfileAlbumsProps> = ({
     borderRadius: "50%",
     animation: "loadingSpinner 1s linear infinite",
   };
-
   const rootUserProfileDataState = useSelector(
     (state: AppState) => state.rootUserProfileDataState
   );

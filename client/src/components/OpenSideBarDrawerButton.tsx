@@ -14,6 +14,7 @@ const OpenSideBarDrawerButton = () => {
     (state: AppState) => state.sideBarDrawerReducer
   );
   const { openSideBarDrawer } = bindActionCreators(actionCreators, dispatch);
+
   return (
     <>
       {useMediaQuery({

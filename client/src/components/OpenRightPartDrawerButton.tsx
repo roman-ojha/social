@@ -13,6 +13,7 @@ const OpenRightPartDrawerButton = () => {
     (state: AppState) => state.rightPartDrawerReducer
   );
   const { openRightPartDrawer } = bindActionCreators(actionCreators, dispatch);
+
   return (
     <>
       {useMediaQuery({
