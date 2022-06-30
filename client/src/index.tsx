@@ -6,7 +6,6 @@ import "./styles/variables.css";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-// import store from "./services/redux-store/store";
 import store from "./services/redux/store";
 
 ReactDOM.render(
