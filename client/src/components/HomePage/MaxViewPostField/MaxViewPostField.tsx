@@ -13,7 +13,7 @@ import PostButton from "./PostButton";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
 
-const MaxViewPostField = () => {
+const MaxViewPostField = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(

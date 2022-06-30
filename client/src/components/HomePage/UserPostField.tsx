@@ -4,7 +4,7 @@ import MinViewPostField from "./MinViewPostField";
 import MaxViewPostField from "./MaxViewPostField/MaxViewPostField";
 import { AppState } from "../../services/redux";
 
-const UserPostField = () => {
+const UserPostField = (): JSX.Element => {
   const viewValue = useSelector(
     (state: AppState) => state.homePagePostFieldViewValue
   );

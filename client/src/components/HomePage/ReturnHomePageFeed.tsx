@@ -4,7 +4,7 @@ import PostBox from "../PostBox/PostBox";
 import { useSelector } from "react-redux";
 import { AppState } from "../../services/redux";
 
-const ReturnHomePageFeed = () => {
+const ReturnHomePageFeed = (): JSX.Element => {
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
@@ -14,6 +14,7 @@ const ReturnHomePageFeed = () => {
   const userProfilePostStore = useSelector(
     (state: AppState) => state.setUserProfilePostReducer
   );
+
   return (
     <>
       <div className="HomePage_Feed_Main_Container">

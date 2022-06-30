@@ -9,7 +9,7 @@ import { toastInfo } from "../../../services/toast";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
 
-const FilePicker = () => {
+const FilePicker = (): JSX.Element => {
   const dispatch = useDispatch();
   const displayEmojiPicker = useSelector(
     (state: AppState) => state.displayEmojiPicker
@@ -20,7 +20,7 @@ const FilePicker = () => {
   const { homePageUserPostFieldDataAction, displayUserPostFieldEmojiPicker } =
     bindActionCreators(actionCreators, dispatch);
 
-  const getUserPostFiledImage = (event) => {
+  const getUserPostFiledImage = (event): void => {
     try {
       var image = document.getElementsByClassName(
         "MaxView_UserPost_Image"

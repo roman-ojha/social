@@ -12,7 +12,7 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
 
-const MinViewPostField = () => {
+const MinViewPostField = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const {

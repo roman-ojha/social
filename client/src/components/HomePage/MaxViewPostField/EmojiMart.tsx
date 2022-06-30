@@ -5,7 +5,7 @@ import { Picker } from "emoji-mart";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
 
-const EmojiMart = () => {
+const EmojiMart = (): JSX.Element => {
   const dispatch = useDispatch();
   const displayEmojiPicker = useSelector(
     (state: AppState) => state.displayEmojiPicker

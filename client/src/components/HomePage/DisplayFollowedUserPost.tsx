@@ -5,7 +5,7 @@ import DefaultSocialPost from "../DefaultSocialPost";
 import PostBox from "../PostBox/PostBox";
 import { AppState } from "../../services/redux";
 
-const DisplayFollowedUserPost = () => {
+const DisplayFollowedUserPost = (): JSX.Element => {
   const followedUserPostDataStore = useSelector(
     (state: AppState) => state.setFollowedUserPostDataReducer
   );

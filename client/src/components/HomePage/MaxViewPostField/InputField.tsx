@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
 
-const InputField = () => {
+const InputField = (): JSX.Element => {
   const dispatch = useDispatch();
   const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
