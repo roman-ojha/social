@@ -7,7 +7,7 @@ import { NavLink, useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { AppState } from "../services/redux";
 
-const Stories = () => {
+const Stories = (): JSX.Element => {
   const history = useHistory();
   const userStoriesStore = useSelector(
     (state: AppState) => state.userStoriesReducer

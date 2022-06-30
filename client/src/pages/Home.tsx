@@ -8,7 +8,7 @@ import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import UserPostField from "../components/HomePage/UserPostField";
 import ReturnHomePageFeed from "../components/HomePage/ReturnHomePageFeed";
 
-const Home = () => {
+const Home = (): JSX.Element => {
   return (
     <>
       <LoadingSpinner />

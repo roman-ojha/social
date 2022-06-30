@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/pages/page404.css";
 import { useHistory } from "react-router-dom";
 
-const Page404 = () => {
+const Page404 = (): JSX.Element => {
   const history = useHistory();
   return (
     <>

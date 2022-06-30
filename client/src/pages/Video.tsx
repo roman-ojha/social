@@ -15,7 +15,7 @@ import { AppState, actionCreators } from "../services/redux";
 import ResponseObject from "src/interface/responseObject";
 import { VideoPageState } from "src/services/redux/pages/video/types";
 
-const Video = () => {
+const Video = (): JSX.Element => {
   const dispatch = useDispatch();
   const videoPageData = useSelector(
     (state: AppState) => state.videoPageDataReducer

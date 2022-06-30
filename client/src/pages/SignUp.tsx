@@ -13,7 +13,7 @@ import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import constant from "../constant/constant";
 
 let previousSelectGenderElement: HTMLDivElement;
-const SignUp = () => {
+const SignUp = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
   let today = new Date();

@@ -21,7 +21,7 @@ import { toastError } from "../services/toast";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../services/redux";
 
-const Index = () => {
+const Index = (): JSX.Element => {
   const dispatch = useDispatch();
   const history = useHistory();
   const [renderMainPage, setRenderMainPage] = useState<boolean>(false);

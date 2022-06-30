@@ -13,7 +13,7 @@ import { toastError, toastInfo } from "../services/toast";
 import constant from "../constant/constant";
 import { AxiosError } from "axios";
 
-const SignIn = () => {
+const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
   const [signInDetail, setSignInDetail] = useState({
     email: "",

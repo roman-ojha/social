@@ -11,7 +11,7 @@ import ChangeDisplayName from "../components/SettingPage/ChangeDisplayName";
 import ChangePassword from "../components/SettingPage/ChangePassword";
 import DeleteProfile from "../components/SettingPage/DeleteProfile";
 
-const Setting = () => {
+const Setting = (): JSX.Element => {
   return (
     <>
       <LoadingSpinner />
