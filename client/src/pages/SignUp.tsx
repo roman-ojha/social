@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import SignUp_illustration from "../assets/svg/SignUp_illustration.svg";
 import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
@@ -10,10 +9,10 @@ import ProgressBar from "../components/ProgressBar";
 import validator from "email-validator";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
-import constant from "../constant/constant";
 import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
+import SignUpLeftPart from "../components/SignUpPage/SignUpLeftPart";
 
 let previousSelectGenderElement: HTMLDivElement;
 const SignUp = (): JSX.Element => {
@@ -174,17 +173,7 @@ const SignUp = (): JSX.Element => {
         <Helmet>
           <title>Register</title>
         </Helmet>
-        <div className="SignUp_Page_Left_Half">
-          <div className="SignUp_Page_Title_Container">
-            <h1 className="SignUp_Page_Logo">{constant.applicationName}</h1>
-            <h3 className="SignUp_Page_Sign_Up_Logo">Sign Up</h3>
-          </div>
-          <img
-            className="SignUp_Page_Illustration"
-            src={SignUp_illustration}
-            alt="Sign Up"
-          ></img>
-        </div>
+        <SignUpLeftPart />
         <div className="SignUp_Page_Rignt_Half">
           <div className="SignUp_Page_SignUp_Container">
             <form method="POST" className="SignUp_Page_SignUp_Form">
