@@ -90,13 +90,25 @@ export default {
           msg: "given userID already Exist, Please Try another one",
         });
       }
+      // we will change display name only after redis user data get updated rather we will not going to update mongodb database
+      const isRedisUserUpdated = await updateRedisUser(
+        req.rootUser.id,
+        "userID",
+        newUserID
+      );
+      console.log(isRedisUserUpdated);
+      if (!isRedisUserUpdated) {
+        return res.status(500).json({
+          success: false,
+          msg: "Sorry for the inconvenient, Server Error Please try again later!!!",
+        });
+      }
       const changeUserIDRes = await userDetail.updateOne(
         {
           userID: oldUserID,
         },
         { $set: { userID: newUserID } }
       );
-      updateRedisUser(req.rootUser.id);
       if (changeUserIDRes) {
         return res.status(200).json(<ResponseObject>{
           success: true,
@@ -123,6 +135,18 @@ export default {
         return res
           .status(400)
           .json({ success: false, msg: "Please Fill the displayName Field" });
+      }
+      // we will change display name only after redis user data get updated rather we will not going to update mongodb database
+      const isRedisUserUpdated = await updateRedisUser(
+        req.rootUser.id,
+        "name",
+        newName
+      );
+      if (!isRedisUserUpdated) {
+        return res.status(500).json({
+          success: false,
+          msg: "Sorry for the inconvenient, Server Error Please try again later!!!",
+        });
       }
       const changeNameRes = await userDetail.updateOne(
         {
