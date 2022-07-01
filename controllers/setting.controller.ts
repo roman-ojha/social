@@ -2,7 +2,8 @@ import userDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { Request, Response } from "express";
-import ResponseObject from "interface/responseObject.js";
+import ResponseObject from "../interface/responseObject.js";
+import updateRedisUser from "../funcs/updateRedisUser.js";
 
 export default {
   changeProfilePicture: async (
@@ -95,6 +96,7 @@ export default {
         },
         { $set: { userID: newUserID } }
       );
+      updateRedisUser(req.rootUser.id);
       if (changeUserIDRes) {
         return res.status(200).json(<ResponseObject>{
           success: true,
