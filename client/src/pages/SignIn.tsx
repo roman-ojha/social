@@ -10,10 +10,10 @@ import { Helmet } from "react-helmet";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";
-import constant from "../constant/constant";
 import { AxiosError } from "axios";
 import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
+import SignInHeader from "../components/SignInPage/SignInHeader";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -93,12 +93,7 @@ const SignIn = (): JSX.Element => {
           <title>SignIn</title>
         </Helmet>
         <div className="SignIn_Page_Left_Half">
-          <div className="SignIn_Page_Left_side_Upper_Logo_Part">
-            <h1 className="SignIn_Page_Social_Logo">
-              {constant.applicationName}
-            </h1>
-            <h3 className="SignIn_Page_Sign_In_Logo">Sign In</h3>
-          </div>
+          <SignInHeader />
           <div className="SignIn_Container_Outline">
             <form method="POST" className="SignIn_Container">
               <input
