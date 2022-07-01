@@ -1,13 +1,27 @@
 ### Changelog
 
-#### [v0.4.0](https://github.com/Roman-Ojha/social/compare/v0.4.0...v0.4.0)
+#### [v0.4.1](https://github.com/Roman-Ojha/social/compare/v0.4.1...v0.4.1)
+
+> 1 July 2022
+
+- fix(server): solved message controller types [`#112`](https://github.com/Roman-Ojha/social/issues/112)
+- fix(client): Separated SignUpPage required comp [`#101`](https://github.com/Roman-Ojha/social/issues/101)
+- fix(signInPage): Separated SignInPages Comp [`#100`](https://github.com/Roman-Ojha/social/issues/100)
+- fix(redis): updating userData while changed by user [`#105`](https://github.com/Roman-Ojha/social/issues/105)
+- fix(videoPage): much better way to search videos [`#111`](https://github.com/Roman-Ojha/social/issues/111)
+- fix(node): posting new user post [`#110`](https://github.com/Roman-Ojha/social/issues/110)
+- docs: updated changelog for v0.4.0 [`de50120`](https://github.com/Roman-Ojha/social/commit/de5012056fc70189fa9ab7502e4ad69fe3ad0aec)
+- fix(reids): trying to update userdata [`94813d8`](https://github.com/Roman-Ojha/social/commit/94813d80013e1cfce29518498a9bbfdfe6c305cd)
+- fix(singInPage): separated Header [`1c542e5`](https://github.com/Roman-Ojha/social/commit/1c542e59d77922405e276cdd9041df87ab8505c9)
+
+#### [v0.4.0](https://github.com/Roman-Ojha/social/compare/v0.3.0...v0.4.0)
 
 > 30 June 2022
 
 - fix(eslint): fixes all node eslint worning [`#108`](https://github.com/Roman-Ojha/social/issues/108)
 - fix: revert because of bug [`66b37ea`](https://github.com/Roman-Ojha/social/commit/66b37eabd33e9fb2fa037b6ef62e3ec1d0ea3b73)
 - fix(eslint): config & solve some problem [`3a3b35b`](https://github.com/Roman-Ojha/social/commit/3a3b35bd37f8624207544c69481b9d21a69438a5)
-- fix(client): switched react app from javascript to typescript [`952795b`](https://github.com/Roman-Ojha/social/commit/952795b366a19e7e5c158fd373716563b1012577)
+- fix(redux): removed js redux from project [`952795b`](https://github.com/Roman-Ojha/social/commit/952795b366a19e7e5c158fd373716563b1012577)
 
 #### [v0.3.0](https://github.com/Roman-Ojha/social/compare/v0.2.1...v0.3.0)
 
