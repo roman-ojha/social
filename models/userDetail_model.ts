@@ -10,6 +10,10 @@ import userStories from "./userStories.js";
 import userNotifications from "./userNotifications.js";
 import userTokens from "./userTokens.js";
 import userBirthday from "./userBirthday.js";
+import {
+  UserDocumentPosts,
+  UserDocumentStories,
+} from "../interface/userDocument.js";
 
 const userDetailSchema = new mongoose.Schema<
   SchemaMethodInstance,
@@ -117,8 +121,8 @@ userDetailSchema.methods.generateAuthToken = async function (): Promise<
 };
 
 userDetailSchema.methods.uploadPost = async function (
-  postData: object,
-  userStoryDetail: object
+  postData: UserDocumentPosts,
+  userStoryDetail: UserDocumentStories
 ) {
   try {
     let resPost: UpdateResult;

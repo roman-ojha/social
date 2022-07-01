@@ -34,7 +34,7 @@ export type UserDocumentPosts = {
     No: number;
     by: UserDocumentPostsComments[] | [];
   };
-  date?: Date;
+  date: Date;
 };
 
 export interface RootUserNewPosts {

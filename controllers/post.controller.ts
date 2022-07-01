@@ -337,7 +337,7 @@ export default {
           _id: any;
         })[]
       ) => {
-        return userPosts.map((post) => {
+        return userPosts.map((post: UserDocumentPosts) => {
           const lastCommented = post.comments.by[post.comments.by.length - 1];
           if (lastCommented) {
             const numbers = commentedUser.filter(
@@ -358,7 +358,7 @@ export default {
               caption: post.caption,
               date: post.date,
               id: post.id,
-              likes: post.likes,
+              likes: post.likes as ResPonseUserPost["likes"],
               comments: {
                 No: post.comments.No,
                 by: [

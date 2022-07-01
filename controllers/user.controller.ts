@@ -112,7 +112,7 @@ export default {
                 caption: post.caption,
                 date: post.date,
                 id: post.id,
-                likes: post.likes,
+                likes: post.likes as ResPonseUserPost["likes"],
                 comments: {
                   No: post.comments.No,
                   by: [
@@ -528,7 +528,7 @@ export default {
                 caption: post.caption,
                 date: post.date,
                 id: post.id,
-                likes: post.likes,
+                likes: post.likes as ResPonseUserPost["likes"],
                 comments: {
                   No: post.comments.No,
                   by: [
