@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import ExtendJWTPayload from "../../types/jsonwebtoken/extend-jwt-payload.js";
 import ResponseObject from "../../interface/responseObject.js";
 import RedisUserDetail from "../../interface/redisUserDetail.js";
-import SchemaMethodInstance from "../../interface/userSchemaMethods.js";
 
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 const REDIS_HOST = process.env.REDIS_HOST || "localhost";
@@ -149,7 +148,6 @@ const authenticate: RequestHandler = async (
       next();
     }
   } catch (err) {
-    console.log(err);
     return res.status(500).json(<ResponseObject>{
       success: false,
       msg: "Server Error!!, Please Try again later",
