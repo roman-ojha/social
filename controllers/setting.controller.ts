@@ -96,11 +96,10 @@ export default {
         "userID",
         newUserID
       );
-      console.log(isRedisUserUpdated);
       if (!isRedisUserUpdated) {
         return res.status(500).json({
           success: false,
-          msg: "Sorry for the inconvenient, Server Error Please try again later!!!",
+          msg: "Sorry for the inconvenient, Server Error, can't be able to update userID or name. Please create new issues on github repository!!!",
         });
       }
       const changeUserIDRes = await userDetail.updateOne(
@@ -145,7 +144,7 @@ export default {
       if (!isRedisUserUpdated) {
         return res.status(500).json({
           success: false,
-          msg: "Sorry for the inconvenient, Server Error Please try again later!!!",
+          msg: "Sorry for the inconvenient, Server Error, can't be able to update userID or name. Please create new issues on github repository!!!",
         });
       }
       const changeNameRes = await userDetail.updateOne(
