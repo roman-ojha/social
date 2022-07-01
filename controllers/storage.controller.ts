@@ -7,7 +7,7 @@ import compressFile from "../funcs/compressFile.js";
 import storage from "../db/userStorageConnection.js";
 import ResponseObject from "../interface/responseObject";
 import { Request, Response } from "express";
-import { file } from "googleapis/build/src/apis/file/index.js";
+import constants from "../constants/index.js";
 const bucket = storage.bucket();
 
 export default {
@@ -213,8 +213,7 @@ export default {
             {
               $set: {
                 userID: userID,
-                picture:
-                  "https://firebasestorage.googleapis.com/v0/b/social-application-326411.appspot.com/o/default%2FUser_profile_Icon.png?alt=media&token=cb51f25a-39d3-4614-a652-06086dbcb27a",
+                picture: constants.defaultNewUserProfilePicture,
               },
             }
           );
@@ -279,11 +278,18 @@ export default {
             })} ${today.getDate()}, ${today.getFullYear()}`,
           };
           // here we are posting user news Feed
-          await rootUser.uploadPost(userPostDetail, userStoryDetail);
+          // await rootUser.uploadPost(userPostDetail, userStoryDetail);
           // now we will save picture as profile picture
           await userDetail.updateOne(
             { email: email },
-            { $set: { userID: userID, picture: picUrl } }
+            {
+              $set: {
+                userID: userID,
+                picture: picUrl,
+                posts: userPostDetail,
+                stories: userStoryDetail,
+              },
+            }
           );
           res.status(200).json({ success: true, msg: "Register Successfully" });
         }

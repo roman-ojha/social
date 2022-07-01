@@ -5,6 +5,7 @@ import ResponseObject from "../interface/responseObject.js";
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
+import constants from "../constants/index.js";
 
 const checkUserIDExistInDatabase = async (userID: string | undefined) => {
   try {
@@ -157,6 +158,7 @@ const registerAdmin = async (
       id,
       userID: admin.userID,
       name: admin.name,
+      picture: constants.defaultNewUserProfilePicture,
       email: admin.email,
       password: admin.password,
       cpassword: admin.cpassword,
