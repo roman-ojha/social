@@ -14,6 +14,8 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import ResponseObject from "src/interface/responseObject";
 import { VideoPageState } from "src/services/redux/pages/video/types";
+import { AxiosError } from "axios";
+import { YoutubeVideos } from "src/interface/youtubeVideos";
 
 const Video = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -50,16 +52,21 @@ const Video = (): JSX.Element => {
     const getYoutubeHomePageVideo = async (): Promise<void> => {
       try {
         interface Response extends ResponseObject {
-          videos: VideoPageState[];
+          videos: VideoPageState["videos"];
         }
         const resVideos = await videoApi.getYoutubeHomePageVideos();
         const resVideosData: Response = await resVideos.data;
         if (resVideos.status === 200 && resVideosData.success) {
-          setVideoPageData(resVideosData.videos);
+          setVideoPageData({
+            fetchedVideos: true,
+            searchedVideos: true,
+            videos: resVideosData.videos,
+          });
         } else {
           toastError("Some thing went wrong, please try again later!!!");
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);
@@ -70,7 +77,7 @@ const Video = (): JSX.Element => {
       }
     };
     // get constant value for youtube home page
-    if (videoPageData.length === 0) {
+    if (videoPageData.fetchedVideos === false) {
       getYoutubeHomePageVideo();
     }
 
@@ -83,7 +90,7 @@ const Video = (): JSX.Element => {
     //
     // Scrap.scrapeYoutubeHomePage();
     // toastInfo("Video Page is in development");
-  }, [dispatch, videoPageData.length]);
+  }, [dispatch, videoPageData.fetchedVideos]);
   return (
     <>
       <main className="VideoPage">
@@ -104,9 +111,9 @@ const Video = (): JSX.Element => {
             <h1>Youtube</h1>
           </a>
         </header>
-        {videoPageData.length > 0 ? (
+        {videoPageData.searchedVideos ? (
           <div className="VideoPage_Videos_Container">
-            {videoPageData.map((video, index) => {
+            {videoPageData.videos.map((video: YoutubeVideos, index: number) => {
               if (video) {
                 return (
                   <RenderVideo

@@ -2,7 +2,8 @@ import { YoutubeVideos } from "../../../../interface/youtubeVideos";
 
 export interface VideoPageState {
   fetchedVideos: boolean;
-  videos: [YoutubeVideos | null];
+  searchedVideos: boolean;
+  videos: YoutubeVideos[] | [];
 }
 
 export enum VideoPageActionTypes {

@@ -3,7 +3,8 @@
 import { VideoPageAction, VideoPageActionTypes, VideoPageState } from "./types";
 const initialState: VideoPageState = {
   fetchedVideos: false,
-  videos: [null],
+  searchedVideos: false,
+  videos: [],
 };
 
 const videoPageDataReducer = (
@@ -14,6 +15,7 @@ const videoPageDataReducer = (
     case VideoPageActionTypes.SET_VIDEO_PAGE_DATA:
       return {
         fetchedVideos: action.payload.fetchedVideos,
+        searchedVideos: action.payload.searchedVideos,
         videos: action.payload.videos.sort(() => Math.random() - 0.5),
       };
     default:

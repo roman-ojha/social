@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
+import { AxiosError } from "axios";
 
 const SearchForm = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,11 @@ const SearchForm = () => {
       if (isEmptyString(value)) {
         toastWarn("Please fill the search field first");
       } else {
-        setVideoPageData([]);
+        setVideoPageData({
+          fetchedVideos: true,
+          searchedVideos: false,
+          videos: [],
+        });
         // const res = await Api.scrapVideoSearch(value);
         const res = await Api.searchYoutubeVideo(value);
         const data = await res.data;
@@ -32,13 +37,18 @@ const SearchForm = () => {
               thumbnail: `http://img.youtube.com/vi/${video.id}/hqdefault.jpg`,
             };
           });
-          setVideoPageData(newVideos);
+          setVideoPageData({
+            fetchedVideos: true,
+            searchedVideos: true,
+            videos: newVideos,
+          });
         } else {
           toastError(data.msg);
         }
       }
       form.current!.reset();
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
