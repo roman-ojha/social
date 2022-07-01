@@ -5,11 +5,11 @@ import messageController from "../controllers/message.controller.js";
 const messageRoute = express.Router();
 
 // this route had implemented into "/u/getMessage" route when message doesn't exist
-messageRoute.post(
-  "/u/createMessage",
-  authenticate,
-  messageController.createMessage
-);
+// messageRoute.post(
+//   "/u/createMessage",
+//   authenticate,
+//   messageController.createMessage
+// );
 
 messageRoute.post(
   "/u/getMessage",

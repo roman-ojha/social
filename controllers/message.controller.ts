@@ -6,90 +6,90 @@ import { UserDocumentMessages } from "../interface/userDocument.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
 
 export default {
-  createMessage: async (req: Request, res: Response): Promise<object> => {
-    try {
-      const rootUser = req.rootUser;
-      const receiverUser = req.body.receiver;
-      if (!req.body.receiver) {
-        return res.status(401).json({ error: "receiver Doesn't exist" });
-      }
-      const receiverExist = await userDetail.findOne(
-        {
-          // searching that user to message if it exist
-          userID: receiverUser,
-        },
-        {
-          email: 1,
-          userID: 1,
-          name: 1,
-        }
-      );
-      if (!receiverExist) {
-        return res.status(400).json({ error: "User doesn't exist" });
-      }
-      const messageExist = await userDetail.findOne(
-        {
-          userID: rootUser.userID,
-          messages: {
-            $elemMatch: {
-              messageTo: receiverUser,
-            },
-          },
-        },
-        {
-          email: 1,
-          userID: 1,
-          name: 1,
-        }
-      );
-      if (!messageExist) {
-        // if initialize message doesn't exist then we have to create a field for both user
-        const resSaveRootMsg = await userDetail.updateOne(
-          // creating and saving message to rootUser
-          {
-            userID: rootUser.userID,
-          },
-          {
-            $push: {
-              messages: {
-                messageTo: receiverUser,
-                receiverPicture: receiverExist.picture,
-                message: [],
-              },
-            },
-          }
-        );
-        const resSaverReciverMsg = await userDetail.updateOne(
-          // creating and saving message to rootUser
-          {
-            userID: receiverUser,
-          },
-          {
-            $push: {
-              messages: {
-                messageTo: rootUser.userID,
-                receiverPicture: rootUser.picture,
-                message: [],
-              },
-            },
-          }
-        );
-        if (resSaverReciverMsg && resSaveRootMsg) {
-          return res.status(200).json({ message: "message created" });
-        } else {
-          return res.status(500).json({ error: "server error" });
-        }
-      } else {
-        return res
-          .status(200)
-          .json({ message: "Message already been created" });
-      }
-    } catch (err) {
-      return res
-        .status(500)
-        .json({ error: "Server Error!!, Please Try again later" });
-    }
-  },
+  // createMessage: async (req: Request, res: Response): Promise<object> => {
+  //   try {
+  //     const rootUser = req.rootUser;
+  //     const receiverUser = req.body.receiver;
+  //     if (!req.body.receiver) {
+  //       return res.status(401).json({ error: "receiver Doesn't exist" });
+  //     }
+  //     const receiverExist = await userDetail.findOne(
+  //       {
+  //         // searching that user to message if it exist
+  //         userID: receiverUser,
+  //       },
+  //       {
+  //         email: 1,
+  //         userID: 1,
+  //         name: 1,
+  //       }
+  //     );
+  //     if (!receiverExist) {
+  //       return res.status(400).json({ error: "User doesn't exist" });
+  //     }
+  //     const messageExist = await userDetail.findOne(
+  //       {
+  //         userID: rootUser.userID,
+  //         messages: {
+  //           $elemMatch: {
+  //             messageTo: receiverUser,
+  //           },
+  //         },
+  //       },
+  //       {
+  //         email: 1,
+  //         userID: 1,
+  //         name: 1,
+  //       }
+  //     );
+  //     if (!messageExist) {
+  //       // if initialize message doesn't exist then we have to create a field for both user
+  //       const resSaveRootMsg = await userDetail.updateOne(
+  //         // creating and saving message to rootUser
+  //         {
+  //           userID: rootUser.userID,
+  //         },
+  //         {
+  //           $push: {
+  //             messages: {
+  //               messageToId: receiverUser,
+  //               lastMessageOn: new Date(),
+  //               message: [],
+  //             },
+  //           },
+  //         }
+  //       );
+  //       const resSaverReciverMsg = await userDetail.updateOne(
+  //         // creating and saving message to rootUser
+  //         {
+  //           userID: receiverUser,
+  //         },
+  //         {
+  //           $push: {
+  //             messages: {
+  //               messageToId: rootUser.userID,
+  //               receiverPicture: rootUser.picture,
+  //               message: [],
+  //             },
+  //           },
+  //         }
+  //       );
+  //       if (resSaverReciverMsg && resSaveRootMsg) {
+  //         return res.status(200).json({ message: "message created" });
+  //       } else {
+  //         return res.status(500).json({ error: "server error" });
+  //       }
+  //     } else {
+  //       return res
+  //         .status(200)
+  //         .json({ message: "Message already been created" });
+  //     }
+  //   } catch (err) {
+  //     return res
+  //       .status(500)
+  //       .json({ error: "Server Error!!, Please Try again later" });
+  //   }
+  // },
   getSingleUserMessage: async (
     req: Request,
     res: Response
@@ -151,7 +151,7 @@ export default {
             $push: {
               messages: {
                 messageToId: messageToId,
-                // roomID: roomID,
+                lastMessageOn: new Date(),
                 message: [],
               },
             },
@@ -166,7 +166,7 @@ export default {
             $push: {
               messages: {
                 messageToId: rootUser.id,
-                // roomID: roomID,
+                lastMessageOn: new Date(),
                 message: [],
               },
             },
@@ -273,7 +273,7 @@ export default {
           const newObj = {
             lastMessageOn: obj.lastMessageOn,
             messageToId: obj.messageToId,
-            roomID: obj.roomID,
+            // roomID: obj.roomID,
             message: obj.message,
             receiverPicture: newUser[0].picture,
             messageToUserId: newUser[0].userID,

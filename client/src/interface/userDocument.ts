@@ -1,8 +1,8 @@
 export type UserDocumentMessages = {
   lastMessageOn: Date;
   messageToId: string;
-  roomID: string;
-  message: [{ senderId: string; content: string; date: Date }];
+  // roomID: string;
+  message: { senderId: string; content: string; date: Date }[];
 };
 
 export type UserDocumentPostsComments = {
@@ -22,17 +22,17 @@ export type UserDocumentPosts = {
   };
   likes: {
     No: number;
-    by: [
-      {
-        user: string;
-      }
-    ];
+    by:
+      | {
+          user: string;
+        }[]
+      | [];
   };
   comments: {
     No: number;
-    by: [UserDocumentPostsComments];
+    by: UserDocumentPostsComments[] | [];
   };
-  date: Date;
+  date?: Date;
 };
 
 export interface RootUserNewPosts {
@@ -98,15 +98,15 @@ export default interface UserDocument {
   birthday: UserDocumentBirthday;
   date: Date;
   gender: string;
-  messages: [UserDocumentMessages];
+  messages: UserDocumentMessages[];
   followersNo: number;
-  followers: [UserDocumentFollower];
+  followers: UserDocumentFollower[];
   followingNo: number;
-  following: [UserDocumentFollowing];
+  following: UserDocumentFollowing[];
   friendsNo: number;
-  friends: [UserDocumentFriends];
+  friends: UserDocumentFriends[];
   postNo: number;
-  posts: [UserDocumentPosts];
+  posts: UserDocumentPosts[];
   stories: UserDocumentStories;
   tokens: [
     {

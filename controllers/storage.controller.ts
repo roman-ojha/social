@@ -8,6 +8,7 @@ import storage from "../db/userStorageConnection.js";
 import ResponseObject from "../interface/responseObject";
 import { Request, Response } from "express";
 import constants from "../constants/index.js";
+import { UserDocumentPosts } from "../interface/userDocument.js";
 const bucket = storage.bucket();
 
 export default {
@@ -89,7 +90,7 @@ export default {
         )}?alt=media&token=${picToken}`;
         const postID = crypto.randomBytes(16).toString("hex");
         const today = new Date();
-        const userPostDetail = {
+        const userPostDetail = <UserDocumentPosts>{
           id: postID,
           caption: caption,
           picture: {

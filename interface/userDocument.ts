@@ -1,11 +1,10 @@
 import { Document } from "mongoose";
-import { Interface } from "readline";
 
 export type UserDocumentMessages = {
   lastMessageOn: Date;
   messageToId: string;
-  roomID: string;
-  message: [{ senderId: string; content: string; date: Date }];
+  // roomID: string;
+  message: { senderId: string; content: string; date: Date }[] | [];
 };
 
 export type UserDocumentPostsComments = {
@@ -25,17 +24,17 @@ export type UserDocumentPosts = {
   };
   likes: {
     No: number;
-    by: [
-      {
-        user: string;
-      }
-    ];
+    by:
+      | {
+          user: string;
+        }[]
+      | [];
   };
   comments: {
     No: number;
-    by: [UserDocumentPostsComments];
+    by: UserDocumentPostsComments[] | [];
   };
-  date: Date;
+  date?: Date;
 };
 
 export interface RootUserNewPosts {
