@@ -46,7 +46,6 @@ const initialState: RootUserProfileDetailState = {
         },
       ],
       messageToId: "",
-      roomID: "",
     },
   ],
   name: "",
