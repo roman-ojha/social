@@ -9,7 +9,7 @@ const SignInHeader = (): JSX.Element => {
       <div className="SignIn_Page_Left_side_Upper_Logo_Part">
         <h1
           onClick={() => {
-            history.push("/u");
+            history.push("/u/home");
           }}
           className="SignIn_Page_Social_Logo"
           style={{ cursor: "pointer" }}
