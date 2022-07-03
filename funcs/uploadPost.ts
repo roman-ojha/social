@@ -1,11 +1,11 @@
-import UserDocument, { UserDocumentPosts } from "../interface/userDocument";
-import { UserDocumentStories } from "../interface/userDocument";
+import UserDocument, { UserDocumentPosts } from "../interface/userDocument.js";
+import { UserDocumentStories } from "../interface/userDocument.js";
 import { UpdateResult } from "mongodb";
-import UserDetail from "../models/userDetail_model";
+import UserDetail from "../models/userDetail_model.js";
 
 const uploadPost = async (
-  postData: UserDocumentPosts,
-  userStoryDetail: UserDocumentStories,
+  postData: object,
+  userStoryDetail: UserDocumentStories | undefined,
   id: UserDocument["id"]
 ): Promise<boolean> => {
   try {
@@ -18,7 +18,7 @@ const uploadPost = async (
         {
           $push: {
             // posts: postData,
-            posts: { $each: [postData], $position: 0 },
+            posts: { $each: [postData as UserDocumentPosts], $position: 0 },
           },
           $inc: {
             postNo: 1,

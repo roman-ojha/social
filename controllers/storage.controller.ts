@@ -1,6 +1,6 @@
 import uuid from "uuid-v4";
 import fs from "fs";
-import userDetail from "../models/userDetail_model.js";
+import UserDetail from "../models/userDetail_model.js";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import compressFile from "../funcs/compressFile.js";
@@ -8,14 +8,14 @@ import storage from "../db/userStorageConnection.js";
 import ResponseObject from "../interface/responseObject";
 import { Request, Response } from "express";
 import constants from "../constants/index.js";
-import { UserDocumentPosts } from "../interface/userDocument.js";
+import UserDocument, { UserDocumentPosts } from "../interface/userDocument.js";
 import uploadPost from "../funcs/uploadPost.js";
 const bucket = storage.bucket();
 
 export default {
   post: async (req: Request, res: Response): Promise<object> => {
     try {
-      const rootUser = req.rootUser;
+      const rootUser: UserDocument = req.rootUser;
       // console.log(rootUser);
       const caption: string | undefined = req.body.caption;
       const file = req.file;
@@ -42,11 +42,16 @@ export default {
             by: [],
           },
         };
-        const postSuccessFull = await rootUser.uploadPost(
+        // const postSuccessFull = await rootUser.uploadPost(
+        //   userPostDetail,
+        //   undefined
+        // );
+        const postSuccessRes = await uploadPost(
           userPostDetail,
-          undefined
+          undefined,
+          rootUser.id
         );
-        if (postSuccessFull) {
+        if (postSuccessRes) {
           const resData = {
             ...userPostDetail,
             picture: undefined,
@@ -117,11 +122,12 @@ export default {
             month: "long",
           })} ${today.getDate()}, ${today.getFullYear()}`,
         };
-        const postSuccessFull = await rootUser.uploadPost(
+        const postSuccessRes = await uploadPost(
           userPostDetail,
-          userStoryDetail
+          userStoryDetail,
+          rootUser.id
         );
-        if (postSuccessFull) {
+        if (postSuccessRes) {
           // const resData = {
           //   useremail: rootUser.email,
           //   username: rootUser.name,
@@ -147,7 +153,6 @@ export default {
           .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
       }
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!, Please Try again later",
@@ -173,7 +178,7 @@ export default {
           .status(400)
           .json({ success: false, err: "Please fill the required field!!!" });
       }
-      const userIDExist = await userDetail.findOne(
+      const userIDExist = await UserDetail.findOne(
         { userID: userID },
         { userID: 1, name: 1, email: 1 }
       );
@@ -183,7 +188,7 @@ export default {
           err: "Sorry..., UserID already exist",
         });
       } else {
-        const rootUser = await userDetail.findOne(
+        const rootUser = await UserDetail.findOne(
           { email: email },
           {
             name: 1,
@@ -211,7 +216,7 @@ export default {
           }
         }
         if (!req.file) {
-          const resData = await userDetail.updateOne(
+          const resData = await UserDetail.updateOne(
             { email: email },
             {
               $set: {
@@ -281,9 +286,8 @@ export default {
             })} ${today.getDate()}, ${today.getFullYear()}`,
           };
           // here we are posting user news Feed
-          // await rootUser.uploadPost(userPostDetail, userStoryDetail);
           // now we will save picture as profile picture
-          await userDetail.updateOne(
+          await UserDetail.updateOne(
             { email: email },
             {
               $set: {
@@ -306,7 +310,7 @@ export default {
   },
   changeProfileUsingImgFile: async (req: Request, res: Response) => {
     try {
-      const rootUser = req.rootUser;
+      const rootUser: UserDocument = req.rootUser;
       const file = req.file;
       if (file === undefined) {
         return res.status(400).json({
@@ -365,12 +369,13 @@ export default {
           month: "long",
         })} ${today.getDate()}, ${today.getFullYear()}`,
       };
-      const uploadPostRes = await rootUser.uploadPost(
+      const uploadPostRes = await uploadPost(
         userPostDetail,
-        userStoryDetail
+        userStoryDetail,
+        rootUser.id
       );
       if (uploadPostRes) {
-        const updateProfilePictureRes = await userDetail.updateOne(
+        const updateProfilePictureRes = await UserDetail.updateOne(
           {
             userID: rootUser.userID,
           },
