@@ -169,6 +169,7 @@ userDetailSchema.methods.uploadPost = async function (
     return false;
   }
 };
+
 userDetailSchema.methods.followUser = async function (followedToUser: any) {
   try {
     // saving following user detail into current user database

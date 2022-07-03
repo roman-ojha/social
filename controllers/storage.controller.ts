@@ -9,6 +9,7 @@ import ResponseObject from "../interface/responseObject";
 import { Request, Response } from "express";
 import constants from "../constants/index.js";
 import { UserDocumentPosts } from "../interface/userDocument.js";
+import uploadPost from "../funcs/uploadPost.js";
 const bucket = storage.bucket();
 
 export default {
@@ -146,6 +147,7 @@ export default {
           .json(<ResponseObject>{ success: false, msg: "UnAuthorized" });
       }
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!, Please Try again later",
