@@ -5,6 +5,7 @@ import MainPageRightSideComp from "../MainPageRightSideComp";
 import CommentBox from "../CommentBox";
 import ProgressBar from "../ProgressBar";
 import RoutingUserPage from "../../routes/RoutingUserPage";
+import ImagePicker from "../ImagePicker";
 
 const ReturnMainPage = (): JSX.Element => {
   return (
@@ -15,6 +16,7 @@ const ReturnMainPage = (): JSX.Element => {
       <MainPageStory />
       <RoutingUserPage />
       <MainPageRightSideComp />
+      <ImagePicker />
     </>
   );
 };
