@@ -7,16 +7,20 @@ const ImagePicker = (): JSX.Element => {
     <>
       <div className="ImagePicker_Page">
         <div className="ImagePicker_Content_Container">
-          <div>
-            <input type="text" className="ImagePicker_Image_Url_Field" />
+          <div className="ImagePicker_Image_Url_Container">
+            <input
+              type="text"
+              className="ImagePicker_Image_Url_Field"
+              placeholder="image url"
+            />
             <h2>
               NOTE : Consider using image url rather then uploading files
               because cloud database have limited Storage
             </h2>
           </div>
 
-          <div>
-            <div>
+          <div className="ImagePicker_File_Picker_Container">
+            <div className="ImagePicker_File_Picker_Label_Container">
               <Icon icon="fa:upload" />
               <label htmlFor="image-picker-file-picker">upload file</label>
             </div>
@@ -29,6 +33,7 @@ const ImagePicker = (): JSX.Element => {
           <div className="ImagePicker_Content_Preview">
             <h3>Preview</h3>
           </div>
+          <button className="ImagePicker_Submit_Button">Submit</button>
         </div>
       </div>
     </>
