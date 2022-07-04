@@ -17,8 +17,11 @@ const FilePicker = (): JSX.Element => {
   const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
   });
-  const { homePageUserPostFieldDataAction, displayUserPostFieldEmojiPicker } =
-    bindActionCreators(actionCreators, dispatch);
+  const {
+    homePageUserPostFieldDataAction,
+    displayUserPostFieldEmojiPicker,
+    openImagePicker,
+  } = bindActionCreators(actionCreators, dispatch);
 
   const getUserPostFiledImage = (event): void => {
     try {
@@ -34,10 +37,13 @@ const FilePicker = (): JSX.Element => {
   return (
     <>
       <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
-        <label htmlFor="image-input">
+        <label>
           <Icon
             className="HomePage_MaxView_UserPost_Field_Icon"
             icon="ic:outline-photo-library"
+            onClick={() => {
+              openImagePicker(true);
+            }}
           />
         </label>
         <input

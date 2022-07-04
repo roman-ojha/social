@@ -111,6 +111,7 @@
   font-size: 0.8rem;
   cursor: pointer;
   transition-duration: 200ms;
+  width: 65%;
 }
 
 .ImagePicker_Submit_Button:hover {
