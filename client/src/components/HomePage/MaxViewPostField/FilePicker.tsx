@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import {
 //   homePageUserPostFieldDataAction,
@@ -17,42 +17,53 @@ const FilePicker = (): JSX.Element => {
   const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
   });
+  const imagePickerState = useSelector(
+    (state: AppState) => state.imagePickerReducer
+  );
+
   const {
     homePageUserPostFieldDataAction,
     displayUserPostFieldEmojiPicker,
     openImagePicker,
   } = bindActionCreators(actionCreators, dispatch);
 
-  const getUserPostFiledImage = (event): void => {
-    try {
-      var image = document.getElementsByClassName(
-        "MaxView_UserPost_Image"
-      )[0] as HTMLImageElement;
+  useEffect(() => {
+    var image = document.getElementsByClassName(
+      "MaxView_UserPost_Image"
+    )[0] as HTMLImageElement;
+    if (
+      imagePickerState.imageUrl !== null &&
+      imagePickerState.imageFile === undefined
+    ) {
       image.style.display = "inline";
       image.style.position = "static";
-      image.src = URL.createObjectURL(event.target.files[0]);
-    } catch (err) {}
-  };
+      image.src = imagePickerState.imageUrl;
+    } else if (
+      imagePickerState.imageUrl === null &&
+      imagePickerState.imageFile !== undefined
+    ) {
+      image.style.display = "inline";
+      image.style.position = "static";
+      image.src = URL.createObjectURL(imagePickerState.imageFile);
+    } else {
+      // else imageUrl===null && imageFile===undefine
+      if (imagePickerState.imageFile !== undefined) {
+        image.style.display = "inline";
+        image.style.position = "static";
+        image.src = URL.createObjectURL(imagePickerState.imageFile);
+      }
+    }
+  }, [imagePickerState]);
 
   return (
     <>
       <div className="HomePage_MaxView_UserPost_Field_Icons_Container">
-        <label>
-          <Icon
-            className="HomePage_MaxView_UserPost_Field_Icon"
-            icon="ic:outline-photo-library"
-            onClick={() => {
-              openImagePicker(true);
-            }}
-          />
-        </label>
-        <input
-          id="image-input"
-          type="file"
-          style={{ visibility: "hidden" }}
-          onChange={getUserPostFiledImage}
-          accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
-          name="image"
+        <Icon
+          className="HomePage_MaxView_UserPost_Field_Icon"
+          icon="ic:outline-photo-library"
+          onClick={() => {
+            openImagePicker(true);
+          }}
         />
         <Icon
           className="HomePage_MaxView_UserPost_Field_Icon"
