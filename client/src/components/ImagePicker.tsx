@@ -106,7 +106,8 @@ const ReturnImagePicker = (): JSX.Element => {
       };
     } catch (err) {}
   }, [imageUrl]);
-  console.log(isImageUrl);
+
+  const submitImage = () => {};
 
   return (
     <>
@@ -151,7 +152,9 @@ const ReturnImagePicker = (): JSX.Element => {
           >
             <h3 ref={imagePreviewH1Element}>Preview</h3>
           </div>
-          <button className="ImagePicker_Submit_Button">Submit</button>
+          <button className="ImagePicker_Submit_Button" onClick={submitImage}>
+            Submit
+          </button>
         </div>
       </div>
     </>

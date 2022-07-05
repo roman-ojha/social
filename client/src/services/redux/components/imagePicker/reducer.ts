@@ -6,6 +6,8 @@ import {
 
 const initialState: ImagePickerState = {
   openedImagePicker: false,
+  imageFile: null,
+  imageUrl: null,
 };
 
 const imagePickerReducer = (
@@ -18,6 +20,8 @@ const imagePickerReducer = (
         ...state,
         openedImagePicker: action.payload,
       };
+    case ImagePickerActionTypes.SUBMIT_IMAGE_PICKER:
+      return action.payload;
     default:
       return state;
   }

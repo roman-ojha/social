@@ -15,3 +15,12 @@ export const openImagePicker = (
     });
   };
 };
+
+export const submitImagePicker = (data: ImagePickerState) => {
+  return (dispatch: Dispatch<ImagePickerAction>) => {
+    dispatch({
+      type: ImagePickerActionTypes.SUBMIT_IMAGE_PICKER,
+      payload: data,
+    });
+  };
+};
