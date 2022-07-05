@@ -11,9 +11,13 @@ const ReturnImagePicker = (): JSX.Element => {
   const imagePickerState = useSelector(
     (state: AppState) => state.imagePickerReducer
   );
-  const { openImagePicker } = bindActionCreators(actionCreators, dispatch);
+  const { openImagePicker, submitImagePicker } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const [imageUrl, setImageUrl] = useState<string>("");
   const [isImageUrl, setIsImageUrl] = useState<boolean>(false);
+  const [isImageFile, setIsImageFile] = useState<boolean>(false);
   const imagePreviewElement: React.MutableRefObject<null | HTMLDivElement> =
     useRef(null);
   const imagePreviewH1Element: React.MutableRefObject<null | HTMLHeadingElement> =
@@ -33,15 +37,7 @@ const ReturnImagePicker = (): JSX.Element => {
       const file = inputFileElement.current?.files[0];
       imageElement.current.src = URL.createObjectURL(file!);
       imagePreviewH1Element.current.replaceWith(imageElement.current);
-    }
-    if (
-      inputFileElement.current?.files !== null &&
-      inputFileElement.current?.files.length !== undefined &&
-      inputFileElement.current?.files.length > 0 &&
-      isImageUrl
-    ) {
-      toastWarn("Please select rather imageUrl or imageFile");
-      setImageUrl("");
+      setIsImageFile(true);
     }
   };
 
@@ -75,14 +71,6 @@ const ReturnImagePicker = (): JSX.Element => {
           imageElement.current.src = imageUrl;
           imagePreviewH1Element.current.replaceWith(imageElement.current);
         }
-        if (
-          inputFileElement.current?.files !== null &&
-          inputFileElement.current?.files.length !== undefined &&
-          inputFileElement.current?.files.length > 0
-        ) {
-          toastWarn("Please select rather imageUrl or imageFile");
-          setImageUrl("");
-        }
         setIsImageUrl(true);
       };
       img.onerror = () => {
@@ -107,7 +95,39 @@ const ReturnImagePicker = (): JSX.Element => {
     } catch (err) {}
   }, [imageUrl]);
 
-  const submitImage = () => {};
+  const submitImage = () => {
+    if (isImageUrl === false && isImageFile === false) {
+      toastWarn(
+        "Please select either imageUrl or imageFile, Non of them are selected"
+      );
+    } else if (isImageUrl && !isImageFile) {
+      submitImagePicker({
+        imageFile: undefined,
+        imageUrl,
+        openedImagePicker: false,
+      });
+    } else if (
+      !isImageUrl &&
+      isImageFile &&
+      inputFileElement.current?.files !== null
+    ) {
+      submitImagePicker({
+        imageFile: inputFileElement.current?.files[0],
+        imageUrl: null,
+        openedImagePicker: false,
+      });
+    } else if (
+      isImageUrl &&
+      isImageFile &&
+      inputFileElement.current?.files !== null
+    ) {
+      submitImagePicker({
+        imageFile: inputFileElement.current?.files[0],
+        imageUrl: null,
+        openedImagePicker: false,
+      });
+    }
+  };
 
   return (
     <>

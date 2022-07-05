@@ -1,7 +1,7 @@
 export interface ImagePickerState {
   openedImagePicker: boolean;
   imageUrl: null | string;
-  imageFile: null | File;
+  imageFile: undefined | File;
 }
 
 export enum ImagePickerActionTypes {

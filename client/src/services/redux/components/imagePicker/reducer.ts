@@ -6,7 +6,7 @@ import {
 
 const initialState: ImagePickerState = {
   openedImagePicker: false,
-  imageFile: null,
+  imageFile: undefined,
   imageUrl: null,
 };
 
