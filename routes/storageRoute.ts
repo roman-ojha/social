@@ -5,7 +5,7 @@ import storageController from "../controllers/storage.controller.js";
 import authenticate from "../middleware/auth/authUsingRedis.js";
 
 router.post(
-  "/u/post",
+  "/u/post-image-file",
   [authenticate, upload.single("image")],
   storageController.post
 );

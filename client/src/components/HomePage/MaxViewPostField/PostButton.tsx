@@ -14,9 +14,13 @@ import { AppState, actionCreators } from "../../../services/redux";
 
 const PostButton = () => {
   const dispatch = useDispatch();
-  const homePageUserPostFieldData = useSelector((state) => {
+  const homePageUserPostFieldData = useSelector((state: AppState) => {
     return state.homePageUserPostFieldDataReducer;
   });
+  const imagePickerState = useSelector(
+    (state: AppState) => state.imagePickerReducer
+  );
+
   const {
     userPostResponseData,
     homePageUserPostFieldDataAction,
@@ -29,24 +33,55 @@ const PostButton = () => {
     try {
       e.preventDefault();
       showLoadingSpinner(true);
-      var image = document.getElementById("image-input").files[0];
-      let data = new FormData();
-      data.append("image", image);
-      data.append("caption", homePageUserPostFieldData.content);
-      // we can be able to pass the other form of data like this
-      const res = await Api.post(data);
-      const resData = await res.data;
-      if (res.status === 200 && resData.success) {
-        toastSuccess(resData.msg);
-        userPostResponseData({ ...resData.data, date: new Date() });
-        homePageUserPostFieldDataAction({
-          ...homePageUserPostFieldData,
-          content: "",
-          image: {},
-        });
-      } else {
-        // error
-        toastError(resData.msg);
+      if (
+        (imagePickerState.imageUrl !== null &&
+          imagePickerState.imageFile === undefined) ||
+        (imagePickerState.imageUrl === null &&
+          imagePickerState.imageFile === undefined)
+      ) {
+        // Posting with imageUrl
+        const postData = {
+          imageUrl: imagePickerState.imageUrl,
+          caption: homePageUserPostFieldData.content,
+        };
+        const res = await Api.postImageUrl(postData);
+        const resData = await res.data;
+        if (res.status === 200 && resData.success) {
+          console.log(resData);
+          toastSuccess(resData.msg);
+          userPostResponseData({ ...resData.data, date: new Date() });
+          homePageUserPostFieldDataAction({
+            ...homePageUserPostFieldData,
+            content: "",
+            image: {},
+          });
+        } else {
+          // error
+          toastError(resData.msg);
+        }
+      } else if (
+        imagePickerState.imageUrl === null &&
+        imagePickerState.imageFile !== undefined
+      ) {
+        // var image = document.getElementById("image-input").files[0];
+        let data = new FormData();
+        data.append("image", imagePickerState.imageFile);
+        data.append("caption", homePageUserPostFieldData.content);
+        // we can be able to pass the other form of data like this
+        const res = await Api.postFile(data);
+        const resData = await res.data;
+        if (res.status === 200 && resData.success) {
+          toastSuccess(resData.msg);
+          userPostResponseData({ ...resData.data, date: new Date() });
+          homePageUserPostFieldDataAction({
+            ...homePageUserPostFieldData,
+            content: "",
+            image: {},
+          });
+        } else {
+          // error
+          toastError(resData.msg);
+        }
       }
       showLoadingSpinner(false);
       setHomePagePostFieldViewValue("min");

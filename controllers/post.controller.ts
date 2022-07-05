@@ -7,8 +7,107 @@ import {
   UserDocumentPosts,
   UserDocumentPostsComments,
 } from "../interface/userDocument.js";
+import crypto from "crypto";
+import uploadPost from "../funcs/uploadPost.js";
 
 export default {
+  postImageUrl: async (req: Request, res: Response) => {
+    try {
+      const rootUser = req.rootUser;
+      const { imageUrl, caption } = req.body;
+      if (!caption && !imageUrl) {
+        return res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Please fill the required field",
+        });
+      }
+      if (!imageUrl) {
+        // if user only fill content field
+        const postID = crypto.randomBytes(16).toString("hex");
+        const userPostDetail = {
+          id: postID,
+          caption: caption,
+          likes: {
+            No: 0,
+            by: [],
+          },
+          comments: {
+            No: 0,
+            by: [],
+          },
+        };
+        const postSuccessRes = await uploadPost(
+          userPostDetail,
+          undefined,
+          rootUser.id
+        );
+        if (postSuccessRes) {
+          const resData = {
+            ...userPostDetail,
+            picture: undefined,
+          };
+          return res.status(200).json(<ResponseObject>{
+            success: true,
+            msg: "Post upload successfully",
+            data: resData,
+          });
+        }
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "Server Error!!, Please Try again later",
+        });
+      }
+      const postID = crypto.randomBytes(16).toString("hex");
+      const today = new Date();
+      const userPostDetail = <UserDocumentPosts>{
+        id: postID,
+        caption: caption,
+        picture: {
+          url: imageUrl,
+          name: "",
+          path: "",
+          firebaseStorageDownloadToken: "",
+          bucket: "",
+        },
+        likes: {
+          No: 0,
+          by: [],
+        },
+        comments: {
+          No: 0,
+          by: [],
+        },
+      };
+      const userStoryDetail = {
+        caption: caption,
+        picture: imageUrl,
+        date: `${today.toLocaleString("default", {
+          month: "long",
+        })} ${today.getDate()}, ${today.getFullYear()}`,
+      };
+      const postSuccessRes = await uploadPost(
+        userPostDetail,
+        userStoryDetail,
+        rootUser.id
+      );
+      if (postSuccessRes) {
+        return res.status(200).json(<ResponseObject>{
+          success: true,
+          msg: "Post upload successfully",
+          data: userPostDetail,
+        });
+      }
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
+    } catch (err) {
+      return res.status(500).json(<ResponseObject>{
+        success: false,
+        msg: "Server Error!!, Please Try again later",
+      });
+    }
+  },
   like: async (req: Request, res: Response): Promise<object> => {
     try {
       const { postID, toUserId, toId, likeNo } = req.body;

@@ -1,10 +1,18 @@
 import { instance as axios } from "../../axios";
 
 const homeApi = {
-  post: async (data) => {
+  postFile: async (data) => {
     return await axios({
       method: "POST",
-      url: "/u/post",
+      url: "/u/post-image-file",
+      data: data,
+      withCredentials: true,
+    });
+  },
+  postImageUrl: async (data) => {
+    return await axios({
+      method: "POST",
+      url: "/post/image-url",
       data: data,
       withCredentials: true,
     });

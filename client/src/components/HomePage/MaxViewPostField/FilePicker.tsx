@@ -45,13 +45,6 @@ const FilePicker = (): JSX.Element => {
       image.style.display = "inline";
       image.style.position = "static";
       image.src = URL.createObjectURL(imagePickerState.imageFile);
-    } else {
-      // else imageUrl===null && imageFile===undefine
-      if (imagePickerState.imageFile !== undefined) {
-        image.style.display = "inline";
-        image.style.position = "static";
-        image.src = URL.createObjectURL(imagePickerState.imageFile);
-      }
     }
   }, [imagePickerState]);
 
