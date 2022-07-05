@@ -101,6 +101,13 @@
   font-weight: 600;
 }
 
+.ImagePicker_Content_Preview_ImgElement {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 .ImagePicker_Submit_Button {
   padding: 8px;
   border-radius: 5px;

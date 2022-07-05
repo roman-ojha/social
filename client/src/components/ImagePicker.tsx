@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/components/imagePicker.css";
 import { Icon } from "@iconify/react";
 import { AppState, actionCreators } from "../services/redux";
@@ -11,6 +11,16 @@ const ImagePicker = (): JSX.Element => {
     (state: AppState) => state.imagePickerReducer
   );
   const { openImagePicker } = bindActionCreators(actionCreators, dispatch);
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [isImageUrl, setIsImageUrl] = useState<boolean>(false);
+  const imagePreviewElement: React.MutableRefObject<null | HTMLDivElement> =
+    useRef(null);
+  const imagePreviewH1Element: React.MutableRefObject<null | HTMLHeadingElement> =
+    useRef(null);
+  const imageElement: React.MutableRefObject<HTMLImageElement> = useRef(
+    document.createElement("img")
+  );
+  imageElement.current.className = "ImagePicker_Content_Preview_ImgElement";
 
   useEffect(() => {
     if (imagePickerState.openedImagePicker === true) {
@@ -31,6 +41,29 @@ const ImagePicker = (): JSX.Element => {
     }
   }, [imagePickerState.openedImagePicker]);
 
+  useEffect(() => {
+    try {
+      const img = new Image();
+      img.src = imageUrl;
+      img.onload = () => {
+        // if url is image
+        imageElement.current.setAttribute("src", imageUrl);
+        if (imagePreviewH1Element.current !== null) {
+          imageElement.current.src = imageUrl;
+          imagePreviewH1Element.current.replaceWith(imageElement.current);
+        }
+        setIsImageUrl(true);
+      };
+      img.onerror = () => {
+        if (imagePreviewH1Element !== null) {
+          imageElement.current.replaceWith(
+            imagePreviewH1Element.current as Node
+          );
+        }
+      };
+    } catch (err) {}
+  }, [imageUrl]);
+
   return (
     <>
       {imagePickerState.openedImagePicker ? (
@@ -44,6 +77,10 @@ const ImagePicker = (): JSX.Element => {
                 type="text"
                 className="ImagePicker_Image_Url_Field"
                 placeholder="image url"
+                onChange={(e) => {
+                  setImageUrl(e.target.value);
+                }}
+                value={imageUrl}
               />
               <h2>
                 NOTE : Consider using image url rather then uploading files
@@ -63,8 +100,11 @@ const ImagePicker = (): JSX.Element => {
                 accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"
               />
             </div>
-            <div className="ImagePicker_Content_Preview">
-              <h3>Preview</h3>
+            <div
+              className="ImagePicker_Content_Preview"
+              ref={imagePreviewElement}
+            >
+              <h3 ref={imagePreviewH1Element}>Preview</h3>
             </div>
             <button className="ImagePicker_Submit_Button">Submit</button>
           </div>
