@@ -3,6 +3,7 @@ import { toastInfo } from "../../services/toast";
 import Sign_In_Facebook_Logo from "../../assets/Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../../assets/Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../../assets/svg/SignIn_RightSide_Issustration.svg";
+import { Button } from "@material-ui/core";
 
 const SignInRightPart = (): JSX.Element => {
   const signInWithGoogle = async () => {
@@ -27,32 +28,26 @@ const SignInRightPart = (): JSX.Element => {
             />
           </div>
 
-          <button
-            onClick={signInWithGoogle}
-            className="SignIn_page_Google_Button"
-          >
+          <Button onClick={signInWithGoogle} id="SignIn_page_Google_Button">
             <img
-              className="SignIn_page_Google_Button_Logo"
+              id="SignIn_page_Google_Button_Logo"
               src={Sign_In_Google_Logo}
               alt="Google"
             />
-            <p className="SignIn_page_Google_Button_Paragraph">
+            <p id="SignIn_page_Google_Button_Paragraph">
               SignIn in With Google
             </p>
-          </button>
-          <button
-            className="SignIn_page_Facebook_Button"
-            onClick={signInWithFacebook}
-          >
+          </Button>
+          <Button id="SignIn_page_Facebook_Button" onClick={signInWithFacebook}>
             <img
-              className="SignIn_page_Facebook_Button_Logo"
+              id="SignIn_page_Facebook_Button_Logo"
               src={Sign_In_Facebook_Logo}
               alt="Facebook"
             />
-            <p className="SignIn_page_Facebook_Button_Paragraph">
+            <p id="SignIn_page_Facebook_Button_Paragraph">
               Sign in With Facebook
             </p>
-          </button>
+          </Button>
         </div>
       </div>
     </>
