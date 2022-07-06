@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEventHandler, useState } from "react";
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
@@ -12,6 +12,7 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import SignInHeader from "../components/SignInPage/SignInHeader";
 import SignInRightPart from "../components/SignInPage/SignInRightPart";
+import Button from "@material-ui/core/Button";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -34,7 +35,7 @@ const SignIn = (): JSX.Element => {
     });
   };
   const history = useHistory();
-  const signingIn = async (e: React.MouseEvent<HTMLElement>) => {
+  const signingIn = async (e) => {
     e.preventDefault();
     try {
       startProgressBar();
@@ -83,7 +84,7 @@ const SignIn = (): JSX.Element => {
         <div className="SignIn_Page_Left_Half">
           <SignInHeader />
           <div className="SignIn_Container_Outline">
-            <form method="POST" className="SignIn_Container">
+            <form onSubmit={signingIn} className="SignIn_Container">
               <input
                 type="email"
                 className="SignIn_Email_Input_Field"
@@ -100,16 +101,21 @@ const SignIn = (): JSX.Element => {
                 value={signInDetail.password}
                 onChange={getSignInDetail}
               />
-              <button className="SignIn_Page_SignIn_Button" onClick={signingIn}>
-                Sign In
-              </button>
-              <NavLink
-                exact
-                to="/register"
-                className="SignIn_Page_Create_Account_Button"
+              <Button
+                variant="contained"
+                id="SignIn_Page_SignIn_Button"
+                type="submit"
               >
-                Create New Account
-              </NavLink>
+                Sign In
+              </Button>
+              <Button
+                variant="contained"
+                id="SignIn_Page_Create_Account_Button"
+              >
+                <NavLink exact to="/register">
+                  Create New Account
+                </NavLink>
+              </Button>
               <p
                 className="SignIn_Page_Forgot_Password_Button"
                 onClick={() => {
