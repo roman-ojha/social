@@ -13,6 +13,7 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
 import SignUpLeftPart from "../components/SignUpPage/SignUpLeftPart";
+import { Button } from "@material-ui/core";
 
 let previousSelectGenderElement: HTMLDivElement;
 const SignUp = (): JSX.Element => {
@@ -310,23 +311,26 @@ const SignUp = (): JSX.Element => {
                 </div>
               </div>
               <div className="SignUp_Page_Submit_Container">
-                <button
-                  className="SignUp_Page_SignUp_Button"
+                <Button
+                  variant="contained"
+                  id="SignUp_Page_SignUp_Button"
                   onClick={registerData}
                 >
-                  Sign Up
-                </button>
-                <NavLink
-                  exact
-                  to="/signin"
-                  className="SignUp_Page_SignIn_Button"
+                  <p>Sign Up</p>
+                </Button>
+                <Button
+                  variant="contained"
+                  id="SignUp_Page_SignIn_Button"
+                  onClick={() => {
+                    history.push("/signin");
+                  }}
                 >
-                  <p className="SignUp_Page_SignIn_Button_Title">Sign In</p>
+                  <p id="SignUp_Page_SignIn_Button_Title">Sign In</p>
                   <Icon
                     icon="ic:outline-forward"
-                    className="SignUp_Page_SignIn_Button_Icon"
+                    id="SignUp_Page_SignIn_Button_Icon"
                   />
-                </NavLink>
+                </Button>
               </div>
             </form>
           </div>
