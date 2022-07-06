@@ -36,6 +36,8 @@ const ProfileAlbums: React.FC<ProfileAlbumsProps> = ({
     (state: AppState) => state.setUserProfileDetailReducer
   );
 
+  console.log(profilePageData.posts);
+
   return (
     <>
       <Helmet>
@@ -52,7 +54,7 @@ const ProfileAlbums: React.FC<ProfileAlbumsProps> = ({
       ) : (
         <div className="ProfilePage_Albums_Container">
           {profilePageData.posts.map((post, index) => {
-            if (post.picture.url) {
+            if (post.picture) {
               return (
                 <div className="ProfilePage_Album_Container" key={index}>
                   <a

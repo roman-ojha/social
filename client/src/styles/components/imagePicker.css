@@ -82,6 +82,12 @@
 
 .ImagePicker_File_Picker_Label_Container label {
   cursor: pointer;
+  font-family: var(--primary-font-family);
+  font-size: 0.9rem;
+}
+
+.ImagePicker_File_Picker_Label_Container svg {
+  font-size: 0.9rem;
 }
 
 .ImagePicker_Content_Preview {
@@ -123,4 +129,138 @@
 
 .ImagePicker_Submit_Button:hover {
   background-color: var(--primary-color-button-hover-color);
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .ImagePicker_Page {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--primary-color-darker-1);
+    top: 0px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ImagePicker_Content_Container {
+    /* border: 1px solid red; */
+    width: 40%;
+    height: 80vh;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+
+  .ImagePicker_Content_Container h2 {
+    font-family: var(--primary-font-family);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .ImagePicker_Image_Url_Container {
+    width: 80%;
+  }
+
+  .ImagePicker_Image_Url_Field {
+    border-radius: 4px;
+    border-width: 1.5px;
+    border-style: solid;
+    width: 100%;
+    margin-bottom: 5px;
+    height: 1.5rem;
+    padding: 3px;
+    border-color: rgb(150, 150, 150);
+  }
+
+  .ImagePicker_Image_Url_Field:focus {
+    outline: none;
+  }
+
+  .ImagePicker_Image_Url_Field:read-write {
+    font-family: var(--primary-font-family);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  /* .ImagePicker_File_Picker_Container {
+} */
+
+  .ImagePicker_File_Picker_Field {
+    position: absolute;
+    display: none;
+  }
+
+  .ImagePicker_File_Picker_Label_Container {
+    /* border: 1px solid red; */
+    background-color: #c9c9c9;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 200ms;
+  }
+
+  .ImagePicker_File_Picker_Label_Container:hover {
+    transform: scale(1.02);
+  }
+
+  .ImagePicker_File_Picker_Label_Container label {
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+
+  .ImagePicker_File_Picker_Label_Container svg {
+    font-size: 0.8rem;
+  }
+
+  .ImagePicker_Content_Preview {
+    width: 65%;
+    height: 40vh;
+    background-color: var(--logo-icon-low-opacity-black-color);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ImagePicker_Content_Preview h3 {
+    color: white;
+    font-family: var(--primary-font-family);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .ImagePicker_Content_Preview_ImgElement {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .ImagePicker_Submit_Button {
+    padding: 8px;
+    border-radius: 4px;
+    border-width: 0px;
+    background-color: var(--primary-color);
+    color: white;
+    font-family: var(--primary-font-family);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition-duration: 200ms;
+    width: 65%;
+  }
+
+  .ImagePicker_Submit_Button:hover {
+    background-color: var(--primary-color-button-hover-color);
+  }
 }
