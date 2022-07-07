@@ -22,6 +22,7 @@
   --home-page-content-width: 85%;
   --logo-icon-low-opacity-black-color: #333333;
   --logo-icon-low-opacity-black-color-point-3: #555555;
+  --white-opacity-3: rgba(255, 255, 255, 0.37);
   --emoji-picker-background-color: #674086;
   --very-small-screen-min-width: 280px;
   --very-small-screen-max-width: 320px;
