@@ -19,37 +19,16 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
-import { Button } from "@material-ui/core";
-import { MUICustomStyles } from "../interface/MUI";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
-  button: {
-    // "&:hover": {
-    //   backgroundColor: "red",
-    // },
-  },
-  child: {
-    backgroundColor: "var(--white-opacity-6)",
-  },
-  rippleVisible: {
-    opacity: 0.5,
-    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes enter": {
-    "0%": {
-      transform: "scale(0)",
-      opacity: 0.1,
-    },
-    "100%": {
-      transform: "scale(1)",
-      opacity: 0.5,
-    },
-  },
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--white-opacity-6)" },
 });
 
-const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
-  const { button: buttonClass, ...rippleClasses } = classes;
+const MoreProfileBox = (): JSX.Element => {
+  const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
@@ -111,9 +90,10 @@ const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
       {moreProfileBoxState ? (
         <div className="More_Profile_Box_Container">
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{
+              classes: { root: ButtonClass.buttonRipple },
+            }}
+            className={ButtonClass.root}
             id="More_Profile_Box_User_Info"
             onClick={() => {
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
@@ -144,9 +124,10 @@ const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
             <p>Roman Ojha</p>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{
+              classes: { root: ButtonClass.buttonRipple },
+            }}
+            className={ButtonClass.root}
             onClick={() => {
               history.push("/u/setting");
             }}
@@ -156,9 +137,10 @@ const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
             <p>Setting</p>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{
+              classes: { root: ButtonClass.buttonRipple },
+            }}
+            className={ButtonClass.root}
             id="More_Profile_Box_Help"
             onClick={() => {
               toastInfo("Helping...");
@@ -168,9 +150,10 @@ const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
             <p>Help</p>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{
+              classes: { root: ButtonClass.buttonRipple },
+            }}
+            className={ButtonClass.root}
             id="More_Profile_Box_logout"
             onClick={userLogOut}
           >
@@ -203,4 +186,4 @@ const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
   );
 };
 
-export default withStyles(MUIButtonStyles)(MoreProfileBox);
+export default MoreProfileBox;
