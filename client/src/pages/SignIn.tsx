@@ -12,7 +12,7 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import SignInHeader from "../components/SignInPage/SignInHeader";
 import SignInRightPart from "../components/SignInPage/SignInRightPart";
-import Button from "@material-ui/core/Button";
+import { Button } from "@mui/material";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();

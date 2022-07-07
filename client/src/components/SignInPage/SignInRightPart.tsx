@@ -3,37 +3,16 @@ import { toastInfo } from "../../services/toast";
 import Sign_In_Facebook_Logo from "../../assets/Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../../assets/Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../../assets/svg/SignIn_RightSide_Issustration.svg";
-import { Button } from "@material-ui/core";
-import { MUICustomStyles } from "../../interface/MUI";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
-  button: {
-    // "&:hover": {
-    //   backgroundColor: "red",
-    // },
-  },
-  child: {
-    backgroundColor: "var(--primary-color-opacity-3)",
-  },
-  rippleVisible: {
-    opacity: 0.5,
-    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes enter": {
-    "0%": {
-      transform: "scale(0)",
-      opacity: 0.1,
-    },
-    "100%": {
-      transform: "scale(1)",
-      opacity: 0.5,
-    },
-  },
+const useStyles = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--primary-color-opacity-3)" },
 });
 
-const SignInRightPart = ({ classes, ...other }): JSX.Element => {
-  const { button: buttonClass, ...rippleClasses } = classes;
+const SignInRightPart = (): JSX.Element => {
+  const ButtonClass = useStyles();
   const signInWithGoogle = async () => {
     window.open(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, "_self");
     // window.open("<URL>", "<MODE>");
@@ -59,9 +38,8 @@ const SignInRightPart = ({ classes, ...other }): JSX.Element => {
           <Button
             onClick={signInWithGoogle}
             id="SignIn_page_Google_Button"
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
           >
             <img
               id="SignIn_page_Google_Button_Logo"
@@ -73,9 +51,8 @@ const SignInRightPart = ({ classes, ...other }): JSX.Element => {
             </p>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="SignIn_page_Facebook_Button"
             onClick={signInWithFacebook}
           >
@@ -94,4 +71,4 @@ const SignInRightPart = ({ classes, ...other }): JSX.Element => {
   );
 };
 
-export default withStyles(MUIButtonStyles)(SignInRightPart);
+export default SignInRightPart;

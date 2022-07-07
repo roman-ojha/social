@@ -143,6 +143,7 @@
   display: flex;
   justify-content: center;
 }
+
 .SignIn_Page_Right_Half {
   /* border: 1px solid red; */
   width: 70%;
@@ -178,6 +179,10 @@
 }
 #SignIn_page_Google_Button {
   margin-top: 7%;
+  color: black;
+}
+.CustomizeTouchRipple {
+  color: red;
 }
 #SignIn_page_Google_Button_Paragraph {
   margin-left: 5%;
@@ -193,6 +198,7 @@
 }
 #SignIn_page_Facebook_Button {
   margin-top: 4%;
+  color: black;
 }
 #SignIn_page_Facebook_Button_Paragraph {
   margin-left: 5%;
