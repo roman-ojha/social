@@ -1,5 +1,16 @@
 ### Changelog
 
+#### [v0.6.0](https://github.com/Roman-Ojha/social/compare/v0.5.0...v0.6.0)
+
+> 8 July 2022
+
+- style: transform mui from v4-&gt;v5 [`#120`](https://github.com/Roman-Ojha/social/issues/120)
+- feat: added MUIButton on react app [`#117`](https://github.com/Roman-Ojha/social/issues/117)
+- fix: added Poral on Popup Component [`#118`](https://github.com/Roman-Ojha/social/issues/118)
+- fix: revert back to 8d8829a4f [`28b632f`](https://github.com/Roman-Ojha/social/commit/28b632f7a6d10eb987fe63c66934ce7a2c04103c)
+- style: added MUIButton on Other Comp after revert [`462ae38`](https://github.com/Roman-Ojha/social/commit/462ae388af9889c0f927840f01fcf6613c4b7e19)
+- fix: try to solve vercel prod error [`1a310b1`](https://github.com/Roman-Ojha/social/commit/1a310b1daa16b38bb78be4715254ee527b200bbb)
+
 #### [v0.5.0](https://github.com/Roman-Ojha/social/compare/v0.4.1...v0.5.0)
 
 > 6 July 2022
