@@ -6,6 +6,7 @@
   --primary-color-point-7: #8e3fcad7;
   --primary-color-darker-5: #7931b1;
   --primary-color-lighter-1: #873cc0;
+  --primary-color-opacity-3: #5b248561;
   --primary-color-button-hover-color: #8f44c9;
   --primary-color-darker-1: rgb(164 145 178 / 33%);
   --secondary-color: #c929a6;
@@ -21,6 +22,8 @@
   --home-page-content-width: 85%;
   --logo-icon-low-opacity-black-color: #333333;
   --logo-icon-low-opacity-black-color-point-3: #555555;
+  --white-opacity-3: rgba(255, 255, 255, 0.37);
+  --white-opacity-6: rgba(255, 255, 255, 0.61);
   --emoji-picker-background-color: #674086;
   --very-small-screen-min-width: 280px;
   --very-small-screen-max-width: 320px;

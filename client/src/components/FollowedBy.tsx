@@ -18,6 +18,13 @@ import { useMediaQuery } from "react-responsive";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--white-opacity-3)" },
+});
 
 const FollowedBy = (): JSX.Element => {
   const history = useHistory();
@@ -50,6 +57,7 @@ const FollowedBy = (): JSX.Element => {
   const FollowedUser: React.FC<FollowedUserProps> = ({
     userInformation,
   }): JSX.Element => {
+    const ButtonClass = buttonStyle();
     const followUser = async (): Promise<void> => {
       if (userInformation.type !== "bot") {
         try {
@@ -220,23 +228,27 @@ const FollowedBy = (): JSX.Element => {
               {userInformation.userID}
             </p>
           </div>
-          <div className="MainPage_Followed_User_Follow_Button">
+          <Button
+            id="MainPage_Followed_User_Follow_Button"
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
+          >
             {userInformation.followed ? (
               <p
-                className="MainPage_Followed_User_Follow_Button_Text"
+                id="MainPage_Followed_User_Follow_Button_Text"
                 onClick={unFollowUser}
               >
                 UnFollow
               </p>
             ) : (
               <p
-                className="MainPage_Followed_User_Follow_Button_Text"
+                id="MainPage_Followed_User_Follow_Button_Text"
                 onClick={followUser}
               >
                 Follow
               </p>
             )}
-          </div>
+          </Button>
         </div>
       </>
     );

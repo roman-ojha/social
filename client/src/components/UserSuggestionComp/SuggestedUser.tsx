@@ -17,6 +17,13 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--white-opacity-3)" },
+});
 
 interface SuggestedUserProps {
   userInformation: any;
@@ -25,6 +32,7 @@ interface SuggestedUserProps {
 const SuggestedUser: React.FC<SuggestedUserProps> = ({
   userInformation,
 }): JSX.Element => {
+  const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
   const history = useHistory();
   const isMax850px = useMediaQuery({
@@ -213,23 +221,27 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             {userInformation.userID}
           </p>
         </div>
-        <div className="MainPage_Suggested_User_Follow_Button">
+        <Button
+          id="MainPage_Suggested_User_Follow_Button"
+          TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+          className={ButtonClass.root}
+        >
           {userInformation.followed ? (
             <p
-              className="MainPage_Suggested_User_Follow_Button_Text"
+              id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={unFollowUser}
             >
               UnFollow
             </p>
           ) : (
             <p
-              className="MainPage_Suggested_User_Follow_Button_Text"
+              id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={followUser}
             >
               Follow
             </p>
           )}
-        </div>
+        </Button>
       </div>
     </>
   );

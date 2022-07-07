@@ -3,8 +3,16 @@ import { toastInfo } from "../../services/toast";
 import Sign_In_Facebook_Logo from "../../assets/Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../../assets/Images/Google_Logo.png";
 import SignIn_RightSide_Issustration from "../../assets/svg/SignIn_RightSide_Issustration.svg";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--primary-color-opacity-3)" },
+});
 
 const SignInRightPart = (): JSX.Element => {
+  const ButtonClass = buttonStyle();
   const signInWithGoogle = async () => {
     window.open(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, "_self");
     // window.open("<URL>", "<MODE>");
@@ -27,32 +35,36 @@ const SignInRightPart = (): JSX.Element => {
             />
           </div>
 
-          <button
+          <Button
             onClick={signInWithGoogle}
-            className="SignIn_page_Google_Button"
+            id="SignIn_page_Google_Button"
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
           >
             <img
-              className="SignIn_page_Google_Button_Logo"
+              id="SignIn_page_Google_Button_Logo"
               src={Sign_In_Google_Logo}
               alt="Google"
             />
-            <p className="SignIn_page_Google_Button_Paragraph">
+            <p id="SignIn_page_Google_Button_Paragraph">
               SignIn in With Google
             </p>
-          </button>
-          <button
-            className="SignIn_page_Facebook_Button"
+          </Button>
+          <Button
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
+            id="SignIn_page_Facebook_Button"
             onClick={signInWithFacebook}
           >
             <img
-              className="SignIn_page_Facebook_Button_Logo"
+              id="SignIn_page_Facebook_Button_Logo"
               src={Sign_In_Facebook_Logo}
               alt="Facebook"
             />
-            <p className="SignIn_page_Facebook_Button_Paragraph">
+            <p id="SignIn_page_Facebook_Button_Paragraph">
               Sign in With Facebook
             </p>
-          </button>
+          </Button>
         </div>
       </div>
     </>

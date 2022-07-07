@@ -79,7 +79,7 @@
 .SingIn_Password_Field {
   margin-top: 5%;
 }
-.SignIn_Page_SignIn_Button {
+#SignIn_Page_SignIn_Button {
   margin-top: 5%;
   width: 75%;
   height: 12%;
@@ -92,29 +92,33 @@
   cursor: pointer;
   transition-duration: 100ms;
   font-family: var(--primary-font-family);
+  text-transform: none;
 }
-.SignIn_Page_SignIn_Button:hover {
+#SignIn_Page_SignIn_Button:hover {
   background-color: var(--primary-color-point-9);
 }
-.SignIn_Page_Create_Account_Button {
+#SignIn_Page_Create_Account_Button {
   margin-top: 3%;
   width: 60%;
   height: 12%;
   border-radius: 10rem;
   border-width: 0px;
   background-color: var(--secondary-color);
-  color: white;
-  font-size: 1rem;
-  letter-spacing: 2px;
   cursor: pointer;
   transition-duration: 100ms;
-  text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: var(--primary-font-family);
 }
-.SignIn_Page_Create_Account_Button:hover {
+#SignIn_Page_Create_Account_Button a {
+  font-family: var(--primary-font-family);
+  text-transform: none;
+  letter-spacing: 2px;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+}
+#SignIn_Page_Create_Account_Button:hover {
   background-color: var(--secondary-color-point-9);
 }
 .SignIn_Page_Forgot_Password_Button {
@@ -139,6 +143,7 @@
   display: flex;
   justify-content: center;
 }
+
 .SignIn_Page_Right_Half {
   /* border: 1px solid red; */
   width: 70%;
@@ -161,6 +166,7 @@
   width: 70%;
   height: 11%;
   align-items: center;
+  justify-content: flex-start;
   border-radius: 5px;
   border-width: 0px;
   background-color: #cc4fb133;
@@ -171,31 +177,38 @@
 .SignIn_Page_Right_Half button:hover {
   background-color: rgba(218, 98, 192, 0.199);
 }
-.SignIn_page_Google_Button {
+#SignIn_page_Google_Button {
   margin-top: 7%;
+  color: black;
 }
-.SignIn_page_Google_Button_Paragraph {
+.CustomizeTouchRipple {
+  color: red;
+}
+#SignIn_page_Google_Button_Paragraph {
   margin-left: 5%;
   font-family: "Raleway", sans-serif;
   letter-spacing: 1px;
   font-size: 0.8rem;
   word-spacing: 1px;
+  text-transform: none;
 }
-.SignIn_page_Google_Button_Logo {
+#SignIn_page_Google_Button_Logo {
   width: 10%;
   margin-left: 10%;
 }
-.SignIn_page_Facebook_Button {
+#SignIn_page_Facebook_Button {
   margin-top: 4%;
+  color: black;
 }
-.SignIn_page_Facebook_Button_Paragraph {
+#SignIn_page_Facebook_Button_Paragraph {
   margin-left: 5%;
   font-family: "Raleway", sans-serif;
   letter-spacing: 1px;
   font-size: 0.8rem;
   word-spacing: 1px;
+  text-transform: none;
 }
-.SignIn_page_Facebook_Button_Logo {
+#SignIn_page_Facebook_Button_Logo {
   width: 10%;
   margin-left: 10%;
 }
@@ -214,12 +227,15 @@
     width: 100%;
     height: 78%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 10%;
     font-size: 1.1rem;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 10%;
+  }
+
+  #SignIn_Page_Create_Account_Button a {
     font-size: 0.8rem;
   }
   .SignIn_Page_Right_Half button {
@@ -241,53 +257,55 @@
     width: 100%;
     height: 78%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 10%;
     font-size: 1.1rem;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 10%;
+  }
+  #SignIn_Page_Create_Account_Button a {
     font-size: 0.7rem;
   }
   .SignIn_Page_Right_Half button {
     height: 10%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     margin-left: 5%;
     font-family: "Raleway", sans-serif;
     letter-spacing: 1px;
     font-size: 0.8rem;
     word-spacing: 1px;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 10%;
     margin-left: 10%;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     margin-left: 5%;
     font-family: "Raleway", sans-serif;
     letter-spacing: 1px;
     font-size: 0.8rem;
     word-spacing: 1px;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 10%;
     margin-left: 10%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
     margin-left: 10%;
@@ -308,13 +326,15 @@
     width: 100%;
     height: 70%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 10%;
     font-size: 1rem;
     width: 70%;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 10%;
+  }
+  #SignIn_Page_Create_Account_Button a {
     font-size: 0.5rem;
   }
   .SignIn_Page_Forgot_Password_Button {
@@ -323,42 +343,42 @@
   .SignIn_Page_Right_Half button {
     height: 10%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     margin-left: 5%;
     font-family: "Raleway", sans-serif;
     letter-spacing: 1px;
     font-size: 0.8rem;
     word-spacing: 1px;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 10%;
     margin-left: 10%;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     margin-left: 5%;
     font-family: "Raleway", sans-serif;
     letter-spacing: 1px;
     font-size: 0.8rem;
     word-spacing: 1px;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 10%;
     margin-left: 10%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
     margin-left: 10%;
@@ -414,12 +434,14 @@
   .SingIn_Password_Field {
     margin-top: 5%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 12%;
     font-size: 1.1rem;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 12%;
+  }
+  #SignIn_Page_Create_Account_Button a {
     font-size: 0.8rem;
   }
   .SignIn_Page_Forgot_Password_Button {
@@ -448,23 +470,23 @@
     width: 70%;
     height: 100px;
   }
-  .SignIn_page_Google_Button {
+  #SignIn_page_Google_Button {
     margin-top: 1%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.5rem;
     height: 1.5rem;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.5rem;
     height: 1.5rem;
   }
@@ -520,17 +542,19 @@
   .SingIn_Password_Field {
     margin-top: 0%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 12%;
     font-size: 1.1rem;
     margin-top: 0%;
     border-radius: 15px;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 12%;
-    font-size: 0.7rem;
     margin-top: 0%;
     border-radius: 15px;
+  }
+  #SignIn_Page_Create_Account_Button a {
+    font-size: 0.7rem;
   }
   .SignIn_Page_Forgot_Password_Button {
     margin-top: 0%;
@@ -556,23 +580,23 @@
     width: 70%;
     height: 100px;
   }
-  .SignIn_page_Google_Button {
+  #SignIn_page_Google_Button {
     margin-top: 1%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.5rem;
     height: 1.5rem;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     font-size: 0.7rem;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.5rem;
     height: 1.5rem;
   }
@@ -619,17 +643,19 @@
   .SingIn_Password_Field {
     margin-top: 0%;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 12%;
     font-size: 1rem;
     margin-top: 0%;
     border-radius: 10px;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 12%;
-    font-size: 0.6rem;
     margin-top: 0%;
     border-radius: 10px;
+  }
+  #SignIn_Page_Create_Account_Button a {
+    font-size: 0.6rem;
   }
   .SignIn_Page_Forgot_Password_Button {
     margin-top: 0%;
@@ -650,20 +676,20 @@
   .SignIn_Page_Right_Half button {
     width: 100%;
   }
-  .SignIn_page_Google_Button {
+  #SignIn_page_Google_Button {
     margin-top: 1%;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.6rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
@@ -687,15 +713,17 @@
   .SignIn_Container input::placeholder {
     font-size: 0.7rem;
   }
-  .SignIn_Page_SignIn_Button {
+  #SignIn_Page_SignIn_Button {
     height: 10%;
     font-size: 0.9rem;
     margin-top: 0%;
   }
-  .SignIn_Page_Create_Account_Button {
+  #SignIn_Page_Create_Account_Button {
     height: 10%;
-    font-size: 0.5rem;
     margin-top: 0%;
+  }
+  #SignIn_Page_Create_Account_Button a {
+    font-size: 0.5rem;
   }
   .SignIn_Page_Forgot_Password_Button {
     margin-top: 0%;
@@ -709,24 +737,24 @@
   .SignIn_Page_Right_Half button {
     width: 100%;
   }
-  .SignIn_page_Google_Button {
+  #SignIn_page_Google_Button {
     margin-top: 0%;
     margin-bottom: 5px;
   }
-  .SignIn_page_Google_Button_Paragraph {
+  #SignIn_page_Google_Button_Paragraph {
     font-size: 0.6rem;
   }
-  .SignIn_page_Google_Button_Logo {
+  #SignIn_page_Google_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
-  .SignIn_page_Facebook_Button {
+  #SignIn_page_Facebook_Button {
     margin-top: 4%;
   }
-  .SignIn_page_Facebook_Button_Paragraph {
+  #SignIn_page_Facebook_Button_Paragraph {
     font-size: 0.6rem;
   }
-  .SignIn_page_Facebook_Button_Logo {
+  #SignIn_page_Facebook_Button_Logo {
     width: 1.2rem;
     height: 1.2rem;
   }
