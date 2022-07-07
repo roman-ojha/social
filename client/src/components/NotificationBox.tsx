@@ -15,16 +15,16 @@ import { useMediaQuery } from "react-responsive";
 import constant from "../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
-import { Button } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { Button } from "@mui/material";
+// import { makeStyles } from "@mui/styles";
 
-const buttonStyle = makeStyles({
-  root: {},
-  buttonRipple: { color: "var(--white-opacity-6)" },
-});
+// const buttonStyle = makeStyles({
+//   root: {},
+//   buttonRipple: { color: "var(--white-opacity-6)" },
+// });
 
 const NotificationBox = (): JSX.Element => {
-  const ButtonClass = buttonStyle();
+  // const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
   const history = useHistory();
   const notificationBoxState = useSelector(
@@ -53,11 +53,11 @@ const NotificationBox = (): JSX.Element => {
               <div className="Show_Notification_Container">
                 {notificationBoxState.notificationData.map((data, index) => {
                   return (
-                    <Button
-                      TouchRippleProps={{
-                        classes: { root: ButtonClass.buttonRipple },
-                      }}
-                      className={ButtonClass.root}
+                    <button
+                      // TouchRippleProps={{
+                      //   classes: { root: ButtonClass.buttonRipple },
+                      // }}
+                      // className={ButtonClass.root}
                       key={index}
                       id="Single_Notification_Container"
                     >
@@ -104,7 +104,7 @@ const NotificationBox = (): JSX.Element => {
                         />
                         <p>{data.userID + " Started following you"}</p>
                       </div>
-                    </Button>
+                    </button>
                   );
                 })}
               </div>

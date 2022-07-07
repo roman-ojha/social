@@ -19,16 +19,16 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
-import { Button } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { Button } from "@mui/material";
+// import { makeStyles } from "@mui/styles";
 
-const buttonStyle = makeStyles({
-  root: {},
-  buttonRipple: { color: "var(--white-opacity-6)" },
-});
+// const buttonStyle = makeStyles({
+//   root: {},
+//   buttonRipple: { color: "var(--white-opacity-6)" },
+// });
 
 const MoreProfileBox = (): JSX.Element => {
-  const ButtonClass = buttonStyle();
+  // const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
@@ -89,11 +89,11 @@ const MoreProfileBox = (): JSX.Element => {
     <>
       {moreProfileBoxState ? (
         <div className="More_Profile_Box_Container">
-          <Button
-            TouchRippleProps={{
-              classes: { root: ButtonClass.buttonRipple },
-            }}
-            className={ButtonClass.root}
+          <button
+            // TouchRippleProps={{
+            //   classes: { root: ButtonClass.buttonRipple },
+            // }}
+            // className={ButtonClass.root}
             id="More_Profile_Box_User_Info"
             onClick={() => {
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
@@ -122,12 +122,12 @@ const MoreProfileBox = (): JSX.Element => {
               alt="user"
             />
             <p>Roman Ojha</p>
-          </Button>
-          <Button
-            TouchRippleProps={{
-              classes: { root: ButtonClass.buttonRipple },
-            }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{
+            //   classes: { root: ButtonClass.buttonRipple },
+            // }}
+            // className={ButtonClass.root}
             onClick={() => {
               history.push("/u/setting");
             }}
@@ -135,12 +135,12 @@ const MoreProfileBox = (): JSX.Element => {
           >
             <Icon icon="ant-design:setting-filled" id="More_Profile_Box_Icon" />
             <p>Setting</p>
-          </Button>
-          <Button
-            TouchRippleProps={{
-              classes: { root: ButtonClass.buttonRipple },
-            }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{
+            //   classes: { root: ButtonClass.buttonRipple },
+            // }}
+            // className={ButtonClass.root}
             id="More_Profile_Box_Help"
             onClick={() => {
               toastInfo("Helping...");
@@ -148,18 +148,18 @@ const MoreProfileBox = (): JSX.Element => {
           >
             <Icon icon="bxs:help-circle" id="More_Profile_Box_Icon" />
             <p>Help</p>
-          </Button>
-          <Button
-            TouchRippleProps={{
-              classes: { root: ButtonClass.buttonRipple },
-            }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{
+            //   classes: { root: ButtonClass.buttonRipple },
+            // }}
+            // className={ButtonClass.root}
             id="More_Profile_Box_logout"
             onClick={userLogOut}
           >
             <Icon icon="majesticons:logout" id="More_Profile_Box_Icon" />
             <p>Log Out</p>
-          </Button>
+          </button>
           <div className="More_Profile_Box_App_Info">
             <p
               onClick={() => {

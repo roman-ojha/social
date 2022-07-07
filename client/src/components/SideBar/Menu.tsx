@@ -8,16 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 // } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
-import { Button } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+// import { Button } from "@mui/material";
+// import { makeStyles } from "@mui/styles";
 
-const buttonStyle = makeStyles({
-  root: {},
-  buttonRipple: { color: "var(--primary-color-opacity-3)" },
-});
+// const buttonStyle = makeStyles({
+//   root: {},
+//   buttonRipple: { color: "var(--primary-color-opacity-3)" },
+// });
 
 const Menu = (): JSX.Element => {
-  const ButtonClass = buttonStyle();
+  // const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
@@ -33,9 +33,9 @@ const Menu = (): JSX.Element => {
       <nav className="MainPage_SideBar_Menu_Container">
         <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
         <div className="MainPage_SideBar_Menu_NavLink_Container">
-          <Button
-            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
-            className={ButtonClass.root}
+          <button
+            // TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            // className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -49,10 +49,10 @@ const Menu = (): JSX.Element => {
               />
               <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
             </NavLink>
-          </Button>
-          <Button
-            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            // className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -66,10 +66,10 @@ const Menu = (): JSX.Element => {
               />
               <h3 className="MainPage_SideBar_Menu_Video_Title">Video</h3>
             </NavLink>
-          </Button>
-          <Button
-            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            // className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -83,10 +83,10 @@ const Menu = (): JSX.Element => {
               />
               <h3 className="MainPage_SideBar_Menu_Message_Title">Message</h3>
             </NavLink>
-          </Button>
-          <Button
-            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            // className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -100,10 +100,10 @@ const Menu = (): JSX.Element => {
               />
               <h3 className="MainPage_SideBar_Menu_Setting_Title">Setting</h3>
             </NavLink>
-          </Button>
-          <Button
-            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
-            className={ButtonClass.root}
+          </button>
+          <button
+            // TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            // className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -130,7 +130,7 @@ const Menu = (): JSX.Element => {
               />
               <h3 className="MainPage_SideBar_Menu_Profile_Title">Profile</h3>
             </NavLink>
-          </Button>
+          </button>
         </div>
         <hr className="MainPage_SideBar_Horizontal_Line" />
       </nav>

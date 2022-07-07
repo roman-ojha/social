@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
@@ -12,7 +12,7 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import SignInHeader from "../components/SignInPage/SignInHeader";
 import SignInRightPart from "../components/SignInPage/SignInRightPart";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -101,21 +101,21 @@ const SignIn = (): JSX.Element => {
                 value={signInDetail.password}
                 onChange={getSignInDetail}
               />
-              <Button
-                variant="contained"
+              <button
+                // variant="contained"
                 id="SignIn_Page_SignIn_Button"
                 type="submit"
               >
                 Sign In
-              </Button>
-              <Button
-                variant="contained"
+              </button>
+              <button
+                // variant="contained"
                 id="SignIn_Page_Create_Account_Button"
               >
                 <NavLink exact to="/register">
                   Create New Account
                 </NavLink>
-              </Button>
+              </button>
               <p
                 className="SignIn_Page_Forgot_Password_Button"
                 onClick={() => {
