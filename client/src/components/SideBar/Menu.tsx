@@ -18,7 +18,7 @@ const styles = (theme) => ({
     // },
   },
   child: {
-    backgroundColor: "green",
+    backgroundColor: "var(--primary-color-opacity-3)",
   },
   rippleVisible: {
     opacity: 0.5,
@@ -54,9 +54,9 @@ const Menu = ({ classes, ...other }): JSX.Element => {
         <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
         <div className="MainPage_SideBar_Menu_NavLink_Container">
           <Button
-            // TouchRippleProps={{ classes: rippleClasses }}
-            // className={buttonClass}
-            // {...other}
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -72,9 +72,9 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            // TouchRippleProps={{ classes: rippleClasses }}
-            // className={buttonClass}
-            // {...other}
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -90,9 +90,9 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            // TouchRippleProps={{ classes: rippleClasses }}
-            // className={buttonClass}
-            // {...other}
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -108,9 +108,9 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            // TouchRippleProps={{ classes: rippleClasses }}
-            // className={buttonClass}
-            // {...other}
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -126,9 +126,9 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            // TouchRippleProps={{ classes: rippleClasses }}
-            // className={buttonClass}
-            // {...other}
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
