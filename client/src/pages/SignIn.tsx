@@ -12,7 +12,6 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import SignInHeader from "../components/SignInPage/SignInHeader";
 import SignInRightPart from "../components/SignInPage/SignInRightPart";
-// import { Button } from "@mui/material";
 
 const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -35,7 +34,7 @@ const SignIn = (): JSX.Element => {
     });
   };
   const history = useHistory();
-  const signingIn = async (e) => {
+  const signingIn = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     try {
       startProgressBar();
@@ -84,7 +83,7 @@ const SignIn = (): JSX.Element => {
         <div className="SignIn_Page_Left_Half">
           <SignInHeader />
           <div className="SignIn_Container_Outline">
-            <form onSubmit={signingIn} className="SignIn_Container">
+            <form method="POST" className="SignIn_Container">
               <input
                 type="email"
                 className="SignIn_Email_Input_Field"
@@ -101,21 +100,16 @@ const SignIn = (): JSX.Element => {
                 value={signInDetail.password}
                 onChange={getSignInDetail}
               />
-              <button
-                // variant="contained"
-                id="SignIn_Page_SignIn_Button"
-                type="submit"
-              >
+              <button className="SignIn_Page_SignIn_Button" onClick={signingIn}>
                 Sign In
               </button>
-              <button
-                // variant="contained"
-                id="SignIn_Page_Create_Account_Button"
+              <NavLink
+                exact
+                to="/register"
+                className="SignIn_Page_Create_Account_Button"
               >
-                <NavLink exact to="/register">
-                  Create New Account
-                </NavLink>
-              </button>
+                Create New Account
+              </NavLink>
               <p
                 className="SignIn_Page_Forgot_Password_Button"
                 onClick={() => {

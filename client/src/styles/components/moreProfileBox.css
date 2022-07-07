@@ -12,10 +12,10 @@
   box-sizing: border-box;
 }
 
-#More_Profile_Box_User_Info,
-#More_Profile_Box_Setting,
-#More_Profile_Box_Help,
-#More_Profile_Box_logout {
+.More_Profile_Box_User_Info,
+.More_Profile_Box_Setting,
+.More_Profile_Box_Help,
+.More_Profile_Box_logout {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -25,32 +25,31 @@
   cursor: pointer;
 }
 
-#More_Profile_Box_User_Info:hover,
-#More_Profile_Box_Setting:hover,
-#More_Profile_Box_Help:hover,
-#More_Profile_Box_logout:hover {
+.More_Profile_Box_User_Info:hover,
+.More_Profile_Box_Setting:hover,
+.More_Profile_Box_Help:hover,
+.More_Profile_Box_logout:hover {
   background-color: #c9c9c9;
 }
 
-#More_Profile_Box_User_Info p,
-#More_Profile_Box_Setting p,
-#More_Profile_Box_Help p,
-#More_Profile_Box_logout p {
+.More_Profile_Box_User_Info p,
+.More_Profile_Box_Setting p,
+.More_Profile_Box_Help p,
+.More_Profile_Box_logout p {
   font-family: var(--primary-font-family);
   color: black;
   margin-left: 1rem;
   /* border: 1px solid blue; */
   max-width: 50%;
   overflow: hidden;
-  text-transform: none;
 }
 
-#More_Profile_Box_User_Info img,
-#More_Profile_Box_Icon {
+.More_Profile_Box_User_Info img,
+.More_Profile_Box_Icon {
   margin-left: 1rem;
 }
 
-#More_Profile_Box_User_Info {
+.More_Profile_Box_User_Info {
   /* border: 1px solid red; */
   width: 95%;
   padding: 0.3rem;
@@ -58,16 +57,16 @@
   border-radius: 5px;
 }
 
-#More_Profile_Box_User_Info img {
+.More_Profile_Box_User_Info img {
   width: 3rem;
   height: 3rem;
   object-fit: cover;
   border-radius: 50%;
 }
 
-#More_Profile_Box_Setting,
-#More_Profile_Box_Help,
-#More_Profile_Box_logout {
+.More_Profile_Box_Setting,
+.More_Profile_Box_Help,
+.More_Profile_Box_logout {
   /* border: 1px solid red; */
   width: 95%;
   padding: 0.3rem;
@@ -75,7 +74,7 @@
   border-radius: 5px;
 }
 
-#More_Profile_Box_Icon {
+.More_Profile_Box_Icon {
   font-size: 1.8rem;
   color: var(--lower-opacity-font-color);
 }
@@ -103,35 +102,35 @@
 }
 
 @media screen and (max-width: 400px) and (min-width: 320px) {
-  #More_Profile_Box_User_Info p,
-  #More_Profile_Box_Setting p,
-  #More_Profile_Box_Help p,
-  #More_Profile_Box_logout p {
+  .More_Profile_Box_User_Info p,
+  .More_Profile_Box_Setting p,
+  .More_Profile_Box_Help p,
+  .More_Profile_Box_logout p {
     font-size: 0.9rem;
   }
 
-  #More_Profile_Box_User_Info img,
-  #More_Profile_Box_Icon {
+  .More_Profile_Box_User_Info img,
+  .More_Profile_Box_Icon {
     margin-left: 0.7rem;
   }
 
-  #More_Profile_Box_User_Info {
+  .More_Profile_Box_User_Info {
     padding: 0.3rem;
   }
 
-  #More_Profile_Box_User_Info img {
+  .More_Profile_Box_User_Info img {
     width: 2.7rem;
     height: 2.7rem;
   }
 
-  #More_Profile_Box_Setting,
-  #More_Profile_Box_Help,
-  #More_Profile_Box_logout {
+  .More_Profile_Box_Setting,
+  .More_Profile_Box_Help,
+  .More_Profile_Box_logout {
     width: 95%;
     padding: 0.3rem;
   }
 
-  #More_Profile_Box_Icon {
+  .More_Profile_Box_Icon {
     font-size: 1.7rem;
   }
 
@@ -141,35 +140,35 @@
 }
 
 @media screen and (max-width: 320px) {
-  #More_Profile_Box_User_Info p,
-  #More_Profile_Box_Setting p,
-  #More_Profile_Box_Help p,
-  #More_Profile_Box_logout p {
+  .More_Profile_Box_User_Info p,
+  .More_Profile_Box_Setting p,
+  .More_Profile_Box_Help p,
+  .More_Profile_Box_logout p {
     font-size: 0.7rem;
   }
 
-  #More_Profile_Box_User_Info img,
-  #More_Profile_Box_Icon {
+  .More_Profile_Box_User_Info img,
+  .More_Profile_Box_Icon {
     margin-left: 0.5rem;
   }
 
-  #More_Profile_Box_User_Info {
+  .More_Profile_Box_User_Info {
     padding: 0.3rem;
   }
 
-  #More_Profile_Box_User_Info img {
+  .More_Profile_Box_User_Info img {
     width: 2.5rem;
     height: 2.5rem;
   }
 
-  #More_Profile_Box_Setting,
-  #More_Profile_Box_Help,
-  #More_Profile_Box_logout {
+  .More_Profile_Box_Setting,
+  .More_Profile_Box_Help,
+  .More_Profile_Box_logout {
     width: 95%;
     padding: 0.2rem;
   }
 
-  #More_Profile_Box_Icon {
+  .More_Profile_Box_Icon {
     font-size: 1.5rem;
   }
 

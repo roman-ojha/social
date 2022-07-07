@@ -1,18 +1,6 @@
 ### Changelog
 
-#### [v0.5.0](https://github.com/Roman-Ojha/social/compare/v0.4.1...v0.5.0)
-
-> 6 July 2022
-
-- style: ImagePicker bellow 320px responsive [`#116`](https://github.com/Roman-Ojha/social/issues/116)
-- feat: successfully Uploading post imageUrl/imageFile [`#115`](https://github.com/Roman-Ojha/social/issues/115)
-- fix: solved favicon problem [`#114`](https://github.com/Roman-Ojha/social/issues/114)
-- fix(server): file is uploading now [`#113`](https://github.com/Roman-Ojha/social/issues/113)
-- style: added mui button on leftSignInPage [`0d1faad`](https://github.com/Roman-Ojha/social/commit/0d1faadeb960a4d2d7eb1da92da5a3df6ef66556)
-- feat: ImagePicker 1024-768px responsive [`78936b0`](https://github.com/Roman-Ojha/social/commit/78936b0e3406f8eeb13a556f6270187f68738270)
-- style: ImagePicker 768-480px responsive [`fe6ec22`](https://github.com/Roman-Ojha/social/commit/fe6ec22ba033d1dc669d50f693cd55af44af06ee)
-
-#### [v0.4.1](https://github.com/Roman-Ojha/social/compare/v0.4.0...v0.4.1)
+#### [v0.4.1](https://github.com/Roman-Ojha/social/compare/v0.4.1...v0.4.1)
 
 > 1 July 2022
 

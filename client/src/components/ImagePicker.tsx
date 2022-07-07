@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOM from "react-dom";
 import "../styles/components/imagePicker.css";
 import { Icon } from "@iconify/react";
 import { AppState, actionCreators } from "../services/redux";
@@ -182,14 +181,11 @@ const ReturnImagePicker = (): JSX.Element => {
   );
 };
 
-const ImagePicker = (): JSX.Element => {
+const ImagePicker = () => {
   const imagePickerState = useSelector(
     (state: AppState) => state.imagePickerReducer
   );
-  return ReactDOM.createPortal(
-    <>{imagePickerState.openedImagePicker ? <ReturnImagePicker /> : <></>}</>,
-    document.getElementById("portal-root") as HTMLElement
-  );
+  return <>{imagePickerState.openedImagePicker ? <ReturnImagePicker /> : ""}</>;
 };
 
 export default ImagePicker;

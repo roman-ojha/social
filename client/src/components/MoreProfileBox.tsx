@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/components/moreProfileBox.css";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 // import {
@@ -19,16 +19,8 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
-// import { Button } from "@mui/material";
-// import { makeStyles } from "@mui/styles";
-
-// const buttonStyle = makeStyles({
-//   root: {},
-//   buttonRipple: { color: "var(--white-opacity-6)" },
-// });
 
 const MoreProfileBox = (): JSX.Element => {
-  // const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
@@ -89,14 +81,10 @@ const MoreProfileBox = (): JSX.Element => {
     <>
       {moreProfileBoxState ? (
         <div className="More_Profile_Box_Container">
-          <button
-            // TouchRippleProps={{
-            //   classes: { root: ButtonClass.buttonRipple },
-            // }}
-            // className={ButtonClass.root}
-            id="More_Profile_Box_User_Info"
+          <NavLink
+            to={`/u/profile/${userProfileDetailStore.userID}/posts`}
+            className="More_Profile_Box_User_Info"
             onClick={() => {
-              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
               const userObj = {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
@@ -122,44 +110,27 @@ const MoreProfileBox = (): JSX.Element => {
               alt="user"
             />
             <p>Roman Ojha</p>
-          </button>
-          <button
-            // TouchRippleProps={{
-            //   classes: { root: ButtonClass.buttonRipple },
-            // }}
-            // className={ButtonClass.root}
-            onClick={() => {
-              history.push("/u/setting");
-            }}
-            id="More_Profile_Box_Setting"
-          >
-            <Icon icon="ant-design:setting-filled" id="More_Profile_Box_Icon" />
+          </NavLink>
+          <NavLink to="/u/setting" className="More_Profile_Box_Setting">
+            <Icon
+              icon="ant-design:setting-filled"
+              className="More_Profile_Box_Icon"
+            />
             <p>Setting</p>
-          </button>
-          <button
-            // TouchRippleProps={{
-            //   classes: { root: ButtonClass.buttonRipple },
-            // }}
-            // className={ButtonClass.root}
-            id="More_Profile_Box_Help"
+          </NavLink>
+          <div
+            className="More_Profile_Box_Help"
             onClick={() => {
               toastInfo("Helping...");
             }}
           >
-            <Icon icon="bxs:help-circle" id="More_Profile_Box_Icon" />
+            <Icon icon="bxs:help-circle" className="More_Profile_Box_Icon" />
             <p>Help</p>
-          </button>
-          <button
-            // TouchRippleProps={{
-            //   classes: { root: ButtonClass.buttonRipple },
-            // }}
-            // className={ButtonClass.root}
-            id="More_Profile_Box_logout"
-            onClick={userLogOut}
-          >
-            <Icon icon="majesticons:logout" id="More_Profile_Box_Icon" />
+          </div>
+          <div className="More_Profile_Box_logout" onClick={userLogOut}>
+            <Icon icon="majesticons:logout" className="More_Profile_Box_Icon" />
             <p>Log Out</p>
-          </button>
+          </div>
           <div className="More_Profile_Box_App_Info">
             <p
               onClick={() => {
