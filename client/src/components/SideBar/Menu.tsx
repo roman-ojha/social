@@ -8,37 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 // } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
-import { Button } from "@material-ui/core";
-import { withStyles, Theme } from "@material-ui/core/styles";
-import { MUICustomStyles } from "../../interface/MUI";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-const styles: MUICustomStyles = (theme: Theme) => ({
-  button: {
-    // "&:hover": {
-    //   backgroundColor: "red",
-    // },
-  },
-  child: {
-    backgroundColor: "var(--primary-color-opacity-3)",
-  },
-  rippleVisible: {
-    opacity: 0.5,
-    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes enter": {
-    "0%": {
-      transform: "scale(0)",
-      opacity: 0.1,
-    },
-    "100%": {
-      transform: "scale(1)",
-      opacity: 0.5,
-    },
-  },
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--primary-color-opacity-3)" },
 });
 
-const Menu = ({ classes, ...other }): JSX.Element => {
-  const { button: buttonClass, ...rippleClasses } = classes;
+const Menu = (): JSX.Element => {
+  const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
@@ -55,9 +34,8 @@ const Menu = ({ classes, ...other }): JSX.Element => {
         <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
         <div className="MainPage_SideBar_Menu_NavLink_Container">
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -73,9 +51,8 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -91,9 +68,8 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -109,9 +85,8 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -127,9 +102,8 @@ const Menu = ({ classes, ...other }): JSX.Element => {
             </NavLink>
           </Button>
           <Button
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
             id="MainPage_SideBar_Menu_MUI_Button"
           >
             <NavLink
@@ -164,4 +138,4 @@ const Menu = ({ classes, ...other }): JSX.Element => {
   );
 };
 
-export default withStyles(styles)(Menu);
+export default Menu;

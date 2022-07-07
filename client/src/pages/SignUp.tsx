@@ -13,7 +13,7 @@ import { actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
 import SignUpLeftPart from "../components/SignUpPage/SignUpLeftPart";
-import { Button } from "@material-ui/core";
+import { Button } from "@mui/material";
 
 let previousSelectGenderElement: HTMLDivElement;
 const SignUp = (): JSX.Element => {

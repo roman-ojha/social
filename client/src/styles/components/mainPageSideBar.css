@@ -100,11 +100,7 @@
   flex-basis: 20%;
 }
 
-#MainPage_SideBar_Menu_MUI_Button .MuiButton-label {
-  height: 100%;
-}
-
-#MainPage_SideBar_Menu_MUI_Button span a {
+#MainPage_SideBar_Menu_MUI_Button a {
   display: flex;
   cursor: pointer;
   align-items: center;
@@ -123,7 +119,7 @@
   height: 1.6rem;
   width: 1.6rem;
 }
-.MainPage_SideBar_Menu_NavLink_Container button span a h3 {
+.MainPage_SideBar_Menu_NavLink_Container button a h3 {
   margin-left: 5%;
   color: var(--lower-opacity-font-color);
   font-size: 0.8rem;

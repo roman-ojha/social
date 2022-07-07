@@ -6,13 +6,13 @@ import SignIn_RightSide_Issustration from "../../assets/svg/SignIn_RightSide_Iss
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
+const buttonStyle = makeStyles({
   root: {},
   buttonRipple: { color: "var(--primary-color-opacity-3)" },
 });
 
 const SignInRightPart = (): JSX.Element => {
-  const ButtonClass = useStyles();
+  const ButtonClass = buttonStyle();
   const signInWithGoogle = async () => {
     window.open(`${process.env.REACT_APP_API_BASE_URL}/auth/google`, "_self");
     // window.open("<URL>", "<MODE>");
