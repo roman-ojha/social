@@ -19,8 +19,37 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
+import { Button } from "@material-ui/core";
+import { MUICustomStyles } from "../interface/MUI";
+import { Theme, withStyles } from "@material-ui/core/styles";
 
-const MoreProfileBox = (): JSX.Element => {
+export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
+  button: {
+    // "&:hover": {
+    //   backgroundColor: "red",
+    // },
+  },
+  child: {
+    backgroundColor: "var(--white-opacity-6)",
+  },
+  rippleVisible: {
+    opacity: 0.5,
+    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
+  },
+  "@keyframes enter": {
+    "0%": {
+      transform: "scale(0)",
+      opacity: 0.1,
+    },
+    "100%": {
+      transform: "scale(1)",
+      opacity: 0.5,
+    },
+  },
+});
+
+const MoreProfileBox = ({ classes, ...other }): JSX.Element => {
+  const { button: buttonClass, ...rippleClasses } = classes;
   const history = useHistory();
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
@@ -81,10 +110,13 @@ const MoreProfileBox = (): JSX.Element => {
     <>
       {moreProfileBoxState ? (
         <div className="More_Profile_Box_Container">
-          <NavLink
-            to={`/u/profile/${userProfileDetailStore.userID}/posts`}
-            className="More_Profile_Box_User_Info"
+          <Button
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
+            id="More_Profile_Box_User_Info"
             onClick={() => {
+              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
               const userObj = {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
@@ -110,27 +142,41 @@ const MoreProfileBox = (): JSX.Element => {
               alt="user"
             />
             <p>Roman Ojha</p>
-          </NavLink>
-          <NavLink to="/u/setting" className="More_Profile_Box_Setting">
-            <Icon
-              icon="ant-design:setting-filled"
-              className="More_Profile_Box_Icon"
-            />
+          </Button>
+          <Button
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
+            onClick={() => {
+              history.push("/u/setting");
+            }}
+            id="More_Profile_Box_Setting"
+          >
+            <Icon icon="ant-design:setting-filled" id="More_Profile_Box_Icon" />
             <p>Setting</p>
-          </NavLink>
-          <div
-            className="More_Profile_Box_Help"
+          </Button>
+          <Button
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
+            id="More_Profile_Box_Help"
             onClick={() => {
               toastInfo("Helping...");
             }}
           >
-            <Icon icon="bxs:help-circle" className="More_Profile_Box_Icon" />
+            <Icon icon="bxs:help-circle" id="More_Profile_Box_Icon" />
             <p>Help</p>
-          </div>
-          <div className="More_Profile_Box_logout" onClick={userLogOut}>
-            <Icon icon="majesticons:logout" className="More_Profile_Box_Icon" />
+          </Button>
+          <Button
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
+            id="More_Profile_Box_logout"
+            onClick={userLogOut}
+          >
+            <Icon icon="majesticons:logout" id="More_Profile_Box_Icon" />
             <p>Log Out</p>
-          </div>
+          </Button>
           <div className="More_Profile_Box_App_Info">
             <p
               onClick={() => {
@@ -157,4 +203,4 @@ const MoreProfileBox = (): JSX.Element => {
   );
 };
 
-export default MoreProfileBox;
+export default withStyles(MUIButtonStyles)(MoreProfileBox);
