@@ -17,45 +17,22 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
-import { Button } from "@material-ui/core";
-import { MUICustomStyles } from "../../interface/MUI";
-import { Theme, withStyles } from "@material-ui/core/styles";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
-  button: {
-    // "&:hover": {
-    //   backgroundColor: "red",
-    // },
-  },
-  child: {
-    backgroundColor: "var(--white-opacity-3)",
-  },
-  rippleVisible: {
-    opacity: 0.5,
-    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes enter": {
-    "0%": {
-      transform: "scale(0)",
-      opacity: 0.1,
-    },
-    "100%": {
-      transform: "scale(1)",
-      opacity: 0.5,
-    },
-  },
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--white-opacity-3)" },
 });
 
 interface SuggestedUserProps {
   userInformation: any;
 }
 
-const SuggestedUser: React.FC<SuggestedUserProps | any> = ({
+const SuggestedUser: React.FC<SuggestedUserProps> = ({
   userInformation,
-  classes,
-  ...other
 }): JSX.Element => {
-  const { button: buttonClass, ...rippleClasses } = classes;
+  const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
   const history = useHistory();
   const isMax850px = useMediaQuery({
@@ -246,9 +223,8 @@ const SuggestedUser: React.FC<SuggestedUserProps | any> = ({
         </div>
         <Button
           id="MainPage_Suggested_User_Follow_Button"
-          TouchRippleProps={{ classes: rippleClasses }}
-          className={buttonClass}
-          {...other}
+          TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+          className={ButtonClass.root}
         >
           {userInformation.followed ? (
             <p
@@ -271,4 +247,4 @@ const SuggestedUser: React.FC<SuggestedUserProps | any> = ({
   );
 };
 
-export default withStyles(MUIButtonStyles)(SuggestedUser);
+export default SuggestedUser;

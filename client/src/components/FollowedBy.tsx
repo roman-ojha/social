@@ -18,12 +18,15 @@ import { useMediaQuery } from "react-responsive";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
-import { Button } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import { MUIButtonStyles } from "./UserSuggestionComp/SuggestedUser";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
-const FollowedBy = ({ classes, ...other }): JSX.Element => {
-  const { button: buttonClass, ...rippleClasses } = classes;
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--white-opacity-3)" },
+});
+
+const FollowedBy = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
@@ -54,6 +57,7 @@ const FollowedBy = ({ classes, ...other }): JSX.Element => {
   const FollowedUser: React.FC<FollowedUserProps> = ({
     userInformation,
   }): JSX.Element => {
+    const ButtonClass = buttonStyle();
     const followUser = async (): Promise<void> => {
       if (userInformation.type !== "bot") {
         try {
@@ -226,9 +230,8 @@ const FollowedBy = ({ classes, ...other }): JSX.Element => {
           </div>
           <Button
             id="MainPage_Followed_User_Follow_Button"
-            TouchRippleProps={{ classes: rippleClasses }}
-            className={buttonClass}
-            {...other}
+            TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+            className={ButtonClass.root}
           >
             {userInformation.followed ? (
               <p
@@ -304,4 +307,4 @@ const FollowedBy = ({ classes, ...other }): JSX.Element => {
   );
 };
 
-export default withStyles(MUIButtonStyles)(FollowedBy);
+export default FollowedBy;
