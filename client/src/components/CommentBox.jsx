@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import "../styles/components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
@@ -257,7 +258,10 @@ const ReturnCommentContent = () => {
 
 const CommentBox = () => {
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
-  return <>{commentBoxStore.openCommentBox ? <ReturnCommentContent /> : ""}</>;
+  return ReactDOM.createPortal(
+    <>{commentBoxStore.openCommentBox ? <ReturnCommentContent /> : <></>}</>,
+    document.getElementById("portal-root")
+  );
 };
 
 export default CommentBox;
