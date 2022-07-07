@@ -18,8 +18,12 @@ import { useMediaQuery } from "react-responsive";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
+import { Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import { MUIButtonStyles } from "./UserSuggestionComp/SuggestedUser";
 
-const FollowedBy = (): JSX.Element => {
+const FollowedBy = ({ classes, ...other }): JSX.Element => {
+  const { button: buttonClass, ...rippleClasses } = classes;
   const history = useHistory();
   const dispatch = useDispatch();
   const mainPageMessageOnOffState = useSelector(
@@ -220,23 +224,28 @@ const FollowedBy = (): JSX.Element => {
               {userInformation.userID}
             </p>
           </div>
-          <div className="MainPage_Followed_User_Follow_Button">
+          <Button
+            id="MainPage_Followed_User_Follow_Button"
+            TouchRippleProps={{ classes: rippleClasses }}
+            className={buttonClass}
+            {...other}
+          >
             {userInformation.followed ? (
               <p
-                className="MainPage_Followed_User_Follow_Button_Text"
+                id="MainPage_Followed_User_Follow_Button_Text"
                 onClick={unFollowUser}
               >
                 UnFollow
               </p>
             ) : (
               <p
-                className="MainPage_Followed_User_Follow_Button_Text"
+                id="MainPage_Followed_User_Follow_Button_Text"
                 onClick={followUser}
               >
                 Follow
               </p>
             )}
-          </div>
+          </Button>
         </div>
       </>
     );
@@ -295,4 +304,4 @@ const FollowedBy = (): JSX.Element => {
   );
 };
 
-export default FollowedBy;
+export default withStyles(MUIButtonStyles)(FollowedBy);

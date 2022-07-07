@@ -17,11 +17,11 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
-import { Button, PropTypes } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { MUICustomStyles } from "../../interface/MUI";
 import { Theme, withStyles } from "@material-ui/core/styles";
 
-const styles: MUICustomStyles = (theme: Theme) => ({
+export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
   button: {
     // "&:hover": {
     //   backgroundColor: "red",
@@ -271,4 +271,4 @@ const SuggestedUser: React.FC<SuggestedUserProps | any> = ({
   );
 };
 
-export default withStyles(styles)(SuggestedUser);
+export default withStyles(MUIButtonStyles)(SuggestedUser);
