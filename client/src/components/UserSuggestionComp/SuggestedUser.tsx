@@ -17,6 +17,7 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
+import { Button } from "@material-ui/core";
 
 interface SuggestedUserProps {
   userInformation: any;
@@ -213,23 +214,23 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             {userInformation.userID}
           </p>
         </div>
-        <div className="MainPage_Suggested_User_Follow_Button">
+        <Button id="MainPage_Suggested_User_Follow_Button">
           {userInformation.followed ? (
             <p
-              className="MainPage_Suggested_User_Follow_Button_Text"
+              id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={unFollowUser}
             >
               UnFollow
             </p>
           ) : (
             <p
-              className="MainPage_Suggested_User_Follow_Button_Text"
+              id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={followUser}
             >
               Follow
             </p>
           )}
-        </div>
+        </Button>
       </div>
     </>
   );

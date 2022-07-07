@@ -95,7 +95,7 @@
 .MainPage_Followed_User_Follower_Name:hover {
   text-decoration: underline;
 }
-.MainPage_Suggested_User_Follow_Button,
+#MainPage_Suggested_User_Follow_Button,
 .MainPage_Followed_User_Follow_Button {
   width: 25%;
   height: 50%;
@@ -108,16 +108,17 @@
   cursor: pointer;
   transition-duration: 50ms;
 }
-.MainPage_Suggested_User_Follow_Button:hover,
+#MainPage_Suggested_User_Follow_Button:hover,
 .MainPage_Followed_User_Follow_Button:hover {
   background-color: var(--primary-color-button-hover-color);
 }
-.MainPage_Suggested_User_Follow_Button_Text,
+#MainPage_Suggested_User_Follow_Button_Text,
 .MainPage_Followed_User_Follow_Button_Text {
   font-family: var(--primary-font-family);
   font-size: 0.68rem;
   font-weight: 600;
   color: white;
+  text-transform: none;
 }
 .MainPage_FollowedBy_Container {
   margin-top: 2%;
@@ -251,12 +252,12 @@
   .MainPage_Followed_User_Follower_Name {
     font-size: 0.6rem;
   }
-  .MainPage_Suggested_User_Follow_Button,
+  #MainPage_Suggested_User_Follow_Button,
   .MainPage_Followed_User_Follow_Button {
     width: 23%;
     height: 45%;
   }
-  .MainPage_Suggested_User_Follow_Button_Text,
+  #MainPage_Suggested_User_Follow_Button_Text,
   .MainPage_Followed_User_Follow_Button_Text {
     font-size: 0.6rem;
   }
@@ -303,13 +304,13 @@
   .MainPage_Followed_User_Follower_Name {
     font-size: 0.6rem;
   }
-  .MainPage_Suggested_User_Follow_Button,
+  #MainPage_Suggested_User_Follow_Button,
   .MainPage_Followed_User_Follow_Button {
     width: 20%;
     height: 45%;
     border-radius: 10px;
   }
-  .MainPage_Suggested_User_Follow_Button_Text,
+  #MainPage_Suggested_User_Follow_Button_Text,
   .MainPage_Followed_User_Follow_Button_Text {
     font-size: 0.55rem;
   }

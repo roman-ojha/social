@@ -10,8 +10,10 @@ import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import { Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import { Theme } from "@material-ui/core/styles";
+import { MUICustomStyles } from "../../interface/MUI.";
 
-const styles = (theme) => ({
+const styles: MUICustomStyles = (theme: Theme) => ({
   button: {
     // "&:hover": {
     //   backgroundColor: "red",
