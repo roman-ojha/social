@@ -8,8 +8,36 @@ import { useSelector, useDispatch } from "react-redux";
 // } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { Button } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 
-const Menu = (): JSX.Element => {
+const styles = (theme) => ({
+  button: {
+    // "&:hover": {
+    //   backgroundColor: "red",
+    // },
+  },
+  child: {
+    backgroundColor: "green",
+  },
+  rippleVisible: {
+    opacity: 0.5,
+    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
+  },
+  "@keyframes enter": {
+    "0%": {
+      transform: "scale(0)",
+      opacity: 0.1,
+    },
+    "100%": {
+      transform: "scale(1)",
+      opacity: 0.5,
+    },
+  },
+});
+
+const Menu = ({ classes, ...other }): JSX.Element => {
+  const { button: buttonClass, ...rippleClasses } = classes;
   const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
@@ -25,17 +53,24 @@ const Menu = (): JSX.Element => {
       <nav className="MainPage_SideBar_Menu_Container">
         <h2 className="MainPage_SideBar_Menu_Title">Menu</h2>
         <div className="MainPage_SideBar_Menu_NavLink_Container">
-          <NavLink
-            to="/u/home"
-            className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
+          <Button
+            // TouchRippleProps={{ classes: rippleClasses }}
+            // className={buttonClass}
+            // {...other}
+            id="MainPage_SideBar_Menu_MUI_Button"
           >
-            <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
-            <Icon
-              className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
-              icon="ant-design:home-filled"
-            />
-            <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
-          </NavLink>
+            <NavLink
+              to="/u/home"
+              className="MainPage_SideBar_Menu_Home_Container MainPage_SideBar_Link"
+            >
+              <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
+              <Icon
+                className="MainPage_SideBar_Menu_Home_Logo MainPage_SideBar_Menu_Logo"
+                icon="ant-design:home-filled"
+              />
+              <h3 className="MainPage_SideBar_Menu_Home_Title">Home</h3>
+            </NavLink>
+          </Button>
           <NavLink
             to="/u/video"
             className="MainPage_SideBar_Menu_Video_Container MainPage_SideBar_Link"
@@ -100,4 +135,4 @@ const Menu = (): JSX.Element => {
   );
 };
 
-export default Menu;
+export default withStyles(styles)(Menu);

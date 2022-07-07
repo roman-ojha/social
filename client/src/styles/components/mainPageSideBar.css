@@ -76,18 +76,6 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.MainPage_SideBar_Menu_NavLink_Container a {
-  display: flex;
-  cursor: pointer;
-  padding: 2% 0% 2% 0%;
-  align-items: center;
-  border-radius: 0px 1rem 1rem 0px;
-  transition-duration: 100ms;
-  text-decoration: none;
-}
-.MainPage_SideBar_Menu_NavLink_Container a:hover {
-  background-color: var(--secondary-color-point-2);
-}
 /* .MainPage_SideBar_Menu_NavLink_Container a span {
     height: 1.5rem;
     cursor: pointer;
@@ -103,23 +91,56 @@
   color: var(--primary-color-point-7);
 }
 
+#MainPage_SideBar_Menu_MUI_Button {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 0px;
+  box-sizing: content-box;
+  border-radius: 0px 1rem 1rem 0px;
+  /* display: flex;
+  cursor: pointer;
+  padding: 2% 0% 2% 0%;
+  align-items: center;
+  border-radius: 0px 1rem 1rem 0px;
+  transition-duration: 100ms;
+  text-decoration: none; */
+}
+
+#MainPage_SideBar_Menu_MUI_Button a {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  /* padding: 2% 0% 2% 0%;
+  transition-duration: 100ms; */
+  text-decoration: none;
+}
+#MainPage_SideBar_Menu_MUI_Button:hover {
+  background-color: var(--secondary-color-point-2);
+}
+
 .MainPage_SideBar_Menu_Home_Logo {
   margin-left: 2%;
   color: var(--logo-icon-low-opacity-black-color-point-3);
-  height: 1.6rem;
-  width: 1.6rem;
+  height: 1.9rem;
+  width: 1.9rem;
 }
-.MainPage_SideBar_Menu_NavLink_Container a h3 {
+.MainPage_SideBar_Menu_NavLink_Container button a h3 {
   margin-left: 5%;
   color: var(--lower-opacity-font-color);
   font-size: 0.8rem;
   font-family: var(--primary-font-family);
   font-weight: 600;
   letter-spacing: 0.5px;
+  text-transform: none;
 }
 .MainPage_SideBar_Menu_SelectBar_Colored {
   width: 12px;
-  height: 120%;
+  height: 41px;
+  /* border: 1px solid red; */
   /* background-color: var(--primary-color-point-7); */
 }
 .MainPage_SideBar_Menu_Title {
