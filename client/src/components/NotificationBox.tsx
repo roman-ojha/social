@@ -15,8 +15,37 @@ import { useMediaQuery } from "react-responsive";
 import constant from "../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
+import { Button } from "@material-ui/core";
+import { MUICustomStyles } from "../interface/MUI";
+import { Theme, withStyles } from "@material-ui/core/styles";
 
-const NotificationBox = () => {
+export const MUIButtonStyles: MUICustomStyles = (theme: Theme) => ({
+  button: {
+    // "&:hover": {
+    //   backgroundColor: "red",
+    // },
+  },
+  child: {
+    backgroundColor: "var(--white-opacity-6)",
+  },
+  rippleVisible: {
+    opacity: 0.5,
+    animation: `$enter 550ms ${theme.transitions.easing.easeInOut}`,
+  },
+  "@keyframes enter": {
+    "0%": {
+      transform: "scale(0)",
+      opacity: 0.1,
+    },
+    "100%": {
+      transform: "scale(1)",
+      opacity: 0.5,
+    },
+  },
+});
+
+const NotificationBox = ({ classes, ...other }): JSX.Element => {
+  const { button: buttonClass, ...rippleClasses } = classes;
   const dispatch = useDispatch();
   const history = useHistory();
   const notificationBoxState = useSelector(
@@ -45,9 +74,15 @@ const NotificationBox = () => {
               <div className="Show_Notification_Container">
                 {notificationBoxState.notificationData.map((data, index) => {
                   return (
-                    <div key={index} className="Single_Notification_Container">
+                    <Button
+                      TouchRippleProps={{ classes: rippleClasses }}
+                      className={buttonClass}
+                      {...other}
+                      key={index}
+                      id="Single_Notification_Container"
+                    >
                       <div
-                        className="Notification_Box_Single_Nft_Pic_and_Title"
+                        id="Notification_Box_Single_Nft_Pic_and_Title"
                         onClick={async () => {
                           try {
                             startProgressBar();
@@ -89,7 +124,7 @@ const NotificationBox = () => {
                         />
                         <p>{data.userID + " Started following you"}</p>
                       </div>
-                    </div>
+                    </Button>
                   );
                 })}
               </div>
@@ -103,4 +138,4 @@ const NotificationBox = () => {
   );
 };
 
-export default NotificationBox;
+export default withStyles(MUIButtonStyles)(NotificationBox);
