@@ -68,6 +68,13 @@
 .MainPage_SideBar_Menu_Container {
   height: 37%;
 }
+.MainPage_SideBar_Menu_Title {
+  font-family: var(--primary-font-family);
+  color: var(--lower-opacity-font-color);
+  font-size: 0.9rem;
+  margin-left: 5%;
+  height: 8%;
+}
 .MainPage_SideBar_Menu_NavLink_Container {
   height: 90%;
   display: flex;
@@ -98,6 +105,7 @@
   box-sizing: content-box;
   border-radius: 0px 1rem 1rem 0px;
   flex-basis: 20%;
+  /* border: 1px solid red; */
 }
 
 #MainPage_SideBar_Menu_MUI_Button a {
@@ -131,13 +139,7 @@
 .MainPage_SideBar_Menu_SelectBar_Colored {
   width: 12px;
   height: 100%;
-}
-.MainPage_SideBar_Menu_Title {
-  font-family: var(--primary-font-family);
-  color: var(--lower-opacity-font-color);
-  font-size: 0.9rem;
-  margin-left: 5%;
-  height: 8%;
+  /* border: 1px solid green; */
 }
 .MainPage_SideBar_Friends_Container {
   height: 35%;
@@ -367,43 +369,8 @@
   .MainPage_SideBar_Menu_Container {
     height: 40%;
   }
-  /* .MainPage_SideBar_Friends_Container {
-    height: 35%;
-    margin: 1% 3% 2% 3%;
-  } */
-  /* .MainPage_SideBar_Friends_Title {
-    margin: 2% 0% 0% 5%;
-    height: 8%;
-  } */
-  /* .MainPage_SideBar_Friend_Active_Status {
-    width: 19%;
-  } */
-  /* .MainPage_SideBar_User_Account_LogOut_Container {
-    height: 17%;
-  } */
-  /* .MainPage_SideBar_Account_Title {
-    height: 20%;
-  } */
-  /* .MainPage_SideBar_User_Account_Logout_Outline {
-    justify-content: center;
-    flex-wrap: wrap;
-  } */
-  /* .MainPage_SideBar_User_Account_Img {
-    margin-right: 3%;
-    padding-left: 5%;
-  } */
-  /* .MainPage_SideBar_User_Account_Name {
-    width: 60%;
-  } */
-  /* .MainPage_LogOut_Icon {
-    margin-right: 4%;
-  } */
 }
-/* @media screen and (max-width: 1500px) and (min-width: 1300px) {
-  .MainPage_SideBar_Search_Outline {
-    width: 60%;
-  }
-} */
+
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
   .MainPage_SideBar_Container {
     width: 15%;
@@ -520,7 +487,7 @@
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container {
     width: 100%;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a {
+  .Close_SideBar_Drawer #MainPage_SideBar_Menu_MUI_Button a {
     justify-content: space-between;
   }
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_Home_Logo {
@@ -528,7 +495,7 @@
     height: 1.9rem;
     width: 1.9rem;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a h3 {
+  .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container button a h3 {
     visibility: hidden;
     position: absolute;
   }
@@ -642,7 +609,7 @@
     height: 1.9rem;
     width: 1.9rem;
   }
-  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a h3 {
+  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container button a h3 {
     font-size: 1rem;
   }
   .Open_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
@@ -752,8 +719,8 @@
     font-size: 0.8rem;
     margin-bottom: 3px;
   }
-  .Close_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container {
-    width: 100%;
+  .Close_SideBar_Drawer #MainPage_SideBar_Menu_MUI_Button {
+    min-width: 100%;
   }
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_Home_Logo {
     margin-right: 20%;
@@ -838,7 +805,7 @@
     height: 1.7rem;
     width: 1.7rem;
   }
-  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a h3 {
+  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container button a h3 {
     font-size: 0.8rem;
   }
   .Open_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
@@ -920,6 +887,9 @@
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_Title {
     font-size: 0.75rem;
     margin-bottom: 3px;
+  }
+  .Close_SideBar_Drawer #MainPage_SideBar_Menu_MUI_Button {
+    min-width: 100%;
   }
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_SelectBar_Colored {
     width: 6px;
@@ -1014,7 +984,7 @@
     height: 1.5rem;
     width: 1.5rem;
   }
-  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a h3 {
+  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container button a h3 {
     font-size: 0.7rem;
   }
   .Open_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
@@ -1102,6 +1072,9 @@
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_Title {
     font-size: 0.6rem;
     margin-bottom: 3px;
+  }
+  .Close_SideBar_Drawer #MainPage_SideBar_Menu_MUI_Button {
+    min-width: 100%;
   }
   .Close_SideBar_Drawer .MainPage_SideBar_Menu_SelectBar_Colored {
     width: 6px;
@@ -1193,7 +1166,7 @@
     height: 1.3rem;
     width: 1.3rem;
   }
-  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container a h3 {
+  .Open_SideBar_Drawer .MainPage_SideBar_Menu_NavLink_Container button a h3 {
     font-size: 0.6rem;
   }
   .Open_SideBar_Drawer .MainPage_SideBar_Horizontal_Line {
