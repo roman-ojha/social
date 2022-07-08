@@ -1,7 +1,6 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-import GlobalApi from "../../services/api/global";
 import UserApi from "../../services/api/global/user";
 // import {
 //   profilePageDataAction,
@@ -10,30 +9,24 @@ import UserApi from "../../services/api/global/user";
 //   setRootUserFriends,
 // } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
-import { useHistory } from "react-router-dom";
 import constant from "../../constant/constant";
 import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 const Friends = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const routeToProfilePage = useRouteToProfilePage();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
   const rootUserFriends = useSelector(
     (state: AppState) => state.rootUserFriends
   );
-  const {
-    startProgressBar,
-    stopProgressBar,
-    setRootUserFriends,
-    profilePageDataAction,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { setRootUserFriends } = bindActionCreators(actionCreators, dispatch);
 
   const MainPageFriend = (props) => {
     return (
@@ -41,37 +34,8 @@ const Friends = () => {
         <div
           className="MainPage_SideBar_Friend_Outline"
           onClick={async () => {
-            try {
-              startProgressBar();
-              const res = await GlobalApi.getFriendData(
-                props.friendDetail.userID
-              );
-              const userData = await res.data;
-              if (res.status === 200 && userData.success) {
-                // success
-                const userObj: ProfilePageDataState = {
-                  ...userData.searchedUser,
-                  isRootUserFollowed: userData.isRootUserFollowed,
-                  throughRouting: true,
-                };
-                profilePageDataAction(userObj);
-                history.push(`/u/profile/${props.friendDetail.userID}/posts`);
-              } else {
-                // error
-                toastError(userData.msg);
-              }
-              stopProgressBar();
-            } catch (error) {
-              const err = error as AxiosError;
-              if (err.response) {
-                if (err.response.data.success === false) {
-                  toastError(err.response.data.msg);
-                }
-              } else {
-                toastError("Some Problem Occur, Please Try again later!!!");
-              }
-              stopProgressBar();
-            }
+            console.log(props.friendDetail.userID);
+            await routeToProfilePage({ userID: props.friendDetail.userID });
           }}
         >
           <img

@@ -9,7 +9,12 @@ import { useMediaQuery } from "react-responsive";
 import constant from "../constant/constant";
 import { AxiosError } from "axios";
 
-type CallingFrom = "postBox" | undefined;
+type CallingFrom =
+  | "postBox"
+  | "suggestionComp"
+  | "followedByComp"
+  | "profileFriendsComp"
+  | undefined;
 type ReturnFuncArgument = {
   userID: string;
   from?: CallingFrom;
@@ -46,10 +51,12 @@ const useRouteToProfilePage = () => {
           throughRouting: true,
         };
         profilePageDataAction(userObj);
-        if (isMax850px) {
-          openRightPartDrawer(false);
+        if (obj.from === "suggestionComp" || obj.from === "followedByComp") {
+          if (isMax850px) {
+            openRightPartDrawer(false);
+          }
         }
-        if (obj.from === "postBox") {
+        if (obj.from === "postBox" || obj.from === "profileFriendsComp") {
           if (obj.userID === userProfileDetailStore.userID) {
             setRootUserProfileDataState({
               fetchedRootUserProfileData: true,

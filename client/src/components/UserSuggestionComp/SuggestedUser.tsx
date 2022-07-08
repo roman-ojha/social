@@ -134,7 +134,10 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
           }
           onClick={async () => {
             if (userInformation.type !== "bot") {
-              await routeToProfilePage({ userID: userInformation.userID });
+              await routeToProfilePage({
+                userID: userInformation.userID,
+                from: "suggestionComp",
+              });
             } else {
               toastError("Sorry!!, can't be able to open bot Profile");
             }
@@ -146,7 +149,10 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             className="MainPage_Suggested_User_Name"
             onClick={async () => {
               if (userInformation.type !== "bot") {
-                await routeToProfilePage({ userID: userInformation.userID });
+                await routeToProfilePage({
+                  userID: userInformation.userID,
+                  from: "suggestionComp",
+                });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -158,7 +164,10 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             className="MainPage_Suggested_User_Follower_Name"
             onClick={async () => {
               if (userInformation.type !== "bot") {
-                await routeToProfilePage({ userID: userInformation.userID });
+                await routeToProfilePage({
+                  userID: userInformation.userID,
+                  from: "suggestionComp",
+                });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }

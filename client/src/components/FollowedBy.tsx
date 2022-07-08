@@ -152,7 +152,10 @@ const FollowedBy = (): JSX.Element => {
             }
             onClick={async () => {
               if (userInformation.type !== "bot") {
-                await routeToProfilePage({ userID: userInformation.userID });
+                await routeToProfilePage({
+                  userID: userInformation.userID,
+                  from: "followedByComp",
+                });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -164,7 +167,10 @@ const FollowedBy = (): JSX.Element => {
               className="MainPage_Followed_User_Name"
               onClick={async () => {
                 if (userInformation.type !== "bot") {
-                  await routeToProfilePage({ userID: userInformation.userID });
+                  await routeToProfilePage({
+                    userID: userInformation.userID,
+                    from: "followedByComp",
+                  });
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
@@ -176,7 +182,10 @@ const FollowedBy = (): JSX.Element => {
               className="MainPage_Followed_User_Follower_Name"
               onClick={async () => {
                 if (userInformation.type !== "bot") {
-                  await routeToProfilePage({ userID: userInformation.userID });
+                  await routeToProfilePage({
+                    userID: userInformation.userID,
+                    from: "followedByComp",
+                  });
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
