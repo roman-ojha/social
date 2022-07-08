@@ -10,16 +10,12 @@ import { instance as axios } from "../../services/axios";
 // } from "../../services/redux-actions";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import GlobalApi from "../../services/api/global";
-import { useMediaQuery } from "react-responsive";
-import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -35,17 +31,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
 }): JSX.Element => {
   const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
-  const history = useHistory();
-  const isMax850px = useMediaQuery({
-    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
-  });
-  const {
-    profilePageDataAction,
-    startProgressBar,
-    stopProgressBar,
-    isFollowedSuggestedUser,
-    openRightPartDrawer,
-  } = bindActionCreators(actionCreators, dispatch);
+  const routeToProfilePage = useRouteToProfilePage();
+  const { startProgressBar, stopProgressBar, isFollowedSuggestedUser } =
+    bindActionCreators(actionCreators, dispatch);
 
   const followUser = async (): Promise<void> => {
     if (userInformation.type !== "bot") {
@@ -134,41 +122,6 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
     }
   };
 
-  const routeToProfile = async (userID: string): Promise<void> => {
-    try {
-      startProgressBar();
-      const res = await GlobalApi.getFriendData(userID);
-      const userData = await res.data;
-      if (res.status === 200 && userData.success) {
-        // success
-        const userObj: ProfilePageDataState = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-          throughRouting: true,
-        };
-        profilePageDataAction(userObj);
-        if (isMax850px) {
-          openRightPartDrawer(false);
-        }
-        history.push(`/u/profile/${userID}/posts`);
-      } else {
-        // error
-        toastError(userData.msg);
-      }
-      stopProgressBar();
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      stopProgressBar();
-    }
-  };
-
   return (
     <>
       <div className="MainPage_Suggested_User_Container">
@@ -181,8 +134,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
           }
           onClick={() => {
             if (userInformation.type !== "bot") {
-              // history.push(`/u/profile/${props.userInformation.userID}/posts`);
-              routeToProfile(userInformation.userID);
+              routeToProfilePage(userInformation.userID);
             } else {
               toastError("Sorry!!, can't be able to open bot Profile");
             }
@@ -194,10 +146,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             className="MainPage_Suggested_User_Name"
             onClick={() => {
               if (userInformation.type !== "bot") {
-                // history.push(
-                //   `/u/profile/${props.userInformation.userID}/posts`
-                // );
-                routeToProfile(userInformation.userID);
+                routeToProfilePage(userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -209,10 +158,7 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             className="MainPage_Suggested_User_Follower_Name"
             onClick={() => {
               if (userInformation.type !== "bot") {
-                // history.push(
-                //   `/u/profile/${props.userInformation.userID}/posts`
-                // );
-                routeToProfile(userInformation.userID);
+                routeToProfilePage(userInformation.userID);
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
