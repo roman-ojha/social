@@ -35,9 +35,6 @@ const ProfileFriends = (): JSX.Element => {
   const profilePageData = useSelector(
     (state: AppState) => state.profilePageDataReducer
   );
-  const userProfileDetailStore = useSelector(
-    (state: AppState) => state.setUserProfileDetailReducer
-  );
   const {
     setProfilePageFriends,
     setProfilePageFollowers,
@@ -171,7 +168,7 @@ const ProfileFriends = (): JSX.Element => {
                 key={index}
                 style={{ textDecoration: "none", color: "black" }}
                 onClick={async () => {
-                  routeToProfilePage({
+                  await routeToProfilePage({
                     userID: userDetail.userID,
                     from: "profileFriendsComp",
                   });

@@ -34,7 +34,6 @@ const Friends = () => {
         <div
           className="MainPage_SideBar_Friend_Outline"
           onClick={async () => {
-            console.log(props.friendDetail.userID);
             await routeToProfilePage({ userID: props.friendDetail.userID });
           }}
         >

@@ -17,15 +17,16 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";
 import { isEmptyString } from "../funcs/isEmptyString";
 import { useHistory } from "react-router-dom";
-import GlobalApi from "../services/api/global";
 import Api from "../services/api/components/postBox";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../services/redux";
 import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
+import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 
 const ReturnCommentContent = () => {
   const history = useHistory();
   const setRootUserProfilePageData = useRootUserProfilePageData();
+  const routeToProfilePage = useRouteToProfilePage();
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
@@ -40,8 +41,6 @@ const ReturnCommentContent = () => {
     incrementPostCommentNumber,
     startProgressBar,
     stopProgressBar,
-    setRootUserProfileDataState,
-    profilePageDataAction,
   } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
@@ -107,43 +106,6 @@ const ReturnCommentContent = () => {
   };
 
   const ViewSingleComment = (props) => {
-    const routeToProfile = async (userID) => {
-      try {
-        startProgressBar();
-        const res = await GlobalApi.getFriendData(userID);
-        const userData = await res.data;
-        if (res.status === 200 && userData.success) {
-          // success
-          const userObj = {
-            ...userData.searchedUser,
-            isRootUserFollowed: userData.isRootUserFollowed,
-            throughRouting: true,
-          };
-          profilePageDataAction(userObj);
-          if (userID === userProfileDetailStore.userID) {
-            setRootUserProfileDataState({
-              fetchedRootUserProfileData: true,
-              getRootUserProfileData: false,
-            });
-          }
-          history.push(`/u/profile/${userID}/posts`);
-        } else {
-          // error
-          toastError(userData.msg);
-        }
-        stopProgressBar();
-      } catch (err) {
-        if (err.response) {
-          if (err.response.data.success === false) {
-            toastError(err.response.data.msg);
-          }
-        } else {
-          toastError("Some Problem Occur, Please Try again later!!!");
-        }
-        stopProgressBar();
-      }
-    };
-
     return (
       <>
         <div className="CommentBox_UserComment">
@@ -153,7 +115,10 @@ const ReturnCommentContent = () => {
             }
             alt={props.comment.userID}
             onClick={() => {
-              routeToProfile(props.comment.userID);
+              routeToProfilePage({
+                userID: props.comment.userID,
+                from: "commentBox",
+              });
               commentBoxAction({
                 openCommentBox: false,
                 postID: "",
@@ -164,7 +129,10 @@ const ReturnCommentContent = () => {
           <div>
             <h3
               onClick={() => {
-                routeToProfile(props.comment.userID);
+                routeToProfilePage({
+                  userID: props.comment.userID,
+                  from: "commentBox",
+                });
                 commentBoxAction({
                   openCommentBox: false,
                   postID: "",

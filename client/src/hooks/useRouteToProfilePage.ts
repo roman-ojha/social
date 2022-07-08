@@ -14,6 +14,8 @@ type CallingFrom =
   | "suggestionComp"
   | "followedByComp"
   | "profileFriendsComp"
+  | "searchBarComp"
+  | "commentBox"
   | undefined;
 type ReturnFuncArgument = {
   userID: string;
@@ -51,12 +53,20 @@ const useRouteToProfilePage = () => {
           throughRouting: true,
         };
         profilePageDataAction(userObj);
-        if (obj.from === "suggestionComp" || obj.from === "followedByComp") {
+        if (
+          obj.from === "suggestionComp" ||
+          obj.from === "followedByComp" ||
+          obj.from === "searchBarComp"
+        ) {
           if (isMax850px) {
             openRightPartDrawer(false);
           }
         }
-        if (obj.from === "postBox" || obj.from === "profileFriendsComp") {
+        if (
+          obj.from === "postBox" ||
+          obj.from === "profileFriendsComp" ||
+          obj.from === "commentBox"
+        ) {
           if (obj.userID === userProfileDetailStore.userID) {
             setRootUserProfileDataState({
               fetchedRootUserProfileData: true,

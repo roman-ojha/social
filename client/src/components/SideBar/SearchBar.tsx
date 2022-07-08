@@ -16,6 +16,7 @@ import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 import { AxiosError } from "axios";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -26,6 +27,7 @@ const MainPageSearchBar = (props) => {
   const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
+  const routeToProfilePage = useRouteToProfilePage();
   let noResultFound = true;
   // Storing Searched userData into redux
   const userProfileDetailStore = useSelector(
@@ -43,41 +45,10 @@ const MainPageSearchBar = (props) => {
           className={ButtonClass.root}
           id="MainPage_SearchBar_User_Container"
           onClick={async () => {
-            try {
-              startProgressBar();
-              const res = await axios({
-                method: "GET",
-                url: `/u/profile/${props.userDetail.userID}`,
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                withCredentials: true,
-              });
-              const userData = await res.data;
-              if (res.status !== 200 && !userData.success) {
-                // error
-              } else {
-                // success
-                const userObj: ProfilePageDataState = {
-                  ...userData.searchedUser,
-                  isRootUserFollowed: userData.isRootUserFollowed,
-                  throughRouting: true,
-                };
-                profilePageDataAction(userObj);
-                stopProgressBar();
-                history.push(`/u/profile/${props.userDetail.userID}/posts`);
-              }
-            } catch (error) {
-              const err = error as AxiosError;
-              if (err.response) {
-                if (err.response.data.success === false) {
-                  toastError(err.response.data.msg);
-                }
-              } else {
-                toastError("Some Problem Occur, Please Try again later!!!");
-              }
-              stopProgressBar();
-            }
+            await routeToProfilePage({
+              userID: props.userDetail.userID,
+              from: "searchBarComp",
+            });
           }}
         >
           {/* here link goes to there user profile  using userid link*/}
