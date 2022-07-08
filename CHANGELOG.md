@@ -1,5 +1,16 @@
 ### Changelog
 
+#### [v0.6.1](https://github.com/Roman-Ojha/social/compare/v0.6.0...v0.6.1)
+
+> 8 July 2022
+
+- fix: all but related to routing ProfilePage [`#122`](https://github.com/Roman-Ojha/social/issues/122)
+- fix: added memo on SignIn,SignUp,PostBox [`#121`](https://github.com/Roman-Ojha/social/issues/121)
+- style: now require buttons are MUIButton [`#117`](https://github.com/Roman-Ojha/social/issues/117)
+- style: added MUIButton on Post,ImagePickerSubmit Button [`21ae1b5`](https://github.com/Roman-Ojha/social/commit/21ae1b5d4a0a3379b100ee0aa466d152c0b0220b)
+- fix(client): bug while routing to profilePage [`47e02b9`](https://github.com/Roman-Ojha/social/commit/47e02b9c9cf2ab794b594cd14dbbc2d908b69c0d)
+- style: added MUIButton on setting Page [`93dabf0`](https://github.com/Roman-Ojha/social/commit/93dabf03262372e1a2a69d27257c6ad5a4156d51)
+
 #### [v0.6.0](https://github.com/Roman-Ojha/social/compare/v0.5.0...v0.6.0)
 
 > 8 July 2022
