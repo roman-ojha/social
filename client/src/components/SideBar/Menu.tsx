@@ -10,6 +10,7 @@ import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -110,9 +111,10 @@ const Menu = (): JSX.Element => {
               to={`/u/profile/${userProfileDetailStore.userID}/posts`}
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
               onClick={() => {
-                const userObj = {
+                const userObj: ProfilePageDataState = {
                   ...userProfileDetailStore,
                   isRootUserFollowed: false,
+                  throughRouting: true,
                 };
                 profilePageDataAction(userObj);
                 if (!rootUserProfileDataState.fetchedRootUserProfileData) {

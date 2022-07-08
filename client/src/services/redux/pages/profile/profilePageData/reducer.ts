@@ -5,6 +5,8 @@ import {
 } from "./types";
 
 const initialState: ProfilePageDataState = {
+  throughRouting: false,
+  isRootUserFollowed: false,
   name: "",
   email: "",
   picture: "",

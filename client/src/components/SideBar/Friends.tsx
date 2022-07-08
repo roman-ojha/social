@@ -16,6 +16,8 @@ import { useMediaQuery } from "react-responsive";
 import { useEffect } from "react";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
+import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 const Friends = () => {
   const dispatch = useDispatch();
@@ -47,9 +49,10 @@ const Friends = () => {
               const userData = await res.data;
               if (res.status === 200 && userData.success) {
                 // success
-                const userObj = {
+                const userObj: ProfilePageDataState = {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
+                  throughRouting: true,
                 };
                 profilePageDataAction(userObj);
                 history.push(`/u/profile/${props.friendDetail.userID}/posts`);
@@ -58,7 +61,8 @@ const Friends = () => {
                 toastError(userData.msg);
               }
               stopProgressBar();
-            } catch (err) {
+            } catch (error) {
+              const err = error as AxiosError;
               if (err.response) {
                 if (err.response.data.success === false) {
                   toastError(err.response.data.msg);
@@ -89,6 +93,7 @@ const Friends = () => {
       </>
     );
   };
+
   const ShowFriends = () => {
     // Displaying current user friends
     return (
@@ -166,7 +171,8 @@ const Friends = () => {
         } else {
           toastError("Some Error Occur While Fetching Friends Data");
         }
-      } catch (err) {
+      } catch (error) {
+        const err = error as AxiosError;
         if (err.response) {
           if (err.response.data.success === false) {
             toastError(err.response.data.msg);

@@ -36,8 +36,6 @@ const ProfileAlbums: React.FC<ProfileAlbumsProps> = ({
     (state: AppState) => state.setUserProfileDetailReducer
   );
 
-  console.log(profilePageData.posts);
-
   return (
     <>
       <Helmet>

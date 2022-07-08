@@ -18,6 +18,7 @@ import PageRoute from "../components/ProfilePage/PageRoute";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
 const Profile = (): JSX.Element => {
   const history = useHistory();
@@ -25,7 +26,7 @@ const Profile = (): JSX.Element => {
   const location = useLocation();
   const dispatch = useDispatch();
   const [fetchedAllData, setFetchedAllData] = useState<boolean>(false);
-  const profilePageData = useSelector(
+  const profilePageData: ProfilePageDataState = useSelector(
     (state: AppState) => state.profilePageDataReducer
   );
   const userProfileDetailStore = useSelector(
@@ -42,10 +43,8 @@ const Profile = (): JSX.Element => {
 
   useEffect(() => {
     const initializeProfilePage = async () => {
-      if (
-        profilePageData.userID !== params.userID &&
-        !rootUserProfileDataState.getRootUserProfileData
-      ) {
+      if (!profilePageData.throughRouting) {
+        console.log("get");
         try {
           // fetching user Detail which current user had search
           const res = await axios({
@@ -57,9 +56,10 @@ const Profile = (): JSX.Element => {
             withCredentials: true,
           });
           const userData = await res.data;
-          const userObj = {
+          const userObj: ProfilePageDataState = {
             ...userData.searchedUser,
             isRootUserFollowed: userData.isRootUserFollowed,
+            throughRouting: true,
           };
           profilePageDataAction(userObj);
           setFetchedAllData(true);
@@ -68,7 +68,6 @@ const Profile = (): JSX.Element => {
               fetchedPostData: true,
               posts: userData.searchedUser.posts,
             });
-
             setRootUserProfileDataState({
               fetchedRootUserProfileData: true,
               getRootUserProfileData: false,

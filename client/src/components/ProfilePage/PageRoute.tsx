@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Icon } from "@iconify/react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -42,4 +42,4 @@ const PageRoute = (): JSX.Element => {
   );
 };
 
-export default PageRoute;
+export default memo(PageRoute);

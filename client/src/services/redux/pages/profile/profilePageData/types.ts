@@ -1,6 +1,8 @@
 import UserPostType from "../../../../../interface/userPost";
 
 export interface ProfilePageDataState {
+  throughRouting: boolean;
+  isRootUserFollowed: boolean;
   name: string;
   email: string;
   picture: string;
