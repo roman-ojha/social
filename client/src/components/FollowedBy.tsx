@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
-import { useHistory } from "react-router-dom";
 import { toastError, toastSuccess } from "../services/toast";
 // import {
 //   profilePageDataAction,
@@ -12,7 +11,6 @@ import { toastError, toastSuccess } from "../services/toast";
 // } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
-import GlobalApi from "../services/api/global";
 import constant from "../constant/constant";
 import { useMediaQuery } from "react-responsive";
 import { AppState, actionCreators } from "../services/redux";
@@ -20,7 +18,7 @@ import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -28,8 +26,8 @@ const buttonStyle = makeStyles({
 });
 
 const FollowedBy = (): JSX.Element => {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const routeToProfilePage = useRouteToProfilePage();
   const mainPageMessageOnOffState = useSelector(
     (state: AppState) => state.changeMainPageMessageView
   );
@@ -43,13 +41,8 @@ const FollowedBy = (): JSX.Element => {
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
 
-  const {
-    profilePageDataAction,
-    isFollowedFollowedByUser,
-    startProgressBar,
-    stopProgressBar,
-    openRightPartDrawer,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { isFollowedFollowedByUser, startProgressBar, stopProgressBar } =
+    bindActionCreators(actionCreators, dispatch);
 
   interface FollowedUserProps {
     userInformation: any;
@@ -147,39 +140,6 @@ const FollowedBy = (): JSX.Element => {
       }
     };
 
-    const routeToProfile = async (userID: string): Promise<void> => {
-      try {
-        startProgressBar();
-        const res = await GlobalApi.getFriendData(userID);
-        const userData = await res.data;
-        if (res.status === 200 && userData.success) {
-          const userObj: ProfilePageDataState = {
-            ...userData.searchedUser,
-            isRootUserFollowed: userData.isRootUserFollowed,
-            throughRouting: true,
-          };
-          profilePageDataAction(userObj);
-          if (isMax850px) {
-            openRightPartDrawer(false);
-          }
-          history.push(`/u/profile/${userID}/posts`);
-        } else {
-          toastError(userData.msg);
-        }
-        stopProgressBar();
-      } catch (error) {
-        const err = error as AxiosError;
-        if (err.response) {
-          if (err.response.data.success === false) {
-            toastError(err.response.data.msg);
-          }
-        } else {
-          toastError("Some Problem Occur, Please Try again later!!!");
-        }
-        stopProgressBar();
-      }
-    };
-
     return (
       <>
         <div className="MainPage_Followed_User_Container">
@@ -190,10 +150,9 @@ const FollowedBy = (): JSX.Element => {
                 ? userInformation.picture
                 : User_Profile_Icon
             }
-            onClick={() => {
+            onClick={async () => {
               if (userInformation.type !== "bot") {
-                // history.push(`/u/profile/${props.userInformation.userID}`);
-                routeToProfile(userInformation.userID);
+                await routeToProfilePage({ userID: userInformation.userID });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -203,10 +162,9 @@ const FollowedBy = (): JSX.Element => {
           <div className="MainPage_Followed_User_Name_Container">
             <p
               className="MainPage_Followed_User_Name"
-              onClick={() => {
+              onClick={async () => {
                 if (userInformation.type !== "bot") {
-                  // history.push(`/u/profile/${props.userInformation.userID}`);
-                  routeToProfile(userInformation.userID);
+                  await routeToProfilePage({ userID: userInformation.userID });
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }
@@ -216,10 +174,9 @@ const FollowedBy = (): JSX.Element => {
             </p>
             <p
               className="MainPage_Followed_User_Follower_Name"
-              onClick={() => {
+              onClick={async () => {
                 if (userInformation.type !== "bot") {
-                  // history.push(`/u/profile/${props.userInformation.userID}`);
-                  routeToProfile(userInformation.userID);
+                  await routeToProfilePage({ userID: userInformation.userID });
                 } else {
                   toastError("Sorry!!, can't be able to open bot Profile");
                 }

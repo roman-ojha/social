@@ -132,9 +132,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
               ? userInformation.picture
               : User_Profile_Icon
           }
-          onClick={() => {
+          onClick={async () => {
             if (userInformation.type !== "bot") {
-              routeToProfilePage(userInformation.userID);
+              await routeToProfilePage({ userID: userInformation.userID });
             } else {
               toastError("Sorry!!, can't be able to open bot Profile");
             }
@@ -144,9 +144,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
         <div className="MainPage_Suggested_User_Name_Container">
           <p
             className="MainPage_Suggested_User_Name"
-            onClick={() => {
+            onClick={async () => {
               if (userInformation.type !== "bot") {
-                routeToProfilePage(userInformation.userID);
+                await routeToProfilePage({ userID: userInformation.userID });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }
@@ -156,9 +156,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
           </p>
           <p
             className="MainPage_Suggested_User_Follower_Name"
-            onClick={() => {
+            onClick={async () => {
               if (userInformation.type !== "bot") {
-                routeToProfilePage(userInformation.userID);
+                await routeToProfilePage({ userID: userInformation.userID });
               } else {
                 toastError("Sorry!!, can't be able to open bot Profile");
               }

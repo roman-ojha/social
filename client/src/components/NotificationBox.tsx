@@ -8,9 +8,6 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 //   profilePageDataAction,
 //   openRightPartDrawer,
 // } from "../services/redux-actions";
-import GlobalApi from "../services/api/global";
-import { toastError } from "../services/toast";
-import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import constant from "../constant/constant";
 import { bindActionCreators } from "redux";
@@ -18,6 +15,7 @@ import { AppState, actionCreators } from "../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -27,7 +25,7 @@ const buttonStyle = makeStyles({
 const NotificationBox = (): JSX.Element => {
   const ButtonClass = buttonStyle();
   const dispatch = useDispatch();
-  const history = useHistory();
+  const routeToProfilePage = useRouteToProfilePage();
   const notificationBoxState = useSelector(
     (state: AppState) => state.notificationBox
   );
@@ -65,39 +63,7 @@ const NotificationBox = (): JSX.Element => {
                       <div
                         id="Notification_Box_Single_Nft_Pic_and_Title"
                         onClick={async () => {
-                          try {
-                            startProgressBar();
-                            const res = await GlobalApi.getFriendData(
-                              data.userID
-                            );
-                            const userData = await res.data;
-                            if (res.status === 200 && userData.success) {
-                              // success
-                              const userObj: ProfilePageDataState = {
-                                ...userData.searchedUser,
-                                isRootUserFollowed: userData.isRootUserFollowed,
-                                throughRouting: true,
-                              };
-                              profilePageDataAction(userObj);
-                              history.push(`/u/profile/${data.userID}/posts`);
-                              if (isMax850px) {
-                                openRightPartDrawer(false);
-                              }
-                            } else {
-                              // error
-                              toastError(userData.msg);
-                            }
-                            stopProgressBar();
-                          } catch (err) {
-                            if (err.response.data.success === false) {
-                              toastError(err.response.data.msg);
-                            } else {
-                              toastError(
-                                "Some Problem Occur, Please Try again later!!!"
-                              );
-                            }
-                            stopProgressBar();
-                          }
+                          await routeToProfilePage({ userID: data.userID });
                         }}
                       >
                         <img

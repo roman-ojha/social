@@ -1,22 +1,16 @@
 import React, { memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import GlobalApi from "../../services/api/global";
 import { useDispatch, useSelector } from "react-redux";
-import { toastError } from "../../services/toast";
 // import {
 //   startProgressBar,
 //   stopProgressBar,
 //   profilePageDataAction,
 //   setRootUserProfileDataState,
 // } from "../../services/redux-actions";
-import { useHistory } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { AppState, actionCreators } from "../../../src/services/redux";
 import { Month } from "src/interface/month";
 import { PostInformationInterface } from "./PostBox";
 import UserPostType from "src/interface/userPost";
-import { AxiosError } from "axios";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 interface PostInfoProps {
   postUserID: PostInformationInterface["userID"];
@@ -31,8 +25,7 @@ const PostInfo: React.FC<PostInfoProps> = ({
   postUserName,
   postUserPicture,
 }): JSX.Element => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const routeToProfilePage = useRouteToProfilePage();
   let uploadedTime: string;
   const userPostdate = new Date(postDate);
   // const userPostUTCTime = userPostdate.toUTCString();
@@ -73,53 +66,6 @@ const PostInfo: React.FC<PostInfoProps> = ({
     const getMonth = userPostdate.getMonth();
     uploadedTime = `${monthNames[getMonth]} ${getDate}, ${getYear}`;
   }
-  const userProfileDetailStore = useSelector(
-    (state: AppState) => state.setUserProfileDetailReducer
-  );
-  const {
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
-    setRootUserProfileDataState,
-  } = bindActionCreators(actionCreators, dispatch);
-
-  const routeToProfile = async (userID: PostInformationInterface["userID"]) => {
-    try {
-      startProgressBar();
-      const res = await GlobalApi.getFriendData(userID);
-      const userData = await res.data;
-      if (res.status === 200 && userData.success) {
-        // success
-        const userObj: ProfilePageDataState = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-          throughRouting: true,
-        };
-        profilePageDataAction(userObj);
-        if (userID === userProfileDetailStore.userID) {
-          setRootUserProfileDataState({
-            fetchedRootUserProfileData: true,
-            getRootUserProfileData: false,
-          });
-        }
-        history.push(`/u/profile/${userID}/posts`);
-      } else {
-        // error
-        toastError(userData.msg);
-      }
-      stopProgressBar();
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      stopProgressBar();
-    }
-  };
 
   return (
     <>
@@ -130,7 +76,10 @@ const PostInfo: React.FC<PostInfoProps> = ({
           }
           alt="user"
           onClick={() => {
-            routeToProfile(postUserID);
+            routeToProfilePage({
+              userID: postUserID,
+              from: "postBox",
+            });
           }}
         />
       </div>
@@ -139,7 +88,10 @@ const PostInfo: React.FC<PostInfoProps> = ({
           <p
             className="HomePage_Feed_User_ID_Text"
             onClick={() => {
-              routeToProfile(postUserID);
+              routeToProfilePage({
+                userID: postUserID,
+                from: "postBox",
+              });
             }}
           >
             {postUserID}
@@ -147,7 +99,10 @@ const PostInfo: React.FC<PostInfoProps> = ({
           <p
             className="HomePage_Feed_User_Name_Text"
             onClick={() => {
-              routeToProfile(postUserID);
+              routeToProfilePage({
+                userID: postUserID,
+                from: "postBox",
+              });
             }}
           >
             {postUserName}

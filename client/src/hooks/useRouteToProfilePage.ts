@@ -1,13 +1,19 @@
 import GlobalApi from "../services/api/global";
 import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../services/redux";
-import { useDispatch } from "react-redux";
+import { actionCreators, AppState } from "../services/redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toastError } from "../services/toast";
 import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import constant from "../constant/constant";
 import { AxiosError } from "axios";
+
+type CallingFrom = "postBox" | undefined;
+type ReturnFuncArgument = {
+  userID: string;
+  from?: CallingFrom;
+};
 
 const useRouteToProfilePage = () => {
   const dispatch = useDispatch();
@@ -15,17 +21,22 @@ const useRouteToProfilePage = () => {
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
+  const userProfileDetailStore = useSelector(
+    (state: AppState) => state.setUserProfileDetailReducer
+  );
+
   const {
     profilePageDataAction,
     startProgressBar,
     stopProgressBar,
     openRightPartDrawer,
+    setRootUserProfileDataState,
   } = bindActionCreators(actionCreators, dispatch);
 
-  return async (userID: string): Promise<void> => {
+  return async (obj: ReturnFuncArgument): Promise<void> => {
     try {
       startProgressBar();
-      const res = await GlobalApi.getFriendData(userID);
+      const res = await GlobalApi.getFriendData(obj.userID);
       const userData = await res.data;
       if (res.status === 200 && userData.success) {
         // success
@@ -38,7 +49,15 @@ const useRouteToProfilePage = () => {
         if (isMax850px) {
           openRightPartDrawer(false);
         }
-        history.push(`/u/profile/${userID}/posts`);
+        if (obj.from === "postBox") {
+          if (obj.userID === userProfileDetailStore.userID) {
+            setRootUserProfileDataState({
+              fetchedRootUserProfileData: true,
+              getRootUserProfileData: false,
+            });
+          }
+        }
+        history.push(`/u/profile/${obj.userID}/posts`);
       } else {
         // error
         toastError(userData.msg);

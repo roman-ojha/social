@@ -1,8 +1,6 @@
 import React, { useEffect, memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import GlobalApi from "../../services/api/global";
 import { useDispatch, useSelector } from "react-redux";
-import { toastError } from "../../services/toast";
 // import {
 //   startProgressBar,
 //   stopProgressBar,
@@ -10,11 +8,10 @@ import { toastError } from "../../services/toast";
 //   setRootUserProfileDataState,
 //   commentBoxAction,
 // } from "../../services/redux-actions";
-import { useHistory } from "react-router-dom";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
 import { bindActionCreators } from "redux";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 interface CommentedUserProps {
   commentInfo: CommentInfoState;
@@ -28,57 +25,14 @@ const CommentedUser: React.FC<CommentedUserProps> = ({
   setCommentInfo,
 }): JSX.Element => {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const routeToProfilePage = useRouteToProfilePage();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
   const commentBoxStore = useSelector(
     (state: AppState) => state.commentBoxReducer
   );
-  const {
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
-    setRootUserProfileDataState,
-    commentBoxAction,
-  } = bindActionCreators(actionCreators, dispatch);
-
-  const routeToProfile = async (userID: string): Promise<void> => {
-    try {
-      startProgressBar();
-      const res = await GlobalApi.getFriendData(userID);
-      const userData = await res.data;
-      if (res.status === 200 && userData.success) {
-        // success
-        const userObj: ProfilePageDataState = {
-          ...userData.searchedUser,
-          isRootUserFollowed: userData.isRootUserFollowed,
-          throughRouting: true,
-        };
-        profilePageDataAction(userObj);
-        if (userID === userProfileDetailStore.userID) {
-          setRootUserProfileDataState({
-            fetchedRootUserProfileData: true,
-            getRootUserProfileData: false,
-          });
-        }
-        history.push(`/u/profile/${userID}/posts`);
-      } else {
-        // error
-        toastError(userData.msg);
-      }
-      stopProgressBar();
-    } catch (err) {
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      stopProgressBar();
-    }
-  };
+  const { commentBoxAction } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
     if (commentBoxStore.commented && commentBoxStore.postID === postId) {
@@ -117,13 +71,21 @@ const CommentedUser: React.FC<CommentedUserProps> = ({
               }
               alt={commentInfo.postCommentInfo.userID}
               onClick={() => {
-                routeToProfile(commentInfo.postCommentInfo.userID);
+                // routeToProfile(commentInfo.postCommentInfo.userID);
+                routeToProfilePage({
+                  userID: commentInfo.postCommentInfo.userID,
+                  from: "postBox",
+                });
               }}
             />
             <div>
               <h3
                 onClick={() => {
-                  routeToProfile(commentInfo.postCommentInfo.userID);
+                  // routeToProfile(commentInfo.postCommentInfo.userID);
+                  routeToProfilePage({
+                    userID: commentInfo.postCommentInfo.userID,
+                    from: "postBox",
+                  });
                 }}
               >
                 {commentInfo.postCommentInfo.userID}
