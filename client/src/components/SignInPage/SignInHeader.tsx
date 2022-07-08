@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import constant from "../../constant/constant";
 import { useHistory } from "react-router-dom";
 
@@ -22,4 +22,4 @@ const SignInHeader = (): JSX.Element => {
   );
 };
 
-export default SignInHeader;
+export default memo(SignInHeader);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { PostInformationInterface } from "./PostBox";
 
 const PostCaption: React.FC<{
@@ -13,4 +13,4 @@ const PostCaption: React.FC<{
   );
 };
 
-export default PostCaption;
+export default memo(PostCaption);

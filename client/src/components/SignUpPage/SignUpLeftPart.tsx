@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import SignUp_illustration from "../../assets/svg/SignUp_illustration.svg";
 import constant from "../../constant/constant";
 
@@ -20,4 +20,4 @@ const SignUpLeftPart = (): JSX.Element => {
   );
 };
 
-export default SignUpLeftPart;
+export default memo(SignUpLeftPart);

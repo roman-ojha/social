@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { toastInfo } from "../../services/toast";
 import Sign_In_Facebook_Logo from "../../assets/Images/Facebook_Logo.png";
 import Sign_In_Google_Logo from "../../assets/Images/Google_Logo.png";
@@ -71,4 +71,4 @@ const SignInRightPart = (): JSX.Element => {
   );
 };
 
-export default SignInRightPart;
+export default memo(SignInRightPart);

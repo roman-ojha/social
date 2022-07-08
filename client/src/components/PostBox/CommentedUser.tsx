@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import GlobalApi from "../../services/api/global";
 import { useDispatch, useSelector } from "react-redux";
@@ -137,4 +137,4 @@ const CommentedUser: React.FC<CommentedUserProps> = ({
   );
 };
 
-export default CommentedUser;
+export default memo(CommentedUser);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import GlobalApi from "../../services/api/global";
 import { useDispatch, useSelector } from "react-redux";
@@ -157,4 +157,4 @@ const PostInfo: React.FC<PostInfoProps> = ({
   );
 };
 
-export default PostInfo;
+export default memo(PostInfo);
