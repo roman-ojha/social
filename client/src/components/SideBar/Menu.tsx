@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 // } from "../../services/redux-actions";
 import { AppState } from "../../services/redux";
 import { Button } from "@mui/material";
+import TouchRipple from "@mui/material/ButtonBase/TouchRipple";
 import { makeStyles } from "@mui/styles";
 import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";
 
