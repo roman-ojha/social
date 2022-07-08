@@ -6,6 +6,7 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { toastWarn } from "src/services/toast";
+import { Button } from "@mui/material";
 
 const ReturnImagePicker = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -173,9 +174,9 @@ const ReturnImagePicker = (): JSX.Element => {
           >
             <h3 ref={imagePreviewH1Element}>Preview</h3>
           </div>
-          <button className="ImagePicker_Submit_Button" onClick={submitImage}>
+          <Button id="ImagePicker_Submit_Button" onClick={submitImage}>
             Submit
-          </button>
+          </Button>
         </div>
       </div>
     </>

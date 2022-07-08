@@ -11,6 +11,8 @@ import Api from "../../../services/api/pages/homeApi";
 import { toastError, toastSuccess } from "../../../services/toast";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
+import { Button } from "@mui/material";
+import { AxiosError } from "axios";
 
 const PostButton = () => {
   const dispatch = useDispatch();
@@ -85,7 +87,8 @@ const PostButton = () => {
       }
       showLoadingSpinner(false);
       setHomePagePostFieldViewValue("min");
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -111,12 +114,12 @@ const PostButton = () => {
             setHomePagePostFieldViewValue("min");
           }}
         />
-        <button
-          className="HomePage_MaxView_UserPost_Field_Post_Button"
+        <Button
+          id="HomePage_MaxView_UserPost_Field_Post_Button"
           onClick={uploadUserPost}
         >
           Post
-        </button>
+        </Button>
       </div>
     </>
   );

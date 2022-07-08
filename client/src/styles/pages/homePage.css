@@ -168,7 +168,7 @@
 .HomePage_MaxView_UserPost_Field_Back_Icon:hover {
   color: var(--primary-color-lighter-1);
 }
-.HomePage_MaxView_UserPost_Field_Post_Button {
+#HomePage_MaxView_UserPost_Field_Post_Button {
   width: 77%;
   height: 1.4rem;
   margin-left: 2.5%;
@@ -182,7 +182,7 @@
   cursor: pointer;
   transition-duration: 150ms;
 }
-.HomePage_MaxView_UserPost_Field_Post_Button:hover {
+#HomePage_MaxView_UserPost_Field_Post_Button:hover {
   background-color: var(--primary-color-lighter-1);
 }
 .MaxView_UserPost_Image_Container {
@@ -287,7 +287,7 @@
     width: 1.8rem;
     height: 1.8rem;
   }
-  .HomePage_MaxView_UserPost_Field_Post_Button {
+  #HomePage_MaxView_UserPost_Field_Post_Button {
     width: 71%;
     border-radius: 5px;
   }
@@ -359,7 +359,7 @@
     width: 1.4rem;
     height: 1.4rem;
   }
-  .HomePage_MaxView_UserPost_Field_Post_Button {
+  #HomePage_MaxView_UserPost_Field_Post_Button {
     width: 70%;
     border-radius: 4px;
   }
@@ -369,7 +369,7 @@
     margin-bottom: 4px;
     margin-left: 10px;
   }
-  .HomePage_MaxView_UserPost_Field_Post_Button {
+  #HomePage_MaxView_UserPost_Field_Post_Button {
     width: 67%;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -434,7 +434,7 @@
     width: 1.2rem;
     height: 1.2rem;
   }
-  .HomePage_MaxView_UserPost_Field_Post_Button {
+  #HomePage_MaxView_UserPost_Field_Post_Button {
     width: 70%;
     border-radius: 4px;
   }
@@ -494,7 +494,7 @@
     width: 10%;
     position: relative;
   }
-  .HomePage_MaxView_UserPost_Field_Post_Button {
+  #HomePage_MaxView_UserPost_Field_Post_Button {
     width: 68%;
     border-radius: 4px;
     font-size: 0.8rem;
