@@ -1,5 +1,6 @@
 import React from "react";
 import { toastInfo } from "../../services/toast";
+import { Button } from "@mui/material";
 
 const DeleteProfile = () => {
   const deleteUser = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,7 +14,7 @@ const DeleteProfile = () => {
         <p>
           NOTE : You can be able to recover after you delete your user profile
         </p>
-        <button onClick={deleteUser}>Delete Profile</button>
+        <Button onClick={deleteUser}>Delete Profile</Button>
       </div>
     </>
   );

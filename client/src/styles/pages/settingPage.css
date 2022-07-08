@@ -169,6 +169,7 @@
   margin-top: 10px;
   font-family: var(--primary-font-family);
   transition-duration: 100ms;
+  text-transform: none;
 }
 .Setting_Container_With_Input_Field form button:hover,
 .Setting_Page_Delete_User_Profile_Container button:hover,
@@ -194,6 +195,7 @@
   margin-top: 15px;
   font-family: var(--primary-font-family);
   transition-duration: 100ms;
+  text-transform: none;
 }
 
 @media screen and (max-width: 1366px) and (min-width: 1200px) {

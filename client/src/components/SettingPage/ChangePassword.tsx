@@ -10,6 +10,7 @@ import { toastError, toastSuccess } from "../../services/toast";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
+import { Button } from "@mui/material";
 
 const ChangePassword = () => {
   const dispatch = useDispatch();
@@ -93,7 +94,7 @@ const ChangePassword = () => {
             value={inputFieldData.cNewPassword}
             onChange={getInputFieldData}
           />
-          <button onClick={changePasswordFunc}>Change</button>
+          <Button onClick={changePasswordFunc}>Change</Button>
         </form>
         <p>Don't Forgot Your Password</p>
       </div>

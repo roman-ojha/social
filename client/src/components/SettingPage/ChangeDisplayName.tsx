@@ -10,6 +10,7 @@ import { toastError, toastSuccess } from "../../services/toast";
 import { AxiosError } from "axios";
 import { actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { Button } from "@mui/material";
 
 const ChangeDisplayName = () => {
   const dispatch = useDispatch();
@@ -61,7 +62,7 @@ const ChangeDisplayName = () => {
               setNewName(e.target.value);
             }}
           />
-          <button onClick={changeName}>Change</button>
+          <Button onClick={changeName}>Change</Button>
         </form>
         <p>Not require to be unique</p>
       </div>

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
+import { Button } from "@mui/material";
 
 const ChangeProfilePicture = () => {
   const dispatch = useDispatch();
@@ -146,9 +147,9 @@ const ChangeProfilePicture = () => {
                 setImgUrl(e.target.value);
               }}
             />
-            <button onClick={changeProfilePicture}>
+            <Button onClick={changeProfilePicture}>
               Change Profile Picture
-            </button>
+            </Button>
           </div>
         </div>
         <div className="Setting_Page_Change_Profile_Picture_Container_Bottom_Part">

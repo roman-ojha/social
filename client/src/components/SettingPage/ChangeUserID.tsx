@@ -10,6 +10,7 @@ import { toastError, toastSuccess } from "../../services/toast";
 import { AxiosError } from "axios";
 import { actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { Button } from "@mui/material";
 
 const ChangeUserID = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const ChangeUserID = () => {
               setNewUserID(e.target.value);
             }}
           />
-          <button onClick={changeUserIDFunc}>Change</button>
+          <Button onClick={changeUserIDFunc}>Change</Button>
         </form>
         <p>You can only be able to set unique ID for your profile</p>
       </div>
