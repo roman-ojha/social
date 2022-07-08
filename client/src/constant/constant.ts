@@ -8,7 +8,7 @@ const constant = {
     screen280: 280,
   },
   applicationName: "Social",
-  applicationGithubUrl: "https://github.com/Roman-Ojha/Social",
+  applicationGithubUrl: "https://github.com/roman-ojha/social",
 };
 
 export default constant;

@@ -44,7 +44,6 @@ const Profile = (): JSX.Element => {
   useEffect(() => {
     const initializeProfilePage = async () => {
       if (!profilePageData.throughRouting) {
-        console.log("get");
         try {
           // fetching user Detail which current user had search
           const res = await axios({

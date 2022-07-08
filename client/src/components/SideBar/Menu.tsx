@@ -11,6 +11,8 @@ import { bindActionCreators } from "redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRootUserProfilePageRoute from "../../hooks/useRouteRootUserProfilePage";
+import { RootUserProfileDetailState } from "src/services/redux/global/rootUserProfileDetail/types";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -28,6 +30,8 @@ const Menu = (): JSX.Element => {
   );
   const { profilePageDataAction, setRootUserProfileDataState } =
     bindActionCreators(actionCreators, dispatch);
+
+  const routeRootUserProfilePage = useRootUserProfilePageRoute();
 
   return (
     <>
@@ -111,18 +115,21 @@ const Menu = (): JSX.Element => {
               to={`/u/profile/${userProfileDetailStore.userID}/posts`}
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
               onClick={() => {
-                const userObj: ProfilePageDataState = {
-                  ...userProfileDetailStore,
-                  isRootUserFollowed: false,
-                  throughRouting: true,
-                };
-                profilePageDataAction(userObj);
-                if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  });
-                }
+                // const userObj: ProfilePageDataState = {
+                //   ...userProfileDetailStore,
+                //   isRootUserFollowed: false,
+                //   throughRouting: true,
+                // };
+                // profilePageDataAction(userObj);
+                // if (!rootUserProfileDataState.fetchedRootUserProfileData) {
+                //   setRootUserProfileDataState({
+                //     fetchedRootUserProfileData: false,
+                //     getRootUserProfileData: true,
+                //   });
+                // }
+                routeRootUserProfilePage({
+                  rootUserProfileDetail: userProfileDetailStore,
+                });
               }}
             >
               <div className="MainPage_SideBar_Menu_SelectBar_Colored"></div>
