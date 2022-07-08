@@ -21,9 +21,11 @@ import GlobalApi from "../services/api/global";
 import Api from "../services/api/components/postBox";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../services/redux";
+import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
 
 const ReturnCommentContent = () => {
   const history = useHistory();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const commentBoxStore = useSelector((state) => state.commentBoxReducer);
   const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
@@ -32,9 +34,6 @@ const ReturnCommentContent = () => {
   );
   const userProfileDetailStore = useSelector(
     (state) => state.setUserProfileDetailReducer
-  );
-  const rootUserProfileDataState = useSelector(
-    (state) => state.rootUserProfileDataState
   );
   const {
     commentBoxAction,
@@ -195,18 +194,9 @@ const ReturnCommentContent = () => {
               }
               // img="User"
               onClick={() => {
-                const userObj = {
-                  ...userProfileDetailStore,
-                  isRootUserFollowed: false,
-                  throughRouting: true,
-                };
-                profilePageDataAction(userObj);
-                if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  });
-                }
+                setRootUserProfilePageData({
+                  rootUserProfileDetail: userProfileDetailStore,
+                });
                 commentBoxAction({
                   openCommentBox: false,
                   postID: "",

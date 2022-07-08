@@ -10,21 +10,15 @@ import FilePicker from "./FilePicker";
 import EmojiMart from "./EmojiMart";
 import InputField from "./InputField";
 import PostButton from "./PostButton";
-import { bindActionCreators } from "redux";
-import { AppState, actionCreators } from "../../../services/redux";
-import { ProfilePageDataState } from "../../../services/redux/pages/profile/profilePageData/types";
+import { AppState } from "../../../services/redux";
+import useRootUserProfilePageData from "../../../hooks/useRootUserProfilePageData";
 
 const MaxViewPostField = (): JSX.Element => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
-  );
-  const { profilePageDataAction, setRootUserProfileDataState } =
-    bindActionCreators(actionCreators, dispatch);
 
   return (
     <>
@@ -42,18 +36,9 @@ const MaxViewPostField = (): JSX.Element => {
               }
               className="HomePage_MaxField_UserPost_Field_Image"
               onClick={() => {
-                const userObj: ProfilePageDataState = {
-                  ...userProfileDetailStore,
-                  isRootUserFollowed: false,
-                  throughRouting: true,
-                };
-                profilePageDataAction(userObj);
-                if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                  setRootUserProfileDataState({
-                    fetchedRootUserProfileData: false,
-                    getRootUserProfileData: true,
-                  });
-                }
+                setRootUserProfilePageData({
+                  rootUserProfileDetail: userProfileDetailStore,
+                });
                 history.push(
                   `/u/profile/${userProfileDetailStore.userID}/posts`
                 );

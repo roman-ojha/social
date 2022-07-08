@@ -21,7 +21,7 @@ import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
+import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -32,25 +32,18 @@ const MoreProfileBox = (): JSX.Element => {
   const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
   const moreProfileBoxState = useSelector(
     (state: AppState) => state.moreProfileBoxReducer
   );
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
-  );
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
   });
-  const {
-    profilePageDataAction,
-    setRootUserProfileDataState,
-    startProgressBar,
-    stopProgressBar,
-    openRightPartDrawer,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { startProgressBar, stopProgressBar, openRightPartDrawer } =
+    bindActionCreators(actionCreators, dispatch);
 
   const date = new Date();
   const userLogOut = async (): Promise<void> => {
@@ -97,18 +90,9 @@ const MoreProfileBox = (): JSX.Element => {
             className={ButtonClass.root}
             id="More_Profile_Box_User_Info"
             onClick={() => {
-              const userObj: ProfilePageDataState = {
-                ...userProfileDetailStore,
-                isRootUserFollowed: false,
-                throughRouting: true,
-              };
-              profilePageDataAction(userObj);
-              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                setRootUserProfileDataState({
-                  fetchedRootUserProfileData: false,
-                  getRootUserProfileData: true,
-                });
-              }
+              setRootUserProfilePageData({
+                rootUserProfileDetail: userProfileDetailStore,
+              });
               if (isMax850px) {
                 openRightPartDrawer(false);
               }

@@ -25,12 +25,13 @@ import { useMediaQuery } from "react-responsive";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import { AxiosError } from "axios";
-import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
+import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
 
 const MainPageMsgAndNtfBar = (): JSX.Element => {
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
@@ -42,9 +43,6 @@ const MainPageMsgAndNtfBar = (): JSX.Element => {
   );
   const notificationBoxState = useSelector(
     (state: AppState) => state.notificationBox
-  );
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
   );
   const isMax850px = useMediaQuery({
     query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
@@ -58,8 +56,6 @@ const MainPageMsgAndNtfBar = (): JSX.Element => {
     stopProgressBar,
     setNotificationData,
     messageListAction,
-    setRootUserProfileDataState,
-    profilePageDataAction,
     openRightPartDrawer,
   } = bindActionCreators(actionCreators, dispatch);
 
@@ -195,18 +191,9 @@ const MainPageMsgAndNtfBar = (): JSX.Element => {
               : userProfileDetailStore.picture
           }
           onClick={() => {
-            const userObj: ProfilePageDataState = {
-              ...userProfileDetailStore,
-              isRootUserFollowed: false,
-              throughRouting: true,
-            };
-            profilePageDataAction(userObj);
-            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-              setRootUserProfileDataState({
-                fetchedRootUserProfileData: false,
-                getRootUserProfileData: true,
-              });
-            }
+            setRootUserProfilePageData({
+              rootUserProfileDetail: userProfileDetailStore,
+            });
             if (isMax850px) {
               openRightPartDrawer(false);
             }

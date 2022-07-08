@@ -16,7 +16,7 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
 import { AxiosError } from "axios";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";
 
 interface CommentFieldProps {
   userFeedData: PostBoxProps["userFeedData"];
@@ -33,19 +33,15 @@ const CommentField: React.FC<CommentFieldProps> = ({
 }) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
   const [commentInputField, setCommentInputField] = useState("");
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
+  const { startProgressBar, stopProgressBar } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
-  const {
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
-    setRootUserProfileDataState,
-  } = bindActionCreators(actionCreators, dispatch);
 
   const comment = async (): Promise<void> => {
     try {
@@ -102,18 +98,9 @@ const CommentField: React.FC<CommentFieldProps> = ({
           }
           // img={userProfileDetailStore.userID}
           onClick={() => {
-            const userObj: ProfilePageDataState = {
-              ...userProfileDetailStore,
-              isRootUserFollowed: false,
-              throughRouting: true,
-            };
-            profilePageDataAction(userObj);
-            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-              setRootUserProfileDataState({
-                fetchedRootUserProfileData: false,
-                getRootUserProfileData: true,
-              });
-            }
+            setRootUserProfilePageData({
+              rootUserProfileDetail: userProfileDetailStore,
+            });
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
           alt=""

@@ -7,7 +7,7 @@ type routeRootUserProfilePageParameter = {
   rootUserProfileDetail: any;
 };
 
-const useRouteRootUserProfilePage = () => {
+const useRootUserProfilePageData = () => {
   const dispatch = useDispatch();
 
   const { profilePageDataAction, setRootUserProfileDataState } =
@@ -32,4 +32,4 @@ const useRouteRootUserProfilePage = () => {
   };
 };
 
-export default useRouteRootUserProfilePage;
+export default useRootUserProfilePageData;

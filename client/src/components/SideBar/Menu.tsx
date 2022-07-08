@@ -6,13 +6,10 @@ import { useSelector, useDispatch } from "react-redux";
 //   profilePageDataAction,
 //   setRootUserProfileDataState,
 // } from "../../services/redux-actions";
-import { AppState, actionCreators } from "../../services/redux";
-import { bindActionCreators } from "redux";
+import { AppState } from "../../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
-import useRootUserProfilePageRoute from "../../hooks/useRouteRootUserProfilePage";
-import { RootUserProfileDetailState } from "src/services/redux/global/rootUserProfileDetail/types";
+import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -21,17 +18,10 @@ const buttonStyle = makeStyles({
 
 const Menu = (): JSX.Element => {
   const ButtonClass = buttonStyle();
-  const dispatch = useDispatch();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
-  );
-  const { profilePageDataAction, setRootUserProfileDataState } =
-    bindActionCreators(actionCreators, dispatch);
-
-  const routeRootUserProfilePage = useRootUserProfilePageRoute();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
 
   return (
     <>
@@ -115,19 +105,7 @@ const Menu = (): JSX.Element => {
               to={`/u/profile/${userProfileDetailStore.userID}/posts`}
               className="MainPage_SideBar_Menu_Profile_Container MainPage_SideBar_Link"
               onClick={() => {
-                // const userObj: ProfilePageDataState = {
-                //   ...userProfileDetailStore,
-                //   isRootUserFollowed: false,
-                //   throughRouting: true,
-                // };
-                // profilePageDataAction(userObj);
-                // if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                //   setRootUserProfileDataState({
-                //     fetchedRootUserProfileData: false,
-                //     getRootUserProfileData: true,
-                //   });
-                // }
-                routeRootUserProfilePage({
+                setRootUserProfilePageData({
                   rootUserProfileDetail: userProfileDetailStore,
                 });
               }}

@@ -13,23 +13,19 @@ import { toastSuccess, toastError } from "../../services/toast";
 // } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
-import { ProfilePageDataState } from "src/services/redux/pages/profile/profilePageData/types";
+import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";
 
 const Account = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
-  const rootUserProfileDataState = useSelector(
-    (state: AppState) => state.rootUserProfileDataState
+  const { startProgressBar, stopProgressBar } = bindActionCreators(
+    actionCreators,
+    dispatch
   );
-  const {
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
-    setRootUserProfileDataState,
-  } = bindActionCreators(actionCreators, dispatch);
 
   const userLogOut = async (): Promise<void> => {
     try {
@@ -71,18 +67,9 @@ const Account = (): JSX.Element => {
             }
             className="MainPage_SideBar_User_Account_Img"
             onClick={() => {
-              const userObj: ProfilePageDataState = {
-                ...userProfileDetailStore,
-                isRootUserFollowed: false,
-                throughRouting: true,
-              };
-              profilePageDataAction(userObj);
-              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                setRootUserProfileDataState({
-                  fetchedRootUserProfileData: false,
-                  getRootUserProfileData: true,
-                });
-              }
+              setRootUserProfilePageData({
+                rootUserProfileDetail: userProfileDetailStore,
+              });
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
             alt="profile"
@@ -90,18 +77,9 @@ const Account = (): JSX.Element => {
           <h3
             className="MainPage_SideBar_User_Account_Name"
             onClick={() => {
-              const userObj: ProfilePageDataState = {
-                ...userProfileDetailStore,
-                isRootUserFollowed: false,
-                throughRouting: true,
-              };
-              profilePageDataAction(userObj);
-              if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-                setRootUserProfileDataState({
-                  fetchedRootUserProfileData: false,
-                  getRootUserProfileData: true,
-                });
-              }
+              setRootUserProfilePageData({
+                rootUserProfileDetail: userProfileDetailStore,
+              });
               history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
           >
