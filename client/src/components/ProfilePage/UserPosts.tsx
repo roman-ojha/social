@@ -47,10 +47,11 @@ const UserPosts: React.FC<UserPostsProps> = ({
             fetchedRootUserProfileData: true,
             getRootUserProfileData: false,
           });
-          const userObj = {
+          const userObj: ProfilePageDataState = {
             ...userProfileDetailStore,
             isRootUserFollowed: false,
             posts: resPostData.posts,
+            throughRouting: true,
           };
           profilePageDataAction(userObj);
         }

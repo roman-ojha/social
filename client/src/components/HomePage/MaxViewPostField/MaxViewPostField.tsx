@@ -12,6 +12,7 @@ import InputField from "./InputField";
 import PostButton from "./PostButton";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";
+import { ProfilePageDataState } from "../../../services/redux/pages/profile/profilePageData/types";
 
 const MaxViewPostField = (): JSX.Element => {
   const history = useHistory();
@@ -41,9 +42,10 @@ const MaxViewPostField = (): JSX.Element => {
               }
               className="HomePage_MaxField_UserPost_Field_Image"
               onClick={() => {
-                const userObj = {
+                const userObj: ProfilePageDataState = {
                   ...userProfileDetailStore,
                   isRootUserFollowed: false,
+                  throughRouting: true,
                 };
                 profilePageDataAction(userObj);
                 if (!rootUserProfileDataState.fetchedRootUserProfileData) {

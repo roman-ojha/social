@@ -20,6 +20,7 @@ import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import UserDocument from "../interface/userDocument";
 import { AxiosError } from "axios";
+import { ProfilePageDataState } from "src/services/redux/pages/profile/profilePageData/types";
 
 const ProfileFriends = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -183,9 +184,10 @@ const ProfileFriends = (): JSX.Element => {
                     const userData = await res.data;
                     if (res.status === 200 && userData.success) {
                       // success
-                      const userObj = {
+                      const userObj: ProfilePageDataState = {
                         ...userData.searchedUser,
                         isRootUserFollowed: userData.isRootUserFollowed,
+                        throughRouting: true,
                       };
                       profilePageDataAction(userObj);
                       if (userDetail.userID === userProfileDetailStore.userID) {
@@ -200,9 +202,12 @@ const ProfileFriends = (): JSX.Element => {
                       toastError(userData.msg);
                     }
                     stopProgressBar();
-                  } catch (err) {
-                    if (err.response.data.success === false) {
-                      toastError(err.response.data.msg);
+                  } catch (error) {
+                    const err = error as AxiosError;
+                    if (err.response) {
+                      if (err.response.data.success === false) {
+                        toastError(err.response.data.msg);
+                      }
                     } else {
                       toastError(
                         "Some Problem Occur, Please Try again later!!!"

@@ -25,6 +25,7 @@ import { useMediaQuery } from "react-responsive";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
 const MainPageMsgAndNtfBar = (): JSX.Element => {
   const history = useHistory();
@@ -194,9 +195,10 @@ const MainPageMsgAndNtfBar = (): JSX.Element => {
               : userProfileDetailStore.picture
           }
           onClick={() => {
-            const userObj = {
+            const userObj: ProfilePageDataState = {
               ...userProfileDetailStore,
               isRootUserFollowed: false,
+              throughRouting: true,
             };
             profilePageDataAction(userObj);
             if (!rootUserProfileDataState.fetchedRootUserProfileData) {

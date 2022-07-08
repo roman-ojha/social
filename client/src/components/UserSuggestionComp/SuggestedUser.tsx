@@ -19,6 +19,7 @@ import { actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -140,9 +141,10 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
       const userData = await res.data;
       if (res.status === 200 && userData.success) {
         // success
-        const userObj = {
+        const userObj: ProfilePageDataState = {
           ...userData.searchedUser,
           isRootUserFollowed: userData.isRootUserFollowed,
+          throughRouting: true,
         };
         profilePageDataAction(userObj);
         if (isMax850px) {

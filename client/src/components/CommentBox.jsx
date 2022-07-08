@@ -118,6 +118,7 @@ const ReturnCommentContent = () => {
           const userObj = {
             ...userData.searchedUser,
             isRootUserFollowed: userData.isRootUserFollowed,
+            throughRouting: true,
           };
           profilePageDataAction(userObj);
           if (userID === userProfileDetailStore.userID) {
@@ -197,6 +198,7 @@ const ReturnCommentContent = () => {
                 const userObj = {
                   ...userProfileDetailStore,
                   isRootUserFollowed: false,
+                  throughRouting: true,
                 };
                 profilePageDataAction(userObj);
                 if (!rootUserProfileDataState.fetchedRootUserProfileData) {

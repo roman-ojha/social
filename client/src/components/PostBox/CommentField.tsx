@@ -16,6 +16,7 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
 import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 interface CommentFieldProps {
   userFeedData: PostBoxProps["userFeedData"];
@@ -101,9 +102,10 @@ const CommentField: React.FC<CommentFieldProps> = ({
           }
           // img={userProfileDetailStore.userID}
           onClick={() => {
-            const userObj = {
+            const userObj: ProfilePageDataState = {
               ...userProfileDetailStore,
               isRootUserFollowed: false,
+              throughRouting: true,
             };
             profilePageDataAction(userObj);
             if (!rootUserProfileDataState.fetchedRootUserProfileData) {

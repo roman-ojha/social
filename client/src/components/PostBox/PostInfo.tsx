@@ -16,6 +16,7 @@ import { Month } from "src/interface/month";
 import { PostInformationInterface } from "./PostBox";
 import UserPostType from "src/interface/userPost";
 import { AxiosError } from "axios";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 interface PostInfoProps {
   postUserID: PostInformationInterface["userID"];
@@ -89,9 +90,10 @@ const PostInfo: React.FC<PostInfoProps> = ({
       const userData = await res.data;
       if (res.status === 200 && userData.success) {
         // success
-        const userObj = {
+        const userObj: ProfilePageDataState = {
           ...userData.searchedUser,
           isRootUserFollowed: userData.isRootUserFollowed,
+          throughRouting: true,
         };
         profilePageDataAction(userObj);
         if (userID === userProfileDetailStore.userID) {

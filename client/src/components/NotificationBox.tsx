@@ -17,6 +17,7 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -72,9 +73,10 @@ const NotificationBox = (): JSX.Element => {
                             const userData = await res.data;
                             if (res.status === 200 && userData.success) {
                               // success
-                              const userObj = {
+                              const userObj: ProfilePageDataState = {
                                 ...userData.searchedUser,
                                 isRootUserFollowed: userData.isRootUserFollowed,
+                                throughRouting: true,
                               };
                               profilePageDataAction(userObj);
                               history.push(`/u/profile/${data.userID}/posts`);

@@ -21,6 +21,7 @@ import { toastError, toastSuccess } from "../services/toast";
 import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -96,10 +97,10 @@ const MoreProfileBox = (): JSX.Element => {
             className={ButtonClass.root}
             id="More_Profile_Box_User_Info"
             onClick={() => {
-              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
-              const userObj = {
+              const userObj: ProfilePageDataState = {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
+                throughRouting: true,
               };
               profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
@@ -111,6 +112,7 @@ const MoreProfileBox = (): JSX.Element => {
               if (isMax850px) {
                 openRightPartDrawer(false);
               }
+              history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
             }}
           >
             <img

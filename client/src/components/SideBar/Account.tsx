@@ -13,6 +13,7 @@ import { toastSuccess, toastError } from "../../services/toast";
 // } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { ProfilePageDataState } from "src/services/redux/pages/profile/profilePageData/types";
 
 const Account = (): JSX.Element => {
   const history = useHistory();
@@ -70,9 +71,10 @@ const Account = (): JSX.Element => {
             }
             className="MainPage_SideBar_User_Account_Img"
             onClick={() => {
-              const userObj = {
+              const userObj: ProfilePageDataState = {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
+                throughRouting: true,
               };
               profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {
@@ -88,9 +90,10 @@ const Account = (): JSX.Element => {
           <h3
             className="MainPage_SideBar_User_Account_Name"
             onClick={() => {
-              const userObj = {
+              const userObj: ProfilePageDataState = {
                 ...userProfileDetailStore,
                 isRootUserFollowed: false,
+                throughRouting: true,
               };
               profilePageDataAction(userObj);
               if (!rootUserProfileDataState.fetchedRootUserProfileData) {

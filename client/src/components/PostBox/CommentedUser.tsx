@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
 import { bindActionCreators } from "redux";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
 
 interface CommentedUserProps {
   commentInfo: CommentInfoState;
@@ -49,9 +50,10 @@ const CommentedUser: React.FC<CommentedUserProps> = ({
       const userData = await res.data;
       if (res.status === 200 && userData.success) {
         // success
-        const userObj = {
+        const userObj: ProfilePageDataState = {
           ...userData.searchedUser,
           isRootUserFollowed: userData.isRootUserFollowed,
+          throughRouting: true,
         };
         profilePageDataAction(userObj);
         if (userID === userProfileDetailStore.userID) {

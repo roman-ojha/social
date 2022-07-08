@@ -14,6 +14,8 @@ import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
+import { AxiosError } from "axios";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -56,15 +58,17 @@ const MainPageSearchBar = (props) => {
                 // error
               } else {
                 // success
-                const userObj = {
+                const userObj: ProfilePageDataState = {
                   ...userData.searchedUser,
                   isRootUserFollowed: userData.isRootUserFollowed,
+                  throughRouting: true,
                 };
-                stopProgressBar();
                 profilePageDataAction(userObj);
+                stopProgressBar();
                 history.push(`/u/profile/${props.userDetail.userID}/posts`);
               }
-            } catch (err) {
+            } catch (error) {
+              const err = error as AxiosError;
               if (err.response) {
                 if (err.response.data.success === false) {
                   toastError(err.response.data.msg);
