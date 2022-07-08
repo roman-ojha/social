@@ -12,8 +12,16 @@ import "../../styles/components/mainPageSearchBar.css";
 import { toastError } from "../../services/toast";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
+import { Button } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+
+const buttonStyle = makeStyles({
+  root: {},
+  buttonRipple: { color: "var(--secondary-color-point-1-transparent-0)" },
+});
 
 const MainPageSearchBar = (props) => {
+  const ButtonClass = buttonStyle();
   const history = useHistory();
   const dispatch = useDispatch();
   let noResultFound = true;
@@ -28,8 +36,10 @@ const MainPageSearchBar = (props) => {
     // console.log(props.userDetail);
     return (
       <>
-        <div
-          className="MainPage_SearchBar_User_Container"
+        <Button
+          TouchRippleProps={{ classes: { root: ButtonClass.buttonRipple } }}
+          className={ButtonClass.root}
+          id="MainPage_SearchBar_User_Container"
           onClick={async () => {
             try {
               startProgressBar();
@@ -76,7 +86,7 @@ const MainPageSearchBar = (props) => {
             alt="user"
           />
           <p>{props.userDetail.userID}</p>
-        </div>
+        </Button>
       </>
     );
   };

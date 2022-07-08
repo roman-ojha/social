@@ -1,16 +1,12 @@
 .MainPage_SearchBar_Container {
-  /* border: 1px solid red; */
   position: absolute;
   width: 90%;
   min-height: 5rem;
-  /* transform: translate(10%, 15%); */
   top: 10%;
   left: 5%;
   border-radius: 10px;
   background-color: #8f59bbe7;
-  /* animation-name: searchBar_animation;
-  animation-duration: 0.3s; */
-  /* overflow: hidden; */
+  z-index: 2;
 }
 .MainPage_SearchBar_Container h3 {
   font-family: var(--primary-font-family);
@@ -60,29 +56,29 @@
   font-family: var(--primary-font-family);
   font-size: 0.8rem;
 }
-.MainPage_SearchBar_User_Container {
+#MainPage_SearchBar_User_Container {
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  /* border: 1px solid red; */
   border-radius: 5px;
   padding: 0.2rem 0rem 0.2rem 0rem;
   cursor: pointer;
   text-decoration: none;
 }
-.MainPage_SearchBar_User_Container:hover {
+#MainPage_SearchBar_User_Container:hover {
   background-color: #b180dae7;
 }
-.MainPage_SearchBar_User_Container img {
+#MainPage_SearchBar_User_Container img {
   width: 2rem;
   height: 2rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: 2%;
 }
-.MainPage_SearchBar_User_Container p {
+#MainPage_SearchBar_User_Container p {
   color: white;
   font-family: var(--primary-font-family);
   font-size: 0.85rem;
@@ -92,6 +88,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-transform: none;
 }
 
 @media screen and (max-width: 768px) and (min-width: 480px) {
@@ -107,11 +104,11 @@
   .MainPage_SearchBar_No_Result_Container p {
     font-size: 0.75rem;
   }
-  .MainPage_SearchBar_User_Container img {
+  #MainPage_SearchBar_User_Container img {
     width: 1.8rem;
     height: 1.8rem;
   }
-  .MainPage_SearchBar_User_Container p {
+  #MainPage_SearchBar_User_Container p {
     font-size: 0.8rem;
   }
 }
@@ -129,17 +126,17 @@
   .MainPage_SearchBar_No_Result_Container p {
     font-size: 0.7rem;
   }
-  .MainPage_SearchBar_User_Container {
+  #MainPage_SearchBar_User_Container {
     margin-top: 0.3rem;
     margin-bottom: 0.3rem;
     border-radius: 3px;
     padding: 0.15rem 0rem 0.15rem 0rem;
   }
-  .MainPage_SearchBar_User_Container img {
+  #MainPage_SearchBar_User_Container img {
     width: 1.6rem;
     height: 1.6rem;
   }
-  .MainPage_SearchBar_User_Container p {
+  #MainPage_SearchBar_User_Container p {
     font-size: 0.7rem;
     margin-left: 5%;
   }
