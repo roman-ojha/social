@@ -5,6 +5,7 @@ import ResponseObject from "../interface/responseObject.js";
 import ResPonseUserPost from "../interface/resUserPost.js";
 import { UserDocumentPosts } from "../interface/userDocument.js";
 import SchemaMethodInstance from "../interface/userSchemaMethods.js";
+import followUser from "../funcs/followUser.js";
 
 var botUser = [];
 fs.readFile("./db/botUser.json", "utf-8", (err, user) => {
@@ -653,7 +654,7 @@ export default {
           .status(401)
           .json(<ResponseObject>{ success: false, msg: "User doesn't exist" });
       }
-      const followRes = await rootUser.followUser({ id: followedToUser.id });
+      const followRes = await followUser(rootUser.id, followedToUser.id);
       if (!followRes) {
         return res
           .status(500)
@@ -748,6 +749,7 @@ export default {
         .status(200)
         .json(<ResponseObject>{ success: true, msg: "Follow successfully" });
     } catch (err) {
+      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!, Please Try again later",

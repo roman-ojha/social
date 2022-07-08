@@ -66,7 +66,7 @@ export type UserDocumentBirthday = {
 };
 
 export type UserDocumentNotification = {
-  topic: string;
+  topic: "follow";
   user: string;
 };
 

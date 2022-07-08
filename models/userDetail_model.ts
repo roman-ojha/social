@@ -3,17 +3,12 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import SchemaMethodInstance from "interface/userSchemaMethods.js";
 import ModelMethodInstance from "interface/userModelMethods.js";
-import { UpdateResult } from "mongodb";
 import userMessages from "./userMessages.js";
 import userPosts from "./userPosts.js";
 import userStories from "./userStories.js";
 import userNotifications from "./userNotifications.js";
 import userTokens from "./userTokens.js";
 import userBirthday from "./userBirthday.js";
-import {
-  UserDocumentPosts,
-  UserDocumentStories,
-} from "../interface/userDocument.js";
 
 const userDetailSchema = new mongoose.Schema<
   SchemaMethodInstance,
@@ -120,114 +115,107 @@ userDetailSchema.methods.generateAuthToken = async function (): Promise<
   }
 };
 
-userDetailSchema.methods.uploadPost = async function (
-  postData: UserDocumentPosts,
-  userStoryDetail: UserDocumentStories
-) {
-  try {
-    let resPost: UpdateResult;
-    if (userStoryDetail !== undefined) {
-      resPost = await UserDetail.updateOne(
-        {
-          id: this.id,
-        },
-        {
-          $push: {
-            // posts: postData,
-            posts: { $each: [postData], $position: 0 },
-          },
-          $inc: {
-            postNo: 1,
-          },
+// userDetailSchema.methods.uploadPost = async function (
+//   postData: UserDocumentPosts,
+//   userStoryDetail: UserDocumentStories
+// ) {
+//   try {
+//     let resPost: UpdateResult;
+//     if (userStoryDetail !== undefined) {
+//       resPost = await UserDetail.updateOne(
+//         {
+//           id: this.id,
+//         },
+//         {
+//           $push: {
+//             // posts: postData,
+//             posts: { $each: [postData], $position: 0 },
+//           },
+//           $inc: {
+//             postNo: 1,
+//           },
 
-          $set: {
-            stories: userStoryDetail,
-          },
-        }
-      );
-    } else {
-      resPost = await UserDetail.updateOne(
-        {
-          id: this.id,
-        },
-        {
-          $push: {
-            posts: postData,
-          },
-          $inc: {
-            postNo: 1,
-          },
-        }
-      );
-    }
-    if (resPost) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (err) {
-    return false;
-  }
-};
+//           $set: {
+//             stories: userStoryDetail,
+//           },
+//         }
+//       );
+//     } else {
+//       resPost = await UserDetail.updateOne(
+//         {
+//           id: this.id,
+//         },
+//         {
+//           $push: {
+//             posts: postData,
+//           },
+//           $inc: {
+//             postNo: 1,
+//           },
+//         }
+//       );
+//     }
+//     if (resPost) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   } catch (err) {
+//     return false;
+//   }
+// };
 
-userDetailSchema.methods.followUser = async function (followedToUser: any) {
-  try {
-    // saving following user detail into current user database
-    const addOnRootUser = await UserDetail.updateOne(
-      {
-        id: this.id,
-      },
-      {
-        // pushing the new followers into followed to user database
-        $push: {
-          following: {
-            id: followedToUser.id,
-          },
-        },
-        $inc: {
-          followingNo: 1,
-        },
-      }
-    );
+// userDetailSchema.methods.followUser = async function (followedToUser: any) {
+//   try {
+//     // saving following user detail into current user database
+//     const addOnRootUser = await UserDetail.updateOne(
+//       {
+//         id: this.id,
+//       },
+//       {
+//         // pushing the new followers into followed to user database
+//         $push: {
+//           following: {
+//             id: followedToUser.id,
+//           },
+//         },
+//         $inc: {
+//           followingNo: 1,
+//         },
+//       }
+//     );
 
-    // saving following user detail into followed to user database
-    const followRes = await UserDetail.updateOne(
-      {
-        id: followedToUser.id,
-      },
-      {
-        // pushing the new followers into followed to user database
-        $push: {
-          followers: {
-            id: this.id,
-          },
-          notification: {
-            topic: "follow",
-            user: this.id,
-          },
-        },
-        $inc: {
-          followersNo: 1,
-        },
-      }
-    );
-    if (followRes && addOnRootUser) {
-      return true;
-    } else {
-      return false;
-    }
-  } catch (err) {
-    // console.log(err);
-    return false;
-  }
-};
-
-userDetailSchema.methods.saveMessage = async function (message) {
-  try {
-    console.log(message);
-    // searching for a use which is getting the message
-  } catch (err) {}
-};
+//     // saving following user detail into followed to user database
+//     const followRes = await UserDetail.updateOne(
+//       {
+//         id: followedToUser.id,
+//       },
+//       {
+//         // pushing the new followers into followed to user database
+//         $push: {
+//           followers: {
+//             id: this.id,
+//           },
+//           notification: {
+//             topic: "follow",
+//             user: this.id,
+//           },
+//         },
+//         $inc: {
+//           followersNo: 1,
+//         },
+//       }
+//     );
+//     if (followRes && addOnRootUser) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   } catch (err) {
+//     // console.log(err);
+//     return false;
+//   }
+// };
 
 const UserDetail = mongoose.model<SchemaMethodInstance>(
   "USERDETAIL",
