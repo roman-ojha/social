@@ -150,7 +150,7 @@ export default {
         if (!updateAdminDocument) {
           return res.status(500).json(<ResponseObject>{
             success: false,
-            msg: "Server Error!,Failed registerd!!!",
+            msg: "Server Error!,Failed registered!!!",
           });
         }
         let token: string | null;
@@ -196,7 +196,7 @@ export default {
       if (!saveUserRes) {
         return res.status(500).json(<ResponseObject>{
           success: false,
-          msg: "Server Error!,Failed registerd!!!",
+          msg: "Server Error!,Failed registered!!!",
         });
       }
       let token: string | null;

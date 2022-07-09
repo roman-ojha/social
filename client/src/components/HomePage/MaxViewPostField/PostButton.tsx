@@ -28,6 +28,8 @@ const PostButton = () => {
     homePageUserPostFieldDataAction,
     showLoadingSpinner,
     setHomePagePostFieldViewValue,
+    submitImagePicker,
+    setImagePickingFrom,
   } = bindActionCreators(actionCreators, dispatch);
 
   // uploading post to database
@@ -80,6 +82,12 @@ const PostButton = () => {
             content: "",
             image: {},
           });
+          submitImagePicker({
+            imageFile: undefined,
+            imageUrl: null,
+            openedImagePicker: false,
+          });
+          setImagePickingFrom("homePagePostFiled");
         } else {
           // error
           toastError(resData.msg);
