@@ -17,7 +17,7 @@ interface GetUserIDProps {
   userDetail: UserDocument;
 }
 
-const GetUserID: React.FC<GetUserIDProps> = (props): JSX.Element => {
+const GetUserID: React.FC<GetUserIDProps> = (): JSX.Element => {
   const dispatch = useDispatch();
   const [userDetail, setUserDetail] = useState<{
     email: UserDocument["email"];
@@ -49,6 +49,7 @@ const GetUserID: React.FC<GetUserIDProps> = (props): JSX.Element => {
           withCredentials: true,
         });
         const data = await res.data;
+        console.log(data);
         setUserDetail(data);
       };
       getUserDetail();
@@ -67,17 +68,6 @@ const GetUserID: React.FC<GetUserIDProps> = (props): JSX.Element => {
         profilePicture = profilePictureList[0];
       }
       const data = new FormData();
-      if (props.userDetail === undefined) {
-        // if UserID page will be open using google authnetication
-        // then user doesn't have a password and userDetail is not commit form the props
-        data.append("email", userDetail.email);
-        data.append("auth", "google");
-        // we have to send 'password' as undefinded if user is login with google authntication to check in backend
-      } else {
-        data.append("email", props.userDetail.email);
-        data.append("password", props.userDetail.password);
-        data.append("auth", "social");
-      }
       data.append("userID", userID);
       data.append("profile", profilePicture as Blob);
       const res = await axios({
@@ -89,14 +79,9 @@ const GetUserID: React.FC<GetUserIDProps> = (props): JSX.Element => {
       if (res.status !== 200) {
         // console.log(resData);
       } else {
-        // console.log(resData);
-        showLoadingSpinner(false);
-        if (props.userDetail === undefined) {
-          history.push("/u/home");
-        } else {
-          history.push("/signin");
-        }
+        history.push("/u/home");
       }
+      showLoadingSpinner(false);
     } catch (error) {
       const err = error as AxiosError;
       if (err.response) {

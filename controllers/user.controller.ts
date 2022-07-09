@@ -420,6 +420,7 @@ export default {
   homeUser: (req: Request, res: Response): object => {
     try {
       const rootUser = req.rootUser;
+      console.log(rootUser);
       return res.status(200).json(rootUser);
     } catch (err) {
       return res.status(500).json({

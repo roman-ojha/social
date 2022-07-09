@@ -10,6 +10,11 @@ import { Request, Response } from "express";
 import constants from "../constants/index.js";
 import UserDocument, { UserDocumentPosts } from "../interface/userDocument.js";
 import uploadPost from "../funcs/uploadPost.js";
+import {
+  isRedisConnected,
+  redisClient,
+} from "../middleware/auth/authUsingRedis.js";
+import RedisUserDetail from "../interface/redisUserDetail.js";
 const bucket = storage.bucket();
 
 export default {
@@ -161,18 +166,8 @@ export default {
   },
   getUserID: async (req, res) => {
     try {
-      const { email, password, userID, auth } = req.body;
-      if (auth === "google") {
-        // if user is login using google authetication and user doesnot have a password
-        if (!email) {
-          return res.status(401).json({ success: false, err: "UnAuthorized" });
-        }
-      } else {
-        // if user is register using social account then will have a password
-        if (!email && !password) {
-          return res.status(401).json({ success: false, err: "UnAuthorized" });
-        }
-      }
+      const { userID } = req.body;
+      const rootUser = req.rootUser;
       if (!userID) {
         return res
           .status(400)
@@ -188,8 +183,8 @@ export default {
           err: "Sorry..., UserID already exist",
         });
       } else {
-        const rootUser = await UserDetail.findOne(
-          { email: email },
+        const resRootUser = await UserDetail.findOne(
+          { id: rootUser.id },
           {
             name: 1,
             userID: 1,
@@ -199,25 +194,12 @@ export default {
             postNo: 1,
           }
         );
-        if (!rootUser) {
+        if (!resRootUser) {
           return res.status(401).json({ success: false, err: "UnAuthorized" });
-        }
-        if (auth !== "google") {
-          // if user is login using google authetication and user doesnot have a password
-          const isPasswordMatch = await bcrypt.compare(
-            password,
-            rootUser.password
-          );
-          if (!isPasswordMatch) {
-            return res.status(400).json({
-              success: false,
-              err: "Email and Password doesn't match",
-            });
-          }
         }
         if (!req.file) {
           const resData = await UserDetail.updateOne(
-            { email: email },
+            { id: rootUser.id },
             {
               $set: {
                 userID: userID,
@@ -225,6 +207,22 @@ export default {
               },
             }
           );
+          // Storing User Data in redis
+          // if (isRedisConnected) {
+          //   const redisUserDetail: RedisUserDetail = {
+          //     id: resRootUser.id,
+          //     email: resRootUser.email,
+          //     name: resRootUser.name,
+          //     tokens: ,
+          //     userID: userLogin.userID,
+          //   };
+          //   await redisClient.setEx(
+          //     userLogin.id,
+          //     864000,
+          //     // for 10 days
+          //     JSON.stringify(redisUserDetail)
+          //   );
+          // }
           return res
             .status(200)
             .json({ success: true, msg: "Register Successfully" });
@@ -240,7 +238,7 @@ export default {
           const uploadRes = await bucket.upload(
             `./db/build/${req.file.filename}`,
             {
-              destination: `images/${rootUser.email}/${req.file.filename}`,
+              destination: `images/${resRootUser.email}/${req.file.filename}`,
               gzip: true,
               metadata: metadata,
             }
@@ -251,7 +249,7 @@ export default {
           const userID = req.body.userID;
           const caption = `${userID} Update The Profile Picture`;
           const picName = req.file.filename;
-          const picPath = `images/${rootUser.email}/${req.file.filename}`;
+          const picPath = `images/${resRootUser.email}/${req.file.filename}`;
           const picToken =
             uploadRes[0].metadata.metadata.firebaseStorageDownloadTokens;
           const picBucket = process.env.FIREBASE_STORAGEBUCKET;
@@ -288,7 +286,7 @@ export default {
           // here we are posting user news Feed
           // now we will save picture as profile picture
           await UserDetail.updateOne(
-            { email: email },
+            { id: rootUser.id },
             {
               $set: {
                 userID: userID,

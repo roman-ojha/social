@@ -2,7 +2,7 @@ type RedisUserDetail = {
   id: string;
   name: string;
   email: string;
-  userID: string;
+  userID?: string;
   tokens: {
     token: string;
   }[];

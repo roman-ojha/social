@@ -174,12 +174,26 @@ export default {
             sameSite: "none",
           });
         }
+        if (isRedisConnected) {
+          // store userDetail to redis
+          const redisUserDetail: RedisUserDetail = {
+            id: newUserId,
+            email: email,
+            name: name,
+            tokens: [{ token: token as string }],
+          };
+          await redisClient.setEx(
+            newUserId,
+            864000,
+            // for 10 days
+            JSON.stringify(redisUserDetail)
+          );
+        }
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "User register successfully",
         });
       }
-      console.log("admin doesn't exist");
       const newUser: SchemaMethodInstance & {
         _id: any;
       } = new userDetail({
@@ -215,6 +229,21 @@ export default {
           // signed: true,
           sameSite: "none",
         });
+      }
+      if (isRedisConnected) {
+        // store userDetail to redis
+        const redisUserDetail: RedisUserDetail = {
+          id: newUserId,
+          email: email,
+          name: name,
+          tokens: [{ token: token as string }],
+        };
+        await redisClient.setEx(
+          newUserId,
+          864000,
+          // for 10 days
+          JSON.stringify(redisUserDetail)
+        );
       }
 
       // NOTE: cause i have hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
