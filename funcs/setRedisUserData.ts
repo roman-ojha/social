@@ -6,7 +6,7 @@ import RedisUserDetail from "../interface/redisUserDetail.js";
 
 type ArgumentObj = RedisUserDetail;
 
-const setRedisUserData = async (userDetail: ArgumentObj) => {
+const setRedisUserData = async (userDetail: ArgumentObj): Promise<boolean> => {
   try {
     if (isRedisConnected) {
       let redisUserDetail: RedisUserDetail;

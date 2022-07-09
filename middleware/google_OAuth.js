@@ -2,6 +2,7 @@ import passport from "passport";
 import userDetail from "../models/userDetail_model.js";
 import crypto from "crypto";
 import GoogleOauth2 from "passport-google-oauth2";
+
 const GoogleStrategy = GoogleOauth2.Strategy;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -18,7 +19,7 @@ passport.use(
       try {
         const userExist = await userDetail.findOne(
           { email: profile.email },
-          { name: 1, email: 1, userID: 1 }
+          { name: 1, email: 1, userID: 1, id: 1 }
         );
         if (userExist) {
           // if the user exist but had already signup from the social Accout
@@ -62,11 +63,11 @@ passport.use(
               })} ${today.getDate()}, ${today.getFullYear()}`,
             },
           });
-          const createUser = await userData.save();
-          return done(null, createUser);
+          const resSavedUser = await userData.save();
+          return done(null, resSavedUser);
         }
       } catch (err) {
-        // console.log(err);
+        return done(null, null);
       }
     }
   )

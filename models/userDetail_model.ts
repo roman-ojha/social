@@ -39,11 +39,9 @@ const userDetailSchema = new mongoose.Schema<
   },
   password: {
     type: String,
-    required: true,
   },
   cpassword: {
     type: String,
-    required: true,
   },
   birthday: userBirthday,
   date: {
