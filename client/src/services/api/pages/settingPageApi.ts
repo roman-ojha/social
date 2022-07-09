@@ -1,7 +1,7 @@
 import { instance as axios } from "../../axios";
 
 const settingPageApi = {
-  changeUserID: async (newUserID) => {
+  changeUserID: async (newUserID: string) => {
     return await axios({
       method: "POST",
       url: "/changeUserID",
@@ -9,7 +9,11 @@ const settingPageApi = {
       withCredentials: true,
     });
   },
-  changePassword: async (inputFieldData) => {
+  changePassword: async (inputFieldData: {
+    oldPassword: string;
+    newPassword: string;
+    cNewPassword: string;
+  }) => {
     return await axios({
       method: "POST",
       url: "/changePassword",
@@ -21,7 +25,7 @@ const settingPageApi = {
       withCredentials: true,
     });
   },
-  changeName: async (newName) => {
+  changeName: async (newName: string) => {
     return await axios({
       method: "POST",
       url: "/changeName",
@@ -29,7 +33,7 @@ const settingPageApi = {
       withCredentials: true,
     });
   },
-  changeImageFileProfilePicture: async (data) => {
+  changeImageFileProfilePicture: async (data: FormData) => {
     return await axios({
       method: "POST",
       url: "/changeProfile/imgFile",
@@ -37,7 +41,7 @@ const settingPageApi = {
       withCredentials: true,
     });
   },
-  changeImageUrlProfilePicture: async (imageUrl) => {
+  changeImageUrlProfilePicture: async (imageUrl: string) => {
     return await axios({
       method: "POST",
       url: "/changeProfile/imgUrl",

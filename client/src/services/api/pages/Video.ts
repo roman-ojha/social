@@ -8,7 +8,7 @@ const videoApi = {
       withCredentials: true,
     });
   },
-  scrapVideoSearch: async (query) => {
+  scrapVideoSearch: async (query: string) => {
     return await axios({
       method: "GET",
       url: `/scrap/youtube/search?q=${query}`,
@@ -22,7 +22,7 @@ const videoApi = {
       withCredentials: true,
     });
   },
-  searchYoutubeVideo: async (query) => {
+  searchYoutubeVideo: async (query: string) => {
     return await axios({
       method: "GET",
       url: `/youtube/search?q=${query}`,

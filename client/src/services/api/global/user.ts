@@ -1,7 +1,7 @@
 import { instance as axios } from "../../axios";
 
 const userApi = {
-  getFriends: async (id) => {
+  getFriends: async (id: string) => {
     return await axios({
       method: "GET",
       url: `/u/getFriends/${id}`,
@@ -11,7 +11,7 @@ const userApi = {
       withCredentials: true,
     });
   },
-  getFollowings: async (id) => {
+  getFollowings: async (id: string) => {
     return await axios({
       method: "GET",
       url: `/u/getFollowings/${id}`,
@@ -21,7 +21,7 @@ const userApi = {
       withCredentials: true,
     });
   },
-  getFollowers: async (id) => {
+  getFollowers: async (id: string) => {
     return await axios({
       method: "GET",
       url: `/u/getFollowers/${id}`,

@@ -1,7 +1,7 @@
 import { instance as axios } from "../../axios";
 
 const index = {
-  getFriendData: async (userID) => {
+  getFriendData: async (userID: string) => {
     return await axios({
       method: "GET",
       url: `/u/profile/${userID}`,
