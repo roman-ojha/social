@@ -253,6 +253,7 @@
   height: 1.4rem;
   object-fit: cover;
   border-radius: 50%;
+  cursor: pointer;
 }
 .MessageBox_Inner_SingleMessage {
   /* border: 1px solid blue; */

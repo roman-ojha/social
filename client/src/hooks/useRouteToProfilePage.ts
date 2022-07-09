@@ -16,6 +16,7 @@ type CallingFrom =
   | "profileFriendsComp"
   | "searchBarComp"
   | "commentBox"
+  | "messageBox"
   | undefined;
 type ReturnFuncArgument = {
   userID: string;
@@ -56,7 +57,8 @@ const useRouteToProfilePage = () => {
         if (
           obj.from === "suggestionComp" ||
           obj.from === "followedByComp" ||
-          obj.from === "searchBarComp"
+          obj.from === "searchBarComp" ||
+          obj.from === "messageBox"
         ) {
           if (isMax850px) {
             openRightPartDrawer(false);

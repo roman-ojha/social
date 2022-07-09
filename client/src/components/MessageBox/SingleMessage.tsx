@@ -2,8 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { AppState } from "../../services/redux";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 const SingleMessage = (props): JSX.Element => {
+  const routeToProfilePage = useRouteToProfilePage();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
@@ -24,7 +26,16 @@ const SingleMessage = (props): JSX.Element => {
         {props.MessageInfo.senderId === userProfileDetailStore.id ? (
           ""
         ) : (
-          <img src={props.picture ? props.picture : User_Profile_Icon} alt="" />
+          <img
+            onClick={async () => {
+              await routeToProfilePage({
+                userID: props.messageToUserId,
+                from: "messageBox",
+              });
+            }}
+            src={props.picture ? props.picture : User_Profile_Icon}
+            alt=""
+          />
         )}
         <div
           className="MessageBox_Inner_SingleMessage"

@@ -9,6 +9,7 @@ import SendMessageInputField from "./SendMessageInputField";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import { CurrentUserMessageState } from "../../services/redux/components/messageBox/currentUserMessage/types";
+import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 interface InnerMessageBoxProps {
   InternalMessageInfo: {
@@ -22,6 +23,7 @@ const InnerMessageBox: React.FC<InnerMessageBoxProps> = ({
   InternalMessageInfo,
 }): JSX.Element => {
   const dispatch = useDispatch();
+  const routeToProfilePage = useRouteToProfilePage();
   const currentMessageStore = useSelector(
     (state: AppState) => state.setCurrentUserMessageReducer
   );
@@ -59,8 +61,23 @@ const InnerMessageBox: React.FC<InnerMessageBoxProps> = ({
                 : User_Profile_Icon
             }
             alt="user"
+            onClick={async () => {
+              await routeToProfilePage({
+                userID: InternalMessageInfo.messageToUserId,
+                from: "messageBox",
+              });
+            }}
           />
-          <h3>{InternalMessageInfo.messageToUserId}</h3>
+          <h3
+            onClick={async () => {
+              await routeToProfilePage({
+                userID: InternalMessageInfo.messageToUserId,
+                from: "messageBox",
+              });
+            }}
+          >
+            {InternalMessageInfo.messageToUserId}
+          </h3>
           <CloseIcon
             className="MessageBox_InnerMessage_Upper_Part_Close_Button"
             style={{ width: "1.2rem", height: "1.2rem" }}
@@ -79,6 +96,7 @@ const InnerMessageBox: React.FC<InnerMessageBoxProps> = ({
               return (
                 <SingleMessage
                   MessageInfo={message}
+                  messageToUserId={InternalMessageInfo.messageToUserId}
                   picture={currentMessageStore.receiverPicture}
                   key={index}
                 />
