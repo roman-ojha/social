@@ -11,7 +11,7 @@ import { isEmptyString } from "../funcs/isEmptyString";
 import { useHistory } from "react-router-dom";
 import Api from "../services/api/components/postBox";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../services/redux";
+import { actionCreators, AppState } from "../services/redux";
 import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
 import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 
@@ -19,14 +19,16 @@ const ReturnCommentContent = () => {
   const history = useHistory();
   const setRootUserProfilePageData = useRootUserProfilePageData();
   const routeToProfilePage = useRouteToProfilePage();
-  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+  const commentBoxStore = useSelector(
+    (state: AppState) => state.commentBoxReducer
+  );
   const [commentInputFieldData, setCommentInputFieldData] = useState("");
   const dispatch = useDispatch();
   const userProfileDetail = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const userProfileDetailStore = useSelector(
-    (state) => state.setUserProfileDetailReducer
+    (state: AppState) => state.setUserProfileDetailReducer
   );
   const {
     commentBoxAction,
@@ -40,12 +42,18 @@ const ReturnCommentContent = () => {
       .getElementsByClassName("CommentBox_Background")[0]
       .addEventListener("click", (e) => {
         if (
-          !document.getElementsByClassName("CommentBox")[0].contains(e.target)
+          !document
+            .getElementsByClassName("CommentBox")[0]
+            .contains(e.target as Node)
         ) {
           commentBoxAction({
             openCommentBox: false,
             postID: "",
             toId: "",
+            toUserId: "",
+            commented: false,
+            newComment: "",
+            comments: [],
           });
         }
       });
@@ -115,6 +123,10 @@ const ReturnCommentContent = () => {
                 openCommentBox: false,
                 postID: "",
                 toId: "",
+                toUserId: "",
+                commented: false,
+                newComment: "",
+                comments: [],
               });
             }}
           />
@@ -129,6 +141,10 @@ const ReturnCommentContent = () => {
                   openCommentBox: false,
                   postID: "",
                   toId: "",
+                  toUserId: "",
+                  commented: false,
+                  newComment: "",
+                  comments: [],
                 });
               }}
             >
@@ -208,11 +224,13 @@ const ReturnCommentContent = () => {
   );
 };
 
-const CommentBox = () => {
-  const commentBoxStore = useSelector((state) => state.commentBoxReducer);
+const CommentBox = (): React.ReactPortal => {
+  const commentBoxStore = useSelector(
+    (state: AppState) => state.commentBoxReducer
+  );
   return ReactDOM.createPortal(
     <>{commentBoxStore.openCommentBox ? <ReturnCommentContent /> : <></>}</>,
-    document.getElementById("portal-root")
+    document.getElementById("portal-root") as HTMLElement
   );
 };
 
