@@ -249,6 +249,7 @@ export default {
           name: 1,
           tokens: { $slice: -5 },
           id: 1,
+          googleID: 1,
         }
       );
       if (!userLogin) {
@@ -257,6 +258,12 @@ export default {
           msg: "Error Login! User does't exist",
         });
       } else {
+        if (userLogin.googleID) {
+          return res.status(401).json(<ResponseObject>{
+            success: false,
+            msg: "It looks like You had create account using google, so please try to authenticate using googleOAuth",
+          });
+        }
         const isPasswordMatch = await bcrypt.compare(
           password,
           userLogin.password

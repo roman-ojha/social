@@ -4,6 +4,7 @@ import crypto from "crypto";
 import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
 import updateRedisUser from "../funcs/updateRedisUser.js";
+import uploadPost from "../funcs/uploadPost.js";
 
 export default {
   changeProfilePicture: async (
@@ -42,8 +43,19 @@ export default {
           month: "long",
         })} ${today.getDate()}, ${today.getFullYear()}`,
       };
-      await rootUser.uploadPost(userPostDetail, userStoryDetail);
-      await userDetail.updateOne(
+      // await rootUser.uploadPost(userPostDetail, userStoryDetail);
+      const postSuccessRes = await uploadPost(
+        userPostDetail,
+        userStoryDetail,
+        rootUser.id
+      );
+      if (!postSuccessRes) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "server Error, Please try again later!!!",
+        });
+      }
+      const updateProfilePictureRes = await userDetail.updateOne(
         {
           userID: rootUser.userID,
         },
@@ -53,6 +65,12 @@ export default {
           },
         }
       );
+      if (!updateProfilePictureRes) {
+        return res.status(500).json(<ResponseObject>{
+          success: false,
+          msg: "server Error, Please try again later!!!",
+        });
+      }
       return res.status(200).json(<ResponseObject>{
         success: true,
         msg: "Successfully Change Profile Picture",
@@ -193,8 +211,21 @@ export default {
         },
         {
           password: 1,
+          googleID: 1,
         }
       );
+      if (!userRes) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Error!! User does't exist",
+        });
+      }
+      if (userRes.googleID) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "It looks like You had create account using googleAuth, so can't be able to change password",
+        });
+      }
       if (!userRes) {
         return res
           .status(401)
@@ -208,6 +239,12 @@ export default {
         return res.status(401).json(<ResponseObject>{
           success: false,
           msg: "Old Password is incorrect",
+        });
+      }
+      if (oldPassword === newPassword) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Sorry you can't set old password as new password",
         });
       }
       const changePassRes = await userDetail.updateOne(

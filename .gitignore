@@ -6,3 +6,4 @@ note.txt
 /dist
 /.vscode/settings.json
 *.rdb
+/appIcon.png
