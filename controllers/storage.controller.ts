@@ -187,21 +187,34 @@ export default {
             tokens: { $slice: -5 },
             postNo: 1,
             id: 1,
+            googleID: 1,
           }
         );
         if (!resRootUser) {
           return res.status(401).json({ success: false, err: "UnAuthorized" });
         }
         if (!req.file) {
-          const resData = await UserDetail.updateOne(
-            { id: rootUser.id },
-            {
-              $set: {
-                userID: userID,
-                picture: constants.defaultNewUserProfilePicture,
-              },
-            }
-          );
+          if (resRootUser.googleID) {
+            // if user is auth through google oauth
+            await UserDetail.updateOne(
+              { id: rootUser.id },
+              {
+                $set: {
+                  userID: userID,
+                },
+              }
+            );
+          } else {
+            await UserDetail.updateOne(
+              { id: rootUser.id },
+              {
+                $set: {
+                  userID: userID,
+                  picture: constants.defaultNewUserProfilePicture,
+                },
+              }
+            );
+          }
           await setRedisUserData({
             id: resRootUser.id,
             email: resRootUser.email,

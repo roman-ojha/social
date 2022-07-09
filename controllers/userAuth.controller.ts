@@ -50,7 +50,6 @@ export default {
         cpassword: adminCpassword,
       });
       const newUserId = crypto.randomBytes(16).toString("hex");
-      const messageRoomID = crypto.randomBytes(16).toString("hex");
       if (resAdmin.success && resAdmin.admin) {
         // if Admin Exist
         const newUser: SchemaMethodInstance & {
@@ -64,7 +63,6 @@ export default {
           birthday,
           gender,
           postNo: 0,
-          storiesNo: 0,
           followingNo: 1,
           following: [
             <UserDocumentFollowing>{
@@ -92,7 +90,6 @@ export default {
           messages: [
             <UserDocumentMessages>{
               lastMessageOn: new Date(),
-              roomID: messageRoomID,
               messageToId: resAdmin.admin.id,
               message: [
                 {
@@ -129,7 +126,6 @@ export default {
               },
               messages: <UserDocumentMessages>{
                 lastMessageOn: new Date(),
-                roomID: messageRoomID,
                 messageToId: newUserId,
                 message: [
                   {
@@ -195,7 +191,6 @@ export default {
         followingNo: 0,
         postNo: 0,
         friendsNo: 0,
-        storiesNo: 0,
       });
       const saveUserRes = await newUser.save();
       if (!saveUserRes) {

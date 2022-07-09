@@ -53,7 +53,10 @@ export default {
           return res.redirect(`${CLIENT_BASE_URL}/u/home`);
         }
       }
-      return res.status(401).json("UnAuthorized");
+      return res.status(401).json(<ResponseObject>{
+        success: false,
+        msg: `UnAuthorized`,
+      });
     } catch (err) {
       res.status(500).json(<ResponseObject>{
         success: false,
