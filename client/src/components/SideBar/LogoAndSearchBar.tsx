@@ -7,7 +7,6 @@ import { Icon } from "@iconify/react";
 import { useDispatch } from "react-redux";
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastError } from "../../services/toast";
-// import { openSideBarDrawer } from "../../services/redux-actions";
 import { actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import { AxiosError } from "axios";

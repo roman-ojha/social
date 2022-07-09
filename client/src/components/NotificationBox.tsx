@@ -1,20 +1,10 @@
 import React from "react";
 import "../styles/components/notificationBox.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   openRightPartDrawer,
-// } from "../services/redux-actions";
-import { useMediaQuery } from "react-responsive";
-import constant from "../constant/constant";
-import { bindActionCreators } from "redux";
-import { AppState, actionCreators } from "../services/redux";
+import { AppState } from "../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../services/redux/pages/profile/profilePageData/types";
 import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
@@ -24,20 +14,10 @@ const buttonStyle = makeStyles({
 
 const NotificationBox = (): JSX.Element => {
   const ButtonClass = buttonStyle();
-  const dispatch = useDispatch();
   const routeToProfilePage = useRouteToProfilePage();
   const notificationBoxState = useSelector(
     (state: AppState) => state.notificationBox
   );
-  const isMax850px = useMediaQuery({
-    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
-  });
-  const {
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
-    openRightPartDrawer,
-  } = bindActionCreators(actionCreators, dispatch);
 
   return (
     <>

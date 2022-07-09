@@ -1,18 +1,6 @@
 import React from "react";
 import more_icon from "../assets/svg/more_icon.svg";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   mainPageMessageViewOnOff,
-//   openNotificationBox,
-//   openMoreProfileBox,
-//   startProgressBar,
-//   stopProgressBar,
-//   setNotificationData,
-//   messageListAction,
-//   setRootUserProfileDataState,
-//   profilePageDataAction,
-//   openRightPartDrawer,
-// } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import "../styles/components/mainPageMsgAndNtfBar.css";
 import { Icon } from "@iconify/react";

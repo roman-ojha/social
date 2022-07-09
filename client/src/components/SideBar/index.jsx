@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/components/mainPageSideBar.css";
-// import { openSideBarDrawer } from "../../services/redux-actions";
 import LogoAndSearchBar from "./LogoAndSearchBar";
 import Menu from "./Menu";
 import Friends from "./Friends";

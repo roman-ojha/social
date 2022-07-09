@@ -2,12 +2,6 @@ import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import UserApi from "../../services/api/global/user";
-// import {
-//   profilePageDataAction,
-//   startProgressBar,
-//   stopProgressBar,
-//   setRootUserFriends,
-// } from "../../services/redux-actions";
 import { toastError } from "../../services/toast";
 import constant from "../../constant/constant";
 import { useMediaQuery } from "react-responsive";

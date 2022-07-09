@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { hideProgressBar } from "../services/redux-actions";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 

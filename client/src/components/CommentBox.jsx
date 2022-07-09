@@ -4,14 +4,6 @@ import "../styles/components/CommentBox.css";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-// import {
-//   commentBoxAction,
-//   incrementPostCommentNumber,
-//   startProgressBar,
-//   stopProgressBar,
-//   setRootUserProfileDataState,
-//   profilePageDataAction,
-// } from "../services/redux-actions";
 import { useState } from "react";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { toastError, toastSuccess, toastWarn } from "../services/toast";

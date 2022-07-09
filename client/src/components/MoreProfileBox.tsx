@@ -4,13 +4,6 @@ import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { useHistory } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-//   startProgressBar,
-//   stopProgressBar,
-//   openRightPartDrawer,
-// } from "../services/redux-actions";
 import { instance as axios } from "../services/axios";
 import { toastInfo } from "../services/toast";
 import constant from "../constant/constant";

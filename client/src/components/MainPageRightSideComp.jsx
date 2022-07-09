@@ -4,7 +4,6 @@ import UserSuggestion from "./UserSuggestionComp/UserSuggestion";
 import FollowedBy from "./FollowedBy";
 import SponsoredBy from "./SponsoredBy";
 import { useDispatch, useSelector } from "react-redux";
-// import { openRightPartDrawer } from "../services/redux-actions";
 import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/components/mainPageRightSideComp.css";
 import NotificationBox from "./NotificationBox";

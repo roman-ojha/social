@@ -2,10 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
-// import {
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../services/redux-actions";
 import { AppState } from "../../services/redux";
 import { Button } from "@mui/material";
 import TouchRipple from "@mui/material/ButtonBase/TouchRipple";

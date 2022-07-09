@@ -6,15 +6,6 @@ import { useLocation } from "react-router-dom";
 import { toastError } from "../services/toast";
 import UserApi from "../services/api/global/user";
 import { Helmet } from "react-helmet";
-// import {
-//   setProfilePageFriends,
-//   setProfilePageFollowers,
-//   setProfilePageFollowings,
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../services/redux-actions";
 import { AppState, actionCreators } from "../services/redux";
 import { bindActionCreators } from "redux";
 import UserDocument from "../interface/userDocument";

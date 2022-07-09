@@ -5,12 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import Api from "../../services/api/components/MainPageSideBar";
 import { toastSuccess, toastError } from "../../services/toast";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";

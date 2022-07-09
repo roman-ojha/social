@@ -1,21 +1,10 @@
 import React from "react";
 import User_profile_icon from "../../assets/svg/User_profile_Icon_color_white.svg";
-import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-// } from "../../services/redux-actions";
-import { instance as axios } from "../../services/axios";
+import { useSelector } from "react-redux";
 import "../../styles/components/mainPageSearchBar.css";
-import { toastError } from "../../services/toast";
-import { AppState, actionCreators } from "../../services/redux";
-import { bindActionCreators } from "redux";
+import { AppState } from "../../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { ProfilePageDataState } from "../../services/redux/pages/profile/profilePageData/types";
-import { AxiosError } from "axios";
 import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 
 const buttonStyle = makeStyles({
@@ -25,16 +14,12 @@ const buttonStyle = makeStyles({
 
 const MainPageSearchBar = (props) => {
   const ButtonClass = buttonStyle();
-  const history = useHistory();
-  const dispatch = useDispatch();
   const routeToProfilePage = useRouteToProfilePage();
   let noResultFound = true;
   // Storing Searched userData into redux
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
-  const { startProgressBar, stopProgressBar, profilePageDataAction } =
-    bindActionCreators(actionCreators, dispatch);
 
   const SearchBarUser = (props) => {
     return (

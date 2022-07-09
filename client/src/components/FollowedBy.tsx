@@ -2,13 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
 import { toastError } from "../services/toast";
-// import {
-//   profilePageDataAction,
-//   isFollowedFollowedByUser,
-//   startProgressBar,
-//   stopProgressBar,
-//   openRightPartDrawer,
-// } from "../services/redux-actions";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { AppState } from "../services/redux";
 import { Button } from "@mui/material";

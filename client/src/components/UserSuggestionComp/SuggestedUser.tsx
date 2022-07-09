@@ -1,12 +1,5 @@
 import React from "react";
 import { toastError } from "../../services/toast";
-// import {
-//   profilePageDataAction,
-//   startProgressBar,
-//   stopProgressBar,
-//   isFollowedSuggestedUser,
-//   openRightPartDrawer,
-// } from "../../services/redux-actions";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
