@@ -1,9 +1,9 @@
 .MessagePage_Container {
-  width: 50.5%;
+  width: 51.5%;
   /* border: 1px solid red; */
   position: fixed;
   left: 20%;
-  top: 5rem;
+  top: 5.2rem;
   display: flex;
   height: calc(100vh - 5rem);
   justify-content: center;
@@ -33,7 +33,7 @@
 
 @media screen and (max-width: 1200px) and (min-width: 1024px) {
   .MessagePage_Container {
-    width: 55.5%;
+    width: 56.5%;
     left: 15%;
     height: calc(100vh - 5rem);
   }
@@ -41,7 +41,7 @@
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
   .MessagePage_Container {
-    width: calc(100% - 100px - 29.5%);
+    width: calc(100% - 100px - 28.5%);
     left: 100px;
   }
 }
@@ -67,7 +67,7 @@
   .MessagePage_Container {
     width: calc(100% - 60px);
     left: 60px;
-    top: 5rem;
+    top: 5.1rem;
     height: calc(100vh - 5rem);
   }
 

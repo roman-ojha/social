@@ -5,16 +5,6 @@ import "../styles/pages/Index.css";
 import "../styles/pages/page404.css";
 import LoadingScreen from "../components/IndexPage/LoadingScreen";
 import ReturnMainPage from "../components/IndexPage/ReturnMainPage";
-// import
-// {userProfileDetailAction,
-// userProfilePostAction,
-// followedUserPostDataAction,
-// userSuggestionAction,
-// followedByUserAction,
-// setUserStories,
-// appendOnCurrentInnerUserMessage,
-// appendMessageOnMessageListAction,
-// } from "../services/redux-actions/index";
 import socket from "../services/socket";
 import Api from "../services/api/pages/index";
 import { toastError } from "../services/toast";

@@ -3,7 +3,6 @@ import { instance as axios } from "../services/axios";
 import { NavLink, useHistory } from "react-router-dom";
 import "../styles/pages/signInPage.css";
 import { Helmet } from "react-helmet";
-// import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import { toastError, toastInfo } from "../services/toast";

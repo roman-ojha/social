@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import "../styles/pages/videoPage.css";
 import { useDispatch, useSelector } from "react-redux";
-// import { setVideoPageData } from "../services/redux-actions";
 import { Icon } from "@iconify/react";
 import RenderVideo from "../components/VideoPage/RenderVideo";
 import SearchForm from "../components/VideoPage/SearchForm";

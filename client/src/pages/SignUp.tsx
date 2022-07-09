@@ -3,7 +3,6 @@ import { NavLink, useHistory } from "react-router-dom";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/signUpPage.css";
 import { Helmet } from "react-helmet";
-// import { startProgressBar, stopProgressBar } from "../services/redux-actions";
 import { useDispatch } from "react-redux";
 import ProgressBar from "../components/ProgressBar";
 import validator from "email-validator";

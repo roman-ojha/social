@@ -5,7 +5,6 @@ import "../styles/components/messageBox.css";
 import "../styles/pages/MessagePage.css";
 import InnerUserMessage from "../components/MessagePage/InnerUserMessage";
 import MessagesList from "../components/MessagePage/MessagesList";
-// import { mainPageMessageViewOnOff } from "../services/redux-actions/index";
 import OpenSideBarDrawerButton from "../components/OpenSideBarDrawerButton";
 import OpenRightPartDrawerButton from "../components/OpenRightPartDrawerButton";
 import { AppState, actionCreators } from "../services/redux";

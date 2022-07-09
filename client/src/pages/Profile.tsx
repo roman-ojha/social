@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { instance as axios } from "../services/axios";
-// import {
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-//   setRootUserPostData,
-// } from "../services/redux-actions/index";
 import { useLocation, useHistory, useParams } from "react-router-dom";
 import "../styles/pages/profilePage.css";
 import { Helmet } from "react-helmet";
