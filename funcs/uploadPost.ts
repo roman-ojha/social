@@ -36,7 +36,7 @@ const uploadPost = async (
         },
         {
           $push: {
-            posts: postData,
+            posts: { $each: [postData as UserDocumentPosts], $position: 0 },
           },
           $inc: {
             postNo: 1,
