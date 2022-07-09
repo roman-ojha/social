@@ -20,31 +20,37 @@ const FilePicker = (): JSX.Element => {
   const imagePickerState = useSelector(
     (state: AppState) => state.imagePickerReducer
   );
+  const imagePickingFromState = useSelector(
+    (state: AppState) => state.imagePickingFromReducer
+  );
 
   const {
     homePageUserPostFieldDataAction,
     displayUserPostFieldEmojiPicker,
     openImagePicker,
+    setImagePickingFrom,
   } = bindActionCreators(actionCreators, dispatch);
 
   useEffect(() => {
-    var image = document.getElementsByClassName(
-      "MaxView_UserPost_Image"
-    )[0] as HTMLImageElement;
-    if (
-      imagePickerState.imageUrl !== null &&
-      imagePickerState.imageFile === undefined
-    ) {
-      image.style.display = "inline";
-      image.style.position = "static";
-      image.src = imagePickerState.imageUrl;
-    } else if (
-      imagePickerState.imageUrl === null &&
-      imagePickerState.imageFile !== undefined
-    ) {
-      image.style.display = "inline";
-      image.style.position = "static";
-      image.src = URL.createObjectURL(imagePickerState.imageFile);
+    if (imagePickingFromState === "homePagePostFiled") {
+      var image = document.getElementsByClassName(
+        "MaxView_UserPost_Image"
+      )[0] as HTMLImageElement;
+      if (
+        imagePickerState.imageUrl !== null &&
+        imagePickerState.imageFile === undefined
+      ) {
+        image.style.display = "inline";
+        image.style.position = "static";
+        image.src = imagePickerState.imageUrl;
+      } else if (
+        imagePickerState.imageUrl === null &&
+        imagePickerState.imageFile !== undefined
+      ) {
+        image.style.display = "inline";
+        image.style.position = "static";
+        image.src = URL.createObjectURL(imagePickerState.imageFile);
+      }
     }
   }, [imagePickerState]);
 
@@ -56,6 +62,7 @@ const FilePicker = (): JSX.Element => {
           icon="ic:outline-photo-library"
           onClick={() => {
             openImagePicker(true);
+            setImagePickingFrom("getUserIDPage");
           }}
         />
         <Icon

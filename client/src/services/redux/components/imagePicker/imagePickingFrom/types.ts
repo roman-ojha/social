@@ -1,7 +1,7 @@
 export type ImagePickingFromState =
   | "homePagePostFiled"
   | "getUserIDPage"
-  | undefined;
+  | null;
 
 export enum ImagePickingFromActionTypes {
   SET_IMAGE_PICKING_FROM = "setImagePickingFrom",

@@ -26,6 +26,7 @@ import mainPageInnerMessageBoxOnOff from "./components/messageBox/mainPageInnerM
 import setCurrentUserMessageReducer from "./components/messageBox/currentUserMessage/reducer";
 import setUserMessageFieldReducer from "./components/messageBox/userMessageField/reducer";
 import imagePickerReducer from "./components/imagePicker/reducer";
+import imagePickingFromReducer from "./components/imagePicker/imagePickingFrom/reducer";
 
 const reducer = combineReducers({
   setUserProfileDetailReducer,
@@ -55,6 +56,7 @@ const reducer = combineReducers({
   setCurrentUserMessageReducer,
   setUserMessageFieldReducer,
   imagePickerReducer,
+  imagePickingFromReducer,
 });
 
 export default reducer;

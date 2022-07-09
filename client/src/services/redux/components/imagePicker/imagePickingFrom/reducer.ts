@@ -4,9 +4,9 @@ import {
   ImagePickingFromState,
 } from "./types";
 
-const initialState: ImagePickingFromState = undefined;
+const initialState: ImagePickingFromState = null;
 
-const imagePickerReducer = (
+const imagePickingFromReducer = (
   state: ImagePickingFromState = initialState,
   action: ImagePickingFromAction
 ): ImagePickingFromState => {
@@ -18,4 +18,4 @@ const imagePickerReducer = (
   }
 };
 
-export default imagePickerReducer;
+export default imagePickingFromReducer;

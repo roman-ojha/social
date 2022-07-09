@@ -25,3 +25,4 @@ export * from "./components/messageBox/mainPageInnerMessageBoxOnOff/action";
 export * from "./components/messageBox/currentUserMessage/action";
 export * from "./components/messageBox/userMessageField/action";
 export * from "./components/imagePicker/action";
+export * from "./components/imagePicker/imagePickingFrom/action";
