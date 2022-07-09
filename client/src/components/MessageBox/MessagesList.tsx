@@ -2,10 +2,6 @@ import React from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
 import { NavLink } from "react-router-dom";
-// import {
-//   openRightPartDrawer,
-//   mainPageMessageViewOnOff,
-// } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import MessagesListSingleMessage from "./MessagesListSingleMessage";
 import { useMediaQuery } from "react-responsive";

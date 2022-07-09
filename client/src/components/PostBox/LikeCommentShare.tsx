@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import Api from "../../services/api/components/postBox";
-// import {
-//   commentBoxAction,
-//   stopProgressBar,
-//   startProgressBar,
-// } from "../../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { toastError } from "../../services/toast";
 import { bindActionCreators } from "redux";

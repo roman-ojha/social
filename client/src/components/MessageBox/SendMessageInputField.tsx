@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import socket from "../../services/socket";
-// import {
-//   appendOnCurrentInnerUserMessage,
-//   appendMessageOnMessageListAction,
-// } from "../../services/redux-actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { AppState, actionCreators } from "../../services/redux";

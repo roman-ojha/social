@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-// import { mainPageMessageInnerViewOnOff } from "../../services/redux-actions/index";
 import SingleMessage from "./SingleMessage";
 import SendMessageInputField from "./SendMessageInputField";
 import { AppState, actionCreators } from "../../services/redux";

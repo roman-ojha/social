@@ -2,12 +2,6 @@ import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { useSelector, useDispatch } from "react-redux";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../services/redux-actions";
 import { isEmptyString } from "../../funcs/isEmptyString";
 import { toastWarn, toastError, toastSuccess } from "../../services/toast";
 import Api from "../../services/api/components/postBox";

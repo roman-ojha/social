@@ -1,13 +1,6 @@
 import React, { useEffect, memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-//   commentBoxAction,
-// } from "../../services/redux-actions";
 import { AppState, actionCreators } from "../../../src/services/redux";
 import { CommentInfoState, PostBoxProps } from "./PostBox";
 import { bindActionCreators } from "redux";

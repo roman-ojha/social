@@ -1,12 +1,5 @@
 import React, { memo } from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../services/redux-actions";
 import { Month } from "src/interface/month";
 import { PostInformationInterface } from "./PostBox";
 import UserPostType from "src/interface/userPost";

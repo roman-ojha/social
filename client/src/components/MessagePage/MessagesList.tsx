@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import SearchIcon from "@mui/icons-material/Search";
-// import { messageListAction } from "../../services/redux-actions/index";
 import { toastError } from "../../services/toast";
 import messageApi from "../../services/api/global/message";
 import MessageListSingleMessage from "./MessagesListSingleMessage";

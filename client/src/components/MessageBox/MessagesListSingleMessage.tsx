@@ -1,9 +1,5 @@
 import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-// import {
-//   currentUserMessageAction,
-//   mainPageMessageInnerViewOnOff,
-// } from "../../services/redux-actions/index";
 import { useDispatch } from "react-redux";
 import { instance as axios } from "../../services/axios";
 import { toastError } from "../../services/toast";
