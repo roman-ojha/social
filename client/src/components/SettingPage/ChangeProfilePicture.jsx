@@ -10,6 +10,7 @@ import settingPageApi from "../../services/api/pages/settingPageApi";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";
 import { Button } from "@mui/material";
+import constant from "../../constant/constant";
 
 const ChangeProfilePicture = () => {
   const dispatch = useDispatch();
@@ -153,10 +154,7 @@ const ChangeProfilePicture = () => {
           </div>
         </div>
         <div className="Setting_Page_Change_Profile_Picture_Container_Bottom_Part">
-          <p>
-            NOTE : Consider using image url rather then uploading files because
-            cloud database have limited Storage
-          </p>
+          <p>NOTE : {constant.imagePickingMessage}</p>
         </div>
       </div>
     </>

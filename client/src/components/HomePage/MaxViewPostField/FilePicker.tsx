@@ -62,7 +62,7 @@ const FilePicker = (): JSX.Element => {
           icon="ic:outline-photo-library"
           onClick={() => {
             openImagePicker(true);
-            setImagePickingFrom("getUserIDPage");
+            setImagePickingFrom("homePagePostFiled");
           }}
         />
         <Icon

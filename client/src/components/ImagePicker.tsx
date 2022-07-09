@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { toastWarn } from "src/services/toast";
 import { Button } from "@mui/material";
+import constant from "../constant/constant";
 
 const ReturnImagePicker = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -148,10 +149,7 @@ const ReturnImagePicker = (): JSX.Element => {
               }}
               value={imageUrl}
             />
-            <h2>
-              NOTE : Consider using image url rather then uploading files
-              because cloud database have limited Storage
-            </h2>
+            <h2>NOTE : {constant.imagePickingMessage}</h2>
           </div>
 
           <div className="ImagePicker_File_Picker_Container">

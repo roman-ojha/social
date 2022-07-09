@@ -9,6 +9,8 @@ const constant = {
   },
   applicationName: "Social",
   applicationGithubUrl: "https://github.com/roman-ojha/social",
+  imagePickingMessage:
+    "If Possible, Consider using image url rather then uploading files because cloud database have limited Storage",
 };
 
 export default constant;
