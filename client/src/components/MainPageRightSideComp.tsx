@@ -8,13 +8,13 @@ import MainPageMsgAndNtfBar from "./MainPageMsgAndNtfBar";
 import "../styles/components/mainPageRightSideComp.css";
 import NotificationBox from "./NotificationBox";
 import MoreProfileBox from "./MoreProfileBox";
-import { actionCreators } from "../services/redux";
+import { actionCreators, AppState } from "../services/redux";
 import { bindActionCreators } from "redux";
 
-const MainPageRightSideComp = () => {
+const MainPageRightSideComp = (): JSX.Element => {
   const dispatch = useDispatch();
   const rightPartDrawerState = useSelector(
-    (state) => state.rightPartDrawerReducer
+    (state: AppState) => state.rightPartDrawerReducer
   );
   const { openRightPartDrawer } = bindActionCreators(actionCreators, dispatch);
 
@@ -27,25 +27,30 @@ const MainPageRightSideComp = () => {
             .getElementsByClassName(
               "MainPage_Rignt_Side_Component_Container"
             )[0]
-            .contains(e.target)
+            .contains(e.target as Node)
         ) {
           openRightPartDrawer(false);
-          document.getElementById("MainPage_Logo").style =
-            "visibility:visible;position:static";
-          document.querySelector(
-            ".MainPage_SideBar_Search_Outline"
-          ).style.width = "65%";
-          document.querySelector(".MainPage_SideBar_Search_Back_Icon").style =
-            "visibility: hidden;";
-          document.querySelector(".MainPage_SideBar_Search_Icon").style =
-            "visibility:visible;position:static;";
-          document.querySelector(".MainPage_SideBar_Search_Input_Field").style =
-            "width:65%";
-          document.querySelector(".MainPage_SideBar_Search_Input_Field").value =
-            "";
+          document
+            .getElementById("MainPage_Logo")!
+            .setAttribute("style", "visibility:visible;position:static");
+          document
+            .querySelector(".MainPage_SideBar_Search_Outline")
+            ?.setAttribute("style", "width:65%");
+          document
+            .querySelector(".MainPage_SideBar_Search_Back_Icon")
+            ?.setAttribute("style", "visibility: hidden;");
+          document
+            .querySelector(".MainPage_SideBar_Search_Icon")
+            ?.setAttribute("style", "visibility:visible;position:static;");
+          document
+            .querySelector(".MainPage_SideBar_Search_Input_Field")
+            ?.setAttribute("style", "width:65%");
+          document
+            .querySelector(".MainPage_SideBar_Search_Input_Field")
+            ?.setAttribute("value", "");
         }
       });
-  });
+  }, []);
 
   useEffect(() => {
     if (rightPartDrawerState) {

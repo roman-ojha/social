@@ -14,8 +14,9 @@ import { bindActionCreators } from "redux";
 import { actionCreators, AppState } from "../services/redux";
 import useRootUserProfilePageData from "../hooks/useRootUserProfilePageData";
 import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
+import { AxiosError } from "axios";
 
-const ReturnCommentContent = () => {
+const ReturnCommentContent = (): JSX.Element => {
   const history = useHistory();
   const setRootUserProfilePageData = useRootUserProfilePageData();
   const routeToProfilePage = useRouteToProfilePage();
@@ -59,7 +60,7 @@ const ReturnCommentContent = () => {
       });
   }, [dispatch]);
 
-  const comment = async () => {
+  const comment = async (): Promise<void> => {
     try {
       startProgressBar();
       if (isEmptyString(commentInputFieldData)) {
@@ -93,7 +94,8 @@ const ReturnCommentContent = () => {
         }
       }
       stopProgressBar();
-    } catch (err) {
+    } catch (error) {
+      const err = error as AxiosError;
       if (err.response) {
         if (err.response.data.success === false) {
           toastError(err.response.data.msg);
@@ -105,18 +107,16 @@ const ReturnCommentContent = () => {
     }
   };
 
-  const ViewSingleComment = (props) => {
+  const ViewSingleComment = ({ comment }): JSX.Element => {
     return (
       <>
         <div className="CommentBox_UserComment">
           <img
-            src={
-              props.comment.picture ? props.comment.picture : User_Profile_Icon
-            }
-            alt={props.comment.userID}
+            src={comment.picture ? comment.picture : User_Profile_Icon}
+            alt={comment.userID}
             onClick={() => {
               routeToProfilePage({
-                userID: props.comment.userID,
+                userID: comment.userID,
                 from: "commentBox",
               });
               commentBoxAction({
@@ -134,7 +134,7 @@ const ReturnCommentContent = () => {
             <h3
               onClick={() => {
                 routeToProfilePage({
-                  userID: props.comment.userID,
+                  userID: comment.userID,
                   from: "commentBox",
                 });
                 commentBoxAction({
@@ -148,14 +148,15 @@ const ReturnCommentContent = () => {
                 });
               }}
             >
-              {props.comment.userID}
+              {comment.userID}
             </h3>
-            <p>{props.comment.comment}</p>
+            <p>{comment.comment}</p>
           </div>
         </div>
       </>
     );
   };
+
   return (
     <>
       <div className="CommentBox_Background">
