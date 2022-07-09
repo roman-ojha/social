@@ -1,10 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../../services/redux-actions";
+import { useSelector } from "react-redux";
 import User_Profile_Icon from "../../../assets/svg/User_profile_Icon.svg";
 import FilePicker from "./FilePicker";
 import EmojiMart from "./EmojiMart";

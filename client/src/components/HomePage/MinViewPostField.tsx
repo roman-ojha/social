@@ -3,11 +3,6 @@ import { Helmet } from "react-helmet";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-// import {
-//   setHomePagePostFieldViewValue,
-//   profilePageDataAction,
-//   setRootUserProfileDataState,
-// } from "../../services/redux-actions";
 import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";

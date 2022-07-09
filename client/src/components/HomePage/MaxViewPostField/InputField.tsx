@@ -1,5 +1,4 @@
 import React from "react";
-// import { homePageUserPostFieldDataAction } from "../../../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";

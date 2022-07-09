@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   homePageUserPostFieldDataAction,
-//   displayUserPostFieldEmojiPicker,
-// } from "../../../services/redux-actions";
 import { Icon } from "@iconify/react";
 import { toastInfo } from "../../../services/toast";
 import { bindActionCreators } from "redux";

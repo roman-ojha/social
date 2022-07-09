@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { homePageUserPostFieldDataAction } from "../../../services/redux-actions";
 import { Picker } from "emoji-mart";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../../services/redux";

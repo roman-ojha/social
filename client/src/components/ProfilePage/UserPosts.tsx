@@ -3,11 +3,6 @@ import PostBox from "../PostBox/PostBox";
 import { useSelector, useDispatch } from "react-redux";
 import profileApi from "../../services/api/pages/profileApi";
 import { toastError } from "../../services/toast";
-// import {
-//   setRootUserProfileDataState,
-//   setRootUserPostData,
-//   profilePageDataAction,
-// } from "../../services/redux-actions";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";

@@ -1,7 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-// import { setHomePagePostFieldViewValue } from "../../services/redux-actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AppState, actionCreators } from "../../services/redux";

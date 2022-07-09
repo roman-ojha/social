@@ -2,14 +2,6 @@ import React from "react";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "@iconify/react";
-// import {
-//   mainPageMessageViewOnOff,
-//   mainPageMessageInnerViewOnOff,
-//   currentUserMessageAction,
-//   startProgressBar,
-//   stopProgressBar,
-//   profilePageDataAction,
-// } from "../../services/redux-actions";
 import { instance as axios } from "../../services/axios";
 import { toastError } from "../../services/toast";
 import { useHistory } from "react-router-dom";

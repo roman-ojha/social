@@ -1,11 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   userPostResponseData,
-//   homePageUserPostFieldDataAction,
-//   showLoadingSpinner,
-//   setHomePagePostFieldViewValue,
-// } from "../../../services/redux-actions";
 import { Icon } from "@iconify/react";
 import Api from "../../../services/api/pages/homeApi";
 import { toastError, toastSuccess } from "../../../services/toast";
