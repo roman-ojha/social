@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import "../styles/components/userSuggestionFollowdBySponsoredBy.css";
-import { toastError, toastSuccess } from "../services/toast";
+import { toastError } from "../services/toast";
 // import {
 //   profilePageDataAction,
 //   isFollowedFollowedByUser,
@@ -9,17 +9,13 @@ import { toastError, toastSuccess } from "../services/toast";
 //   stopProgressBar,
 //   openRightPartDrawer,
 // } from "../services/redux-actions";
-import { instance as axios } from "../services/axios";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
-import constant from "../constant/constant";
-import { useMediaQuery } from "react-responsive";
-import { AppState, actionCreators } from "../services/redux";
-import { bindActionCreators } from "redux";
-import { AxiosError } from "axios";
+import { AppState } from "../services/redux";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import useRouteToProfilePage from "../hooks/useRouteToProfilePage";
 import useFollowUser from "../hooks/useFollowUser";
+import useUnFollowUser from "../hooks/useUnFollowUser";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -27,9 +23,9 @@ const buttonStyle = makeStyles({
 });
 
 const FollowedBy = (): JSX.Element => {
-  const dispatch = useDispatch();
   const routeToProfilePage = useRouteToProfilePage();
   const followUser = useFollowUser();
+  const unFollowUser = useUnFollowUser();
   const mainPageMessageOnOffState = useSelector(
     (state: AppState) => state.changeMainPageMessageView
   );
@@ -39,12 +35,6 @@ const FollowedBy = (): JSX.Element => {
   const moreProfileBoxState = useSelector(
     (state: AppState) => state.moreProfileBoxReducer
   );
-  const isMax850px = useMediaQuery({
-    query: `(max-width:${constant.mediaQueryRes.screen850}px)`,
-  });
-
-  const { isFollowedFollowedByUser, startProgressBar, stopProgressBar } =
-    bindActionCreators(actionCreators, dispatch);
 
   interface FollowedUserProps {
     userInformation: any;
@@ -55,49 +45,49 @@ const FollowedBy = (): JSX.Element => {
   }): JSX.Element => {
     const ButtonClass = buttonStyle();
 
-    const unFollowUser = async (): Promise<void> => {
-      if (userInformation.type !== "bot") {
-        try {
-          startProgressBar();
-          const unfollowedTo = {
-            userID: userInformation.userID,
-            id: userInformation.id,
-          };
-          const response = await axios({
-            method: "POST",
-            url: "/u/unfollow",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            data: JSON.stringify(unfollowedTo),
-            // sending both follwedTo and FollowedBy
-            withCredentials: true,
-          });
-          const data = await response.data;
-          if (response.status === 200 && data.success) {
-            toastSuccess(data.msg);
-            isFollowedFollowedByUser({
-              userID: userInformation.userID,
-              followed: false,
-              type: "",
-            });
-            stopProgressBar();
-          }
-        } catch (error) {
-          const err = error as AxiosError;
-          if (err.response) {
-            if (err.response.data.success === false) {
-              toastError(err.response.data.msg);
-            }
-          } else {
-            toastError("Some Problem Occur, Please Try again later!!!");
-          }
-          stopProgressBar();
-        }
-      } else {
-        toastError("Sorry!!, can't be able to Follow bot");
-      }
-    };
+    // const unFollowUser = async (): Promise<void> => {
+    //   if (userInformation.type !== "bot") {
+    //     try {
+    //       startProgressBar();
+    //       const unfollowedTo = {
+    //         userID: userInformation.userID,
+    //         id: userInformation.id,
+    //       };
+    //       const response = await axios({
+    //         method: "POST",
+    //         url: "/u/unfollow",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         data: JSON.stringify(unfollowedTo),
+    //         // sending both follwedTo and FollowedBy
+    //         withCredentials: true,
+    //       });
+    //       const data = await response.data;
+    //       if (response.status === 200 && data.success) {
+    //         toastSuccess(data.msg);
+    //         isFollowedFollowedByUser({
+    //           userID: userInformation.userID,
+    //           followed: false,
+    //           type: "",
+    //         });
+    //         stopProgressBar();
+    //       }
+    //     } catch (error) {
+    //       const err = error as AxiosError;
+    //       if (err.response) {
+    //         if (err.response.data.success === false) {
+    //           toastError(err.response.data.msg);
+    //         }
+    //       } else {
+    //         toastError("Some Problem Occur, Please Try again later!!!");
+    //       }
+    //       stopProgressBar();
+    //     }
+    //   } else {
+    //     toastError("Sorry!!, can't be able to Follow bot");
+    //   }
+    // };
 
     return (
       <>
@@ -163,7 +153,16 @@ const FollowedBy = (): JSX.Element => {
             {userInformation.followed ? (
               <p
                 id="MainPage_Followed_User_Follow_Button_Text"
-                onClick={unFollowUser}
+                onClick={async () => {
+                  await unFollowUser({
+                    userInformation: {
+                      id: userInformation.id,
+                      userID: userInformation.userID,
+                      type: userInformation.type,
+                    },
+                    from: "followedByComp",
+                  });
+                }}
               >
                 UnFollow
               </p>

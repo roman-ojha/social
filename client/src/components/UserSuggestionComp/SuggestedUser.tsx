@@ -1,6 +1,5 @@
 import React from "react";
-import { toastError, toastSuccess } from "../../services/toast";
-import { instance as axios } from "../../services/axios";
+import { toastError } from "../../services/toast";
 // import {
 //   profilePageDataAction,
 //   startProgressBar,
@@ -9,14 +8,11 @@ import { instance as axios } from "../../services/axios";
 //   openRightPartDrawer,
 // } from "../../services/redux-actions";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
-import { useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "../../services/redux";
-import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 import useFollowUser from "../../hooks/useFollowUser";
+import useUnFollowUser from "../../hooks/useUnFollowUser";
 
 const buttonStyle = makeStyles({
   root: {},
@@ -31,54 +27,9 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
   userInformation,
 }): JSX.Element => {
   const ButtonClass = buttonStyle();
-  const dispatch = useDispatch();
   const routeToProfilePage = useRouteToProfilePage();
   const followUser = useFollowUser();
-  const { startProgressBar, stopProgressBar, isFollowedSuggestedUser } =
-    bindActionCreators(actionCreators, dispatch);
-
-  const unFollowUser = async (): Promise<void> => {
-    if (userInformation.type !== "bot") {
-      try {
-        startProgressBar();
-        const unfollowedTo = {
-          userID: userInformation.userID,
-          id: userInformation.id,
-        };
-        const response = await axios({
-          method: "POST",
-          url: "/u/unfollow",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          data: JSON.stringify(unfollowedTo),
-          // sending both follwedTo and FollowedBy
-          withCredentials: true,
-        });
-        const data = await response.data;
-        if (response.status === 200 && data.success) {
-          toastSuccess(data.msg);
-          isFollowedSuggestedUser({
-            userID: userInformation.userID,
-            followed: false,
-          });
-          stopProgressBar();
-        }
-      } catch (error) {
-        const err = error as AxiosError;
-        if (err.response) {
-          if (err.response.data.success === false) {
-            toastError(err.response.data.msg);
-          }
-        } else {
-          toastError("Some Problem Occur, Please Try again later!!!");
-        }
-        stopProgressBar();
-      }
-    } else {
-      toastError("Sorry!!, can't be able to Follow bot");
-    }
-  };
+  const unFollowUser = useUnFollowUser();
 
   return (
     <>
@@ -144,7 +95,17 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
           {userInformation.followed ? (
             <p
               id="MainPage_Suggested_User_Follow_Button_Text"
-              onClick={unFollowUser}
+              onClick={async () => {
+                console.log("UnfollowUser");
+                await unFollowUser({
+                  userInformation: {
+                    id: userInformation.id,
+                    userID: userInformation.userID,
+                    type: userInformation.type,
+                  },
+                  from: "userSuggestionComp",
+                });
+              }}
             >
               UnFollow
             </p>

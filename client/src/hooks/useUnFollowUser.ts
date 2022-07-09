@@ -18,7 +18,7 @@ type ReturnArgument = {
   };
 };
 
-const useFollowUser = () => {
+const useUnFollowUser = () => {
   const dispatch = useDispatch();
   const {
     startProgressBar,
@@ -32,17 +32,17 @@ const useFollowUser = () => {
     if (obj.userInformation.type !== "bot") {
       try {
         startProgressBar();
-        const followedTo = {
+        const unFollowedTo = {
           userID: obj.userInformation.userID,
           id: obj.userInformation.id,
         };
         const response = await axios({
           method: "POST",
-          url: "/u/follow",
+          url: "/u/unfollow",
           headers: {
             "Content-Type": "application/json",
           },
-          data: JSON.stringify(followedTo),
+          data: JSON.stringify(unFollowedTo),
           // sending both follwedTo and FollowedBy
           withCredentials: true,
         });
@@ -52,14 +52,14 @@ const useFollowUser = () => {
           if (obj.from === "userSuggestionComp") {
             isFollowedSuggestedUser({
               userID: obj.userInformation.userID,
-              followed: true,
+              followed: false,
               type: "",
             });
           }
           if (obj.from === "followedByComp") {
             isFollowedFollowedByUser({
               userID: obj.userInformation.userID,
-              followed: true,
+              followed: false,
               type: "",
             });
           }
@@ -69,7 +69,7 @@ const useFollowUser = () => {
           ) {
             const userObj = {
               ...obj.optional.data,
-              isRootUserFollowed: true,
+              isRootUserFollowed: false,
             };
             profilePageDataAction(userObj);
           }
@@ -92,4 +92,4 @@ const useFollowUser = () => {
   };
 };
 
-export default useFollowUser;
+export default useUnFollowUser;

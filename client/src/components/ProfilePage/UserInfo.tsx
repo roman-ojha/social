@@ -11,7 +11,7 @@ import { Icon } from "@iconify/react";
 //   profilePageDataAction,
 // } from "../../services/redux-actions";
 import { instance as axios } from "../../services/axios";
-import { toastError, toastSuccess } from "../../services/toast";
+import { toastError } from "../../services/toast";
 import { useHistory } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import constant from "../../constant/constant";
@@ -19,11 +19,13 @@ import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
 import useFollowUser from "../../hooks/useFollowUser";
+import useUnFollowUser from "../../hooks/useUnFollowUser";
 
 const UserInfo = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
   const followUser = useFollowUser();
+  const unFollowUser = useUnFollowUser();
   const profilePageData = useSelector(
     (state: AppState) => state.profilePageDataReducer
   );
@@ -37,50 +39,7 @@ const UserInfo = (): JSX.Element => {
     mainPageMessageViewOnOff,
     mainPageMessageInnerViewOnOff,
     currentUserMessageAction,
-    startProgressBar,
-    stopProgressBar,
-    profilePageDataAction,
   } = bindActionCreators(actionCreators, dispatch);
-
-  const unFollowUser = async (): Promise<void> => {
-    try {
-      startProgressBar();
-      const unfollowedTo = {
-        userID: profilePageData.userID,
-        id: profilePageData.id,
-      };
-      const response = await axios({
-        method: "POST",
-        url: "/u/unfollow",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(unfollowedTo),
-        // sending both follwedTo and FollowedBy
-        withCredentials: true,
-      });
-      const data = await response.data;
-      const userObj = {
-        ...profilePageData,
-        isRootUserFollowed: false,
-      };
-      if (response.status === 200 && data.success) {
-        toastSuccess(data.msg);
-        profilePageDataAction(userObj);
-        stopProgressBar();
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      stopProgressBar();
-    }
-  };
 
   const showInnerMessage = async (): Promise<void> => {
     // before getting new message we will reset the previous message stored into redux
@@ -203,7 +162,17 @@ const UserInfo = (): JSX.Element => {
           ) : profilePageData.isRootUserFollowed ? (
             <button
               className="ProfilePage_UserInfo_FollowUser_Button"
-              onClick={unFollowUser}
+              onClick={async () => {
+                await unFollowUser({
+                  userInformation: {
+                    id: profilePageData.id,
+                    userID: profilePageData.userID,
+                    type: "",
+                  },
+                  from: "profilePage",
+                  optional: { for: "profilePage", data: profilePageData },
+                });
+              }}
             >
               Unfollow
             </button>
