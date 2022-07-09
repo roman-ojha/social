@@ -1,4 +1,4 @@
-.Notification_Box_Container {
+.box_Container {
   height: 59%;
   background-color: white;
   margin-bottom: 1%;
@@ -11,21 +11,24 @@
   padding: 0.3rem;
   box-sizing: border-box;
 }
-.Notification_Box_Container h1 {
+
+.box_Container h1 {
   width: 90%;
   font-family: var(--primary-font-family);
 }
-.Notification_Title_HR {
+
+.box_Container hr {
   width: 98%;
 }
-.Notification_Container {
+
+.inner_container {
   height: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.Notification_Container p {
+.inner_container p {
   font-family: var(--primary-font-family);
   font-size: 2rem;
   font-weight: 600;
@@ -33,31 +36,29 @@
   font-style: italic;
 }
 
-.Show_Notification_Container {
+.notification_list_container {
   height: 100%;
-  /* border: 1px solid blue; */
   overflow-y: scroll;
 }
 
-.Show_Notification_Container::-webkit-scrollbar {
+.notification_list_container::-webkit-scrollbar {
   width: 5px;
 }
-.Show_Notification_Container::-webkit-scrollbar-track {
+.notification_list_container::-webkit-scrollbar-track {
   background-color: transparent;
 }
-.Show_Notification_Container::-webkit-scrollbar-thumb {
+.notification_list_container::-webkit-scrollbar-thumb {
   background-color: transparent;
   border-radius: 15px;
 }
-.Show_Notification_Container:hover::-webkit-scrollbar-thumb {
+.notification_list_container:hover::-webkit-scrollbar-thumb {
   background-color: #522572;
 }
-.Show_Notification_Container::-webkit-scrollbar-thumb:hover {
+.notification_list_container::-webkit-scrollbar-thumb:hover {
   background-color: #6b4a81;
 }
 
-#Single_Notification_Container {
-  /* border: 1px solid red; */
+#single_notification {
   margin: 0.5rem;
   padding: 0.5rem;
   cursor: pointer;
@@ -66,24 +67,24 @@
   transition-duration: 100ms;
 }
 
-#Single_Notification_Container:hover {
+#single_notification:hover {
   background-color: #c9c9c9;
 }
 
-#Notification_Box_Single_Nft_Pic_and_Title {
+#single_notification_pic_and_title {
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
 }
 
-#Notification_Box_Single_Nft_Pic_and_Title img {
+#single_notification_pic_and_title img {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 50%;
 }
 
-#Notification_Box_Single_Nft_Pic_and_Title p {
+#single_notification_pic_and_title p {
   margin-left: 0.5rem;
   font-size: 1rem;
   color: black;

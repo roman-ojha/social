@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/components/notificationBox.css";
+import styles from "../styles/modules/components/notificationBox.module.css";
 import { useSelector } from "react-redux";
 import User_Profile_Icon from "../assets/svg/User_profile_Icon.svg";
 import { AppState } from "../services/redux";
@@ -22,14 +22,14 @@ const NotificationBox = (): JSX.Element => {
   return (
     <>
       {notificationBoxState.open ? (
-        <div className="Notification_Box_Container">
+        <div className={styles.box_Container}>
           <h1>Notification</h1>
-          <hr className="Notification_Title_HR" />
-          <div className="Notification_Container">
+          <hr />
+          <div className={styles.inner_container}>
             {notificationBoxState.notificationData.length === 0 ? (
               <p>Empty</p>
             ) : (
-              <div className="Show_Notification_Container">
+              <div className={styles.notification_list_container}>
                 {notificationBoxState.notificationData.map((data, index) => {
                   return (
                     <Button
@@ -38,10 +38,10 @@ const NotificationBox = (): JSX.Element => {
                       }}
                       className={ButtonClass.root}
                       key={index}
-                      id="Single_Notification_Container"
+                      id={styles.single_notification}
                     >
                       <div
-                        id="Notification_Box_Single_Nft_Pic_and_Title"
+                        id={styles.single_notification_pic_and_title}
                         onClick={async () => {
                           await routeToProfilePage({ userID: data.userID });
                         }}
