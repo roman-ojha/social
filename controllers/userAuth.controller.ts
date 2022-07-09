@@ -13,11 +13,7 @@ import {
   UserDocumentMessages,
   UserDocumentNotification,
 } from "../interface/userDocument.js";
-import {
-  redisClient,
-  isRedisConnected,
-} from "../middleware/auth/authUsingRedis.js";
-import RedisUserDetail from "../interface/redisUserDetail.js";
+import setRedisUserData from "../funcs/setRedisUserData.js";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
@@ -174,21 +170,12 @@ export default {
             sameSite: "none",
           });
         }
-        if (isRedisConnected) {
-          // store userDetail to redis
-          const redisUserDetail: RedisUserDetail = {
-            id: newUserId,
-            email: email,
-            name: name,
-            tokens: [{ token: token as string }],
-          };
-          await redisClient.setEx(
-            newUserId,
-            864000,
-            // for 10 days
-            JSON.stringify(redisUserDetail)
-          );
-        }
+        await setRedisUserData({
+          email: email,
+          name: name,
+          id: newUserId,
+          tokens: [{ token: token as string }],
+        });
         return res.status(200).json(<ResponseObject>{
           success: true,
           msg: "User register successfully",
@@ -230,22 +217,12 @@ export default {
           sameSite: "none",
         });
       }
-      if (isRedisConnected) {
-        // store userDetail to redis
-        const redisUserDetail: RedisUserDetail = {
-          id: newUserId,
-          email: email,
-          name: name,
-          tokens: [{ token: token as string }],
-        };
-        await redisClient.setEx(
-          newUserId,
-          864000,
-          // for 10 days
-          JSON.stringify(redisUserDetail)
-        );
-      }
-
+      await setRedisUserData({
+        id: newUserId,
+        email: email,
+        name: name,
+        tokens: [{ token: token as string }],
+      });
       // NOTE: cause i have hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
       // Warning: But in my opinion this might not be the best way to authenticate user
       return res.status(200).json(<ResponseObject>{
@@ -253,7 +230,6 @@ export default {
         msg: "User register successfully",
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json({
         success: false,
         err: "Server Error!!,Please try again later",
@@ -311,21 +287,13 @@ export default {
           }
 
           // Storing User Data in redis
-          if (isRedisConnected) {
-            const redisUserDetail: RedisUserDetail = {
-              id: userLogin.id,
-              email: userLogin.email,
-              name: userLogin.name,
-              tokens: userLogin.tokens,
-              userID: userLogin.userID,
-            };
-            await redisClient.setEx(
-              userLogin.id,
-              864000,
-              // for 10 days
-              JSON.stringify(redisUserDetail)
-            );
-          }
+          await setRedisUserData({
+            id: userLogin.id,
+            email: userLogin.email,
+            name: userLogin.name,
+            userID: userLogin.userID,
+            tokens: userLogin.tokens,
+          });
 
           // NOTE: if we would host hosted client app on vercel and server on heroku and Cookies are not cross-domain compatible. if it was, it would be a serious security issue. So that we have to pass the token as response object
           return res.status(200).json(<ResponseObject>{

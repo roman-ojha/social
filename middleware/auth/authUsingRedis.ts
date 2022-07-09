@@ -118,7 +118,7 @@ const authenticate: RequestHandler = async (
         ...parsedUserDetail,
         tokens: [],
       };
-      req.userID = parsedUserDetail.userID;
+      req.userID = parsedUserDetail.userID as string;
       next();
     } else {
       // redis is not connected then we have to authenticate using mongodb

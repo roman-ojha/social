@@ -1,12 +1,12 @@
 import {
   isRedisConnected,
   redisClient,
-} from "../middleware/auth/authUsingRedis";
-import RedisUserDetail from "../interface/redisUserDetail";
+} from "../middleware/auth/authUsingRedis.js";
+import RedisUserDetail from "../interface/redisUserDetail.js";
 
 type ArgumentObj = RedisUserDetail;
 
-const updateRedisUserData = async (userDetail: ArgumentObj) => {
+const setRedisUserData = async (userDetail: ArgumentObj) => {
   try {
     if (isRedisConnected) {
       let redisUserDetail: RedisUserDetail;
@@ -41,4 +41,4 @@ const updateRedisUserData = async (userDetail: ArgumentObj) => {
   }
 };
 
-export default updateRedisUserData;
+export default setRedisUserData;

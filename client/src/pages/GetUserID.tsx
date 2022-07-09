@@ -49,7 +49,6 @@ const GetUserID: React.FC<GetUserIDProps> = (): JSX.Element => {
           withCredentials: true,
         });
         const data = await res.data;
-        console.log(data);
         setUserDetail(data);
       };
       getUserDetail();

@@ -420,7 +420,6 @@ export default {
   homeUser: (req: Request, res: Response): object => {
     try {
       const rootUser = req.rootUser;
-      console.log(rootUser);
       return res.status(200).json(rootUser);
     } catch (err) {
       return res.status(500).json({
@@ -750,7 +749,6 @@ export default {
         .status(200)
         .json(<ResponseObject>{ success: true, msg: "Follow successfully" });
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!, Please Try again later",

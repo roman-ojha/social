@@ -10,21 +10,15 @@ import { Request, Response } from "express";
 import constants from "../constants/index.js";
 import UserDocument, { UserDocumentPosts } from "../interface/userDocument.js";
 import uploadPost from "../funcs/uploadPost.js";
-import {
-  isRedisConnected,
-  redisClient,
-} from "../middleware/auth/authUsingRedis.js";
-import RedisUserDetail from "../interface/redisUserDetail.js";
+import setRedisUserData from "../funcs/setRedisUserData.js";
 const bucket = storage.bucket();
 
 export default {
   post: async (req: Request, res: Response): Promise<object> => {
     try {
       const rootUser: UserDocument = req.rootUser;
-      // console.log(rootUser);
       const caption: string | undefined = req.body.caption;
       const file = req.file;
-      // console.log();
       if (!caption && !file) {
         // if user doesn't fill the any filed
         return res.status(400).json(<ResponseObject>{
@@ -89,7 +83,6 @@ export default {
         });
         // here we are again deleting the compressed file after upload to firebase
         fs.unlink(`./db/build/${file.filename}`, (err) => {});
-        // console.log(uploadRes);
         const caption = req.body.caption;
         const picName = file.filename;
         const picPath = `images/${rootUser.email}/${file.filename}`;
@@ -191,7 +184,9 @@ export default {
             email: 1,
             posts: 1,
             stories: 1,
+            tokens: { $slice: -5 },
             postNo: 1,
+            id: 1,
           }
         );
         if (!resRootUser) {
@@ -207,22 +202,13 @@ export default {
               },
             }
           );
-          // Storing User Data in redis
-          // if (isRedisConnected) {
-          //   const redisUserDetail: RedisUserDetail = {
-          //     id: resRootUser.id,
-          //     email: resRootUser.email,
-          //     name: resRootUser.name,
-          //     tokens: ,
-          //     userID: userLogin.userID,
-          //   };
-          //   await redisClient.setEx(
-          //     userLogin.id,
-          //     864000,
-          //     // for 10 days
-          //     JSON.stringify(redisUserDetail)
-          //   );
-          // }
+          await setRedisUserData({
+            id: resRootUser.id,
+            email: resRootUser.email,
+            name: resRootUser.name,
+            userID: userID,
+            tokens: resRootUser.tokens,
+          });
           return res
             .status(200)
             .json({ success: true, msg: "Register Successfully" });
@@ -245,7 +231,6 @@ export default {
           );
           // here we are again deleting the compressed file after upload to firebase
           fs.unlink(`./db/build/${req.file.filename}`, (err) => {});
-          // console.log(uploadRes);
           const userID = req.body.userID;
           const caption = `${userID} Update The Profile Picture`;
           const picName = req.file.filename;
@@ -296,6 +281,15 @@ export default {
               },
             }
           );
+
+          // update redis with userID
+          await setRedisUserData({
+            id: resRootUser.id,
+            email: resRootUser.email,
+            name: resRootUser.name,
+            userID: userID,
+            tokens: resRootUser.tokens,
+          });
           res.status(200).json({ success: true, msg: "Register Successfully" });
         }
       }
