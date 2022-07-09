@@ -1,5 +1,19 @@
 ### Changelog
 
+#### [v0.6.3](https://github.com/roman-ojha/social/compare/v0.6.2...v0.6.3)
+
+> 9 July 2022
+
+- fix(server): Google oauth is working now [`#128`](https://github.com/roman-ojha/social/issues/128)
+- fix: improved /u/userID route and redis Database [`#106`](https://github.com/roman-ojha/social/issues/106)
+- fix(server): now Posting caption is pushed on the top [`#127`](https://github.com/roman-ojha/social/issues/127)
+- fix(custom_hooks): added useFollowUser & useUnFollowUser [`#127`](https://github.com/roman-ojha/social/issues/127)
+- style(sideBar): updated media Query for SideBarMenu [`#119`](https://github.com/roman-ojha/social/issues/119)
+- fix(server): solved followUser route [`#123`](https://github.com/roman-ojha/social/issues/123)
+- fix(server): storing admin into googelOauth User [`4c4f24a`](https://github.com/roman-ojha/social/commit/4c4f24add0c243fca8fc83ef68f855ac91af1e1e)
+- chore(changelog): updated to v0.6.2 [`4413001`](https://github.com/roman-ojha/social/commit/4413001037d614cacd97749431b89a4232837ff5)
+- fix(custom_hooks): added useFollowUser [`e10fb79`](https://github.com/roman-ojha/social/commit/e10fb79d3ae11983e4b7df2bd3851146492b5b06)
+
 #### [v0.6.2](https://github.com/roman-ojha/social/compare/v0.6.1...v0.6.2)
 
 > 8 July 2022
