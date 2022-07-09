@@ -22,7 +22,6 @@ const ChangeUserID = () => {
     try {
       e.preventDefault();
       startProgressBar();
-      //   console.log(newUserID);
       const res = await settingPageApi.changeUserID(newUserID);
       const resData = await res.data;
       if (resData.success) {

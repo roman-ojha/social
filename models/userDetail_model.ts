@@ -210,7 +210,6 @@ userDetailSchema.methods.generateAuthToken = async function (): Promise<
 //       return false;
 //     }
 //   } catch (err) {
-//     // console.log(err);
 //     return false;
 //   }
 // };

@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
+import useRootUserProfilePageData from "../../hooks/useRootUserProfilePageData";
 
 const MinViewPostField = (): JSX.Element => {
   const history = useHistory();
@@ -20,6 +21,7 @@ const MinViewPostField = (): JSX.Element => {
     setRootUserProfileDataState,
     setHomePagePostFieldViewValue,
   } = bindActionCreators(actionCreators, dispatch);
+  const setRootUserProfilePageData = useRootUserProfilePageData();
   const userProfileDetailStore = useSelector(
     (state: AppState) => state.setUserProfileDetailReducer
   );
@@ -44,17 +46,9 @@ const MinViewPostField = (): JSX.Element => {
           }
           className="HomePage_MinField_UserPost_Field_Image"
           onClick={() => {
-            const userObj = {
-              ...userProfileDetailStore,
-              isRootUserFollowed: false,
-            };
-            profilePageDataAction(userObj);
-            if (!rootUserProfileDataState.fetchedRootUserProfileData) {
-              setRootUserProfileDataState({
-                fetchedRootUserProfileData: false,
-                getRootUserProfileData: true,
-              });
-            }
+            setRootUserProfilePageData({
+              rootUserProfileDetail: userProfileDetailStore,
+            });
             history.push(`/u/profile/${userProfileDetailStore.userID}/posts`);
           }}
           alt="profile"

@@ -49,9 +49,7 @@ const SignIn = (): JSX.Element => {
         withCredentials: true,
       });
       stopProgressBar();
-      // console.log(res.status);
       if (res.status !== 200) {
-        // console.log(data);
         setSignInDetail({
           email: "",
           password: "",

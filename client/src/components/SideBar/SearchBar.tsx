@@ -37,7 +37,6 @@ const MainPageSearchBar = (props) => {
     bindActionCreators(actionCreators, dispatch);
 
   const SearchBarUser = (props) => {
-    // console.log(props.userDetail);
     return (
       <>
         <Button

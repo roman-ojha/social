@@ -24,7 +24,6 @@ const OpenSideBarDrawerButton = () => {
           className="SideBar_Drawer_Open_Icons"
           onClick={() => {
             openSideBarDrawer(true);
-            // console.log("hello");
           }}
         >
           <Icon

@@ -101,7 +101,6 @@ const authenticate: RequestHandler = async (
         return;
       }
       // User Exist in Redis
-      //   console.log(JSON.parse(userFromRedis));
       const parsedUserDetail: RedisUserDetail = JSON.parse(userFromRedis);
       const isTokenExist = parsedUserDetail.tokens.find((obj) => {
         if (obj.token === token) return true;

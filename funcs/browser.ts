@@ -24,7 +24,6 @@
 //         height: 1080,
 //       },
 //     });
-//     console.log("Headless Browser launched Successfully");
 //     return true;
 //   } catch (err) {
 //     return false;

@@ -27,7 +27,6 @@ const MessageListSingleMessage = (props): JSX.Element => {
         fetchedInnerMessage: false,
       });
       mainPageMessageInnerViewOnOff(true);
-      // console.log(props.messageInfo.messageTo);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",

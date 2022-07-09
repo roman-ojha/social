@@ -383,7 +383,6 @@ export default {
         comment: finalComments,
       });
     } catch (err) {
-      console.log(err);
       return res.status(500).json(<ResponseObject>{
         success: false,
         msg: "Server Error!!!, please try again later",

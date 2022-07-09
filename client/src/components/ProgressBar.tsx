@@ -21,7 +21,6 @@ const ProgressBar = (): JSX.Element => {
       //   progressBarState.isCompleted === true &&
       //   progressBarState.showProgressBar === false
       // ) {
-      //   console.log("hello");
       //   // hideProgressBar();
       // }
       if (!progressBarState.isCompleted) {
@@ -29,12 +28,10 @@ const ProgressBar = (): JSX.Element => {
         let incrementInterval = 30;
         const updateProgressBar = () => {
           if (previousWidth <= 85) {
-            // console.log("less then 85");
             incrementInterval = incrementInterval / 1.4;
             previousWidth = previousWidth + incrementInterval;
             progressBar.style.width = `${previousWidth}%`;
           } else if (previousWidth <= 100) {
-            // console.log("more then 85");
             incrementInterval = incrementInterval / 1.9;
             previousWidth = previousWidth + incrementInterval;
             progressBar.style.width = `${previousWidth}%`;

@@ -96,7 +96,6 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             <p
               id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={async () => {
-                console.log("UnfollowUser");
                 await unFollowUser({
                   userInformation: {
                     id: userInformation.id,

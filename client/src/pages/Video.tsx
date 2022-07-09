@@ -42,9 +42,7 @@ const Video = (): JSX.Element => {
   //   try {
   //     const res = await Api.getYoutubeApi();
   //     const data = await res.data;
-  //     // console.log(data);
   //   } catch (err) {
-  //     // console.log(err);
   //   }
   // };
 

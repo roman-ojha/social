@@ -51,7 +51,6 @@ const PostButton = () => {
         const res = await Api.postImageUrl(postData);
         const resData = await res.data;
         if (res.status === 200 && resData.success) {
-          console.log(resData);
           toastSuccess(resData.msg);
           userPostResponseData({ ...resData.data, date: new Date() });
           homePageUserPostFieldDataAction({
