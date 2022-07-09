@@ -152,7 +152,14 @@ const SuggestedUser: React.FC<SuggestedUserProps> = ({
             <p
               id="MainPage_Suggested_User_Follow_Button_Text"
               onClick={async () => {
-                await followUser(userInformation);
+                await followUser({
+                  userInformation: {
+                    id: userInformation.id,
+                    userID: userInformation.userID,
+                    type: userInformation.type,
+                  },
+                  from: "userSuggestionComp",
+                });
               }}
             >
               Follow

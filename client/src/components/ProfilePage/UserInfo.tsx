@@ -18,10 +18,12 @@ import constant from "../../constant/constant";
 import { bindActionCreators } from "redux";
 import { AppState, actionCreators } from "../../services/redux";
 import { AxiosError } from "axios";
+import useFollowUser from "../../hooks/useFollowUser";
 
 const UserInfo = (): JSX.Element => {
   const history = useHistory();
   const dispatch = useDispatch();
+  const followUser = useFollowUser();
   const profilePageData = useSelector(
     (state: AppState) => state.profilePageDataReducer
   );
@@ -39,49 +41,6 @@ const UserInfo = (): JSX.Element => {
     stopProgressBar,
     profilePageDataAction,
   } = bindActionCreators(actionCreators, dispatch);
-
-  const followUser = async (): Promise<void> => {
-    // writing logic for followuser
-    try {
-      startProgressBar();
-      const followedTo = {
-        userID: profilePageData.userID,
-        id: profilePageData.id,
-      };
-      const response = await axios({
-        method: "POST",
-        url: "/u/follow",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: JSON.stringify(followedTo),
-        // sending both follwedTo and FollowedBy
-        withCredentials: true,
-      });
-      const data = await response.data;
-      const userObj = {
-        ...profilePageData,
-        isRootUserFollowed: true,
-      };
-      if (data.success) {
-      }
-      if (response.status === 200 && data.success) {
-        toastSuccess(data.msg);
-        profilePageDataAction(userObj);
-        stopProgressBar();
-      }
-    } catch (error) {
-      const err = error as AxiosError;
-      if (err.response) {
-        if (err.response.data.success === false) {
-          toastError(err.response.data.msg);
-        }
-      } else {
-        toastError("Some Problem Occur, Please Try again later!!!");
-      }
-      stopProgressBar();
-    }
-  };
 
   const unFollowUser = async (): Promise<void> => {
     try {
@@ -251,7 +210,17 @@ const UserInfo = (): JSX.Element => {
           ) : (
             <button
               className="ProfilePage_UserInfo_FollowUser_Button"
-              onClick={followUser}
+              onClick={async () => {
+                await followUser({
+                  userInformation: {
+                    id: profilePageData.id,
+                    userID: profilePageData.userID,
+                    type: "",
+                  },
+                  from: "profilePage",
+                  optional: { for: "profilePage", data: profilePageData },
+                });
+              }}
             >
               Follow
             </button>

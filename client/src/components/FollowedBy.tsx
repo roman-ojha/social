@@ -54,49 +54,6 @@ const FollowedBy = (): JSX.Element => {
     userInformation,
   }): JSX.Element => {
     const ButtonClass = buttonStyle();
-    // const followUser = async (): Promise<void> => {
-    //   if (userInformation.type !== "bot") {
-    //     try {
-    //       startProgressBar();
-    //       const followedTo = {
-    //         userID: userInformation.userID,
-    //         id: userInformation.id,
-    //       };
-    //       const response = await axios({
-    //         method: "POST",
-    //         url: "/u/follow",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         data: JSON.stringify(followedTo),
-    //         // sending both follwedTo and FollowedBy
-    //         withCredentials: true,
-    //       });
-    //       const data = await response.data;
-    //       if (response.status === 200 && data.success) {
-    //         toastSuccess(data.msg);
-    //         isFollowedFollowedByUser({
-    //           userID: userInformation.userID,
-    //           followed: true,
-    //           type: "",
-    //         });
-    //         stopProgressBar();
-    //       }
-    //     } catch (error) {
-    //       const err = error as AxiosError;
-    //       if (err.response) {
-    //         if (err.response.data.success === false) {
-    //           toastError(err.response.data.msg);
-    //         }
-    //       } else {
-    //         toastError("Some Problem Occur, Please Try again later!!!");
-    //       }
-    //       stopProgressBar();
-    //     }
-    //   } else {
-    //     toastError("Sorry!!, can't be able to Follow bot");
-    //   }
-    // };
 
     const unFollowUser = async (): Promise<void> => {
       if (userInformation.type !== "bot") {
@@ -214,7 +171,14 @@ const FollowedBy = (): JSX.Element => {
               <p
                 id="MainPage_Followed_User_Follow_Button_Text"
                 onClick={async () => {
-                  // await followUser(userInformation);
+                  await followUser({
+                    userInformation: {
+                      id: userInformation.id,
+                      userID: userInformation.userID,
+                      type: userInformation.type,
+                    },
+                    from: "followedByComp",
+                  });
                 }}
               >
                 Follow

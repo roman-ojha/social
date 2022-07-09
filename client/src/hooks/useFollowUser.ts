@@ -1,13 +1,21 @@
 import { actionCreators, AppState } from "../services/redux";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { instance as axios } from "../services/axios";
 import { AxiosError } from "axios";
 import { toastSuccess, toastError } from "../services/toast";
 
 type ReturnArgument = {
-  userInformation: any;
-  from: "userSuggestionComp" | "followedByComp";
+  userInformation: {
+    type: string;
+    userID: string;
+    id: string;
+  };
+  from: "userSuggestionComp" | "followedByComp" | "profilePage";
+  optional?: {
+    for: "profilePage";
+    data: any;
+  };
 };
 
 const useFollowUser = () => {
@@ -17,9 +25,11 @@ const useFollowUser = () => {
     stopProgressBar,
     isFollowedSuggestedUser,
     isFollowedFollowedByUser,
+    profilePageDataAction,
   } = bindActionCreators(actionCreators, dispatch);
 
   return async (obj: ReturnArgument): Promise<void> => {
+    console.log(obj);
     if (obj.userInformation.type !== "bot") {
       try {
         startProgressBar();
@@ -53,6 +63,16 @@ const useFollowUser = () => {
               followed: true,
               type: "",
             });
+          }
+          if (
+            obj.from === "profilePage" &&
+            obj.optional?.for === "profilePage"
+          ) {
+            const userObj = {
+              ...obj.optional.data,
+              isRootUserFollowed: true,
+            };
+            profilePageDataAction(userObj);
           }
           stopProgressBar();
         }
