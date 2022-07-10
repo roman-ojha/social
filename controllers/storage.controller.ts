@@ -11,6 +11,7 @@ import UserDocument, { UserDocumentPosts } from "../interface/userDocument.js";
 import uploadPost from "../funcs/uploadPost.js";
 import setRedisUserData from "../funcs/setRedisUserData.js";
 const bucket = storage.bucket();
+import makeStandardUserID from "../funcs/makeStandardUserID.js";
 
 export default {
   post: async (req: Request, res: Response): Promise<object> => {
@@ -141,7 +142,15 @@ export default {
   },
   getUserID: async (req, res) => {
     try {
-      const { userID } = req.body;
+      let { userID }: { userID: string } = req.body;
+      const alreadyHaveUserID = req.rootUser.userID;
+      if (alreadyHaveUserID) {
+        return res.status(400).json({
+          success: false,
+          err: "You already added UserID from this page, if you want to change it you can change through setting page",
+        });
+      }
+      userID = makeStandardUserID(userID);
       const rootUser = req.rootUser;
       if (!userID) {
         return res

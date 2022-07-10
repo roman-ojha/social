@@ -5,6 +5,7 @@ import { Request, Response } from "express";
 import ResponseObject from "../interface/responseObject.js";
 import updateRedisUser from "../funcs/updateRedisUser.js";
 import uploadPost from "../funcs/uploadPost.js";
+import makeStandardUserID from "../funcs/makeStandardUserID.js";
 
 export default {
   changeProfilePicture: async (
@@ -84,7 +85,8 @@ export default {
   },
   changeUserID: async (req: Request, res: Response): Promise<object> => {
     try {
-      const newUserID = req.body.newUserID;
+      let newUserID: string = req.body.newUserID;
+      newUserID = makeStandardUserID(newUserID);
       const oldUserID = req.rootUser.userID;
       if (!newUserID) {
         return res.status(400).json(<ResponseObject>{

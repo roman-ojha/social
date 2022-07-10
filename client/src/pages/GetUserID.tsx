@@ -4,7 +4,7 @@ import { useHistory } from "react-router";
 import { instance as axios } from "../services/axios";
 import "../styles/pages/getUserIDPage.css";
 import { Helmet } from "react-helmet";
-import { toastError } from "../services/toast";
+import { toastError, toastInfo, toastWarn } from "../services/toast";
 import { useDispatch } from "react-redux";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { bindActionCreators } from "redux";
@@ -18,11 +18,7 @@ interface GetUserIDProps {
 
 const GetUserID: React.FC<GetUserIDProps> = (): JSX.Element => {
   const dispatch = useDispatch();
-  const [userDetail, setUserDetail] = useState<{
-    email: UserDocument["email"];
-  }>({
-    email: "",
-  });
+  const [userDetail, setUserDetail] = useState<any>({});
   const history = useHistory();
   const [userID, setUserID] = useState("");
   const url = new URL(window.location.href);
