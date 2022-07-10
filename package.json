@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "postinstall": "tsc",
+    "heroku": "node dist/src/index.js",
     "start": "env-cmd -f .env.production ts-node src/index.ts",
     "dev": "env-cmd -f .env.development nodemon src/index.ts",
     "dev:node": "env-cmd -f .env.development ts-node src/index.ts",
