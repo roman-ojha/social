@@ -1,5 +1,16 @@
 ### Changelog
 
+#### [v0.6.4](https://github.com/roman-ojha/social/compare/v0.6.3...v0.6.4)
+
+> 10 July 2022
+
+- style: fixes some style [`#130`](https://github.com/roman-ojha/social/issues/130)
+- fix(server): converted userID into app standard [`#131`](https://github.com/roman-ojha/social/issues/131)
+- style(module): added on notificationBox didn't impressed [`#129`](https://github.com/roman-ojha/social/issues/129)
+- fix(client): removed all useless import from whole app [`bf1dad6`](https://github.com/roman-ojha/social/commit/bf1dad635b5bf200756c6a4768dcc7b105c9dae2)
+- fix(client): converted MainPageRightSideComp js-&gt;ts [`9d44b94`](https://github.com/roman-ojha/social/commit/9d44b946d08dad46023c7444ab050f26ec3e4852)
+- fix(server): improved backend logic for setting,userAuth [`3d45f57`](https://github.com/roman-ojha/social/commit/3d45f5798e9d481f76c7b22e0a2b2401cbf66e01)
+
 #### [v0.6.3](https://github.com/roman-ojha/social/compare/v0.6.2...v0.6.3)
 
 > 9 July 2022
