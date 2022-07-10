@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
 import { toastError, toastSuccess } from "../../services/toast";
 import { useDispatch, useSelector } from "react-redux";
-// import {
-//   changeUserProfilePictureAction,
-//   showLoadingSpinner,
-// } from "../../services/redux-actions";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../services/redux";

@@ -1,9 +1,5 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-// import {
-//   startProgressBar,
-//   stopProgressBar,
-// } from "../../services/redux-actions";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { useState } from "react";
 import { toastError, toastSuccess } from "../../services/toast";
@@ -37,7 +33,7 @@ const ChangePassword = () => {
     });
   };
 
-  const changePasswordFunc = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const changePasswordFunc = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       startProgressBar();
@@ -85,7 +81,7 @@ const ChangePassword = () => {
           value={inputFieldData.newPassword}
           onChange={getInputFieldData}
         />
-        <form>
+        <form onSubmit={changePasswordFunc}>
           <input
             id="setting-page-change-password"
             type="password"
@@ -94,7 +90,7 @@ const ChangePassword = () => {
             value={inputFieldData.cNewPassword}
             onChange={getInputFieldData}
           />
-          <Button onClick={changePasswordFunc}>Change</Button>
+          <Button type="submit">Change</Button>
         </form>
         <p>Don't Forgot Your Password</p>
       </div>

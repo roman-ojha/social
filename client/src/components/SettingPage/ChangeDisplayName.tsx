@@ -18,7 +18,7 @@ const ChangeDisplayName = () => {
   const { changeRootUserNameAction, startProgressBar, stopProgressBar } =
     bindActionCreators(actionCreators, dispatch);
 
-  const changeName = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const changeName = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       startProgressBar();
@@ -51,7 +51,7 @@ const ChangeDisplayName = () => {
         <label htmlFor="setting-page-change-display-name">
           Change display name
         </label>
-        <form>
+        <form onSubmit={changeName}>
           <input
             id="setting-page-change-display-name"
             type="text"
@@ -62,7 +62,7 @@ const ChangeDisplayName = () => {
               setNewName(e.target.value);
             }}
           />
-          <Button onClick={changeName}>Change</Button>
+          <Button type="submit">Change</Button>
         </form>
         <p>Not require to be unique</p>
       </div>

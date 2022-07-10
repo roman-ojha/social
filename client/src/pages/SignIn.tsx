@@ -34,7 +34,7 @@ const SignIn = (): JSX.Element => {
     });
   };
   const history = useHistory();
-  const signingIn = async (e) => {
+  const signingIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       startProgressBar();

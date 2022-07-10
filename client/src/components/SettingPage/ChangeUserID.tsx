@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import settingPageApi from "../../services/api/pages/settingPageApi";
 import { useDispatch } from "react-redux";
-// import {
-//   changeRootUserUserIDAction,
-//   startProgressBar,
-//   stopProgressBar,
-// } from "../../services/redux-actions";
 import { toastError, toastSuccess } from "../../services/toast";
 import { AxiosError } from "axios";
 import { actionCreators } from "../../services/redux";
@@ -18,7 +13,7 @@ const ChangeUserID = () => {
   const { startProgressBar, stopProgressBar, changeRootUserUserIDAction } =
     bindActionCreators(actionCreators, dispatch);
 
-  const changeUserIDFunc = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const changeUserIDFunc = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
       startProgressBar();
@@ -49,7 +44,7 @@ const ChangeUserID = () => {
     <>
       <div className="Setting_Container_With_Input_Field">
         <label htmlFor="setting-page-change-userID">Change UserID</label>
-        <form>
+        <form onSubmit={changeUserIDFunc}>
           <input
             id="setting-page-change-userID"
             type="text"
@@ -60,7 +55,7 @@ const ChangeUserID = () => {
               setNewUserID(e.target.value);
             }}
           />
-          <Button onClick={changeUserIDFunc}>Change</Button>
+          <Button type="submit">Change</Button>
         </form>
         <p>You can only be able to set unique ID for your profile</p>
       </div>
