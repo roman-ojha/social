@@ -153,33 +153,35 @@ const ProfileFriends = (): JSX.Element => {
       {userDetails.fetchedData ? (
         <div className="ProfilePage_Friends_Container">
           {userDetails.user.map((userDetail, index) => {
-            return (
-              <div
-                className="ProfilePage_Friend_Outline"
-                key={index}
-                style={{ textDecoration: "none", color: "black" }}
-                onClick={async () => {
-                  await routeToProfilePage({
-                    userID: userDetail.userID,
-                    from: "profileFriendsComp",
-                  });
-                }}
-              >
-                <img
-                  src={
-                    userDetail.picture === undefined
-                      ? User_Profile_Icon
-                      : userDetail.picture
-                  }
-                  alt=""
-                  className="ProfilePage_Friend_Image"
-                />
-                <p className="ProfilePage_Friend_Name">{userDetail.userID}</p>
-                <div className="ProfilePage_Friend_Active_Status">
-                  <p>Active</p>
+            if (userDetail.userID) {
+              return (
+                <div
+                  className="ProfilePage_Friend_Outline"
+                  key={index}
+                  style={{ textDecoration: "none", color: "black" }}
+                  onClick={async () => {
+                    await routeToProfilePage({
+                      userID: userDetail.userID,
+                      from: "profileFriendsComp",
+                    });
+                  }}
+                >
+                  <img
+                    src={
+                      userDetail.picture === undefined
+                        ? User_Profile_Icon
+                        : userDetail.picture
+                    }
+                    alt=""
+                    className="ProfilePage_Friend_Image"
+                  />
+                  <p className="ProfilePage_Friend_Name">{userDetail.userID}</p>
+                  <div className="ProfilePage_Friend_Active_Status">
+                    <p>Active</p>
+                  </div>
                 </div>
-              </div>
-            );
+              );
+            }
           })}
         </div>
       ) : (
