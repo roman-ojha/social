@@ -5,6 +5,8 @@ import userDetail from "../models/userDetail_model.js";
 import cookie from "cookie";
 import socketCookieParse from "socket.io-cookie-parser";
 import ioAuthenticate from "./authUser.js";
+import jwt from "jsonwebtoken";
+import ExtendJWTPayload from "../types/jsonwebtoken/extend-jwt-payload.js";
 
 const app: Express = express();
 const httpServer = createServer(app);
@@ -36,14 +38,33 @@ io.on("connect", (socket) => {
   socket.on("send-message", async (messageInfo, cb) => {
     try {
       // NOTE : I have to authenticate before saving the message
+      const senderId = messageInfo.senderId;
+      const receiverId = messageInfo.receiverId;
+      if (socket.handshake.headers.cookie) {
+        const cookies = cookie.parse(socket.handshake.headers.cookie);
+        const verifyToken = jwt.verify(
+          cookies.AuthToken,
+          process.env.SECRET_KEY!
+        ) as ExtendJWTPayload;
+        if (verifyToken.id === senderId) {
+          cb({
+            success: false,
+            msg: "UnAuthorized",
+          });
+        }
+      } else {
+        cb({
+          success: false,
+          msg: "Token not provided",
+        });
+      }
       const emittingMessageInfo = {
         senderId: messageInfo.senderId,
         senderUserId: messageInfo.senderUserId,
         content: messageInfo.message,
         date: Date(),
       };
-      const senderId = messageInfo.senderId;
-      const receiverId = messageInfo.receiverId;
+
       // if message already created then we just have to save
       const resSaveReceiverMsg = await userDetail.updateOne(
         // creating and saving message to sender

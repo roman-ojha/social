@@ -1,6 +1,4 @@
 import UserDetail from "../models/userDetail_model.js";
-import redis from "redis";
-import { RequestHandler, Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import ExtendJWTPayload from "../types/jsonwebtoken/extend-jwt-payload.js";
 import ResponseObject from "../interface/responseObject.js";
