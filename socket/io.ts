@@ -46,7 +46,7 @@ io.on("connect", (socket) => {
           cookies.AuthToken,
           process.env.SECRET_KEY!
         ) as ExtendJWTPayload;
-        if (verifyToken.id === senderId) {
+        if (verifyToken.id !== senderId) {
           cb({
             success: false,
             msg: "UnAuthorized",
