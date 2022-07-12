@@ -42,14 +42,13 @@ const Index = (): JSX.Element => {
             setUserStories(userData.data.userStories);
             setRenderMainPage(true);
           }
-          socket.on("connect", () => {
-            console.log(`connected to id: ${socket.id}`);
-          });
 
           socket.emit("authenticate", (res) => {
             console.log(res);
           });
-
+          if (!socket.connected) {
+            socket.connect();
+          }
           socket.emit(
             "join-room",
             userData.data.userProfileDetail.id,
