@@ -2,12 +2,34 @@ import { createServer } from "http";
 import express, { Express } from "express";
 import { Server } from "socket.io";
 import userDetail from "../models/userDetail_model.js";
+import passport from "passport";
+import session from "express-session";
+import cookie from "cookie";
+import socketCookieParse from "socket.io-cookie-parser";
+
+// const sessionMiddleware = session({
+//   secret: process.env.SECRET_KEY as string,
+//   resave: false,
+//   saveUninitialized: false,
+// });
 
 const app: Express = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: { credentials: true, origin: process.env.CLIENT_BASE_URL },
+  cookie: true,
 });
+
+// const wrap = (middleware) => (socket, next) =>
+//   middleware(socket.request, {}, next);
+// io.use(wrap(sessionMiddleware));
+// io.use(wrap(passport.initialize()));
+// io.use(wrap(passport.session()));
+io.use(socketCookieParse());
+
+// io.use((socket, next) => {
+//   next();
+// });
 
 io.on("connect", (socket) => {
   socket.on("send-message", async (messageInfo, cb) => {

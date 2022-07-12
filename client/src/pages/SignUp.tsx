@@ -206,7 +206,7 @@ const SignUp = (): JSX.Element => {
                 <input
                   className="SignUp_Page_Conform_Password_Input_Field"
                   type="password"
-                  placeholder="Conform Password"
+                  placeholder="Confirm Password"
                   name="cpassword"
                   value={userData.cpassword}
                   onChange={getUserData}
