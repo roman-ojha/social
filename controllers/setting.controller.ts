@@ -6,6 +6,7 @@ import ResponseObject from "../interface/responseObject.js";
 import updateRedisUser from "../funcs/updateRedisUser.js";
 import uploadPost from "../funcs/uploadPost.js";
 import makeStandardUserID from "../funcs/makeStandardUserID.js";
+import PasswordValidator from "password-validator";
 
 export default {
   changeProfilePicture: async (
@@ -155,6 +156,12 @@ export default {
           .status(400)
           .json({ success: false, msg: "Please Fill the displayName Field" });
       }
+      if (newName.length < 5 || newName.length > 20) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please input full name between 5 - 20 characters length",
+        });
+      }
       // we will change display name only after redis user data get updated rather we will not going to update mongodb database
       const isRedisUserUpdated = await updateRedisUser(
         req.rootUser.id,
@@ -194,6 +201,8 @@ export default {
   changePassword: async (req: Request, res: Response) => {
     try {
       const { oldPassword, newPassword, cNewPassword } = req.body;
+      const p_validator = new PasswordValidator();
+      p_validator.has().spaces();
       if (!cNewPassword || !oldPassword || !newPassword) {
         return res.status(400).json(<ResponseObject>{
           success: false,
@@ -204,6 +213,19 @@ export default {
         return res.status(401).json(<ResponseObject>{
           success: false,
           msg: "password doesn't match",
+        });
+      }
+
+      if (newPassword.length < 5 || newPassword.length > 30) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please input password between 5 - 30 characters length",
+        });
+      }
+      if (p_validator.validate(newPassword)) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please can't contain space",
         });
       }
       const nPassword = await bcrypt.hash(newPassword, 12);

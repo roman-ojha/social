@@ -14,11 +14,14 @@ import {
   UserDocumentNotification,
 } from "../interface/userDocument.js";
 import setRedisUserData from "../funcs/setRedisUserData.js";
+import PasswordValidator from "password-validator";
 
 export default {
   register: async (req: Request, res: Response): Promise<object> => {
     try {
       const { name, email, password, cpassword, birthday, gender } = req.body;
+      const p_validator = new PasswordValidator();
+      p_validator.has().spaces();
       if (!name || !email || !password || !cpassword || !birthday || !gender) {
         return res.status(400).json(<ResponseObject>{
           success: false,
@@ -28,7 +31,25 @@ export default {
       if (password !== cpassword) {
         return res.status(401).json(<ResponseObject>{
           success: false,
-          msg: "Password doesn't match",
+          msg: "Password did't match",
+        });
+      }
+      if (name.length < 5 || name.length > 20) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please input full name between 5 - 20 characters length",
+        });
+      }
+      if (password.length < 5 || password.length > 30) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please input password between 5 - 30 characters length",
+        });
+      }
+      if (p_validator.validate(password)) {
+        return res.status(401).json(<ResponseObject>{
+          success: false,
+          msg: "Please can't contain space",
         });
       }
       const emailExist = await userDetail.findOne(

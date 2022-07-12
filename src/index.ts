@@ -18,6 +18,8 @@ import {
   connectRedis,
   redisClient,
 } from "../middleware/auth/authUsingRedis.js";
+import validator from "validator";
+
 const PORT = process.env.PORT;
 
 // warning: connect.session() MemoryStorage is not designed for a production environment as it will leak memory, and will not scale past a single process.
@@ -85,3 +87,5 @@ httpServer.listen(PORT, () => {
 
 // Admin SignIn
 AuthAdmin();
+// "^[a-zA-Z0-9_\.\-]*$"
+// validator.matches("roman", `^[a-zA-Z0-9_\.\-]*$`)
