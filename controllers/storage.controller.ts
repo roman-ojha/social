@@ -158,12 +158,13 @@ export default {
           .status(400)
           .json({ success: false, err: "Please fill the required field!!!" });
       }
-      if (!validator.matches(userID, "^[a-zA-Z0-9_.-]*$")) {
+      if (!validator.matches(userID, "^[a-zA-Z0-9_-]*$")) {
         return res.status(400).json({
           success: false,
           err: "Try to avoid special symbols, not a valid userID",
         });
       }
+
       const userIDExist = await UserDetail.findOne(
         { userID: userID },
         { userID: 1, name: 1, email: 1 }

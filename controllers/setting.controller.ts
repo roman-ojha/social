@@ -96,7 +96,7 @@ export default {
           msg: "Please Fill the userID Field",
         });
       }
-      if (!validator.matches(newUserID, "^[a-zA-Z0-9_.-]*$")) {
+      if (!validator.matches(newUserID, "^[a-zA-Z0-9_-]*$")) {
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Try to avoid special symbols, not a valid userID",
