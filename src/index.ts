@@ -14,11 +14,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { httpServer, app } from "../socket/io.js";
 import AuthAdmin from "../funcs/AuthAdmin.js";
-import {
-  connectRedis,
-  redisClient,
-} from "../middleware/auth/authUsingRedis.js";
-import validator from "validator";
+import { connectRedis } from "../middleware/auth/authUsingRedis.js";
 
 const PORT = process.env.PORT;
 
@@ -87,5 +83,3 @@ httpServer.listen(PORT, () => {
 
 // Admin SignIn
 AuthAdmin();
-// "^[a-zA-Z0-9_\.\-]*$"
-// validator.matches("roman", `^[a-zA-Z0-9_\.\-]*$`)

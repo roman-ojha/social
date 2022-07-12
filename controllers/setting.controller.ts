@@ -7,6 +7,7 @@ import updateRedisUser from "../funcs/updateRedisUser.js";
 import uploadPost from "../funcs/uploadPost.js";
 import makeStandardUserID from "../funcs/makeStandardUserID.js";
 import PasswordValidator from "password-validator";
+import validator from "validator";
 
 export default {
   changeProfilePicture: async (
@@ -93,6 +94,12 @@ export default {
         return res.status(400).json(<ResponseObject>{
           success: false,
           msg: "Please Fill the userID Field",
+        });
+      }
+      if (!validator.matches(newUserID, "^[a-zA-Z0-9_.-]*$")) {
+        return res.status(400).json(<ResponseObject>{
+          success: false,
+          msg: "Try to avoid special symbols, not a valid userID",
         });
       }
       const userIDAlreadyExist = await userDetail.findOne(

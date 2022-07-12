@@ -12,6 +12,7 @@ import uploadPost from "../funcs/uploadPost.js";
 import setRedisUserData from "../funcs/setRedisUserData.js";
 const bucket = storage.bucket();
 import makeStandardUserID from "../funcs/makeStandardUserID.js";
+import validator from "validator";
 
 export default {
   post: async (req: Request, res: Response): Promise<object> => {
@@ -156,6 +157,12 @@ export default {
         return res
           .status(400)
           .json({ success: false, err: "Please fill the required field!!!" });
+      }
+      if (!validator.matches(userID, "^[a-zA-Z0-9_.-]*$")) {
+        return res.status(400).json({
+          success: false,
+          err: "Try to avoid special symbols, not a valid userID",
+        });
       }
       const userIDExist = await UserDetail.findOne(
         { userID: userID },
