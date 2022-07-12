@@ -1,5 +1,13 @@
 ### Changelog
 
+#### [v0.6.5](https://github.com/roman-ojha/social/compare/v0.6.4...v0.6.5)
+
+- fix: complete socket authneticate [`#133`](https://github.com/roman-ojha/social/issues/133)
+- fix: added validation on userID [`#132`](https://github.com/roman-ojha/social/issues/132)
+- fix: io authenticate successful [`3b375c4`](https://github.com/roman-ojha/social/commit/3b375c423dd846acd3dc219964b98e32e859b150)
+- fix: added ioAuthenticate function [`06b2c3b`](https://github.com/roman-ojha/social/commit/06b2c3bd9ed1d59d9183211e801dbd51fe509ac5)
+- fix: added vaidation on password & name [`921f243`](https://github.com/roman-ojha/social/commit/921f243c6384f3e5bb72d45f6af8b6d3c389a32d)
+
 #### [v0.6.4](https://github.com/roman-ojha/social/compare/v0.6.3...v0.6.4)
 
 > 10 July 2022
