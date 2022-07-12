@@ -46,6 +46,10 @@ const Index = (): JSX.Element => {
             console.log(`connected to id: ${socket.id}`);
           });
 
+          socket.emit("authenticate", (res) => {
+            console.log(res);
+          });
+
           socket.emit(
             "join-room",
             userData.data.userProfileDetail.id,

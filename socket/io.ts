@@ -27,9 +27,10 @@ const io = new Server(httpServer, {
 // io.use(wrap(passport.session()));
 io.use(socketCookieParse());
 
-// io.use((socket, next) => {
-//   next();
-// });
+io.use((socket, next) => {
+  console.log(socket.request.headers);
+  next(new Error("unauthorized"));
+});
 
 io.on("connect", (socket) => {
   socket.on("send-message", async (messageInfo, cb) => {
