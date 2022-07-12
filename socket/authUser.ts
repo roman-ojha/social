@@ -8,9 +8,9 @@ import RedisUserDetail from "../interface/redisUserDetail.js";
 import {
   isRedisConnected,
   redisClient,
-} from "../middleware/auth/authUsingRedis";
+} from "../middleware/auth/authUsingRedis.js";
 
-const ioAuthenticate = async (token: string) => {
+const ioAuthenticate = async (token: string): Promise<ResponseObject> => {
   try {
     if (!token) {
       return {
@@ -120,3 +120,5 @@ const ioAuthenticate = async (token: string) => {
     };
   }
 };
+
+export default ioAuthenticate;
