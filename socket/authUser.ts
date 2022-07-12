@@ -8,7 +8,7 @@ import {
   redisClient,
 } from "../middleware/auth/authUsingRedis.js";
 
-const ioAuthenticate = async (token: string): Promise<ResponseObject> => {
+const ioAuthenticate = async (token: string) => {
   try {
     if (!token) {
       return {
@@ -66,6 +66,7 @@ const ioAuthenticate = async (token: string): Promise<ResponseObject> => {
         return {
           success: true,
           msg: "Authenticated",
+          senderId: verifyToken.id,
         };
       }
       // User Exist in Redis
@@ -83,6 +84,7 @@ const ioAuthenticate = async (token: string): Promise<ResponseObject> => {
       return {
         success: true,
         msg: "Authenticated",
+        senderId: verifyToken.id,
       };
     } else {
       // redis is not connected then we have to authenticate using mongodb
@@ -109,6 +111,7 @@ const ioAuthenticate = async (token: string): Promise<ResponseObject> => {
       return {
         success: true,
         msg: "Authenticated",
+        senderId: verifyToken.id,
       };
     }
   } catch (err) {

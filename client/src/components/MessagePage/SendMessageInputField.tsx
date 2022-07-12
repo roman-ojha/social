@@ -28,7 +28,6 @@ const SendMessageInputField = (props): JSX.Element => {
         return;
       }
       const resBody = {
-        senderId: userProfileDetailStore.id,
         senderUserId: userProfileDetailStore.userID,
         senderPicture: userProfileDetailStore.picture,
         receiverId: props.messageToId,

@@ -27,14 +27,13 @@ const SendMessageInputField = (props): JSX.Element => {
         return;
       }
       const resBody = {
-        senderId: userProfileDetailStore.id,
         senderUserId: userProfileDetailStore.userID,
         senderPicture: userProfileDetailStore.picture,
         receiverId: props.messageToId,
         receiverUserID: props.messageToUserId,
         // messageTo is the userID of user where we are sending the message
         message: userMessageField,
-        roomID: currentMessageStore.roomID,
+        // roomID: currentMessageStore.roomID,
       };
       setUserMessageField("");
       socket.emit("send-message", resBody, (res) => {
