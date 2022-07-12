@@ -38,7 +38,7 @@ const SendMessageInputField = (props): JSX.Element => {
       };
       setUserMessageField("");
       socket.emit("send-message", resBody, (res) => {
-        if (res.success !== false) {
+        if (res.success) {
           appendOnCurrentInnerUserMessage({
             ...res.msgInfo,
             _id: `${Math.random()}`,
@@ -52,6 +52,8 @@ const SendMessageInputField = (props): JSX.Element => {
             receiverPicture: props.receiverPicture,
             messageToUserId: props.messageToUserId,
           });
+        } else {
+          toastError(res.msg);
         }
       });
     } catch (error) {
