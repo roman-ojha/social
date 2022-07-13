@@ -13,8 +13,3 @@
 3. Get all the environment variables which are include in `.env.example`
 4. Run `yarn` to install all packages
 5. Run `yarn start` to run the client Site
-
-## Using Docker:
-1. Create `.env.development` file in Project Directory
-2. Get all the environment variables which are include in `.env.example`
-4. Run `yarn docker:dev` to dockerize application

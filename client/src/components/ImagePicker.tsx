@@ -155,7 +155,7 @@ const ReturnImagePicker = (): JSX.Element => {
           <div className="ImagePicker_File_Picker_Container">
             <div className="ImagePicker_File_Picker_Label_Container">
               <Icon icon="fa:upload" />
-              <label htmlFor="image-picker-file-picker">upload file</label>
+              <label htmlFor="image-picker-file-picker">upload img</label>
             </div>
             <input
               type="file"
