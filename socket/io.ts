@@ -15,22 +15,22 @@ const io = new Server(httpServer, {
 
 io.use(socketCookieParse());
 
-io.use(async (socket, next) => {
-  try {
-    if (socket.handshake.headers.cookie) {
-      const cookies = cookie.parse(socket.handshake.headers.cookie);
-      const resAuth = await ioAuthenticate(cookies.AuthToken);
-      if (!resAuth.success) {
-        next(new Error(resAuth.msg));
-      }
-      next();
-    } else {
-      next(new Error("Token not provided"));
-    }
-  } catch (err) {
-    next(new Error("Server Error while connecting to socket"));
-  }
-});
+// io.use(async (socket, next) => {
+//   try {
+//     if (socket.handshake.headers.cookie) {
+//       const cookies = cookie.parse(socket.handshake.headers.cookie);
+//       const resAuth = await ioAuthenticate(cookies.AuthToken);
+//       if (!resAuth.success) {
+//         next(new Error(resAuth.msg));
+//       }
+//       next();
+//     } else {
+//       next(new Error("Token not provided"));
+//     }
+//   } catch (err) {
+//     next(new Error("Server Error while connecting to socket"));
+//   }
+// });
 
 io.on("connect", (socket) => {
   socket.on("send-message", async (messageInfo, cb) => {
@@ -143,9 +143,9 @@ io.on("connect", (socket) => {
       });
     }
   });
-  socket.on("join-room", (roomID, cb) => {
-    socket.join(roomID);
-    cb(`joined on ${roomID}`);
+  socket.on("join-room", (id, cb) => {
+    socket.join(id);
+    cb(`joined on ${id}`);
   });
 });
 

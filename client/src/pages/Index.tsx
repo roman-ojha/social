@@ -43,16 +43,10 @@ const Index = (): JSX.Element => {
             setRenderMainPage(true);
           }
 
-          socket.emit("authenticate", (res) => {
-            console.log(res);
-          });
-          if (!socket.connected) {
-            socket.connect();
-          }
           socket.emit(
             "join-room",
             userData.data.userProfileDetail.id,
-            (resMessage) => {
+            (resMessage: string) => {
               console.log(resMessage);
             }
           );
