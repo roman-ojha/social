@@ -12,9 +12,9 @@ import { bindActionCreators } from "redux";
 
 const Message = (): JSX.Element => {
   const dispatch = useDispatch();
-  const currentMessageStore = useSelector(
-    (state: AppState) => state.setCurrentUserMessageReducer
-  );
+  // const currentMessageStore = useSelector(
+  //   (state: AppState) => state.setCurrentUserMessageReducer
+  // );
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state: AppState) => state.mainPageInnerMessageBoxOnOff
   );
@@ -38,11 +38,11 @@ const Message = (): JSX.Element => {
           <OpenRightPartDrawerButton />
           {mainPageInnerMessageBoxOnOffState ? (
             <InnerUserMessage
-              InternalMessageInfo={{
-                messageToUserId: currentMessageStore.messageToUserId,
-                messageToId: currentMessageStore.messageToId,
-                picture: currentMessageStore.receiverPicture,
-              }}
+            // InternalMessageInfo={{
+            //   messageToUserId: currentMessageStore.messageToUserId,
+            //   messageToId: currentMessageStore.messageToId,
+            //   picture: currentMessageStore.receiverPicture,
+            // }}
             />
           ) : (
             <MessagesList />

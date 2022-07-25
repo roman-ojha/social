@@ -52,10 +52,6 @@ const Index = (): JSX.Element => {
           );
           socket.on("send-message-client", (res) => {
             if (res.success) {
-              appendOnCurrentInnerUserMessage({
-                ...res.msgInfo,
-                _id: `${Math.random()}`,
-              });
               appendMessageOnMessageListAction({
                 msgInfo: {
                   ...res.msgInfo,

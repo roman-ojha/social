@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CloseIcon from "@mui/icons-material/Close";
 import User_Profile_Icon from "../../assets/svg/User_profile_Icon.svg";
@@ -7,6 +7,7 @@ import SendMessageInputField from "./SendMessageInputField";
 import { AppState, actionCreators } from "../../services/redux";
 import { bindActionCreators } from "redux";
 import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
+import socket from "../../services/socket";
 
 const InnerUserMessage = (props): JSX.Element => {
   const dispatch = useDispatch();
@@ -14,10 +15,8 @@ const InnerUserMessage = (props): JSX.Element => {
   const currentMessageStore = useSelector(
     (state: AppState) => state.setCurrentUserMessageReducer
   );
-  const { mainPageMessageInnerViewOnOff } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { mainPageMessageInnerViewOnOff, appendOnCurrentInnerUserMessage } =
+    bindActionCreators(actionCreators, dispatch);
 
   // Styling Loading Spinner
   const loadingContainerSpinnerStyle = {
@@ -36,6 +35,25 @@ const InnerUserMessage = (props): JSX.Element => {
     borderRadius: "50%",
     animation: "loadingSpinner 1s linear infinite",
   };
+
+  useEffect(() => {
+    socket.on("send-message-client", (res) => {
+      if (res.success) {
+        if (res.msgInfo.senderId === props.InternalMessageInfo.messageToId) {
+          console.log(props.InternalMessageInfo.messageToId);
+          console.log(props.InternalMessageInfo.messageToUserId);
+          console.log(res.msgInfo.senderId);
+          console.log(
+            res.msgInfo.senderId === props.InternalMessageInfo.messageToId
+          );
+          appendOnCurrentInnerUserMessage({
+            ...res.msgInfo,
+            _id: `${Math.random()}`,
+          });
+        }
+      }
+    });
+  }, []);
 
   return (
     <>

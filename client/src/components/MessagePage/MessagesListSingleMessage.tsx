@@ -22,7 +22,6 @@ const MessageListSingleMessage = (props): JSX.Element => {
         message: [],
         fetchedInnerMessage: false,
       });
-      mainPageMessageInnerViewOnOff(true);
       const resMessage = await axios({
         // sending receiver userID to get message data of that user
         method: "POST",
@@ -41,6 +40,13 @@ const MessageListSingleMessage = (props): JSX.Element => {
       } else {
         const resData = await resMessage.data.data;
         // after getting message we will store that message into redux
+        // console.log({
+        //   messageToId: props.messageInfo.messageToId,
+        //   messageToUserId: props.messageInfo.messageToUserId,
+        //   receiverPicture: props.messageInfo.receiverPicture,
+        //   message: resData.message,
+        //   fetchedInnerMessage: true,
+        // });
         currentUserMessageAction({
           messageToId: props.messageInfo.messageToId,
           messageToUserId: props.messageInfo.messageToUserId,
@@ -48,6 +54,7 @@ const MessageListSingleMessage = (props): JSX.Element => {
           message: resData.message,
           fetchedInnerMessage: true,
         });
+        mainPageMessageInnerViewOnOff(true);
       }
     } catch (error) {
       const err = error as AxiosError;
