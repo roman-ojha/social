@@ -37,13 +37,9 @@ const InnerUserMessage = (): JSX.Element => {
   };
 
   useEffect(() => {
-    console.log(currentMessageStore.messageToId);
-    console.log(currentMessageStore.messageToUserId);
     socket.on("send-message-client", (res) => {
       if (res.success) {
         if (res.msgInfo.senderId === currentMessageStore.messageToId) {
-          console.log(res.msgInfo.senderId);
-          console.log(res.msgInfo.senderId === currentMessageStore.messageToId);
           appendOnCurrentInnerUserMessage({
             ...res.msgInfo,
             _id: `${Math.random()}`,

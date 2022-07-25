@@ -10,9 +10,6 @@ const MessageBox = (): JSX.Element => {
   const mainPageMessageOnOffState = useSelector(
     (state: AppState) => state.changeMainPageMessageView
   );
-  const currentMessageStore: CurrentUserMessageState = useSelector(
-    (state: AppState) => state.setCurrentUserMessageReducer
-  );
   const mainPageInnerMessageBoxOnOffState = useSelector(
     (state: AppState) => state.mainPageInnerMessageBoxOnOff
   );
@@ -22,13 +19,7 @@ const MessageBox = (): JSX.Element => {
       <>
         <div className="MainPage_MessageBox_Container">
           {mainPageInnerMessageBoxOnOffState ? (
-            <InnerMessageBox
-              InternalMessageInfo={{
-                messageToUserId: currentMessageStore.messageToUserId,
-                messageToId: currentMessageStore.messageToId,
-                picture: currentMessageStore.receiverPicture,
-              }}
-            />
+            <InnerMessageBox />
           ) : (
             <MessagesList />
           )}
