@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import useRouteToProfilePage from "../../hooks/useRouteToProfilePage";
 import socket from "../../services/socket";
 
-const InnerUserMessage = (props): JSX.Element => {
+const InnerUserMessage = (): JSX.Element => {
   const dispatch = useDispatch();
   const routeToProfilePage = useRouteToProfilePage();
   const currentMessageStore = useSelector(
@@ -37,15 +37,13 @@ const InnerUserMessage = (props): JSX.Element => {
   };
 
   useEffect(() => {
+    console.log(currentMessageStore.messageToId);
+    console.log(currentMessageStore.messageToUserId);
     socket.on("send-message-client", (res) => {
       if (res.success) {
-        if (res.msgInfo.senderId === props.InternalMessageInfo.messageToId) {
-          console.log(props.InternalMessageInfo.messageToId);
-          console.log(props.InternalMessageInfo.messageToUserId);
+        if (res.msgInfo.senderId === currentMessageStore.messageToId) {
           console.log(res.msgInfo.senderId);
-          console.log(
-            res.msgInfo.senderId === props.InternalMessageInfo.messageToId
-          );
+          console.log(res.msgInfo.senderId === currentMessageStore.messageToId);
           appendOnCurrentInnerUserMessage({
             ...res.msgInfo,
             _id: `${Math.random()}`,
@@ -53,6 +51,9 @@ const InnerUserMessage = (props): JSX.Element => {
         }
       }
     });
+    return () => {
+      socket.off("send-message-client");
+    };
   }, []);
 
   return (
@@ -61,14 +62,14 @@ const InnerUserMessage = (props): JSX.Element => {
         <div className="MessageBox_InnerMessage_Upper_Part_Container">
           <img
             src={
-              props.InternalMessageInfo.picture
-                ? props.InternalMessageInfo.picture
+              currentMessageStore.receiverPicture
+                ? currentMessageStore.receiverPicture
                 : User_Profile_Icon
             }
             alt="user"
             onClick={async () => {
               await routeToProfilePage({
-                userID: props.InternalMessageInfo.messageToUserId,
+                userID: currentMessageStore.messageToUserId,
                 from: "messagePage",
               });
             }}
@@ -76,12 +77,12 @@ const InnerUserMessage = (props): JSX.Element => {
           <h3
             onClick={async () => {
               await routeToProfilePage({
-                userID: props.InternalMessageInfo.messageToUserId,
+                userID: currentMessageStore.messageToUserId,
                 from: "messagePage",
               });
             }}
           >
-            {props.InternalMessageInfo.messageToUserId}
+            {currentMessageStore.messageToUserId}
           </h3>
           <CloseIcon
             className="MessageBox_InnerMessage_Upper_Part_Close_Button"
@@ -101,7 +102,7 @@ const InnerUserMessage = (props): JSX.Element => {
               return (
                 <SingleMessage
                   MessageInfo={message}
-                  messageToUserId={props.InternalMessageInfo.messageToUserId}
+                  messageToUserId={currentMessageStore.messageToUserId}
                   picture={currentMessageStore.receiverPicture}
                   key={index}
                 />
@@ -111,9 +112,9 @@ const InnerUserMessage = (props): JSX.Element => {
         </div>
 
         <SendMessageInputField
-          messageToUserId={props.InternalMessageInfo.messageToUserId}
-          messageToId={props.InternalMessageInfo.messageToId}
-          receiverPicture={props.InternalMessageInfo.picture}
+          messageToUserId={currentMessageStore.messageToUserId}
+          messageToId={currentMessageStore.messageToId}
+          receiverPicture={currentMessageStore.receiverPicture}
         />
       </div>
     </>

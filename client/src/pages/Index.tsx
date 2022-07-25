@@ -22,7 +22,6 @@ const Index = (): JSX.Element => {
     userProfilePostAction,
     followedUserPostDataAction,
     userSuggestionAction,
-    appendOnCurrentInnerUserMessage,
     appendMessageOnMessageListAction,
   } = bindActionCreators(actionCreators, dispatch);
   useEffect(() => {
@@ -82,6 +81,9 @@ const Index = (): JSX.Element => {
     };
     // fetching all user data and current user following user Post data
     getUserData();
+    return () => {
+      socket.off("send-message-client");
+    };
   }, [dispatch, history]);
 
   return (
